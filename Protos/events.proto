@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Valmar";
+
+package events;
+
+// A palantir event
+message EventReply {
+  string name = 1;
+  int32 id = 2;
+  string start = 3;
+  string description = 4;
+  int32 length = 5;  
+}

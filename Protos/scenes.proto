@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+import "events.proto";
+
+option csharp_namespace = "Valmar";
+
+package scenes;
+
+// The greeting service definition.
+service Scenes {
+  
+  // Gets all scenes
+  rpc GetAllScenes (google.protobuf.Empty) returns (stream SceneReply);
+}
+
+// The request message containing the user's name.
+message SceneReply {
+  string name = 1;
+  string url = 2;
+  int32 id = 3;
+  google.protobuf.Int32Value eventId = 4;
+  google.protobuf.StringValue primaryColor = 5;
+  google.protobuf.StringValue guessedColor = 6;
+  google.protobuf.StringValue artist = 7;
+}
