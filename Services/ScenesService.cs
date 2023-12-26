@@ -5,20 +5,11 @@ using Valmar.Database;
 
 namespace Valmar.Services;
 
-public class ScenesService : Scenes.ScenesBase
+public class ScenesService(ILogger<ScenesService> logger, PalantirContext db) : Scenes.ScenesBase 
 {
-    private readonly ILogger<ScenesService> _logger;
-    private readonly PalantirContext _db;
-
-    public ScenesService(ILogger<ScenesService> logger, PalantirContext db)
-    {
-        _logger = logger;
-        _db = db;
-    }
-
     public override async Task GetAllScenes(Empty request, IServerStreamWriter<SceneReply> responseStream, ServerCallContext context)
     {
-        var scenes = await _db.Scenes.ToListAsync();
+        var scenes = await db.Scenes.ToListAsync();
         foreach (var scene in scenes)
         {
             SceneReply sceneReply = new()
