@@ -14,9 +14,12 @@ service Scenes {
   
   // Gets all scenes
   rpc GetAllScenes (google.protobuf.Empty) returns (stream SceneReply);
+
+  // Gets all scenes
+  rpc GetSceneById (GetSceneRequest) returns (SceneReply);
 }
 
-// The request message containing the user's name.
+// Response containing a scene's properties.
 message SceneReply {
   string name = 1;
   string url = 2;
@@ -25,4 +28,9 @@ message SceneReply {
   google.protobuf.StringValue primaryColor = 5;
   google.protobuf.StringValue guessedColor = 6;
   google.protobuf.StringValue artist = 7;
+}
+
+// Request containing a scene id
+message GetSceneRequest {
+  int32 id = 1;
 }
