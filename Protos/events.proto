@@ -39,7 +39,7 @@ message EventDropReply {
   string name = 1;
   int32 id = 2;
   string url = 3;
-  int32 event = 4;
+  int32 eventId = 4;
 }
 
 // Request containing an event id
