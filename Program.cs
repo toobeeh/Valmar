@@ -1,8 +1,10 @@
 using System.Reflection;
+using Calzolari.Grpc.AspNetCore.Validation;
 using Valmar.Database;
 using Valmar.Domain;
 using Valmar.Grpc;
 using Valmar.Mapper;
+using Valmar.Validator.Scenes;
 
 namespace Valmar;
 
@@ -13,7 +15,9 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddGrpc();
+        builder.Services.AddGrpc(options => options.EnableMessageValidation());
+        builder.Services.AddValidators();
+        builder.Services.AddGrpcValidation();
         builder.Services.AddDbContext<PalantirContext>();
         RegisterMapperProfiles(builder.Services);
         RegisterDomainServices(builder.Services);

@@ -14,6 +14,7 @@
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="12.0.1" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+        <PackageReference Include="Calzolari.Grpc.AspNetCore.Validation" Version="6.3.0" />
         <PackageReference Include="EFCore" Version="1.1.2" />
         <PackageReference Include="EntityFrameworkCore.Scaffolding.Handlebars" Version="8.0.0-beta1" />
         <PackageReference Include="Grpc.AspNetCore" Version="2.49.0"/>
