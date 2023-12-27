@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Valmar.Validator.Scenes;
+namespace Valmar.Validators.Scenes;
 
 public class GetSceneRequestValidator : AbstractValidator<GetSceneRequest>
 {

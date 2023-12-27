@@ -3,8 +3,8 @@ using Calzolari.Grpc.AspNetCore.Validation;
 using Valmar.Database;
 using Valmar.Domain;
 using Valmar.Grpc;
-using Valmar.Mapper;
-using Valmar.Validator.Scenes;
+using Valmar.Mappers;
+using Valmar.Validators.Scenes;
 
 namespace Valmar;
 

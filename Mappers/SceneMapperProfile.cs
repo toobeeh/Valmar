@@ -1,7 +1,7 @@
 using AutoMapper;
 using Valmar.Database;
 
-namespace Valmar.Mapper;
+namespace Valmar.Mappers;
 
 public class SceneMapperProfile : Profile
 {
