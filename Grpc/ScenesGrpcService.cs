@@ -13,6 +13,8 @@ public class ScenesGrpcService(
 {
     public override async Task GetAllScenes(Empty request, IServerStreamWriter<SceneReply> responseStream, ServerCallContext context)
     {
+        logger.LogTrace($"GetAllScenes(empty)");
+        
         var scenes = await scenesService.GetAllScenes();
         foreach (var scene in scenes)
         {
@@ -22,10 +24,12 @@ public class ScenesGrpcService(
 
     public override async Task<SceneReply> GetSceneById(GetSceneRequest request, ServerCallContext context)
     {
+        logger.LogTrace("GetSceneById(request={request})", request);
+        
         var scene = await scenesService.GetSceneById(request.Id);
-
         if (scene is null)
         {
+            logger.LogInformation("Scene for id {id} was null", request.Id);
             throw new RpcException(new Status(StatusCode.NotFound, $"Scene with id {request.Id} does not exist"));
         }
 

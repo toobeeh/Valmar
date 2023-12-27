@@ -11,11 +11,13 @@ public class ScenesDomainService(
     
     public async Task<SceneEntity?> GetSceneById(int id)
     {
+        logger.LogTrace("GetSceneByID(id={id})", id);
         return await db.Scenes.FirstOrDefaultAsync(scene => scene.Id == id);
     }
 
     public async Task<List<SceneEntity>> GetAllScenes()
     {
+        logger.LogTrace("GetAllScenes()");
         return await db.Scenes.ToListAsync();
     }
 }
