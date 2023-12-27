@@ -1,8 +1,12 @@
 using System.Reflection;
+using AutoMapper;
 using Calzolari.Grpc.AspNetCore.Validation;
+using Grpc.Core.Interceptors;
 using Valmar.Database;
 using Valmar.Domain;
+using Valmar.Domain.Implementation;
 using Valmar.Grpc;
+using Valmar.Grpc.Interceptors;
 using Valmar.Mappers;
 using Valmar.Validators.Scenes;
 
@@ -15,7 +19,13 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddGrpc(options => options.EnableMessageValidation());
+        builder.Services.AddGrpc(options =>
+        {
+            options.Interceptors.Add<ExceptionInterceptor>();
+            options.EnableDetailedErrors = true;
+            options.EnableMessageValidation();
+        });
+        //builder.Services.AddSingleton<Interceptor, ExceptionInterceptor>();
         builder.Services.AddValidators();
         builder.Services.AddGrpcValidation();
         builder.Services.AddDbContext<PalantirContext>();
@@ -35,16 +45,26 @@ public class Program
 
     private static void RegisterDomainServices(IServiceCollection services)
     {
-        services.AddTransient<ScenesDomainService>();
+        services.AddScoped<IScenesDomainService, ScenesDomainService>();
+        services.AddScoped<ISpritesDomainService, SpritesDomainService>();
+        services.AddScoped<IAwardsDomainService, AwardsDomainService>();
+        services.AddScoped<IEventsDomainService, EventsDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
     {
         app.MapGrpcService<ScenesGrpcService>();
+        app.MapGrpcService<SpritesGrpcService>();
+        app.MapGrpcService<AwardsGrpcService>();
+        app.MapGrpcService<EventsGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)
     {
-        services.AddAutoMapper(typeof(SceneMapperProfile));
+        services.AddAutoMapper(
+            typeof(EventMapperProfile),
+            typeof(SceneMapperProfile),
+            typeof(SpriteMapperProfile),
+            typeof(AwardMapperProfile));
     }
 }

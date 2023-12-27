@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Valmar";
+package awards;
+
+// Service definition for award resource access
+service Awards {
+  
+  // Gets all awards
+  rpc GetAllAwards (google.protobuf.Empty) returns (stream AwardReply);
+
+  // Gets an award by its id
+  rpc GetAwardById (GetAwardRequest) returns (AwardReply);
+}
+
+// Response containing a award's properties.
+message AwardReply {
+  string name = 1;
+  string url = 2;
+  int32 id = 3;
+  string description = 4;
+  int32 rarity = 5;
+}
+
+// Request containing a award id
+message GetAwardRequest {
+  int32 id = 1;
+}

@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Valmar";
+package sprites;
+
+// Service definition for sprite resource access
+service Sprites {
+  
+  // Gets all sprites
+  rpc GetAllSprites (google.protobuf.Empty) returns (stream SpriteReply);
+
+  // Gets a sprite by its id
+  rpc GetSpriteById (GetSpriteRequest) returns (SpriteReply);
+}
+
+// Response containing a sprite's properties.
+message SpriteReply {
+  string name = 1;
+  string url = 2;
+  int32 id = 3;
+  int32 cost = 4;
+  bool isRainbow = 5;
+  bool isSpecial = 6;
+  google.protobuf.Int32Value eventDropId = 7;
+  google.protobuf.StringValue artist = 8;
+}
+
+// Request containing a sprite id
+message GetSpriteRequest {
+  int32 id = 1;
+}

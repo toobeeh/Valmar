@@ -9,6 +9,13 @@
 
     <ItemGroup>
         <Protobuf Include="**/*.proto" GrpcServices="Server" ProtoRoot="Protos"/>
+        <Protobuf Update="Protos\*.proto">
+          <Access>Public</Access>
+          <ProtoCompile>True</ProtoCompile>
+          <CompileOutputs>True</CompileOutputs>
+          <OutputDir>obj\Debug\net8.0\</OutputDir>
+          <Generator>MSBuild:Compile</Generator>
+        </Protobuf>
     </ItemGroup>
 
     <ItemGroup>

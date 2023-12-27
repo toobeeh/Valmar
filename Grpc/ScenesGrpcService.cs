@@ -2,6 +2,7 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Valmar.Domain;
+using Valmar.Domain.Implementation;
 using Status = Grpc.Core.Status;
 
 namespace Valmar.Grpc;
@@ -9,7 +10,7 @@ namespace Valmar.Grpc;
 public class ScenesGrpcService(
     ILogger<ScenesGrpcService> logger, 
     IMapper mapper,
-    ScenesDomainService scenesService) : Scenes.ScenesBase 
+    IScenesDomainService scenesService) : Scenes.ScenesBase 
 {
     public override async Task GetAllScenes(Empty request, IServerStreamWriter<SceneReply> responseStream, ServerCallContext context)
     {
@@ -27,12 +28,6 @@ public class ScenesGrpcService(
         logger.LogTrace("GetSceneById(request={request})", request);
         
         var scene = await scenesService.GetSceneById(request.Id);
-        if (scene is null)
-        {
-            logger.LogInformation("Scene for id {id} was null", request.Id);
-            throw new RpcException(new Status(StatusCode.NotFound, $"Scene with id {request.Id} does not exist"));
-        }
-
         return mapper.Map<SceneReply>(scene);
     }
 }

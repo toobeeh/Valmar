@@ -1,7 +1,29 @@
 syntax = "proto3";
-option csharp_namespace = "Valmar";
 
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Valmar";
 package events;
+
+// Service definition for events and their drops
+service Events {
+  
+  // Gets all events
+  rpc GetAllEvents (google.protobuf.Empty) returns (stream EventReply);
+  
+  // Gets an event by its id
+  rpc GetEventById (GetEventRequest) returns (EventReply);
+  
+  // Gets all eventdrops
+  rpc GetAllEventDrops (google.protobuf.Empty) returns (stream EventDropReply);
+
+  // Gets an event drop by id
+  rpc GetEventDropById (GetEventDropRequest) returns (EventDropReply);
+  
+  // Gets all eventdrops of an event
+  rpc GetEventDropsOfEvent (GetEventRequest) returns (stream EventDropReply);
+  
+}
 
 // A palantir event
 message EventReply {
@@ -10,4 +32,22 @@ message EventReply {
   string start = 3;
   string description = 4;
   int32 length = 5;  
+}
+
+// A palantir event drop
+message EventDropReply {
+  string name = 1;
+  int32 id = 2;
+  string url = 3;
+  int32 event = 4;
+}
+
+// Request containing an event id
+message GetEventRequest {
+  int32 id = 1;
+}
+
+// Request containing eventdrop id
+message GetEventDropRequest {
+  int32 id = 1;
 }
