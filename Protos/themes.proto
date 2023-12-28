@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Valmar";
+package themes;
+
+// Service definition for theme resource access
+service Themes {
+  
+  // Gets all themes
+  rpc GetPublishedThemes (google.protobuf.Empty) returns (stream ThemeListingReply);
+
+  // Gets an theme by its id
+  rpc GetThemeById (GetThemeRequest) returns (ThemeDataReply);
+  
+  // Publishes a theme
+  rpc PublishTheme (PublishThemeRequest) returns (google.protobuf.Empty);
+  
+  // Shares a theme 
+  rpc ShareTheme (ShareThemeRequest) returns (ThemeShareReply);
+  
+  // Updates a published theme
+  rpc UpdateTheme (UpdateThemeRequest) returns (google.protobuf.Empty);
+}
+
+// Response containing a theme's share id.
+message ThemeShareReply {
+  string id = 1;
+}
+
+// Response containing a theme JSON
+message ThemeDataReply {
+  string themeJson = 1;
+}
+
+// Response containing a published theme listing
+message ThemeListingReply {
+  string id = 1;
+  string name = 2;
+  string author = 3;
+  int32 downloads = 4;
+  int32 version = 5;
+}
+
+
+// Request containing theme data for sharing
+message ShareThemeRequest {
+  string themeJson = 1;
+}
+
+// Request containing a theme id
+message GetThemeRequest {
+  string id = 1;
+  bool incrementDownloads = 2;
+}
+
+// Request containing a theme id and the owner who publishes it
+message PublishThemeRequest {
+  string id = 1;
+  string owner = 2;
+}
+
+// Request containing a theme id and the id to fetch the new theme from
+message UpdateThemeRequest {
+  string id = 1;
+  string newId = 2;
+}
