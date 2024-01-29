@@ -25,7 +25,6 @@ public class Program
             options.EnableDetailedErrors = true;
             options.EnableMessageValidation();
         });
-        //builder.Services.AddSingleton<Interceptor, ExceptionInterceptor>();
         builder.Services.AddValidators();
         builder.Services.AddGrpcValidation();
         builder.Services.AddDbContext<PalantirContext>();
@@ -50,6 +49,7 @@ public class Program
         services.AddScoped<IAwardsDomainService, AwardsDomainService>();
         services.AddScoped<IEventsDomainService, EventsDomainService>();
         services.AddScoped<IThemesDomainService, ThemesDomainService>();
+        services.AddScoped<IGuildsDomainService, GuildsDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -59,6 +59,7 @@ public class Program
         app.MapGrpcService<AwardsGrpcService>();
         app.MapGrpcService<EventsGrpcService>();
         app.MapGrpcService<ThemesGrpcService>();
+        app.MapGrpcService<GuildsGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)
@@ -68,6 +69,7 @@ public class Program
             typeof(SceneMapperProfile),
             typeof(SpriteMapperProfile),
             typeof(ThemeMapperProfile),
+            typeof(GuildMapperProfile),
             typeof(AwardMapperProfile));
     }
 }

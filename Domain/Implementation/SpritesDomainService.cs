@@ -25,7 +25,11 @@ public class SpritesDomainService(
     public async Task<List<SpriteEntity>> GetAllSprites()
     {
         logger.LogTrace("GetAllSprites()");
-        
-        return await db.Sprites.ToListAsync();
+
+        return (await db.Sprites.ToListAsync()).Select(sprite =>
+        {
+            if (sprite.Id >= 1000) sprite.EventDropId = 0; // map exclusive sprites out of event
+            return sprite;
+        }).ToList();
     }
 }

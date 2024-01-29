@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "Valmar";
+package guilds;
+
+// Service definition for guilds resource access
+service Guilds {
+  
+  // Gets a guild by its observe token
+  rpc GetGuildByToken (GetGuildRequest) returns (GuildReply);
+}
+
+// Response containing a award's properties.
+message GuildReply {
+  int64 guildId = 1;
+  int64 channelId = 2;
+  int64 messageId = 3;
+  int32 observeToken = 4;
+  string name = 5;
+  int32 connectedMemberCount = 6;
+}
+
+// Request containing a guild observe token
+message GetGuildRequest {
+  int32 observeToken = 1;
+}

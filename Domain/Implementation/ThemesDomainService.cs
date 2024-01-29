@@ -12,28 +12,6 @@ public class ThemesDomainService(
     ILogger<ThemesDomainService> logger, 
     PalantirContext db) : IThemesDomainService
 {
-
-    private static JsonSerializerOptions _jsonSerializerOptions = new()
-    {
-        PropertyNameCaseInsensitive = true,
-        TypeInfoResolver = new DefaultJsonTypeInfoResolver
-        {
-            Modifiers =
-            {
-                static typeInfo =>
-                {
-                    if (typeInfo.Kind != JsonTypeInfoKind.Object)
-                        return;
-
-                    foreach (JsonPropertyInfo propertyInfo in typeInfo.Properties)
-                    {
-                        // Strip IsRequired constraint from every property.
-                        propertyInfo.IsRequired = true;
-                    }
-                }
-            }
-        }
-    };
     
     private static string GenerateRandomId(int length = 8)
     {
@@ -129,6 +107,9 @@ public class ThemesDomainService(
 
     public async Task<ThemeListingDdo> GetListingOfTheme(string id)
     {
+        
+        // TODO improve performance by taking theme entity as argument
+        
         var publishedTheme = await db.UserThemes.FirstOrDefaultAsync(t => t.Id == id);
         if (publishedTheme is null)
         {
@@ -146,7 +127,7 @@ public class ThemesDomainService(
         ThemeJson? theme = null;
         try
         {
-            theme = JsonSerializer.Deserialize<ThemeJson>(themeJson, _jsonSerializerOptions);
+            theme = JsonSerializer.Deserialize<ThemeJson>(themeJson, ValmarJsonOptions.JsonSerializerOptions);
         }
         catch(Exception e)
         {

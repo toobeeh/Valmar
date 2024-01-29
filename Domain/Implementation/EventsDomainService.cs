@@ -41,7 +41,7 @@ public class EventsDomainService(
 
     public async Task<List<EventDropEntity>> GetAllEventDrops()
     {
-        return await db.EventDrops.ToListAsync();
+        return await db.EventDrops.Where(drop => drop.EventId != 1000).ToListAsync(); // filter out placeholder drop
     }
 
     public async Task<List<EventDropEntity>> GetEventDropsOfEvent(int id)
