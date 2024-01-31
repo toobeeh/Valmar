@@ -8,6 +8,6 @@ public class GuildMapperProfile : Profile
 {
     public GuildMapperProfile()
     {
-        CreateMap<GuildDetailDto, GuildReply>();
+        CreateMap<GuildDetailDdo, GuildReply>();
     }
 }

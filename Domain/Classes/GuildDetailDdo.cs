@@ -1,6 +1,6 @@
 namespace Valmar.Domain.Classes;
 
-public record GuildDetailDto(
+public record GuildDetailDdo(
     long GuildId,
     long ChannelId,
     long MessageId,

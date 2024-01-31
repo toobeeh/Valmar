@@ -11,7 +11,7 @@ public class GuildsDomainService(
     ILogger<GuildsDomainService> logger, 
     PalantirContext db) : IGuildsDomainService
 {
-    public async Task<GuildDetailDto> GetGuildByObserveToken(int observeToken)
+    public async Task<GuildDetailDdo> GetGuildByObserveToken(int observeToken)
     {
         var guild = await db.Palantiris.FirstOrDefaultAsync(guild => guild.Token == observeToken.ToString());
         if (guild is null)
@@ -23,10 +23,10 @@ public class GuildsDomainService(
         var memberCount =
             await db.Members.Where(member => member.Member1.Contains(observeToken.ToString())).CountAsync();
 
-        var details = new GuildDetailDto(
-            Convert.ToInt64(guildProperties.GuildID),
-            Convert.ToInt64(guildProperties.ChannelID),
-            Convert.ToInt64(guildProperties.MessageID),
+        var details = new GuildDetailDdo(
+            Convert.ToInt64(guildProperties.GuildId),
+            Convert.ToInt64(guildProperties.ChannelId),
+            Convert.ToInt64(guildProperties.MessageId),
             observeToken,
             guildProperties.GuildName,
             memberCount
@@ -35,12 +35,12 @@ public class GuildsDomainService(
         return details;
     }
 
-    private GuildProperties ParseGuildProperties(string guildJson)
+    private GuildPropertiesJson ParseGuildProperties(string guildJson)
     {
-        GuildProperties? guildProperties = null;
+        GuildPropertiesJson? guildProperties = null;
         try
         {
-            guildProperties = JsonSerializer.Deserialize<GuildProperties>(guildJson, ValmarJsonOptions.JsonSerializerOptions);
+            guildProperties = JsonSerializer.Deserialize<GuildPropertiesJson>(guildJson, ValmarJsonOptions.JsonSerializerOptions);
         }
         catch(Exception e)
         {

@@ -31,14 +31,9 @@ public class Program
         RegisterMapperProfiles(builder.Services);
         RegisterDomainServices(builder.Services);
 
+        // Register routes and start app
         var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
         RegisterGrpcServices(app);
-        app.MapGet("/",
-            () =>
-                "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-
         app.Run();
     }
 
@@ -50,6 +45,7 @@ public class Program
         services.AddScoped<IEventsDomainService, EventsDomainService>();
         services.AddScoped<IThemesDomainService, ThemesDomainService>();
         services.AddScoped<IGuildsDomainService, GuildsDomainService>();
+        services.AddScoped<ILobbiesDomainService, LobbiesDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -60,12 +56,14 @@ public class Program
         app.MapGrpcService<EventsGrpcService>();
         app.MapGrpcService<ThemesGrpcService>();
         app.MapGrpcService<GuildsGrpcService>();
+        app.MapGrpcService<LobbiesGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)
     {
         services.AddAutoMapper(
             typeof(EventMapperProfile),
+            typeof(LobbyMapperProfile),
             typeof(SceneMapperProfile),
             typeof(SpriteMapperProfile),
             typeof(ThemeMapperProfile),

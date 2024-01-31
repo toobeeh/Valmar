@@ -5,5 +5,5 @@ namespace Valmar.Domain;
 
 public interface IGuildsDomainService
 {
-    Task<GuildDetailDto> GetGuildByObserveToken(int observeToken);
+    Task<GuildDetailDdo> GetGuildByObserveToken(int observeToken);
 }

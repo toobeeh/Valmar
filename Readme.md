@@ -32,9 +32,20 @@ All layers use dependency injection of mappers, database, loggers and other serv
 ## Design guidelines
 
 ### Entities / DTOs
+Following layers should expose following entity types:
+- Application layer: GRPC response classes
+- Domain Layer: Entities, JSON Models for partial entities or "Domain Data Objects"/Ddos.
+
 gRPC requests/responses have to be only used in the application layer.  
-In the domain/persistence layer, the efcore entities and additional classes for data encapsulation are used. 
-To map entities from domain to application layer, the IMapper interface has to be used.
+If suitable JSON Models exists, they may be used instead of creating dedicated Ddo classes.
+Ddo classes should be used to combine data from multiple domains to a single response.
+
+The application layer should only use Automapper to convert Domain layer entities to Application layer entities.   
+This engages that the domain layer produces ready-to-use entities and decouples it from the application layer.  
+The primary objective of the auto-mapping should be stripping properties and mapping to slightly different structure.
+
+The domain layer should not use Automapper to deal more explicitly with attribute name/type conversion.
+Automapper is useful for converting objects with similar signature, but the domain layer should rather produce full-featured objects than "stripped" objects.
 
 ### Exception handling 
 gRPC exceptions should be only thrown in the application layer.  
