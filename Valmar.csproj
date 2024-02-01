@@ -41,6 +41,7 @@
       <Content Include="..\.dockerignore">
         <Link>.docker\.dockerignore</Link>
       </Content>
+      <Content Include=".docker\docker-compose.yml" />
       <Content Include=".github\workflows\build.yml" />
     </ItemGroup>
 

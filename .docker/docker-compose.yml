@@ -1,0 +1,9 @@
+version: "3.0"
+
+services:
+  valmar:
+    container_name: valmar
+    image: "ghcr.io/toobeeh/valmar:latest"
+    restart: no
+    ports:
+      - "8080:8080"
