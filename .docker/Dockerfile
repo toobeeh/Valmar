@@ -2,7 +2,6 @@
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 
 ARG DB_DOMAIN_NAME="db.domain.tld"
 ENV DB_DOMAIN_NAME "${DB_DOMAIN_NAME}"
@@ -26,8 +25,10 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 # Copy the entrypoint script
-COPY .docker/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY .docker/entrypoint.sh .
+USER root
+RUN chmod +x entrypoint.sh
+USER $APP_UID
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["sh", "-c", "dotnet Valmar.dll"]
