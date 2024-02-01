@@ -30,5 +30,5 @@ USER root
 RUN chmod +x entrypoint.sh
 USER $APP_UID
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["sh", "-c", "dotnet Valmar.dll"]
