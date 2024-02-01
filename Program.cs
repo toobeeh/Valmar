@@ -46,6 +46,7 @@ public class Program
         services.AddScoped<IThemesDomainService, ThemesDomainService>();
         services.AddScoped<IGuildsDomainService, GuildsDomainService>();
         services.AddScoped<ILobbiesDomainService, LobbiesDomainService>();
+        services.AddScoped<IMembersDomainService, MembersDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -56,6 +57,7 @@ public class Program
         app.MapGrpcService<EventsGrpcService>();
         app.MapGrpcService<ThemesGrpcService>();
         app.MapGrpcService<GuildsGrpcService>();
+        app.MapGrpcService<MembersGrpcService>();
         app.MapGrpcService<LobbiesGrpcService>();
     }
 
@@ -68,6 +70,7 @@ public class Program
             typeof(SpriteMapperProfile),
             typeof(ThemeMapperProfile),
             typeof(GuildMapperProfile),
+            typeof(MemberMapperProfile),
             typeof(AwardMapperProfile));
     }
 }

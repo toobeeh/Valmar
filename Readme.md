@@ -31,6 +31,10 @@ All layers use dependency injection of mappers, database, loggers and other serv
 
 ## Design guidelines
 
+### Performance
+Each service should have the goal to create granular access to its entities and not waste resources to calculate/fetch data that might not be needed by the majority of its consumers.  
+
+
 ### Entities / DTOs
 Following layers should expose following entity types:
 - Application layer: GRPC response classes

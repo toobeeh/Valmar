@@ -10,7 +10,7 @@ service Guilds {
   rpc GetGuildByToken (GetGuildRequest) returns (GuildReply);
 }
 
-// Response containing a award's properties.
+// Response containing a guild's properties.
 message GuildReply {
   int64 guildId = 1;
   int64 channelId = 2;

@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Valmar";
+package members;
+
+// Service definition for member resource access
+service Members {
+  
+  // Gets a member by its login
+  rpc GetMemberByLogin (IdentifyMemberByLoginRequest) returns (MemberReply);
+
+  // Gets a member by its connected discord account id
+  rpc GetMemberByDiscordId (IdentifyMemberByDiscordIdRequest) returns (MemberReply);
+
+  // Finds members matching a query
+  rpc SearchMember (SearchMemberRequest) returns (stream MemberSearchReply);
+  
+  // Gets the raw member json string of a member
+  rpc GetRawMemberByLogin (IdentifyMemberByLoginRequest) returns (RawMemberReply);
+
+  // Gets the accesstoken of a member
+  rpc GetAccessTokenByLogin (IdentifyMemberByLoginRequest) returns (AccessTokenReply);
+  
+  // Updates the linked discord id of a member
+  rpc UpdateMemberDiscordId (UpdateDiscordIdRequest) returns (MemberReply);
+
+  // Clears the last or current dropboost of a member
+  rpc ClearMemberDropboost (IdentifyMemberByLoginRequest) returns (google.protobuf.Empty);
+
+  // Adds a server to the member's connections
+  rpc AddMemberServerConnection (ModifyServerConnectionRequest) returns (google.protobuf.Empty);
+
+  // Removes a server from the member's connections
+  rpc RemoveMemberServerConnection (ModifyServerConnectionRequest) returns (google.protobuf.Empty);
+}
+
+// Response containing a member's properties.
+message MemberReply {
+  int32 bubbles = 1;
+  int32 drops = 2;
+  string sprites = 3;
+  string scenes = 4;
+  int32 flags = 5;
+  string rainbowSprites = 6;
+  int64 discordId = 7;
+  string username = 8;
+  int32 login = 9;
+  repeated int32 serverConnections = 10;
+}
+
+// Reply containing the accesstoken of a member
+message AccessTokenReply {
+  string accessToken = 1;
+}
+
+// Response containing a member as raw json with all possible information for inspection, in no  particular structure
+message RawMemberReply {
+  string memberJson = 1;
+}
+
+// Response containing a brief member data as well as inspection data
+message MemberSearchReply {
+  string username = 1;
+  int32 login = 2;
+  RawMemberReply raw = 3;
+}
+
+// Request used to target a distinct member by id
+message IdentifyMemberByLoginRequest {
+  int32 login = 1;
+}
+
+// Request used to target a distinct member by id
+message IdentifyMemberByDiscordIdRequest {
+  int64 id = 1;
+}
+
+// Request to fetch members matching a plain text query
+message SearchMemberRequest {
+  string query = 1;
+}
+
+// Request to modify a server conenction of a member
+message ModifyServerConnectionRequest {
+  int32 login = 1;
+  int32 serverToken = 2;
+}
+
+// Request to update the linked discord id of a member
+message UpdateDiscordIdRequest {
+  int32 login = 1;
+  int64 discordId = 2;
+}
+
+
+

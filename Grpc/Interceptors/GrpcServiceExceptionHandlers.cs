@@ -9,6 +9,7 @@ public static class GrpcServiceExceptionHandlers
         exception switch
         {
             EntityNotFoundException notFoundException => HandleEntityNotFoundException(notFoundException, logger),
+            EntityAlreadyExistsException existsException => HandleEntityAlreadyExistsException(existsException, logger),
             RpcException rpcException => HandleRpcException(rpcException, logger),
             _ => HandleDefault(exception, context, logger)
         };
@@ -17,6 +18,12 @@ public static class GrpcServiceExceptionHandlers
     {
         logger.LogWarning(exception, "An entity requested by rpc service handler could not be found");
         return new RpcException(new Status(StatusCode.NotFound, exception.Message));
+    }
+    
+    private static RpcException HandleEntityAlreadyExistsException<T>(EntityAlreadyExistsException exception, ILogger<T> logger)
+    {
+        logger.LogWarning(exception, "An entity requested to be created already exists");
+        return new RpcException(new Status(StatusCode.AlreadyExists, exception.Message));
     }
 
     private static RpcException HandleRpcException<T>(RpcException exception, ILogger<T> logger)
