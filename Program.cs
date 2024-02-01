@@ -8,7 +8,6 @@ using Valmar.Domain.Implementation;
 using Valmar.Grpc;
 using Valmar.Grpc.Interceptors;
 using Valmar.Mappers;
-using Valmar.Validators.Scenes;
 
 namespace Valmar;
 
