@@ -57,7 +57,7 @@ public class MembersGrpcService(
         logger.LogTrace("UpdateMemberDiscordId(request={request})", request);
 
         await membersService.UpdateMemberDiscordId(request.Login, request.DiscordId);
-        var newMember = membersService.GetMemberByLogin(request.Login);
+        var newMember = await membersService.GetMemberByLogin(request.Login);
         return mapper.Map<MemberReply>(newMember);
     }
 

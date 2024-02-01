@@ -116,7 +116,54 @@ public class MembersDomainService(
 
     public async Task UpdateMemberDiscordId(int login, long newId)
     {
-        throw new NotImplementedException();
+        logger.LogTrace("UpdateMemberDiscordId(login={login}, newId={newId})", login, newId);
+
+        var member = await db.Members.FirstOrDefaultAsync(member => member.Login == login);
+        if (member is null)
+        {
+            throw new EntityNotFoundException($"No member found for login {login}");
+        }
+
+        var parsedMember = ValmarJsonParser.TryParse<MemberJson>(member.Member1, logger);
+        if (parsedMember.UserId == newId.ToString())
+        {
+            throw new EntityConflictException($"Member with login {login} is already linked with the discord id {newId}");
+        }
+        
+        // check if there is already a member for the new discord id and transfer its bubbles and drops, and remove old bubble traces
+        try
+        {
+            var existingNewMember = await GetMemberByDiscordId(newId); // use this function for efficient querying by discord id through json column
+            
+            logger.LogTrace("Found account for new discord id, data will be transferred: {existingNewMember}", existingNewMember);
+            member.Bubbles += existingNewMember.Bubbles;
+            member.Drops += existingNewMember.Drops;
+
+            // start tracking deprecated entities as deleted
+            db.BubbleTraces.RemoveRange(db.BubbleTraces.Where(trace => trace.Login == existingNewMember.Login));
+            db.Members.RemoveRange(db.Members.Where(m => m.Login == existingNewMember.Login));
+        }
+        catch(Exception e) {
+            logger.LogTrace("No account for new discord id found, transferring no data");
+        }
+
+        // update member JSON
+        var newParsedMember = parsedMember with { UserId = newId.ToString() };
+        member.Member1 = JsonSerializer.Serialize(newParsedMember);
+        
+        // delete drops with old user id due to PK reasons
+        var userDrops = await db.PastDrops.Where(drop => drop.CaughtLobbyPlayerId == parsedMember.UserId).ToListAsync();
+        db.PastDrops.RemoveRange(userDrops);
+        
+        // execute updates
+        db.Members.Update(member);
+        await db.SaveChangesAsync();
+        
+        // add updated drops again
+        logger.LogTrace("Transferring {drops} to new discord id {id}", userDrops.Count, newId);
+        foreach (var drop in userDrops) drop.CaughtLobbyPlayerId = newParsedMember.UserId;
+        db.PastDrops.AddRange(userDrops);
+        await db.SaveChangesAsync();
     }
 
     public async Task ClearMemberDropboost(int login)

@@ -10,6 +10,7 @@ public static class GrpcServiceExceptionHandlers
         {
             EntityNotFoundException notFoundException => HandleEntityNotFoundException(notFoundException, logger),
             EntityAlreadyExistsException existsException => HandleEntityAlreadyExistsException(existsException, logger),
+            EntityConflictException conflictException => HandleConflictException(conflictException, logger),
             RpcException rpcException => HandleRpcException(rpcException, logger),
             _ => HandleDefault(exception, context, logger)
         };
@@ -24,6 +25,12 @@ public static class GrpcServiceExceptionHandlers
     {
         logger.LogWarning(exception, "An entity requested to be created already exists");
         return new RpcException(new Status(StatusCode.AlreadyExists, exception.Message));
+    }
+    
+    private static RpcException HandleConflictException<T>(EntityConflictException exception, ILogger<T> logger)
+    {
+        logger.LogWarning(exception, "Some given arguments are in conflict with the current state");
+        return new RpcException(new Status(StatusCode.InvalidArgument, exception.Message));
     }
 
     private static RpcException HandleRpcException<T>(RpcException exception, ILogger<T> logger)
