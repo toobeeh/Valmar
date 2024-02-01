@@ -14,6 +14,39 @@ public class MembersDomainService(
     IGuildsDomainService guildsService,
     PalantirContext db) : IMembersDomainService
 {
+    public async Task<MemberDdo> CreateMember(long discordId, string username, bool connectTypo)
+    {
+        logger.LogTrace("CreateMember(discordId={discordId}, username={username}, connectTypo={connectTypo})", discordId, username, connectTypo);
+        
+        int login ;
+        do
+        {
+            login = new Random().Next(99999999);
+        } while (await db.Members.AnyAsync(member => member.Login == login));
+        
+        var member = new MemberEntity()
+        {
+            Bubbles = 0,
+            Drops = 0,
+            Sprites = "",
+            Login = login,
+            Flag = 0
+        };
+
+        var memberDetails = new MemberJson(
+            discordId.ToString(),
+            username,
+            member.Login.ToString(),
+            []
+        );
+        member.Member1 = JsonSerializer.Serialize(memberDetails);
+
+        db.Members.Add(member);
+        await db.SaveChangesAsync();
+
+        if (connectTypo) await ConnectToServer(login, 79177353);
+        return await GetMemberByLogin(login);
+    }
 
     public async Task<MemberDdo> GetMemberByLogin(int login)
     {
@@ -62,6 +95,19 @@ public class MembersDomainService(
         }
 
         return await GetMemberByLogin(Convert.ToInt32(match.UserLogin)); // accept performance loss for code reusability
+    }
+
+    public async Task<MemberDdo> GetMemberByAccessToken(string token)
+    {
+        logger.LogTrace("GetMemberByAccessToken(token={token})", token);
+
+        var accessToken = await db.AccessTokens.FirstOrDefaultAsync(entity => entity.AccessToken1 == token);
+        if (accessToken is null)
+        {
+            throw new EntityNotFoundException($"No access token found found for token {token}");
+        }
+
+        return await GetMemberByLogin(accessToken.Login);
     }
 
     public async Task<List<MemberSearchDdo>> SearchMember(string query)

@@ -12,6 +12,22 @@ public class MembersGrpcService(
     IMapper mapper,
     IMembersDomainService membersService) : Members.MembersBase
 {
+    public override async Task<MemberReply> GetMemberByAccessToken(IdentifyMemberByAccessTokenRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("GetMemberByAccessToken(request={request})", request);
+
+        var member = await membersService.GetMemberByAccessToken(request.AccessToken);
+        return mapper.Map<MemberReply>(member);
+    }
+
+    public override async Task<MemberReply> CreateNewMember(CreateNewMemberRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("CreateNewMember(request={request})", request);
+
+        var member = await membersService.CreateMember(request.DiscordId, request.Username, request.ConnectToTypoServer);
+        return mapper.Map<MemberReply>(member);
+    }
+
     public override async Task<MemberReply> GetMemberByLogin(IdentifyMemberByLoginRequest request, ServerCallContext context)
     {
         logger.LogTrace("GetMemberByLogin(request={request})", request);

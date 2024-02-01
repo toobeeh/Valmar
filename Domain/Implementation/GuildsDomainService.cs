@@ -21,7 +21,7 @@ public class GuildsDomainService(
 
         var guildProperties = ParseGuildProperties(guild.Palantir);
         var memberCount =
-            await db.Members.Where(member => member.Member1.Contains(observeToken.ToString())).CountAsync();
+            await db.Members.Where(member => member.Member1.Contains(observeToken.ToString())).CountAsync(); // TODO improve safety, this is only a "inaccurate" count for performance
 
         var details = new GuildDetailDdo(
             Convert.ToInt64(guildProperties.GuildId),
