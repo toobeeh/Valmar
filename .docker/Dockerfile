@@ -4,6 +4,9 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+ARG DB_DOMAIN_NAME="db.domain.tld"
+ENV DB_DOMAIN_NAME "${DB_DOMAIN_NAME}"
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
@@ -21,4 +24,10 @@ RUN dotnet publish "Valmar.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:Us
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Valmar.dll"]
+
+# Copy the entrypoint script
+COPY .docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["sh", "-c", "dotnet Valmar.dll"]
