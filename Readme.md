@@ -7,9 +7,9 @@ Other services can scaffold clients based on the proto definitions.
 This way, there is only one place where logic of new features has to be implemented.
 
 ## Status & Roadmap
-Valmar is has just left beta testing and is already used in production!.  
+Valmar is has just left beta testing and is already used in production!  
 The Nest API in toobeeh/Tirith has been refactored and solely uses Valmar instead of native database access.  
-Valmar is currently deployed on the same server as thte remaining typo ecosystem and not publicy exposed, since it has no (and will never have any) sort of authentication. 
+Valmar is currently deployed on the same server as the remaining typo ecosystem and not publicy exposed, since it has no (and will never have any) sort of authentication. 
 
 Further steps involve integrating more heavy business logic from Palantir into Valmar, and begin a separation of the 
 different Palantir components into separate services, each independent of another and receiving data from Valmar.  
