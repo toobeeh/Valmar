@@ -26,7 +26,7 @@ public class LobbiesGrpcService(
 
             // execute multiple mappings on automapper to one object
             var response = mapper
-                .Map<LobbyReply>(skribblLobby)
+                .Map<LobbyReply>(palantirLobby)
                 .Map(skribblLobby, mapper)
                 .Map(players, mapper);
 
