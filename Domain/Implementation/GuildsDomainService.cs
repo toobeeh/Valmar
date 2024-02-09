@@ -13,7 +13,8 @@ public class GuildsDomainService(
 {
     public async Task<GuildDetailDdo> GetGuildByObserveToken(int observeToken)
     {
-        var guild = await db.Palantiris.FirstOrDefaultAsync(guild => guild.Token == observeToken.ToString("00000000"));
+        var guild = await db.Palantiris.FirstOrDefaultAsync(
+            guild => guild.Token == observeToken.ToString("00000000") || guild.Token == observeToken.ToString()); // TODO fix inconsistency of 0 paddings in db
         if (guild is null)
         {
             throw new EntityNotFoundException($"Guild with token {observeToken} does not exist");
