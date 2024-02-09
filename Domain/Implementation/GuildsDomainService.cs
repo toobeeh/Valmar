@@ -13,7 +13,7 @@ public class GuildsDomainService(
 {
     public async Task<GuildDetailDdo> GetGuildByObserveToken(int observeToken)
     {
-        var guild = await db.Palantiris.FirstOrDefaultAsync(guild => guild.Token == observeToken.ToString());
+        var guild = await db.Palantiris.FirstOrDefaultAsync(guild => guild.Token == observeToken.ToString("00000000"));
         if (guild is null)
         {
             throw new EntityNotFoundException($"Guild with token {observeToken} does not exist");
@@ -21,7 +21,7 @@ public class GuildsDomainService(
 
         var guildProperties = ParseGuildProperties(guild.Palantir);
         var memberCount =
-            await db.Members.Where(member => member.Member1.Contains(observeToken.ToString())).CountAsync(); // TODO improve safety, this is only a "inaccurate" count for performance
+            await db.Members.Where(member => member.Member1.Contains(observeToken.ToString("00000000"))).CountAsync(); // TODO improve safety, this is only a "inaccurate" count for performance
 
         var details = new GuildDetailDdo(
             Convert.ToInt64(guildProperties.GuildId),
