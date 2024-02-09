@@ -1,19 +1,28 @@
 # Valmar
+[![part of Typo ecosystem](https://img.shields.io/badge/Typo%20ecosystem-Valmar-blue?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAACV0lEQVR4nO3dPUrDYByA8UQ8g15AI+gsOOnmrufoIBT0DAUFB+/R3bFTobOCwQvoJSouNcObhHyZ9n2eHwiirW3Th79J2iaJJEmSJEmSJIC06iGu1+vgz9M0Df9CY6t8PkP2fMrYDADOAOAMAM4A4OrWGl3bj0Pp8+wEgDMAuP2uD//w7I6+DEf19fbc6eadAHAGAGcAcAYAZwBwnbcCTrIj+jL8Fx/55yA34wSAMwA4A4AzADgDgDMAOAOAMwC4zjuCzi+uN9+fZgeNrvuefw+69FfL10H/fgycAHAGAGcAcAYAZwBwnbcCioZeq2+quIVS5NbBHycAnAHARffRsOksr71Ml38Bi/mk9XVH5EfDFGYAcHVbAWWjw08NbyePEaRmDADOAOAMAM4A4Fq9FjCd5cG1zaeHrPeleXnzsvl+MZ802vooe4fSatn9ftUILp/iYxlCm51UTgA4A4Dr9eXgsv3wtJdfhx71fXICwBkAXGUAv+cLCH0pHk4AOAOAMwA4A4AzALhedwRpXBVneSu9X04AOAOAMwA4A4AzADgDgDMAOAOAMwA4A4AzADgDgDMAOAOAMwA4A4AzALio3xG0bUcu3UZOADgDgDMAOAOAMwC4qLcCRjxG0M5wAsAZAJwBwBkAnAHAGQCcAcAZAJwBwBkAnAHA+Y4gOCcAnAHAGQCcAcAZAFyrrYDH++NGl7+6ZZ0yZpc4AeAMAC66HUFDnLwyZk4AOAOAKz+QfMXx58dScdz7se5o8A7t0HJzAtAZAJwBwBkAnAFIkiRJkiRJUtySJPkBweNXgRaWkYQAAAAASUVORK5CYII=)](https://github.com/topics/skribbl-typo)
 > Valmar, the capital of the god-like Valar, held the key to Middle-earth's destiny.  
 
-Similar to its role in the LOTR lore, Valmar aims to be the centralized business service for all skribbl-typo services.  
-Valmar implements the persistance and business-service layer, and exposes all functions with an gRPC API.  
-Other services can scaffold clients based on the proto definitions.   
-This way, there is only one place where logic of new features has to be implemented.
+Similar to its role in the LOTR lore, Valmar aims to be the centralized domain service for all skribbl-typo services.  
+Valmar implements the persistance and domain-service layer, and exposes all functions with a gRPC API.  
+Other services can scaffold clients and types easily based on the proto definitions.   
+This way, there is only one place where logic of new features needs to be implemented.
+
+## Brief ecosystem overview
+Following graphic illustrates the current state of the typo ecosystem:
+  
+![typo ecosystem](https://i.imgur.com/JN5AoEM.jpg)  
+  
+It can be seen that domain/persistance layer is implemented multiple times; this is unnecessarily duplicated code resulting in unmaintainable code, higher difficulty to implement new features uniformly, and makes it incredibly easy to let errors slip in one of the many implementations.  
+Valmar will act in future as the only implementation of domain & persistance layer, like it is currently done in Tirith. More in the Roadmap section.
 
 ## Status & Roadmap
-Valmar is under development and not production-ready.  
-The Nest API in toobeeh/Tirith will be refactored along with the progress of Valmar on a development branch.  
-As soon as the Tirith-API has fully switched from native Database access to gRPC, Valmar will be deployed.  
+Valmar is has just left beta testing and is already used in production!  
+The Nest API in toobeeh/Tirith has been refactored and solely uses Valmar instead of native database access.  
+Valmar is currently deployed on the same server as the remaining typo ecosystem and not publicy exposed, since it has no (and will never have any) sort of authentication. 
 
 Further steps involve integrating more heavy business logic from Palantir into Valmar, and begin a separation of the 
-different Palantir components into separate services,  
-each independent of another and receiving data from Valmar.
+different Palantir components into separate services, each independent of another and receiving data from Valmar.  
+Another goal is to get rid of the domain code from Ithil-Rebirth as well and fully switch to Valmar.
 
 ## Architecture
 Valmar aims to improve the Domain Driven Design architecture in the typo ecosystem.  
