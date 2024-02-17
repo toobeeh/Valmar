@@ -188,6 +188,17 @@ public class MembersDomainService(
             // start tracking deprecated entities as deleted
             db.BubbleTraces.RemoveRange(db.BubbleTraces.Where(trace => trace.Login == existingNewMember.Login));
             db.Members.RemoveRange(db.Members.Where(m => m.Login == existingNewMember.Login));
+            
+            // update own awards of temp member
+            var ownAwards = await db.Awardees.Where(awardee => awardee.OwnerLogin == existingNewMember.Login).ToListAsync();
+            ownAwards.ForEach(award => award.OwnerLogin = member.Login);
+            db.Awardees.UpdateRange(ownAwards);
+            
+            // update received awards of temp member
+            var receivedAwards = await db.Awardees.Where(awardee => awardee.AwardeeLogin == existingNewMember.Login).ToListAsync();
+            receivedAwards.ForEach(award => award.AwardeeLogin = member.Login);
+            db.Awardees.UpdateRange(receivedAwards);
+
         }
         catch(Exception e) {
             logger.LogTrace("No account for new discord id found, transferring no data");
