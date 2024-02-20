@@ -42,7 +42,29 @@ All layers use dependency injection of mappers, database, loggers and other serv
 
 ### Performance
 Each service should have the goal to create granular access to its entities and not waste resources to calculate/fetch data that might not be needed by the majority of its consumers.  
+Generally speaking, Valmar should not cache any data.
+An exception are drops, which are the main performance bottleneck of the whole application. 
 
+Following concept should be implemented to handle drops:
+### Drop Chunks with Octree access
+The drop table is a huge table with a lot of data (a couple millions of drops).
+To handle this, the table should be split into chunks.
+The chunks should be stored in an octree structure, where each chunk is a leaf node in the tree.
+Each node in the octree is either an abstraction of its child nodes, or a leaf node which is assigned to a range of drop IDs in the database.   
+
+The abstraction nodes calculate the stats of their children and store (cache) that, to save performance cost.  
+Initially, abstraction nodes are dirty. When a read request is made, the node calculates the stats (recursively) from its child nodes, saves them, marks itself as clean, and returns the value.  
+For the next read operation, the node can directly return the stats without recalculating them.  
+When a node encounters a writing access, it marks the stats as dirty, which is propagated downwards to the chunks/nodes that are requried for the write access.
+At the next read access, the dirty nodes will have to recalculate the stats from its child nodes.
+
+The leaf nodes are assigned to a range of drop IDs and calculate their stats directly from the database.
+During the initialization of the octree, the initializer creates a parent abstraction node and starts loading chunks of size n.
+It adds the chunks to the current head node; when the head node is filled up with eight chunks it moves the chunks to a new child node and therefore has seven new chunks available. 
+
+This uses the temporal locality of drop accesses, especially the write accesses - new drops and redeeming league drops. 
+Most chunks will remain clean and when frequent write accesses occur, it is likely that they are affecting a number of chunks in the same area of the octree due to drop events.
+The chunksize should be chosen to be as large as possible to minimize the amount of nodes in the octree, but as small as necessary to keep the amount of dirty nodes low.
 
 ### Entities / DTOs
 Following layers should expose following entity types:
