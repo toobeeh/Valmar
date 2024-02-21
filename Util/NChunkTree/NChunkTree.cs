@@ -58,12 +58,12 @@ public abstract class NChunkTree<TChunk>
     /// <summary>
     /// The implementation-specific start index of this chunk
     /// </summary>
-    protected abstract long ChunkStartIndex { get; }
+    protected abstract long? ChunkStartIndex { get; }
     
     /// <summary>
     /// The implementation-specific end index of this chunk
     /// </summary>
-    protected abstract long ChunkEndIndex { get; }
+    protected abstract long? ChunkEndIndex { get; }
     
     /// <summary>
     /// Creates a new instance of the same chunk node type,
@@ -92,7 +92,7 @@ public abstract class NChunkTree<TChunk>
     /// </summary>
     /// <param name="chunk"></param>
     /// <returns>Returns this node for fluent interface</returns>
-    public NChunkTree<TChunk> AddChunk(NChunkTree<TChunk> chunk)
+    public virtual NChunkTree<TChunk> AddChunk(NChunkTree<TChunk> chunk)
     {
         
         // find node position that is either not set or can take chunks in it
