@@ -16,30 +16,6 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        
-        var drops = new List<PastDropEntity>();
-        for (var i = 0; i < 10_000_000; i++)
-        {
-            PastDropEntity drop = new PastDropEntity
-            {
-                DropId = i,
-                EventDropId = i % 10,
-                CaughtLobbyKey = "adasd",
-                CaughtLobbyPlayerId = "asdasd",
-                LeagueWeight = i % 1000,
-                ValidFrom = "adasd"
-            };
-            drops.Add(drop);
-        }
-        
-        var node = new DropChunkTree(8);
-
-        for (int i = 0; i < drops.Count() / 1000; i++)
-        {
-            node.AddChunk(new DropChunkLeaf(i * 1000, (i * 1000 + 1)));
-        }
-        
-        
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.

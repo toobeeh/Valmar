@@ -1,8 +1,7 @@
 namespace Valmar.Util.NChunkTree;
 
-public class DropChunkTree : NChunkTree<IDropChunkNode>, IDropChunkNode
+public class DropChunkTree(int chunkCount) : NChunkTree<IDropChunkNode>(chunkCount), IDropChunkNode
 {
-    public DropChunkTree(int chunkCount) : base(chunkCount) { }
     protected override long ChunkStartIndex => DropIndexStart;
     protected override long ChunkEndIndex => DropIndexEnd;
     protected override NChunkTree<IDropChunkNode> CreateExpansionNode()
@@ -14,4 +13,8 @@ public class DropChunkTree : NChunkTree<IDropChunkNode>, IDropChunkNode
 
     public long DropIndexStart => Chunks.First().DropIndexStart;
     public long DropIndexEnd => Chunks.Last().DropIndexEnd;
+    public double GetTotalDropValueForUser(string id)
+    {
+        return Chunks.Sum(c => c.GetTotalDropValueForUser(id));
+    }
 }
