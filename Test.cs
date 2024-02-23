@@ -1,7 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using Valmar.Database;
 using Valmar.Domain.Implementation.Drops;
-using Valmar.Util.NChunkTree;
+using Valmar.Util;
 
 namespace Valmar;
 
@@ -13,7 +11,8 @@ public static class Test
         {
             var drops = scope.ServiceProvider.GetRequiredService<DropCache>();
 
-            var score1 = await drops.Drops.GetTotalLeagueWeight("334048043638849536");
+            var score1 = await drops.Drops.GetLeagueWeightInTimespan("732281653648687198", DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), DateTimeOffset.Now);
+            var count = await drops.Drops.GetLeagueCountInTimespan("732281653648687198", DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), DateTimeOffset.Now);
 
             return;
         }

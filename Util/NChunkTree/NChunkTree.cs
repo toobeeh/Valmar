@@ -4,22 +4,24 @@ namespace Valmar.Util.NChunkTree;
 
 /// <summary>
 /// A dynamic tree data structure with following characteristics:
-/// - A node can have an arbitrary amount of child nodes
-/// - If a node has 0 child nodes, it's a leaf
-/// - each node has a range of indices
+/// - each node has a "chunk", which is an abstraction of all its child nodes (or in other words - their chunks)
+/// - the leaf node chunks are no abstraction, but the actual data$
+/// - a chunk provideds functions that operate on a dataset identified and ordered by strictly monotonic increasing indices
+/// - a chunk has an operating range, which is the range of minimum to maximum index of its data
+/// - a node can have an arbitrary amount of child nodes
 /// - the child nodes in a node are sorted by their non-overlapping range
-/// - the index range of a node can be set by the implementation, but all child nodes must be in that range
+/// - the index range of a mode is at least the range of smallest to largest index of all its child nodes
 /// - if a node is added to a node, it will either be added to the first empty index, or the node with the least amount of child nodes will be expanded
-/// - when a node is expanded, all nodes to its right will be moved to the new node
+/// - when a node is expanded, all nodes with a index range bigger than the expanded node (ie the nodes right to it) and itself are moved a level further down
 ///
 /// - issues: dynamic sizing of the nodes may cause issues with expanding, when the parent node has more slots than the expanded node
 ///
-/// this strucutre is used similar as an octree to create abstraction chunks.
+/// this structure is used similar as an octree to create abstraction chunks.
 /// a node has a chunk data type TChunk which can be used to calculate an abstraction to all its child chunks.
 /// the abstraction can implement a caching algorithm using clean/dirty markers and therefor create a big performance boost
 /// if the data has large spaces of unchanged data.
 /// </summary>
-/// <typeparam name="TChunk"></typeparam>
+/// <typeparam name="TChunk">The datatype of the chunk that each node holds</typeparam>
 public abstract class NChunkTree<TChunk>
 {
     
@@ -29,12 +31,12 @@ public abstract class NChunkTree<TChunk>
     protected readonly int ChunkNumber;
     
     /// <summary>
-    /// The implementation-specific start index of this chunk
+    /// The implementation-specific start index of this chunk; null if open
     /// </summary>
     protected abstract long? ChunkStartIndex { get; }
     
     /// <summary>
-    /// The implementation-specific end index of this chunk
+    /// The implementation-specific end index of this chunk; null if open
     /// </summary>
     protected abstract long? ChunkEndIndex { get; }
     
