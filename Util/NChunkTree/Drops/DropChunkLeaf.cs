@@ -1,22 +1,28 @@
-using Valmar.Database;
+using Valmar.Domain.Implementation.Drops;
 
-namespace Valmar.Util.NChunkTree;
+namespace Valmar.Util.NChunkTree.Drops;
 
-public class DropChunkLeaf : NChunkTree<IDropChunkNode>, IDropChunkNode
+public class DropChunkLeaf : NChunkTree<IDropChunk>
 {
-    public static List<PastDropEntity> drops;
-    protected override long? ChunkStartIndex => DropChunk.DropIndexStart;
-    protected override long? ChunkEndIndex => DropChunk.DropIndexEnd;
-    protected override IDropChunkNode Chunk => this;
     
-    public DropChunkLeaf(long dropIndexStart, long dropIndexEnd) : base(0)
+    private readonly IServiceProvider _services;
+    private readonly PersistentDropChunk _chunk;
+    protected override long? ChunkStartIndex => Chunk.DropIndexStart;
+    protected override long? ChunkEndIndex => Chunk.DropIndexEnd;
+    public sealed override IDropChunk Chunk => _chunk;
+    
+    public DropChunkLeaf(IServiceProvider services) : base(0)
     {
-        DropChunk = new PersistentDropChunk(dropIndexStart, dropIndexEnd);
+        _chunk = ActivatorUtilities.CreateInstance<PersistentDropChunk>(services);
+        _services = services;
     }
-
-    public IDropChunk DropChunk { get; }
-    protected override NChunkTree<IDropChunkNode> CreateExpansionNode()
+    public DropChunkLeaf WithChunkSize(long? dropIndexStart, long? dropIndexEnd)
     {
-        return new DropChunkTree(ChunkNumber);
+        _chunk.SetChunkSize(dropIndexStart, dropIndexEnd);
+        return this;
+    } 
+    protected override NChunkTree<IDropChunk> CreateExpansionNode()
+    {
+        throw new InvalidOperationException("Leaves cannot expand");
     }
 }

@@ -22,14 +22,36 @@ namespace Valmar.Util.NChunkTree;
 /// <typeparam name="TChunk"></typeparam>
 public abstract class NChunkTree<TChunk>
 {
-    private static int _nextId = 0;
-    
-    private readonly int _id = NChunkTree<TChunk>._nextId++;
     
     /// <summary>
     ///  The max allowed chunk nodes in this node
     /// </summary>
     protected readonly int ChunkNumber;
+    
+    /// <summary>
+    /// The implementation-specific start index of this chunk
+    /// </summary>
+    protected abstract long? ChunkStartIndex { get; }
+    
+    /// <summary>
+    /// The implementation-specific end index of this chunk
+    /// </summary>
+    protected abstract long? ChunkEndIndex { get; }
+    
+    /// <summary>
+    /// The chunk which represents the abstraction of all child chunks
+    /// </summary>
+    public abstract TChunk Chunk { get; }
+    
+    /// <summary>
+    /// Creates a new instance of the same chunk node type,
+    /// used to expand one of the nodes
+    /// </summary>
+    /// <returns></returns>
+    protected abstract NChunkTree<TChunk> CreateExpansionNode();
+
+    private readonly NChunkTree<TChunk>?[] _chunks;
+    private int _nextUnsetChunkIndex = 0;
     
     /// <summary>
     /// If this node can take another chunk node
@@ -54,31 +76,6 @@ public abstract class NChunkTree<TChunk>
         }
         return count;
     }}
-    
-    /// <summary>
-    /// The implementation-specific start index of this chunk
-    /// </summary>
-    protected abstract long? ChunkStartIndex { get; }
-    
-    /// <summary>
-    /// The implementation-specific end index of this chunk
-    /// </summary>
-    protected abstract long? ChunkEndIndex { get; }
-    
-    /// <summary>
-    /// Creates a new instance of the same chunk node type,
-    /// used to expand one of the nodes
-    /// </summary>
-    /// <returns></returns>
-    protected abstract NChunkTree<TChunk> CreateExpansionNode();
-    
-    /// <summary>
-    /// Gets the chunk abstraction that is stored in this node
-    /// </summary>
-    protected abstract TChunk Chunk { get; }
-
-    private readonly NChunkTree<TChunk>?[] _chunks;
-    private int _nextUnsetChunkIndex = 0;
     
     protected NChunkTree(int chunkCount)
     {
@@ -159,7 +156,7 @@ public abstract class NChunkTree<TChunk>
         return this;
     }
 
-    public IEnumerable<TChunk> Chunks => new ChunkEnumerable(this);
+    protected IEnumerable<TChunk> Chunks => new ChunkEnumerable(this);
 
     private class ChunkEnumerable(NChunkTree<TChunk> tree) : IEnumerable<TChunk>
     {

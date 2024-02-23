@@ -5,6 +5,7 @@ using Grpc.Core.Interceptors;
 using Valmar.Database;
 using Valmar.Domain;
 using Valmar.Domain.Implementation;
+using Valmar.Domain.Implementation.Drops;
 using Valmar.Grpc;
 using Valmar.Grpc.Interceptors;
 using Valmar.Mappers;
@@ -14,8 +15,9 @@ namespace Valmar;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
+        
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
@@ -27,12 +29,16 @@ public class Program
         });
         builder.Services.AddValidators();
         builder.Services.AddGrpcValidation();
-        builder.Services.AddDbContext<PalantirContext>();
+        builder.Services.AddDbContext<PalantirContext>(ServiceLifetime.Transient);
         RegisterMapperProfiles(builder.Services);
         RegisterDomainServices(builder.Services);
+        RegisterDropChunkAbstraction(builder.Services);
 
         // Register routes and start app
         var app = builder.Build();
+
+        //await Test.TestDropChunks(app.Services);
+        
         RegisterGrpcServices(app);
         app.Run();
     }
@@ -72,5 +78,11 @@ public class Program
             typeof(GuildMapperProfile),
             typeof(MemberMapperProfile),
             typeof(AwardMapperProfile));
+    }
+    
+    private static void RegisterDropChunkAbstraction(IServiceCollection services)
+    {
+        services.AddTransient<PersistentDropChunk>();
+        services.AddScoped<DropCache>();
     }
 }

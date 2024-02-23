@@ -1,7 +1,6 @@
 using System.Collections.Concurrent;
-using Microsoft.AspNetCore.Identity;
 
-namespace Valmar.Util.NChunkTree;
+namespace Valmar.Domain.Implementation.Drops;
 
 /*
  *  Drop Store should accomplish the following:
@@ -11,7 +10,7 @@ namespace Valmar.Util.NChunkTree;
  *  - consume user eventdrop value
  *
  */
-public class CachedDropChunk(IEnumerable<IDropChunk> chunks, long? dropIndexStart, long? dropIndexEnd) : IDropChunk
+public class CachedDropChunk(IEnumerable<IDropChunk> chunks) : IDropChunk
 {
     private ConcurrentDictionary<string, UserStore<string, double>> _leagueDropValue = new ();
 
@@ -22,24 +21,39 @@ public class CachedDropChunk(IEnumerable<IDropChunk> chunks, long? dropIndexStar
         
         await Parallel.ForEachAsync(source, async (item, token) =>
         {
-            var value = await sourceMapping.Invoke(item);
-            lock (sumLock)
+            try
             {
-                sum += value;
+                var value = await sourceMapping.Invoke(item);
+                lock (sumLock)
+                {
+                    sum += value;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         });
 
         return sum;
     }
-    public long? DropIndexStart => dropIndexStart;
-    public long? DropIndexEnd => dropIndexEnd;
     
-    public async Task<double> GetTotalDropValueForUser(string id)
+    public long? DropIndexStart => !chunks.Any() ? null : chunks.First().DropIndexStart;
+
+    public long? DropIndexEnd => !chunks.Any() ? null : chunks.Last().DropIndexStart;
+
+    public async Task<double> GetTotalLeagueWeight(string id)
     {
         var store = _leagueDropValue.GetOrAdd(id,id =>  new UserStore<string, double>(id, async id =>
-            await SumAsync(chunks, async c => await c.GetTotalDropValueForUser(id)))
+            await SumAsync(chunks, async c => await c.GetTotalLeagueWeight(id)))
         );
         return await store.Retrieve();
+    }
+
+    public async Task<double> GetLeagueWeightInTimespan(string id, DateOnly start, DateOnly end)
+    {
+        throw new NotImplementedException();
     }
 }
 
