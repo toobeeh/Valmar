@@ -173,14 +173,14 @@ public class PersistentDropChunk(PalantirContext db) : IDropChunk
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
                         && d.CaughtLobbyPlayerId == userid)
-            .Select(drop => new {EventDropId = Math.Abs(drop.EventDropId), Weight = drop.LeagueWeight, Redeemable = drop.EventDropId > 0 })
+            .Select(drop => new {EventDropId = Math.Abs(drop.EventDropId), Weight = drop.LeagueWeight, Redeemable = drop.EventDropId > 0, DropId = drop.DropId })
             .ToListAsync();
 
         // credits that are still redeemable (drops that can be converted to the credit table)
         var redeemableCredits = leagueEventdropWeights
             .Where(d => d.Redeemable)
             .GroupBy(d => d.EventDropId)
-            .Select(g => new {EventDropId = g.Key, Credit = g.Sum(w => Weight(w.Weight))});
+            .Select(g => new {EventDropId = g.Key, Credit = g.Select(w => new { Weight = Weight(w.Weight), w.DropId })});
                 
         // amount of credits that already has been converted to the credits table
         var redeemedCredits = leagueEventdropWeights.Where(d => !d.Redeemable).Sum(w => Weight(w.Weight));
@@ -195,13 +195,15 @@ public class PersistentDropChunk(PalantirContext db) : IDropChunk
             .CountAsync();
         
         // build maps
-        var redeemableCreditMap = new ConcurrentDictionary<int, double>();
+        var redeemableCreditMap = new ConcurrentDictionary<int, ConcurrentDictionary<long, double>>();
         double progress = regularCaughtSum + redeemedCredits;
         
         foreach (var redeemableCredit in redeemableCredits)
         {
-            redeemableCreditMap[redeemableCredit.EventDropId] = redeemableCredit.Credit;
-            progress += redeemableCredit.Credit;
+            var dict = redeemableCredit.Credit.ToDictionary(credit => credit.DropId, credit => credit.Weight);
+            
+            redeemableCreditMap[redeemableCredit.EventDropId] = new ConcurrentDictionary<long, double>(dict);
+            progress += redeemableCredit.Credit.Sum(c => c.Weight);
         }
 
         return new EventResult(redeemableCreditMap, progress);

@@ -22,4 +22,4 @@ public interface IDropChunk
 }
 
 public record StreakResult(int Tail, int Head, int Streak);
-public record EventResult(ConcurrentDictionary<int, double> RedeemableCredit, double Progress);
+public record EventResult(ConcurrentDictionary<int, ConcurrentDictionary<long, double>> RedeemableCredit, double Progress);

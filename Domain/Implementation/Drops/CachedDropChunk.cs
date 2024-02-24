@@ -164,12 +164,21 @@ public class CachedDropChunk(IEnumerable<IDropChunk> chunks) : IDropChunk
                 {
                     foreach (var key in b.RedeemableCredit.Keys)
                     {
-                        a.RedeemableCredit.AddOrUpdate(key, b.RedeemableCredit[key], (akey, value) => value + b.RedeemableCredit[akey]);
+                        // add all redeemable drop Ids to dictionary
+                        a.RedeemableCredit.AddOrUpdate(key, b.RedeemableCredit[key], (akey, value) =>
+                        {
+                            foreach (var dropId in b.RedeemableCredit[key].Keys)
+                            {
+                                value.TryAdd(dropId, b.RedeemableCredit[key][dropId]);
+                            }
+
+                            return value;
+                        });
                     }
                     
                     return a with { Progress = a.Progress + b.Progress };
                 }, 
-                new EventResult(new ConcurrentDictionary<int, double>(), 0)))
+                new EventResult(new ConcurrentDictionary<int, ConcurrentDictionary<long, double>>(), 0)))
         );
         return await store.Retrieve();
     }

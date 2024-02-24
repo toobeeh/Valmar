@@ -17,7 +17,7 @@ public static class Test
             var time = await drops.Drops.GetLeagueAverageTime("833571903636504618", DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), DateTimeOffset.Now);
             
             var eventd = await drops.Drops.GetEventLeagueDetails(22, "335165475870867456", 55565227);
-
+            var redeemed = DropHelper.FindDropToRedeem(eventd, 4, null);
             return;
         }
         
