@@ -15,12 +15,13 @@ public class CachedDropChunk(IEnumerable<IDropChunk> chunks) : IDropChunk
 {
     private ConcurrentDictionary<string, UserStore<string, double>> _leagueDropValue = new ();
     private ConcurrentDictionary<string, UserStore<string, int>> _leagueDropCount = new ();
-    private ConcurrentDictionary<string, UserStore<string, double>> _leagueTimespanDropValue = new ();
-    private ConcurrentDictionary<string, UserStore<string, int>> _leagueTimespanDropCount = new ();
+    private ConcurrentDictionary<string, UserStore<string, StreakResult>> _leagueStreak = new ();
+    private ConcurrentDictionary<string, UserStore<string, double>> _leagueAverageTime = new ();
+    private ConcurrentDictionary<string, UserStore<string, EventResult>> _eventDetails = new ();
     
-    private async Task<TSum> SumAsync<TSource, TSum>(IEnumerable<TSource> source, Func<TSource, Task<TSum>> sourceMapping, Func<TSum, TSum, TSum> aggregator)
+    private async Task<TSum> SumAsync<TSource, TSum>(IEnumerable<TSource> source, Func<TSource, Task<TSum>> sourceMapping, Func<TSum, TSum, TSum> aggregator, TSum seed)
     {
-        TSum sum = default;
+        TSum sum = seed;
         var sumLock = new object();
         
         await Parallel.ForEachAsync(source, async (item, token) =>
@@ -48,58 +49,127 @@ public class CachedDropChunk(IEnumerable<IDropChunk> chunks) : IDropChunk
     public DateTimeOffset? DropTimestampStart => !chunks.Any() ? null : chunks.First().DropTimestampStart;
     public DateTimeOffset? DropTimestampEnd => !chunks.Any() ? null : chunks.Last().DropTimestampEnd;
 
-    public async Task<double> GetTotalLeagueWeight(string id)
+    public async Task<double> GetLeagueWeight(string id)
     {
-        var store = _leagueDropValue.GetOrAdd(id,id =>  new UserStore<string, double>(id, async id =>
-            await SumAsync(chunks, async c => await c.GetTotalLeagueWeight(id), (a, b) => a+b))
-        );
-        return await store.Retrieve();
+        return await GetLeagueWeight(id, null, null);
     }
 
-    public async Task<double> GetLeagueWeightInTimespan(string id, DateTimeOffset start, DateTimeOffset end)
+    public async Task<double> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end)
     {
         // sort out if this chunk is relevant
         if (start > DropTimestampEnd) return 0d;
         if (end < DropTimestampStart) return 0d;
         
-        // return whole chunk if it's within the timespan
-        if (start <= DropTimestampStart && end >= DropTimestampEnd)
-        {
-            return await GetTotalLeagueWeight(id);
-        }
+        // set end or start to null if out if chunk range
+        if (start < DropTimestampStart) start = null;
+        if (end >= DropTimestampEnd) end = null;
         
-        // get key for request identifiers; will mostly be league requests so not too diverse
-        var key = $"{id}//{start.UtcTicks}//{end.UtcTicks}";
-        var store = _leagueTimespanDropValue.GetOrAdd(key,key =>  new UserStore<string, double>(key, async key =>
-            await SumAsync(chunks, async c => await c.GetLeagueWeightInTimespan(id, start, end), (a, b) => a+b))
+        // get key for request identifiers; will mostly be league requests (start/end of month) or whole chunk span so not too diverse
+        var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
+        var store = _leagueDropValue.GetOrAdd(key,key =>  new UserStore<string, double>(key, async key =>
+            await SumAsync(chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) => a+b, 0d))
         );
         return await store.Retrieve();
     }
     
-    public async Task<int> GetTotalLeagueCount(string id)
+    public async Task<int> GetLeagueCount(string id)
     {
-        var store = _leagueDropCount.GetOrAdd(id,id =>  new UserStore<string, int>(id, async id =>
-            await SumAsync(chunks, async c => await c.GetTotalLeagueCount(id), (a, b) => a+b))
-        );
-        return await store.Retrieve();
+        return await GetLeagueCount(id, null, null);
     }
 
-    public async Task<int> GetLeagueCountInTimespan(string id, DateTimeOffset start, DateTimeOffset end)
+    public async Task<int> GetLeagueCount(string id, DateTimeOffset? start, DateTimeOffset? end)
     {
         // sort out if this chunk is relevant
         if (start > DropTimestampEnd) return 0;
         if (end < DropTimestampStart) return 0;
         
-        // return whole chunk if it's within the timespan
-        if (start <= DropTimestampStart && end >= DropTimestampEnd)
-        {
-            return await GetTotalLeagueCount(id);
-        }
+        // set end or start to null if out if chunk range
+        if (start < DropTimestampStart) start = null;
+        if (end >= DropTimestampEnd) end = null;
         
-        // get key for request identifiers; will mostly be league requests so not too diverse
-        var key = $"{id}//{start.UtcTicks}//{end.UtcTicks}";
-        var store = _leagueTimespanDropCount.GetOrAdd(key,key =>  new UserStore<string, int>(key, async key =>
-            await SumAsync(chunks, async c => await c.GetLeagueCountInTimespan(id, start, end), (a, b) => a+b))
+        // get key for request identifiers; will mostly be league requests (start/end of month) or whole chunk span so not too diverse
+        var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
+        var store = _leagueDropCount.GetOrAdd(key,key =>  new UserStore<string, int>(key, async key =>
+            await SumAsync(chunks, async c => await c.GetLeagueCount(id, start, end), (a, b) => a+b, 0))
+        );
+        return await store.Retrieve();
+    }
+    
+    public async Task<StreakResult> GetLeagueStreak(string id)
+    {
+        return await GetLeagueStreak(id, null, null);
+    }
+    
+    public async Task<StreakResult> GetLeagueStreak(string id, DateTimeOffset? start, DateTimeOffset? end)
+    {
+        
+        // sort out if this chunk is relevant
+        if (start > DropTimestampEnd) return new StreakResult(0, 0, 0);
+        if (end < DropTimestampStart) return new StreakResult(0, 0, 0);
+        
+        // set end or start to null if out if chunk range
+        if (start < DropTimestampStart) start = null;
+        if (end >= DropTimestampEnd) end = null;
+        
+        // get key for request identifiers; will mostly be league requests (start/end of month) or whole chunk span so not too diverse
+        var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
+        var store = _leagueStreak.GetOrAdd(key,key =>  new UserStore<string, StreakResult>(key, async key =>
+            await SumAsync(chunks, async c => await c.GetLeagueStreak(id, start, end), (a, b) =>
+            {
+                var instercetion = a.Head + b.Tail;
+                var max = Math.Max(b.Streak, Math.Max(a.Streak, instercetion));
+                return new StreakResult(a.Tail, b.Head, Math.Max(a.Streak, max));
+            }, new StreakResult(0, 0, 0)))
+        );
+        return await store.Retrieve();
+    }
+    
+    public async Task<double> GetLeagueAverageTime(string id)
+    {
+        return await GetLeagueAverageTime(id, null, null);
+    }
+    
+    public async Task<double> GetLeagueAverageTime(string id, DateTimeOffset? start, DateTimeOffset? end)
+    {
+        
+        // sort out if this chunk is relevant
+        if (start > DropTimestampEnd) return 0;
+        if (end < DropTimestampStart) return 0;
+        
+        // set end or start to null if out if chunk range
+        if (start < DropTimestampStart) start = null;
+        if (end >= DropTimestampEnd) end = null;
+        
+        // get key for request identifiers; will mostly be league requests (start/end of month) or whole chunk span so not too diverse
+        var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
+        double amount = await GetLeagueCount(id, start, end);
+        var store = _leagueAverageTime.GetOrAdd(key,key =>  new UserStore<string, double>(key, async key =>
+            await SumAsync(chunks, async c =>
+            {
+                var time = await c.GetLeagueAverageTime(id, start, end);
+                var chunkAmount = await c.GetLeagueCount(id, start, end);
+                return time * (chunkAmount / amount);
+            }, (a, b) => a + b, 0d))
+        );
+        return await store.Retrieve();
+    }
+    
+    public async Task<EventResult> GetEventLeagueDetails(int eventId, string userid, int userLogin)
+    {
+        // get key for request identifiers
+        var key = $"{eventId}//{userid}//{userLogin}";
+        var store = _eventDetails.GetOrAdd(key,key =>  new UserStore<string, EventResult>(key, async key =>
+            await SumAsync(chunks, async c => await c.GetEventLeagueDetails(eventId, userid, userLogin),
+                (a, b) =>
+                {
+                    foreach (var key in b.RedeemableCredit.Keys)
+                    {
+                        a.RedeemableCredit.AddOrUpdate(key, b.RedeemableCredit[key], (akey, value) => value + b.RedeemableCredit[akey]);
+                    }
+                    
+                    return a with { Progress = a.Progress + b.Progress };
+                }, 
+                new EventResult(new ConcurrentDictionary<int, double>(), 0)))
         );
         return await store.Retrieve();
     }
