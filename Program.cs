@@ -33,7 +33,7 @@ public class Program
         // Register routes and start app
         var app = builder.Build();
 
-        //await Test.TestDropChunks(app.Services);
+        await Test.TestDropChunks(app.Services);
         
         RegisterGrpcServices(app);
         app.Run();

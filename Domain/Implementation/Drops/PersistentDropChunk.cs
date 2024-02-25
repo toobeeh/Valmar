@@ -110,6 +110,28 @@ public class PersistentDropChunk(PalantirContext db) : IDropChunk
         return time ?? 0;
     }
     
+    public async Task<IList<string>> GetLeagueParticipants()
+    {
+        return await GetLeagueParticipants(null, null);
+    }
+
+    public async Task<IList<string>> GetLeagueParticipants(DateTimeOffset? start, DateTimeOffset? end)
+    {
+        var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
+        var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
+        
+        var participants = await db.PastDrops
+            .Where(d => d.LeagueWeight > 0
+                        && (DropIndexStart == null || d.DropId >= DropIndexStart) 
+                        && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
+                        && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)
+                        && (endStamp == null ||  d.ValidFrom.CompareTo(endStamp) < 0))
+            .Select(d => d.CaughtLobbyPlayerId)
+            .Distinct()
+            .ToListAsync();
+        return participants;
+    }
+    
     public async Task<StreakResult> GetLeagueStreak(string id)
     {
         return await GetLeagueStreak(id, null, null);

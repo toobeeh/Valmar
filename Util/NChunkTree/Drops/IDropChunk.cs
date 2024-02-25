@@ -14,6 +14,8 @@ public interface IDropChunk
     Task<double> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end);
     Task<int> GetLeagueCount(string id);
     Task<int> GetLeagueCount(string id, DateTimeOffset? start, DateTimeOffset? end);
+    Task<IList<string>> GetLeagueParticipants();
+    Task<IList<string>> GetLeagueParticipants(DateTimeOffset? start, DateTimeOffset? end);
     Task<StreakResult> GetLeagueStreak(string id);
     Task<StreakResult> GetLeagueStreak(string id, DateTimeOffset? start, DateTimeOffset? end);
     Task<double> GetLeagueAverageTime(string id);
