@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Valmar.Database;
+using Valmar.Util.NChunkTree;
 using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar.Domain.Implementation.Drops;
@@ -12,19 +13,19 @@ public class DropCache
 {
     private readonly PalantirContext _db;
     private readonly IServiceProvider _services;
-    private static DropChunkTree? _tree; // workaround for singleton-like behavior
-    private static DropChunkLeaf? _leaf; // workaround for singleton-like behavior
+    private static IDropChunk? _tree; // workaround for singleton-like behavior
+    private static PersistentDropChunk? _leaf; // workaround for singleton-like behavior
 
     public IDropChunk Drops
     {
         get
         {
             if (_tree is null) throw new NullReferenceException("Tree has not been initialized");
-            return _tree.Chunk;
+            return _tree;
         }
     }
 
-    public DropCache(PalantirContext db, IServiceProvider services, ILogger<DropCache> logger)
+    public DropCache(PalantirContext db, IServiceProvider services, ILogger<DropCache> logger, DropChunkTreeProvider provider)
     {
         _services = services;
         _db = db;
@@ -45,14 +46,15 @@ public class DropCache
         
             // create chunks
             logger.LogDebug("Building chunk tree...");
-            var tree = new DropChunkTree(services, treeBranchingCoeff);
-            DropChunkLeaf? lastLeaf = null;
+            var tree = provider.GetTree(services);
+            
+            PersistentDropChunk? lastLeaf = null;
             for(var i = 0; i < drops.Count; i++)
             {
                 var dropStart = drops[i].DropId;
                 long? dropEnd = i < drops.Count - 1 ? drops[i + 1].DropId : null;
-                lastLeaf = new DropChunkLeaf(services)
-                    .WithChunkSize(dropStart, dropEnd);
+
+                lastLeaf = provider.CreateLeaf(services, dropStart, dropEnd);
                 tree.AddChunk(lastLeaf);
             }
 
@@ -64,7 +66,7 @@ public class DropCache
         }
     }
 
-    public void ReevaluateRange()
+    /*public void ReevaluateRange()
     {
         // check if there are new indexes to add chunks
         var chunkSize = 5000;
@@ -78,17 +80,17 @@ public class DropCache
         if (drops.Count == 1) return;
         
         // else add new chunks
-        _leaf.WithChunkSize(lastChunkStart, drops[2].DropId);
+        _leaf.WithChunkRange(lastChunkStart, drops[2].DropId);
         DropChunkLeaf? lastLeaf = null;
         for(var i = 0; i < drops.Count; i++)
         {
             var dropStart = drops[i].DropId;
             long? dropEnd = i < drops.Count - 1 ? drops[i + 1].DropId : null;
             lastLeaf = new DropChunkLeaf(_services)
-                .WithChunkSize(dropStart, dropEnd);
+                .WithChunkRange(dropStart, dropEnd);
             _tree.AddChunk(lastLeaf);
         }
 
         _leaf = lastLeaf;
-    }
+    }*/
 }

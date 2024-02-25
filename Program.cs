@@ -6,6 +6,8 @@ using Valmar.Domain.Implementation.Drops;
 using Valmar.Grpc;
 using Valmar.Grpc.Interceptors;
 using Valmar.Mappers;
+using Valmar.Util.NChunkTree;
+using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar;
 
@@ -78,7 +80,10 @@ public class Program
     
     private static void RegisterDropChunkAbstraction(IServiceCollection services)
     {
-        services.AddTransient<PersistentDropChunk>();
+        services.AddSingleton<DropChunkTreeProvider>();
+        services.AddScoped<PersistentDropChunk>();
+        services.AddScoped<CachedDropChunk>();
+        services.AddScoped<NChunkTreeNodeContext>(c => new NChunkTreeNodeContext(0, [], 1, null));
         services.AddScoped<DropCache>();
     }
 }

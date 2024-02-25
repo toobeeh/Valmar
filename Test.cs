@@ -7,7 +7,7 @@ namespace Valmar;
 
 public static class Test
 {
-    private record League(double Score, int Count, StreakResult Streak, double Time);
+    /*private record League(double Score, int Count, StreakResult Streak, double Time);*/
     public static async Task TestDropChunks(IServiceProvider services)
     {
         using (var scope = services.CreateScope())

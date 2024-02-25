@@ -22,13 +22,16 @@ namespace Valmar.Util.NChunkTree;
 /// if the data has large spaces of unchanged data.
 /// </summary>
 /// <typeparam name="TChunk">The datatype of the chunk that each node holds</typeparam>
-public abstract class NChunkTree<TChunk>
+public abstract class NChunkTree<TChunk, TProvider> where TProvider : NChunkTreeProvider
 {
     
     /// <summary>
     ///  The max allowed chunk nodes in this node
     /// </summary>
-    protected readonly int ChunkNumber;
+    protected virtual int NodeCount => Context.ChildIdSlots.Length;
+    
+    public int NodeId => Context.Id;
+    public int Level => Context.Level;
     
     /// <summary>
     /// The implementation-specific start index of this chunk; null if open
@@ -41,48 +44,37 @@ public abstract class NChunkTree<TChunk>
     protected abstract long? ChunkEndIndex { get; }
     
     /// <summary>
-    /// The chunk which represents the abstraction of all child chunks
+    /// The chunk which represents the abstraction of all child nodes' chunks
     /// </summary>
     public abstract TChunk Chunk { get; }
     
     /// <summary>
-    /// Creates a new instance of the same chunk node type,
+    /// Creates a new node instance with the same chunk type,
     /// used to expand one of the nodes
     /// </summary>
     /// <returns></returns>
-    protected abstract NChunkTree<TChunk> CreateExpansionNode();
+    protected abstract NChunkTree<TChunk, TProvider> CreateExpansionNode();
 
-    private readonly NChunkTree<TChunk>?[] _chunks;
-    private int _nextUnsetChunkIndex = 0;
-    
+    protected virtual List<NChunkTree<TChunk, TProvider>> Nodes => Provider.GetNodeChildNodes<TChunk, TProvider>(Services, Context.Id);
+
     /// <summary>
     /// If this node can take another chunk node
     /// </summary>
-    private bool IsFull { get {
-        for (var i = 0; i < ChunkNumber; i++)
-        {
-            if (_chunks[i] == null || !_chunks[i]!.IsFull) return false;
-        }
-        return true;
-    }}
+    protected virtual bool IsFull => Provider.NodeIsFull(Context.Id);
     
     /// <summary>
     /// The cardinality / recursive amount of chunk nodes in this node
     /// </summary>
-    private int Cardinality { get
-    {
-        var count = 1; // this chunk
-        for (var i = 0; i < _nextUnsetChunkIndex; i++)
-        {
-            count += _chunks[i]!.Cardinality; // chunks in chunk nodes
-        }
-        return count;
-    }}
+    protected virtual int Cardinality => Provider.GetNodeCardinality(Context.Id);
     
-    protected NChunkTree(int chunkCount)
+    protected readonly NChunkTreeNodeContext Context;
+    protected readonly TProvider Provider;
+    protected readonly IServiceProvider Services;
+    protected NChunkTree(IServiceProvider services, TProvider provider, NChunkTreeNodeContext context)
     {
-        ChunkNumber = chunkCount;
-        _chunks = new NChunkTree<TChunk>?[chunkCount];
+        Provider = provider;
+        Context = context;
+        Services = services;
     }
 
     /// <summary>
@@ -91,109 +83,64 @@ public abstract class NChunkTree<TChunk>
     /// </summary>
     /// <param name="chunk"></param>
     /// <returns>Returns this node for fluent interface</returns>
-    public virtual NChunkTree<TChunk> AddChunk(NChunkTree<TChunk> chunk)
+    public virtual NChunkTree<TChunk, TProvider> AddChunk(NChunkTree<TChunk, TProvider> chunk)
     {
         
         // find node position that is either not set or can take chunks in it
-        var freeChunk = -1;
-        for(int i = 0; i < ChunkNumber; i++)
+        var freeSlot = -1;
+        var slots = Context.ChildIdSlots;
+        for(int i = 0; i < NodeCount; i++)
         {
-            if (_chunks[i] == null || !_chunks[i]!.IsFull)
-            {
-                freeChunk = i;
-                break;
-            }
+            if (slots[i] is {} nodeId && Provider.NodeIsFull(nodeId)) continue;
+            
+            // free node found
+            freeSlot = i;
+            break;
         }
         
-        // ensure that new chunk starts after the biggest existing chunk of the stored nodes
-        if(_chunks[freeChunk == -1 ? ChunkNumber - 1 : freeChunk]?.ChunkEndIndex > chunk.ChunkStartIndex)
+        // ensure that new chunk starts after the all chunks currently existing
+        if(ChunkEndIndex > chunk.ChunkStartIndex)
         {
             throw new ArgumentException("New chunk must start after the biggest existing chunk");
         }
         
         // expand this node if all chunk nodes are full
-        if (freeChunk == -1)
+        if (freeSlot == -1)
         {
             // find node with least cardinality to be expanded
-            var leastCardinality = int.MaxValue;
-            var expansionIndex = 0;
-            for(var i = 0; i < ChunkNumber; i++)
-            {
-                var cardinality = _chunks[i]!.Cardinality;
-                if (cardinality < leastCardinality)
-                {
-                    leastCardinality = cardinality;
-                    expansionIndex = i;
-                }
-            }
+            var expansionIndex = slots
+                .Select((node, index) => new {count = Provider.GetNodeCardinality(node ?? throw new NullReferenceException("Node id was null")), index})
+                .MinBy(item => item.count)!
+                .index;
             
             // move existing chunk nodes starting from expansion index to new chunk node
             var expansion = CreateExpansionNode();
-            for(var i = expansionIndex; i < ChunkNumber; i++)
+            for(var i = expansionIndex; i < NodeCount; i++)
             {
-                expansion.AddChunk(_chunks[i]!);
-                _chunks[i] = null;
+                var node = Provider.GetNode<TChunk, TProvider>(Services, slots[i] ?? throw new NullReferenceException("Node id was null"));
+                expansion.AddChunk(node);
+                slots[i] = null;
             }
             
             // set expansion chunk node to expansion index, and execute add chunk again (now should be free space!)
-            _chunks[expansionIndex] = expansion;
-            _nextUnsetChunkIndex = expansionIndex + 1;
+            slots[expansionIndex] = expansion.NodeId;
             AddChunk(chunk);
         }
 
         // add chunk to next index
         else
         {
-            if (_chunks[freeChunk] == null)
+            if (slots[freeSlot] is {} freeNodeId)
             {
-                _chunks[freeChunk] = chunk;
-                _nextUnsetChunkIndex++;
+                var node = Provider.GetNode<TChunk, TProvider>(Services, freeNodeId);
+                node.AddChunk(chunk);
             }
             else
             {
-                _chunks[freeChunk]!.AddChunk(chunk);
+                slots[freeSlot] = chunk.NodeId;
             }
         }
 
         return this;
-    }
-
-    protected IEnumerable<TChunk> Chunks => new ChunkEnumerable(this);
-
-    private class ChunkEnumerable(NChunkTree<TChunk> tree) : IEnumerable<TChunk>
-    {
-        public IEnumerator<TChunk> GetEnumerator()
-        {
-            return new ChunkEnumerator(tree);
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-    }
-
-    private class ChunkEnumerator(NChunkTree<TChunk> tree) : IEnumerator<TChunk>
-    {
-        private int _index = -1;
-
-        public bool MoveNext()
-        {
-            return ++_index < tree._nextUnsetChunkIndex;
-        }
-
-        public void Reset()
-        {
-            _index = -1;
-        }
-
-        public TChunk Current => tree._chunks[_index]!.Chunk;
-
-        object IEnumerator.Current => Current!;
-
-        public void Dispose()
-        {
-            // pass
-        }
     }
 }

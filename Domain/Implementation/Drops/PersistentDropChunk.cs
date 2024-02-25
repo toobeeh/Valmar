@@ -1,19 +1,50 @@
 using System.Collections.Concurrent;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Valmar.Database;
 using Valmar.Util;
+using Valmar.Util.NChunkTree;
 using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar.Domain.Implementation.Drops;
 
-public class PersistentDropChunk(PalantirContext db) : IDropChunk
+/// <summary>
+/// Lifetime: Only used once per request; 
+/// </summary>
+public class PersistentDropChunk : DropChunkTree, IDropChunk
 {
+    private readonly PalantirContext db; // guarantee new db instance
+    
+    public override IDropChunk Chunk => this;
+
     private long? _dropIndexStart, _dropIndexEnd;
+
+    public PersistentDropChunk(IServiceProvider services, DropChunkTreeProvider provider, NChunkTreeNodeContext context) : base(services, provider, context)
+    {
+        db = ActivatorUtilities.CreateInstance<PalantirContext>(services);
+        
+        // init chunk with saved range
+        Provider.ChunkRanges.TryGetValue(NodeId, out var range);
+        if (range != null)
+        {
+            _dropIndexStart = range.Start;
+            _dropIndexEnd = range.End;
+            DropTimestampStart = range.StartDate;
+            DropTimestampEnd = range.EndDate;
+        }
+    }
+
     public long? DropIndexStart => _dropIndexStart;
     public long? DropIndexEnd => _dropIndexEnd;
     public DateTimeOffset? DropTimestampStart { get; private set; }
     public DateTimeOffset? DropTimestampEnd { get; private set; }
+    
+    /// <summary>
+    /// Sets the range of the chunk;
+    /// Fetches also the dates of the range bounds and stores to the provider for re-fetching
+    /// Other instances that are currently alive will be outdated 
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
     public void SetChunkSize(long? start, long? end)
     {
         _dropIndexStart = start;
@@ -30,6 +61,8 @@ public class PersistentDropChunk(PalantirContext db) : IDropChunk
             DropTimestampEnd = DropHelper.ParseDropTimestamp(
                 db.PastDrops.First(d => d.DropId == end).ValidFrom);
         }
+
+        Provider.ChunkRanges[NodeId] = new PersistentDropChunkRange(start, end, DropTimestampStart, DropTimestampEnd);
     }
     
     public async Task<double> GetLeagueWeight(string id)

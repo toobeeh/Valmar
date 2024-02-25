@@ -2,32 +2,22 @@ using Valmar.Domain.Implementation.Drops;
 
 namespace Valmar.Util.NChunkTree.Drops;
 
-public class DropChunkTree : NChunkTree<IDropChunk>
+public abstract class DropChunkTree(
+    IServiceProvider services,
+    DropChunkTreeProvider provider,
+    NChunkTreeNodeContext context)
+    : NChunkTree<IDropChunk, DropChunkTreeProvider>(services, provider, context)
 {
-    private readonly IServiceProvider _services;
-    private CachedDropChunk _chunk;
     protected override long? ChunkStartIndex => Chunk.DropIndexStart;
     protected override long? ChunkEndIndex => Chunk.DropIndexEnd;
-    public sealed override IDropChunk Chunk => _chunk;
-    protected override NChunkTree<IDropChunk> CreateExpansionNode()
+    protected override NChunkTree<IDropChunk, DropChunkTreeProvider> CreateExpansionNode()
     {
-        return new DropChunkTree(_services, ChunkNumber);
-    }
-    
-    public DropChunkTree(IServiceProvider services, int chunkCount) : base(chunkCount)
-    {
-        _services = services;
-        _chunk = InitChunk();
+        return Provider.CreateNode<IDropChunk, DropChunkTreeProvider, CachedDropChunk>(services, NodeCount, Level);
     }
 
-    private CachedDropChunk InitChunk()
+    /*public override NChunkTree<IDropChunk, DropChunkTreeProvider> AddChunk(NChunkTree<IDropChunk, DropChunkTreeProvider> chunk)
     {
-        return new CachedDropChunk(Chunks); // effectively dirty all values (remove all) from this node
-    }
-
-    public override NChunkTree<IDropChunk> AddChunk(NChunkTree<IDropChunk> chunk)
-    {
-        _chunk = InitChunk();
+        // TODO dirty chunk
         return base.AddChunk(chunk);
-    }
+    }*/
 }
