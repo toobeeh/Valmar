@@ -7,7 +7,7 @@ namespace Valmar;
 
 public static class Test
 {
-    /*private record League(double Score, int Count, StreakResult Streak, double Time);*/
+    private record League(double Score, int Count, StreakResult Streak, double Time);
     public static async Task TestDropChunks(IServiceProvider services)
     {
         using (var scope = services.CreateScope())
@@ -25,11 +25,11 @@ public static class Test
             var streaks = new ConcurrentDictionary<string, StreakResult>();
             var times = new ConcurrentDictionary<string, double>();
             
-            var tasks = new List<Task>();
             
             var i = 0;
             foreach (var participant in pcp)
             {
+                var tasks = new List<Task>();
                 tasks.Add(Task.Run(async () =>
                 {
                     var score = await drops.Drops.GetLeagueWeight(participant,
@@ -54,20 +54,48 @@ public static class Test
                         DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null); times.TryAdd(participant, time);
                 }));
                 Console.WriteLine(++i);
-            }
+                await Task.WhenAll(tasks);
+            }*/
 
-            await Task.WhenAll(tasks);*/
             
             while (true)
             {
                 Console.WriteLine("Enter inspection id");
                 var id = Console.ReadLine();
-                var score1 = await drops.Drops.GetLeagueWeight(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
+
+                var tasks = new List<Task>();
+                
+                tasks.Add(Task.Run(async () =>
+                {
+                    var score1 = await drops.Drops.GetLeagueWeight(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
+                    Console.WriteLine($"score: {score1}");
+                }));
+                
+                tasks.Add(Task.Run(async () =>
+                {
+                    var count = await drops.Drops.GetLeagueCount(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
+                    Console.WriteLine($"count: {count}");
+                }));
+                
+                tasks.Add(Task.Run(async () =>
+                {
+                    var streak = await drops.Drops.GetLeagueStreak(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
+                    Console.WriteLine($"streak: {streak.Streak}/{streak.Head}");
+                }));
+                
+                tasks.Add(Task.Run(async () =>
+                {
+                    var time = await drops.Drops.GetLeagueAverageTime(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
+                    Console.WriteLine($"time: {time}");
+                }));
+                
+                /*var score1 = await drops.Drops.GetLeagueWeight(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
                 var count = await drops.Drops.GetLeagueCount(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
                 var streak = await drops.Drops.GetLeagueStreak(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
                 var time = await drops.Drops.GetLeagueAverageTime(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
                 
-                Console.Write($"score: {score1}, count: {count}, streak: {streak.Streak}/{streak.Head}, time: {time} \n");
+                Console.Write($"score: {score1}, count: {count}, streak: {streak.Streak}/{streak.Head}, time: {time} \n");*/
+                Task.WaitAll(tasks.ToArray());
             }
             
             return;

@@ -27,7 +27,7 @@ public class Program
         });
         builder.Services.AddValidators();
         builder.Services.AddGrpcValidation();
-        builder.Services.AddDbContext<PalantirContext>(ServiceLifetime.Transient);
+        builder.Services.AddDbContext<PalantirContext>();
         RegisterMapperProfiles(builder.Services);
         RegisterDomainServices(builder.Services);
         RegisterDropChunkAbstraction(builder.Services);

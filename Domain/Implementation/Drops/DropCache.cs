@@ -33,15 +33,16 @@ public class DropCache
         // init tree if not yet done
         if (_tree is null)
         {
-            var chunkSize = 100000;
+            var chunkSize = 5000;
             var treeBranchingCoeff = 2;
         
             logger.LogDebug("Indexing drops for chunking...");
         
             // find indexes to index chunks
             var drops = db.PastDrops
-                .FromSqlRaw(
-                    $"SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (ORDER BY DropID) AS rn FROM PastDrops) hd WHERE (hd.rn % {chunkSize})=0;")
+                .OrderBy(d => d.DropId)
+                .AsEnumerable()
+                .Where((drop, index) => (index) % chunkSize == 0)
                 .ToList();
         
             // create chunks
@@ -65,32 +66,4 @@ public class DropCache
             logger.LogDebug("Drop chunk tree finished initialization.");
         }
     }
-
-    /*public void ReevaluateRange()
-    {
-        // check if there are new indexes to add chunks
-        var chunkSize = 5000;
-        var lastChunkStart = _leaf.Chunk.DropIndexStart;
-        var drops = _db.PastDrops
-            .FromSqlRaw(
-                $"SELECT * FROM ( SELECT *, ROW_NUMBER() OVER (ORDER BY DropID) AS rn FROM PastDrops WHERE DropID > {lastChunkStart}) hd WHERE (hd.rn % {chunkSize})=0;")
-            .ToList();
-        
-        // if no new indexes found, do not grow tree
-        if (drops.Count == 1) return;
-        
-        // else add new chunks
-        _leaf.WithChunkRange(lastChunkStart, drops[2].DropId);
-        DropChunkLeaf? lastLeaf = null;
-        for(var i = 0; i < drops.Count; i++)
-        {
-            var dropStart = drops[i].DropId;
-            long? dropEnd = i < drops.Count - 1 ? drops[i + 1].DropId : null;
-            lastLeaf = new DropChunkLeaf(_services)
-                .WithChunkRange(dropStart, dropEnd);
-            _tree.AddChunk(lastLeaf);
-        }
-
-        _leaf = lastLeaf;
-    }*/
 }

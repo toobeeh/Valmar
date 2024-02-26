@@ -24,14 +24,22 @@ namespace Valmar.Util.NChunkTree;
 /// <typeparam name="TChunk">The datatype of the chunk that each node holds</typeparam>
 public abstract class NChunkTree<TChunk, TProvider> where TProvider : NChunkTreeProvider
 {
+    public int NodeId => Context.Id;
+    
+    /// <summary>
+    /// The chunk which represents the abstraction of all child nodes' chunks
+    /// </summary>
+    public abstract TChunk Chunk { get; }
     
     /// <summary>
     ///  The max allowed chunk nodes in this node
     /// </summary>
-    protected virtual int NodeCount => Context.ChildIdSlots.Length;
+    protected int NodeCount => Context.ChildIdSlots.Length;
     
-    public int NodeId => Context.Id;
-    public int Level => Context.Level;
+    /// <summary>
+    /// A list of child node instances; instances are created by provider each request
+    /// </summary>
+    protected List<NChunkTree<TChunk, TProvider>> Nodes => Provider.GetNodeChildNodes<TChunk, TProvider>(Services, Context.Id);
     
     /// <summary>
     /// The implementation-specific start index of this chunk; null if open
@@ -44,28 +52,26 @@ public abstract class NChunkTree<TChunk, TProvider> where TProvider : NChunkTree
     protected abstract long? ChunkEndIndex { get; }
     
     /// <summary>
-    /// The chunk which represents the abstraction of all child nodes' chunks
-    /// </summary>
-    public abstract TChunk Chunk { get; }
-    
-    /// <summary>
     /// Creates a new node instance with the same chunk type,
     /// used to expand one of the nodes
     /// </summary>
     /// <returns></returns>
     protected abstract NChunkTree<TChunk, TProvider> CreateExpansionNode();
-
-    protected virtual List<NChunkTree<TChunk, TProvider>> Nodes => Provider.GetNodeChildNodes<TChunk, TProvider>(Services, Context.Id);
-
+    
     /// <summary>
     /// If this node can take another chunk node
     /// </summary>
-    protected virtual bool IsFull => Provider.NodeIsFull(Context.Id);
+    protected bool IsFull => Provider.NodeIsFull(Context.Id);
     
     /// <summary>
     /// The cardinality / recursive amount of chunk nodes in this node
     /// </summary>
-    protected virtual int Cardinality => Provider.GetNodeCardinality(Context.Id);
+    protected int Cardinality => Provider.GetNodeCardinality(Context.Id);
+    
+    /// <summary>
+    /// The level of this node in the tree
+    /// </summary>
+    protected int Level => Context.Level;
     
     protected readonly NChunkTreeNodeContext Context;
     protected readonly TProvider Provider;

@@ -22,8 +22,6 @@ public abstract class NChunkTreeProvider
         where TNode : NChunkTree<TChunk, TProvider> 
         where TProvider : NChunkTreeProvider
     {
-        /*if (!nodeType.IsAssignableTo(typeof(NChunkTree<TChunk, TProvider>)))
-            throw new InvalidOperationException($"Tried to assign invalid node type {nodeType} to NChunkTree<{typeof(TChunk).FullName}, {typeof(TChunk).FullName}>");*/
         
         if(! typeof(TProvider).IsAssignableTo(GetType())) throw new InvalidOperationException($"Tried to access from foreign provider implementation {typeof(TProvider).FullName}");
         

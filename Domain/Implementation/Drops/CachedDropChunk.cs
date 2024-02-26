@@ -5,31 +5,25 @@ using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar.Domain.Implementation.Drops;
 
-/*
- *  Drop Store should accomplish the following:
- *  - Get user total drop value (regular and event drops)
- *  - Get user league score/streak/count in time span
- *  - get user event drop value (used/unused)
- *  - consume user eventdrop value
- */
-public class CachedDropChunk(IServiceProvider services, DropChunkTreeProvider provider, NChunkTreeNodeContext context)
-    : DropChunkTree(services, provider, context), IDropChunk
+/// <summary>
+/// Implementation which extends the dropchunktree node by the chunk specific functions
+/// Main feature is the caching of the results of the underlying chunks
+/// </summary>
+public class CachedDropChunk : DropChunkTree, IDropChunk
 {
-    public override IDropChunk Chunk => this;
+    private readonly CachedDropChunkContext _context;
+    public CachedDropChunk(IServiceProvider services, DropChunkTreeProvider provider, NChunkTreeNodeContext context) : base(services, provider, context)
+    {
+        _context = provider.CachedChunkContext.GetOrAdd(NodeId, new CachedDropChunkContext());
+    }
 
-    private List<IDropChunk> _chunks => Nodes.Select(node => node.Chunk).ToList(); // TODO Reevaluate performance issue?
+    public override IDropChunk Chunk => this;
+    public long? DropIndexStart => Chunks.Count == 0 ? null : Chunks.First().DropIndexStart;
+    public long? DropIndexEnd => Chunks.Count == 0 ? null : Chunks.Last().DropIndexEnd;
+    public DateTimeOffset? DropTimestampStart => Chunks.Count == 0 ? null : Chunks.First().DropTimestampStart;
+    public DateTimeOffset? DropTimestampEnd => Chunks.Count == 0 ? null : Chunks.Last().DropTimestampEnd;
+    private List<IDropChunk> Chunks => Nodes.Select(node => node.Chunk).ToList(); // by accessing "Nodes" it will create new isntances every time - this actually makes it completely thread-safe+
     
-    private readonly ConcurrentDictionary<string, UserStore<string, double>> _leagueDropValue = new ();
-    private readonly ConcurrentDictionary<string, UserStore<string, int>> _leagueDropCount = new ();
-    private readonly ConcurrentDictionary<string, UserStore<string, StreakResult>> _leagueStreak = new ();
-    private readonly ConcurrentDictionary<string, UserStore<string, double>> _leagueAverageTime = new ();
-    private readonly ConcurrentDictionary<string, UserStore<string, EventResult>> _eventDetails = new ();
-    private readonly ConcurrentDictionary<string, UserStore<string, IList<string>>> _leagueParticipants = new ();
-    
-    public long? DropIndexStart => _chunks.Count == 0 ? null : _chunks.First().DropIndexStart;
-    public long? DropIndexEnd => _chunks.Count == 0 ? null : _chunks.Last().DropIndexEnd;
-    public DateTimeOffset? DropTimestampStart => _chunks.Count == 0 ? null : _chunks.First().DropTimestampStart;
-    public DateTimeOffset? DropTimestampEnd => _chunks.Count == 0 ? null : _chunks.Last().DropTimestampEnd;
 
     public async Task<double> GetLeagueWeight(string id)
     {
@@ -50,10 +44,10 @@ public class CachedDropChunk(IServiceProvider services, DropChunkTreeProvider pr
         var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
-        if(DropIndexEnd is null && _leagueDropValue.ContainsKey(key)) _leagueDropValue[key].Dirty();
+        if(DropIndexEnd is null && _context.LeagueDropValue.ContainsKey(key)) _context.LeagueDropValue[key].Dirty();
 
-        var store = _leagueDropValue.GetOrAdd(key,key =>  new UserStore<string, double>(key, async key =>
-            await DropHelper.ReduceParallel(_chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) => a+b, 0d))
+        var store = _context.LeagueDropValue.GetOrAdd(key,key =>  new UserStore<string, double>(key, async key =>
+            await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) => a+b, 0d))
         );
         return await store.Retrieve();
     }
@@ -77,10 +71,10 @@ public class CachedDropChunk(IServiceProvider services, DropChunkTreeProvider pr
         var key = $"all-have-the-same-key";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
-        if(DropIndexEnd is null && _leagueParticipants.ContainsKey(key)) _leagueParticipants[key].Dirty();
+        if(DropIndexEnd is null && _context.LeagueParticipants.ContainsKey(key)) _context.LeagueParticipants[key].Dirty();
 
-        var store = _leagueParticipants.GetOrAdd(key,key =>  new UserStore<string, IList<string>>(key, async key =>
-            await DropHelper.ReduceParallel(_chunks, async c => await c.GetLeagueParticipants(start, end), (a, b) =>
+        var store = _context.LeagueParticipants.GetOrAdd(key,key =>  new UserStore<string, IList<string>>(key, async key =>
+            await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueParticipants(start, end), (a, b) =>
             {
                 foreach (var item in b)
                 {
@@ -111,10 +105,10 @@ public class CachedDropChunk(IServiceProvider services, DropChunkTreeProvider pr
         var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
-        if(DropIndexEnd is null && _leagueDropCount.ContainsKey(key)) _leagueDropCount[key].Dirty();
+        if(DropIndexEnd is null && _context.LeagueDropCount.ContainsKey(key)) _context.LeagueDropCount[key].Dirty();
 
-        var store = _leagueDropCount.GetOrAdd(key,key =>  new UserStore<string, int>(key, async key =>
-            await DropHelper.ReduceParallel(_chunks, async c => await c.GetLeagueCount(id, start, end), (a, b) => a+b, 0))
+        var store = _context.LeagueDropCount.GetOrAdd(key,key =>  new UserStore<string, int>(key, async key =>
+            await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueCount(id, start, end), (a, b) => a+b, 0))
         );
         return await store.Retrieve();
     }
@@ -139,10 +133,10 @@ public class CachedDropChunk(IServiceProvider services, DropChunkTreeProvider pr
         var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
-        if(DropIndexEnd is null && _leagueStreak.ContainsKey(key)) _leagueStreak[key].Dirty();
+        if(DropIndexEnd is null && _context.LeagueStreak.ContainsKey(key)) _context.LeagueStreak[key].Dirty();
         
-        var store = _leagueStreak.GetOrAdd(key,key =>  new UserStore<string, StreakResult>(key, async key =>
-            await DropHelper.ReduceParallel(_chunks, async c => await c.GetLeagueStreak(id, start, end), (a, b) =>
+        var store = _context.LeagueStreak.GetOrAdd(key,key =>  new UserStore<string, StreakResult>(key, async key =>
+            await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueStreak(id, start, end), (a, b) =>
             {
                 var intersection = a.Head + b.Tail;
                 var max = Math.Max(b.Streak, Math.Max(a.Streak, intersection));
@@ -172,11 +166,11 @@ public class CachedDropChunk(IServiceProvider services, DropChunkTreeProvider pr
         var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
-        if(DropIndexEnd is null && _leagueAverageTime.ContainsKey(key)) _leagueAverageTime[key].Dirty();
+        if(DropIndexEnd is null && _context.LeagueAverageTime.ContainsKey(key)) _context.LeagueAverageTime[key].Dirty();
             
         double amount = await GetLeagueCount(id, start, end);
-        var store = _leagueAverageTime.GetOrAdd(key,key => new UserStore<string, double>(key, async key =>
-            amount == 0 ? 0 : await DropHelper.ReduceParallel(_chunks, async c =>
+        var store = _context.LeagueAverageTime.GetOrAdd(key,key => new UserStore<string, double>(key, async key =>
+            amount == 0 ? 0 : await DropHelper.ReduceParallel(Chunks, async c =>
             {
                 var time = await c.GetLeagueAverageTime(id, start, end);
                 var chunkAmount = await c.GetLeagueCount(id, start, end);
@@ -192,10 +186,10 @@ public class CachedDropChunk(IServiceProvider services, DropChunkTreeProvider pr
         var key = $"{eventId}//{userid}//{userLogin}";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
-        if(DropIndexEnd is null && _eventDetails.ContainsKey(key)) _eventDetails[key].Dirty();
+        if(DropIndexEnd is null && _context.EventDetails.ContainsKey(key)) _context.EventDetails[key].Dirty();
 
-        var store = _eventDetails.GetOrAdd(key,key =>  new UserStore<string, EventResult>(key, async key =>
-            await DropHelper.ReduceParallel(_chunks, async c => await c.GetEventLeagueDetails(eventId, userid, userLogin),
+        var store = _context.EventDetails.GetOrAdd(key,key =>  new UserStore<string, EventResult>(key, async key =>
+            await DropHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventId, userid, userLogin),
                 (a, b) =>
                 {
                     foreach (var key in b.RedeemableCredit.Keys)

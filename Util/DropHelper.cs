@@ -95,4 +95,12 @@ public static class DropHelper
 
         return sum;
     }
+    
+    public static double Weight(double catchMs)
+    {
+        if (catchMs < 0) return 0;
+        if (catchMs > 1000) return 0.3;
+        var weight =  -1.78641975945623 * Math.Pow(10, -9) * Math.Pow(catchMs, 4) + 0.00000457264006980028 * Math.Pow(catchMs, 3) - 0.00397188791256729 * Math.Pow(catchMs, 2) + 1.21566760222325 * catchMs;
+        return weight / 100;
+    }
 }

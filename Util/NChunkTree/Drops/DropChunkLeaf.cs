@@ -2,6 +2,16 @@ using Valmar.Domain.Implementation.Drops;
 
 namespace Valmar.Util.NChunkTree.Drops;
 
+/// <summary>
+/// Implementation of the nchunktree for drops
+/// designed to be a leaf in the tree
+/// 
+/// implements functions specific to the tree
+/// for implementation of the chunk, see the persistentdropchunk class
+/// </summary>
+/// <param name="services"></param>
+/// <param name="provider"></param>
+/// <param name="context"></param>
 public abstract class DropChunkLeaf(
     IServiceProvider services,
     DropChunkTreeProvider provider,
@@ -14,8 +24,4 @@ public abstract class DropChunkLeaf(
     {
         throw new InvalidOperationException("Leaves cannot expand");
     }
-    protected override bool IsFull => true;
-    protected override int Cardinality => 1;
-    protected override int NodeCount => 0;
-    protected override List<NChunkTree<IDropChunk, DropChunkTreeProvider>> Nodes => new();
 }

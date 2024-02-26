@@ -8,8 +8,12 @@ using Valmar.Util.NChunkTree.Drops;
 namespace Valmar.Domain.Implementation.Drops;
 
 /// <summary>
-/// Lifetime: Only used once per request; 
+/// Implementation which extends the dropchunkleaf node by the chunk specific functions
+/// Main feature is the access and calculation of drop-related data from persistance
 /// </summary>
+/// <param name="services"></param>
+/// <param name="provider"></param>
+/// <param name="context"></param>
 public class PersistentDropChunk : DropChunkTree, IDropChunk
 {
     private readonly PalantirContext db; // guarantee new db instance
@@ -23,7 +27,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         db = ActivatorUtilities.CreateInstance<PalantirContext>(services);
         
         // init chunk with saved range
-        Provider.ChunkRanges.TryGetValue(NodeId, out var range);
+        Provider.PersistentChunkContext.TryGetValue(NodeId, out var range);
         if (range != null)
         {
             _dropIndexStart = range.Start;
@@ -62,7 +66,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
                 db.PastDrops.First(d => d.DropId == end).ValidFrom);
         }
 
-        Provider.ChunkRanges[NodeId] = new PersistentDropChunkRange(start, end, DropTimestampStart, DropTimestampEnd);
+        Provider.PersistentChunkContext[NodeId] = new PersistentDropChunkRange(start, end, DropTimestampStart, DropTimestampEnd);
     }
     
     public async Task<double> GetLeagueWeight(string id)
@@ -75,7 +79,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
                         && d.CaughtLobbyPlayerId == id)
             .Select(d => d.LeagueWeight)
             .ToListAsync();
-        var score = weights.Sum(d => Weight(d));
+        var score = weights.Sum(d => DropHelper.Weight(d));
         
         return score;
     }
@@ -95,7 +99,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
                         && d.CaughtLobbyPlayerId == id)
             .Select(d => d.LeagueWeight)
             .ToListAsync();
-        var score = weights.Sum(d => Weight(d));
+        var score = weights.Sum(d => DropHelper.Weight(d));
         
         return score;
     }
@@ -235,10 +239,10 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         var redeemableCredits = leagueEventdropWeights
             .Where(d => d.Redeemable)
             .GroupBy(d => d.EventDropId)
-            .Select(g => new {EventDropId = g.Key, Credit = g.Select(w => new { Weight = Weight(w.Weight), w.DropId })});
+            .Select(g => new {EventDropId = g.Key, Credit = g.Select(w => new { Weight = DropHelper.Weight(w.Weight), w.DropId })});
                 
         // amount of credits that already has been converted to the credits table
-        var redeemedCredits = leagueEventdropWeights.Where(d => !d.Redeemable).Sum(w => Weight(w.Weight));
+        var redeemedCredits = leagueEventdropWeights.Where(d => !d.Redeemable).Sum(w => DropHelper.Weight(w.Weight));
 
         // amount of regular drops that contributed to credit -> needed for loss rate
         var regularCaughtSum = await db.PastDrops
@@ -262,13 +266,5 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         }
 
         return new EventResult(redeemableCreditMap, progress);
-    }
-
-    private double Weight(double catchMs)
-    {
-        if (catchMs < 0) return 0;
-        if (catchMs > 1000) return 0.3;
-        var weight =  -1.78641975945623 * Math.Pow(10, -9) * Math.Pow(catchMs, 4) + 0.00000457264006980028 * Math.Pow(catchMs, 3) - 0.00397188791256729 * Math.Pow(catchMs, 2) + 1.21566760222325 * catchMs;
-        return weight / 100;
     }
 }
