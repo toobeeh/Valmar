@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using Valmar.Domain.Implementation.Drops;
 
 namespace Valmar.Util.NChunkTree.Drops;
@@ -14,6 +15,7 @@ namespace Valmar.Util.NChunkTree.Drops;
 /// <param name="context"></param>
 public abstract class DropChunkTree(
     IServiceProvider services,
+    IOptions<DropChunkConfiguration> config,
     DropChunkTreeProvider provider,
     NChunkTreeNodeContext context)
     : NChunkTree<IDropChunk, DropChunkTreeProvider>(services, provider, context)
@@ -27,7 +29,46 @@ public abstract class DropChunkTree(
 
     public override NChunkTree<IDropChunk, DropChunkTreeProvider> AddChunk(NChunkTree<IDropChunk, DropChunkTreeProvider> chunk)
     {
-        // TODO dirty chunk
+        Provider.CachedChunkContext.Remove(NodeId, out _); // remove everything cached due to chunk resize
         return base.AddChunk(chunk);
     }
+
+    public override void RepartitionChunks()
+    {
+        // only the last chunk may be repartitioned because repartitioning others could destroy integrity of chunk tree - and simply not possible for drops
+        var candidate = Nodes.Last();
+        
+        // check if node is open-ended; if not, it does not need to be repartitioned since its amount is assumed to be correct (unchanged)
+        if(candidate.Chunk.DropIndexEnd is not null)
+        {
+            return;
+        }
+        
+        // check if node is a leaf - if yes, perform operation on it. else, delegate repartitioning to the node
+        if (Provider.GetNodeCardinality(candidate.NodeId) > 1)
+        {
+            candidate.RepartitionChunks();
+        }
+
+        // evaluate if new subchunks can be made in chunk
+        var subChunks = candidate.Chunk.EvaluateSubChunks(config.Value.ChunkSize).Result;
+        
+        // first index should equal or bigger than chunk start index to maintain integrity
+        if(subChunks.Count == 0 || subChunks[0] < candidate.Chunk.DropIndexStart)
+        {
+            throw new InvalidOperationException("Error calculating subchunks - First subchunk should start at the same index as the chunk");
+        }
+        
+        // remove the last chunk and add the new subchunks
+        Provider.RemoveNode(candidate.NodeId, NodeId);
+        
+        // add new chunks
+        for(int i = 0; i < subChunks.Count; i++)
+        {
+            var newChunk = Provider.CreateLeaf(services, subChunks[i], i + 1 > subChunks.Count - 1 ? null : subChunks[i + 1]);
+            provider.AddLeaf(services, newChunk);
+        }
+    }
+
+    // TODO: function to reevaluate chunk by checking for open (upper) bound and reeinitiating the sub-chunks if amount grew too big
 }

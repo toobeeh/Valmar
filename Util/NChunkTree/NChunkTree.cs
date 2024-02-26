@@ -32,6 +32,12 @@ public abstract class NChunkTree<TChunk, TProvider> where TProvider : NChunkTree
     public abstract TChunk Chunk { get; }
     
     /// <summary>
+    /// Reevaluates chunks (child nodes) of the tree; adds or removes chunks depending on the implementation
+    /// </summary>
+    /// <returns></returns>
+    public abstract void RepartitionChunks();
+    
+    /// <summary>
     ///  The max allowed chunk nodes in this node
     /// </summary>
     protected int NodeCount => Context.ChildIdSlots.Length;
@@ -91,7 +97,6 @@ public abstract class NChunkTree<TChunk, TProvider> where TProvider : NChunkTree
     /// <returns>Returns this node for fluent interface</returns>
     public virtual NChunkTree<TChunk, TProvider> AddChunk(NChunkTree<TChunk, TProvider> chunk)
     {
-        
         // find node position that is either not set or can take chunks in it
         var freeSlot = -1;
         var slots = Context.ChildIdSlots;

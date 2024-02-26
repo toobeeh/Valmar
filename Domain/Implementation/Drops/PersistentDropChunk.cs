@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Valmar.Database;
 using Valmar.Util;
 using Valmar.Util.NChunkTree;
@@ -14,9 +15,9 @@ namespace Valmar.Domain.Implementation.Drops;
 /// <param name="services"></param>
 /// <param name="provider"></param>
 /// <param name="context"></param>
-public class PersistentDropChunk : DropChunkTree, IDropChunk
+public class PersistentDropChunk : DropChunkLeaf, IDropChunk
 {
-    private readonly PalantirContext db; // guarantee new db instance
+    private readonly PalantirContext _db; // guarantee new db instance
     
     public override IDropChunk Chunk => this;
 
@@ -24,7 +25,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
 
     public PersistentDropChunk(IServiceProvider services, DropChunkTreeProvider provider, NChunkTreeNodeContext context) : base(services, provider, context)
     {
-        db = ActivatorUtilities.CreateInstance<PalantirContext>(services);
+        _db = ActivatorUtilities.CreateInstance<PalantirContext>(services);
         
         // init chunk with saved range
         Provider.PersistentChunkContext.TryGetValue(NodeId, out var range);
@@ -57,21 +58,37 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         if (start != null)
         {
             DropTimestampStart = DropHelper.ParseDropTimestamp(
-                db.PastDrops.First(d => d.DropId == start).ValidFrom);
+                _db.PastDrops.First(d => d.DropId == start).ValidFrom);
         }
 
         if (end != null)
         {
             DropTimestampEnd = DropHelper.ParseDropTimestamp(
-                db.PastDrops.First(d => d.DropId == end).ValidFrom);
+                _db.PastDrops.First(d => d.DropId == end).ValidFrom);
         }
 
         Provider.PersistentChunkContext[NodeId] = new PersistentDropChunkRange(start, end, DropTimestampStart, DropTimestampEnd);
     }
     
+    public async Task<List<long>> EvaluateSubChunks(int chunkSize)
+    {
+        // find indexes to index chunks
+        var drops = _db.PastDrops
+            .Where(d => d.LeagueWeight > 0
+                 && (DropIndexStart == null || d.DropId >= DropIndexStart) 
+                 && (DropIndexEnd == null || d.DropId < DropIndexEnd))
+            .OrderBy(d => d.DropId)
+            .AsEnumerable()
+            .Where((drop, index) => (index) % chunkSize == 0)
+            .Select(item => Convert.ToInt64(item.DropId))
+            .ToList();
+
+        return drops;
+    }
+    
     public async Task<double> GetLeagueWeight(string id)
     {
-        var drops = db.PastDrops;
+        var drops = _db.PastDrops;
         var weights = await drops
             .Where(d => d.LeagueWeight > 0
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
@@ -89,7 +106,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
         var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
         
-        var drops = db.PastDrops;
+        var drops = _db.PastDrops;
         var weights = await drops
             .Where(d => d.LeagueWeight > 0
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
@@ -114,7 +131,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
         var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
         
-        var count = await db.PastDrops
+        var count = await _db.PastDrops
             .Where(d => d.LeagueWeight > 0
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
@@ -135,7 +152,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
         var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
         
-        var time = await db.PastDrops
+        var time = await _db.PastDrops
             .Where(d => d.LeagueWeight > 0
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
@@ -157,7 +174,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
         var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
         
-        var participants = await db.PastDrops
+        var participants = await _db.PastDrops
             .Where(d => d.LeagueWeight > 0
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
@@ -179,7 +196,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
         var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
         
-        var streak = await db.PastDrops
+        var streak = await _db.PastDrops
             .Where(d => d.LeagueWeight > 0
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
@@ -220,13 +237,13 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
     public async Task<EventResult> GetEventLeagueDetails(int eventId, string userid, int userLogin)
     {
         // get eventdrops for faster processing
-        var drops = await db.EventDrops
+        var drops = await _db.EventDrops
             .Where(evd => evd.EventId == eventId)
             .Select(evd => evd.EventDropId)
             .ToArrayAsync();
         
         // get drops weights of eventdrops, either redeemable or already redeemed
-        var leagueEventdropWeights = await db.PastDrops
+        var leagueEventdropWeights = await _db.PastDrops
             .Where(d => d.LeagueWeight > 0
                         && drops.Any(id => id == Math.Abs(d.EventDropId))
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
@@ -245,7 +262,7 @@ public class PersistentDropChunk : DropChunkTree, IDropChunk
         var redeemedCredits = leagueEventdropWeights.Where(d => !d.Redeemable).Sum(w => DropHelper.Weight(w.Weight));
 
         // amount of regular drops that contributed to credit -> needed for loss rate
-        var regularCaughtSum = await db.PastDrops
+        var regularCaughtSum = await _db.PastDrops
             .Where(d => d.LeagueWeight == 0
                         && drops.Any(id => id == Math.Abs(d.EventDropId))
                         && (DropIndexStart == null || d.DropId >= DropIndexStart)

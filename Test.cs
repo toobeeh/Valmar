@@ -1,5 +1,4 @@
-using System.Collections.Concurrent;
-using Valmar.Domain.Implementation.Drops;
+using System.Diagnostics;
 using Valmar.Util;
 using Valmar.Util.NChunkTree.Drops;
 
@@ -12,7 +11,8 @@ public static class Test
     {
         using (var scope = services.CreateScope())
         {
-            var drops = scope.ServiceProvider.GetRequiredService<DropCache>();
+            var drops = scope.ServiceProvider.GetRequiredService<DropChunkTreeProvider>();
+            var tree = drops.GetTree(scope.ServiceProvider);
             /*var eventd = await drops.Drops.GetEventLeagueDetails(22, "335165475870867456", 55565227);
             var redeemed = DropHelper.FindDropToRedeem(eventd, 4, null);*/
 
@@ -64,30 +64,33 @@ public static class Test
                 var id = Console.ReadLine();
 
                 var tasks = new List<Task>();
+
+                var s = new Stopwatch();
+                s.Start();
                 
                 tasks.Add(Task.Run(async () =>
                 {
-                    var score1 = await drops.Drops.GetLeagueWeight(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
+                    var score1 = await tree.GetLeagueWeight(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
                     Console.WriteLine($"score: {score1}");
                 }));
                 
-                tasks.Add(Task.Run(async () =>
+                /*tasks.Add(Task.Run(async () =>
                 {
-                    var count = await drops.Drops.GetLeagueCount(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
+                    var count = await tree.GetLeagueCount(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
                     Console.WriteLine($"count: {count}");
                 }));
                 
                 tasks.Add(Task.Run(async () =>
                 {
-                    var streak = await drops.Drops.GetLeagueStreak(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
+                    var streak = await tree.GetLeagueStreak(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
                     Console.WriteLine($"streak: {streak.Streak}/{streak.Head}");
                 }));
                 
                 tasks.Add(Task.Run(async () =>
                 {
-                    var time = await drops.Drops.GetLeagueAverageTime(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
+                    var time = await tree.GetLeagueAverageTime(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
                     Console.WriteLine($"time: {time}");
-                }));
+                }));*/
                 
                 /*var score1 = await drops.Drops.GetLeagueWeight(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
                 var count = await drops.Drops.GetLeagueCount(id, DropHelper.ParseDropTimestamp("2024-02-01 00:00:00"), null);
@@ -96,6 +99,8 @@ public static class Test
                 
                 Console.Write($"score: {score1}, count: {count}, streak: {streak.Streak}/{streak.Head}, time: {time} \n");*/
                 Task.WaitAll(tasks.ToArray());
+                s.Stop();
+                Console.WriteLine(s.ElapsedMilliseconds);
             }
             
             return;

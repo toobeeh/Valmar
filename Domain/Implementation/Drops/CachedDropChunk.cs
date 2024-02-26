@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Microsoft.Extensions.Options;
 using Valmar.Util;
 using Valmar.Util.NChunkTree;
 using Valmar.Util.NChunkTree.Drops;
@@ -12,7 +13,7 @@ namespace Valmar.Domain.Implementation.Drops;
 public class CachedDropChunk : DropChunkTree, IDropChunk
 {
     private readonly CachedDropChunkContext _context;
-    public CachedDropChunk(IServiceProvider services, DropChunkTreeProvider provider, NChunkTreeNodeContext context) : base(services, provider, context)
+    public CachedDropChunk(IServiceProvider services, IOptions<DropChunkConfiguration> config, DropChunkTreeProvider provider, NChunkTreeNodeContext context) : base(services, config, provider, context)
     {
         _context = provider.CachedChunkContext.GetOrAdd(NodeId, new CachedDropChunkContext());
     }
@@ -178,6 +179,16 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
             }, (a, b) => a + b, 0d))
         );
         return await store.Retrieve();
+    }
+    
+    public async Task<List<long>> EvaluateSubChunks(int chunkSize)
+    {
+        var subChunks = new List<long>();
+        foreach (var chunk in Chunks)
+        {
+            subChunks.AddRange(await chunk.EvaluateSubChunks(chunkSize));
+        }
+        return subChunks;
     }
     
     public async Task<EventResult> GetEventLeagueDetails(int eventId, string userid, int userLogin)

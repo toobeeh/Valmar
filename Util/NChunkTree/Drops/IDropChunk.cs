@@ -21,6 +21,7 @@ public interface IDropChunk
     Task<double> GetLeagueAverageTime(string id);
     Task<double> GetLeagueAverageTime(string id, DateTimeOffset? start, DateTimeOffset? end);
     Task<EventResult> GetEventLeagueDetails(int eventId, string userId, int userLogin);
+    Task<List<long>> EvaluateSubChunks(int chunkSize);
 }
 
 public record StreakResult(int Tail, int Head, int Streak);

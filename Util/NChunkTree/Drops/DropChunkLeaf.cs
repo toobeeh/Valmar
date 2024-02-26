@@ -24,4 +24,9 @@ public abstract class DropChunkLeaf(
     {
         throw new InvalidOperationException("Leaves cannot expand");
     }
+
+    public override void RepartitionChunks()
+    {
+        throw new InvalidOperationException("Node is a leaf and has no chunks; repartitioning can only be done in a parent node");
+    }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Microsoft.Extensions.Options;
 using Valmar.Domain.Implementation.Drops;
 
 namespace Valmar.Util.NChunkTree.Drops;
@@ -18,6 +19,7 @@ public class CachedDropChunkContext
 public class DropChunkTreeProvider : NChunkTreeProvider
 {
     private int? _rootNode;
+    private readonly object _treeStructureLock = new();
     
     public readonly ConcurrentDictionary<int, PersistentDropChunkRange> PersistentChunkContext = new();
     public readonly ConcurrentDictionary<int, CachedDropChunkContext> CachedChunkContext = new();
@@ -35,6 +37,19 @@ public class DropChunkTreeProvider : NChunkTreeProvider
         leaf.SetChunkSize(dropStart, dropEnd);
         return leaf;
     }
+    
+    public void AddLeaf(IServiceProvider provider, PersistentDropChunk leaf)
+    {
+        if (_rootNode is { } rootNodeValue)
+        {
+            lock (_treeStructureLock)
+            {
+                var tree = (CachedDropChunk)GetNode<IDropChunk, DropChunkTreeProvider>(provider, rootNodeValue);
+                tree.AddChunk(leaf);
+            }
+        }
+        else throw new InvalidOperationException("Tree has not been initialized");
+    }
 
     /// <summary>
     /// Gets an instance of the drop chunk tree
@@ -48,13 +63,39 @@ public class DropChunkTreeProvider : NChunkTreeProvider
     /// <returns></returns>
     public CachedDropChunk GetTree(IServiceProvider provider)
     {
-        if(_rootNode is {} rootNodeValue)
+        CachedDropChunk tree;
+        lock (_treeStructureLock)
         {
-            return (CachedDropChunk) GetNode<IDropChunk, DropChunkTreeProvider>(provider, rootNodeValue);
-        }
+            if(_rootNode is {} rootNodeValue)
+            {
+                return (CachedDropChunk) GetNode<IDropChunk, DropChunkTreeProvider>(provider, rootNodeValue);
+            }
         
-        var tree = CreateNode<IDropChunk, DropChunkTreeProvider, CachedDropChunk>(provider, 2, 1);
-        _rootNode = tree.NodeId;
+            // tree has not been created/inited yet - do now
+            var config = provider.GetRequiredService<IOptions<DropChunkConfiguration>>().Value;
+            tree = CreateNode<IDropChunk, DropChunkTreeProvider, CachedDropChunk>(provider, config.BranchingCoefficient, 1);
+            _rootNode = tree.NodeId;
+        }
+    
+        // add a single leaf which covers the whole range
+        var leaf = CreateLeaf(provider, null, null);
+        AddLeaf(provider, leaf);
+    
+        tree.RepartitionChunks();
         return tree;
+    }
+    
+    public override void RemoveNode(int nodeId, int? parentNode)
+    {
+        base.RemoveNode(nodeId, parentNode);
+        PersistentChunkContext.TryRemove(nodeId, out _);
+        CachedChunkContext.TryRemove(nodeId, out _);
+        
+        // dirty parent node
+        if(parentNode is {} parentNodeValue)
+        {
+            PersistentChunkContext.TryRemove(parentNodeValue, out _);
+            CachedChunkContext.TryRemove(parentNodeValue, out _);
+        }
     }
 }

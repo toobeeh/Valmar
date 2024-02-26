@@ -30,7 +30,7 @@ public class Program
         builder.Services.AddDbContext<PalantirContext>();
         RegisterMapperProfiles(builder.Services);
         RegisterDomainServices(builder.Services);
-        RegisterDropChunkAbstraction(builder.Services);
+        RegisterDropChunkAbstraction(builder);
 
         // Register routes and start app
         var app = builder.Build();
@@ -78,12 +78,13 @@ public class Program
             typeof(AwardMapperProfile));
     }
     
-    private static void RegisterDropChunkAbstraction(IServiceCollection services)
+    private static void RegisterDropChunkAbstraction(WebApplicationBuilder builder)
     {
+        var services = builder.Services;
+        services.Configure<DropChunkConfiguration>(builder.Configuration.GetSection("DropChunk"));
         services.AddSingleton<DropChunkTreeProvider>();
         services.AddScoped<PersistentDropChunk>();
         services.AddScoped<CachedDropChunk>();
-        services.AddScoped<NChunkTreeNodeContext>(c => new NChunkTreeNodeContext(0, [], 1, null));
-        services.AddScoped<DropCache>();
+        services.AddScoped<NChunkTreeNodeContext>(c => throw new InvalidOperationException("Context cannot be created from DI"));
     }
 }
