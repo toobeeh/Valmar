@@ -22,7 +22,10 @@ public interface IDropChunk
     Task<double> GetLeagueAverageTime(string id, DateTimeOffset? start, DateTimeOffset? end);
     Task<EventResult> GetEventLeagueDetails(int eventId, string userId, int userLogin);
     Task<List<long>> EvaluateSubChunks(int chunkSize);
+    Task<Dictionary<string, LeagueResult>> GetLeagueResults(DateTimeOffset? start, DateTimeOffset? end);
+    
 }
 
 public record StreakResult(int Tail, int Head, int Streak);
 public record EventResult(ConcurrentDictionary<int, ConcurrentDictionary<long, double>> RedeemableCredit, double Progress);
+public record LeagueResult(string Id, double Score, int Count, double AverageTime, double AverageScore, StreakResult Streak);

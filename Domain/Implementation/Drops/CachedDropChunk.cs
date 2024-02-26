@@ -9,11 +9,22 @@ namespace Valmar.Domain.Implementation.Drops;
 /// <summary>
 /// Implementation which extends the dropchunktree node by the chunk specific functions
 /// Main feature is the caching of the results of the underlying chunks
+///
+/// refactored goals:
+/// - drop value caching per-user per-timespan
+/// - event stats caching per-user
+/// - league stats caching per-time
+/// - server leaderboard caching per-server
+///
 /// </summary>
 public class CachedDropChunk : DropChunkTree, IDropChunk
 {
     private readonly CachedDropChunkContext _context;
-    public CachedDropChunk(IServiceProvider services, IOptions<DropChunkConfiguration> config, DropChunkTreeProvider provider, NChunkTreeNodeContext context) : base(services, config, provider, context)
+    public CachedDropChunk(
+        IServiceProvider services, 
+        IOptions<DropChunkConfiguration> config, 
+        DropChunkTreeProvider provider, 
+        NChunkTreeNodeContext context) : base(services, config, provider, context)
     {
         _context = provider.CachedChunkContext.GetOrAdd(NodeId, new CachedDropChunkContext());
     }
@@ -47,7 +58,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.LeagueDropValue.ContainsKey(key)) _context.LeagueDropValue[key].Dirty();
 
-        var store = _context.LeagueDropValue.GetOrAdd(key,key =>  new UserStore<string, double>(key, async key =>
+        var store = _context.LeagueDropValue.GetOrAdd(key,key =>  new KVStore<string, double>(key, async key =>
             await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) => a+b, 0d))
         );
         return await store.Retrieve();
@@ -74,7 +85,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.LeagueParticipants.ContainsKey(key)) _context.LeagueParticipants[key].Dirty();
 
-        var store = _context.LeagueParticipants.GetOrAdd(key,key =>  new UserStore<string, IList<string>>(key, async key =>
+        var store = _context.LeagueParticipants.GetOrAdd(key,key =>  new KVStore<string, IList<string>>(key, async key =>
             await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueParticipants(start, end), (a, b) =>
             {
                 foreach (var item in b)
@@ -108,7 +119,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.LeagueDropCount.ContainsKey(key)) _context.LeagueDropCount[key].Dirty();
 
-        var store = _context.LeagueDropCount.GetOrAdd(key,key =>  new UserStore<string, int>(key, async key =>
+        var store = _context.LeagueDropCount.GetOrAdd(key,key =>  new KVStore<string, int>(key, async key =>
             await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueCount(id, start, end), (a, b) => a+b, 0))
         );
         return await store.Retrieve();
@@ -136,7 +147,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.LeagueStreak.ContainsKey(key)) _context.LeagueStreak[key].Dirty();
         
-        var store = _context.LeagueStreak.GetOrAdd(key,key =>  new UserStore<string, StreakResult>(key, async key =>
+        var store = _context.LeagueStreak.GetOrAdd(key,key =>  new KVStore<string, StreakResult>(key, async key =>
             await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueStreak(id, start, end), (a, b) =>
             {
                 var intersection = a.Head + b.Tail;
@@ -170,7 +181,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         if(DropIndexEnd is null && _context.LeagueAverageTime.ContainsKey(key)) _context.LeagueAverageTime[key].Dirty();
             
         double amount = await GetLeagueCount(id, start, end);
-        var store = _context.LeagueAverageTime.GetOrAdd(key,key => new UserStore<string, double>(key, async key =>
+        var store = _context.LeagueAverageTime.GetOrAdd(key,key => new KVStore<string, double>(key, async key =>
             amount == 0 ? 0 : await DropHelper.ReduceParallel(Chunks, async c =>
             {
                 var time = await c.GetLeagueAverageTime(id, start, end);
@@ -199,7 +210,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.EventDetails.ContainsKey(key)) _context.EventDetails[key].Dirty();
 
-        var store = _context.EventDetails.GetOrAdd(key,key =>  new UserStore<string, EventResult>(key, async key =>
+        var store = _context.EventDetails.GetOrAdd(key,key =>  new KVStore<string, EventResult>(key, async key =>
             await DropHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventId, userid, userLogin),
                 (a, b) =>
                 {
@@ -224,9 +235,63 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         return await store.Retrieve();
     }
 
+    public async Task<Dictionary<string, LeagueResult>> GetLeagueResults(DateTimeOffset? start, DateTimeOffset? end)
+    {
+        // get key for request identifiers
+        var key = $"{start}//{end}";
+        
+        // set as dirty if chunk is open ended (can always be bigger than last checked!)
+        if(DropIndexEnd is null && _context.LeagueResults.TryGetValue(key, out var detail)) detail.Dirty();
+        
+        
+        var store = _context.LeagueResults.GetOrAdd(key,_ =>  new KVStore<string, Dictionary<string, LeagueResult>>(key, async _ =>
+            await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueResults(start, end),
+                (a, b) =>
+                {
+                    foreach (var result in a.Values)
+                    {
+                        // check if user is present in other chunk
+                        if (b.TryGetValue(result.Id, out var bResult))
+                        {
+                            var totalCount = result.Count + bResult.Count;
+                            var totalScore = result.Score + bResult.Score;
+                            var combinedAverageTime = result.AverageTime * result.Count / totalCount +
+                                                      bResult.AverageTime * result.Count / totalCount;
+
+                            var combinedStreak = new StreakResult(
+                                result.Streak.Tail,
+                                bResult.Streak.Head,
+                                Math.Max(Math.Max(result.Streak.Streak, bResult.Streak.Streak),
+                                    result.Streak.Head + bResult.Streak.Tail));
+                                
+                            var combinedResult = new LeagueResult(
+                                result.Id,
+                                totalScore,
+                                totalCount,
+                                combinedAverageTime,
+                                totalScore / totalCount,
+                                combinedStreak);
+
+                            b[result.Id] = combinedResult;
+                        }
+                        
+                        // if not, just add result of chunk
+                        else
+                        {
+                            b[result.Id] = result;
+                        }
+                    }
+
+                    return b;
+                }, 
+                new Dictionary<string, LeagueResult>()))
+        );
+        return await store.Retrieve();
+    }
+
 }
 
-public class UserStore<TKey, TData>(TKey key, Func<TKey, Task<TData>> retrieval)
+public class KVStore<TKey, TData>(TKey key, Func<TKey, Task<TData>> retrieval)
 {
     private TData _data;
     private bool _dirty = true;

@@ -48,6 +48,7 @@ public abstract class DropChunkTree(
         if (Provider.GetNodeCardinality(candidate.NodeId) > 1)
         {
             candidate.RepartitionChunks();
+            return;
         }
 
         // evaluate if new subchunks can be made in chunk
@@ -57,6 +58,12 @@ public abstract class DropChunkTree(
         if(subChunks.Count == 0 || subChunks[0] < candidate.Chunk.DropIndexStart)
         {
             throw new InvalidOperationException("Error calculating subchunks - First subchunk should start at the same index as the chunk");
+        }
+        
+        // if only one chunk as result, no need for repartitioning
+        if(subChunks.Count == 1)
+        {
+            return;
         }
         
         // remove the last chunk and add the new subchunks

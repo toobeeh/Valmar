@@ -284,4 +284,116 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
 
         return new EventResult(redeemableCreditMap, progress);
     }
+    
+    public async Task<Dictionary<string, LeagueResult>> GetLeagueResults(DateTimeOffset? start, DateTimeOffset? end)
+    {
+        var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
+        var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
+        
+        // get participants for easier processing
+        var participants = (await GetLeagueParticipants(start, end)).ToArray();
+        
+        // get data from db
+        var drops = await _db.PastDrops
+            .Where(d => d.LeagueWeight > 0
+                        && (DropIndexStart == null || d.DropId >= DropIndexStart) 
+                        && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
+                        && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)
+                        && (endStamp == null ||  d.ValidFrom.CompareTo(endStamp) < 0))
+            .OrderBy(d => d.ValidFrom)
+            .GroupBy(d => d.DropId)
+            .Select(group => new { DropId = group.Key, Caught = group.Select(drop => new { Id = drop.CaughtLobbyPlayerId, Time = drop.LeagueWeight }) })
+            .ToListAsync();
+        
+        // process data
+        var streakTails = new Dictionary<string, int>();
+        var streakMaxes = new Dictionary<string, int>();
+        var streakHeads = new Dictionary<string, int>(); 
+        var scores = new Dictionary<string, double>();
+        var counts = new Dictionary<string, int>();
+        var times = new Dictionary<string, double>();
+
+        for (var i = 0; i < drops.Count; i++)
+        {
+            var drop = drops[i];
+            var continuesHeads = new Dictionary<string, int>();
+            
+            foreach (var claim in drop.Caught)
+            {
+                
+                // continues a streak
+                var thisStreak = 1;
+                if (streakHeads.TryGetValue(claim.Id, out var streak))
+                {
+                    thisStreak = streak + 1;
+                    continuesHeads[claim.Id] = thisStreak;
+                }
+
+                // starts a new streak 
+                else
+                {
+                    continuesHeads[claim.Id] = 1;
+                }
+                    
+                // if streak == i, tail streak is still in progress
+                if (thisStreak == i + 1)
+                {
+                    streakTails[claim.Id] = thisStreak;
+                }
+                
+                // update max streak 
+                if (streakMaxes.TryGetValue(claim.Id, out var max))
+                {
+                    if (thisStreak > max) streakMaxes[claim.Id] = thisStreak;
+                }
+                else streakMaxes[claim.Id] = thisStreak;
+                
+                // add to score
+                if (scores.TryGetValue(claim.Id, out var score))
+                {
+                    scores[claim.Id] = score + DropHelper.Weight(claim.Time);
+                }
+                else scores[claim.Id] = DropHelper.Weight(claim.Time);
+                
+                // add to count
+                if (counts.TryGetValue(claim.Id, out var count))
+                {
+                    counts[claim.Id] = count + 1;
+                }
+                else counts[claim.Id] = 1;
+                
+                // add to times
+                if (times.TryGetValue(claim.Id, out var time))
+                {
+                    times[claim.Id] = time + claim.Time;
+                }
+                else times[claim.Id] = claim.Time;
+            }
+            
+
+            // reset to contain only active streaks
+            streakHeads = continuesHeads;
+        }
+            
+        // map to records from dictionaries
+        var resultList = participants.Select(participant =>
+        {
+            counts.TryGetValue(participant, out var totalCount);
+            scores.TryGetValue(participant, out var totalScore);
+            scores.TryGetValue(participant, out var time);
+            double averageTime = time / totalCount;
+            double averageWeight = totalScore / totalCount;
+
+            streakTails.TryGetValue(participant, out var tail);
+            streakMaxes.TryGetValue(participant, out var head);
+            streakHeads.TryGetValue(participant, out var max);
+
+            var streak = new StreakResult(tail, head, max);
+
+            return new LeagueResult(participant, totalScore, totalCount, averageTime, averageWeight, streak);
+        });
+
+        var results = resultList.ToDictionary(item => item.Id);
+        return results;
+    }
 }

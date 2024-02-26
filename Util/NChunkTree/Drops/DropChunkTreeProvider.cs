@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using Microsoft.Extensions.Options;
 using Valmar.Domain.Implementation.Drops;
 
@@ -8,15 +9,16 @@ public record PersistentDropChunkRange(long? Start, long? End, DateTimeOffset? S
 
 public class CachedDropChunkContext
 {
-    public readonly ConcurrentDictionary<string, UserStore<string, double>> LeagueDropValue = new ();
-    public readonly ConcurrentDictionary<string, UserStore<string, int>> LeagueDropCount = new ();
-    public readonly ConcurrentDictionary<string, UserStore<string, StreakResult>> LeagueStreak = new ();
-    public readonly ConcurrentDictionary<string, UserStore<string, double>> LeagueAverageTime = new ();
-    public readonly ConcurrentDictionary<string, UserStore<string, EventResult>> EventDetails = new ();
-    public readonly ConcurrentDictionary<string, UserStore<string, IList<string>>> LeagueParticipants = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, double>> LeagueDropValue = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, int>> LeagueDropCount = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, StreakResult>> LeagueStreak = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, double>> LeagueAverageTime = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, EventResult>> EventDetails = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, IList<string>>> LeagueParticipants = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, Dictionary<string, LeagueResult>>> LeagueResults = new ();
 }
 
-public class DropChunkTreeProvider : NChunkTreeProvider
+public class DropChunkTreeProvider(ILogger<DropChunkTreeProvider> logger) : NChunkTreeProvider
 {
     private int? _rootNode;
     private readonly object _treeStructureLock = new();
@@ -68,8 +70,10 @@ public class DropChunkTreeProvider : NChunkTreeProvider
         {
             if(_rootNode is {} rootNodeValue)
             {
-                return (CachedDropChunk) GetNode<IDropChunk, DropChunkTreeProvider>(provider, rootNodeValue);
+                tree = (CachedDropChunk) GetNode<IDropChunk, DropChunkTreeProvider>(provider, rootNodeValue);
+                return tree;
             }
+            
         
             // tree has not been created/inited yet - do now
             var config = provider.GetRequiredService<IOptions<DropChunkConfiguration>>().Value;
@@ -77,12 +81,21 @@ public class DropChunkTreeProvider : NChunkTreeProvider
             _rootNode = tree.NodeId;
         }
     
-        // add a single leaf which covers the whole range
+        // add a single leaf which covers the whole range, and repartition tree to build proper chunksizes
         var leaf = CreateLeaf(provider, null, null);
         AddLeaf(provider, leaf);
-    
-        tree.RepartitionChunks();
+        RepartitionTree(tree);
+        
         return tree;
+    }
+
+    public void RepartitionTree(CachedDropChunk tree)
+    {
+        var sw = new Stopwatch();
+        sw.Start();
+        tree.RepartitionChunks();
+        sw.Stop();
+        logger.LogInformation("Repartitioned tree in {time}ms", sw.ElapsedMilliseconds);
     }
     
     public override void RemoveNode(int nodeId, int? parentNode)
