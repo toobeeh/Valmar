@@ -142,28 +142,6 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         return count;
     }
     
-    public async Task<double> GetLeagueAverageTime(string id)
-    {
-        return await GetLeagueAverageTime(id, null, null);
-    }
-
-    public async Task<double> GetLeagueAverageTime(string id, DateTimeOffset? start, DateTimeOffset? end)
-    {
-        var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
-        var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
-        
-        var time = await _db.PastDrops
-            .Where(d => d.LeagueWeight > 0
-                        && (DropIndexStart == null || d.DropId >= DropIndexStart) 
-                        && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
-                        && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)
-                        && (endStamp == null ||  d.ValidFrom.CompareTo(endStamp) < 0)
-                        && d.CaughtLobbyPlayerId == id)
-            .Select(d => d.LeagueWeight)
-            .AverageAsync(t => (int?)t);
-        return time ?? 0;
-    }
-    
     public async Task<IList<string>> GetLeagueParticipants()
     {
         return await GetLeagueParticipants(null, null);
@@ -184,54 +162,6 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
             .Distinct()
             .ToListAsync();
         return participants;
-    }
-    
-    public async Task<StreakResult> GetLeagueStreak(string id)
-    {
-        return await GetLeagueStreak(id, null, null);
-    }
-    
-    public async Task<StreakResult> GetLeagueStreak(string id, DateTimeOffset? start, DateTimeOffset? end)
-    {
-        var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
-        var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
-        
-        var streak = await _db.PastDrops
-            .Where(d => d.LeagueWeight > 0
-                        && (DropIndexStart == null || d.DropId >= DropIndexStart) 
-                        && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
-                        && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)
-                        && (endStamp == null ||  d.ValidFrom.CompareTo(endStamp) < 0))
-            .OrderBy(d => d.ValidFrom)
-            .GroupBy(d => d.DropId)
-            .Select(group => new { DropId = group.Key, Caught = group.Any(d => d.CaughtLobbyPlayerId == id) })
-            .ToListAsync();
-        
-        var streakResult = new StreakResult(-1, -1, -1);
-        var currentStreak = 0;
-        var longestStreak = 0;
-        foreach (var drop in streak)
-        {
-            if (drop.Caught)
-            {
-                currentStreak++;
-                if(currentStreak > longestStreak) longestStreak = currentStreak;
-            }
-            else
-            {
-                // update tail at streak loss if not set yet
-                if(streakResult.Tail == -1) streakResult = streakResult with { Tail = currentStreak };
-                currentStreak = 0;
-            }
-        }
-        
-        // check if tail was not set
-        if(streakResult.Tail == -1) streakResult = streakResult with { Tail = currentStreak };
-        
-        // set max and head of streak
-        streakResult = streakResult with { Head = currentStreak, Streak = longestStreak };
-        
-        return streakResult;
     }
 
     public async Task<EventResult> GetEventLeagueDetails(int eventId, string userid, int userLogin)

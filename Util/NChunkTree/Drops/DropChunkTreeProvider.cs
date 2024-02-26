@@ -11,8 +11,6 @@ public class CachedDropChunkContext
 {
     public readonly ConcurrentDictionary<string, KVStore<string, double>> LeagueDropValue = new ();
     public readonly ConcurrentDictionary<string, KVStore<string, int>> LeagueDropCount = new ();
-    public readonly ConcurrentDictionary<string, KVStore<string, StreakResult>> LeagueStreak = new ();
-    public readonly ConcurrentDictionary<string, KVStore<string, double>> LeagueAverageTime = new ();
     public readonly ConcurrentDictionary<string, KVStore<string, EventResult>> EventDetails = new ();
     public readonly ConcurrentDictionary<string, KVStore<string, IList<string>>> LeagueParticipants = new ();
     public readonly ConcurrentDictionary<string, KVStore<string, Dictionary<string, LeagueResult>>> LeagueResults = new ();
