@@ -75,10 +75,27 @@ public class MembersDomainService(
             memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList()
         );
     }
-
-    public async Task<MemberDdo> GetMemberByDiscordId(long id)
+    
+    public async Task<List<MemberJson>> GetMemberInfosFromDiscordIds(List<long> ids)
     {
-        logger.LogTrace("GetMemberByDiscordId(id={id})", id);
+        logger.LogTrace("GetMemberInfosFromDiscordIds(ids={ids})", ids);
+        var idArray = ids.Select(id => id.ToString());
+        
+        // find likely candidates to avoid parsing a large amount of data
+        var candidates = await db.Members
+            .Select(member => member.Member1)
+            .ToListAsync();
+        var matches = candidates
+            .Where(member => idArray.Any(id => member.Contains(id)))
+            .Select(candidate => ValmarJsonParser.TryParse<MemberJson>(candidate, logger))
+            .ToList();
+
+        return matches;
+    }
+
+    public async Task<int> GetMemberLoginFromDiscordId(long id)
+    {
+        logger.LogTrace("GetMemberLoginFromDiscordId(id={id})", id);
         
         // find likely candidates to avoid parsing a large amount of data
         var candidates = await db.Members
@@ -94,7 +111,17 @@ public class MembersDomainService(
             throw new EntityNotFoundException($"No member found for id {id}");
         }
 
-        return await GetMemberByLogin(Convert.ToInt32(match.UserLogin)); // accept performance loss for code reusability
+        return Convert.ToInt32(match.UserLogin);
+    }
+
+    public async Task<MemberDdo> GetMemberByDiscordId(long id)
+    {
+        logger.LogTrace("GetMemberByDiscordId(id={id})", id);
+        
+        // get login
+        var login = await GetMemberLoginFromDiscordId(id);
+
+        return await GetMemberByLogin(login); // accept performance loss for code reusability
     }
 
     public async Task<MemberDdo> GetMemberByAccessToken(string token)

@@ -24,7 +24,7 @@ public abstract class DropChunkTree(
     protected override long? ChunkEndIndex => Chunk.DropIndexEnd;
     protected override NChunkTree<IDropChunk, DropChunkTreeProvider> CreateExpansionNode()
     {
-        return Provider.CreateNode<IDropChunk, DropChunkTreeProvider, CachedDropChunk>(services, NodeCount, Level);
+        return Provider.CreateNode<IDropChunk, DropChunkTreeProvider, CachedDropChunk>(NodeCount, Level);
     }
 
     public override NChunkTree<IDropChunk, DropChunkTreeProvider> AddChunk(NChunkTree<IDropChunk, DropChunkTreeProvider> chunk)
@@ -72,8 +72,8 @@ public abstract class DropChunkTree(
         // add new chunks
         for(int i = 0; i < subChunks.Count; i++)
         {
-            var newChunk = Provider.CreateLeaf(services, subChunks[i], i + 1 > subChunks.Count - 1 ? null : subChunks[i + 1]);
-            provider.AddLeaf(services, newChunk);
+            var newChunk = Provider.CreateLeaf(subChunks[i], i + 1 > subChunks.Count - 1 ? null : subChunks[i + 1]);
+            provider.AddLeaf(newChunk);
         }
     }
 

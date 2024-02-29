@@ -1,0 +1,20 @@
+using AutoMapper;
+using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
+using Valmar.Domain;
+using Valmar.Domain.Implementation;
+
+namespace Valmar.Grpc;
+
+public class AdminGrpcService(
+    ILogger<AdminGrpcService> logger, 
+    IMapper mapper,
+    IAdminDomainService adminService) : Admin.AdminBase 
+{
+    public override async Task<Empty> ReevaluateDropChunks(Empty request, ServerCallContext context)
+    {
+        logger.LogTrace($"ReevaluateDropChunks(empty)");
+        await adminService.ReevaluateDropChunks();
+        return new Empty();
+    }
+}

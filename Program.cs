@@ -34,8 +34,6 @@ public class Program
 
         // Register routes and start app
         var app = builder.Build();
-
-        await Test.TestDropChunks(app.Services);
         
         RegisterGrpcServices(app);
         app.Run();
@@ -51,6 +49,8 @@ public class Program
         services.AddScoped<IGuildsDomainService, GuildsDomainService>();
         services.AddScoped<ILobbiesDomainService, LobbiesDomainService>();
         services.AddScoped<IMembersDomainService, MembersDomainService>();
+        services.AddScoped<IAdminDomainService, AdminDomainService>();
+        services.AddScoped<ILeaguesDomainService, LeaguesDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -63,6 +63,8 @@ public class Program
         app.MapGrpcService<GuildsGrpcService>();
         app.MapGrpcService<MembersGrpcService>();
         app.MapGrpcService<LobbiesGrpcService>();
+        app.MapGrpcService<LeaguesGrpcService>();
+        app.MapGrpcService<AdminGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)

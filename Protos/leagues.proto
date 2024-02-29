@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Valmar";
+package leagues;
+
+// Service definition for league stat access
+service Leagues {
+  
+  // Gets the current league evaluation
+  rpc EvaluateCurrentLeagueSeason (google.protobuf.Empty) returns (LeagueSeasonEvaluationReply);
+
+  // gets the league evaluation for a specific month
+  rpc EvaluateLeagueSeason (EvaluateSeasonRequest) returns (LeagueSeasonEvaluationReply);
+  
+  // Gets the current own league evaluation
+  rpc EvaluateMemberCurrentLeagueSeason (EvaluateMemberCurrentSeasonRequest) returns (LeagueSeasonMemberEvaluationReply);
+  
+  // gets the own league evaluation for a specific month
+  rpc EvaluateMemberLeagueSeason (EvaluateMemberSeasonRequest) returns (LeagueSeasonMemberEvaluationReply);
+}
+
+// Response containing league evaluation.
+message LeagueSeasonEvaluationReply {
+  int32 year = 1;
+  int32 month = 2;
+  repeated LeagueScoreRankingReply scoreRanking = 3;
+  repeated LeagueCountRankingReply countRanking = 4;
+  repeated LeagueAverageTimeRankingReply timeRanking = 5;
+  repeated LeagueAverageWeightRankingReply weightRanking = 6;
+  repeated LeagueStreakRankingReply streakRanking = 7;
+}
+
+// Response containing own league evaluation.
+message LeagueSeasonMemberEvaluationReply {
+  int32 year = 1;
+  int32 month = 2;
+  double score = 3;
+  int32 count = 5;
+  int32 maxStreak = 6;
+  int32 currentStreak = 7;
+  double averageTime = 8;
+  double averageWeight = 9;
+}
+
+message LeagueScoreRankingReply {
+  string name = 1;
+  double score = 2;
+}
+
+message LeagueCountRankingReply {
+  string name = 1;
+  int32 caughtDrops = 2;
+}
+
+message LeagueAverageTimeRankingReply {
+  string name = 1;
+  double averageTime = 2;
+}
+
+message LeagueAverageWeightRankingReply {
+  string name = 1;
+  double averageWeight = 2;
+}
+
+message LeagueStreakRankingReply {
+  string name = 1;
+  int32 maxStreak = 2;
+  int32 currentStreak = 3;
+}
+
+// Request containing a month and year for a league season
+message EvaluateSeasonRequest {
+  int32 year = 1;
+  int32 month = 2;
+}
+
+// Request containing a month and year for a league season, and a user identification
+message EvaluateMemberSeasonRequest {
+  int32 year = 1;
+  int32 month = 2;
+  int32 login = 3;
+}
+
+// Request containing a user identification
+message EvaluateMemberCurrentSeasonRequest {
+  int32 login = 2;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Valmar";
+package admin;
+
+// Service definition for administration and management actions
+service Admin {
+  
+  // Reevaluates the last chunk of the drop cache
+  rpc ReevaluateDropChunks (google.protobuf.Empty) returns (google.protobuf.Empty);
+}

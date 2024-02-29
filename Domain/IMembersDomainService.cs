@@ -1,5 +1,6 @@
 using Valmar.Database;
 using Valmar.Domain.Classes;
+using Valmar.Domain.Classes.JSON;
 
 namespace Valmar.Domain;
 
@@ -16,4 +17,6 @@ public interface IMembersDomainService
     Task ClearMemberDropboost(int login);
     Task ConnectToServer(int login, int serverToken);
     Task DisconnectFromServer(int login, int serverToken);
+    Task<int> GetMemberLoginFromDiscordId(long id);
+    Task<List<MemberJson>> GetMemberInfosFromDiscordIds(List<long> ids);
 }

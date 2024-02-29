@@ -281,7 +281,7 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
                 // add to score
                 if (scores.TryGetValue(claim.Id, out var score))
                 {
-                    scores[claim.Id] = score + DropHelper.Weight(claim.Time);
+                    scores[claim.Id] = score + DropHelper.Weight(claim.Time) * 10; // score is 10* weight
                 }
                 else scores[claim.Id] = DropHelper.Weight(claim.Time);
                 

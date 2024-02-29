@@ -4,22 +4,27 @@ namespace Valmar.Util.NChunkTree;
 
 public record NChunkTreeNodeContext(int Id, int?[] ChildIdSlots, int Level, Type NodeType);
 
-public abstract class NChunkTreeProvider
+public abstract class NChunkTreeProvider(IServiceProvider provider)
 {
     private int _nextId = 0;
     private readonly object _nodeCreateLock = new();
     private readonly ConcurrentDictionary<int, NChunkTreeNodeContext> _nodes = new();
+
+    protected IServiceProvider CreateScopedServices()
+    {
+        return provider.CreateScope().ServiceProvider;
+    }
     
-    public NChunkTree<TChunk, TProvider> GetNode<TChunk, TProvider>(IServiceProvider provider, int id) 
+    public NChunkTree<TChunk, TProvider> GetNode<TChunk, TProvider>(int id) 
         where TProvider : NChunkTreeProvider
     {
         if (!_nodes.TryGetValue(id, out var context)) throw new InvalidOperationException("Node not found");
         
-        var tree = ActivatorUtilities.CreateInstance(provider, context.NodeType, context) as NChunkTree<TChunk, TProvider> ?? throw new NullReferenceException("Could not instantiate node") ;
+        var tree = ActivatorUtilities.CreateInstance(CreateScopedServices(), context.NodeType, context) as NChunkTree<TChunk, TProvider> ?? throw new NullReferenceException("Could not instantiate node") ;
         return tree;
     }
 
-    public TNode CreateNode<TChunk, TProvider, TNode>(IServiceProvider provider, int nodeCount, int level) 
+    public TNode CreateNode<TChunk, TProvider, TNode>(int nodeCount, int level) 
         where TNode : NChunkTree<TChunk, TProvider> 
         where TProvider : NChunkTreeProvider
     {
@@ -36,16 +41,16 @@ public abstract class NChunkTreeProvider
         var context = new NChunkTreeNodeContext(id, new int?[nodeCount], level, typeof(TNode));
         _nodes.TryAdd(context.Id, context);
         
-        var tree = ActivatorUtilities.CreateInstance<TNode>(provider, context) ?? throw new NullReferenceException("Could not instantiate node");
+        var tree = ActivatorUtilities.CreateInstance<TNode>(CreateScopedServices(), context) ?? throw new NullReferenceException("Could not instantiate node");
         return tree;
     }
 
-    public List<NChunkTree<TChunk, TProvider>> GetNodeChildNodes<TChunk, TProvider>(IServiceProvider provider, int id) where TProvider : NChunkTreeProvider
+    public List<NChunkTree<TChunk, TProvider>> GetNodeChildNodes<TChunk, TProvider>(int id) where TProvider : NChunkTreeProvider
     {
         if (!_nodes.TryGetValue(id, out var context)) throw new InvalidOperationException("Node not found");
         var nodes = context.ChildIdSlots
             .Where(id => id.HasValue)
-            .Select(id => GetNode<TChunk, TProvider>(provider, id.Value));
+            .Select(id => GetNode<TChunk, TProvider>(id.Value));
 
         return nodes.ToList();
     }

@@ -45,7 +45,7 @@ public abstract class NChunkTree<TChunk, TProvider> where TProvider : NChunkTree
     /// <summary>
     /// A list of child node instances; instances are created by provider each request
     /// </summary>
-    protected List<NChunkTree<TChunk, TProvider>> Nodes => Provider.GetNodeChildNodes<TChunk, TProvider>(Services, Context.Id);
+    protected List<NChunkTree<TChunk, TProvider>> Nodes => Provider.GetNodeChildNodes<TChunk, TProvider>(Context.Id);
     
     /// <summary>
     /// The implementation-specific start index of this chunk; null if open
@@ -128,7 +128,7 @@ public abstract class NChunkTree<TChunk, TProvider> where TProvider : NChunkTree
             var expansion = CreateExpansionNode();
             for(var i = expansionIndex; i < NodeCount; i++)
             {
-                var node = Provider.GetNode<TChunk, TProvider>(Services, slots[i] ?? throw new NullReferenceException("Node id was null"));
+                var node = Provider.GetNode<TChunk, TProvider>(slots[i] ?? throw new NullReferenceException("Node id was null"));
                 expansion.AddChunk(node);
                 slots[i] = null;
             }
@@ -143,7 +143,7 @@ public abstract class NChunkTree<TChunk, TProvider> where TProvider : NChunkTree
         {
             if (slots[freeSlot] is {} freeNodeId)
             {
-                var node = Provider.GetNode<TChunk, TProvider>(Services, freeNodeId);
+                var node = Provider.GetNode<TChunk, TProvider>(freeNodeId);
                 node.AddChunk(chunk);
             }
             else

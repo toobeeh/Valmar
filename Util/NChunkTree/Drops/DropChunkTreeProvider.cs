@@ -16,7 +16,7 @@ public class CachedDropChunkContext
     public readonly ConcurrentDictionary<string, KVStore<string, Dictionary<string, LeagueResult>>> LeagueResults = new ();
 }
 
-public class DropChunkTreeProvider(ILogger<DropChunkTreeProvider> logger) : NChunkTreeProvider
+public class DropChunkTreeProvider(ILogger<DropChunkTreeProvider> logger, IServiceProvider provider) : NChunkTreeProvider(provider)
 {
     private int? _rootNode;
     private readonly object _treeStructureLock = new();
@@ -31,20 +31,20 @@ public class DropChunkTreeProvider(ILogger<DropChunkTreeProvider> logger) : NChu
     /// <param name="dropStart"></param>
     /// <param name="dropEnd"></param>
     /// <returns></returns>
-    public PersistentDropChunk CreateLeaf(IServiceProvider provider, long? dropStart, long? dropEnd)
+    public PersistentDropChunk CreateLeaf(long? dropStart, long? dropEnd)
     {
-        var leaf = CreateNode<IDropChunk, DropChunkTreeProvider, PersistentDropChunk>(provider, 0, 1);
+        var leaf = CreateNode<IDropChunk, DropChunkTreeProvider, PersistentDropChunk>(0, 1);
         leaf.SetChunkSize(dropStart, dropEnd);
         return leaf;
     }
     
-    public void AddLeaf(IServiceProvider provider, PersistentDropChunk leaf)
+    public void AddLeaf(PersistentDropChunk leaf)
     {
         if (_rootNode is { } rootNodeValue)
         {
             lock (_treeStructureLock)
             {
-                var tree = (CachedDropChunk)GetNode<IDropChunk, DropChunkTreeProvider>(provider, rootNodeValue);
+                var tree = (CachedDropChunk)GetNode<IDropChunk, DropChunkTreeProvider>(rootNodeValue);
                 tree.AddChunk(leaf);
             }
         }
@@ -61,27 +61,28 @@ public class DropChunkTreeProvider(ILogger<DropChunkTreeProvider> logger) : NChu
     /// </summary>
     /// <param name="provider"></param>
     /// <returns></returns>
-    public CachedDropChunk GetTree(IServiceProvider provider)
+    public CachedDropChunk GetTree()
     {
+        
         CachedDropChunk tree;
         lock (_treeStructureLock)
         {
             if(_rootNode is {} rootNodeValue)
             {
-                tree = (CachedDropChunk) GetNode<IDropChunk, DropChunkTreeProvider>(provider, rootNodeValue);
+                tree = (CachedDropChunk) GetNode<IDropChunk, DropChunkTreeProvider>(rootNodeValue);
                 return tree;
             }
             
-        
             // tree has not been created/inited yet - do now
-            var config = provider.GetRequiredService<IOptions<DropChunkConfiguration>>().Value;
-            tree = CreateNode<IDropChunk, DropChunkTreeProvider, CachedDropChunk>(provider, config.BranchingCoefficient, 1);
+            var prov = CreateScopedServices();
+            var config = prov.GetRequiredService<IOptions<DropChunkConfiguration>>().Value;
+            tree = CreateNode<IDropChunk, DropChunkTreeProvider, CachedDropChunk>(config.BranchingCoefficient, 1);
             _rootNode = tree.NodeId;
         }
     
         // add a single leaf which covers the whole range, and repartition tree to build proper chunksizes
-        var leaf = CreateLeaf(provider, null, null);
-        AddLeaf(provider, leaf);
+        var leaf = CreateLeaf(null, null);
+        AddLeaf(leaf);
         RepartitionTree(tree);
         
         return tree;
