@@ -30,7 +30,7 @@ public class LeaguesDomainService(
                 userResult.Count, 
                 userResult.Streak.Streak, 
                 userResult.Streak.Head, 
-                userResult.AverageScore, 
+                userResult.AverageWeight, 
                 userResult.AverageTime);
         }
         return new LeagueSeasonMemberEvaluationDdo(year, month, 0, 0, 0, 0, 0, 0);
@@ -72,7 +72,7 @@ public class LeaguesDomainService(
         
         var weightRanking = participants
             .Select(p =>
-            new LeagueAverageWeightRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageScore))
+            new LeagueAverageWeightRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageWeight))
             .OrderByDescending(item => item.AverageWeight)
             .ToList();
         

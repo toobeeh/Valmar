@@ -310,7 +310,7 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         {
             counts.TryGetValue(participant, out var totalCount);
             scores.TryGetValue(participant, out var totalScore);
-            scores.TryGetValue(participant, out var time);
+            times.TryGetValue(participant, out var time);
             double averageTime = time / totalCount;
             double averageWeight = totalScore / totalCount;
 

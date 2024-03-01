@@ -190,6 +190,9 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
                             var totalScore = result.Score + aResult.Score;
                             var combinedAverageTime = result.AverageTime * result.Count / totalCount +
                                                       aResult.AverageTime * result.Count / totalCount;
+                            
+                            var combinedAverageWeight = result.AverageWeight * result.Count / totalCount +
+                                                      aResult.AverageWeight * result.Count / totalCount;
 
                             var combinedStreak = new StreakResult(
                                 result.Streak.Tail,
@@ -202,7 +205,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
                                 totalScore,
                                 totalCount,
                                 combinedAverageTime,
-                                totalScore / totalCount,
+                                combinedAverageWeight,
                                 combinedStreak);
 
                             a[result.Id] = combinedResult;
@@ -220,9 +223,6 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
                 new Dictionary<string, LeagueResult>()))
         );
         var val = await store.Retrieve();
-        
-        if(val.TryGetValue("334048043638849536", out var deb)) Console.WriteLine(NodeId + " evaluated " + deb.Score);
-        //else Console.WriteLine(NodeId + " evalueated empty");
         
         return val;
     }
