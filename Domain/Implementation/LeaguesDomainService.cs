@@ -55,25 +55,25 @@ public class LeaguesDomainService(
         var scoreRanking = participants
             .Select(p =>
                 new LeagueScoreRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Score))
-            .OrderBy(item => item.Score)
+            .OrderByDescending(item => item.Score)
             .ToList();
         
         var countRanking = participants
             .Select(p =>
             new LeagueCountRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Count))
-            .OrderBy(item => item.CaughtDrops)
+            .OrderByDescending(item => item.CaughtDrops)
             .ToList();
         
         var streakRanking = participants
             .Select(p =>
             new LeagueStreakRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Streak.Streak, p.Value.Streak.Head))
-            .OrderBy(item => item.MaxStreak)
+            .OrderByDescending(item => item.MaxStreak)
             .ToList();
         
         var weightRanking = participants
             .Select(p =>
             new LeagueAverageWeightRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageScore))
-            .OrderBy(item => item.AverageWeight)
+            .OrderByDescending(item => item.AverageWeight)
             .ToList();
         
         var timeRanking = participants
