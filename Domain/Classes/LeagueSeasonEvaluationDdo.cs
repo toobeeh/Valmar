@@ -5,15 +5,15 @@ namespace Valmar.Domain.Classes;
 public record LeagueSeasonEvaluationDdo(
     int Year, 
     int Month, 
-    List<LeagueSeasonScoreRankingDdo> ScoreRanking, 
-    List<LeagueSeasonCountRankingDdo> CountRanking, 
-    List<LeagueSeasonAverageWeightRankingDdo> WeightRanking, 
-    List<LeagueSeasonAverageTimeRankingDdo> TimeRanking, 
-    List<LeagueSeasonStreakRankingDdo> StreakRanking
+    List<LeagueScoreRankingDdo> ScoreRanking, 
+    List<LeagueCountRankingDdo> CountRanking, 
+    List<LeagueAverageWeightRankingDdo> WeightRanking, 
+    List<LeagueAverageTimeRankingDdo> TimeRanking, 
+    List<LeagueStreakRankingDdo> StreakRanking
     );
 
-public record LeagueSeasonScoreRankingDdo(string Name, double Score);
-public record LeagueSeasonCountRankingDdo(string Name, int Count);
-public record LeagueSeasonAverageWeightRankingDdo(string Name, double AverageWeight);
-public record LeagueSeasonAverageTimeRankingDdo(string Name, double AverageTime);
-public record LeagueSeasonStreakRankingDdo(string Name, int MaxStreak, int CurrentStreak);
+public record LeagueScoreRankingDdo(string Name, double Score);
+public record LeagueCountRankingDdo(string Name, int CaughtDrops);
+public record LeagueAverageWeightRankingDdo(string Name, double AverageWeight);
+public record LeagueAverageTimeRankingDdo(string Name, double AverageTime);
+public record LeagueStreakRankingDdo(string Name, int MaxStreak, int CurrentStreak);

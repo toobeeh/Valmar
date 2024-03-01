@@ -90,6 +90,7 @@ public class DropChunkTreeProvider(ILogger<DropChunkTreeProvider> logger, IServi
 
     public void RepartitionTree(CachedDropChunk tree)
     {
+        logger.LogTrace("RepartitionTree(tree={tree})", tree);
         var sw = new Stopwatch();
         sw.Start();
         tree.RepartitionChunks();

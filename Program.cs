@@ -35,6 +35,10 @@ public class Program
         // Register routes and start app
         var app = builder.Build();
         
+        // initialize drops
+        var drops = app.Services.GetRequiredService<DropChunkTreeProvider>();
+        drops.RepartitionTree(drops.GetTree());
+        
         RegisterGrpcServices(app);
         app.Run();
     }

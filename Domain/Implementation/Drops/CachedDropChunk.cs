@@ -80,7 +80,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         if (end >= DropTimestampEnd) end = null;
         
         // use for consistency same store-retrieval method, although ever request shares the same resource
-        var key = $"all-have-the-same-key";
+        var key = $"{start}//{end}";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.LeagueParticipants.ContainsKey(key)) _context.LeagueParticipants[key].Dirty();
@@ -181,21 +181,21 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
             await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueResults(start, end),
                 (a, b) =>
                 {
-                    foreach (var result in a.Values)
+                    foreach (var result in b.Values)
                     {
                         // check if user is present in other chunk
-                        if (b.TryGetValue(result.Id, out var bResult))
+                        if (a.TryGetValue(result.Id, out var aResult))
                         {
-                            var totalCount = result.Count + bResult.Count;
-                            var totalScore = result.Score + bResult.Score;
+                            var totalCount = result.Count + aResult.Count;
+                            var totalScore = result.Score + aResult.Score;
                             var combinedAverageTime = result.AverageTime * result.Count / totalCount +
-                                                      bResult.AverageTime * result.Count / totalCount;
+                                                      aResult.AverageTime * result.Count / totalCount;
 
                             var combinedStreak = new StreakResult(
                                 result.Streak.Tail,
-                                bResult.Streak.Head,
-                                Math.Max(Math.Max(result.Streak.Streak, bResult.Streak.Streak),
-                                    result.Streak.Head + bResult.Streak.Tail));
+                                aResult.Streak.Head,
+                                Math.Max(Math.Max(result.Streak.Streak, aResult.Streak.Streak),
+                                    aResult.Streak.Head + result.Streak.Tail));
                                 
                             var combinedResult = new LeagueResult(
                                 result.Id,
@@ -205,21 +205,26 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
                                 totalScore / totalCount,
                                 combinedStreak);
 
-                            b[result.Id] = combinedResult;
+                            a[result.Id] = combinedResult;
                         }
                         
                         // if not, just add result of chunk
                         else
                         {
-                            b[result.Id] = result;
+                            a[result.Id] = result;
                         }
                     }
 
-                    return b;
+                    return a;
                 }, 
                 new Dictionary<string, LeagueResult>()))
         );
-        return await store.Retrieve();
+        var val = await store.Retrieve();
+        
+        if(val.TryGetValue("334048043638849536", out var deb)) Console.WriteLine(NodeId + " evaluated " + deb.Score);
+        //else Console.WriteLine(NodeId + " evalueated empty");
+        
+        return val;
     }
 
 }

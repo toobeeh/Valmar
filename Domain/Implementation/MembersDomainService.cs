@@ -6,12 +6,14 @@ using Valmar.Database;
 using Valmar.Domain.Classes;
 using Valmar.Domain.Classes.JSON;
 using Valmar.Domain.Exceptions;
+using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar.Domain.Implementation;
 
 public class MembersDomainService(
     ILogger<MembersDomainService> logger, 
     IGuildsDomainService guildsService,
+    DropChunkTreeProvider dropTree,
     PalantirContext db) : IMembersDomainService
 {
     public async Task<MemberDdo> CreateMember(long discordId, string username, bool connectTypo)
@@ -60,6 +62,11 @@ public class MembersDomainService(
         
         // parse details from json
         var memberDetails = ValmarJsonParser.TryParse<MemberJson>(member.Member1, logger);
+        
+        // get league drop stats
+        var drops = dropTree.GetTree().Chunk;
+        var value = await drops.GetLeagueWeight(memberDetails.UserId);
+        var count = await drops.GetLeagueCount(memberDetails.UserId);
 
         // build ddo
         return new MemberDdo(
@@ -72,7 +79,9 @@ public class MembersDomainService(
             Convert.ToInt64(memberDetails.UserId),
             memberDetails.UserName,
             Convert.ToInt32(memberDetails.UserLogin),
-            memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList()
+            memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList(),
+            Convert.ToInt32(Math.Round(value, MidpointRounding.ToZero)),
+            count
         );
     }
     

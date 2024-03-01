@@ -10,5 +10,7 @@ public record MemberDdo(
     long DiscordId,
     string Username,
     int Login,
-    List<int> ServerConnections
+    List<int> ServerConnections,
+    int LeagueDropValue,
+    int LeagueDropCount
     );

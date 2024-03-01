@@ -36,7 +36,7 @@ public class LeaguesDomainService(
         return new LeagueSeasonMemberEvaluationDdo(year, month, 0, 0, 0, 0, 0, 0);
     }
 
-    public async Task<LeagueSeasonEvaluationDdo> EvaluateLeagueSeason(int year, int month)
+    public async Task<LeagueSeasonEvaluationDdo> EvaluateLeagueSeason(int year, int month) // TODO fix streak calc with drops inbetween
     {
         logger.LogTrace("EvaluateLeagueSeason({year}, {month})", year, month);
         
@@ -54,31 +54,31 @@ public class LeaguesDomainService(
 
         var scoreRanking = participants
             .Select(p =>
-                new LeagueSeasonScoreRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Score))
+                new LeagueScoreRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Score))
             .OrderBy(item => item.Score)
             .ToList();
         
         var countRanking = participants
             .Select(p =>
-            new LeagueSeasonCountRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Count))
-            .OrderBy(item => item.Count)
+            new LeagueCountRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Count))
+            .OrderBy(item => item.CaughtDrops)
             .ToList();
         
         var streakRanking = participants
             .Select(p =>
-            new LeagueSeasonStreakRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Streak.Streak, p.Value.Streak.Head))
+            new LeagueStreakRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Streak.Streak, p.Value.Streak.Head))
             .OrderBy(item => item.MaxStreak)
             .ToList();
         
         var weightRanking = participants
             .Select(p =>
-            new LeagueSeasonAverageWeightRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageScore))
+            new LeagueAverageWeightRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageScore))
             .OrderBy(item => item.AverageWeight)
             .ToList();
         
         var timeRanking = participants
             .Select(p =>
-            new LeagueSeasonAverageTimeRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageTime))
+            new LeagueAverageTimeRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageTime))
             .OrderBy(item => item.AverageTime)
             .ToList();
         

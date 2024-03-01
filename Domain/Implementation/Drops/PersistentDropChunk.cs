@@ -225,14 +225,15 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         
         // get data from db
         var drops = await _db.PastDrops
-            .Where(d => d.LeagueWeight > 0
-                        && (DropIndexStart == null || d.DropId >= DropIndexStart) 
+            .Where(d => (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
                         && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)
                         && (endStamp == null ||  d.ValidFrom.CompareTo(endStamp) < 0))
             .OrderBy(d => d.ValidFrom)
             .GroupBy(d => d.DropId)
-            .Select(group => new { DropId = group.Key, Caught = group.Select(drop => new { Id = drop.CaughtLobbyPlayerId, Time = drop.LeagueWeight }) })
+            .Select(group => new { DropId = group.Key, Caught = group
+                .Where(drop => drop.LeagueWeight > 0)
+                .Select(drop => new { Id = drop.CaughtLobbyPlayerId, Time = drop.LeagueWeight }) })
             .ToListAsync();
         
         // process data
@@ -281,7 +282,7 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
                 // add to score
                 if (scores.TryGetValue(claim.Id, out var score))
                 {
-                    scores[claim.Id] = score + DropHelper.Weight(claim.Time) * 10; // score is 10* weight
+                    scores[claim.Id] = score + DropHelper.Weight(claim.Time);
                 }
                 else scores[claim.Id] = DropHelper.Weight(claim.Time);
                 
@@ -300,7 +301,6 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
                 else times[claim.Id] = claim.Time;
             }
             
-
             // reset to contain only active streaks
             streakHeads = continuesHeads;
         }
@@ -315,12 +315,12 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
             double averageWeight = totalScore / totalCount;
 
             streakTails.TryGetValue(participant, out var tail);
-            streakMaxes.TryGetValue(participant, out var head);
-            streakHeads.TryGetValue(participant, out var max);
+            streakMaxes.TryGetValue(participant, out var max);
+            streakHeads.TryGetValue(participant, out var head);
 
             var streak = new StreakResult(tail, head, max);
 
-            return new LeagueResult(participant, totalScore, totalCount, averageTime, averageWeight, streak);
+            return new LeagueResult(participant, totalScore * 10, totalCount, averageTime, averageWeight, streak); // dropweight = 10*score
         });
 
         var results = resultList.ToDictionary(item => item.Id);

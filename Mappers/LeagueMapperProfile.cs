@@ -9,11 +9,11 @@ public class LeagueMapperProfile : Profile
     public LeagueMapperProfile()
     {
         CreateMap<LeagueSeasonEvaluationDdo, LeagueSeasonEvaluationReply>();
-        CreateMap<LeagueSeasonScoreRankingDdo, LeagueScoreRankingReply>();
-        CreateMap<LeagueSeasonCountRankingDdo, LeagueCountRankingReply>();
-        CreateMap<LeagueSeasonAverageWeightRankingDdo, LeagueAverageWeightRankingReply>();
-        CreateMap<LeagueSeasonAverageTimeRankingDdo, LeagueAverageTimeRankingReply>();
-        CreateMap<LeagueSeasonStreakRankingDdo, LeagueStreakRankingReply>();
+        CreateMap<LeagueScoreRankingDdo, LeagueScoreRankingReply>();
+        CreateMap<LeagueCountRankingDdo, LeagueCountRankingReply>();
+        CreateMap<LeagueAverageWeightRankingDdo, LeagueAverageWeightRankingReply>();
+        CreateMap<LeagueAverageTimeRankingDdo, LeagueAverageTimeRankingReply>();
+        CreateMap<LeagueStreakRankingDdo, LeagueStreakRankingReply>();
         
         CreateMap<LeagueSeasonMemberEvaluationDdo, LeagueSeasonMemberEvaluationReply>();
     }
