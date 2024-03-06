@@ -11,6 +11,14 @@ public class AdminGrpcService(
     IMapper mapper,
     IAdminDomainService adminService) : Admin.AdminBase 
 {
+    public override async Task<Empty> UpdateMemberFlags(UpdateMemberFlagsRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("UpdateMemberFlags(request={request})", request);
+
+        await adminService.SetPermissionFlag(request.MemberIds, request.FlagId, request.State, request.InvertOthers);
+        return new Empty();
+    }
+
     public override async Task<Empty> ReevaluateDropChunks(Empty request, ServerCallContext context)
     {
         logger.LogTrace($"ReevaluateDropChunks(empty)");

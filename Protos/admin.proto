@@ -10,4 +10,15 @@ service Admin {
   
   // Reevaluates the last chunk of the drop cache
   rpc ReevaluateDropChunks (google.protobuf.Empty) returns (google.protobuf.Empty);
+  
+  // Update the flags of members
+  rpc UpdateMemberFlags (UpdateMemberFlagsRequest) returns (google.protobuf.Empty);
+}
+
+// Request to update the flags of members
+message UpdateMemberFlagsRequest {
+  repeated int64 memberIds = 1;
+  bool invertOthers = 2;
+  bool state =  3;
+  int32 flagId = 4;
 }

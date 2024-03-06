@@ -2,6 +2,7 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Valmar.Domain;
+using Valmar.Domain.Exceptions;
 using Valmar.Domain.Implementation;
 using Valmar.Grpc.Utils;
 
@@ -41,6 +42,14 @@ public class MembersGrpcService(
         logger.LogTrace("GetMemberByDiscordId(request={request})", request);
 
         var member = await membersService.GetMemberByDiscordId(request.Id);
+        return mapper.Map<MemberReply>(member);
+    }
+
+    public override async Task<MemberReply> GetPatronizedOfMember(IdentifyMemberByDiscordIdRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("GetPatronizedOfMember(request={request})", request);
+
+        var member = await membersService.GetPatronizedMemberOfPatronizer(request.Id);
         return mapper.Map<MemberReply>(member);
     }
 

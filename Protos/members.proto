@@ -19,6 +19,9 @@ service Members {
   // Gets a member by its connected discord account id
   rpc GetMemberByDiscordId (IdentifyMemberByDiscordIdRequest) returns (MemberReply);
 
+  // Gets the patronized member of a given member (id)
+  rpc GetPatronizedOfMember (IdentifyMemberByDiscordIdRequest) returns (MemberReply);
+
   // Finds members matching a query
   rpc SearchMember (SearchMemberRequest) returns (stream MemberSearchReply);
   

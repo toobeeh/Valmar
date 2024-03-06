@@ -67,6 +67,9 @@ public class MembersDomainService(
         var drops = dropTree.GetTree().Chunk;
         var value = await drops.GetLeagueWeight(memberDetails.UserId);
         var count = await drops.GetLeagueCount(memberDetails.UserId);
+        
+        // parse patronized details
+        long? patronizedId = member.Patronize is { } patronizeString ? Convert.ToInt64(patronizeString.Split("#")[0]) : null;
 
         // build ddo
         return new MemberDdo(
@@ -81,8 +84,22 @@ public class MembersDomainService(
             Convert.ToInt32(memberDetails.UserLogin),
             memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList(),
             Convert.ToInt32(Math.Round(value, MidpointRounding.ToZero)),
-            count
+            count,
+            patronizedId
         );
+    }
+    
+    public async Task<MemberDdo> GetPatronizedMemberOfPatronizer(long patronizerId)
+    {
+        logger.LogTrace("GetPatronizedMemberOfPatronizer(patronizerId={patronizerId})", patronizerId);
+        
+        var patronizer = await GetMemberByDiscordId(patronizerId);
+        if (patronizer.PatronizedDiscordId is { } patronizedId)
+        {
+            var patronized = await GetMemberByDiscordId(patronizedId);
+            return patronized;
+        }
+        throw new EntityNotFoundException("User has no member patronized");
     }
     
     public async Task<List<MemberJson>> GetMemberInfosFromDiscordIds(List<long> ids)

@@ -12,5 +12,6 @@ public record MemberDdo(
     int Login,
     List<int> ServerConnections,
     int LeagueDropValue,
-    int LeagueDropCount
+    int LeagueDropCount,
+    long? PatronizedDiscordId
     );
