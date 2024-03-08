@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Valmar";
+package admin;
+
+// Service definition for drop and management actions
+service Drops {
+  
+  // Schedule a new drop to be dispatched
+  rpc ScheduleDrop (ScheduleDropRequest) returns (google.protobuf.Empty);
+
+  // Get the current boost factor for drop delays
+  rpc GetCurrentBoostFactor (google.protobuf.Empty) returns (CurrentBoostFactorReply);
+
+  // Calculate min and max drop delay bounds for given online count and boost factor
+  rpc CalculateDropDelayBounds (CalculateDelayRequest) returns (DropDelayBoundsReply);
+}
+
+// request to schedule a new drop
+message ScheduleDropRequest {
+  int32 delaySeconds = 1;
+  google.protobuf.Int32Value eventDropId = 2;
+}
+
+// message to calculate the delay bounds for a drop
+message CalculateDelayRequest {
+  int32 onlinePlayerCount = 1;
+  double boostFactor = 2;
+}
+
+// response containing the min and max delay bounds for a drop delay
+message DropDelayBoundsReply {
+  int32 minDelaySeconds = 1;
+  int32 maxDelaySeconds = 2;
+}
+
+// request to get the current boost factor
+message CurrentBoostFactorReply {
+  double boost = 1;
+}

@@ -56,8 +56,6 @@ message MemberReply {
   string username = 8;
   int32 login = 9;
   repeated int32 serverConnections = 10;
-  int32 leagueDropValue = 11;
-  int32 leagueDropCount = 12;
 }
 
 // Reply containing the accesstoken of a member

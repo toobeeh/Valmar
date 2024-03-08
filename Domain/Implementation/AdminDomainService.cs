@@ -32,7 +32,7 @@ public class AdminDomainService(
         
         foreach (var member in positives)
         {
-            var newFlag = SetFlag(member.Flag, flag, state);
+            var newFlag = RecalculateFlag(member.Flag, flag, state);
             if (newFlag == member.Flag) continue;
             member.Flag = newFlag;
             updates.Add(member);
@@ -40,7 +40,7 @@ public class AdminDomainService(
         
         foreach (var member in negatives)
         {
-            var newFlag = SetFlag(member.Flag, flag, !state);
+            var newFlag = RecalculateFlag(member.Flag, flag, !state);
             if (newFlag == member.Flag) continue;
             member.Flag = newFlag;
             updates.Add(member);
@@ -51,7 +51,7 @@ public class AdminDomainService(
         await db.SaveChangesAsync();
     }
     
-    private int SetFlag(int flag, int flagIndex, bool state)
+    private static int RecalculateFlag(int flag, int flagIndex, bool state)
     {
         return state ? flag | (1 << flagIndex) : flag & ~(1 << flagIndex);
     }

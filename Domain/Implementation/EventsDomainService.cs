@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Valmar.Database;
 using Valmar.Domain.Exceptions;
+using Valmar.Util;
 
 namespace Valmar.Domain.Implementation;
 
@@ -19,6 +20,23 @@ public class EventsDomainService(
         }
         
         return evt;
+    }
+    
+    public async Task<EventEntity> GetCurrentEvent()
+    {
+        logger.LogTrace("GetCurrentEvent()");
+        
+        var events = await db.Events.ToListAsync();
+        var active = events
+            .FirstOrDefault(evt => EventHelper.ParseEventTimestamp(evt.ValidFrom) <= DateTimeOffset.Now &&
+                                   EventHelper.ParseEventTimestamp(evt.ValidFrom).AddDays(evt.DayLength) >= DateTimeOffset.Now);
+        
+        if (active is null)
+        {
+            throw new EntityNotFoundException($"No event is currently active.");
+        }
+        
+        return active;
     }
 
     public async Task<List<EventEntity>> GetAllEvents()

@@ -10,4 +10,5 @@ public interface ILobbiesDomainService
     Task<SkribblLobbyReportJson> GetSkribblLobbyDetails(string id);
     Task<List<PalantirLobbyPlayerDdo>> GetPalantirLobbyPlayers(PalantirLobbyJson palantirLobby, SkribblLobbyReportJson skribblLobby);
     Task<List<PastDropEntity>> GetLobbyDrops(string key);
+    Task<List<OnlineMemberDdo>> GetOnlineMembers();
 }

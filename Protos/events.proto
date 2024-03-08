@@ -11,6 +11,9 @@ service Events {
   // Gets all events
   rpc GetAllEvents (google.protobuf.Empty) returns (stream EventReply);
   
+  // Gets the currently active event
+  rpc GetCurrentEvent (google.protobuf.Empty) returns (EventReply);
+  
   // Gets an event by its id
   rpc GetEventById (GetEventRequest) returns (EventReply);
   

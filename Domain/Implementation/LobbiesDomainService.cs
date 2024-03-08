@@ -6,13 +6,33 @@ using Valmar.Database;
 using Valmar.Domain.Classes;
 using Valmar.Domain.Classes.JSON;
 using Valmar.Domain.Exceptions;
+using Valmar.Util;
 
 namespace Valmar.Domain.Implementation;
 
 public class LobbiesDomainService(
     ILogger<LobbiesDomainService> logger, 
+    IMembersDomainService membersService,
     PalantirContext db) : ILobbiesDomainService
 {
+    public async Task<List<OnlineMemberDdo>> GetOnlineMembers()
+    {
+        logger.LogTrace("GetOnlineMembers()");
+
+        // get online players from status table
+        var statuses = await db.Statuses.Select(status => status.Status1).ToListAsync();
+        var onlinePlayerLogins = statuses
+            .ConvertAll(status => ValmarJsonParser.TryParse<MemberStatusJson>(status, logger))
+            .Where(status => status.Status == "playing")
+            .Select(status => Convert.ToInt32(status.PlayerMember.UserLogin))
+            .Distinct();
+
+        var onlinePlayerDetails = onlinePlayerLogins.Select(login => membersService.GetMemberByLogin(login).Result);
+
+        return onlinePlayerDetails
+            .Select(member => new OnlineMemberDdo(member.Login, member.Bubbles, member.PatronEmoji)).ToList();
+    }
+    
     public async Task<List<PalantirLobbyJson>> GetPalantirLobbies()
     {
         logger.LogTrace("GetPalantirLobbies()");

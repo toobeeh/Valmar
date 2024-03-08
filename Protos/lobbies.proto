@@ -14,6 +14,9 @@ service Lobbies {
 
   // Gets an award by its id
   rpc GetLobbyDropClaims (GetLobbyDropClaimsRequest) returns (stream DropLogReply);
+  
+  // Gets all currently playing member's details
+  rpc GetOnlinePlayers (google.protobuf.Empty) returns (stream OnlineMemberReply);
 }
 
 // Container for palantir lobby details, containing palantir relevant details
@@ -67,4 +70,10 @@ message DropLogReply {
   string validFrom = 4;
   google.protobuf.Int32Value eventDropId = 5;
   google.protobuf.Int32Value leagueTime = 6;
+}
+
+message OnlineMemberReply {
+  int32 login = 1;
+  int32 bubbles = 2;
+  google.protobuf.StringValue patronEmoji = 3;
 }

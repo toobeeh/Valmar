@@ -42,4 +42,12 @@ public class LobbiesGrpcService(
         var drops = await lobbiesService.GetLobbyDrops(request.LobbyKey);
         await responseStream.WriteAllMappedAsync(drops, mapper.Map<DropLogReply>);
     }
+
+    public override async Task GetOnlinePlayers(Empty request, IServerStreamWriter<OnlineMemberReply> responseStream, ServerCallContext context)
+    {
+        logger.LogTrace("GetOnlinePlayers(empty)");
+
+        var members = await lobbiesService.GetOnlineMembers();
+        await responseStream.WriteAllMappedAsync(members, mapper.Map<OnlineMemberReply>);
+    }
 }

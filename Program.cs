@@ -55,6 +55,7 @@ public class Program
         services.AddScoped<IMembersDomainService, MembersDomainService>();
         services.AddScoped<IAdminDomainService, AdminDomainService>();
         services.AddScoped<ILeaguesDomainService, LeaguesDomainService>();
+        services.AddScoped<IDropsDomainService, DropsDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -69,6 +70,7 @@ public class Program
         app.MapGrpcService<LobbiesGrpcService>();
         app.MapGrpcService<LeaguesGrpcService>();
         app.MapGrpcService<AdminGrpcService>();
+        app.MapGrpcService<DropsGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)

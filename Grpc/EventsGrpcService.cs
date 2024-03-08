@@ -21,6 +21,14 @@ public class EventsGrpcService(
         }
     }
 
+    public override async Task<EventReply> GetCurrentEvent(Empty request, ServerCallContext context)
+    {
+        logger.LogTrace("GetCurrentEvent(empty)");
+        
+        var eventEntity = await eventsService.GetCurrentEvent();
+        return mapper.Map<EventReply>(eventEntity);
+    }
+
     public override async Task<EventReply> GetEventById(GetEventRequest request, ServerCallContext context)
     {
         logger.LogTrace("GetEventById(request={request})", request);

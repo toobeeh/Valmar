@@ -6,6 +6,7 @@ using Valmar.Database;
 using Valmar.Domain.Classes;
 using Valmar.Domain.Classes.JSON;
 using Valmar.Domain.Exceptions;
+using Valmar.Util;
 using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar.Domain.Implementation;
@@ -64,9 +65,9 @@ public class MembersDomainService(
         var memberDetails = ValmarJsonParser.TryParse<MemberJson>(member.Member1, logger);
         
         // get league drop stats
-        var drops = dropTree.GetTree().Chunk;
-        var value = await drops.GetLeagueWeight(memberDetails.UserId);
-        var count = await drops.GetLeagueCount(memberDetails.UserId);
+        //var drops = dropTree.GetTree().Chunk;
+        //var value = await drops.GetLeagueWeight(memberDetails.UserId);
+        //var count = await drops.GetLeagueCount(memberDetails.UserId);
         
         // parse patronized details
         long? patronizedId = member.Patronize is { } patronizeString ? Convert.ToInt64(patronizeString.Split("#")[0]) : null;
@@ -83,9 +84,8 @@ public class MembersDomainService(
             memberDetails.UserName,
             Convert.ToInt32(memberDetails.UserLogin),
             memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList(),
-            Convert.ToInt32(Math.Round(value, MidpointRounding.ToZero)),
-            count,
-            patronizedId
+            patronizedId,
+            FlagHelper.HasFlag(member.Flag, FlagHelper.Patron) ? member.Emoji : null
         );
     }
     

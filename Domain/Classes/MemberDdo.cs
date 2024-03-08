@@ -11,7 +11,6 @@ public record MemberDdo(
     string Username,
     int Login,
     List<int> ServerConnections,
-    int LeagueDropValue,
-    int LeagueDropCount,
-    long? PatronizedDiscordId
+    long? PatronizedDiscordId,
+    string? PatronEmoji
     );

@@ -31,6 +31,9 @@ public class LobbyMapperProfile : Profile
 
         // mappings for drops
         CreateMap<PastDropEntity, DropLogReply>().ConvertUsing(drop => MapDropEntity(drop));
+        
+        // mappings for onlinemembers
+        CreateMap<OnlineMemberDdo, OnlineMemberReply>();
     }
 
     private DropLogReply MapDropEntity(PastDropEntity drop)
