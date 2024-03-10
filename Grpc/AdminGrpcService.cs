@@ -26,6 +26,13 @@ public class AdminGrpcService(
         return new Empty();
     }
 
+    public override async Task<Empty> ClearVolatileData(Empty request, ServerCallContext context)
+    {
+        logger.LogTrace("ClearVolatileData(empty)");
+        await adminService.ClearVolatileData();
+        return new Empty();
+    }
+
     public override async Task<Empty> ReevaluateDropChunks(Empty request, ServerCallContext context)
     {
         logger.LogTrace("ReevaluateDropChunks(empty)");

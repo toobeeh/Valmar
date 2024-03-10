@@ -42,6 +42,41 @@ public class AdminDomainService(
         await db.BubbleTraces.AddRangeAsync(traces);
         await db.SaveChangesAsync();
     }
+    
+    public async Task ClearVolatileData()
+    {
+        logger.LogTrace("ClearVolatileData()");
+
+        var now = DateTimeOffset.UtcNow;
+
+        var outdatedReports = db.Reports
+            .Where(report =>
+                (DateTimeOffset)(object)report.Date < now.AddSeconds(-30));
+        var outdatedStatus = db.Statuses
+            .Where(status =>
+                (DateTimeOffset)(object)status.Date < now.AddSeconds(-10));
+        var outdatedSprites = db.OnlineSprites
+            .Where(sprite =>
+                (DateTimeOffset)(object)sprite.Date < now.AddSeconds(-30));
+        var outdatedItems = db.OnlineItems
+            .Where(item =>
+                item.ItemType != "award" && item.Date < now.AddSeconds(-30).ToUnixTimeSeconds() || 
+                item.ItemType == "award" && item.Date < now.AddDays(-2).ToUnixTimeSeconds());
+        var outdatedLobbies = db.Lobbies
+            .Where(lobby =>
+                (long)(object)lobby.LobbyId < now.AddDays(-1).ToUnixTimeMilliseconds() &&
+                !db.Statuses.Any(status => status.Status1.Contains(lobby.LobbyId)));         // where no status references the lobby
+        
+        // TODO ensure that there are no duplicate lobby keys (same key, other ID - fix in future by making key the PK)
+        
+        db.Reports.RemoveRange(outdatedReports);
+        db.Statuses.RemoveRange(outdatedStatus);
+        db.OnlineSprites.RemoveRange(outdatedSprites);
+        db.OnlineItems.RemoveRange(outdatedItems);
+        db.Lobbies.RemoveRange(outdatedLobbies);
+        
+        await db.SaveChangesAsync();
+    }
 
     public async Task SetPermissionFlag(IList<long> userIds, int flag, bool state, bool toggleOthers)
     {

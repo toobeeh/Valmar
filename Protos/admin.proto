@@ -17,6 +17,9 @@ service Admin {
   
   // Fetch current member bubble cound and save as bubble traces
   rpc CreateBubbleTraces (google.protobuf.Empty) returns (google.protobuf.Empty);
+
+  // Clear volatile data from tables, like sprites, lobbies and online status
+  rpc ClearVolatileData (google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
 // Request to update the flags of members
