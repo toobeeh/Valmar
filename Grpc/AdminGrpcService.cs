@@ -19,9 +19,16 @@ public class AdminGrpcService(
         return new Empty();
     }
 
+    public override async Task<Empty> CreateBubbleTraces(Empty request, ServerCallContext context)
+    {
+        logger.LogTrace("CreateBubbleTraces(empty)");
+        await adminService.CreateBubbleTraces();
+        return new Empty();
+    }
+
     public override async Task<Empty> ReevaluateDropChunks(Empty request, ServerCallContext context)
     {
-        logger.LogTrace($"ReevaluateDropChunks(empty)");
+        logger.LogTrace("ReevaluateDropChunks(empty)");
         await adminService.ReevaluateDropChunks();
         return new Empty();
     }

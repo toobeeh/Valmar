@@ -14,6 +14,9 @@ service Admin {
   
   // Update the flags of members
   rpc UpdateMemberFlags (UpdateMemberFlagsRequest) returns (google.protobuf.Empty);
+  
+  // Fetch current member bubble cound and save as bubble traces
+  rpc CreateBubbleTraces (google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
 // Request to update the flags of members

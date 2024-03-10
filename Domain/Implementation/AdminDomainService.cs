@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Valmar.Database;
-using Valmar.Domain.Exceptions;
+using Valmar.Util;
 using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar.Domain.Implementation;
@@ -18,6 +18,29 @@ public class AdminDomainService(
 
         var tree = dropChunks.GetTree();
         dropChunks.RepartitionTree(tree);
+    }
+    
+    public async Task CreateBubbleTraces()
+    {
+        logger.LogTrace("CreateBubbleTraces()");
+
+        var memberStats = await db.Members.Select(member => new { member.Bubbles, member.Login }).ToListAsync();
+        var date = BubbleHelper.FormatTraceTimestamp(DateTimeOffset.UtcNow);
+        
+        db.BubbleTraces.RemoveRange(db.BubbleTraces.Where(trace => trace.Date == date));
+        await db.SaveChangesAsync();
+        var maxId = await db.BubbleTraces.Select(trace => trace.Id).MaxAsync();
+        
+        var traces = memberStats.Select(member => new BubbleTraceEntity
+        {
+            Login = member.Login,
+            Date = date,
+            Bubbles = member.Bubbles,
+            Id = ++maxId
+        }).ToList();
+
+        await db.BubbleTraces.AddRangeAsync(traces);
+        await db.SaveChangesAsync();
     }
 
     public async Task SetPermissionFlag(IList<long> userIds, int flag, bool state, bool toggleOthers)
