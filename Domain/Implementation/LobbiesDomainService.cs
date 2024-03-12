@@ -21,16 +21,25 @@ public class LobbiesDomainService(
 
         // get online players from status table
         var statuses = await db.Statuses.Select(status => status.Status1).ToListAsync();
-        var onlinePlayerLogins = statuses
+        var onlineMembers = statuses
             .ConvertAll(status => ValmarJsonParser.TryParse<MemberStatusJson>(status, logger))
             .Where(status => status.Status == "playing")
-            .Select(status => Convert.ToInt32(status.PlayerMember.UserLogin))
-            .Distinct();
+            .GroupBy(status => status.PlayerMember.UserLogin)
+            .Select(login => new
+            {
+                Member = membersService.GetMemberByLogin(Convert.ToInt32(login.Key)).Result, 
+                Lobbies = login.Select(status => status.LobbyId).ToList()
+            })
+            .ToList();
 
-        var onlinePlayerDetails = onlinePlayerLogins.Select(login => membersService.GetMemberByLogin(login).Result);
+        var lobbyIds = onlineMembers.Select(member => member.Lobbies).SelectMany(m => m);
+        var lobbiesDict = (await db.Lobbies
+            .Where(lobby => lobbyIds.Contains(lobby.LobbyId))
+            .ToListAsync())
+            .ToDictionary(lobby => lobby.LobbyId, lobby => ValmarJsonParser.TryParse<PalantirLobbyJson>(lobby.Lobby1, logger));
 
-        return onlinePlayerDetails
-            .Select(member => new OnlineMemberDdo(member.Login, member.Bubbles, member.PatronEmoji)).ToList();
+        return onlineMembers
+            .Select(member => new OnlineMemberDdo(member.Member.Login, member.Member.Bubbles, member.Lobbies.Select(lobby => lobbiesDict[lobby]).ToList(),  member.Member.PatronEmoji)).ToList();
     }
     
     public async Task<List<PalantirLobbyJson>> GetPalantirLobbies()

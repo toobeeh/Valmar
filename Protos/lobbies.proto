@@ -76,4 +76,5 @@ message OnlineMemberReply {
   int32 login = 1;
   int32 bubbles = 2;
   google.protobuf.StringValue patronEmoji = 3;
+  repeated PalantirLobbyDetails joinedLobbies = 4;
 }

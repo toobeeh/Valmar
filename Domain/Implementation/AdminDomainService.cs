@@ -19,7 +19,21 @@ public class AdminDomainService(
         var tree = dropChunks.GetTree();
         dropChunks.RepartitionTree(tree);
     }
-    
+
+    public async Task IncrementMemberBubbles(IList<int> userLogins)
+    {
+        logger.LogTrace("IncrementMemberBubbles(userIds={userLogins})", userLogins);
+
+        var members = db.Members.Where(member => userLogins.Contains(member.Login));
+        foreach (var memberEntity in members)
+        {
+            memberEntity.Bubbles++;
+        }
+
+        db.UpdateRange(members);
+        await db.SaveChangesAsync();
+    }
+
     public async Task CreateBubbleTraces()
     {
         logger.LogTrace("CreateBubbleTraces()");

@@ -33,6 +33,13 @@ public class AdminGrpcService(
         return new Empty();
     }
 
+    public override async Task<Empty> IncrementMemberBubbles(IncrementMemberBubblesRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("IncrementMemberBubbles(request={request})", request);
+        await adminService.IncrementMemberBubbles(request.MemberLogins);
+        return new Empty();
+    }
+
     public override async Task<Empty> ReevaluateDropChunks(Empty request, ServerCallContext context)
     {
         logger.LogTrace("ReevaluateDropChunks(empty)");

@@ -7,4 +7,5 @@ public interface IAdminDomainService
     Task SetPermissionFlag(IList<long> userIds, int flag, bool state, bool toggleOthers);
     Task CreateBubbleTraces();
     Task ClearVolatileData();
+    Task IncrementMemberBubbles(IList<int> userLogins);
 }
