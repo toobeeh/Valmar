@@ -333,8 +333,14 @@ public class MembersDomainService(
         }
 
         var parsedMember = ValmarJsonParser.TryParse<MemberJson>(member.Member1, logger);
-        var newGuilds = parsedMember.Guilds.Where(guild => guild.ObserveToken != serverToken.ToString())
+        var newGuilds = parsedMember.Guilds.Where(guild => guild.ObserveToken == serverToken.ToString("00000000") || guild.ObserveToken != serverToken.ToString())
             .ToArray();
+        
+        if(newGuilds.Length == parsedMember.Guilds.Length)
+        {
+            throw new EntityNotFoundException($"Member {login} is not connected to guild {serverToken}");
+        }
+        
         var newMember = parsedMember with { Guilds = newGuilds };
         var newMemberString = JsonSerializer.Serialize(newMember);
         member.Member1 = newMemberString;
