@@ -6,6 +6,14 @@ import "google/protobuf/wrappers.proto";
 option csharp_namespace = "Valmar";
 package admin;
 
+enum OnlineItemType {
+  Sprite = 0;
+  ColorShift = 1;
+  Scene = 2;
+  Award = 3;
+  Rewardee = 5;
+}
+
 // Service definition for administration and management actions
 service Admin {
   
@@ -23,6 +31,9 @@ service Admin {
 
   // Increments the bubble count of a range of members
   rpc IncrementMemberBubbles (IncrementMemberBubblesRequest) returns (google.protobuf.Empty);
+  
+  // Writes a set of new onlineitems to the database
+  rpc SetOnlineItems (SetOnlineItemsRequest) returns (google.protobuf.Empty);
 }
 
 // Request to update the flags of members
@@ -31,6 +42,18 @@ message UpdateMemberFlagsRequest {
   bool invertOthers = 2;
   bool state =  3;
   int32 flagId = 4;
+}
+
+message SetOnlineItemsRequest {
+  repeated OnlineItemMessage items = 1;
+}
+
+message OnlineItemMessage {
+  OnlineItemType itemType = 1;
+  int32 slot = 2;
+  int32 itemId = 3;
+  string lobbyKey = 4;
+  int32 lobbyPlayerId = 5;
 }
 
 // Request to increment the bubble count of a range of members

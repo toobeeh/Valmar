@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Valmar.Database;
+using Valmar.Domain.Classes.Param;
 using Valmar.Util;
 using Valmar.Util.NChunkTree.Drops;
 
@@ -15,9 +16,33 @@ public class AdminDomainService(
     public async Task ReevaluateDropChunks()
     {
         logger.LogTrace("ReevaluateDropChunks()");
-
         var tree = dropChunks.GetTree();
         dropChunks.RepartitionTree(tree);
+    }
+    
+    public async Task WriteOnlineItems(List<OnlineItemDdo> items)
+    {
+        logger.LogTrace("WriteOnlineItems(items={items})", items);
+
+        var date = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        var entities = items.Select(item => new OnlineItemEntity
+        {
+            Date = Convert.ToInt32(date),
+            ItemType = item.ItemType,
+            Slot = item.Slot,
+            ItemId = item.ItemId,
+            LobbyKey = item.LobbyKey,
+            LobbyPlayerId = item.LobbyPlayerId
+        });
+        
+        var duplicates = (await db.OnlineItems.ToListAsync())
+            .Where(item => items.Any(i => 
+                i.ItemType == item.ItemType && i.Slot == item.Slot && i.LobbyKey == item.LobbyKey && i.LobbyPlayerId == item.LobbyPlayerId));
+        db.OnlineItems.RemoveRange(duplicates);
+        await db.SaveChangesAsync();
+        
+        await db.OnlineItems.AddRangeAsync(entities);
+        await db.SaveChangesAsync();
     }
 
     public async Task IncrementMemberBubbles(IList<int> userLogins)

@@ -2,6 +2,7 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Valmar.Domain;
+using Valmar.Domain.Classes.Param;
 using Valmar.Domain.Implementation;
 
 namespace Valmar.Grpc;
@@ -37,6 +38,14 @@ public class AdminGrpcService(
     {
         logger.LogTrace("IncrementMemberBubbles(request={request})", request);
         await adminService.IncrementMemberBubbles(request.MemberLogins);
+        return new Empty();
+    }
+
+    public override async Task<Empty> SetOnlineItems(SetOnlineItemsRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("SetOnlineItems(request={request})", request);
+        await adminService.WriteOnlineItems(
+            request.Items.Select(mapper.Map<OnlineItemMessage, OnlineItemDdo>).ToList()); 
         return new Empty();
     }
 

@@ -33,9 +33,9 @@ public class LobbyMapperProfile : Profile
         CreateMap<PastDropEntity, DropLogReply>().ConvertUsing(drop => MapDropEntity(drop));
         
         // mappings for onlinemembers
-        CreateMap<OnlineMemberDdo, OnlineMemberReply>()
-            .ForMember(dest => dest.JoinedLobbies,
-                opt => opt.MapFrom(src => src.JoinedLobbies));
+        CreateMap<OnlineMemberDdo, OnlineMemberReply>();
+        CreateMap<JoinedLobbyDdo, JoinedLobbyMessage>();
+        CreateMap<MemberSpriteSlotDdo, MemberSpriteSlotMessage>();
     }
 
     private DropLogReply MapDropEntity(PastDropEntity drop)

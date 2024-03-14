@@ -1,3 +1,5 @@
+using Valmar.Domain.Classes.Param;
+
 namespace Valmar.Domain;
 
 public interface IAdminDomainService
@@ -8,4 +10,5 @@ public interface IAdminDomainService
     Task CreateBubbleTraces();
     Task ClearVolatileData();
     Task IncrementMemberBubbles(IList<int> userLogins);
+    Task WriteOnlineItems(List<OnlineItemDdo> items);
 }

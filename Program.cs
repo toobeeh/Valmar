@@ -83,6 +83,7 @@ public class Program
             typeof(ThemeMapperProfile),
             typeof(GuildMapperProfile),
             typeof(MemberMapperProfile),
+            typeof(AdminMapperProfile),
             typeof(AwardMapperProfile));
     }
     
