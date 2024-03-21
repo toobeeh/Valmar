@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Valmar.Database;
 using Valmar.Domain.Classes;
-using Valmar.Domain.Classes.Param;
 using Valmar.Domain.Exceptions;
 using Valmar.Util;
 using Valmar.Util.NChunkTree.Drops;
@@ -13,7 +12,6 @@ public class InventoryDomainService(
     PalantirContext db,
     IMembersDomainService membersService,
     ISpritesDomainService spritesService,
-    IEventsDomainService eventsService,
     DropChunkTreeProvider dropChunks) : IInventoryDomainService
 {
     public async Task<List<MemberSpriteSlotDdo>> GetMemberSpriteInventory(int login)
@@ -25,14 +23,11 @@ public class InventoryDomainService(
         return inv;
     }
     
-    public async Task<BubbleCreditDdo> GetBubbleCredit(int login)
+    public async Task<BubbleCreditDdo> GetBubbleCredit(int login, DropCreditDdo dropCredit)
     {
         logger.LogTrace("GetBubbleCredit(login={login})", login);
         
         var member = await membersService.GetMemberByLogin(login);
-        
-        var chunk = dropChunks.GetTree().Chunk;
-        var leagueDrops = (int)Math.Floor(await chunk.GetLeagueWeight(member.DiscordId.ToString()));
 
         var spriteInv = InventoryHelper.ParseSpriteInventory(member.Sprites, member.RainbowSprites).Select(inv => inv.SpriteId).ToArray();
         var invSum = await db.Sprites.Where(sprite => sprite.EventDropId == 0 && spriteInv.Contains(sprite.Id))
@@ -42,10 +37,23 @@ public class InventoryDomainService(
         var nonEventScenes = await db.Scenes.Where(scene => scene.EventId == 0 && !scene.Exclusive && sceneInv.Contains(scene.Id)).ToListAsync(); 
         var sceneSum = nonEventScenes.Select((scene, index) => SceneHelper.GetScenePrice(index)).Sum();
 
-        var totalBubbles = member.Bubbles + (member.Drops + leagueDrops) * 50;
+        var totalBubbles = member.Bubbles + dropCredit.TotalCredit * 50;
         var availableBubbles = totalBubbles - invSum - sceneSum;
         
         return new BubbleCreditDdo(totalBubbles, availableBubbles, member.Bubbles);
+    }
+    
+    public async Task<DropCreditDdo> GetDropCredit(int login)
+    {
+        logger.LogTrace("GetDropCredit(login={login})", login);
+        
+        var member = await membersService.GetMemberByLogin(login);
+        
+        var chunk = dropChunks.GetTree().Chunk;
+        var leagueDrops = (int)Math.Floor(await chunk.GetLeagueWeight(member.DiscordId.ToString()));
+        var leagueCount = await chunk.GetLeagueCount(member.DiscordId.ToString());
+        
+        return new DropCreditDdo(member.Drops + leagueDrops, member.Drops, leagueCount);
     }
     
     public async Task<List<EventCreditDdo>> GetEventCredit(int login, List<int> eventDropIds)
@@ -98,7 +106,8 @@ public class InventoryDomainService(
         }
         else
         {
-            var credit = await GetBubbleCredit(login);
+            var dropCredit = await GetDropCredit(login);
+            var credit = await GetBubbleCredit(login, dropCredit);
             if(credit.AvailableCredit < sprite.Cost) throw new UserOperationException($"The sprite price ({sprite.Cost}) exceeds the available bubble credit ({credit.AvailableCredit})");
         }
         
@@ -106,6 +115,63 @@ public class InventoryDomainService(
         inv.Add(new MemberSpriteSlotDdo(0, sprite.Id, null));
         member.Sprites = InventoryHelper.SerializeSpriteInventory(inv);
         db.Members.Update(member);
+        await db.SaveChangesAsync();
+    }
+
+    public async Task<int> GetSpriteSlotCount(int login)
+    {
+        logger.LogTrace("GetSpriteSlotCount(login={login})", login);
+
+        var member = await membersService.GetMemberByLogin(login);
+        var isPatron = FlagHelper.HasFlag(member.Flags, FlagHelper.Patron);
+        var dropCredit = await GetDropCredit(login);
+        
+        var slots = 1 + (isPatron ? 1 : 0) + dropCredit.TotalCredit / 1000;
+        return slots;
+    }
+
+    public async Task UseSpriteCombo(int login, List<int> combo, bool clearOther = false)
+    {
+        logger.LogTrace("UseSpriteCombo(login={login}, combo={combo}, clearOther={clearOther})", login, combo, clearOther);
+        
+        var member = await membersService.GetMemberByLogin(login);
+        var inv = InventoryHelper.ParseSpriteInventory(member.Sprites, member.RainbowSprites);
+        
+        // check if all sprites are in the inventory
+        if (combo.Any(id => inv.All(slot => slot.SpriteId != id)))
+        {
+            throw new UserOperationException($"The user does not own all sprites from the combo {combo}");
+        }
+        
+        // check if all sprites are unique
+        if (combo.Distinct().Count() != combo.Count)
+        {
+            throw new UserOperationException("The combo contains duplicate sprites");
+        }
+        
+        // check if user has enough sprite slots
+        if (combo.Count > await GetSpriteSlotCount(login))
+        {
+            throw new UserOperationException("The user does not have enough sprite slots to activate the combo");
+        }
+        
+        // if clearing is enabled, remove all other sprites from combo
+        if (clearOther) inv = inv.Select(slot => slot with { Slot = 0 }).ToList();
+        
+        // activate new combo
+        for (var slot = 0; slot < combo.Count; slot++)
+        {
+            var existingSprite = inv.FindIndex(invSlot => invSlot.SpriteId == combo[slot]);
+            if(existingSprite != -1) inv[existingSprite] = inv[existingSprite] with { Slot = slot + 1 };
+            
+            var targetSprite = inv.FindIndex(invSlot => invSlot.SpriteId == combo[slot]);
+            if(targetSprite != -1) inv[targetSprite] = inv[targetSprite] with { Slot = slot + 1 };
+        }
+        
+        // save combo
+        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The cant be activated because member doesn't exist");
+        memberEntity.Sprites = InventoryHelper.SerializeSpriteInventory(inv);
+        db.Members.Update(memberEntity);
         await db.SaveChangesAsync();
     }
 }

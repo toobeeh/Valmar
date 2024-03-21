@@ -33,6 +33,8 @@ The services in /Grpc implement the services in the proto definitions.
 They must not include domain-specific functions; just retrieve data from underlying layers and map them to response objects.
 - Domain Services / Service Layer:  
 The services in /Domain implement the domain logic and access data from the persistence layer.  
+Domain services should be designed to enable the application layer to re-use fetched data to avoid fetching the same data multiple times.  
+Therefore, adding parameters - primitives or domain objects - to the service functions is encouraged, instead fetching an object from another service in the service method.
 - Persistence Layer:  
 The persistence layer is scaffolded by efcore tools. 
 

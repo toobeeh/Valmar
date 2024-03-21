@@ -16,13 +16,25 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("GetBubbleCredit(request={request})", request);
 
-        var credit = await inventoryService.GetBubbleCredit(request.Login);
+        var dropCredit = await inventoryService.GetDropCredit(request.Login);
+        var credit = await inventoryService.GetBubbleCredit(request.Login, dropCredit);
         return mapper.Map<BubbleCreditReply>(credit);
     }
 
     public override async Task<DropCreditReply> GetDropCredit(GetDropCreditRequest request, ServerCallContext context)
     {
-        return await base.GetDropCredit(request, context);
+        logger.LogTrace("GetDropCredit(request={request})", request);
+
+        var dropCredit = await inventoryService.GetDropCredit(request.Login);
+        return mapper.Map<DropCreditReply>(dropCredit);
+    }
+
+    public override async Task<SpriteSlotCountReply> GetSpriteSlotCount(GetSpriteSlotCountRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("GetSpriteSlotCount(request={request})", request);
+
+        var count = await inventoryService.GetSpriteSlotCount(request.Login);
+        return new SpriteSlotCountReply { UnlockedSlots = count };
     }
 
     public override async Task GetEventCredit(GetEventCreditRequest request, IServerStreamWriter<EventCreditReply> responseStream, ServerCallContext context)
@@ -53,7 +65,16 @@ public class InventoryGrpcService(
 
     public override async Task<Empty> UseSpriteCombo(UseSpriteComboRequest request, ServerCallContext context)
     {
-        return await base.UseSpriteCombo(request, context);
+        logger.LogTrace("UseSpriteCombo(request={request})", request);
+        
+        var slots = Enumerable.Repeat(0, request.Combo.Max(slot => slot.SlotId)).ToList();
+        foreach (var slot in request.Combo)
+        {
+            slots[slot.SlotId - 1] = slot.SpriteId;
+        }
+        
+        await inventoryService.UseSpriteCombo(request.Login, slots);
+        return new Empty();
     }
 
     public override async Task<Empty> SetSpriteColor(SetSpriteColorRequest request, ServerCallContext context)

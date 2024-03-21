@@ -13,6 +13,8 @@ public class SpriteMapperProfile : Profile
         CreateMap<SpriteDdo, SpriteReply>()
             .ForMember(s => s.IsRainbow, 
                 opt => opt.MapFrom(src => src.Rainbow == 1))
+            .ForMember(s => s.IsReleased, 
+                opt => opt.MapFrom(src => src.Released))
             .ForMember(s => s.IsSpecial, 
                 opt => opt.MapFrom(src => src.Special))
             .ForMember(s => s.EventDropId, 

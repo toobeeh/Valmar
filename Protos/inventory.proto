@@ -15,6 +15,9 @@ service Inventory {
   // gets the drop credit details of a member
   rpc GetDropCredit (GetDropCreditRequest) returns (DropCreditReply);
   
+  // gets the count of unlocked sprite slots of a member
+  rpc GetSpriteSlotCount (GetSpriteSlotCountRequest) returns (SpriteSlotCountReply);
+  
   // gets the event drop credit details of a member
   rpc GetEventCredit (GetEventCreditRequest) returns (stream EventCreditReply);
   
@@ -104,5 +107,13 @@ message EventCreditReply {
   int32 totalCredit = 1;
   int32 availableCredit = 2;
   int32 eventDropId = 3;
+}
+
+message GetSpriteSlotCountRequest {
+  int32 login = 1;
+}
+
+message SpriteSlotCountReply {
+  int32 unlockedSlots = 1;
 }
 
