@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Valmar";
+package inventory;
+
+// Service definition for inventory checks and actions for sprites, scenes, stats, eventdrops etc
+service Inventory {
+  
+  // gets the bubble credit details of a member
+  rpc GetBubbleCredit (GetBubbleCreditRequest) returns (BubbleCreditReply);
+  
+  // gets the drop credit details of a member
+  rpc GetDropCredit (GetDropCreditRequest) returns (DropCreditReply);
+  
+  // gets the event drop credit details of a member
+  rpc GetEventCredit (GetEventCreditRequest) returns (stream EventCreditReply);
+  
+  // get the complete sprite inventory of a member (including inactive sprites -> slot = 0)
+  rpc GetSpriteInventory (GetSpriteInventoryRequest) returns (stream SpriteSlotConfigurationReply);
+  
+  // add a sprite to the inventory of a member
+  rpc BuySprite (BuySpriteRequest) returns (google.protobuf.Empty);
+  
+  // activate a sprite combo for a selected set of slots
+  rpc UseSpriteCombo (UseSpriteComboRequest) returns (google.protobuf.Empty);
+  
+  // set a user configuration for a sprite color
+  rpc SetSpriteColor (SetSpriteColorRequest) returns (google.protobuf.Empty);
+}
+
+message GetBubbleCreditRequest {
+  int32 login = 1;
+}
+
+message BubbleCreditReply {
+  
+  // credit that is the sum of collected bubbles plus worth of drops
+  int32 totalCredit = 1;
+  
+  // part of total credit that is available to get spent
+  int32 availableCredit = 2;
+  
+  // the part of total credit that has been gained through playtime
+  int32 bubblesAmount = 3;
+}
+
+message GetDropCreditRequest {
+  int32 login = 1;
+}
+
+message DropCreditReply {
+  
+  // the total amount of drops, consisting of regular drops + weighted league drops
+  int32 totalAmount = 1;
+  
+  // the count of regular drops
+  int32 regularAmount = 2;
+  
+  // the count (non-weighted) of league drops
+  int32 leagueAmount = 3;
+}
+
+message BuySpriteRequest {
+  int32 login = 1;
+  int32 spriteId = 2;
+}
+
+message SpriteSlotConfigurationRequest {
+  int32 slotId = 1;
+  int32 spriteId = 2;
+}
+
+message UseSpriteComboRequest {
+  int32 login = 1;
+  bool clearOtherSlots = 2;
+  repeated SpriteSlotConfigurationRequest combo = 3;
+}
+
+message SetSpriteColorRequest {
+  int32 login = 1;
+  int32 spriteId = 2;
+  int32 colorShift = 3;
+}
+
+message GetSpriteInventoryRequest {
+  int32 login = 1;
+}
+
+message SpriteSlotConfigurationReply {
+  int32 slot = 1;
+  int32 spriteId = 2;
+  google.protobuf.Int32Value colorShift = 3;
+}
+
+message GetEventCreditRequest {
+  int32 login = 1;
+  int32 eventId = 2;
+}
+
+message EventCreditReply {
+  int32 totalCredit = 1;
+  int32 availableCredit = 2;
+  int32 eventDropId = 3;
+}
+

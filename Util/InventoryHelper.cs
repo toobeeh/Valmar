@@ -1,3 +1,4 @@
+using System.Text;
 using Valmar.Domain.Classes;
 
 namespace Valmar.Util;
@@ -32,7 +33,7 @@ public static class InventoryHelper
 
                 return new { Slot = slot, Sprite = validSpriteId ? spriteId : -1 };
             })
-            .Where(sprite => sprite.Sprite != -1 && sprite.Slot > 0);
+            .Where(sprite => sprite.Sprite != -1);
 
         return spritesList
             .Select(sprite =>
@@ -42,8 +43,26 @@ public static class InventoryHelper
                 })
             .ToList();
     }
+    
+    public static string SerializeSpriteInventory(List<MemberSpriteSlotDdo> slots)
+    {
+        return string.Join(",", slots.Select(slot => $"{new StringBuilder(slot.Slot).Insert(0, ".", slot.Slot)}{slot.SpriteId}"));
+    }
+    
+    public static List<int> ParseSceneInventory(string scenes)
+    {
+        return scenes
+            .Split(",")
+            .Select(scene =>
+            {
+                var validSceneId = int.TryParse(scene.Replace(".", ""), out var sceneId);
+                return validSceneId ? sceneId : 0;
+            })
+            .Where(id => id > 0)
+            .ToList();
+    }
 
-    public static int? ParseSceneInventory(string scenes)
+    public static int? ParseActiveSceneFromInventory(string scenes)
     {
         foreach (var scene in scenes.Split(","))
         {
@@ -54,5 +73,10 @@ public static class InventoryHelper
         }
 
         return null;
+    }
+
+    public static List<MemberSpriteSlotDdo> ParseActiveSlotsFromInventory(string sprites, string shifts)
+    {
+        return ParseSpriteInventory(sprites, shifts).Where(slot => slot.Slot > 0).ToList();
     }
 }

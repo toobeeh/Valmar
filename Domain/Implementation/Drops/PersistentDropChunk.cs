@@ -91,6 +91,7 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         var drops = _db.PastDrops;
         var weights = await drops
             .Where(d => d.LeagueWeight > 0
+                        && d.EventDropId == 0
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
                         && d.CaughtLobbyPlayerId == id)
@@ -109,6 +110,7 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         var drops = _db.PastDrops;
         var weights = await drops
             .Where(d => d.LeagueWeight > 0
+                        && d.EventDropId == 0
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
                         && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)

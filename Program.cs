@@ -56,6 +56,7 @@ public class Program
         services.AddScoped<IAdminDomainService, AdminDomainService>();
         services.AddScoped<ILeaguesDomainService, LeaguesDomainService>();
         services.AddScoped<IDropsDomainService, DropsDomainService>();
+        services.AddScoped<IInventoryDomainService, InventoryDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -71,6 +72,7 @@ public class Program
         app.MapGrpcService<LeaguesGrpcService>();
         app.MapGrpcService<AdminGrpcService>();
         app.MapGrpcService<DropsGrpcService>();
+        app.MapGrpcService<InventoryGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)
@@ -84,6 +86,7 @@ public class Program
             typeof(GuildMapperProfile),
             typeof(MemberMapperProfile),
             typeof(AdminMapperProfile),
+            typeof(InventoryMapperProfile),
             typeof(AwardMapperProfile));
     }
     

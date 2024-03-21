@@ -3,6 +3,7 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Valmar.Domain;
 using Valmar.Domain.Implementation;
+using Valmar.Grpc.Utils;
 
 namespace Valmar.Grpc;
 
@@ -28,5 +29,13 @@ public class SpritesGrpcService(
         
         var sprite = await spritesService.GetSpriteById(request.Id);
         return mapper.Map<SpriteReply>(sprite);
+    }
+
+    public override async Task GetSpriteRanking(Empty request, IServerStreamWriter<SpriteRankingReply> responseStream, ServerCallContext context)
+    {
+        logger.LogTrace("GetSpriteRanking(request={request})", request);
+
+        var ranking = await spritesService.GetSpriteRanking();
+        await responseStream.WriteAllMappedAsync(ranking, mapper.Map<SpriteRankingReply>);
     }
 }

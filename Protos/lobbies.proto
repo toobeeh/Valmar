@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
+import "inventory.proto";
 
 option csharp_namespace = "Valmar";
 package lobbies;
@@ -82,12 +83,7 @@ message OnlineMemberReply {
   int32 bubbles = 2;
   google.protobuf.StringValue patronEmoji = 3;
   repeated JoinedLobbyMessage joinedLobbies = 4;
-  repeated MemberSpriteSlotMessage spriteSlots = 5;
+  repeated inventory.SpriteSlotConfigurationReply spriteSlots = 5;
   google.protobuf.Int32Value sceneId = 6;
 }
 
-message MemberSpriteSlotMessage {
-  int32 slot = 1;
-  int32 spriteId = 2;
-  google.protobuf.Int32Value rainbowShift = 3;
-}

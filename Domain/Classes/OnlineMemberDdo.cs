@@ -7,5 +7,5 @@ public record OnlineMemberDdo(
     string? PatronEmoji,
     List<MemberSpriteSlotDdo> SpriteSlots,
     int? SceneId);
-public record MemberSpriteSlotDdo(int Slot, int SpriteId, int? RainbowShift = null);
+
 public record JoinedLobbyDdo(int LobbyPlayerId, PalantirLobbyJson Lobby);

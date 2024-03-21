@@ -35,7 +35,6 @@ public class LobbyMapperProfile : Profile
         // mappings for onlinemembers
         CreateMap<OnlineMemberDdo, OnlineMemberReply>();
         CreateMap<JoinedLobbyDdo, JoinedLobbyMessage>();
-        CreateMap<MemberSpriteSlotDdo, MemberSpriteSlotMessage>();
     }
 
     private DropLogReply MapDropEntity(PastDropEntity drop)

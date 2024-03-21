@@ -1,6 +1,5 @@
 using Grpc.Core;
 using Grpc.Core.Interceptors;
-using Valmar.Domain.Exceptions;
 
 namespace Valmar.Grpc.Interceptors;
 

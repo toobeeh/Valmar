@@ -1,3 +1,4 @@
+using AutoMapper;
 using Grpc.Core;
 using Valmar.Domain.Exceptions;
 
@@ -8,6 +9,7 @@ public static class GrpcServiceExceptionHandlers
     public static RpcException Handle<T>(this Exception exception, ServerCallContext context, ILogger<T> logger) =>
         exception switch
         {
+            UserOperationException userOperationException => HandleFailedPreconditionException(userOperationException, logger),
             EntityNotFoundException notFoundException => HandleEntityNotFoundException(notFoundException, logger),
             EntityAlreadyExistsException existsException => HandleEntityAlreadyExistsException(existsException, logger),
             EntityConflictException conflictException => HandleConflictException(conflictException, logger),
@@ -15,6 +17,11 @@ public static class GrpcServiceExceptionHandlers
             _ => HandleDefault(exception, context, logger)
         };
 
+    private static RpcException HandleFailedPreconditionException<T>(UserOperationException exception, ILogger<T> logger)
+    {
+        logger.LogWarning(exception, "An operation for an user failed");
+        return new RpcException(new Status(StatusCode.FailedPrecondition, exception.Message));
+    }
     private static RpcException HandleEntityNotFoundException<T>(EntityNotFoundException exception, ILogger<T> logger)
     {
         logger.LogWarning(exception, "An entity requested by rpc service handler could not be found");

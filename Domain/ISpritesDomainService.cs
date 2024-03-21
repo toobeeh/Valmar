@@ -1,9 +1,11 @@
 using Valmar.Database;
+using Valmar.Domain.Classes;
 
 namespace Valmar.Domain;
 
 public interface ISpritesDomainService
 {
-    Task<SpriteEntity> GetSpriteById(int id);
-    Task<List<SpriteEntity>> GetAllSprites();
+    Task<SpriteDdo> GetSpriteById(int id);
+    Task<List<SpriteDdo>> GetAllSprites();
+    Task<List<SpriteRankingDdo>> GetSpriteRanking();
 }

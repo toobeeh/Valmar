@@ -35,6 +35,7 @@ message EventReply {
   string start = 3;
   string description = 4;
   int32 length = 5;  
+  bool progressive = 6;
 }
 
 // A palantir event drop

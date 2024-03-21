@@ -14,6 +14,9 @@ service Sprites {
 
   // Gets a sprite by its id
   rpc GetSpriteById (GetSpriteRequest) returns (SpriteReply);
+  
+  // Gets the ranking of all sprites
+  rpc GetSpriteRanking (google.protobuf.Empty) returns (stream SpriteRankingReply);
 }
 
 // Response containing a sprite's properties.
@@ -26,9 +29,18 @@ message SpriteReply {
   bool isSpecial = 6;
   google.protobuf.Int32Value eventDropId = 7;
   google.protobuf.StringValue artist = 8;
+  bool isReleased = 9;
 }
 
 // Request containing a sprite id
 message GetSpriteRequest {
   int32 id = 1;
+}
+
+// Response containing the ranking of a sprite
+message SpriteRankingReply {
+  int32 id = 1;
+  int32 activeUsers = 2;
+  int32 totalBought = 3;
+  int32 rank = 4;
 }
