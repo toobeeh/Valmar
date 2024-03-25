@@ -12,4 +12,6 @@ public interface IInventoryDomainService
     Task<int> GetSpriteSlotCount(int login);
     Task UseSpriteCombo(int login, List<int> combo, bool clearOther = false);
     Task SetColorShiftConfiguration(int login, Dictionary<int, int?> colorShiftMap, bool clearOther = false);
+    Task<SceneInventoryDdo> GetMemberSceneInventory(int login);
+    Task UseScene(int login, int sceneId);
 }

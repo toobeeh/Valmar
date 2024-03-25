@@ -85,4 +85,26 @@ public class InventoryGrpcService(
         await inventoryService.SetColorShiftConfiguration(request.Login, configParams, request.ClearOtherConfigs);
         return new Empty();
     }
+
+    public override async Task<SceneInventoryReply> GetSceneInventory(GetSceneInventoryRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("GetSceneInventory(request={request})", request);
+        
+        var inv = await inventoryService.GetMemberSceneInventory(request.Login);
+        return mapper.Map<SceneInventoryReply>(inv);
+    }
+
+    public override async Task<Empty> BuyScene(BuySceneRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("BuyScene(request={request})", request);
+        return await base.BuyScene(request, context);
+    }
+
+    public override async Task<Empty> UseScene(UseSceneRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("UseScene(request={request})", request);
+        
+        await inventoryService.UseScene(request.Login, request.SceneId);
+        return new Empty();
+    }
 }

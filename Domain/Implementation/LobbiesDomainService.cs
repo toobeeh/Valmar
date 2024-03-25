@@ -45,7 +45,7 @@ public class LobbiesDomainService(
                 member.Lobbies.Select(lobby => new JoinedLobbyDdo(Convert.ToInt32(lobby.PlayerId), lobbiesDict[lobby.Id])).ToList(), 
                 member.Member.PatronEmoji,
                 InventoryHelper.ParseActiveSlotsFromInventory(member.Member.Sprites, member.Member.RainbowSprites),
-                InventoryHelper.ParseActiveSceneFromInventory(member.Member.Scenes)
+                InventoryHelper.ParseSceneInventory(member.Member.Scenes).ActiveId
                 )).ToList();
     }
     

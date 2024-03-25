@@ -1,0 +1,96 @@
+using Valmar.Database;
+using Valmar.Util;
+using Valmar.Util.NChunkTree;
+using Valmar.Util.NChunkTree.Bubbles;
+
+namespace Valmar.Domain.Implementation.Bubbles;
+
+/// <summary>
+/// Implementation which extends the dropchunkleaf node by the chunk specific functions
+/// Main feature is the access and calculation of drop-related data from persistance
+/// </summary>
+/// <param name="services"></param>
+/// <param name="provider"></param>
+/// <param name="context"></param>
+public class PersistentBubbleChunk : BubbleChunkLeaf, IBubbleChunk
+{
+    private readonly PalantirContext _db; // guarantee new db instance
+    
+    public override IBubbleChunk Chunk => this;
+
+    private int? _traceIdStart, _traceIdEnd;
+
+    public PersistentBubbleChunk(IServiceProvider services, BubbleChunkTreeProvider provider, NChunkTreeNodeContext context) : base(services, provider, context)
+    {
+        _db = ActivatorUtilities.CreateInstance<PalantirContext>(services);
+        
+        // init chunk with saved range
+        Provider.PersistentChunkContext.TryGetValue(NodeId, out var range);
+        if (range != null)
+        {
+            _traceIdStart = range.TraceIdStart;
+            _traceIdEnd = range.TraceIdEnd;
+            TraceTimestampStart = range.StartDate;
+            TraceTimestampEnd = range.EndDate;
+        }
+    }
+
+    public int? TraceIdStart => _traceIdStart;
+    public int? TraceIdEnd => _traceIdEnd;
+
+    public DateTimeOffset? TraceTimestampStart { get; private set; }
+    public DateTimeOffset? TraceTimestampEnd { get; private set; }
+    
+    /// <summary>
+    /// Sets the range of the chunk;
+    /// Fetches also the dates of the range bounds and stores to the provider for re-fetching
+    /// Other instances that are currently alive will be outdated 
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    public void SetChunkSize(int? start, int? end)
+    {
+        _traceIdStart = start;
+        _traceIdEnd = end;
+
+        if (start != null)
+        {
+            TraceTimestampStart = BubbleHelper.ParseTraceTimestamp(
+                _db.BubbleTraces.First(t => t.Id == start).Date);
+        }
+
+        if (end != null)
+        {
+            TraceTimestampEnd = BubbleHelper.ParseTraceTimestamp(
+                _db.BubbleTraces.First(t => t.Id == end).Date);
+        }
+
+        Provider.PersistentChunkContext[NodeId] = new PersistentBubbleChunkRange(start, end, TraceTimestampStart, TraceTimestampEnd);
+    }
+    
+    public async Task<List<int>> EvaluateSubChunks(int chunkSize)
+    {
+        // find indexes to index chunks
+        var traceDateIds = _db.BubbleTraces
+            .Where(t => (TraceIdStart == null || t.Id >= TraceIdStart) 
+                 && (TraceIdEnd == null || t.Id < TraceIdEnd))
+            .GroupBy(trace => trace.Date)
+            .Select(group => new
+            {
+                Date = group.Key, 
+                MinId = group.Select(g => g.Id).Min()
+            })
+            .OrderBy(d => d.MinId)
+            .AsEnumerable()
+            .Where((trace, index) => (index) % chunkSize == 0)
+            .Select(item => item.MinId)
+            .ToList();
+
+        return traceDateIds;
+    }
+    
+    public DateTimeOffset GetFirstSeenDate(int login)
+    {
+        throw new NotImplementedException();
+    }
+}

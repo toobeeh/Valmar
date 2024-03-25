@@ -5,6 +5,27 @@ namespace Valmar.Util;
 
 public static class InventoryHelper
 {
+    public static SceneInventoryDdo ParseSceneInventory(string scenes)
+    {
+        int? activeScene = null;
+        
+        var ids = scenes
+            .Split(",")
+            .Select(scene =>
+            {
+                var active = scene.Contains('.');
+                var validSceneId = int.TryParse(scene.Replace(".", ""), out var sceneId);
+                
+                if(active && validSceneId) activeScene = sceneId;
+                
+                return validSceneId ? sceneId : 0;
+            })
+            .Where(id => id > 0)
+            .ToList();
+
+        return new SceneInventoryDdo(activeScene, ids);
+    }
+    
     public static List<MemberSpriteSlotDdo> ParseSpriteInventory(string sprites, string shifts)
     {
         var shiftDict = shifts
@@ -49,30 +70,9 @@ public static class InventoryHelper
         return string.Join(",", slots.Select(slot => $"{new StringBuilder(slot.Slot).Insert(0, ".", slot.Slot)}{slot.SpriteId}"));
     }
     
-    public static List<int> ParseSceneInventory(string scenes)
+    public static string SerializeSceneInventory(SceneInventoryDdo inv)
     {
-        return scenes
-            .Split(",")
-            .Select(scene =>
-            {
-                var validSceneId = int.TryParse(scene.Replace(".", ""), out var sceneId);
-                return validSceneId ? sceneId : 0;
-            })
-            .Where(id => id > 0)
-            .ToList();
-    }
-
-    public static int? ParseActiveSceneFromInventory(string scenes)
-    {
-        foreach (var scene in scenes.Split(","))
-        {
-            if(!scene.Contains('.')) continue;
-            var validSceneId = int.TryParse(scene.Replace(".", ""), out var sceneId);
-            if(!validSceneId) continue;
-            return sceneId;
-        }
-
-        return null;
+        return string.Join(",", inv.SceneIds.Select(id => $"{(id == inv.ActiveId ? "." : "")}{id}"));
     }
 
     public static List<MemberSpriteSlotDdo> ParseActiveSlotsFromInventory(string sprites, string shifts)

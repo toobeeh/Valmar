@@ -12,5 +12,6 @@ public class InventoryMapperProfile : Profile
         CreateMap<MemberSpriteSlotDdo, SpriteSlotConfigurationReply>();
         CreateMap<BubbleCreditDdo, BubbleCreditReply>();
         CreateMap<EventCreditDdo, EventCreditReply>();
+        CreateMap<SceneInventoryDdo, SceneInventoryReply>();
     }
 }

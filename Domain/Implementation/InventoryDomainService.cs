@@ -23,6 +23,15 @@ public class InventoryDomainService(
         return inv;
     }
     
+    public async Task<SceneInventoryDdo> GetMemberSceneInventory(int login)
+    {
+        logger.LogTrace("GetMemberSceneInventory(login={login})", login);
+        
+        var member = await membersService.GetMemberByLogin(login);
+        var inv = InventoryHelper.ParseSceneInventory(member.Scenes);
+        return inv;
+    }
+    
     public async Task<BubbleCreditDdo> GetBubbleCredit(int login, DropCreditDdo dropCredit)
     {
         logger.LogTrace("GetBubbleCredit(login={login})", login);
@@ -33,7 +42,7 @@ public class InventoryDomainService(
         var invSum = await db.Sprites.Where(sprite => sprite.EventDropId == 0 && spriteInv.Contains(sprite.Id))
             .SumAsync(sprite => sprite.Cost);
 
-        var sceneInv = InventoryHelper.ParseSceneInventory(member.Scenes).ToArray();
+        var sceneInv = InventoryHelper.ParseSceneInventory(member.Scenes).SceneIds.ToArray();
         var nonEventScenes = await db.Scenes.Where(scene => scene.EventId == 0 && !scene.Exclusive && sceneInv.Contains(scene.Id)).ToListAsync(); 
         var sceneSum = nonEventScenes.Select((scene, index) => SceneHelper.GetScenePrice(index)).Sum();
 
@@ -164,6 +173,28 @@ public class InventoryDomainService(
         
         var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The color shift configuration can't be saved because member doesn't exist");
         memberEntity.RainbowSprites = configString;
+        db.Members.Update(memberEntity);
+        await db.SaveChangesAsync();
+    }
+    
+    public async Task UseScene(int login, int sceneId)
+    {
+        logger.LogTrace("UseScene(login={login}, sceneId={sceneId})", login, sceneId);
+        
+        var member = await membersService.GetMemberByLogin(login);
+        var inv = InventoryHelper.ParseSceneInventory(member.Scenes);
+        
+        // check if user owns the scene 
+        if (!inv.SceneIds.Contains(sceneId))
+        {
+            throw new UserOperationException($"The user does not own the scene {sceneId}");
+        }
+        
+        // set new active scene
+        inv = inv with { ActiveId = sceneId };
+        
+        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The scene can't be activated because member doesn't exist");
+        memberEntity.Scenes = InventoryHelper.SerializeSceneInventory(inv);
         db.Members.Update(memberEntity);
         await db.SaveChangesAsync();
     }

@@ -32,6 +32,15 @@ service Inventory {
   
   // set a user configuration for a sprite color
   rpc SetSpriteColorConfiguration (SetSpriteColorRequest) returns (google.protobuf.Empty);
+
+  // get the complete scene inventory of a member
+  rpc GetSceneInventory (GetSceneInventoryRequest) returns (SceneInventoryReply);
+
+  // add a scene to the inventory of a member
+  rpc BuyScene (BuySceneRequest) returns (google.protobuf.Empty);
+
+  // activate a scene for a member
+  rpc UseScene (UseSceneRequest) returns (google.protobuf.Empty);
 }
 
 message GetBubbleCreditRequest {
@@ -120,5 +129,24 @@ message GetSpriteSlotCountRequest {
 
 message SpriteSlotCountReply {
   int32 unlockedSlots = 1;
+}
+
+message GetSceneInventoryRequest {
+  int32 login = 1;
+}
+
+message SceneInventoryReply {
+  google.protobuf.Int32Value activeId = 1;
+  repeated int32 sceneIds = 2;
+}
+
+message BuySceneRequest {
+  int32 login = 1;
+  int32 sceneId = 2;
+}
+
+message UseSceneRequest {
+  int32 login = 1;
+  int32 sceneId = 2;
 }
 
