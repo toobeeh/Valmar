@@ -59,7 +59,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         if(DropIndexEnd is null && _context.LeagueDropValue.ContainsKey(key)) _context.LeagueDropValue[key].Dirty();
 
         var store = _context.LeagueDropValue.GetOrAdd(key,key =>  new KVStore<string, double>(key, async key =>
-            await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) => a+b, 0d))
+            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) => a+b, 0d))
         );
         return await store.Retrieve();
     }
@@ -86,7 +86,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         if(DropIndexEnd is null && _context.LeagueParticipants.ContainsKey(key)) _context.LeagueParticipants[key].Dirty();
 
         var store = _context.LeagueParticipants.GetOrAdd(key,key =>  new KVStore<string, IList<string>>(key, async key =>
-            await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueParticipants(start, end), (a, b) =>
+            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueParticipants(start, end), (a, b) =>
             {
                 foreach (var item in b)
                 {
@@ -120,7 +120,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         if(DropIndexEnd is null && _context.LeagueDropCount.ContainsKey(key)) _context.LeagueDropCount[key].Dirty();
 
         var store = _context.LeagueDropCount.GetOrAdd(key,key =>  new KVStore<string, int>(key, async key =>
-            await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueCount(id, start, end), (a, b) => a+b, 0))
+            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueCount(id, start, end), (a, b) => a+b, 0))
         );
         return await store.Retrieve();
     }
@@ -144,7 +144,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         if(DropIndexEnd is null && _context.EventDetails.ContainsKey(key)) _context.EventDetails[key].Dirty();
 
         var store = _context.EventDetails.GetOrAdd(key,key =>  new KVStore<string, EventResult>(key, async key =>
-            await DropHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventId, userid, userLogin),
+            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventId, userid, userLogin),
                 (a, b) =>
                 {
                     foreach (var key in b.RedeemableCredit.Keys)
@@ -178,7 +178,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         
         
         var store = _context.LeagueResults.GetOrAdd(key,_ =>  new KVStore<string, Dictionary<string, LeagueResult>>(key, async _ =>
-            await DropHelper.ReduceParallel(Chunks, async c => await c.GetLeagueResults(start, end),
+            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueResults(start, end),
                 (a, b) =>
                 {
                     foreach (var result in b.Values)

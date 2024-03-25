@@ -7,8 +7,8 @@ public static class BubbleHelper
     {
         return DateTimeOffset.ParseExact(timestamp, TraceTimestampFormat, System.Globalization.CultureInfo.InvariantCulture);
     }
-    public static string FormatTraceTimestamp(DateTimeOffset timestamp)
+    public static string FormatTraceTimestamp(DateTimeOffset timestamp, bool oldFormat = false)
     {
-        return timestamp.ToString(TraceTimestampFormat[0]);
+        return timestamp.ToString(TraceTimestampFormat[oldFormat ? 1 : 0]);
     }
 }

@@ -10,7 +10,8 @@ public record PersistentBubbleChunkRange(int? TraceIdStart, int? TraceIdEnd, Dat
 
 public class CachedBubbleChunkContext
 {
-    public readonly ConcurrentDictionary<string, KVStore<string, DateTimeOffset>> FirstSeenDates = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, DateTimeOffset?>> FirstSeenDates = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, BubbleTimespanRange>> CollectedBubbles = new ();
 }
 
 public class BubbleChunkTreeProvider(ILogger<BubbleChunkTreeProvider> logger, IServiceProvider provider) : NChunkTreeProvider(provider)
@@ -24,9 +25,8 @@ public class BubbleChunkTreeProvider(ILogger<BubbleChunkTreeProvider> logger, IS
     /// <summary>
     /// Creates a new leaf which can be added to the bubble tree
     /// </summary>
-    /// <param name="provider"></param>
-    /// <param name="dropStart"></param>
-    /// <param name="dropEnd"></param>
+    /// <param name="traceIdStart"></param>
+    /// <param name="traceIdEnd"></param>
     /// <returns></returns>
     public PersistentBubbleChunk CreateLeaf(int? traceIdStart, int? traceIdEnd)
     {

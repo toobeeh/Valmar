@@ -8,5 +8,8 @@ public interface IBubbleChunk
     DateTimeOffset? TraceTimestampEnd { get; }
     Task<List<int>> EvaluateSubChunks(int chunkSize);
     
-    DateTimeOffset GetFirstSeenDate(int login);
+    Task<DateTimeOffset?> GetFirstSeenDate(int login);
+    Task<BubbleTimespanRange> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end);
 }
+
+public record BubbleTimespanRange(int? StartAmount, int? EndAmount);

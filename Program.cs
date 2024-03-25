@@ -39,8 +39,8 @@ public class Program
         var app = builder.Build();
         
         // initialize drops
-        /*var drops = app.Services.GetRequiredService<DropChunkTreeProvider>();
-        drops.RepartitionTree(drops.GetTree());*/
+        var drops = app.Services.GetRequiredService<DropChunkTreeProvider>();
+        drops.RepartitionTree(drops.GetTree());
         
         // initialize bubbles
         var bubbles = app.Services.GetRequiredService<BubbleChunkTreeProvider>();

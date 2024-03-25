@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Valmar.Database;
 using Valmar.Util;
 using Valmar.Util.NChunkTree;
@@ -89,8 +90,37 @@ public class PersistentBubbleChunk : BubbleChunkLeaf, IBubbleChunk
         return traceDateIds;
     }
     
-    public DateTimeOffset GetFirstSeenDate(int login)
+    public async Task<DateTimeOffset?> GetFirstSeenDate(int login)
     {
-        throw new NotImplementedException();
+        var firstTrace = await _db.BubbleTraces.Where(trace =>
+                (TraceIdStart == null || trace.Id >= TraceIdStart)
+                && (TraceIdEnd == null || trace.Id < TraceIdEnd)
+                && trace.Login == login)
+            .OrderBy(trace => trace.Id)
+            .FirstOrDefaultAsync();
+        
+        if(firstTrace is null) return null;
+        return BubbleHelper.ParseTraceTimestamp(firstTrace.Date);
+    }
+
+    public async Task<BubbleTimespanRange> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end)
+    {
+        var traces = await _db.BubbleTraces
+            .Where(trace =>
+                (TraceIdStart == null || trace.Id >= TraceIdStart)
+                && (TraceIdEnd == null || trace.Id < TraceIdEnd)
+                && trace.Login == login)
+            .ToListAsync();
+
+        var rangeTraces = traces
+            .Select(trace => new { Date = BubbleHelper.ParseTraceTimestamp(trace.Date), Bubbles = trace.Bubbles })
+            .Where(trace => (start is null || trace.Date >= start) && (end is null || trace.Date < end))
+            .Select(trace => trace.Bubbles)
+            .ToList();
+        
+        var min = rangeTraces.Min();
+        var max = rangeTraces.Max();
+        
+        return new BubbleTimespanRange(min, max);
     }
 }
