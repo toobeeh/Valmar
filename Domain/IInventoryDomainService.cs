@@ -11,4 +11,5 @@ public interface IInventoryDomainService
     Task<DropCreditDdo> GetDropCredit(int login);
     Task<int> GetSpriteSlotCount(int login);
     Task UseSpriteCombo(int login, List<int> combo, bool clearOther = false);
+    Task SetColorShiftConfiguration(int login, Dictionary<int, int?> colorShiftMap, bool clearOther = false);
 }

@@ -85,7 +85,8 @@ public class MembersDomainService(
             Convert.ToInt32(memberDetails.UserLogin),
             memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList(),
             patronizedId,
-            FlagHelper.HasFlag(member.Flag, FlagHelper.Patron) ? member.Emoji : null
+            FlagHelper.HasFlag(member.Flag, MemberFlagDdo.Patron) ? member.Emoji : null,
+            FlagHelper.GetFlags(member.Flag)
         );
     }
     

@@ -1,18 +1,22 @@
+using Valmar.Domain.Classes;
+
 namespace Valmar.Util;
 
 public static class FlagHelper
 {
-    public static readonly ushort 
-        BubbleFarming = 0, 
-        BotAdmin = 1, 
-        Moderator = 2, 
-        UnlimitedCloud = 3, 
-        Patron = 5, 
-        PermanentBan = 6, 
-        DropBan = 6, 
-        Patronizer = 7, 
-        Booster = 8, 
-        Beta = 9;
+    public const ushort 
+        BubbleFarming = 1, 
+        BotAdmin = 2, 
+        Moderator = 4, 
+        UnlimitedCloud = 8, 
+        Patron = 16, 
+        PermanentBan = 32, 
+        DropBan = 64, 
+        Patronizer = 128, 
+        Booster = 256, 
+        Beta = 512;
     
-    public static bool HasFlag(int flags, ushort flag) => (flags & (1 << flag)) != 0;
+    public static bool HasFlag(int flags, MemberFlagDdo flag) => ((MemberFlagDdo)flags).HasFlag(flag);
+    
+    public static List<MemberFlagDdo> GetFlags(int flags) => Enum.GetValues<MemberFlagDdo>().Where(f => HasFlag(flags, f)).ToList();
 }

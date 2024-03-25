@@ -5,6 +5,19 @@ import "google/protobuf/empty.proto";
 option csharp_namespace = "Valmar";
 package members;
 
+enum MemberFlagMessage {
+  Admin = 0;
+  Moderator = 1;
+  Patron = 2;
+  Patronizer = 3;
+  Booster = 4;
+  DropBan = 5;
+  PermaBan = 6;
+  Beta = 7;
+  BubbleFarming = 8;
+  UnlimitedCloud = 9;
+}
+
 // Service definition for member resource access
 service Members {
   
@@ -56,6 +69,7 @@ message MemberReply {
   string username = 8;
   int32 login = 9;
   repeated int32 serverConnections = 10;
+  repeated MemberFlagMessage mappedFlags = 11;
 }
 
 // Reply containing the accesstoken of a member

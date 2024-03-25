@@ -73,12 +73,16 @@ public class InventoryGrpcService(
             slots[slot.SlotId - 1] = slot.SpriteId;
         }
         
-        await inventoryService.UseSpriteCombo(request.Login, slots);
+        await inventoryService.UseSpriteCombo(request.Login, slots, request.ClearOtherSlots);
         return new Empty();
     }
 
-    public override async Task<Empty> SetSpriteColor(SetSpriteColorRequest request, ServerCallContext context)
+    public override async Task<Empty> SetSpriteColorConfiguration(SetSpriteColorRequest request, ServerCallContext context)
     {
-        return await base.SetSpriteColor(request, context);
+        logger.LogTrace("SetSpriteColorConfiguration(request={request})", request);
+        
+        var configParams = request.ColorConfig.ToDictionary(config => config.SpriteId, config => config.ColorShift);
+        await inventoryService.SetColorShiftConfiguration(request.Login, configParams, request.ClearOtherConfigs);
+        return new Empty();
     }
 }

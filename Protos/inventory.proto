@@ -31,7 +31,7 @@ service Inventory {
   rpc UseSpriteCombo (UseSpriteComboRequest) returns (google.protobuf.Empty);
   
   // set a user configuration for a sprite color
-  rpc SetSpriteColor (SetSpriteColorRequest) returns (google.protobuf.Empty);
+  rpc SetSpriteColorConfiguration (SetSpriteColorRequest) returns (google.protobuf.Empty);
 }
 
 message GetBubbleCreditRequest {
@@ -82,10 +82,15 @@ message UseSpriteComboRequest {
   repeated SpriteSlotConfigurationRequest combo = 3;
 }
 
+message SpriteColorConfigurationRequest {
+  int32 spriteId = 1;
+  google.protobuf.Int32Value colorShift = 2;
+}
+
 message SetSpriteColorRequest {
   int32 login = 1;
-  int32 spriteId = 2;
-  int32 colorShift = 3;
+  bool clearOtherConfigs = 2;
+  repeated SpriteColorConfigurationRequest colorConfig = 3;
 }
 
 message GetSpriteInventoryRequest {

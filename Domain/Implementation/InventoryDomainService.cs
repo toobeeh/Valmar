@@ -123,11 +123,49 @@ public class InventoryDomainService(
         logger.LogTrace("GetSpriteSlotCount(login={login})", login);
 
         var member = await membersService.GetMemberByLogin(login);
-        var isPatron = FlagHelper.HasFlag(member.Flags, FlagHelper.Patron);
+        var isPatron = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Patron);
         var dropCredit = await GetDropCredit(login);
         
         var slots = 1 + (isPatron ? 1 : 0) + dropCredit.TotalCredit / 1000;
         return slots;
+    }
+
+    public async Task SetColorShiftConfiguration(int login, Dictionary<int, int?> colorShiftMap, bool clearOther = false)
+    {
+        logger.LogTrace("SetColorShiftConfiguration(login={login}, colorShiftMap={colorShiftMap}, clearOther={clearOther})", login, colorShiftMap, clearOther);
+
+        var member = await membersService.GetMemberByLogin(login);
+        var inv = await GetMemberSpriteInventory(login);
+        var isPatron = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Patron);
+
+        // if clearing, remove all configs
+        if (!clearOther)
+        {
+            inv = inv.Select(slot => slot with { ColorShift = null }).ToList();
+        }
+        
+        // set new configs 
+        foreach (var (spriteId, colorShift) in colorShiftMap)
+        {
+            var slotIndex = inv.FindIndex(slot => slot.SpriteId == spriteId);
+            if (slotIndex != -1) inv[slotIndex] = inv[slotIndex] with { ColorShift = colorShift };
+            else throw new UserOperationException($"The user does not own the sprite {spriteId}");
+        }
+        
+        // check if user is allowed to set more than one color shifts
+        if (!isPatron && inv.Count(slot => slot.ColorShift != null) > 1)
+        {
+            throw new UserOperationException("User is not allowed to set more than one color shift");
+        }
+        
+        var configString = String.Join(",", inv
+            .Where(slot => slot.ColorShift != null)
+            .Select(slot => $"{slot.SpriteId}:{slot.ColorShift}"));
+        
+        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The color shift configuration can't be saved because member doesn't exist");
+        memberEntity.RainbowSprites = configString;
+        db.Members.Update(memberEntity);
+        await db.SaveChangesAsync();
     }
 
     public async Task UseSpriteCombo(int login, List<int> combo, bool clearOther = false)
@@ -161,11 +199,14 @@ public class InventoryDomainService(
         // activate new combo
         for (var slot = 0; slot < combo.Count; slot++)
         {
-            var existingSprite = inv.FindIndex(invSlot => invSlot.SpriteId == combo[slot]);
-            if(existingSprite != -1) inv[existingSprite] = inv[existingSprite] with { Slot = slot + 1 };
+            // clear existing sprite in slot
+            var existingSprite = inv.FindIndex(invSlot => invSlot.Slot == slot + 1);
+            if(existingSprite != -1) inv[existingSprite] = inv[existingSprite] with { Slot = 0 };
             
+            // set target sprite in slot
             var targetSprite = inv.FindIndex(invSlot => invSlot.SpriteId == combo[slot]);
             if(targetSprite != -1) inv[targetSprite] = inv[targetSprite] with { Slot = slot + 1 };
+            else throw new UserOperationException($"The user does not own the sprite {combo[slot]}");
         }
         
         // save combo

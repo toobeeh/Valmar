@@ -12,5 +12,6 @@ public record MemberDdo(
     int Login,
     List<int> ServerConnections,
     long? PatronizedDiscordId,
-    string? PatronEmoji
+    string? PatronEmoji,
+    List<MemberFlagDdo> MappedFlags
     );

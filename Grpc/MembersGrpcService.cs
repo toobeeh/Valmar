@@ -5,6 +5,7 @@ using Valmar.Domain;
 using Valmar.Domain.Exceptions;
 using Valmar.Domain.Implementation;
 using Valmar.Grpc.Utils;
+using Valmar.Util;
 
 namespace Valmar.Grpc;
 
