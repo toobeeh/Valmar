@@ -17,7 +17,6 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
-        
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
@@ -38,14 +37,14 @@ public class Program
         // Register routes and start app
         var app = builder.Build();
         
-        // initialize drops
+        // initialize drop & bubble chunks
         var drops = app.Services.GetRequiredService<DropChunkTreeProvider>();
-        drops.RepartitionTree(drops.GetTree());
-        
-        // initialize bubbles
         var bubbles = app.Services.GetRequiredService<BubbleChunkTreeProvider>();
-        bubbles.RepartitionTree(bubbles.GetTree());
-        
+        Task.WaitAll(
+            Task.Run(() => drops.RepartitionTree(drops.GetTree())),
+            Task.Run(() => bubbles.RepartitionTree(bubbles.GetTree()))
+        );
+
         RegisterGrpcServices(app);
         app.Run();
     }
@@ -64,6 +63,7 @@ public class Program
         services.AddScoped<ILeaguesDomainService, LeaguesDomainService>();
         services.AddScoped<IDropsDomainService, DropsDomainService>();
         services.AddScoped<IInventoryDomainService, InventoryDomainService>();
+        services.AddScoped<IStatsDomainService, StatsDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -78,6 +78,7 @@ public class Program
         app.MapGrpcService<LobbiesGrpcService>();
         app.MapGrpcService<LeaguesGrpcService>();
         app.MapGrpcService<AdminGrpcService>();
+        app.MapGrpcService<StatsGrpcService>();
         app.MapGrpcService<DropsGrpcService>();
         app.MapGrpcService<InventoryGrpcService>();
     }
@@ -94,6 +95,8 @@ public class Program
             typeof(MemberMapperProfile),
             typeof(AdminMapperProfile),
             typeof(InventoryMapperProfile),
+            typeof(BasicMapperProfile),
+            typeof(StatMapperProfile),
             typeof(AwardMapperProfile));
     }
     

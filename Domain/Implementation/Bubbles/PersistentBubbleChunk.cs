@@ -103,7 +103,7 @@ public class PersistentBubbleChunk : BubbleChunkLeaf, IBubbleChunk
         return BubbleHelper.ParseTraceTimestamp(firstTrace.Date);
     }
 
-    public async Task<BubbleTimespanRange> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end)
+    public async Task<BubbleTimespanRangeDdo> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end)
     {
         var traces = await _db.BubbleTraces
             .Where(trace =>
@@ -115,12 +115,18 @@ public class PersistentBubbleChunk : BubbleChunkLeaf, IBubbleChunk
         var rangeTraces = traces
             .Select(trace => new { Date = BubbleHelper.ParseTraceTimestamp(trace.Date), Bubbles = trace.Bubbles })
             .Where(trace => (start is null || trace.Date >= start) && (end is null || trace.Date < end))
-            .Select(trace => trace.Bubbles)
+            .OrderBy(trace => trace.Date)
             .ToList();
         
-        var min = rangeTraces.Min();
-        var max = rangeTraces.Max();
+        var min = rangeTraces.Count == 0 ? null : rangeTraces.First();
+        var max =  rangeTraces.Count == 0 ? null : rangeTraces.Last();
+        var minBubbles = min?.Bubbles;
+        var maxBubbles = max?.Bubbles;
+
+        // if chunk and search are open ended or open ended but search end later than last record, check the member's current bubbles
+        if (end is null && ChunkEndIndex is null || ChunkEndIndex is null && end is {} endVal && endVal.AddDays(-1) > max?.Date)
+            maxBubbles = (await _db.Members.FirstOrDefaultAsync(m => m.Login == login))?.Bubbles ?? maxBubbles;
         
-        return new BubbleTimespanRange(min, max);
+        return new BubbleTimespanRangeDdo(minBubbles, maxBubbles);
     }
 }

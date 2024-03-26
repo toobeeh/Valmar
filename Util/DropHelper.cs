@@ -7,7 +7,7 @@ public static class DropHelper
     public static readonly string DropTimestampFormat = "yyyy-MM-dd HH:mm:ss";
     public static DateTimeOffset ParseDropTimestamp(string timestamp)
     {
-        return DateTimeOffset.ParseExact(timestamp, DropTimestampFormat, System.Globalization.CultureInfo.InvariantCulture);
+        return DateTimeOffset.ParseExact(timestamp, DropTimestampFormat, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal);
     }
     public static string FormatDropTimestamp(DateTimeOffset timestamp)
     {
@@ -17,7 +17,7 @@ public static class DropHelper
     public static List<long> FindDropToRedeem(EventResult eventResult, int amount, int? eventDropid = null)
     {
         List<Tuple<long, double>> candidates;
-        if (eventDropid is int id)
+        if (eventDropid is { } id)
         {
             candidates = eventResult.RedeemableCredit[id]
                 .Keys

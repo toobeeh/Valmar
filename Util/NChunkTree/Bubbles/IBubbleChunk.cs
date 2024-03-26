@@ -9,7 +9,7 @@ public interface IBubbleChunk
     Task<List<int>> EvaluateSubChunks(int chunkSize);
     
     Task<DateTimeOffset?> GetFirstSeenDate(int login);
-    Task<BubbleTimespanRange> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end);
+    Task<BubbleTimespanRangeDdo> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end);
 }
 
-public record BubbleTimespanRange(int? StartAmount, int? EndAmount);
+public record BubbleTimespanRangeDdo(int? StartAmount, int? EndAmount);

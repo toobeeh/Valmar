@@ -12,6 +12,9 @@ public class InventoryDomainService(
     PalantirContext db,
     IMembersDomainService membersService,
     ISpritesDomainService spritesService,
+    IScenesDomainService scenesService,
+    IEventsDomainService eventsService,
+    IStatsDomainService statsService,
     DropChunkTreeProvider dropChunks) : IInventoryDomainService
 {
     public async Task<List<MemberSpriteSlotDdo>> GetMemberSpriteInventory(int login)
@@ -177,7 +180,7 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
     }
     
-    public async Task UseScene(int login, int sceneId)
+    public async Task UseScene(int login, int? sceneId)
     {
         logger.LogTrace("UseScene(login={login}, sceneId={sceneId})", login, sceneId);
         
@@ -185,14 +188,71 @@ public class InventoryDomainService(
         var inv = InventoryHelper.ParseSceneInventory(member.Scenes);
         
         // check if user owns the scene 
-        if (!inv.SceneIds.Contains(sceneId))
+        if (sceneId is {} sceneIdValue && !inv.SceneIds.Contains(sceneIdValue))
         {
-            throw new UserOperationException($"The user does not own the scene {sceneId}");
+            throw new UserOperationException($"The user does not own the scene {sceneIdValue}");
         }
         
         // set new active scene
         inv = inv with { ActiveId = sceneId };
         
+        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The scene can't be activated because member doesn't exist");
+        memberEntity.Scenes = InventoryHelper.SerializeSceneInventory(inv);
+        db.Members.Update(memberEntity);
+        await db.SaveChangesAsync();
+    }
+    
+    public async Task BuyScene(int login, int sceneId)
+    {
+        logger.LogTrace("BuyScene(login={login}, sceneId={sceneId})", login, sceneId);
+        
+        var member = await membersService.GetMemberByLogin(login);
+        var inv = InventoryHelper.ParseSceneInventory(member.Scenes);
+        
+        // check if user owns the scene 
+        if (inv.SceneIds.Contains(sceneId))
+        {
+            throw new UserOperationException($"The user already owns the scene {sceneId}");
+        }
+        
+        // check if the scene is available for purchase
+        var scene = await scenesService.GetSceneById(sceneId);
+        if(scene.Exclusive)
+        {
+            throw new UserOperationException(
+                $"The scene {scene.Name} ({scene.Id}) is exclusive and can't be purchased");
+        }
+        
+        // check if scene is event scene or regular scene and verify price
+        if (scene.EventId != 0)
+        {
+            var sceneEvent = await eventsService.GetEventById(scene.EventId);
+            var eventPrice = EventHelper.GetEventScenePrice(sceneEvent.Length);
+            var traceBeforeStart = sceneEvent.StartDate.AddDays(-1); // traces are record from end of day - event start credit is from day before start
+            var eventBubblesCollected = await statsService.GetMemberBubblesInRange(login, traceBeforeStart, sceneEvent.EndDate);
+            var totalCollectedDuringEvent = eventBubblesCollected.EndAmount - eventBubblesCollected.StartAmount;
+            
+            if(eventPrice > totalCollectedDuringEvent)
+            {
+                throw new UserOperationException(
+                    $"The scene price ({eventPrice}) exceeds the available bubbles ({totalCollectedDuringEvent})");
+            }
+        }
+        else
+        {
+            var dropCredit = await GetDropCredit(login);
+            var bubbleCredit = await GetBubbleCredit(login, dropCredit);
+            var scenePrice = SceneHelper.GetScenePrice(inv.SceneIds.Count);
+            
+            if(scenePrice > bubbleCredit.AvailableCredit)
+            {
+                throw new UserOperationException(
+                    $"The scene price ({scenePrice}) exceeds the available bubble credit ({bubbleCredit.AvailableCredit})");
+            }
+        }
+        
+        // add scene to inventory
+        inv.SceneIds.Add(scene.Id);
         var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The scene can't be activated because member doesn't exist");
         memberEntity.Scenes = InventoryHelper.SerializeSceneInventory(inv);
         db.Members.Update(memberEntity);

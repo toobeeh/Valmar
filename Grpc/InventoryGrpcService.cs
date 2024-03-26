@@ -3,6 +3,7 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Valmar.Domain;
 using Valmar.Grpc.Utils;
+using Valmar.Util;
 
 namespace Valmar.Grpc;
 
@@ -97,7 +98,9 @@ public class InventoryGrpcService(
     public override async Task<Empty> BuyScene(BuySceneRequest request, ServerCallContext context)
     {
         logger.LogTrace("BuyScene(request={request})", request);
-        return await base.BuyScene(request, context);
+        
+        await inventoryService.BuyScene(request.Login, request.SceneId);
+        return new Empty();
     }
 
     public override async Task<Empty> UseScene(UseSceneRequest request, ServerCallContext context)
@@ -106,5 +109,14 @@ public class InventoryGrpcService(
         
         await inventoryService.UseScene(request.Login, request.SceneId);
         return new Empty();
+    }
+
+    public override async Task<ScenePriceReply> GetScenePrice(ScenePriceRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("UseScene(request={request})", request);
+
+        var nextPrice = SceneHelper.GetScenePrice(request.BoughtSceneCount);
+        var spentAmount = request.BoughtSceneCount == 0 ? 0 : Enumerable.Range(0, request.BoughtSceneCount).Sum(SceneHelper.GetScenePrice);
+        return new ScenePriceReply { NextPrice = nextPrice, TotalBubblesSpent = spentAmount };
     }
 }

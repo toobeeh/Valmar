@@ -41,6 +41,9 @@ service Inventory {
 
   // activate a scene for a member
   rpc UseScene (UseSceneRequest) returns (google.protobuf.Empty);
+  
+  // get the price of the next scene and the total amount of bubbles spent on scnes in the inv
+  rpc GetScenePrice (ScenePriceRequest) returns (ScenePriceReply);
 }
 
 message GetBubbleCreditRequest {
@@ -147,6 +150,15 @@ message BuySceneRequest {
 
 message UseSceneRequest {
   int32 login = 1;
-  int32 sceneId = 2;
+  google.protobuf.Int32Value sceneId = 2;
+}
+
+message ScenePriceRequest {
+  int32 boughtSceneCount = 1;
+}
+
+message ScenePriceReply {
+  int32 nextPrice = 1;
+  int32 totalBubblesSpent = 2;
 }
 

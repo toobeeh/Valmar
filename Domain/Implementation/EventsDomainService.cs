@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Valmar.Database;
+using Valmar.Domain.Classes;
 using Valmar.Domain.Exceptions;
 using Valmar.Util;
 
@@ -9,7 +10,14 @@ public class EventsDomainService(
     ILogger<EventsDomainService> logger, 
     PalantirContext db) : IEventsDomainService
 {
-    public async Task<EventEntity> GetEventById(int id)
+    private EventDdo ConvertEventEntityToDdo(EventEntity evt)
+    {
+        var start = EventHelper.ParseEventTimestamp(evt.ValidFrom);
+        return new EventDdo(evt.EventName, evt.EventId, evt.Description, evt.DayLength, evt.Progressive == 1, start,
+            start.AddDays(evt.DayLength));
+    }
+    
+    public async Task<EventDdo> GetEventById(int id)
     {
         logger.LogTrace("GetEventById(id={id})", id);
         
@@ -18,11 +26,11 @@ public class EventsDomainService(
         {
             throw new EntityNotFoundException($"Event with id {id} does not exist.");
         }
-        
-        return evt;
+
+        return ConvertEventEntityToDdo(evt);
     }
     
-    public async Task<EventEntity> GetCurrentEvent()
+    public async Task<EventDdo> GetCurrentEvent()
     {
         logger.LogTrace("GetCurrentEvent()");
         
@@ -36,12 +44,12 @@ public class EventsDomainService(
             throw new EntityNotFoundException($"No event is currently active.");
         }
         
-        return active;
+        return ConvertEventEntityToDdo(active);
     }
 
-    public async Task<List<EventEntity>> GetAllEvents()
+    public async Task<List<EventDdo>> GetAllEvents()
     {
-        return await db.Events.ToListAsync();
+        return await db.Events.Select(evt => ConvertEventEntityToDdo(evt)).ToListAsync();
     }
 
     public async Task<EventDropEntity> GetEventDropById(int id)

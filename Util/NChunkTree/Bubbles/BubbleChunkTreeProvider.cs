@@ -11,7 +11,7 @@ public record PersistentBubbleChunkRange(int? TraceIdStart, int? TraceIdEnd, Dat
 public class CachedBubbleChunkContext
 {
     public readonly ConcurrentDictionary<string, KVStore<string, DateTimeOffset?>> FirstSeenDates = new ();
-    public readonly ConcurrentDictionary<string, KVStore<string, BubbleTimespanRange>> CollectedBubbles = new ();
+    public readonly ConcurrentDictionary<string, KVStore<string, BubbleTimespanRangeDdo>> CollectedBubbles = new ();
 }
 
 public class BubbleChunkTreeProvider(ILogger<BubbleChunkTreeProvider> logger, IServiceProvider provider) : NChunkTreeProvider(provider)

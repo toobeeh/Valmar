@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Valmar";
 package events;
@@ -32,10 +33,11 @@ service Events {
 message EventReply {
   string name = 1;
   int32 id = 2;
-  string start = 3;
   string description = 4;
   int32 length = 5;  
   bool progressive = 6;
+  google.protobuf.Timestamp startDate = 7;
+  google.protobuf.Timestamp endDate = 8;
 }
 
 // A palantir event drop

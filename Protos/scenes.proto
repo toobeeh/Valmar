@@ -14,6 +14,12 @@ service Scenes {
 
   // Gets a scene by its id
   rpc GetSceneById (GetSceneRequest) returns (SceneReply);
+
+  // Gets the ranking of all scenes
+  rpc GetSceneRanking (google.protobuf.Empty) returns (stream SceneRankingReply);
+  
+  // Gets the price for a scene of an event
+  rpc GetEventScenePrice (GetEventScenePriceRequest) returns (EventScenePriceReply);
 }
 
 // Response containing a scene's properties.
@@ -31,4 +37,20 @@ message SceneReply {
 // Request containing a scene id
 message GetSceneRequest {
   int32 id = 1;
+}
+
+// Response containing the ranking of a scene
+message SceneRankingReply {
+  int32 id = 1;
+  int32 activeUsers = 2;
+  int32 totalBought = 3;
+  int32 rank = 4;
+}
+
+message GetEventScenePriceRequest {
+  int32 eventDayLength = 1;
+}
+
+message EventScenePriceReply {
+  int32 price = 2;
 }

@@ -56,11 +56,11 @@ public class CachedBubbleChunk : BubbleChunkTree, IBubbleChunk
         return await store.Retrieve();
     }
 
-    public async Task<BubbleTimespanRange> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end)
+    public async Task<BubbleTimespanRangeDdo> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end)
     {
         // sort out if this chunk is relevant - -1 signalizes this value should be ignored
-        if (start > TraceTimestampEnd) return new BubbleTimespanRange(null, null);
-        if (end < TraceTimestampStart) return new BubbleTimespanRange(null, null);
+        if (start > TraceTimestampEnd) return new BubbleTimespanRangeDdo(null, null);
+        if (end < TraceTimestampStart) return new BubbleTimespanRangeDdo(null, null);
         
         // set end or start to null if out if chunk range
         if (start < TraceTimestampStart) start = null;
@@ -72,22 +72,21 @@ public class CachedBubbleChunk : BubbleChunkTree, IBubbleChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(TraceIdEnd is null && _context.CollectedBubbles.TryGetValue(key, out var bubbleStore)) bubbleStore.Dirty();
 
-        var store = _context.CollectedBubbles.GetOrAdd(key,key =>  new KVStore<string, BubbleTimespanRange>(key, async key =>
+        var store = _context.CollectedBubbles.GetOrAdd(key,key =>  new KVStore<string, BubbleTimespanRangeDdo>(key, async key =>
             await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetAmountCollectedInTimespan(login, start, end), (a, b) =>
             {
-                // skip seed/ignored values
-                int? start = null;
-                if(a.StartAmount is not null && b.StartAmount is not null) start = Math.Min(a.StartAmount ?? 0, b.StartAmount ?? 0);
-                else if(a.StartAmount is not null) start = a.StartAmount;
-                else if(b.StartAmount is not null) start = b.StartAmount;
-
-                int? end = null;
-                if (a.EndAmount is not null && b.EndAmount is not null) end = Math.Max(a.EndAmount ?? 0, b.EndAmount ?? 0);
-                else if (a.EndAmount is not null) end = a.EndAmount;
-                else if (b.EndAmount is not null) end = b.EndAmount;
+                // treat cases where one of the ranges has absolutely no matches
+                var aNoMatches = a.StartAmount is null && a.EndAmount is null;
+                var bNoMatches = b.StartAmount is null && b.EndAmount is null;
+                if(aNoMatches && bNoMatches) return a;
+                if(aNoMatches && !bNoMatches) return b;
+                if(!aNoMatches && bNoMatches) return a;
                 
-                return new BubbleTimespanRange(start, end);
-            }, new BubbleTimespanRange(null, null)))
+                // one of range values null -> invalid state! incorrect calculation, cannot happen, should be equal in case of only one trace
+                if(a.StartAmount is null || a.EndAmount is null || b.StartAmount is null || b.EndAmount is null) throw new InvalidOperationException("Invalid state: Exactly one of the trace range values is null");
+                
+                return new BubbleTimespanRangeDdo(a.StartAmount, b.EndAmount);
+            }, new BubbleTimespanRangeDdo(null, null)))
         );
         return await store.Retrieve();
     }

@@ -1,5 +1,6 @@
 using AutoMapper;
 using Valmar.Database;
+using Valmar.Domain.Classes;
 
 namespace Valmar.Mappers;
 
@@ -7,6 +8,7 @@ public class SceneMapperProfile : Profile
 {
     public SceneMapperProfile()
     {
+        CreateMap<SceneRankingDdo, SceneRankingReply>();
         CreateMap<SceneEntity, SceneReply>()
             .ForMember(s => s.EventId, 
                 opt => opt.MapFrom(src => MapEventId(src)))
