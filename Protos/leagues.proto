@@ -52,27 +52,32 @@ message LeagueSeasonMemberEvaluationReply {
 message LeagueScoreRankingReply {
   string name = 1;
   double score = 2;
+  int64 userId = 3;
 }
 
 message LeagueCountRankingReply {
   string name = 1;
   int32 caughtDrops = 2;
+  int64 userId = 3;
 }
 
 message LeagueAverageTimeRankingReply {
   string name = 1;
   double averageTime = 2;
+  int64 userId = 3;
 }
 
 message LeagueAverageWeightRankingReply {
   string name = 1;
   double averageWeight = 2;
+  int64 userId = 3;
 }
 
 message LeagueStreakRankingReply {
   string name = 1;
   int32 maxStreak = 2;
   int32 currentStreak = 3;
+  int64 userId = 4;
 }
 
 // Request containing a month and year for a league season

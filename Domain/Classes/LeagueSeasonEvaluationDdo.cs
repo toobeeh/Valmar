@@ -14,8 +14,8 @@ public record LeagueSeasonEvaluationDdo(
     DateTimeOffset SeasonEnd
     );
 
-public record LeagueScoreRankingDdo(string Name, double Score);
-public record LeagueCountRankingDdo(string Name, int CaughtDrops);
-public record LeagueAverageWeightRankingDdo(string Name, double AverageWeight);
-public record LeagueAverageTimeRankingDdo(string Name, double AverageTime);
-public record LeagueStreakRankingDdo(string Name, int MaxStreak, int CurrentStreak);
+public record LeagueScoreRankingDdo(string Name, double Score, long UserId);
+public record LeagueCountRankingDdo(string Name, int CaughtDrops, long UserId);
+public record LeagueAverageWeightRankingDdo(string Name, double AverageWeight, long UserId);
+public record LeagueAverageTimeRankingDdo(string Name, double AverageTime, long UserId);
+public record LeagueStreakRankingDdo(string Name, int MaxStreak, int CurrentStreak, long UserId);

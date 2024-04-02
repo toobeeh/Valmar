@@ -56,31 +56,31 @@ public class LeaguesDomainService(
 
         var scoreRanking = participants
             .Select(p =>
-                new LeagueScoreRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Score))
+                new LeagueScoreRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Score, Convert.ToInt64(p.Key)))
             .OrderByDescending(item => item.Score)
             .ToList();
         
         var countRanking = participants
             .Select(p =>
-            new LeagueCountRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Count))
+            new LeagueCountRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Count, Convert.ToInt64(p.Key)))
             .OrderByDescending(item => item.CaughtDrops)
             .ToList();
         
         var streakRanking = participants
             .Select(p =>
-            new LeagueStreakRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Streak.Streak, p.Value.Streak.Head))
+            new LeagueStreakRankingDdo(memberInfoDict[p.Key].UserName, p.Value.Streak.Streak, p.Value.Streak.Head, Convert.ToInt64(p.Key)))
             .OrderByDescending(item => item.MaxStreak)
             .ToList();
         
         var weightRanking = participants
             .Select(p =>
-            new LeagueAverageWeightRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageWeight))
+            new LeagueAverageWeightRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageWeight, Convert.ToInt64(p.Key)))
             .OrderByDescending(item => item.AverageWeight)
             .ToList();
         
         var timeRanking = participants
             .Select(p =>
-            new LeagueAverageTimeRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageTime))
+            new LeagueAverageTimeRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageTime, Convert.ToInt64(p.Key)))
             .OrderBy(item => item.AverageTime)
             .ToList();
         
