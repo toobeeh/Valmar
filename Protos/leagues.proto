@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Valmar";
 package leagues;
@@ -30,6 +31,8 @@ message LeagueSeasonEvaluationReply {
   repeated LeagueAverageTimeRankingReply timeRanking = 5;
   repeated LeagueAverageWeightRankingReply weightRanking = 6;
   repeated LeagueStreakRankingReply streakRanking = 7;
+  google.protobuf.Timestamp seasonStart = 8;
+  google.protobuf.Timestamp seasonEnd = 9;
 }
 
 // Response containing own league evaluation.
@@ -42,6 +45,8 @@ message LeagueSeasonMemberEvaluationReply {
   int32 currentStreak = 7;
   double averageTime = 8;
   double averageWeight = 9;
+  google.protobuf.Timestamp seasonStart = 10;
+  google.protobuf.Timestamp seasonEnd = 11;
 }
 
 message LeagueScoreRankingReply {

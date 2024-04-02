@@ -31,9 +31,11 @@ public class LeaguesDomainService(
                 userResult.Streak.Streak, 
                 userResult.Streak.Head, 
                 userResult.AverageWeight, 
-                userResult.AverageTime);
+                userResult.AverageTime,
+                dateStart,
+                dateEnd);
         }
-        return new LeagueSeasonMemberEvaluationDdo(year, month, 0, 0, 0, 0, 0, 0);
+        return new LeagueSeasonMemberEvaluationDdo(year, month, 0, 0, 0, 0, 0, 0, dateStart, dateEnd);
     }
 
     public async Task<LeagueSeasonEvaluationDdo> EvaluateLeagueSeason(int year, int month) // TODO fix streak calc with drops inbetween
@@ -82,6 +84,6 @@ public class LeaguesDomainService(
             .OrderBy(item => item.AverageTime)
             .ToList();
         
-        return new LeagueSeasonEvaluationDdo(year, month, scoreRanking, countRanking, weightRanking, timeRanking, streakRanking);
+        return new LeagueSeasonEvaluationDdo(year, month, scoreRanking, countRanking, weightRanking, timeRanking, streakRanking, dateStart, dateEnd);
     }
 }

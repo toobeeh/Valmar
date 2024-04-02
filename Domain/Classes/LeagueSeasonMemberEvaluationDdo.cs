@@ -10,5 +10,7 @@ public record LeagueSeasonMemberEvaluationDdo(
     int MaxStreak,
     int CurrentStreak,
     double AverageWeight,
-    double AverageTime
+    double AverageTime,
+    DateTimeOffset SeasonStart,
+    DateTimeOffset SeasonEnd
     );

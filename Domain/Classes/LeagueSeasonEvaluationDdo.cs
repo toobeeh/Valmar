@@ -9,7 +9,9 @@ public record LeagueSeasonEvaluationDdo(
     List<LeagueCountRankingDdo> CountRanking, 
     List<LeagueAverageWeightRankingDdo> WeightRanking, 
     List<LeagueAverageTimeRankingDdo> TimeRanking, 
-    List<LeagueStreakRankingDdo> StreakRanking
+    List<LeagueStreakRankingDdo> StreakRanking,
+    DateTimeOffset SeasonStart,
+    DateTimeOffset SeasonEnd
     );
 
 public record LeagueScoreRankingDdo(string Name, double Score);
