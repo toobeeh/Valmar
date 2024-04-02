@@ -189,10 +189,10 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
                             var totalCount = result.Count + aResult.Count;
                             var totalScore = result.Score + aResult.Score;
                             var combinedAverageTime = result.AverageTime * result.Count / totalCount +
-                                                      aResult.AverageTime * result.Count / totalCount;
+                                                      aResult.AverageTime * aResult.Count / totalCount;
                             
                             var combinedAverageWeight = result.AverageWeight * result.Count / totalCount +
-                                                      aResult.AverageWeight * result.Count / totalCount;
+                                                      aResult.AverageWeight * aResult.Count / totalCount;
 
                             var combinedStreak = new StreakResult(
                                 result.Streak.Tail,
