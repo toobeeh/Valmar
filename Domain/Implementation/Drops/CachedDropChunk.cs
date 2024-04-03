@@ -195,8 +195,8 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
                                                       aResult.AverageWeight * aResult.Count / totalCount;
 
                             var combinedStreak = new StreakResult(
-                                result.Streak.Tail,
-                                aResult.Streak.Head,
+                                aResult.Streak.Tail,
+                                result.Streak.Head,
                                 Math.Max(Math.Max(result.Streak.Streak, aResult.Streak.Streak),
                                     aResult.Streak.Head + result.Streak.Tail));
                                 

@@ -38,7 +38,7 @@ public class LeaguesDomainService(
         return new LeagueSeasonMemberEvaluationDdo(year, month, 0, 0, 0, 0, 0, 0, dateStart, dateEnd);
     }
 
-    public async Task<LeagueSeasonEvaluationDdo> EvaluateLeagueSeason(int year, int month) // TODO fix streak calc with drops inbetween
+    public async Task<LeagueSeasonEvaluationDdo> EvaluateLeagueSeason(int year, int month)
     {
         logger.LogTrace("EvaluateLeagueSeason({year}, {month})", year, month);
         
