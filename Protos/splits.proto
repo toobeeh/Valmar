@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Valmar";
+package splits;
+
+// Service definition for splits and dropboosts
+service Splits {
+  
+  // Get all split definitions
+  rpc GetSplits(google.protobuf.Empty) returns (stream SplitReply);
+  
+  // Get a split reply by id
+  rpc GetSplitById(GetSplitByIdRequest) returns (SplitReply);
+  
+  // Get all split rewards for a member
+  rpc GetMemberSplitRewards(GetMemberSplitRewardsRequest) returns (stream SplitRewardReply);
+  
+  // Reward a member with a split
+  rpc RewardSplit(RewardSplitRequest) returns (google.protobuf.Empty);
+  
+  // Get information of the cost of a dropboost
+  rpc GetBoostCostInformation(google.protobuf.Empty) returns (BoostCostInformationReply);
+  
+  // Gets all active dropboosts
+  rpc GetActiveDropboosts(google.protobuf.Empty) returns (stream ActiveDropboostReply);
+  
+  // Gets all active dropboosts for a member
+  rpc GetActiveDropboostsOfMember(GetActiveDropboostsForMemberRequest) returns (stream ActiveDropboostReply);
+  
+  // Starts a new dropboost for a member
+  rpc StartDropboost(StartDropboostRequest) returns (google.protobuf.Empty);
+  
+  // Gets the currently available splits of a member
+  rpc GetAvailableSplits(GetAvailableSplitsRequest) returns (AvailableSplitsReply);
+}
+
+// Request to get the splits credits of a member
+message GetMemberSplitRewardsRequest {
+  int32 login = 1;
+}
+
+message GetAvailableSplitsRequest {
+  int32 login = 1;
+}
+
+message AvailableSplitsReply {
+  int32 totalSplits = 1;
+  int32 availableSplits = 2;
+}
+
+// Request to get a static split definition by id
+message GetSplitByIdRequest {
+  int32 id = 1;
+}
+
+// Request to reward a member with a split credit
+message RewardSplitRequest {
+  int32 splitId = 1;
+  int32 rewardeeLogin = 2;
+  google.protobuf.StringValue comment = 3;
+  google.protobuf.Int32Value valueOverride = 4;
+}
+
+// A static split definition
+message SplitReply {
+  int32 id = 1;
+  string name = 2;
+  string description = 3;
+  google.protobuf.Timestamp creationDate = 4;
+  int32 value = 5;
+}
+
+// A split reward of a member
+message SplitRewardReply {
+  int32 rewardeeLogin = 2;
+  SplitReply split = 3;
+  google.protobuf.Timestamp rewardDate = 4;
+  google.protobuf.StringValue comment = 5;
+  google.protobuf.Int32Value valueOverride = 6;
+  bool expired = 7;
+}
+
+message StartDropboostRequest {
+  int32 login = 1;
+  int32 durationSplits = 5;
+  int32 factorSplits = 6;
+  int32 cooldownSplits = 7;
+}
+
+message ActiveDropboostReply {
+  int32 login = 1;
+  int32 value = 3; // the value of this boost in splits
+  google.protobuf.Timestamp startDate = 4;
+  int32 durationSeconds = 5;
+  double factor = 6;
+  int32 cooldownSeconds = 7;
+}
+
+message GetActiveDropboostsForMemberRequest {
+  int32 login = 1;
+}
+
+message BoostCostInformationReply {
+  int32 factorSplitCost = 1;
+  double factorIncrease = 2;
+  double defaultFactor = 3;
+  int32 durationSplitCost = 4;
+  int32 durationIncreaseMinutes = 5;
+  int32 defaultDurationMinutes = 6;
+  int32 cooldownSplitCost = 7;
+  int32 cooldownIncreaseHours = 8;
+  int32 defaultCooldownHours = 9;
+}

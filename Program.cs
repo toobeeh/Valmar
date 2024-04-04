@@ -1,3 +1,4 @@
+using System.Globalization;
 using Calzolari.Grpc.AspNetCore.Validation;
 using Valmar.Database;
 using Valmar.Domain;
@@ -17,6 +18,9 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+        CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+        
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
@@ -64,6 +68,7 @@ public class Program
         services.AddScoped<IDropsDomainService, DropsDomainService>();
         services.AddScoped<IInventoryDomainService, InventoryDomainService>();
         services.AddScoped<IStatsDomainService, StatsDomainService>();
+        services.AddScoped<ISplitsDomainService, SplitsDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -81,6 +86,7 @@ public class Program
         app.MapGrpcService<StatsGrpcService>();
         app.MapGrpcService<DropsGrpcService>();
         app.MapGrpcService<InventoryGrpcService>();
+        app.MapGrpcService<SplitsGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)
@@ -97,6 +103,7 @@ public class Program
             typeof(InventoryMapperProfile),
             typeof(BasicMapperProfile),
             typeof(StatMapperProfile),
+            typeof(SceneMapperProfile),
             typeof(AwardMapperProfile));
     }
     
