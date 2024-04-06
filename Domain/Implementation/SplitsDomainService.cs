@@ -60,7 +60,8 @@ public class SplitsDomainService(
             {
                 Login = member.Login,
                 RewardDate = SplitHelper.FormatSplitTimestamp(DateTimeOffset.UtcNow),
-                Split = 31
+                Split = 31,
+                ValueOverride = -1
             });
         }
         
@@ -70,7 +71,8 @@ public class SplitsDomainService(
             {
                 Login = member.Login,
                 RewardDate = SplitHelper.FormatSplitTimestamp(DateTimeOffset.UtcNow),
-                Split = 29
+                Split = 29,
+                ValueOverride = -1
             });
         }
         else if (member.MappedFlags.Contains(MemberFlagDdo.Patron))
@@ -79,7 +81,8 @@ public class SplitsDomainService(
             {
                 Login = member.Login,
                 RewardDate = SplitHelper.FormatSplitTimestamp(DateTimeOffset.UtcNow),
-                Split = 30
+                Split = 30,
+                ValueOverride = -1
             });
         }
 
@@ -125,21 +128,34 @@ public class SplitsDomainService(
         await db.SaveChangesAsync();
     }
 
-    public async Task<List<DropboostDdo>> GetDropboosts(int? login = null)
+    public async Task<List<DropboostDdo>> GetDropboosts(int? login = null, bool onlyActive = true)
     {
         var utcMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         var activeBoosts = await db.DropBoosts
-            .Where(boost => (login == null || boost.Login == login) && Convert.ToInt64(boost.StartUtcs) + boost.DurationS > utcMs)
+            .Where(boost => (login == null || boost.Login == login) 
+                            && (!onlyActive || Convert.ToInt64(boost.StartUtcs) + boost.DurationS > utcMs)
+                            && ((Convert.ToInt64(boost.StartUtcs) + 1000 * 60 * 60 * 24 * 7 - boost.CooldownBonusS) > utcMs || Convert.ToInt64(boost.StartUtcs) + boost.DurationS > utcMs) ) // filter out boosts older than cooldown that are also already inactive to prevent double spending at high cooldowns
             .ToListAsync();
+        
 
-        return activeBoosts.Select(boost => new DropboostDdo(
-            boost.Login,
-            SplitHelper.CalculateSplitCost(Convert.ToDouble(boost.Factor), boost.DurationS / 1000, boost.CooldownBonusS / 1000),
-            DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(boost.StartUtcs)),
-            boost.DurationS / 1000,
-            Convert.ToDouble(boost.Factor),
-            boost.CooldownBonusS / 1000
-            )).ToList();
+        return activeBoosts.Select(boost =>
+        {
+            var start = DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(boost.StartUtcs));
+            var end = start.AddSeconds(boost.DurationS / 1000);
+            var cooldownEnd = start.AddDays(7).AddSeconds(-1 * boost.CooldownBonusS / 1000);
+
+            return new DropboostDdo(
+                boost.Login,
+                SplitHelper.CalculateSplitCost(Convert.ToDouble(boost.Factor), boost.DurationS / 1000,
+                    boost.CooldownBonusS / 1000),
+                start,
+                end,
+                end > cooldownEnd ? end : cooldownEnd,
+                boost.DurationS / 1000,
+                Convert.ToDouble(boost.Factor),
+                boost.CooldownBonusS / 1000
+            );
+        }).ToList();
     }
     
     public async Task<AvailableSplitsDdo> GetAvailableSplits(MemberDdo member)
@@ -147,11 +163,12 @@ public class SplitsDomainService(
         logger.LogTrace("GetAvailableSplits(member={member})", member);
 
         var rewards = await GetMemberSplitRewards(member);
-        var boosts = await GetDropboosts(member.Login);
+        var boosts = await GetDropboosts(member.Login, false);
 
         var total = rewards.Where(reward => !reward.Expired).Sum(reward => reward.ValueOverride ?? reward.Split.Value);
         var used = boosts.Sum(boost => boost.Value);
-        return new AvailableSplitsDdo(total, total - used);
+        var canStartBoost = total - used > 0 || boosts.Count == 0; // boost with 0 splits always allowed if no other boost active within cooldown period
+        return new AvailableSplitsDdo(total, total - used, boosts, canStartBoost);
     }
 
     public async Task StartDropboost(MemberDdo member, int factorSplits, int durationSplits, int cooldownSplits)

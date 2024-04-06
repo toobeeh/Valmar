@@ -9,7 +9,7 @@ public interface ISplitsDomainService
     Task<SplitDefinitionDdo> GetSplitById(int id);
     Task<List<SplitRewardDdo>> GetMemberSplitRewards(MemberDdo member);
     Task RewardSplit(int rewardeeLogin, int splitId, string? comment, int? valueOverride);
-    Task<List<DropboostDdo>> GetDropboosts(int? login = null);
+    Task<List<DropboostDdo>> GetDropboosts(int? login = null, bool onlyActive = true);
     Task<AvailableSplitsDdo> GetAvailableSplits(MemberDdo member);
     Task StartDropboost(MemberDdo member, int factorSplits, int durationSplits, int cooldownSplits);
 }

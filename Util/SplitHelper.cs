@@ -28,7 +28,7 @@ public static class SplitHelper
     public static int CalculateSplitCost(double factor, int durationS, int cooldownS)
     {
         var exact = (factor - DefaultFactor) / FactorIncrease * FactorSplitCost
-                    + (durationS - DefaultDurationMinutes * 60) / DurationIncreaseMinutes * 60 * DurationSplitCost
+                    + (durationS - DefaultDurationMinutes * 60) / (DurationIncreaseMinutes * 60) * DurationSplitCost
                     + (cooldownS - DefaultCooldownHours * 3600) / 3600 / CooldownIncreaseHours * CooldownSplitCost;
 
         return Convert.ToInt32(exact);

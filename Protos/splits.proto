@@ -50,6 +50,8 @@ message GetAvailableSplitsRequest {
 message AvailableSplitsReply {
   int32 totalSplits = 1;
   int32 availableSplits = 2;
+  repeated ActiveDropboostReply activeDropboosts = 3;
+  bool canStartBoost = 4;
 }
 
 // Request to get a static split definition by id
@@ -98,6 +100,8 @@ message ActiveDropboostReply {
   int32 durationSeconds = 5;
   double factor = 6;
   int32 cooldownSeconds = 7;
+  google.protobuf.Timestamp endDate = 8;
+  google.protobuf.Timestamp cooldownEndDate = 9;
 }
 
 message GetActiveDropboostsForMemberRequest {
