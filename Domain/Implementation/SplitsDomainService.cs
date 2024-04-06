@@ -110,9 +110,9 @@ public class SplitsDomainService(
                 splitDefinition.Name.Contains("League") &&
                 splitDefinition.CreationDate < DateTimeOffset.UtcNow.AddMonths(-4) // league
                 || (splitDefinition.Id == 20 &&
-                    splitDefinition.CreationDate < DateTimeOffset.UtcNow.AddDays(-14)) // epic award
+                    rewardDate < DateTimeOffset.UtcNow.AddDays(-14)) // epic award
                 || (splitDefinition.Id == 21 &&
-                    splitDefinition.CreationDate < DateTimeOffset.UtcNow.AddDays(-28)) // legendary award
+                    rewardDate < DateTimeOffset.UtcNow.AddDays(-28)) // legendary award
             );
         }).ToList();
     }
