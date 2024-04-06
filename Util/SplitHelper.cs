@@ -11,7 +11,7 @@ public static class SplitHelper
     public static readonly int DurationIncreaseMinutes = 20;
     public static readonly int CooldownSplitCost = 1;
     public static readonly int CooldownIncreaseHours = 12;
-    public static readonly double DefaultFactor = 1.1;
+    public static readonly double DefaultFactor = 1;
     public static readonly int DefaultDurationMinutes = 60;
     public static readonly int DefaultCooldownHours = 0;
     

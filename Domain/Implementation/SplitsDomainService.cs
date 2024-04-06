@@ -85,6 +85,14 @@ public class SplitsDomainService(
                 ValueOverride = -1
             });
         }
+        
+        rewards.Add(new SplitCreditEntity
+        {
+            Login = member.Login,
+            RewardDate = SplitHelper.FormatSplitTimestamp(DateTimeOffset.UtcNow),
+            Split = 32,
+            ValueOverride = -1
+        });
 
         var splits = await GetSplits(); // better performance as long as there is no major increase in splits
         return rewards.Select(reward =>
@@ -175,6 +183,8 @@ public class SplitsDomainService(
     {
         logger.LogTrace("StartDropboost(member={member}, factorSplits={factorSplits}, durationSplits={durationSplits}, cooldownSplits={cooldownSplits})", member, factorSplits, durationSplits, cooldownSplits);
         
+        if(factorSplits == 0) throw new UserOperationException("Cannot start boost with 0 factor splits");
+        
         var availableSplits = await GetAvailableSplits(member);
         if (availableSplits.AvailableSplits < factorSplits + durationSplits + cooldownSplits)
         {
@@ -199,7 +209,7 @@ public class SplitsDomainService(
             StartUtcs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString()
         };
         
-        db.DropBoosts.RemoveRange(db.DropBoosts.Where(boost => boost.Login == member.Login)); // TODO allow multiple boosts
+        //db.DropBoosts.RemoveRange(db.DropBoosts.Where(boost => boost.Login == member.Login)); // TODO allow multiple boosts
         await db.SaveChangesAsync();
 
         db.DropBoosts.Add(boost);

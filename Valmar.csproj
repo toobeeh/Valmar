@@ -27,10 +27,11 @@
         <PackageReference Include="EFCore" Version="1.1.2" />
         <PackageReference Include="EntityFrameworkCore.Scaffolding.Handlebars" Version="8.0.0-beta1" />
         <PackageReference Include="Grpc.AspNetCore" Version="2.49.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.3" />
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0-beta.2" />
     </ItemGroup>
 

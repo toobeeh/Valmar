@@ -107,5 +107,5 @@ Valmar accesses the MariaDb Palantir Database.
 ### Database client scaffolding
 
 Using the entity framework and its cli tools, the persistence layer can be easily scaffolded:  
-`dotnet ef dbcontext scaffold "Name=ConnectionStrings:Palantir" Pomelo.EntityFrameworkCore.MySql -o Database`  
-It might be possible that it is required to add [Key] attributes to some primary keys since they get omitted due to naming conventions (might be an early .net8 bug?).
+`dotnet ef dbcontext scaffold "Name=ConnectionStrings:Palantir" Pomelo.EntityFrameworkCore.MySql -o Database --force --data-annotations`  
+
