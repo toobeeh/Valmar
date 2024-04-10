@@ -33,7 +33,8 @@ public class MembersDomainService(
             Drops = 0,
             Sprites = "",
             Login = login,
-            Flag = 0
+            Flag = 0,
+            Streamcode = ""
         };
 
         var memberDetails = new MemberJson(
