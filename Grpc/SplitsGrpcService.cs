@@ -93,6 +93,16 @@ public class SplitsGrpcService(
         return new Empty();
     }
 
+    public override async Task<Empty> UpgradeDropboost(UpgradeDropboostRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("UpgradeDropboost(request={request})", request);
+
+        var member = await membersDomainService.GetMemberByLogin(request.Login);
+        await splitsDomainService.UpgradeDropboost(member, request.StartDate.ToDateTimeOffset(), request.FactorSplitsIncrease, request.DurationSplitsIncrease, request.CooldownSplitsIncrease);
+
+        return new Empty();
+    }
+
     public override async Task<AvailableSplitsReply> GetAvailableSplits(GetAvailableSplitsRequest request, ServerCallContext context)
     {
         logger.LogTrace("GetAvailableSplits(request={request})", request);

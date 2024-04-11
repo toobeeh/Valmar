@@ -12,4 +12,5 @@ public interface ISplitsDomainService
     Task<List<DropboostDdo>> GetDropboosts(int? login = null, bool onlyActive = true);
     Task<AvailableSplitsDdo> GetAvailableSplits(MemberDdo member);
     Task StartDropboost(MemberDdo member, int factorSplits, int durationSplits, int cooldownSplits);
+    Task UpgradeDropboost(MemberDdo member, DateTimeOffset startDate,  int factorSplitsIncrease, int durationSplitsIncrease, int cooldownSplitsIncrease);
 }

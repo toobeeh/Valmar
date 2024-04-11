@@ -208,11 +208,45 @@ public class SplitsDomainService(
             DurationS = durationSeconds * 1000,
             StartUtcs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString()
         };
-        
-        //db.DropBoosts.RemoveRange(db.DropBoosts.Where(boost => boost.Login == member.Login)); // TODO allow multiple boosts
-        await db.SaveChangesAsync();
 
         db.DropBoosts.Add(boost);
+        await db.SaveChangesAsync();
+    }
+
+    public async Task UpgradeDropboost(MemberDdo member, DateTimeOffset startDate,  int factorSplitsIncrease, int durationSplitsIncrease, int cooldownSplitsIncrease)
+    {
+        logger.LogTrace("StartDropboost(member={member}, factorSplitsIncrease={factorSplitsIncrease}, durationSplitsIncrease={durationSplitsIncrease}, cooldownSplitsIncrease={cooldownSplitsIncrease})", member, factorSplitsIncrease, durationSplitsIncrease, cooldownSplitsIncrease);
+
+        var splitsSum = factorSplitsIncrease + durationSplitsIncrease + cooldownSplitsIncrease;
+        if(splitsSum == 0) throw new UserOperationException("Cannot upgrade a boost with 0 splits increase");
+        
+        var availableSplits = await GetAvailableSplits(member);
+        if (availableSplits.AvailableSplits < splitsSum)
+        {
+            throw new UserOperationException($"Cannot upgrade boost, because not enough splits available ({availableSplits.AvailableSplits})");
+        }
+        
+        if(factorSplitsIncrease % SplitHelper.FactorSplitCost != 0 || durationSplitsIncrease % SplitHelper.DurationSplitCost != 0 || cooldownSplitsIncrease % SplitHelper.CooldownSplitCost != 0)
+        {
+            throw new UserOperationException("Invalid split count provided");
+        }
+
+        var existingBoost = await db.DropBoosts.FirstOrDefaultAsync(boost =>
+            boost.Login == member.Login && boost.StartUtcs == startDate.ToUnixTimeMilliseconds().ToString());
+        if (existingBoost is null)
+        {
+            throw new EntityNotFoundException($"No boost started at {startDate.ToUnixTimeMilliseconds()} to upgrade found");
+        }
+
+        var factorIncrease = SplitHelper.CalculateFactorBoost(factorSplitsIncrease) - SplitHelper.DefaultFactor;
+        var durationSecondsIncrease = SplitHelper.CalculateDurationSecondsBoost(durationSplitsIncrease) - SplitHelper.DefaultDurationMinutes * 60;
+        var cooldownSecondsIncrease = SplitHelper.CalculateCooldownSecondsBoost(cooldownSplitsIncrease) - SplitHelper.DefaultCooldownHours * 60 * 60;
+
+        existingBoost.DurationS += durationSecondsIncrease * 1000;
+        existingBoost.Factor = (Convert.ToDouble(existingBoost.Factor) + factorIncrease).ToString();
+        existingBoost.CooldownBonusS += cooldownSecondsIncrease * 1000;
+
+        db.DropBoosts.Update(existingBoost);
         await db.SaveChangesAsync();
     }
 }
