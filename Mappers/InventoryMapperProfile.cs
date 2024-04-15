@@ -9,7 +9,7 @@ public class InventoryMapperProfile : Profile
 {
     public InventoryMapperProfile()
     {
-        CreateMap<MemberSpriteSlotDdo, SpriteSlotConfigurationReply>();
+        CreateMap<MemberSpriteSlotDdo, SpriteSlotConfigurationReply>().ReverseMap();
         CreateMap<BubbleCreditDdo, BubbleCreditReply>();
         CreateMap<EventCreditDdo, EventCreditReply>();
         CreateMap<SceneInventoryDdo, SceneInventoryReply>();

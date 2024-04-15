@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "inventory.proto";
+
+option csharp_namespace = "Valmar";
+package outfits;
+
+// Service definition for outfits resource access
+service Outfits {
+  
+  // Gets all outfits of a member
+  rpc GetOutfits(GetOutfitsRequest) returns (stream OutfitMessage);
+  
+  // Saves a new outfit
+  rpc SaveOutfit(SaveOutfitRequest) returns (google.protobuf.Empty);
+  
+  // Deletes an outfit
+  rpc DeleteOutfit(DeleteOutfitRequest) returns (google.protobuf.Empty);
+  
+  // Uses an outfit
+  rpc UseOutfit(UseOutfitRequest) returns (google.protobuf.Empty);
+}
+
+// Request message for GetOutfits
+message GetOutfitsRequest {
+  int32 login = 1;
+}
+
+// configuration for a sprite/scene outfit
+message OutfitMessage {
+  string name = 1;
+  repeated inventory.SpriteSlotConfigurationReply spriteSlotConfiguration = 2;
+  google.protobuf.Int32Value sceneId = 3;
+}
+
+message SaveOutfitRequest {
+  int32 login = 1;
+  OutfitMessage outfit = 2;
+}
+
+message DeleteOutfitRequest {
+  int32 login = 1;
+  string outfitName = 2;
+}
+
+message UseOutfitRequest {
+  int32 login = 1;
+  string outfitName = 2;
+}
