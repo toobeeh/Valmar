@@ -8,6 +8,6 @@ public class OutfitMapperProfile : Profile
 {
     public OutfitMapperProfile()
     {
-        CreateMap<OutfitDdo, OutfitMessage>();
+        CreateMap<OutfitDdo, OutfitMessage>().ReverseMap();
     }
 }

@@ -20,6 +20,14 @@ public class OutfitsGrpcService(
         await responseStream.WriteAllMappedAsync(outfits, mapper.Map<OutfitMessage>);
     }
 
+    public override async Task<OutfitMessage> GetOutfit(GetOutfitRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("GetOutfit(request={request})", request);
+
+        var outfit = await outfitsDomainService.GetMemberOutfit(request.Login, request.OutfitName);
+        return mapper.Map<OutfitMessage>(outfit);
+    }
+
     public override async Task<Empty> SaveOutfit(SaveOutfitRequest request, ServerCallContext context)
     {
         logger.LogTrace("SaveOutfit(request={request})", request);

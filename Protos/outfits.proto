@@ -12,6 +12,9 @@ service Outfits {
   
   // Gets all outfits of a member
   rpc GetOutfits(GetOutfitsRequest) returns (stream OutfitMessage);
+
+  // Gets an outfit by name of a member
+  rpc GetOutfit(GetOutfitRequest) returns (OutfitMessage);
   
   // Saves a new outfit
   rpc SaveOutfit(SaveOutfitRequest) returns (google.protobuf.Empty);
@@ -38,6 +41,11 @@ message OutfitMessage {
 message SaveOutfitRequest {
   int32 login = 1;
   OutfitMessage outfit = 2;
+}
+
+message GetOutfitRequest {
+  int32 login = 1;
+  string outfitName = 2;
 }
 
 message DeleteOutfitRequest {

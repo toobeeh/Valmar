@@ -22,10 +22,8 @@ public class OutfitsDomainService(
         return outfits
             .Select(outfit => new OutfitDdo(
                 outfit.Name,
-                InventoryHelper.ParseActiveSlotsFromInventory(
-                    string.Join(",", outfit.Combo.Split(",").Select((item, idx) => $"{".".Repeat(idx + 1)}{item}")), 
-                    outfit.RainbowSprites),
-                string.IsNullOrWhiteSpace(outfit.Scene) ? null : Convert.ToInt32(outfit.Scene)))
+                OutfitHelper.ParseComboFromOutfit(outfit.Combo, outfit.RainbowSprites),
+                OutfitHelper.ParseSceneFromOutfit(outfit.Scene)))
             .ToList();
     }
 
@@ -44,10 +42,8 @@ public class OutfitsDomainService(
         
         return new OutfitDdo(
             outfit.Name,
-            InventoryHelper.ParseActiveSlotsFromInventory(
-                string.Join(",", outfit.Combo.Split(",").Select((item, idx) => $"{".".Repeat(idx + 1)}{item}")), 
-                outfit.RainbowSprites),
-            string.IsNullOrWhiteSpace(outfit.Scene) ? null : Convert.ToInt32(outfit.Scene));
+            OutfitHelper.ParseComboFromOutfit(outfit.Combo, outfit.RainbowSprites),
+            OutfitHelper.ParseSceneFromOutfit(outfit.Scene));
     }
     
     public async Task SaveOutfit(int login, OutfitDdo outfit)
@@ -64,8 +60,8 @@ public class OutfitsDomainService(
             {
                 Login = login,
                 Name = outfit.Name,
-                Combo = InventoryHelper.SerializeSimpleCombo(outfit.SpriteSlotConfiguration),
-                RainbowSprites = InventoryHelper.SerializeSimpleColorConfig(outfit.SpriteSlotConfiguration),
+                Combo = OutfitHelper.SerializeSimpleCombo(outfit.SpriteSlotConfiguration),
+                RainbowSprites = OutfitHelper.SerializeSimpleColorConfig(outfit.SpriteSlotConfiguration),
                 Scene = outfit.SceneId?.ToString() ?? ""
             };
 
@@ -73,8 +69,8 @@ public class OutfitsDomainService(
         }
         else
         {
-            spriteProfile.Combo = InventoryHelper.SerializeSimpleCombo(outfit.SpriteSlotConfiguration);
-            spriteProfile.RainbowSprites = InventoryHelper.SerializeSimpleColorConfig(outfit.SpriteSlotConfiguration);
+            spriteProfile.Combo = OutfitHelper.SerializeSimpleCombo(outfit.SpriteSlotConfiguration);
+            spriteProfile.RainbowSprites = OutfitHelper.SerializeSimpleColorConfig(outfit.SpriteSlotConfiguration);
             spriteProfile.Scene = outfit.SceneId?.ToString() ?? "";
             db.Update(spriteProfile);
         }

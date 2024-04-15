@@ -136,9 +136,10 @@ public class InventoryDomainService(
 
         var member = await membersService.GetMemberByLogin(login);
         var isPatron = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Patron);
+        var isAdmin = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Admin);
         var dropCredit = await GetDropCredit(login);
         
-        var slots = 1 + (isPatron ? 1 : 0) + dropCredit.TotalCredit / 1000;
+        var slots = 1 + (isPatron ? 1 : 0) + (isAdmin ? 100 : 0) + dropCredit.TotalCredit / 1000;
         return slots;
     }
 
@@ -149,6 +150,7 @@ public class InventoryDomainService(
         var member = await membersService.GetMemberByLogin(login);
         var inv = await GetMemberSpriteInventory(login);
         var isPatron = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Patron);
+        var isAdmin = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Admin);
 
         // if clearing, remove all configs
         if (!clearOther)
@@ -165,7 +167,7 @@ public class InventoryDomainService(
         }
         
         // check if user is allowed to set more than one color shifts
-        if (!isPatron && inv.Count(slot => slot.ColorShift != null) > 1)
+        if (!isPatron && !isAdmin && inv.Count(slot => slot.ColorShift != null) > 1)
         {
             throw new UserOperationException("User is not allowed to set more than one color shift");
         }

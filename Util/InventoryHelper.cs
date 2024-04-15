@@ -79,16 +79,4 @@ public static class InventoryHelper
     {
         return ParseSpriteInventory(sprites, shifts).Where(slot => slot.Slot > 0).ToList();
     }
-    
-    public static string SerializeSimpleCombo(List<MemberSpriteSlotDdo> slots)
-    {
-        return string.Join(",", slots.Select(slot => slot.SpriteId));
-    }
-    
-    public static string SerializeSimpleColorConfig(List<MemberSpriteSlotDdo> slots)
-    {
-        return string.Join(",", slots
-            .Where(slot => slot.ColorShift is not null)
-            .Select(slot => $"{slot.SpriteId}:{slot.ColorShift}"));
-    }
 }
