@@ -21,7 +21,7 @@ public class ShareThemeRequestValidator : AbstractValidator<ShareThemeRequest>
             var meta = _themesService.ParseTheme(json);
             return true;
         }
-        catch(Exception e)
+        catch(Exception)
         {
             return false;
         }

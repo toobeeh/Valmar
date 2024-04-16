@@ -8,7 +8,6 @@ namespace Valmar.Domain.Implementation;
 
 public class SplitsDomainService(
     ILogger<SplitsDomainService> logger,
-    IMembersDomainService membersDomainService,
     PalantirContext db) : ISplitsDomainService
 {
     public async Task<List<SplitDefinitionDdo>> GetSplits()

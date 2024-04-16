@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using Valmar.Domain.Classes;
 using Valmar.Domain.Implementation.Drops;
 using Valmar.Util;
 using Valmar.Util.NChunkTree;
@@ -44,7 +45,7 @@ public class CachedBubbleChunk : BubbleChunkTree, IBubbleChunk
         // get key for request identifiers
         var key = $"{login}";
         
-        var store = _context.FirstSeenDates.GetOrAdd(key,key =>  new KVStore<string, DateTimeOffset?>(key, async key =>
+        var store = _context.FirstSeenDates.GetOrAdd(key,key =>  new KeyValueStore<string, DateTimeOffset?>(key, async key =>
             await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetFirstSeenDate(login), (a, b) =>
             {
                 if (a is null) return b;
@@ -72,7 +73,7 @@ public class CachedBubbleChunk : BubbleChunkTree, IBubbleChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(TraceIdEnd is null && _context.CollectedBubbles.TryGetValue(key, out var bubbleStore)) bubbleStore.Dirty();
 
-        var store = _context.CollectedBubbles.GetOrAdd(key,key =>  new KVStore<string, BubbleTimespanRangeDdo>(key, async key =>
+        var store = _context.CollectedBubbles.GetOrAdd(key,key =>  new KeyValueStore<string, BubbleTimespanRangeDdo>(key, async key =>
             await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetAmountCollectedInTimespan(login, start, end), (a, b) =>
             {
                 // treat cases where one of the ranges has absolutely no matches

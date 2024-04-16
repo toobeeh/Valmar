@@ -41,11 +41,11 @@ public class ScenesGrpcService(
         await responseStream.WriteAllMappedAsync(ranking, mapper.Map<SceneRankingReply>);
     }
 
-    public override async Task<EventScenePriceReply> GetEventScenePrice(GetEventScenePriceRequest request, ServerCallContext context)
+    public override Task<EventScenePriceReply> GetEventScenePrice(GetEventScenePriceRequest request, ServerCallContext context)
     {
         logger.LogTrace("GetEventScenePrice(request={request})", request);
         
         var price = EventHelper.GetEventScenePrice(request.EventDayLength);
-        return new EventScenePriceReply { Price = price};
+        return Task.FromResult(new EventScenePriceReply { Price = price});
     }
 }

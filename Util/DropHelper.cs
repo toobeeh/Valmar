@@ -37,7 +37,7 @@ public static class DropHelper
         candidates.Sort((a, b) => a.Item2.CompareTo(b.Item2));
 
         List<Tuple<long, double>> currentSet = new List<Tuple<long, double>>();
-        List<Tuple<long, double>> optimalSet = null;
+        List<Tuple<long, double>> optimalSet = [];
 
         double currentSum = 0;
         double optimalSum = double.MaxValue;

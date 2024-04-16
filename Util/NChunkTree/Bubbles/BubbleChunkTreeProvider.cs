@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using Microsoft.Extensions.Options;
+using Valmar.Domain.Classes;
 using Valmar.Domain.Implementation.Bubbles;
 using Valmar.Domain.Implementation.Drops;
 
@@ -10,8 +11,8 @@ public record PersistentBubbleChunkRange(int? TraceIdStart, int? TraceIdEnd, Dat
 
 public class CachedBubbleChunkContext
 {
-    public readonly ConcurrentDictionary<string, KVStore<string, DateTimeOffset?>> FirstSeenDates = new ();
-    public readonly ConcurrentDictionary<string, KVStore<string, BubbleTimespanRangeDdo>> CollectedBubbles = new ();
+    public readonly ConcurrentDictionary<string, KeyValueStore<string, DateTimeOffset?>> FirstSeenDates = new ();
+    public readonly ConcurrentDictionary<string, KeyValueStore<string, BubbleTimespanRangeDdo>> CollectedBubbles = new ();
 }
 
 public class BubbleChunkTreeProvider(ILogger<BubbleChunkTreeProvider> logger, IServiceProvider provider) : NChunkTreeProvider(provider)

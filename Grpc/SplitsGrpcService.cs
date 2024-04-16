@@ -47,11 +47,11 @@ public class SplitsGrpcService(
         return new Empty();
     }
 
-    public override async Task<BoostCostInformationReply> GetBoostCostInformation(Empty request, ServerCallContext context)
+    public override Task<BoostCostInformationReply> GetBoostCostInformation(Empty request, ServerCallContext context)
     {
         logger.LogTrace("GetBoostCostInformation(request={request})", request);
 
-        return new BoostCostInformationReply
+        return Task.FromResult(new BoostCostInformationReply
         {
             FactorSplitCost = SplitHelper.FactorSplitCost,
             FactorIncrease = SplitHelper.FactorIncrease,
@@ -62,7 +62,7 @@ public class SplitsGrpcService(
             DefaultFactor = SplitHelper.DefaultFactor,
             DefaultDurationMinutes = SplitHelper.DefaultDurationMinutes,
             DefaultCooldownHours = SplitHelper.DefaultCooldownHours
-        };
+        });
     }
 
     public override async Task GetActiveDropboosts(Empty request, IServerStreamWriter<ActiveDropboostReply> responseStream, ServerCallContext context)

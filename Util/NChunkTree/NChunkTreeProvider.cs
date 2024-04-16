@@ -49,8 +49,8 @@ public abstract class NChunkTreeProvider(IServiceProvider provider)
     {
         if (!_nodes.TryGetValue(id, out var context)) throw new InvalidOperationException("Node not found");
         var nodes = context.ChildIdSlots
-            .Where(id => id.HasValue)
-            .Select(id => GetNode<TChunk, TProvider>(id.Value));
+            .Where(childId => childId.HasValue)
+            .Select(childId => GetNode<TChunk, TProvider>(childId!.Value));
 
         return nodes.ToList();
     }

@@ -14,7 +14,6 @@ namespace Valmar.Domain.Implementation;
 public class MembersDomainService(
     ILogger<MembersDomainService> logger, 
     IGuildsDomainService guildsService,
-    DropChunkTreeProvider dropTree,
     PalantirContext db) : IMembersDomainService
 {
     public async Task<MemberDdo> CreateMember(long discordId, string username, bool connectTypo)
@@ -255,7 +254,7 @@ public class MembersDomainService(
             db.Awardees.UpdateRange(receivedAwards);
 
         }
-        catch(Exception e) {
+        catch(Exception) {
             logger.LogTrace("No account for new discord id found, transferring no data");
         }
 

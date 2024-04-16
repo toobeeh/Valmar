@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using Microsoft.Extensions.Options;
+using Valmar.Domain.Classes;
 using Valmar.Domain.Implementation.Drops;
 
 namespace Valmar.Util.NChunkTree.Drops;
@@ -9,11 +10,11 @@ public record PersistentDropChunkRange(long? Start, long? End, DateTimeOffset? S
 
 public class CachedDropChunkContext
 {
-    public readonly ConcurrentDictionary<string, KVStore<string, double>> LeagueDropValue = new ();
-    public readonly ConcurrentDictionary<string, KVStore<string, int>> LeagueDropCount = new ();
-    public readonly ConcurrentDictionary<string, KVStore<string, EventResult>> EventDetails = new ();
-    public readonly ConcurrentDictionary<string, KVStore<string, IList<string>>> LeagueParticipants = new ();
-    public readonly ConcurrentDictionary<string, KVStore<string, Dictionary<string, LeagueResult>>> LeagueResults = new ();
+    public readonly ConcurrentDictionary<string, KeyValueStore<string, double>> LeagueDropValue = new ();
+    public readonly ConcurrentDictionary<string, KeyValueStore<string, int>> LeagueDropCount = new ();
+    public readonly ConcurrentDictionary<string, KeyValueStore<string, EventResult>> EventDetails = new ();
+    public readonly ConcurrentDictionary<string, KeyValueStore<string, IList<string>>> LeagueParticipants = new ();
+    public readonly ConcurrentDictionary<string, KeyValueStore<string, Dictionary<string, LeagueResult>>> LeagueResults = new ();
 }
 
 public class DropChunkTreeProvider(ILogger<DropChunkTreeProvider> logger, IServiceProvider provider) : NChunkTreeProvider(provider)

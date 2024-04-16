@@ -70,7 +70,7 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         Provider.PersistentChunkContext[NodeId] = new PersistentDropChunkRange(start, end, DropTimestampStart, DropTimestampEnd);
     }
     
-    public async Task<List<long>> EvaluateSubChunks(int chunkSize)
+    public Task<List<long>> EvaluateSubChunks(int chunkSize)
     {
         // find indexes to index chunks
         var drops = _db.PastDrops
@@ -83,7 +83,7 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
             .Select(item => Convert.ToInt64(item.DropId))
             .ToList();
 
-        return drops;
+        return Task.FromResult(drops);
     }
     
     public async Task<double> GetLeagueWeight(string id)

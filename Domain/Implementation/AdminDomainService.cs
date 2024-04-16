@@ -13,11 +13,13 @@ public class AdminDomainService(
     DropChunkTreeProvider dropChunks) : IAdminDomainService
 {
     
-    public async Task ReevaluateDropChunks()
+    public Task ReevaluateDropChunks()
     {
         logger.LogTrace("ReevaluateDropChunks()");
+        
         var tree = dropChunks.GetTree();
         dropChunks.RepartitionTree(tree);
+        return Task.CompletedTask;
     }
     
     public async Task WriteOnlineItems(List<OnlineItemDdo> items)

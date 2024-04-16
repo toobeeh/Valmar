@@ -22,6 +22,7 @@ public abstract class BubbleChunkTree(
     NChunkTreeNodeContext context)
     : NChunkTree<IBubbleChunk, BubbleChunkTreeProvider>(services, provider, context)
 {
+    private readonly BubbleChunkTreeProvider _provider = provider;
     protected override long? ChunkStartIndex => Chunk.TraceIdStart;
     protected override long? ChunkEndIndex => Chunk.TraceIdEnd;
     protected override NChunkTree<IBubbleChunk, BubbleChunkTreeProvider> CreateExpansionNode()
@@ -75,7 +76,7 @@ public abstract class BubbleChunkTree(
         for(int i = 0; i < subChunks.Count; i++)
         {
             var newChunk = Provider.CreateLeaf(subChunks[i], i + 1 > subChunks.Count - 1 ? null : subChunks[i + 1]);
-            provider.AddLeaf(newChunk);
+            _provider.AddLeaf(newChunk);
         }
     }
 }

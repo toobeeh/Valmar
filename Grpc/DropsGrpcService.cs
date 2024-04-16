@@ -8,7 +8,6 @@ namespace Valmar.Grpc;
 
 public class DropsGrpcService(
     ILogger<DropsGrpcService> logger, 
-    IMapper mapper,
     IDropsDomainService dropsService) : Drops.DropsBase
 {
     public override async Task<Empty> ScheduleDrop(ScheduleDropRequest request, ServerCallContext context)
@@ -24,7 +23,7 @@ public class DropsGrpcService(
         logger.LogTrace("GetCurrentBoostFactor(empty)");
         
         var boost = await dropsService.GetCurrentDropBoost();
-        return new CurrentBoostFactorReply() { Boost = boost };
+        return new CurrentBoostFactorReply { Boost = boost };
     }
 
     public override async Task<DropDelayBoundsReply> CalculateDropDelayBounds(CalculateDelayRequest request, ServerCallContext context)
@@ -33,6 +32,6 @@ public class DropsGrpcService(
         
         var bounds = await dropsService.CalculateDropDelayBounds(request.OnlinePlayerCount, request.BoostFactor);
 
-        return new DropDelayBoundsReply() { MinDelaySeconds = bounds.Item1, MaxDelaySeconds = bounds.Item2 };
+        return new DropDelayBoundsReply { MinDelaySeconds = bounds.Item1, MaxDelaySeconds = bounds.Item2 };
     }
 }

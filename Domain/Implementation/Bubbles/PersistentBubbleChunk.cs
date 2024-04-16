@@ -69,7 +69,7 @@ public class PersistentBubbleChunk : BubbleChunkLeaf, IBubbleChunk
         Provider.PersistentChunkContext[NodeId] = new PersistentBubbleChunkRange(start, end, TraceTimestampStart, TraceTimestampEnd);
     }
     
-    public async Task<List<int>> EvaluateSubChunks(int chunkSize)
+    public Task<List<int>> EvaluateSubChunks(int chunkSize)
     {
         // find indexes to index chunks
         var traceDateIds = _db.BubbleTraces
@@ -87,7 +87,7 @@ public class PersistentBubbleChunk : BubbleChunkLeaf, IBubbleChunk
             .Select(item => item.MinId)
             .ToList();
 
-        return traceDateIds;
+        return Task.FromResult(traceDateIds);
     }
     
     public async Task<DateTimeOffset?> GetFirstSeenDate(int login)

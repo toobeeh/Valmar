@@ -37,7 +37,7 @@ public class ScenesDomainService(
         var scenes = await db.Scenes.Select(sprite => sprite.Id).ToListAsync();
         var inventories = await db.Members.Select(member => member.Scenes).Where(inv => !string.IsNullOrWhiteSpace(inv)).ToListAsync();
         var parsedInventories = inventories
-            .Select(inv => inv
+            .Select(inv => inv!
                 .Split(",")
                 .Select(id => new { Id = Convert.ToInt32(id.Replace(".", "")), Active =  id.Contains('.')}).ToList())
             .ToList();

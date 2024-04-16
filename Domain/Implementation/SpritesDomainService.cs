@@ -105,7 +105,7 @@ public class SpritesDomainService(
         var unreleasedEventDrops = progressiveEventDrops
             .SelectMany(evt =>
             {
-                var eventStart = EventHelper.ParseEventTimestamp(evt.Event.ValidFrom);
+                var eventStart = EventHelper.ParseEventTimestamp(evt.Event!.ValidFrom);
                 if (DateTimeOffset.UtcNow > eventStart.AddDays(evt.Event.DayLength)) return [];
 
                 return EventHelper.GetProgressiveEventDropReleaseSlots(

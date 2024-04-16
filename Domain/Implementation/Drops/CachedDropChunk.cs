@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Options;
+using Valmar.Domain.Classes;
 using Valmar.Util;
 using Valmar.Util.NChunkTree;
 using Valmar.Util.NChunkTree.Drops;
@@ -58,7 +59,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.LeagueDropValue.ContainsKey(key)) _context.LeagueDropValue[key].Dirty();
 
-        var store = _context.LeagueDropValue.GetOrAdd(key,key =>  new KVStore<string, double>(key, async key =>
+        var store = _context.LeagueDropValue.GetOrAdd(key,key =>  new KeyValueStore<string, double>(key, async key =>
             await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) => a+b, 0d))
         );
         return await store.Retrieve();
@@ -85,7 +86,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.LeagueParticipants.ContainsKey(key)) _context.LeagueParticipants[key].Dirty();
 
-        var store = _context.LeagueParticipants.GetOrAdd(key,key =>  new KVStore<string, IList<string>>(key, async key =>
+        var store = _context.LeagueParticipants.GetOrAdd(key,key =>  new KeyValueStore<string, IList<string>>(key, async key =>
             await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueParticipants(start, end), (a, b) =>
             {
                 foreach (var item in b)
@@ -119,7 +120,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.LeagueDropCount.ContainsKey(key)) _context.LeagueDropCount[key].Dirty();
 
-        var store = _context.LeagueDropCount.GetOrAdd(key,key =>  new KVStore<string, int>(key, async key =>
+        var store = _context.LeagueDropCount.GetOrAdd(key,key =>  new KeyValueStore<string, int>(key, async key =>
             await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueCount(id, start, end), (a, b) => a+b, 0))
         );
         return await store.Retrieve();
@@ -143,7 +144,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.EventDetails.ContainsKey(key)) _context.EventDetails[key].Dirty();
 
-        var store = _context.EventDetails.GetOrAdd(key,key =>  new KVStore<string, EventResult>(key, async key =>
+        var store = _context.EventDetails.GetOrAdd(key,key =>  new KeyValueStore<string, EventResult>(key, async key =>
             await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventId, userid, userLogin),
                 (a, b) =>
                 {
@@ -177,7 +178,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         if(DropIndexEnd is null && _context.LeagueResults.TryGetValue(key, out var detail)) detail.Dirty();
         
         
-        var store = _context.LeagueResults.GetOrAdd(key,_ =>  new KVStore<string, Dictionary<string, LeagueResult>>(key, async _ =>
+        var store = _context.LeagueResults.GetOrAdd(key,_ =>  new KeyValueStore<string, Dictionary<string, LeagueResult>>(key, async _ =>
             await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueResults(start, end),
                 (a, b) =>
                 {

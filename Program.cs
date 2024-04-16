@@ -50,7 +50,7 @@ public class Program
         );
 
         RegisterGrpcServices(app);
-        app.Run();
+        await app.RunAsync();
     }
 
     private static void RegisterDomainServices(IServiceCollection services)

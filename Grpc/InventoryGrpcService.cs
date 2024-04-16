@@ -111,12 +111,12 @@ public class InventoryGrpcService(
         return new Empty();
     }
 
-    public override async Task<ScenePriceReply> GetScenePrice(ScenePriceRequest request, ServerCallContext context)
+    public override Task<ScenePriceReply> GetScenePrice(ScenePriceRequest request, ServerCallContext context)
     {
         logger.LogTrace("UseScene(request={request})", request);
 
         var nextPrice = SceneHelper.GetScenePrice(request.BoughtSceneCount);
         var spentAmount = request.BoughtSceneCount == 0 ? 0 : Enumerable.Range(0, request.BoughtSceneCount).Sum(SceneHelper.GetScenePrice);
-        return new ScenePriceReply { NextPrice = nextPrice, TotalBubblesSpent = spentAmount };
+        return Task.FromResult(new ScenePriceReply { NextPrice = nextPrice, TotalBubblesSpent = spentAmount });
     }
 }
