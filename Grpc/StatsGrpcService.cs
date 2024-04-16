@@ -1,15 +1,13 @@
 using AutoMapper;
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Valmar.Domain;
-using Valmar.Domain.Classes.Param;
-using Valmar.Domain.Implementation;
 
 namespace Valmar.Grpc;
 
 public class StatsGrpcService(
     ILogger<StatsGrpcService> logger, 
     IMapper mapper,
+    IMembersDomainService membersService,
     IStatsDomainService statsService) : Stats.StatsBase
 {
     public override async Task<BubbleTimespanRangeReply> GetBubbleTimespanRange(BubbleTimespanRangeRequest request, ServerCallContext context)
@@ -19,5 +17,18 @@ public class StatsGrpcService(
         var range = await statsService.GetMemberBubblesInRange(request.Login, request.StartDate.ToDateTimeOffset(),
             request.EndDate.ToDateTimeOffset());
         return mapper.Map<BubbleTimespanRangeReply>(range);
+    }
+
+    public override async Task<LeaderboardMessage> GetLeaderboard(GetLeaderboardMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("GetLeaderboard(request={request})", request);
+
+        var members = request.GuildToken is { } token
+            ? await membersService.GetGuildMembers(token)
+            : await membersService.GetAllMembers();
+        
+        var leaderboard = await statsService.CreateLeaderboard(members, request.Mode);
+        
+        return new LeaderboardMessage { Entries = { mapper.Map<List<LeaderboardRankMessage>>(leaderboard) } };
     }
 }

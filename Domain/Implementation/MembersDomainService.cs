@@ -7,7 +7,6 @@ using Valmar.Domain.Classes;
 using Valmar.Domain.Classes.JSON;
 using Valmar.Domain.Exceptions;
 using Valmar.Util;
-using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar.Domain.Implementation;
 
@@ -60,34 +59,33 @@ public class MembersDomainService(
         {
             throw new EntityNotFoundException($"No member found for login {login}");
         }
-        
-        // parse details from json
-        var memberDetails = ValmarJsonParser.TryParse<MemberJson>(member.Member1, logger);
-        
-        // get league drop stats
-        //var drops = dropTree.GetTree().Chunk;
-        //var value = await drops.GetLeagueWeight(memberDetails.UserId);
-        //var count = await drops.GetLeagueCount(memberDetails.UserId);
-        
-        // parse patronized details
-        long? patronizedId = member.Patronize is { } patronizeString ? Convert.ToInt64(patronizeString.Split("#")[0]) : null;
 
-        // build ddo
-        return new MemberDdo(
-            member.Bubbles,
-            member.Drops,
-            member.Sprites,
-            member.Scenes ?? "",
-            member.Flag,
-            member.RainbowSprites ?? "",
-            Convert.ToInt64(memberDetails.UserId),
-            memberDetails.UserName,
-            Convert.ToInt32(memberDetails.UserLogin),
-            memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList(),
-            patronizedId,
-            FlagHelper.HasFlag(member.Flag, MemberFlagDdo.Patron) ? member.Emoji : null,
-            FlagHelper.GetFlags(member.Flag)
-        );
+        return ConvertToDdo(member);
+    }
+
+    public async Task<List<MemberDdo>> GetGuildMembers(int observeToken)
+    {
+        logger.LogTrace("GetGuildMembers(observeToken={observeToken})", observeToken);
+        
+        var members = await db.Members.Where(member => member.Member1.Contains(observeToken.ToString())).ToListAsync(); // get possible candidates and filter out after parsing json
+        var memberDdos = members
+            .Select(ConvertToDdo)
+            .Where(member => member.ServerConnections.Contains(observeToken))
+            .ToList();
+
+        return memberDdos;
+    }
+    
+    public async Task<List<MemberDdo>> GetAllMembers()
+    {
+        logger.LogTrace("GetAllMembers()");
+        
+        var members = await db.Members.ToListAsync();
+        var memberDdos = members
+            .Select(member => Task.Run(() => ConvertToDdo(member)) )
+            .ToList();
+
+        return (await Task.WhenAll(memberDdos)).ToList();
     }
     
     public async Task<MemberDdo> GetPatronizedMemberOfPatronizer(long patronizerId)
@@ -356,5 +354,38 @@ public class MembersDomainService(
         var base64 = Convert.ToBase64String(bytes);
         var result = Regex.Replace(base64,"[^A-Za-z0-9]","");
         return result;
+    }
+    
+    private MemberDdo ConvertToDdo(MemberEntity member)
+    {
+        logger.LogTrace("ConvertToDdo(member={member})", member);
+        
+        // parse details from json
+        var memberDetails = ValmarJsonParser.TryParse<MemberJson>(member.Member1, logger);
+        
+        // get league drop stats
+        //var drops = dropTree.GetTree().Chunk;
+        //var value = await drops.GetLeagueWeight(memberDetails.UserId);
+        //var count = await drops.GetLeagueCount(memberDetails.UserId);
+        
+        // parse patronized details
+        long? patronizedId = member.Patronize is { } patronizeString ? Convert.ToInt64(patronizeString.Split("#")[0]) : null;
+
+        // build ddo
+        return new MemberDdo(
+            member.Bubbles,
+            member.Drops,
+            member.Sprites,
+            member.Scenes ?? "",
+            member.Flag,
+            member.RainbowSprites ?? "",
+            Convert.ToInt64(memberDetails.UserId),
+            memberDetails.UserName,
+            Convert.ToInt32(memberDetails.UserLogin),
+            memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList(),
+            patronizedId,
+            FlagHelper.HasFlag(member.Flag, MemberFlagDdo.Patron) ? member.Emoji : null,
+            FlagHelper.GetFlags(member.Flag)
+        );
     }
 }

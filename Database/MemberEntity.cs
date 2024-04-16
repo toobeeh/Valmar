@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace Valmar.Database
 {
@@ -30,7 +27,7 @@ namespace Valmar.Database
         [Column(TypeName = "text")]
         public string? Scenes { get; set; }
         [Column(TypeName = "text")]
-        public string Streamcode { get; set; } = null!;
+        public string? Streamcode { get; set; } = null!;
         [Column(TypeName = "text")]
         public string? RainbowSprites { get; set; }
         [Column(TypeName = "bigint(20)")]

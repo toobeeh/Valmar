@@ -1,15 +1,24 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 option csharp_namespace = "Valmar";
 package stats;
+
+enum LeaderboardMode {
+  BUBBLES = 0;
+  DROPS = 1;
+}
 
 // Service definition for scene resource access
 service Stats {
   
   // Get the bubble range of a member in a timespan
   rpc GetBubbleTimespanRange (BubbleTimespanRangeRequest) returns (BubbleTimespanRangeReply);
+  
+  // gets the member leaderboard, either global or for a guild, sorted by bubbles or drops
+  rpc GetLeaderboard (GetLeaderboardMessage) returns (LeaderboardMessage);
 }
 
 message BubbleTimespanRangeRequest {
@@ -21,4 +30,22 @@ message BubbleTimespanRangeRequest {
 message BubbleTimespanRangeReply {
   int32 startAmount = 1;
   int32 endAmount = 2;
+}
+
+message GetLeaderboardMessage {
+  google.protobuf.Int32Value guildToken = 1;
+  LeaderboardMode mode = 2;
+}
+
+message LeaderboardMessage {
+  repeated LeaderboardRankMessage entries = 1;
+}
+
+message LeaderboardRankMessage {
+  int32 rank = 1;
+  int32 login = 2;
+  int64 discordId = 3;
+  string username = 4;
+  int32 bubbles = 5;
+  int32 drops = 6;
 }

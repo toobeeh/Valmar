@@ -1,5 +1,4 @@
 using AutoMapper;
-using Valmar.Database;
 using Valmar.Domain.Classes;
 using Valmar.Util.NChunkTree.Bubbles;
 
@@ -10,5 +9,6 @@ public class StatMapperProfile : Profile
     public StatMapperProfile()
     {
         CreateMap<BubbleTimespanRangeDdo, BubbleTimespanRangeReply>();
+        CreateMap<LeaderboardRankDdo, LeaderboardRankMessage>();
     }
 }
