@@ -8,6 +8,9 @@ service Guilds {
   
   // Gets a guild by its observe token
   rpc GetGuildByToken (GetGuildRequest) returns (GuildReply);
+  
+  // Gets a guild by its discord ID
+  rpc GetGuildByDiscordId (GetGuildByIdMessage) returns (GuildReply);
 }
 
 // Response containing a guild's properties.
@@ -23,4 +26,9 @@ message GuildReply {
 // Request containing a guild observe token
 message GetGuildRequest {
   int32 observeToken = 1;
+}
+
+// Request containing a guild discord ID
+message GetGuildByIdMessage {
+  int64 discordId = 1;
 }

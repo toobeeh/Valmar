@@ -1,12 +1,10 @@
 using Valmar.Domain.Classes;
 using Valmar.Util.NChunkTree.Bubbles;
-using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar.Domain.Implementation;
 
 public class StatsDomainService(
     ILogger<StatsDomainService> logger, 
-    DropChunkTreeProvider dropChunkProvider,
     BubbleChunkTreeProvider bubbleChunks) : IStatsDomainService
 {
     public async Task<BubbleTimespanRangeDdo> GetMemberBubblesInRange(int login, DateTimeOffset start, DateTimeOffset end)
@@ -19,11 +17,9 @@ public class StatsDomainService(
         return new BubbleTimespanRangeDdo(range.StartAmount ?? 0, range.EndAmount ?? (range.StartAmount ?? 0));
     }
 
-    public async Task<List<LeaderboardRankDdo>> CreateLeaderboard(List<MemberDdo> members, LeaderboardMode mode)
+    public Task<List<LeaderboardRankDdo>> CreateLeaderboard(List<MemberDdo> members, LeaderboardMode mode)
     {
         logger.LogTrace("CreateLeaderboard(members={members}, mode={mode})", members, mode);
-
-        var dropChunk = dropChunkProvider.GetTree().Chunk;
         
         // map members to leaderboard stats
         var leaderboard = members.Select(member => new
@@ -37,6 +33,6 @@ public class StatsDomainService(
             .Select((member, index) => new LeaderboardRankDdo(index + 1, member.Member.Login, member.Member.DiscordId, member.Bubbles, Convert.ToInt32(member.Drops), member.Member.Username))
             .ToList();
 
-        return ranking;
+        return Task.FromResult(ranking);
     }
 }

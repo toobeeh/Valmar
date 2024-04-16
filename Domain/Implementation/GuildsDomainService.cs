@@ -20,20 +20,24 @@ public class GuildsDomainService(
             throw new EntityNotFoundException($"Guild with token {observeToken} does not exist");
         }
 
-        var guildProperties = ParseGuildProperties(guild.Palantir);
-        var memberCount =
-            await db.Members.Where(member => member.Member1.Contains(observeToken.ToString())).CountAsync(); // TODO improve safety, this is only a "inaccurate" count for performance
+        return await ConvertToDdo(guild);
+    }
+    
+    public async Task<GuildDetailDdo> GetGuildByDiscordId(long discordId)
+    {
+        var guilds = await db.Palantiris.Where(
+            guild => guild.Palantir.Contains(discordId.ToString()))
+            .ToListAsync(); // filter out matching candidates
 
-        var details = new GuildDetailDdo(
-            Convert.ToInt64(guildProperties.GuildId),
-            Convert.ToInt64(guildProperties.ChannelId),
-            Convert.ToInt64(guildProperties.MessageId),
-            observeToken,
-            guildProperties.GuildName,
-            memberCount
-        );
+        var matchingGuild =
+            (await Task.WhenAll(guilds.Select(ConvertToDdo))).FirstOrDefault(guild => guild.GuildId == discordId);
+        
+        if (matchingGuild is null)
+        {
+            throw new EntityNotFoundException($"Guild with discord id {discordId} does not exist");
+        }
 
-        return details;
+        return matchingGuild;
     }
 
     private GuildPropertiesJson ParseGuildProperties(string guildJson)
@@ -55,5 +59,25 @@ public class GuildsDomainService(
         }
         
         return guildProperties;
+    }
+
+    private async Task<GuildDetailDdo> ConvertToDdo(PalantiriEntity guild)
+    {
+        logger.LogTrace("ConvertToDdo(guild={guild})", guild);
+        
+        var guildProperties = ParseGuildProperties(guild.Palantir);
+        var memberCount =
+            await db.Members.Where(member => member.Member1.Contains(guild.Token)).CountAsync(); // TODO improve safety, this is only a "inaccurate" count for performance
+
+        var details = new GuildDetailDdo(
+            Convert.ToInt64(guildProperties.GuildId),
+            Convert.ToInt64(guildProperties.ChannelId),
+            Convert.ToInt64(guildProperties.MessageId),
+            Convert.ToInt32(guild.Token),
+            guildProperties.GuildName,
+            memberCount
+        );
+
+        return details;
     }
 }

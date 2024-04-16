@@ -1,8 +1,6 @@
 using AutoMapper;
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Valmar.Domain;
-using Valmar.Domain.Implementation;
 
 namespace Valmar.Grpc;
 
@@ -17,6 +15,14 @@ public class GuildsGrpcService(
         logger.LogTrace("GetGuildByToken(request={request})", request);
 
         var details = await guildsService.GetGuildByObserveToken(request.ObserveToken);
+        return mapper.Map<GuildReply>(details);
+    }
+
+    public override async Task<GuildReply> GetGuildByDiscordId(GetGuildByIdMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("GetGuildByDiscordId(request={request})", request);
+
+        var details = await guildsService.GetGuildByDiscordId(request.DiscordId);
         return mapper.Map<GuildReply>(details);
     }
 }
