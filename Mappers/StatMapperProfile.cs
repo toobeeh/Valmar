@@ -10,5 +10,8 @@ public class StatMapperProfile : Profile
     {
         CreateMap<BubbleTimespanRangeDdo, BubbleTimespanRangeReply>();
         CreateMap<LeaderboardRankDdo, LeaderboardRankMessage>();
+        CreateMap<BubbleProgressEntryDdo, BubbleProgressEntryMessage>();
+        CreateMap<LeaderboardModeDdo, LeaderboardMode>().ReverseMap();
+        CreateMap<BubbleProgressIntervalModeDdo, BubbleProgressIntervalMode>().ReverseMap();
     }
 }

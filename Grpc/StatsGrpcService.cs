@@ -1,6 +1,7 @@
 using AutoMapper;
 using Grpc.Core;
 using Valmar.Domain;
+using Valmar.Domain.Classes;
 
 namespace Valmar.Grpc;
 
@@ -19,6 +20,16 @@ public class StatsGrpcService(
         return mapper.Map<BubbleTimespanRangeReply>(range);
     }
 
+    public override async Task<BubbleProgressMessage> GetBubbleProgress(GetBubbleProgressMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("GetBubbleProgress(request={request})", request);
+
+        var range = await statsService.GetBubbleProgress(request.Login, request.StartDate.ToDateTimeOffset(), request.EndDate.ToDateTimeOffset(),
+            mapper.Map<BubbleProgressIntervalModeDdo>(request.Interval));
+        
+        return new BubbleProgressMessage { Entries = { mapper.Map<List<BubbleProgressEntryMessage>>(range) } };
+    }
+
     public override async Task<LeaderboardMessage> GetLeaderboard(GetLeaderboardMessage request, ServerCallContext context)
     {
         logger.LogTrace("GetLeaderboard(request={request})", request);
@@ -27,7 +38,7 @@ public class StatsGrpcService(
             ? await membersService.GetGuildMembers(token)
             : await membersService.GetAllMembers();
         
-        var leaderboard = await statsService.CreateLeaderboard(members, request.Mode);
+        var leaderboard = await statsService.CreateLeaderboard(members, mapper.Map<LeaderboardModeDdo>(request.Mode));
         
         return new LeaderboardMessage { Entries = { mapper.Map<List<LeaderboardRankMessage>>(leaderboard) } };
     }

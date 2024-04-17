@@ -11,14 +11,39 @@ enum LeaderboardMode {
   DROPS = 1;
 }
 
+enum BubbleProgressIntervalMode {
+  DAY = 0;
+  WEEK = 1;
+  MONTH = 2;
+}
+
 // Service definition for scene resource access
 service Stats {
   
   // Get the bubble range of a member in a timespan
   rpc GetBubbleTimespanRange (BubbleTimespanRangeRequest) returns (BubbleTimespanRangeReply);
   
+  // Get the bubble progress in a time range with given range steps
+  rpc GetBubbleProgress (GetBubbleProgressMessage) returns (BubbleProgressMessage);
+  
   // gets the member leaderboard, either global or for a guild, sorted by bubbles or drops
   rpc GetLeaderboard (GetLeaderboardMessage) returns (LeaderboardMessage);
+}
+
+message GetBubbleProgressMessage {
+  int32 login = 1;
+  google.protobuf.Timestamp startDate = 2;
+  google.protobuf.Timestamp endDate = 3;
+  BubbleProgressIntervalMode interval = 4;
+}
+
+message BubbleProgressMessage {
+  repeated BubbleProgressEntryMessage entries = 1;
+}
+
+message BubbleProgressEntryMessage {
+  google.protobuf.Timestamp date = 1;
+  int32 bubbles = 2;
 }
 
 message BubbleTimespanRangeRequest {

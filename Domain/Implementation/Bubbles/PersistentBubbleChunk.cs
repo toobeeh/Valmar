@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Valmar.Database;
+using Valmar.Domain.Classes;
 using Valmar.Util;
 using Valmar.Util.NChunkTree;
 using Valmar.Util.NChunkTree.Bubbles;
@@ -128,5 +129,50 @@ public class PersistentBubbleChunk : BubbleChunkLeaf, IBubbleChunk
             maxBubbles = (await _db.Members.FirstOrDefaultAsync(m => m.Login == login))?.Bubbles ?? maxBubbles;
         
         return new BubbleTimespanRangeDdo(minBubbles, maxBubbles);
+    }
+
+    public async Task<List<BubbleProgressEntryDdo>> GetBubbleProgress(int login, DateTimeOffset? start,
+        DateTimeOffset? end, BubbleProgressIntervalModeDdo mode)
+    {
+        var traces = await _db.BubbleTraces
+            .Where(trace =>
+                (TraceIdStart == null || trace.Id >= TraceIdStart)
+                && (TraceIdEnd == null || trace.Id < TraceIdEnd)
+                && trace.Login == login)
+            .ToListAsync();
+
+        var parsedTraces = traces
+            .Select(trace => new BubbleProgressEntryDdo(BubbleHelper.ParseTraceTimestamp(trace.Date),trace.Bubbles))
+            .OrderBy(trace => trace.Date)
+            .ToList();
+
+        var intervalTraces = parsedTraces.Where(trace =>
+        {
+            switch (mode)
+            {
+                case BubbleProgressIntervalModeDdo.Day:
+                    return (start is null || trace.Date >= start) &&
+                           (end is null || trace.Date < end); // take every trace in timerange
+                case BubbleProgressIntervalModeDdo.Week:
+                    return trace.Date.DayOfWeek == DayOfWeek.Monday && // take all monday traces
+                           (start is null || trace.Date >= start) && (end is null || trace.Date < end);
+                case BubbleProgressIntervalModeDdo.Month:
+                    return trace.Date.Day == 1 && // take all first of month traces
+                           (start is null || trace.Date >= start) && (end is null || trace.Date < end);
+                default:
+                    return false;
+            }
+        }).ToList();
+        
+        // if chunk is open-ended and end is bigger than last trace candidate, add current bubbles
+        if (TraceTimestampEnd is null && 
+            (end is null || end is { } endVal &&
+                (parsedTraces.Count == 0 || endVal.AddDays(-1) > parsedTraces.Last().Date)))
+        {
+            intervalTraces.Add(new BubbleProgressEntryDdo(DateTimeOffset.Now, 
+                (await _db.Members.FirstAsync(m => m.Login == login)).Bubbles));
+        }
+
+        return intervalTraces;
     }
 }

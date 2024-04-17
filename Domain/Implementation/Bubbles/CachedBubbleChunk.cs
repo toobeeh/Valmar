@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Options;
 using Valmar.Domain.Classes;
-using Valmar.Domain.Implementation.Drops;
 using Valmar.Util;
 using Valmar.Util.NChunkTree;
 using Valmar.Util.NChunkTree.Bubbles;
@@ -59,7 +58,7 @@ public class CachedBubbleChunk : BubbleChunkTree, IBubbleChunk
 
     public async Task<BubbleTimespanRangeDdo> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end)
     {
-        // sort out if this chunk is relevant - -1 signalizes this value should be ignored
+        // sort out if this chunk is relevant
         if (start > TraceTimestampEnd) return new BubbleTimespanRangeDdo(null, null);
         if (end < TraceTimestampStart) return new BubbleTimespanRangeDdo(null, null);
         
@@ -88,6 +87,44 @@ public class CachedBubbleChunk : BubbleChunkTree, IBubbleChunk
                 
                 return new BubbleTimespanRangeDdo(a.StartAmount, b.EndAmount);
             }, new BubbleTimespanRangeDdo(null, null)))
+        );
+        return await store.Retrieve();
+    }
+    
+    public async Task<List<BubbleProgressEntryDdo>> GetBubbleProgress(int login, DateTimeOffset? start, DateTimeOffset? end, BubbleProgressIntervalModeDdo mode)
+    {
+        // sort out if this chunk is relevant
+        if (start > TraceTimestampEnd) return [];
+        if (end < TraceTimestampStart) return [];
+        
+        // create key for request identifiers
+        var key = $"{login}//{start}//{end}//{mode}";
+        
+        var store = _context.BubbleProgress.GetOrAdd(key,key =>  new KeyValueStore<string, List<BubbleProgressEntryDdo>>(key, async key =>
+            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetBubbleProgress(login, start, end, mode), (a, b) =>
+            {
+                var merged = new List<BubbleProgressEntryDdo>();
+                if(a.Count > 0 && b.Count > 0)
+                {
+                    if (a.Last().Date < b.First().Date)
+                    {
+                        merged.AddRange(a);
+                        merged.AddRange(b);
+                    }
+                    else
+                    {
+                        merged.AddRange(b);
+                        merged.AddRange(a);
+                    }
+                }
+                else
+                {
+                    merged.AddRange(a);
+                    merged.AddRange(b);
+                }
+                
+                return merged;
+            }, []))
         );
         return await store.Retrieve();
     }

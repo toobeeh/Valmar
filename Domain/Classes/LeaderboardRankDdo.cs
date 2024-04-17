@@ -1,6 +1,6 @@
 namespace Valmar.Domain.Classes;
 
-public enum LeaderboardMode
+public enum LeaderboardModeDdo
 {
     Bubbles,
     Drops

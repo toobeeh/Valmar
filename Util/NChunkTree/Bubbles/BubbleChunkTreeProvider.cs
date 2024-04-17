@@ -3,7 +3,6 @@ using System.Diagnostics;
 using Microsoft.Extensions.Options;
 using Valmar.Domain.Classes;
 using Valmar.Domain.Implementation.Bubbles;
-using Valmar.Domain.Implementation.Drops;
 
 namespace Valmar.Util.NChunkTree.Bubbles;
 
@@ -13,6 +12,7 @@ public class CachedBubbleChunkContext
 {
     public readonly ConcurrentDictionary<string, KeyValueStore<string, DateTimeOffset?>> FirstSeenDates = new ();
     public readonly ConcurrentDictionary<string, KeyValueStore<string, BubbleTimespanRangeDdo>> CollectedBubbles = new ();
+    public readonly ConcurrentDictionary<string, KeyValueStore<string, List<BubbleProgressEntryDdo>>> BubbleProgress = new ();
 }
 
 public class BubbleChunkTreeProvider(ILogger<BubbleChunkTreeProvider> logger, IServiceProvider provider) : NChunkTreeProvider(provider)

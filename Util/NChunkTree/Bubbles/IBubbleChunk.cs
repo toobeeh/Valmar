@@ -1,3 +1,5 @@
+using Valmar.Domain.Classes;
+
 namespace Valmar.Util.NChunkTree.Bubbles;
 
 public interface IBubbleChunk
@@ -10,6 +12,7 @@ public interface IBubbleChunk
     
     Task<DateTimeOffset?> GetFirstSeenDate(int login);
     Task<BubbleTimespanRangeDdo> GetAmountCollectedInTimespan(int login, DateTimeOffset? start, DateTimeOffset? end);
+    Task<List<BubbleProgressEntryDdo>> GetBubbleProgress(int login, DateTimeOffset? start, DateTimeOffset? end, BubbleProgressIntervalModeDdo mode);
 }
 
 public record BubbleTimespanRangeDdo(int? StartAmount, int? EndAmount);
