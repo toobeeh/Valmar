@@ -179,13 +179,13 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         
         
         var store = _context.LeagueResults.GetOrAdd(key,_ =>  new KeyValueStore<string, Dictionary<string, LeagueResult>>(key, async _ =>
-            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueResults(start, end),
-                (a, b) =>
+            await ChunkHelper.ReduceInOrder(Chunks, async c => await c.GetLeagueResults(start, end),
+                (first, second) =>
                 {
-                    foreach (var result in b.Values)
+                    foreach (var result in second.Values)
                     {
                         // check if user is present in other chunk
-                        if (a.TryGetValue(result.Id, out var aResult))
+                        if (first.TryGetValue(result.Id, out var aResult))
                         {
                             var totalCount = result.Count + aResult.Count;
                             var totalScore = result.Score + aResult.Score;
@@ -209,17 +209,17 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
                                 combinedAverageWeight,
                                 combinedStreak);
 
-                            a[result.Id] = combinedResult;
+                            first[result.Id] = combinedResult;
                         }
                         
                         // if not, just add result of chunk
                         else
                         {
-                            a[result.Id] = result;
+                            first[result.Id] = result;
                         }
                     }
 
-                    return a;
+                    return first;
                 }, 
                 new Dictionary<string, LeagueResult>()))
         );

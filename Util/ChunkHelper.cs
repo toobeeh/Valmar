@@ -26,4 +26,17 @@ public static class ChunkHelper
 
         return sum;
     }
+    
+    public static async Task<TSum> ReduceInOrder<TSource, TSum>(IEnumerable<TSource> source, Func<TSource, Task<TSum>> sourceMapping, Func<TSum, TSum, TSum> aggregator, TSum seed)
+    {
+        TSum sum = seed;
+        var values = await Task.WhenAll(source.Select(sourceMapping.Invoke));
+
+        foreach (var value in values)
+        {
+            sum = aggregator.Invoke(sum, value);
+        }
+
+        return sum;
+    }
 }
