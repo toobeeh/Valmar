@@ -21,6 +21,7 @@ namespace Valmar.Domain.Implementation.Drops;
 public class CachedDropChunk : DropChunkTree, IDropChunk
 {
     private readonly CachedDropChunkContext _context;
+    private readonly DropChunkConfiguration _config;
     public CachedDropChunk(
         IServiceProvider services, 
         IOptions<DropChunkConfiguration> config, 
@@ -28,6 +29,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         NChunkTreeNodeContext context) : base(services, config, provider, context)
     {
         _context = provider.CachedChunkContext.GetOrAdd(NodeId, new CachedDropChunkContext());
+        _config = config.Value;
     }
 
     public override IDropChunk Chunk => this;
@@ -182,40 +184,71 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
             await ChunkHelper.ReduceInOrder(Chunks, async c => await c.GetLeagueResults(start, end),
                 (first, second) =>
                 {
-                    foreach (var result in second.Values)
+                    foreach (var secondResult in second.Values)
                     {
                         // check if user is present in other chunk
-                        if (first.TryGetValue(result.Id, out var aResult))
+                        if (first.TryGetValue(secondResult.Id, out var firstResult))
                         {
-                            var totalCount = result.Count + aResult.Count;
-                            var totalScore = result.Score + aResult.Score;
-                            var combinedAverageTime = result.AverageTime * result.Count / totalCount +
-                                                      aResult.AverageTime * aResult.Count / totalCount;
+                            var totalCount = secondResult.Count + firstResult.Count;
+                            var totalScore = secondResult.Score + firstResult.Score;
+                            var combinedAverageTime = secondResult.AverageTime * secondResult.Count / totalCount +
+                                                      firstResult.AverageTime * firstResult.Count / totalCount;
                             
-                            var combinedAverageWeight = result.AverageWeight * result.Count / totalCount +
-                                                      aResult.AverageWeight * aResult.Count / totalCount;
-
-                            var combinedStreak = new StreakResult(
-                                aResult.Streak.Tail,
-                                result.Streak.Head,
-                                Math.Max(Math.Max(result.Streak.Streak, aResult.Streak.Streak),
-                                    aResult.Streak.Head + result.Streak.Tail));
+                            var combinedAverageWeight = secondResult.AverageWeight * secondResult.Count / totalCount +
+                                                      firstResult.AverageWeight * firstResult.Count / totalCount;
+                            
+                            StreakResult combinedStreak;
+                            var firstChunkFullStreak = firstResult.Streak.Tail == _config.ChunkSize &&
+                                                       firstResult.Streak.Streak == _config.ChunkSize &&
+                                                       firstResult.Streak.Head == _config.ChunkSize;
+                            var secondChunkFullStreak = secondResult.Streak.Tail == _config.ChunkSize &&
+                                                        secondResult.Streak.Streak == _config.ChunkSize &&
+                                                        secondResult.Streak.Head == _config.ChunkSize;
+                            
+                            // special case if some of the chunks have full streaks
+                            if (firstChunkFullStreak && secondChunkFullStreak)
+                            {
+                                combinedStreak = new StreakResult(_config.ChunkSize * 2, _config.ChunkSize * 2, _config.ChunkSize * 2);
+                            }
+                            else if(firstChunkFullStreak)
+                            {
+                                combinedStreak = new StreakResult(
+                                    _config.ChunkSize + secondResult.Streak.Tail,
+                                    secondResult.Streak.Head,
+                                    Math.Max(secondResult.Streak.Streak, _config.ChunkSize + secondResult.Streak.Tail));
+                            }
+                            else if (secondChunkFullStreak)
+                            {
+                                combinedStreak = new StreakResult(
+                                    firstResult.Streak.Tail,
+                                    firstResult.Streak.Head + _config.ChunkSize,
+                                    Math.Max(firstResult.Streak.Streak, _config.ChunkSize + firstResult.Streak.Head));
+                            }
+                            else
+                            {
+                                combinedStreak = new StreakResult(
+                                    firstResult.Streak.Tail,
+                                    secondResult.Streak.Head,
+                                    Math.Max(Math.Max(secondResult.Streak.Streak, firstResult.Streak.Streak),
+                                        firstResult.Streak.Head + secondResult.Streak.Tail));
+                            }
+                            
                                 
                             var combinedResult = new LeagueResult(
-                                result.Id,
+                                secondResult.Id,
                                 totalScore,
                                 totalCount,
                                 combinedAverageTime,
                                 combinedAverageWeight,
                                 combinedStreak);
 
-                            first[result.Id] = combinedResult;
+                            first[secondResult.Id] = combinedResult;
                         }
                         
                         // if not, just add result of chunk
                         else
                         {
-                            first[result.Id] = result;
+                            first[secondResult.Id] = secondResult;
                         }
                     }
 

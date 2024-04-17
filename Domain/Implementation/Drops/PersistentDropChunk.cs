@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Valmar.Database;
 using Valmar.Util;
 using Valmar.Util.NChunkTree;
@@ -77,10 +76,12 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
             .Where(d => d.LeagueWeight > 0
                  && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                  && (DropIndexEnd == null || d.DropId < DropIndexEnd))
-            .OrderBy(d => d.DropId)
+            .Select(drop => drop.DropId)
+            .Distinct()
+            .OrderBy(id => id)
             .AsEnumerable()
             .Where((drop, index) => (index) % chunkSize == 0)
-            .Select(item => Convert.ToInt64(item.DropId))
+            .Select(Convert.ToInt64)
             .ToList();
 
         return Task.FromResult(drops);
