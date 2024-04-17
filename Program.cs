@@ -1,5 +1,6 @@
 using System.Globalization;
 using Calzolari.Grpc.AspNetCore.Validation;
+using Prometheus;
 using Valmar.Database;
 using Valmar.Domain;
 using Valmar.Domain.Implementation;
@@ -50,6 +51,13 @@ public class Program
         );
 
         RegisterGrpcServices(app);
+
+        // use prometheus
+        app.UseRouting();
+        app.UseGrpcMetrics();
+        app.UseHttpMetrics();
+        app.MapMetrics();
+            
         await app.RunAsync();
     }
 
