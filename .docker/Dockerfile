@@ -2,11 +2,8 @@
 USER $APP_UID
 WORKDIR /app
 
-# grpc
-EXPOSE 8080
-
-# prometheus
-EXPOSE 9090
+# grpc and prometheus
+EXPOSE 8080 9090
 
 ARG DB_DOMAIN_NAME="db.domain.tld"
 ENV DB_DOMAIN_NAME "${DB_DOMAIN_NAME}"
