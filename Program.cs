@@ -43,19 +43,19 @@ public class Program
         var app = builder.Build();
         
         // initialize drop & bubble chunks
-        var drops = app.Services.GetRequiredService<DropChunkTreeProvider>();
+        /*var drops = app.Services.GetRequiredService<DropChunkTreeProvider>();
         var bubbles = app.Services.GetRequiredService<BubbleChunkTreeProvider>();
         Task.WaitAll(
             Task.Run(() => drops.RepartitionTree(drops.GetTree())),
             Task.Run(() => bubbles.RepartitionTree(bubbles.GetTree()))
-        );
+        );*/
 
         RegisterGrpcServices(app);
 
         // use prometheus
         app.UseRouting();
+        app.UseMetricServer(9090);
         app.UseGrpcMetrics();
-        app.UseHttpMetrics();
         app.MapMetrics();
             
         await app.RunAsync();
