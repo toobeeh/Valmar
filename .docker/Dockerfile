@@ -1,8 +1,12 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 8080 #grpc
-EXPOSE 9090 #metrics
+
+# grpc
+EXPOSE 8080
+
+# prometheus
+EXPOSE 9090
 
 ARG DB_DOMAIN_NAME="db.domain.tld"
 ENV DB_DOMAIN_NAME "${DB_DOMAIN_NAME}"
