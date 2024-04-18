@@ -109,3 +109,9 @@ Valmar accesses the MariaDb Palantir Database.
 Using the entity framework and its cli tools, the persistence layer can be easily scaffolded:  
 `dotnet ef dbcontext scaffold "Name=ConnectionStrings:Palantir" Pomelo.EntityFrameworkCore.MySql -o Database --force --data-annotations`  
 
+## Refactoring TODOs
+- rename all proto messages to "Message" instead of "Request" or "Reply"
+- make individual request messages for each rpc call
+- review enum naming (should include message suffix)
+- review usage of service parameters; should take objects instead of fetching them
+- add real persistence layer with repositories (? sos)

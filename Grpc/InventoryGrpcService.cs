@@ -10,7 +10,9 @@ namespace Valmar.Grpc;
 public class InventoryGrpcService(
     ILogger<InventoryGrpcService> logger, 
     IMapper mapper,
+    IMembersDomainService membersService,
     IEventsDomainService eventsService,
+    IStatsDomainService statsService,
     IInventoryDomainService inventoryService) : Inventory.InventoryBase
 {
     public override async Task<BubbleCreditReply> GetBubbleCredit(GetBubbleCreditRequest request, ServerCallContext context)
@@ -118,5 +120,54 @@ public class InventoryGrpcService(
         var nextPrice = SceneHelper.GetScenePrice(request.BoughtSceneCount);
         var spentAmount = request.BoughtSceneCount == 0 ? 0 : Enumerable.Range(0, request.BoughtSceneCount).Sum(SceneHelper.GetScenePrice);
         return Task.FromResult(new ScenePriceReply { NextPrice = nextPrice, TotalBubblesSpent = spentAmount });
+    }
+
+    public override async Task<AwardInventoryMessage> GetAwardInventory(GetAwardInventoryMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("GetAwardInventory(request={request})", request);
+        
+        var inv = await inventoryService.GetMemberAwardInventory(request.Login);
+        return mapper.Map<AwardInventoryMessage>(inv);
+    }
+
+    public override async Task<AwardPackLevelMessage> GetAwardPackLevel(GetAwardPackLevelMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("GetAwardPackLevel(request={request})", request);
+
+        var bubblesCollected = await statsService.GetMemberBubblesInRange(request.Login, DateTimeOffset.UtcNow.AddDays(-8), DateTimeOffset.UtcNow);
+        var diff = (bubblesCollected.EndAmount - bubblesCollected.StartAmount) ?? 0;
+        var level = InventoryHelper.GetAwardPackRarity(diff);
+
+        return new AwardPackLevelMessage
+        {
+            CollectedBubbles = diff,
+            Level = mapper.Map<AwardRarityMessage>(level)
+        };
+    }
+
+    public override async Task GetGalleryItems(GetGalleryItemsMessage request, IServerStreamWriter<GalleryItemMessage> responseStream, ServerCallContext context)
+    {
+        logger.LogTrace("GetAwardPackLevel(request={request})", request);
+
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var images = await inventoryService.GetImagesFromCloud(member, request.ImageIds.ToList());
+        await responseStream.WriteAllMappedAsync(images, mapper.Map<GalleryItemMessage>);
+    }
+
+    public override async Task<AwardPackResultMessage> OpenAwardPack(OpenAwardPackMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("OpenAwardPack(request={request})", request);
+
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var bubblesCollected = await statsService.GetMemberBubblesInRange(request.Login, DateTimeOffset.UtcNow.AddDays(-8), DateTimeOffset.UtcNow);
+        var diff = (bubblesCollected.EndAmount - bubblesCollected.StartAmount) ?? 0;
+        var level = InventoryHelper.GetAwardPackRarity(diff);
+
+        var awards = await inventoryService.OpenAwardPack(member, level);
+
+        return new AwardPackResultMessage
+        {
+            Awards = { mapper.Map<List<AwardReply>>(awards) }
+        };
     }
 }

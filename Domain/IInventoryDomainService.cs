@@ -1,3 +1,4 @@
+using Valmar.Database;
 using Valmar.Domain.Classes;
 
 namespace Valmar.Domain;
@@ -15,4 +16,7 @@ public interface IInventoryDomainService
     Task<SceneInventoryDdo> GetMemberSceneInventory(int login);
     Task UseScene(int login, int? sceneId);
     Task BuyScene(int login, int sceneId);
+    Task<AwardInventoryDdo> GetMemberAwardInventory(int login);
+    Task<List<GalleryItemDdo>> GetImagesFromCloud(MemberDdo member, List<long> ids);
+    Task<List<AwardEntity>> OpenAwardPack(MemberDdo member, int rarityLevel);
 }

@@ -42,7 +42,7 @@ public class Program
         // Register routes and start app
         var app = builder.Build();
         
-        // initialize drop & bubble chunks
+        // initialize drop & bubble chunks to prevent inconsistency with first requests
         var drops = app.Services.GetRequiredService<DropChunkTreeProvider>();
         var bubbles = app.Services.GetRequiredService<BubbleChunkTreeProvider>();
         Task.WaitAll(
@@ -54,7 +54,6 @@ public class Program
 
         // use prometheus
         app.UseRouting();
-        app.UseMetricServer(9090);
         app.UseGrpcMetrics();
         app.MapMetrics();
             

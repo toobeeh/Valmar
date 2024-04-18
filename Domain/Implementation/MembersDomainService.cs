@@ -371,6 +371,13 @@ public class MembersDomainService(
         // parse patronized details
         long? patronizedId = member.Patronize is { } patronizeString ? Convert.ToInt64(patronizeString.Split("#")[0]) : null;
 
+        // parse next award pack open date
+        var mappedFlags = FlagHelper.GetFlags(member.Flag);
+        var awardPackCooldown = mappedFlags.Any(flag => flag is MemberFlagDdo.Admin or MemberFlagDdo.Patron) ? 5 : 7;
+        var nextAwardPack = member.AwardPackOpened is {} timestamp ? 
+            DateTimeOffset.FromUnixTimeMilliseconds(timestamp).AddDays(awardPackCooldown) : 
+            DateTimeOffset.UtcNow;
+        
         // build ddo
         return new MemberDdo(
             member.Bubbles,
@@ -385,7 +392,8 @@ public class MembersDomainService(
             memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList(),
             patronizedId,
             FlagHelper.HasFlag(member.Flag, MemberFlagDdo.Patron) ? member.Emoji : null,
-            FlagHelper.GetFlags(member.Flag)
+            mappedFlags,
+            nextAwardPack
         );
     }
 }

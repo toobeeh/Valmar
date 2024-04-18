@@ -13,5 +13,6 @@ public record MemberDdo(
     List<int> ServerConnections,
     long? PatronizedDiscordId,
     string? PatronEmoji,
-    List<MemberFlagDdo> MappedFlags
+    List<MemberFlagDdo> MappedFlags,
+    DateTimeOffset NextAwardPackDate
     );

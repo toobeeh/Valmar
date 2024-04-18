@@ -3,6 +3,7 @@ using Valmar.Database;
 using Valmar.Domain.Classes;
 using Valmar.Domain.Exceptions;
 using Valmar.Util;
+using Valmar.Util.NChunkTree.Bubbles;
 using Valmar.Util.NChunkTree.Drops;
 
 namespace Valmar.Domain.Implementation;
@@ -15,7 +16,9 @@ public class InventoryDomainService(
     IScenesDomainService scenesService,
     IEventsDomainService eventsService,
     IStatsDomainService statsService,
-    DropChunkTreeProvider dropChunks) : IInventoryDomainService
+    DropChunkTreeProvider dropChunks,
+    IAwardsDomainService awardsService,
+    BubbleChunkTreeProvider bubbleChunks) : IInventoryDomainService
 {
     public async Task<List<MemberSpriteSlotDdo>> GetMemberSpriteInventory(int login)
     {
@@ -307,5 +310,79 @@ public class InventoryDomainService(
         memberEntity.Sprites = InventoryHelper.SerializeSpriteInventory(inv);
         db.Members.Update(memberEntity);
         await db.SaveChangesAsync();
+    }
+    
+    public async Task<AwardInventoryDdo> GetMemberAwardInventory(int login)
+    {
+        logger.LogTrace("GetMemberAwardInventory(login={login})", login);
+        
+        var ownAvailableAwards = await db.Awardees.Where(awardee => awardee.OwnerLogin == login && awardee.AwardeeLogin == null).ToListAsync();
+        var ownConsumedAwards = await db.Awardees.Where(awardee => awardee.OwnerLogin == login && awardee.AwardeeLogin != null).ToListAsync();
+        var receivedAwards = await db.Awardees.Where(awardee => awardee.AwardeeLogin == login).ToListAsync();
+
+        return new AwardInventoryDdo(ownAvailableAwards, ownConsumedAwards, receivedAwards);
+    }
+
+    public async Task<List<GalleryItemDdo>> GetImagesFromCloud(MemberDdo member, List<long> ids)
+    {
+        logger.LogTrace("GetImagesFromCloud(member={member}, ids={ids})", member, ids);
+        
+        var images = await db.CloudTags.Where(tag => tag.Owner == member.Login && ids.Contains(tag.ImageId)).ToListAsync();
+        
+        return images.Select(image => new GalleryItemDdo(
+            image.ImageId,
+            $"https://cloud.typo.rip/{member.DiscordId}/{image.ImageId}/image.png",
+            image.Title,
+            image.Author,
+            DateTimeOffset.FromUnixTimeMilliseconds(image.Date),
+            image.Language,
+            image.Own,
+            image.Private
+        )).ToList();
+    }
+
+    public async Task<List<AwardEntity>> OpenAwardPack(MemberDdo member, int rarityLevel)
+    {
+        logger.LogTrace("OpenAwardPack(member={member}, rarityLevel={rarityLevel})", member, rarityLevel);
+
+        if (member.NextAwardPackDate > DateTimeOffset.UtcNow)
+        {
+            throw new UserOperationException("The award pack can't be opened because the cooldown hasn't expired yet");
+        }
+
+        var awards = await awardsService.GetAllAwards();
+        
+        var rarityRanges =  rarityLevel switch
+        {
+            1 => new double[] { 0.55, 0.8, 0.97 },
+            2 => new double[] { 0.4, 0.7, 0.95 },
+            3 => new double[] { 0.3, 0.5, 0.91 },
+            _ => new double[] { 0.2, 0.4, 0.85 }
+        };
+        
+        AwardEntity GetRandomAward()
+        {
+            var random = new Random().NextDouble();
+            var rarity = random < rarityRanges[0] ? 1 : random < rarityRanges[1] ? 2 : random < rarityRanges[2] ? 3 : 4;
+            var availableAwards = awards.Where(award => award.Rarity == rarity).ToList();
+            var randomIndex = new Random().NextInt64(0, availableAwards.Count - 1);
+            var randomAward = availableAwards[(int)randomIndex];
+            awards.Remove(randomAward);
+
+            return randomAward;
+        }
+        
+        var result = Enumerable.Repeat(GetRandomAward, 2).Select(func => func.Invoke()).ToList();
+        
+        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ?? throw new EntityNotFoundException("The award pack can't be opened because member doesn't exist");
+        memberEntity.AwardPackOpened = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        db.Update(memberEntity);
+        
+        var awardees = result.Select(award => new AwardeeEntity {Award = (short)award.Id, OwnerLogin = member.Login}).ToList();
+        db.Awardees.AddRange(awardees);
+
+        await db.SaveChangesAsync();
+
+        return result;
     }
 }

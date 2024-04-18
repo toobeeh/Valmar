@@ -5,6 +5,13 @@ import "google/protobuf/empty.proto";
 option csharp_namespace = "Valmar";
 package awards;
 
+enum AwardRarityMessage {
+  Common = 0;
+  Special = 1;
+  Epic = 2;
+  Legendary = 3;
+}
+
 // Service definition for award resource access
 service Awards {
   
@@ -21,7 +28,8 @@ message AwardReply {
   string url = 2;
   int32 id = 3;
   string description = 4;
-  int32 rarity = 5;
+  int32 rarityNum = 5  [deprecated = true];
+  AwardRarityMessage rarity = 6;
 }
 
 // Request containing a award id

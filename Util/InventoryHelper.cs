@@ -79,4 +79,14 @@ public static class InventoryHelper
     {
         return ParseSpriteInventory(sprites, shifts).Where(slot => slot.Slot > 0).ToList();
     }
+
+    public static int GetAwardPackRarity(int bubblesCollected)
+    {
+        return bubblesCollected switch {
+            < 2500 => 1,
+            < 5000 => 2,
+            < 15000 => 3,
+            _ => 4
+        };
+    }
 }

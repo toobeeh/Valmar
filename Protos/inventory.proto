@@ -1,7 +1,10 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+
+import "awards.proto";
 
 option csharp_namespace = "Valmar";
 package inventory;
@@ -42,12 +45,79 @@ service Inventory {
   // activate a scene for a member
   rpc UseScene (UseSceneRequest) returns (google.protobuf.Empty);
   
-  // get the price of the next scene and the total amount of bubbles spent on scnes in the inv
+  // get the price of the next scene and the total amount of bubbles spent on scenes in the inv
   rpc GetScenePrice (ScenePriceRequest) returns (ScenePriceReply);
+  
+  // get the inventory of awards - currently available, received and given
+  rpc GetAwardInventory (GetAwardInventoryMessage) returns (AwardInventoryMessage);
+  
+  // get the current award pack level and cooldown until next pack
+  rpc GetAwardPackLevel (GetAwardPackLevelMessage) returns (AwardPackLevelMessage);
+  
+  // get images from the image gallery of a member
+  rpc GetGalleryItems (GetGalleryItemsMessage) returns (stream GalleryItemMessage);
+  
+  // open an award pack
+  rpc OpenAwardPack (OpenAwardPackMessage) returns (AwardPackResultMessage);
+}
+
+message GetAwardInventoryMessage {
+  int32 login = 1;
+}
+
+message ConsumedAwardMessage {
+  int32 awardId = 1;
+  int32 ownerLogin = 2;
+  int32 awardeeLogin = 3;
+  google.protobuf.Timestamp awardedTimestamp = 4;
+  google.protobuf.Int64Value linkedImageId = 5;
+}
+
+message AvailableAwardMessage {
+  int32 awardId = 1;
+}
+
+message AwardInventoryMessage {
+  repeated AvailableAwardMessage availableAwards = 1;
+  repeated ConsumedAwardMessage receivedAwards = 2;
+  repeated ConsumedAwardMessage givenAwards = 3;
+}
+
+message GetAwardPackLevelMessage {
+  int32 login = 1;
+}
+
+message AwardPackLevelMessage {
+  awards.AwardRarityMessage level = 1;
+  int32 collectedBubbles = 2;
 }
 
 message GetBubbleCreditRequest {
   int32 login = 1;
+}
+
+message GetGalleryItemsMessage {
+  int32 login = 1;
+  repeated int64 imageIds = 2;
+}
+
+message GalleryItemMessage {
+  int64 imageId = 1;
+  string imageUrl = 2;
+  string title = 3;
+  string author = 4;
+  google.protobuf.Timestamp date = 5;
+  string language = 6;
+  bool isOwn = 7;
+  bool inPrivateLobby = 8;
+}
+
+message OpenAwardPackMessage {
+  int32 login = 1;
+}
+
+message AwardPackResultMessage {
+  repeated awards.AwardReply awards = 1;
 }
 
 message BubbleCreditReply {
