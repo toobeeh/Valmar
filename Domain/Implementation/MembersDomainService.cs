@@ -88,6 +88,18 @@ public class MembersDomainService(
         return (await Task.WhenAll(memberDdos)).ToList();
     }
     
+    public async Task<List<MemberDdo>> GetMembersByLogin(List<int> logins)
+    {
+        logger.LogTrace("GetMembersByLogin(logins={logins})", logins);
+        
+        var members = await db.Members.Where(member => logins.Contains(member.Login)).ToListAsync();
+        var memberDdos = members
+            .Select(ConvertToDdo)
+            .ToList();
+
+        return memberDdos;
+    }
+    
     public async Task<MemberDdo> GetPatronizedMemberOfPatronizer(long patronizerId)
     {
         logger.LogTrace("GetPatronizedMemberOfPatronizer(patronizerId={patronizerId})", patronizerId);

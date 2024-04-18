@@ -21,4 +21,5 @@ public interface IMembersDomainService
     Task<MemberDdo> GetPatronizedMemberOfPatronizer(long patronizerId);
     Task<List<MemberDdo>> GetAllMembers();
     Task<List<MemberDdo>> GetGuildMembers(int observeToken);
+    Task<List<MemberDdo>> GetMembersByLogin(List<int> logins);
 }

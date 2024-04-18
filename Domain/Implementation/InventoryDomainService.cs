@@ -351,13 +351,12 @@ public class InventoryDomainService(
         }
 
         var awards = await awardsService.GetAllAwards();
-        
-        var rarityRanges =  rarityLevel switch
+        double[] rarityRanges =  rarityLevel switch
         {
-            1 => new double[] { 0.55, 0.8, 0.97 },
-            2 => new double[] { 0.4, 0.7, 0.95 },
-            3 => new double[] { 0.3, 0.5, 0.91 },
-            _ => new double[] { 0.2, 0.4, 0.85 }
+            1 => [0.55, 0.8, 0.97],
+            2 => [0.4, 0.7, 0.95],
+            3 => [0.3, 0.5, 0.91],
+            _ => [0.2, 0.4, 0.85]
         };
         
         AwardEntity GetRandomAward()
@@ -382,7 +381,6 @@ public class InventoryDomainService(
         db.Awardees.AddRange(awardees);
 
         await db.SaveChangesAsync();
-
         return result;
     }
 }

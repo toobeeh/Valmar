@@ -2,10 +2,7 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Valmar.Domain;
-using Valmar.Domain.Exceptions;
-using Valmar.Domain.Implementation;
 using Valmar.Grpc.Utils;
-using Valmar.Util;
 
 namespace Valmar.Grpc;
 
@@ -14,6 +11,14 @@ public class MembersGrpcService(
     IMapper mapper,
     IMembersDomainService membersService) : Members.MembersBase
 {
+    public override async Task GetMembersByLogin(GetMembersByLoginMessage request, IServerStreamWriter<MemberReply> responseStream, ServerCallContext context)
+    {
+        logger.LogTrace("GetMembersByLogin(request={request})", request);
+        
+        var members = await membersService.GetMembersByLogin(request.Logins.ToList());
+        await responseStream.WriteAllMappedAsync(members, mapper.Map<MemberReply>);
+    }
+
     public override async Task<MemberReply> GetMemberByAccessToken(IdentifyMemberByAccessTokenRequest request, ServerCallContext context)
     {
         logger.LogTrace("GetMemberByAccessToken(request={request})", request);
