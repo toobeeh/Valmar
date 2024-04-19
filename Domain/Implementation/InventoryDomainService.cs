@@ -383,4 +383,11 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
         return result;
     }
+
+    public async Task<DateTimeOffset> GetFirstSeenDate(int login)
+    {
+        logger.LogTrace("GetFirstSeenDate(login={login})", login);
+
+        return await bubbleChunks.GetTree().Chunk.GetFirstSeenDate(login) ?? DateTimeOffset.Now;
+    }
 }

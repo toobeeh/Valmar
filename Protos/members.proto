@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 option csharp_namespace = "Valmar";
 package members;
@@ -75,6 +76,7 @@ message MemberReply {
   repeated int32 serverConnections = 10;
   repeated MemberFlagMessage mappedFlags = 11;
   google.protobuf.Timestamp nextAwardPackDate = 12;
+  google.protobuf.StringValue patronEmoji = 13;
 }
 
 // Reply containing the accesstoken of a member

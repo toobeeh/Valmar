@@ -59,6 +59,17 @@ service Inventory {
   
   // open an award pack
   rpc OpenAwardPack (OpenAwardPackMessage) returns (AwardPackResultMessage);
+  
+  // gets the first seen date of a member
+  rpc GetFirstSeenDate (GetFirstSeenDateRequest) returns (FirstSeenMessage);
+}
+
+message GetFirstSeenDateRequest {
+  int32 login = 1;
+}
+
+message FirstSeenMessage {
+  google.protobuf.Timestamp firstSeen = 1;
 }
 
 message GetAwardInventoryMessage {
@@ -139,13 +150,13 @@ message GetDropCreditRequest {
 message DropCreditReply {
   
   // the total amount of drops, consisting of regular drops + weighted league drops
-  int32 totalAmount = 1;
+  int32 totalCredit = 1;
   
   // the count of regular drops
-  int32 regularAmount = 2;
+  int32 regularCount = 2;
   
   // the count (non-weighted) of league drops
-  int32 leagueAmount = 3;
+  int32 leagueCount = 3;
 }
 
 message BuySpriteRequest {

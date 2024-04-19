@@ -170,4 +170,12 @@ public class InventoryGrpcService(
             Awards = { mapper.Map<List<AwardReply>>(awards) }
         };
     }
+
+    public override async Task<FirstSeenMessage> GetFirstSeenDate(GetFirstSeenDateRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("GetFirstSeenDate(request={request})", request);
+
+        var firstSeen = await inventoryService.GetFirstSeenDate(request.Login);
+        return new FirstSeenMessage { FirstSeen = mapper.Map<Timestamp>(firstSeen) };
+    }
 }

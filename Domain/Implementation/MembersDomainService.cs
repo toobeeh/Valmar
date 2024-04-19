@@ -385,6 +385,11 @@ public class MembersDomainService(
 
         // parse next award pack open date
         var mappedFlags = FlagHelper.GetFlags(member.Flag);
+        if (mappedFlags.Contains(MemberFlagDdo.Admin) && !mappedFlags.Contains(MemberFlagDdo.Patron))
+        {
+            mappedFlags.Add(MemberFlagDdo.Patron);
+        }
+        
         var awardPackCooldown = mappedFlags.Any(flag => flag is MemberFlagDdo.Admin or MemberFlagDdo.Patron) ? 5 : 7;
         var nextAwardPack = member.AwardPackOpened is {} timestamp ? 
             DateTimeOffset.FromUnixTimeMilliseconds(timestamp).AddDays(awardPackCooldown) : 
@@ -403,7 +408,7 @@ public class MembersDomainService(
             Convert.ToInt32(memberDetails.UserLogin),
             memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList(),
             patronizedId,
-            FlagHelper.HasFlag(member.Flag, MemberFlagDdo.Patron) ? member.Emoji : null,
+            mappedFlags.Contains(MemberFlagDdo.Patron) ? member.Emoji : null,
             mappedFlags,
             nextAwardPack
         );

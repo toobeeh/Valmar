@@ -19,4 +19,5 @@ public interface IInventoryDomainService
     Task<AwardInventoryDdo> GetMemberAwardInventory(int login);
     Task<List<GalleryItemDdo>> GetImagesFromCloud(MemberDdo member, List<long> ids);
     Task<List<AwardEntity>> OpenAwardPack(MemberDdo member, int rarityLevel);
+    Task<DateTimeOffset> GetFirstSeenDate(int login);
 }

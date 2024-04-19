@@ -1,3 +1,3 @@
 namespace Valmar.Domain.Classes;
 
-public record DropCreditDdo(int TotalCredit, int RegularAmount, int LeagueCount);
+public record DropCreditDdo(int TotalCredit, int RegularCount, int LeagueCount);
