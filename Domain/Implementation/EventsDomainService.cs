@@ -10,7 +10,7 @@ public class EventsDomainService(
     ILogger<EventsDomainService> logger, 
     PalantirContext db) : IEventsDomainService
 {
-    private EventDdo ConvertEventEntityToDdo(EventEntity evt)
+    private static EventDdo ConvertEventEntityToDdo(EventEntity evt)
     {
         var start = EventHelper.ParseEventTimestamp(evt.ValidFrom);
         return new EventDdo(evt.EventName, evt.EventId, evt.Description, evt.DayLength, evt.Progressive == 1, start,
