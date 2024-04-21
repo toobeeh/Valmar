@@ -2,16 +2,15 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Valmar.Domain;
-using Valmar.Domain.Implementation;
 using Valmar.Grpc.Utils;
 using Valmar.Util;
-using Status = Grpc.Core.Status;
 
 namespace Valmar.Grpc;
 
 public class ScenesGrpcService(
     ILogger<ScenesGrpcService> logger, 
     IMapper mapper,
+    IEventsDomainService eventsService,
     IScenesDomainService scenesService) : Scenes.ScenesBase 
 {
     public override async Task GetAllScenes(Empty request, IServerStreamWriter<SceneReply> responseStream, ServerCallContext context)
@@ -37,15 +36,17 @@ public class ScenesGrpcService(
     {
         logger.LogTrace("GetSceneRanking(request={request})", request);
 
-        var ranking = await scenesService.GetSpriteRanking();
+        var ranking = await scenesService.GetSceneRanking();
         await responseStream.WriteAllMappedAsync(ranking, mapper.Map<SceneRankingReply>);
     }
 
-    public override Task<EventScenePriceReply> GetEventScenePrice(GetEventScenePriceRequest request, ServerCallContext context)
+    public override async Task<EventSceneReply> GetEventScene(GetEventSceneRequest request, ServerCallContext context)
     {
-        logger.LogTrace("GetEventScenePrice(request={request})", request);
+        logger.LogTrace("GetEventScene(request={request})", request);
         
-        var price = EventHelper.GetEventScenePrice(request.EventDayLength);
-        return Task.FromResult(new EventScenePriceReply { Price = price});
+        var evt = await eventsService.GetEventById(request.EventId);
+        var scene = await scenesService.GetSceneByEventId(evt.Id);
+        var price = EventHelper.GetEventScenePrice(evt.Length);
+        return new EventSceneReply { Price = price, Scene = mapper.Map<SceneReply>(scene)};
     }
 }

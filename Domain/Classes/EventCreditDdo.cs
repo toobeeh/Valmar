@@ -1,3 +1,3 @@
 namespace Valmar.Domain.Classes;
 
-public record EventCreditDdo(int EventDropId, int TotalCredit, int AvailableCredit);
+public record EventCreditDdo(int EventDropId, int TotalCredit, int AvailableCredit, double RedeemableAmount);

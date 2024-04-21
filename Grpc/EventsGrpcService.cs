@@ -41,7 +41,7 @@ public class EventsGrpcService(
     {
         logger.LogTrace("GetAllEventDrops(empty)");
         
-        var eventDrops = await eventsService.GetAllEventDrops();
+        var eventDrops = await eventsService.GetEventDrops();
         foreach (var eventDrop in eventDrops)
         {
             await responseStream.WriteAsync(mapper.Map<EventDropReply>(eventDrop));
@@ -60,7 +60,7 @@ public class EventsGrpcService(
     {
         logger.LogTrace("GetEventDropsOfEvent(request={request})", request);
         
-        var eventDrops = await eventsService.GetEventDropsOfEvent(request.Id);
+        var eventDrops = await eventsService.GetEventDrops(request.Id);
         foreach (var eventDrop in eventDrops)
         {
             await responseStream.WriteAsync(mapper.Map<EventDropReply>(eventDrop));

@@ -138,16 +138,16 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         return subChunks;
     }
     
-    public async Task<EventResult> GetEventLeagueDetails(int eventId, string userid, int userLogin)
+    public async Task<EventResult> GetEventLeagueDetails(int[] eventDropIds, string userid, int userLogin)
     {
         // get key for request identifiers
-        var key = $"{eventId}//{userid}//{userLogin}";
+        var key = $"{string.Join("-", eventDropIds)}//{userid}//{userLogin}";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.EventDetails.ContainsKey(key)) _context.EventDetails[key].Dirty();
 
         var store = _context.EventDetails.GetOrAdd(key,key =>  new KeyValueStore<string, EventResult>(key, async key =>
-            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventId, userid, userLogin),
+            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventDropIds, userid, userLogin),
                 (a, b) =>
                 {
                     foreach (var key in b.RedeemableCredit.Keys)

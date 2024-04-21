@@ -71,11 +71,11 @@ public class InventoryDomainService(
         return new DropCreditDdo(member.Drops + leagueDrops, member.Drops, leagueCount);
     }
     
-    public async Task<List<EventCreditDdo>> GetEventCredit(int login, List<int> eventDropIds)
+    public async Task<List<EventCreditDdo>> GetEventCredit(MemberDdo member, List<int> eventDropIds)
     {
-        logger.LogTrace("GetEventCredit(login={login})", login);
+        logger.LogTrace("GetEventCredit(member={member})", member);
         
-        var inv = (await GetMemberSpriteInventory(login)).Select(inv => inv.SpriteId).ToArray();
+        var inv = (await GetMemberSpriteInventory(member.Login)).Select(inv => inv.SpriteId).ToArray();
         
         var spentCredits = await db.Sprites
             .Where(sprite => eventDropIds.Contains(sprite.EventDropId) && inv.Contains(sprite.Id))
@@ -84,25 +84,31 @@ public class InventoryDomainService(
             .ToListAsync();
         
         var credits = await db.EventCredits
-            .Where(credit => credit.Login == login && eventDropIds.Contains(credit.EventDropId))
+            .Where(credit => credit.Login == member.Login && eventDropIds.Contains(credit.EventDropId))
             .ToListAsync();
+
+        var redeemables = await dropChunks.GetTree().Chunk
+            .GetEventLeagueDetails(eventDropIds.ToArray(), member.DiscordId.ToString(), member.Login);
 
         var creditResults = eventDropIds.Select(dropId =>
         {
             var totalCredit = credits.FirstOrDefault(credit => credit.EventDropId == dropId)?.Credit ?? 0;
-            var availableCredit = totalCredit - spentCredits.FirstOrDefault(spent => spent.EventDropId == dropId)?.Cost ?? 0;
-            return new EventCreditDdo(dropId, totalCredit, availableCredit);
+            var availableCredit = totalCredit -
+                                  (spentCredits.FirstOrDefault(spent => spent.EventDropId == dropId)?.Cost ?? 0);
+            var redeemableDrops = redeemables.RedeemableCredit.TryGetValue(dropId, out var redeemable) ? redeemable : [];
+            var redeemableCredit = redeemableDrops.Values.Sum();
+            return new EventCreditDdo(dropId, totalCredit, availableCredit, redeemableCredit);
         }).ToList();
         
         return creditResults;
     }
 
-    public async Task BuySprite(int login, int spriteId)
+    public async Task BuySprite(MemberDdo member, int spriteId)
     {
-        logger.LogTrace("BuySprite(login={login}, spriteId={spriteId})", login, spriteId);
+        logger.LogTrace("BuySprite(member={member}, spriteId={spriteId})", member, spriteId);
         
         // check if the sprite is already in the inventory
-        var inv = await GetMemberSpriteInventory(login);
+        var inv = await GetMemberSpriteInventory(member.Login);
         if (inv.Any(slot => slot.SpriteId == spriteId))
         {
             throw new UserOperationException("The sprite is already in the inventory");
@@ -115,21 +121,21 @@ public class InventoryDomainService(
         
         if (sprite.EventDropId > 0)
         {
-            var credit = (await GetEventCredit(login, [sprite.EventDropId]))
+            var credit = (await GetEventCredit(member, [sprite.EventDropId]))
                 .FirstOrDefault(credit => credit.EventDropId == sprite.EventDropId)?.AvailableCredit ?? 0;
             if(credit < sprite.Cost) throw new UserOperationException($"The sprite price ({sprite.Cost}) exceeds the available event credit ({credit}) of the event drop {sprite.Name} ({sprite.EventDropId})");
         }
         else
         {
-            var dropCredit = await GetDropCredit(login);
-            var credit = await GetBubbleCredit(login, dropCredit);
+            var dropCredit = await GetDropCredit(member.Login);
+            var credit = await GetBubbleCredit(member.Login, dropCredit);
             if(credit.AvailableCredit < sprite.Cost) throw new UserOperationException($"The sprite price ({sprite.Cost}) exceeds the available bubble credit ({credit.AvailableCredit})");
         }
         
-        var member = await db.Members.FirstOrDefaultAsync(member => member.Login == login) ?? throw new EntityNotFoundException("The sprite can't be added to member inventory, because member doesn't exist");
+        var memberEntity = await db.Members.FirstOrDefaultAsync(entity => entity.Login == member.Login) ?? throw new EntityNotFoundException("The sprite can't be added to member inventory, because member doesn't exist");
         inv.Add(new MemberSpriteSlotDdo(0, sprite.Id, null));
-        member.Sprites = InventoryHelper.SerializeSpriteInventory(inv);
-        db.Members.Update(member);
+        memberEntity.Sprites = InventoryHelper.SerializeSpriteInventory(inv);
+        db.Members.Update(memberEntity);
         await db.SaveChangesAsync();
     }
 
@@ -384,10 +390,61 @@ public class InventoryDomainService(
         return result;
     }
 
-    public async Task<DateTimeOffset> GetFirstSeenDate(int login)
+    public async Task<DateTimeOffset> GetFirstSeenDate(int login) // TODO move to stats
     {
         logger.LogTrace("GetFirstSeenDate(login={login})", login);
 
         return await bubbleChunks.GetTree().Chunk.GetFirstSeenDate(login) ?? DateTimeOffset.Now;
+    }
+
+    public async Task<GiftLossRateDdo> GetGiftLossRateBase(MemberDdo member, List<SpriteDdo> eventSprites)
+    {
+        logger.LogTrace("GetGiftLossRateBase(member={member}, eventSprites={eventSprites})", member, eventSprites);
+
+        var totalValue = eventSprites.Sum(sprite => sprite.Cost);
+        var eventDetails = await dropChunks.GetTree().Chunk
+            .GetEventLeagueDetails(eventSprites.Select(sprite => sprite.EventDropId).ToArray(), member.DiscordId.ToString(), member.Login);
+        var lossRate = EventHelper.CalculateCurrentGiftLossRate(totalValue, eventDetails.Progress);
+
+        return new GiftLossRateDdo(totalValue, eventDetails.Progress, lossRate);
+    }
+
+    public async Task<EventCreditGiftResultDdo> GiftEventCredit(MemberDdo fromMember, MemberDdo toMember, int amount, EventDropDdo eventDrop, GiftLossRateDdo lossRate)
+    {
+        logger.LogTrace("GiftEventCredit(fromMember={fromMember}, toMember={toMember}, amount={amount}, eventDropId={eventDropId}, lossRate={lossRate})", fromMember, toMember, amount, eventDrop, lossRate);
+
+        var eventDrops = (await eventsService.GetEventDrops(eventDrop.EventId)).Select(drop => drop.Id).ToArray();
+        var eventCredit = await GetEventCredit(fromMember, eventDrops.ToList());
+
+        var availableCredit =
+            eventCredit.FirstOrDefault(credit => credit.EventDropId == eventDrop.Id)?.AvailableCredit ?? 0;
+        if (amount > availableCredit)
+        {
+            throw new UserOperationException("The amount of gifted credit exceeds the available credit");
+        }
+        
+        var loss = (int)Math.Ceiling(EventHelper.CalculateRandomGiftLoss(lossRate.LossRateBase, amount));
+
+        var fromEntity = await db.EventCredits.FirstAsync(credit => credit.Login == fromMember.Login && credit.EventDropId == eventDrop.Id);
+        var toEntity = await db.EventCredits.FirstOrDefaultAsync(credit => credit.Login == toMember.Login && credit.EventDropId == eventDrop.Id);
+        if(toEntity == null)
+        {
+            toEntity = new EventCreditEntity
+            {
+                Login = toMember.Login,
+                EventDropId = eventDrop.Id,
+                Credit = 0
+            };
+            db.EventCredits.Add(toEntity);
+            await db.SaveChangesAsync();
+        }
+        
+        fromEntity.Credit -= amount;
+        toEntity.Credit += amount - loss;
+        
+        db.EventCredits.UpdateRange([fromEntity, toEntity]);
+        await db.SaveChangesAsync();
+
+        return new EventCreditGiftResultDdo(lossRate, loss, amount);
     }
 }

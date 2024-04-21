@@ -43,4 +43,34 @@ public static class EventHelper
 
         return slots;
     }
+    
+    public static double CalculateCurrentGiftLossRate(double required, double collected)
+    {
+        var ratio = collected / required;
+
+        var loss = ratio / 5 + 0.1;
+        if (loss < 0.2) loss = 0.2;
+        if (loss > 0.8) loss = 0.8;
+
+        return loss;
+    }
+    
+    public static double CalculateRandomGiftLoss(double lossBase, int amount)
+    {
+        var lossMin = Convert.ToInt32(Math.Round(lossBase * amount * 0.7));
+        var lossMax = Convert.ToInt32(Math.Round(lossBase * amount * 1.1));
+        
+        var loss = 0;
+        if (lossMax <= 1)
+        {
+            var loseProb = new Random().NextDouble();
+            if (loseProb <= lossBase) loss = 1;
+        }
+        else
+        {
+            loss = new Random().Next(lossMin, lossMax + 1);
+        }
+
+        return loss;
+    }
 }

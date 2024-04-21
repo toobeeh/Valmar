@@ -13,6 +13,7 @@ public class InventoryGrpcService(
     IMembersDomainService membersService,
     IEventsDomainService eventsService,
     IStatsDomainService statsService,
+    ISpritesDomainService spritesService,
     IInventoryDomainService inventoryService) : Inventory.InventoryBase
 {
     public override async Task<BubbleCreditReply> GetBubbleCredit(GetBubbleCreditRequest request, ServerCallContext context)
@@ -44,8 +45,9 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("GetEventCreditRequest(request={request})", request);
 
-        var drops = await eventsService.GetEventDropsOfEvent(request.EventId);
-        var credit = await inventoryService.GetEventCredit(request.Login, drops.Select(drop => drop.EventDropId).ToList());
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var drops = await eventsService.GetEventDrops(request.EventId);
+        var credit = await inventoryService.GetEventCredit(member, drops.Select(drop => drop.Id).ToList());
         await responseStream.WriteAllMappedAsync(credit, mapper.Map<EventCreditReply>);
     }
 
@@ -60,9 +62,10 @@ public class InventoryGrpcService(
 
     public override async Task<Empty> BuySprite(BuySpriteRequest request, ServerCallContext context)
     {
-        logger.LogTrace("GetSpriteInventory(request={request})", request);
+        logger.LogTrace("BuySprite(request={request})", request);
         
-        await inventoryService.BuySprite(request.Login, request.SpriteId);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        await inventoryService.BuySprite(member, request.SpriteId);
         return new Empty();
     }
 
@@ -115,7 +118,7 @@ public class InventoryGrpcService(
 
     public override Task<ScenePriceReply> GetScenePrice(ScenePriceRequest request, ServerCallContext context)
     {
-        logger.LogTrace("UseScene(request={request})", request);
+        logger.LogTrace("GetScenePrice(request={request})", request);
 
         var nextPrice = SceneHelper.GetScenePrice(request.BoughtSceneCount);
         var spentAmount = request.BoughtSceneCount == 0 ? 0 : Enumerable.Range(0, request.BoughtSceneCount).Sum(SceneHelper.GetScenePrice);
@@ -147,7 +150,7 @@ public class InventoryGrpcService(
 
     public override async Task GetGalleryItems(GetGalleryItemsMessage request, IServerStreamWriter<GalleryItemMessage> responseStream, ServerCallContext context)
     {
-        logger.LogTrace("GetAwardPackLevel(request={request})", request);
+        logger.LogTrace("GetGalleryItems(request={request})", request);
 
         var member = await membersService.GetMemberByLogin(request.Login);
         var images = await inventoryService.GetImagesFromCloud(member, request.ImageIds.ToList());
@@ -177,5 +180,36 @@ public class InventoryGrpcService(
 
         var firstSeen = await inventoryService.GetFirstSeenDate(request.Login);
         return new FirstSeenMessage { FirstSeen = mapper.Map<Timestamp>(firstSeen) };
+    }
+
+    public override async Task<Empty> RedeemLeagueEventDrop(RedeemLeagueEventDropMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("RedeemLeagueEventDrop(request={request})", request);
+        return await base.RedeemLeagueEventDrop(request, context);
+    }
+
+    public override async Task<GiftLossMessage> GiftEventCredit(GiftEventCreditMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("GiftEventCredit(request={request})", request);
+
+        var evtDrop = await eventsService.GetEventDropById(request.EventDropId);
+        var eventSprites = await spritesService.GetAllSprites(evtDrop.EventId);
+        var member = await membersService.GetMemberByLogin(request.SenderLogin);
+        var recipient = await membersService.GetMemberByLogin(request.RecipientLogin);
+        var lossRate = await inventoryService.GetGiftLossRateBase(member, eventSprites);
+        var result = await inventoryService.GiftEventCredit(member, recipient, request.Amount, evtDrop, lossRate);
+
+        return mapper.Map<GiftLossMessage>(result);
+    }
+
+    public override async Task<GiftLossRateMessage> GetGiftLossRate(GetGiftLossRateMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("GetGiftLossRate(request={request})", request);
+
+        var eventSprites = await spritesService.GetAllSprites(request.EventId);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var lossRate = await inventoryService.GetGiftLossRateBase(member, eventSprites);
+
+        return mapper.Map<GiftLossRateMessage>(lossRate);
     }
 }

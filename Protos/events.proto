@@ -27,6 +27,9 @@ service Events {
   // Gets all eventdrops of an event
   rpc GetEventDropsOfEvent (GetEventRequest) returns (stream EventDropReply);
   
+  // gets the release slots of an progressive event
+  rpc GetEventReleaseSlots (GetEventRequest) returns (stream google.protobuf.Timestamp);
+  
 }
 
 // A palantir event
@@ -46,6 +49,8 @@ message EventDropReply {
   int32 id = 2;
   string url = 3;
   int32 eventId = 4;
+  google.protobuf.Timestamp releaseStart = 7;
+  google.protobuf.Timestamp releaseEnd = 8;
 }
 
 // Request containing an event id

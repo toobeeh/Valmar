@@ -69,9 +69,9 @@ public class SpritesDomainService(
                 // sprite is released if event passed
                 if (DateTimeOffset.UtcNow < eventStart.AddDays(evt.DayLength))
                 {
-                    var eventDrops = await eventsDomainService.GetEventDropsOfEvent(evt.EventId);
+                    var eventDrops = await eventsDomainService.GetEventDrops(evt.EventId);
                     var releaseSlots = EventHelper.GetProgressiveEventDropReleaseSlots(eventStart, evt.DayLength,
-                        eventDrops.Select(drop => drop.EventDropId).ToList());
+                        eventDrops.Select(drop => drop.Id).ToList());
                     
                     // check if drop has been released yet
                     released = releaseSlots.Any(slot => slot.EventDropId == sprite.EventDropId && slot.IsReleased);
@@ -82,24 +82,26 @@ public class SpritesDomainService(
         return new SpriteDdo(sprite.Id, sprite.Name, sprite.Url, sprite.Cost, sprite.Special, sprite.EventDropId, sprite.Artist, sprite.Rainbow, released);
     }
 
-    public async Task<List<SpriteDdo>> GetAllSprites()
+    public async Task<List<SpriteDdo>> GetAllSprites(int? eventId = null)
     {
-        logger.LogTrace("GetAllSprites()");
+        logger.LogTrace("GetAllSprites()"); // TODO split to separate geteventsprites.. method
 
-        // find all progressive event drops of eventsprites
-        var progressiveEventDrops = await db.EventDrops
+        var eventDrops = await db.EventDrops
             .GroupJoin(
-                db.Events,
+                db.Events.Where(evt => eventId == null || evt.EventId == eventId),
                 evt => evt.EventId,
                 drop => drop.EventId,
                 (drop, events) => new { Drop = drop, Events = events })
             .SelectMany(
                 group => group.Events.DefaultIfEmpty(),
                 (group, evt) => new { Event = evt, DropId = group.Drop.EventDropId })
-            .Where(drop => drop.Event != null && drop.Event.Progressive == 1)
+            .Where(drop => drop.Event != null)
             .GroupBy(drop => drop.Event)
-            .Select(group => new { Event = group.Key, Drops = group.Select(drop => drop.DropId) })
+            .Select(group => new { Event = group.Key!, Drops = group.Select(drop => drop.DropId) })
             .ToListAsync();
+        
+        // find all progressive event drops of eventsprites
+        var progressiveEventDrops = eventDrops.Where(drop => drop.Event.Progressive == 1).ToList();
         
         // filter drops of progressive events that are not released yet
         var unreleasedEventDrops = progressiveEventDrops
@@ -117,7 +119,9 @@ public class SpritesDomainService(
             })
             .ToList();
 
-        return (await db.Sprites.ToListAsync()).Select(sprite =>
+        return (await db.Sprites.ToListAsync())
+            .Where(sprite => eventId == null || eventDrops.Any(drop => drop.Drops.Contains(sprite.EventDropId)))
+            .Select(sprite =>
         {
             var released = !unreleasedEventDrops.Contains(sprite.EventDropId); // check if drop has been released yet
             if (sprite.Id >= 1000) sprite.EventDropId = 0; // map exclusive sprites out of event

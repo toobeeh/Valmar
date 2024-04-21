@@ -18,8 +18,8 @@ service Scenes {
   // Gets the ranking of all scenes
   rpc GetSceneRanking (google.protobuf.Empty) returns (stream SceneRankingReply);
   
-  // Gets the price for a scene of an event
-  rpc GetEventScenePrice (GetEventScenePriceRequest) returns (EventScenePriceReply);
+  // Gets the price and scene of an event
+  rpc GetEventScene (GetEventSceneRequest) returns (EventSceneReply);
 }
 
 // Response containing a scene's properties.
@@ -47,10 +47,11 @@ message SceneRankingReply {
   int32 rank = 4;
 }
 
-message GetEventScenePriceRequest {
-  int32 eventDayLength = 1;
+message EventSceneReply {
+  SceneReply scene = 1;
+  int32 price = 2;
 }
 
-message EventScenePriceReply {
-  int32 price = 2;
+message GetEventSceneRequest {
+  int32 eventId = 1;
 }

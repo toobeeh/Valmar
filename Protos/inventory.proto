@@ -62,6 +62,45 @@ service Inventory {
   
   // gets the first seen date of a member
   rpc GetFirstSeenDate (GetFirstSeenDateRequest) returns (FirstSeenMessage);
+  
+  // redeems league event drops for a member
+  rpc RedeemLeagueEventDrop (RedeemLeagueEventDropMessage) returns (google.protobuf.Empty);
+  
+  // gift an amount of event credit to another member
+  rpc GiftEventCredit (GiftEventCreditMessage) returns (GiftLossMessage);
+  
+  // gets the current gift loss rate
+  rpc GetGiftLossRate (GetGiftLossRateMessage) returns (GiftLossRateMessage);
+}
+
+message GetGiftLossRateMessage {
+  int32 login = 1;
+  int32 eventId = 2;
+}
+
+message RedeemLeagueEventDropMessage {
+  int32 login = 1;
+  int32 eventDropId = 2;
+  int32 amount = 3;
+}
+
+message GiftEventCreditMessage {
+  int32 amount = 1;
+  int32 recipientLogin = 2;
+  int32 senderLogin = 3;
+  int32 eventDropId = 4;
+}
+
+message GiftLossRateMessage {
+  double lossRateBase = 1;
+  double collectedDrops = 2;
+  int32 requiredDrops = 3;
+}
+
+message GiftLossMessage {
+  int32 lostAmount = 1;
+  int32 totalAmount = 2;
+  GiftLossRateMessage lossRate = 3;
 }
 
 message GetFirstSeenDateRequest {
@@ -205,6 +244,7 @@ message EventCreditReply {
   int32 totalCredit = 1;
   int32 availableCredit = 2;
   int32 eventDropId = 3;
+  double redeemableAmount = 4;
 }
 
 message GetSpriteSlotCountRequest {

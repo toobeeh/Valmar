@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Concurrent;
-using Valmar.Database;
 
 namespace Valmar.Util.NChunkTree.Drops;
 
@@ -16,7 +14,7 @@ public interface IDropChunk
     Task<int> GetLeagueCount(string id, DateTimeOffset? start, DateTimeOffset? end);
     Task<IList<string>> GetLeagueParticipants();
     Task<IList<string>> GetLeagueParticipants(DateTimeOffset? start, DateTimeOffset? end);
-    Task<EventResult> GetEventLeagueDetails(int eventId, string userId, int userLogin);
+    Task<EventResult> GetEventLeagueDetails(int[] eventDropIds, string userId, int userLogin);
     Task<List<long>> EvaluateSubChunks(int chunkSize);
     Task<Dictionary<string, LeagueResult>> GetLeagueResults(DateTimeOffset? start, DateTimeOffset? end);
     

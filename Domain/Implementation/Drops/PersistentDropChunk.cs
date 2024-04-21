@@ -167,18 +167,12 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         return participants;
     }
 
-    public async Task<EventResult> GetEventLeagueDetails(int eventId, string userid, int userLogin)
+    public async Task<EventResult> GetEventLeagueDetails(int[] eventDropIds, string userid, int userLogin)
     {
-        // get eventdrops for faster processing
-        var drops = await _db.EventDrops
-            .Where(evd => evd.EventId == eventId)
-            .Select(evd => evd.EventDropId)
-            .ToArrayAsync();
-        
         // get drops weights of eventdrops, either redeemable or already redeemed
         var leagueEventdropWeights = await _db.PastDrops
             .Where(d => d.LeagueWeight > 0
-                        && drops.Any(id => id == Math.Abs(d.EventDropId))
+                        && eventDropIds.Any(id => id == Math.Abs(d.EventDropId))
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
                         && d.CaughtLobbyPlayerId == userid)
@@ -197,7 +191,7 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         // amount of regular drops that contributed to credit -> needed for loss rate
         var regularCaughtSum = await _db.PastDrops
             .Where(d => d.LeagueWeight == 0
-                        && drops.Any(id => id == Math.Abs(d.EventDropId))
+                        && eventDropIds.Any(id => id == Math.Abs(d.EventDropId))
                         && (DropIndexStart == null || d.DropId >= DropIndexStart)
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd)
                         && d.CaughtLobbyPlayerId == userid)

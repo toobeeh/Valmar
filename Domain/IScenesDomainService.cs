@@ -7,5 +7,6 @@ public interface IScenesDomainService
 {
     Task<SceneEntity> GetSceneById(int id);
     Task<List<SceneEntity>> GetAllScenes();
-    Task<List<SceneRankingDdo>> GetSpriteRanking();
+    Task<List<SceneRankingDdo>> GetSceneRanking();
+    Task<SceneEntity> GetSceneByEventId(int id);
 }

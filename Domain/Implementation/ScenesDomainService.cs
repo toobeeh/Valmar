@@ -12,12 +12,25 @@ public class ScenesDomainService(
     
     public async Task<SceneEntity> GetSceneById(int id)
     {
-        logger.LogTrace("GetSceneByID(id={id})", id);
+        logger.LogTrace("GetSceneById(id={id})", id);
         
         var scene = await db.Scenes.FirstOrDefaultAsync(scene => scene.Id == id);
         if (scene is null)
         {
             throw new EntityNotFoundException($"Scene with id {id} does not exist.");
+        }
+
+        return scene;
+    }
+    
+    public async Task<SceneEntity> GetSceneByEventId(int id)
+    {
+        logger.LogTrace("GetSceneByEventId(id={id})", id);
+        
+        var scene = await db.Scenes.FirstOrDefaultAsync(scene => scene.EventId == id);
+        if (scene is null)
+        {
+            throw new EntityNotFoundException($"Scene for event id {id} does not exist.");
         }
 
         return scene;
@@ -30,7 +43,7 @@ public class ScenesDomainService(
         return await db.Scenes.ToListAsync();
     }
     
-    public async Task<List<SceneRankingDdo>> GetSpriteRanking()
+    public async Task<List<SceneRankingDdo>> GetSceneRanking()
     {
         logger.LogTrace("GetSpriteRanking()");
 

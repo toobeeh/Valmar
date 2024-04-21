@@ -22,6 +22,9 @@ public class InventoryMapperProfile : Profile
         CreateMap<AwardeeEntity, ConsumedAwardMessage>().ConvertUsing(entity => MapConsumedAward(entity));
 
         CreateMap<GalleryItemDdo, GalleryItemMessage>();
+
+        CreateMap<GiftLossRateDdo, GiftLossRateMessage>();
+        CreateMap<EventCreditGiftResultDdo, GiftLossMessage>();
     }
     
     private static ConsumedAwardMessage MapConsumedAward(AwardeeEntity entity)
