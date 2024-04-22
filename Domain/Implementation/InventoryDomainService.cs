@@ -447,4 +447,50 @@ public class InventoryDomainService(
 
         return new EventCreditGiftResultDdo(lossRate, loss, amount);
     }
+
+    public async Task<int> RedeemEventLeagueDrops(MemberDdo member, int amount, int eventDropId)
+    {
+        logger.LogTrace("RedeemEventLeagueDrops(member={member}, amount={amount}, eventDropId={eventDropId})", member, amount, eventDropId);
+        
+        var evtDrop = await eventsService.GetEventDropById(eventDropId);
+        var evt = await eventsService.GetEventById(evtDrop.EventId);
+        var otherDrops = (await eventsService.GetEventDrops(evt.Id)).Select(drop => drop.Id).ToArray();
+        var eventResult = await dropChunks.GetTree().Chunk.GetEventLeagueDetails(otherDrops, member.DiscordId.ToString(), member.Login);
+        
+        var dropsToRedeem = DropHelper.FindDropToRedeem(eventResult, amount, evt.Progressive ? eventDropId : null);
+        var totalRedeemed = eventResult.RedeemableCredit
+            .SelectMany(kv => kv.Value)
+            .Where(kv => dropsToRedeem.Contains(kv.Key))
+            .Sum(kv => kv.Value);
+
+        if (totalRedeemed < amount)
+        {
+            throw new UserOperationException($"Could not redeem the requested amount of drops - only {totalRedeemed} available");
+        }
+
+        var roundedRedeemed = (int)Math.Floor(totalRedeemed);
+        
+        await dropChunks.GetTree().Chunk.MarkEventDropsAsRedeemed(member.DiscordId.ToString(), dropsToRedeem);
+        
+        var credit = await db.EventCredits.FirstOrDefaultAsync(credit => credit.Login == member.Login && credit.EventDropId == eventDropId);
+        if(credit == null)
+        {
+            credit = new EventCreditEntity
+            {
+                Login = member.Login,
+                EventDropId = eventDropId,
+                Credit = roundedRedeemed
+            };
+            db.EventCredits.Add(credit);
+            await db.SaveChangesAsync();
+        }
+        else
+        {
+            credit.Credit += roundedRedeemed;
+            db.EventCredits.Update(credit);
+            await db.SaveChangesAsync();
+        }
+
+        return roundedRedeemed;
+    }
 }

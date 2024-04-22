@@ -261,4 +261,21 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         return val;
     }
 
+    public async Task MarkEventDropsAsRedeemed(string userId, List<long> dropIds)
+    {
+        // THIS IS NOT THREADSAFE - should make a lock in the context and lock for all read access
+        foreach (var chunk in Chunks)
+        {
+            await chunk.MarkEventDropsAsRedeemed(userId, dropIds);
+        }
+
+        foreach (var contextEventDetail in _context.EventDetails)
+        {
+            var identifiers = contextEventDetail.Key.Split("//");
+            if(identifiers[1] == userId)
+            {
+                contextEventDetail.Value.Dirty();
+            }
+        }
+    }
 }

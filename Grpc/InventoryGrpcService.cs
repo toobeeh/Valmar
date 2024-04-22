@@ -185,7 +185,11 @@ public class InventoryGrpcService(
     public override async Task<Empty> RedeemLeagueEventDrop(RedeemLeagueEventDropMessage request, ServerCallContext context)
     {
         logger.LogTrace("RedeemLeagueEventDrop(request={request})", request);
-        return await base.RedeemLeagueEventDrop(request, context);
+        
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var result = await inventoryService.RedeemEventLeagueDrops(member, request.Amount, request.EventDropId);
+        
+        return new Empty();
     }
 
     public override async Task<GiftLossMessage> GiftEventCredit(GiftEventCreditMessage request, ServerCallContext context)

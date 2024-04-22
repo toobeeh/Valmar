@@ -4,7 +4,8 @@ namespace Valmar.Util;
 
 public static class DropHelper
 {
-    public static readonly string DropTimestampFormat = "yyyy-MM-dd HH:mm:ss";
+    public const string DropTimestampFormat = "yyyy-MM-dd HH:mm:ss";
+
     public static DateTimeOffset ParseDropTimestamp(string timestamp)
     {
         return DateTimeOffset.ParseExact(timestamp, DropTimestampFormat, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal);
@@ -14,10 +15,10 @@ public static class DropHelper
         return timestamp.ToString(DropTimestampFormat);
     }
 
-    public static List<long> FindDropToRedeem(EventResult eventResult, int amount, int? eventDropid = null)
+    public static List<long> FindDropToRedeem(EventResult eventResult, int amount, int? eventDropId = null)
     {
         List<Tuple<long, double>> candidates;
-        if (eventDropid is { } id)
+        if (eventDropId is { } id)
         {
             candidates = eventResult.RedeemableCredit[id]
                 .Keys

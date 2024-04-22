@@ -323,4 +323,25 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         var results = resultList.ToDictionary(item => item.Id);
         return results;
     }
+
+    public async Task MarkEventDropsAsRedeemed(string userId, List<long> dropIds)
+    {
+        var filteredIds = dropIds.Where(id => id >= DropIndexStart && id < DropIndexEnd).ToList();
+        
+        // get data from db
+        var drops = await _db.PastDrops
+            .Where(d => (DropIndexStart == null || d.DropId >= DropIndexStart) 
+                        && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
+                        && d.CaughtLobbyPlayerId == userId && d.EventDropId > 0
+                        && filteredIds.Contains(d.DropId))
+            .ToListAsync();
+        
+        foreach (var pastDropEntity in drops)
+        {
+            pastDropEntity.EventDropId = Math.Abs(pastDropEntity.EventDropId) * -1;
+        }
+        
+        _db.UpdateRange(drops);
+        await _db.SaveChangesAsync();
+    }
 }

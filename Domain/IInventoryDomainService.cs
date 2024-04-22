@@ -22,4 +22,5 @@ public interface IInventoryDomainService
     Task<DateTimeOffset> GetFirstSeenDate(int login);
     Task<GiftLossRateDdo> GetGiftLossRateBase(MemberDdo member, List<SpriteDdo> eventSprites);
     Task<EventCreditGiftResultDdo> GiftEventCredit(MemberDdo fromMember, MemberDdo toMember, int amount, EventDropDdo eventDrop, GiftLossRateDdo lossRate);
+    Task<int> RedeemEventLeagueDrops(MemberDdo member, int amount, int eventDropId);
 }

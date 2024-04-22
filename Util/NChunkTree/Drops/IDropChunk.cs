@@ -17,6 +17,7 @@ public interface IDropChunk
     Task<EventResult> GetEventLeagueDetails(int[] eventDropIds, string userId, int userLogin);
     Task<List<long>> EvaluateSubChunks(int chunkSize);
     Task<Dictionary<string, LeagueResult>> GetLeagueResults(DateTimeOffset? start, DateTimeOffset? end);
+    Task MarkEventDropsAsRedeemed(string userId, List<long> dropIds);
     
 }
 
