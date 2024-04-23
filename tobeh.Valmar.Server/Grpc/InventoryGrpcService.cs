@@ -73,7 +73,7 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("UseSpriteCombo(request={request})", request);
         
-        var slots = Enumerable.Repeat(0, request.Combo.Max(slot => slot.SlotId)).ToList();
+        var slots = Enumerable.Repeat(0, request.Combo.Count == 0 ? 0 : request.Combo.Max(slot => slot.SlotId)).ToList();
         foreach (var slot in request.Combo)
         {
             slots[slot.SlotId - 1] = slot.SpriteId;
