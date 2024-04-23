@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_NAME: valmar
-  DOCKERFILE_PATH: ./.docker/Dockerfile
+  DOCKERFILE_PATH: ./tobeh.Valmar.Server/.docker/Dockerfile
 
 jobs:
   build-and-publish:
@@ -27,7 +27,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./tobeh.Valmar.Server
           file: ${{ env.DOCKERFILE_PATH }}
           push: true
           tags: ghcr.io/toobeeh/${{ env.IMAGE_NAME }}:latest
