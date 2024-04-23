@@ -33,6 +33,7 @@ message GetCardTemplateMessage {
 message CardTemplateMessage {
   string name = 1;
   string template = 2;
+  string templateCss = 3;
 }
 
 message GetMemberCardSettingsMessage {

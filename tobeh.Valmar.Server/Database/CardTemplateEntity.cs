@@ -13,5 +13,7 @@ namespace tobeh.Valmar.Server.Database
         public string Name { get; set; } = null!;
         [Column(TypeName = "text")]
         public string Template { get; set; } = null!;
+        [Column(TypeName = "mediumtext")]
+        public string TemplateCss { get; set; } = null!;
     }
 }

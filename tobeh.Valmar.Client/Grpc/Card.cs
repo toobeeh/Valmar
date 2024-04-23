@@ -27,31 +27,31 @@ namespace tobeh.Valmar {
             "CgpjYXJkLnByb3RvEgRjYXJkGhtnb29nbGUvcHJvdG9idWYvZW1wdHkucHJv",
             "dG8aHmdvb2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90byIqChpDYXJkVGVt",
             "cGxhdGVMaXN0aW5nTWVzc2FnZRIMCgRuYW1lGAEgASgJIiYKFkdldENhcmRU",
-            "ZW1wbGF0ZU1lc3NhZ2USDAoEbmFtZRgBIAEoCSI1ChNDYXJkVGVtcGxhdGVN",
-            "ZXNzYWdlEgwKBG5hbWUYASABKAkSEAoIdGVtcGxhdGUYAiABKAkiLQocR2V0",
-            "TWVtYmVyQ2FyZFNldHRpbmdzTWVzc2FnZRINCgVsb2dpbhgBIAEoBSLeAQoZ",
-            "TWVtYmVyQ2FyZFNldHRpbmdzTWVzc2FnZRIVCg1oZWFkZXJPcGFjaXR5GAEg",
-            "ASgBEhkKEWJhY2tncm91bmRPcGFjaXR5GAIgASgBEjUKD2JhY2tncm91bmRJ",
-            "bWFnZRgDIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRIWCg5s",
-            "aWdodFRleHRDb2xvchgEIAEoCRIVCg1kYXJrVGV4dENvbG9yGAUgASgJEhMK",
-            "C2hlYWRlckNvbG9yGAYgASgJEhQKDHRlbXBsYXRlTmFtZRgHIAEoCSJgChxT",
-            "ZXRNZW1iZXJDYXJkU2V0dGluZ3NNZXNzYWdlEg0KBWxvZ2luGAEgASgFEjEK",
-            "CHNldHRpbmdzGAIgASgLMh8uY2FyZC5NZW1iZXJDYXJkU2V0dGluZ3NNZXNz",
-            "YWdlMtUCCgRDYXJkEk4KEEdldENhcmRUZW1wbGF0ZXMSFi5nb29nbGUucHJv",
-            "dG9idWYuRW1wdHkaIC5jYXJkLkNhcmRUZW1wbGF0ZUxpc3RpbmdNZXNzYWdl",
-            "MAESSgoPR2V0Q2FyZFRlbXBsYXRlEhwuY2FyZC5HZXRDYXJkVGVtcGxhdGVN",
-            "ZXNzYWdlGhkuY2FyZC5DYXJkVGVtcGxhdGVNZXNzYWdlElwKFUdldE1lbWJl",
-            "ckNhcmRTZXR0aW5ncxIiLmNhcmQuR2V0TWVtYmVyQ2FyZFNldHRpbmdzTWVz",
-            "c2FnZRofLmNhcmQuTWVtYmVyQ2FyZFNldHRpbmdzTWVzc2FnZRJTChVTZXRN",
-            "ZW1iZXJDYXJkU2V0dGluZ3MSIi5jYXJkLlNldE1lbWJlckNhcmRTZXR0aW5n",
-            "c01lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHlCD6oCDHRvYmVoLlZh",
-            "bG1hcmIGcHJvdG8z"));
+            "ZW1wbGF0ZU1lc3NhZ2USDAoEbmFtZRgBIAEoCSJKChNDYXJkVGVtcGxhdGVN",
+            "ZXNzYWdlEgwKBG5hbWUYASABKAkSEAoIdGVtcGxhdGUYAiABKAkSEwoLdGVt",
+            "cGxhdGVDc3MYAyABKAkiLQocR2V0TWVtYmVyQ2FyZFNldHRpbmdzTWVzc2Fn",
+            "ZRINCgVsb2dpbhgBIAEoBSLeAQoZTWVtYmVyQ2FyZFNldHRpbmdzTWVzc2Fn",
+            "ZRIVCg1oZWFkZXJPcGFjaXR5GAEgASgBEhkKEWJhY2tncm91bmRPcGFjaXR5",
+            "GAIgASgBEjUKD2JhY2tncm91bmRJbWFnZRgDIAEoCzIcLmdvb2dsZS5wcm90",
+            "b2J1Zi5TdHJpbmdWYWx1ZRIWCg5saWdodFRleHRDb2xvchgEIAEoCRIVCg1k",
+            "YXJrVGV4dENvbG9yGAUgASgJEhMKC2hlYWRlckNvbG9yGAYgASgJEhQKDHRl",
+            "bXBsYXRlTmFtZRgHIAEoCSJgChxTZXRNZW1iZXJDYXJkU2V0dGluZ3NNZXNz",
+            "YWdlEg0KBWxvZ2luGAEgASgFEjEKCHNldHRpbmdzGAIgASgLMh8uY2FyZC5N",
+            "ZW1iZXJDYXJkU2V0dGluZ3NNZXNzYWdlMtUCCgRDYXJkEk4KEEdldENhcmRU",
+            "ZW1wbGF0ZXMSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaIC5jYXJkLkNhcmRU",
+            "ZW1wbGF0ZUxpc3RpbmdNZXNzYWdlMAESSgoPR2V0Q2FyZFRlbXBsYXRlEhwu",
+            "Y2FyZC5HZXRDYXJkVGVtcGxhdGVNZXNzYWdlGhkuY2FyZC5DYXJkVGVtcGxh",
+            "dGVNZXNzYWdlElwKFUdldE1lbWJlckNhcmRTZXR0aW5ncxIiLmNhcmQuR2V0",
+            "TWVtYmVyQ2FyZFNldHRpbmdzTWVzc2FnZRofLmNhcmQuTWVtYmVyQ2FyZFNl",
+            "dHRpbmdzTWVzc2FnZRJTChVTZXRNZW1iZXJDYXJkU2V0dGluZ3MSIi5jYXJk",
+            "LlNldE1lbWJlckNhcmRTZXR0aW5nc01lc3NhZ2UaFi5nb29nbGUucHJvdG9i",
+            "dWYuRW1wdHlCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CardTemplateListingMessage), global::tobeh.Valmar.CardTemplateListingMessage.Parser, new[]{ "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetCardTemplateMessage), global::tobeh.Valmar.GetCardTemplateMessage.Parser, new[]{ "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CardTemplateMessage), global::tobeh.Valmar.CardTemplateMessage.Parser, new[]{ "Name", "Template" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CardTemplateMessage), global::tobeh.Valmar.CardTemplateMessage.Parser, new[]{ "Name", "Template", "TemplateCss" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetMemberCardSettingsMessage), global::tobeh.Valmar.GetMemberCardSettingsMessage.Parser, new[]{ "Login" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.MemberCardSettingsMessage), global::tobeh.Valmar.MemberCardSettingsMessage.Parser, new[]{ "HeaderOpacity", "BackgroundOpacity", "BackgroundImage", "LightTextColor", "DarkTextColor", "HeaderColor", "TemplateName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SetMemberCardSettingsMessage), global::tobeh.Valmar.SetMemberCardSettingsMessage.Parser, new[]{ "Login", "Settings" }, null, null, null, null)
@@ -475,6 +475,7 @@ namespace tobeh.Valmar {
     public CardTemplateMessage(CardTemplateMessage other) : this() {
       name_ = other.name_;
       template_ = other.template_;
+      templateCss_ = other.templateCss_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -508,6 +509,18 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "templateCss" field.</summary>
+    public const int TemplateCssFieldNumber = 3;
+    private string templateCss_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string TemplateCss {
+      get { return templateCss_; }
+      set {
+        templateCss_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -525,6 +538,7 @@ namespace tobeh.Valmar {
       }
       if (Name != other.Name) return false;
       if (Template != other.Template) return false;
+      if (TemplateCss != other.TemplateCss) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -534,6 +548,7 @@ namespace tobeh.Valmar {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Template.Length != 0) hash ^= Template.GetHashCode();
+      if (TemplateCss.Length != 0) hash ^= TemplateCss.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -560,6 +575,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(18);
         output.WriteString(Template);
       }
+      if (TemplateCss.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(TemplateCss);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -578,6 +597,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(18);
         output.WriteString(Template);
       }
+      if (TemplateCss.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(TemplateCss);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -593,6 +616,9 @@ namespace tobeh.Valmar {
       }
       if (Template.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Template);
+      }
+      if (TemplateCss.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TemplateCss);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -611,6 +637,9 @@ namespace tobeh.Valmar {
       }
       if (other.Template.Length != 0) {
         Template = other.Template;
+      }
+      if (other.TemplateCss.Length != 0) {
+        TemplateCss = other.TemplateCss;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -635,6 +664,10 @@ namespace tobeh.Valmar {
             Template = input.ReadString();
             break;
           }
+          case 26: {
+            TemplateCss = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -656,6 +689,10 @@ namespace tobeh.Valmar {
           }
           case 18: {
             Template = input.ReadString();
+            break;
+          }
+          case 26: {
+            TemplateCss = input.ReadString();
             break;
           }
         }
