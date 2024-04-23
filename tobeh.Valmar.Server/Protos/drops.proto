@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 
-option csharp_namespace = "Valmar";
+option csharp_namespace = "tobeh.Valmar";
 package admin;
 
 // Service definition for drop and management actions

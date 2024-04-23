@@ -4,7 +4,7 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "inventory.proto";
 
-option csharp_namespace = "Valmar";
+option csharp_namespace = "tobeh.Valmar";
 package outfits;
 
 // Service definition for outfits resource access

@@ -6,7 +6,7 @@ import "google/protobuf/wrappers.proto";
 
 import "awards.proto";
 
-option csharp_namespace = "Valmar";
+option csharp_namespace = "tobeh.Valmar";
 package inventory;
 
 // Service definition for inventory checks and actions for sprites, scenes, stats, eventdrops etc

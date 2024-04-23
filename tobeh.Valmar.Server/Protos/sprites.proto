@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 
-option csharp_namespace = "Valmar";
+option csharp_namespace = "tobeh.Valmar";
 package sprites;
 
 // Service definition for sprite resource access

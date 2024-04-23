@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-option csharp_namespace = "Valmar";
+option csharp_namespace = "tobeh.Valmar";
 package stats;
 
 enum LeaderboardMode {

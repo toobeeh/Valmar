@@ -5,7 +5,6 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>12</LangVersion>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +16,6 @@
           <OutputDir>obj\Debug\net8.0\</OutputDir>
           <Generator>MSBuild:Compile</Generator>
         </Protobuf>
-        <Protobuf Remove=".github\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -39,26 +37,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Include=".docker\Dockerfile" />
-      <None Remove=".github\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.docker\.dockerignore</Link>
-      </Content>
-      <Content Include=".docker\docker-compose.yml" />
-      <Content Include=".docker\entrypoint.sh" />
-      <Content Include=".github\workflows\build.yml" />
-      <Content Remove=".github\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove=".github\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Remove=".github\**" />
+      <Content Include=".docker\*" />
     </ItemGroup>
 
 </Project>

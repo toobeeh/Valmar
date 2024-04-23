@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Valmar";
+option csharp_namespace = "tobeh.Valmar";
 package guilds;
 
 // Service definition for guilds resource access

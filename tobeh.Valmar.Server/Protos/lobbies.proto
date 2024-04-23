@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 import "inventory.proto";
 
-option csharp_namespace = "Valmar";
+option csharp_namespace = "tobeh.Valmar";
 package lobbies;
 
 // Service definition for award resource access
