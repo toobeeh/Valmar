@@ -37,8 +37,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.github\workflows\build.yml">
-        <Link>.github\workflows\build.yml</Link>
+      <Content Include="..\.github\workflows\build-client.yml">
+        <Link>.github\workflows\build-client.yml</Link>
+      </Content>
+      <Content Include="..\.github\workflows\build-server.yml">
+        <Link>.github\workflows\build-server.yml</Link>
       </Content>
       <Content Include=".docker\*" />
     </ItemGroup>

@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tobeh.Valmar.Server", "tobeh.Valmar.Server\tobeh.Valmar.Server.csproj", "{31E7D14B-E4DC-4FFB-B6A7-B664348B1642}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tobeh.Valmar.Client", "tobeh.Valmar.Client\tobeh.Valmar.Client.csproj", "{9BBD07E6-6FAB-4ADD-B99E-3128E321C602}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{31E7D14B-E4DC-4FFB-B6A7-B664348B1642}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31E7D14B-E4DC-4FFB-B6A7-B664348B1642}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31E7D14B-E4DC-4FFB-B6A7-B664348B1642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BBD07E6-6FAB-4ADD-B99E-3128E321C602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BBD07E6-6FAB-4ADD-B99E-3128E321C602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BBD07E6-6FAB-4ADD-B99E-3128E321C602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BBD07E6-6FAB-4ADD-B99E-3128E321C602}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,38 @@
+name: Build and Publish Client to NuGet
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Generate Version Number
+        id: version
+        run: echo "::set-output name=timestamp::$(date +%s)"
+
+      - name: Build
+        run: dotnet build tobeh.Valmar.Client/tobeh.Valmar.Client.csproj --configuration Release
+
+      - name: Package
+        run: |
+          PACKAGE_VERSION="0.1.${{ steps.version.outputs.timestamp }}"
+          dotnet pack tobeh.Valmar.Client/tobeh.Valmar.Client.csproj --no-restore --no-build --configuration Release -p:PackageID=tobeh.Valmar.Client -p:PackageVersion=$PACKAGE_VERSION -o ./nupkg
+
+      - name: Publish
+        run: |
+          PACKAGE_VERSION="0.1.${{ steps.version.outputs.timestamp }}"
+          dotnet nuget push "./nupkg/tobeh.Valmar.Client.$PACKAGE_VERSION.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}

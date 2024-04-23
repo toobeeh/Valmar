@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Protobuf Include="../tobeh.Valmar.Server/Protos/*.proto" GrpcServices="Client" ProtoRoot="../tobeh.Valmar.Server/Protos">
+            <Access>Public</Access>
+            <ProtoCompile>True</ProtoCompile>
+            <CompileOutputs>True</CompileOutputs>
+            <OutputDir>Grpc</OutputDir>
+            <Generator>MSBuild:Compile</Generator>
+        </Protobuf>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Grpc\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.github\workflows\build-client.yml">
+        <Link>build-client.yml</Link>
+      </Content>
+    </ItemGroup>
+
+</Project>
