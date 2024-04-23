@@ -12,16 +12,16 @@ ENV DB_DOMAIN_NAME "${DB_DOMAIN_NAME}"
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Valmar.csproj", "Valmar/"]
-RUN dotnet restore "Valmar/Valmar.csproj"
+COPY ["tobeh.Valmar.Server/tobeh.Valmar.Server.csproj", "tobeh.Valmar.Server/"]
+RUN dotnet restore "tobeh.Valmar.Server/tobeh.Valmar.Server.csproj"
 COPY . ./Valmar
-WORKDIR "/src/Valmar"
+WORKDIR "/src/tobeh.Valmar.Server"
 #RUN ls -lR
-RUN dotnet build "Valmar.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "tobeh.Valmar.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Valmar.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "tobeh.Valmar.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
@@ -34,4 +34,4 @@ RUN chmod +x entrypoint.sh
 USER $APP_UID
 
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["sh", "-c", "dotnet Valmar.dll"]
+CMD ["sh", "-c", "dotnet tobeh.Valmar.Server.dll"]
