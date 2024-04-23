@@ -12,7 +12,7 @@ ENV DB_DOMAIN_NAME "${DB_DOMAIN_NAME}"
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["tobeh.Valmar.Server/tobeh.Valmar.Server.csproj", "tobeh.Valmar.Server/"]
+COPY ["tobeh.Valmar.Server.csproj", "tobeh.Valmar.Server/"]
 RUN dotnet restore "tobeh.Valmar.Server/tobeh.Valmar.Server.csproj"
 COPY . ./tobeh.Valmar.Server
 WORKDIR "/src/tobeh.Valmar.Server"
