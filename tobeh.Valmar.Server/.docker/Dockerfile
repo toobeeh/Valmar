@@ -14,7 +14,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["tobeh.Valmar.Server/tobeh.Valmar.Server.csproj", "tobeh.Valmar.Server/"]
 RUN dotnet restore "tobeh.Valmar.Server/tobeh.Valmar.Server.csproj"
-COPY . ./Valmar
+COPY . ./tobeh.Valmar.Server
 WORKDIR "/src/tobeh.Valmar.Server"
 #RUN ls -lR
 RUN dotnet build "tobeh.Valmar.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build
