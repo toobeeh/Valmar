@@ -7,7 +7,7 @@ namespace tobeh.Valmar.Client.Util;
 
 public static class GrpcClientRegistrationExtensions
 {
-    public static IServiceCollection AddGrpcClients(this IServiceCollection services, string address)
+    public static IServiceCollection AddValmarGrpc(this IServiceCollection services, string address)
     {
         var assembly = Assembly.GetExecutingAssembly();
         
