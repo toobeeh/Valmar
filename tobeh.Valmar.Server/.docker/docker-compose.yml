@@ -3,9 +3,11 @@ version: "3.0"
 services:
   valmar:
     container_name: valmar
-    image: "ghcr.io/toobeeh/valmar:latest"
+    build:
+      context: ../
+      dockerfile: .docker/Dockerfile
     restart: no
     environment:
-      - DB_DOMAIN_NAME=mariadb.typo.rip
+      - DB_DOMAIN_NAME=host.docker.internal
     ports:
       - "8080:8080"

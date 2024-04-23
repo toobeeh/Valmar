@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/publish-server.yml
+      - '.github/workflows/publish-server.yml'
       - 'tobeh.Valmar.Server/**'
 
 env:
