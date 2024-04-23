@@ -35,15 +35,4 @@
         <PackageReference Include="prometheus-net" Version="8.2.1" />
         <PackageReference Include="prometheus-net.AspNetCore.Grpc" Version="8.2.1" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="..\.github\workflows\build-client.yml">
-        <Link>.github\workflows\build-client.yml</Link>
-      </Content>
-      <Content Include="..\.github\workflows\build-server.yml">
-        <Link>.github\workflows\build-server.yml</Link>
-      </Content>
-      <Content Include=".docker\*" />
-    </ItemGroup>
-
 </Project>

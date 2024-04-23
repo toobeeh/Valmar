@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/**'
+      - '.github/workflows/publish-client.yml'
       - 'tobeh.Valmar.Client/**'
 
 jobs:

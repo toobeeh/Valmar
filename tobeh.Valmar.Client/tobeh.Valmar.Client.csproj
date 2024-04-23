@@ -24,10 +24,4 @@
         <Folder Include="Grpc\" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="..\.github\workflows\build-client.yml">
-        <Link>build-client.yml</Link>
-      </Content>
-    </ItemGroup>
-
 </Project>
