@@ -12,6 +12,7 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<AwardeeEntity> Awardees { get; set; } = null!;
         public virtual DbSet<BoostSplitEntity> BoostSplits { get; set; } = null!;
         public virtual DbSet<BubbleTraceEntity> BubbleTraces { get; set; } = null!;
+        public virtual DbSet<CardTemplateEntity> CardTemplates { get; set; } = null!;
         public virtual DbSet<CloudTagEntity> CloudTags { get; set; } = null!;
         public virtual DbSet<DropBoostEntity> DropBoosts { get; set; } = null!;
         public virtual DbSet<EventEntity> Events { get; set; } = null!;
@@ -52,7 +53,8 @@ namespace tobeh.Valmar.Server.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("name=ConnectionStrings:Palantir", ServerVersion.Parse("11.3.2-mariadb"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseMySql("name=ConnectionStrings:Palantir", Microsoft.EntityFrameworkCore.ServerVersion.Parse("11.3.2-mariadb"));
             }
         }
 
@@ -77,6 +79,12 @@ namespace tobeh.Valmar.Server.Database
             modelBuilder.Entity<BubbleTraceEntity>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<CardTemplateEntity>(entity =>
+            {
+                entity.HasKey(e => e.Name)
+                    .HasName("PRIMARY");
             });
 
             modelBuilder.Entity<CloudTagEntity>(entity =>

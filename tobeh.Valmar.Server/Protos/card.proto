@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "tobeh.Valmar";
+package card;
+
+// Service definition for card resource access
+service Card {
+  
+  // get all available card templates
+  rpc GetCardTemplates (google.protobuf.Empty) returns (stream CardTemplateListingMessage);
+  
+  // get a single card template
+  rpc GetCardTemplate (GetCardTemplateMessage) returns (CardTemplateMessage);
+
+  // get member card settings
+  rpc GetMemberCardSettings (GetMemberCardSettingsMessage) returns (MemberCardSettingsMessage);
+  
+  // set member card settings
+  rpc SetMemberCardSettings (SetMemberCardSettingsMessage) returns (google.protobuf.Empty);
+}
+
+message CardTemplateListingMessage {
+  string name = 1;
+}
+
+message GetCardTemplateMessage {
+  string name = 1;
+}
+
+message CardTemplateMessage {
+  string name = 1;
+  string template = 2;
+}
+
+message GetMemberCardSettingsMessage {
+  int32 login = 1;
+}
+
+message MemberCardSettingsMessage {
+  double headerOpacity = 1;
+  double backgroundOpacity = 2;
+  google.protobuf.StringValue backgroundImage = 3;
+  string lightTextColor = 4;
+  string darkTextColor = 5;
+  string headerColor = 6;
+  string templateName = 7;
+}
+
+message SetMemberCardSettingsMessage {
+  int32 login = 1;
+  MemberCardSettingsMessage settings = 2;
+}

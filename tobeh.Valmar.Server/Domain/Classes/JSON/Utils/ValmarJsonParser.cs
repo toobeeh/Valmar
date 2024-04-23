@@ -4,12 +4,12 @@ namespace tobeh.Valmar.Server.Domain.Classes.JSON;
 
 public static class ValmarJsonParser
 {
-    public static TDestination TryParse<TDestination>(string json, ILogger logger) where TDestination : class // TODO improve logger passing
+    public static TDestination TryParse<TDestination>(string json, ILogger logger, bool useDefaults = false) where TDestination : class // TODO improve logger passing
     {
         TDestination? result = null;
         try
         {
-            result = JsonSerializer.Deserialize<TDestination>(json, ValmarJsonOptions.JsonSerializerOptions);
+            result = useDefaults ? JsonSerializer.Deserialize<TDestination>(json) : JsonSerializer.Deserialize<TDestination>(json, ValmarJsonOptions.JsonSerializerOptions);
         }
         catch(Exception e)
         {
