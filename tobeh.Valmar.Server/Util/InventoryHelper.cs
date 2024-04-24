@@ -54,7 +54,7 @@ public static class InventoryHelper
 
                 return new { Slot = slot, Sprite = validSpriteId ? spriteId : -1 };
             })
-            .Where(sprite => sprite.Sprite != -1);
+            .Where(sprite => sprite.Sprite > 0);
 
         return spritesList
             .Select(sprite =>
