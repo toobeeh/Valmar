@@ -10,7 +10,7 @@ public record PersistentDropChunkRange(long? Start, long? End, DateTimeOffset? S
 
 public class CachedDropChunkContext
 {
-    public readonly ConcurrentDictionary<string, KeyValueStore<string, double>> LeagueDropValue = new ();
+    public readonly ConcurrentDictionary<string, KeyValueStore<string, LeagueWeightDetails>> LeagueDropValue = new ();
     public readonly ConcurrentDictionary<string, KeyValueStore<string, int>> LeagueDropCount = new ();
     public readonly ConcurrentDictionary<string, KeyValueStore<string, EventResult>> EventDetails = new ();
     public readonly ConcurrentDictionary<string, KeyValueStore<string, IList<string>>> LeagueParticipants = new ();

@@ -40,16 +40,16 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
     private List<IDropChunk> Chunks => Nodes.Select(node => node.Chunk).ToList(); // by accessing "Nodes" it will create new isntances every time - this actually makes it completely thread-safe+
     
 
-    public async Task<double> GetLeagueWeight(string id)
+    public async Task<LeagueWeightDetails> GetLeagueWeight(string id)
     {
         return await GetLeagueWeight(id, null, null);
     }
 
-    public async Task<double> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end)
+    public async Task<LeagueWeightDetails> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end)
     {
         // sort out if this chunk is relevant
-        if (start > DropTimestampEnd) return 0d;
-        if (end < DropTimestampStart) return 0d;
+        if (start > DropTimestampEnd) return new LeagueWeightDetails(0, new ConcurrentDictionary<int, double>());
+        if (end < DropTimestampStart) return new LeagueWeightDetails(0, new ConcurrentDictionary<int, double>());
         
         // set end or start to null if out if chunk range
         if (start < DropTimestampStart) start = null;
@@ -59,10 +59,18 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
-        if(DropIndexEnd is null && _context.LeagueDropValue.ContainsKey(key)) _context.LeagueDropValue[key].Dirty();
+        if(DropIndexEnd is null && _context.LeagueDropValue.TryGetValue(key, out var value)) value.Dirty();
 
-        var store = _context.LeagueDropValue.GetOrAdd(key,key =>  new KeyValueStore<string, double>(key, async key =>
-            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) => a+b, 0d))
+        var store = _context.LeagueDropValue.GetOrAdd(key,key =>  new KeyValueStore<string, LeagueWeightDetails>(key, async key =>
+            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) =>
+            {
+                var combinedDicts = new ConcurrentDictionary<int, double>(a.EventDropValues);
+                foreach (var eventDropValuePair in b.EventDropValues)
+                {
+                    combinedDicts.AddOrUpdate(eventDropValuePair.Key, eventDropValuePair.Value, (akey, dropValue) => dropValue + eventDropValuePair.Value);
+                }
+                return new LeagueWeightDetails(a.RegularValue + b.RegularValue, combinedDicts);
+            }, new LeagueWeightDetails(0, new ConcurrentDictionary<int, double>())))
         );
         return await store.Retrieve();
     }

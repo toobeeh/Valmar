@@ -87,23 +87,12 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         return Task.FromResult(drops);
     }
     
-    public async Task<double> GetLeagueWeight(string id)
+    public async Task<LeagueWeightDetails> GetLeagueWeight(string id)
     {
-        var drops = _db.PastDrops;
-        var weights = await drops
-            .Where(d => d.LeagueWeight > 0
-                        && d.EventDropId == 0
-                        && (DropIndexStart == null || d.DropId >= DropIndexStart) 
-                        && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
-                        && d.CaughtLobbyPlayerId == id)
-            .Select(d => d.LeagueWeight)
-            .ToListAsync();
-        var score = weights.Sum(d => DropHelper.Weight(d));
-        
-        return score;
+        return await GetLeagueWeight(id, null, null);
     }
 
-    public async Task<double> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end)
+    public async Task<LeagueWeightDetails> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end)
     {
         var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
         var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
@@ -111,17 +100,23 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         var drops = _db.PastDrops;
         var weights = await drops
             .Where(d => d.LeagueWeight > 0
-                        && d.EventDropId == 0
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
                         && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)
                         && (endStamp == null ||  d.ValidFrom.CompareTo(endStamp) < 0)
                         && d.CaughtLobbyPlayerId == id)
-            .Select(d => d.LeagueWeight)
+            .Select(drop => new { EventDropId = Math.Abs(drop.EventDropId), drop.LeagueWeight})
+            .GroupBy(drop => drop.EventDropId)
             .ToListAsync();
-        var score = weights.Sum(d => DropHelper.Weight(d));
         
-        return score;
+        var scores = weights.Select(group => new
+                { EventDropId = group.Key, Value = group.Sum(d => DropHelper.Weight(d.LeagueWeight)) })
+            .ToDictionary(drop => drop.EventDropId, drop => drop.Value);
+        
+        var regularValue = scores.TryGetValue(0, out var value) ? value : 0;
+        scores.Remove(0);
+        
+        return new LeagueWeightDetails(regularValue, new ConcurrentDictionary<int, double>(scores));
     }
     
     public async Task<int> GetLeagueCount(string id)

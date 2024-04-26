@@ -66,10 +66,14 @@ public class InventoryDomainService(
         var member = await membersService.GetMemberByLogin(login);
         
         var chunk = dropChunks.GetTree().Chunk;
-        var leagueDrops = (int)Math.Floor(await chunk.GetLeagueWeight(member.DiscordId.ToString()));
+        var leagueDetails = await chunk.GetLeagueWeight(member.DiscordId.ToString());
+        var leagueEventValues = leagueDetails.EventDropValues
+            .Select(kv => new LeagueEventDropValueDdo(kv.Key, kv.Value))
+            .ToList();
+        var leagueValue = (int)Math.Floor(leagueDetails.RegularValue);
         var leagueCount = await chunk.GetLeagueCount(member.DiscordId.ToString());
         
-        return new DropCreditDdo(member.Drops + leagueDrops, member.Drops, leagueCount);
+        return new DropCreditDdo(member.Drops + leagueValue, member.Drops, leagueCount, leagueEventValues);
     }
     
     public async Task<List<EventCreditDdo>> GetEventCredit(MemberDdo member, List<int> eventDropIds)
@@ -493,5 +497,43 @@ public class InventoryDomainService(
         }
 
         return roundedRedeemed;
+    }
+
+    public async Task SetPatronEmoji(MemberDdo member, string? emoji)
+    {
+        logger.LogTrace("SetPatronEmoji(member={member}, emoji={emoji})", member, emoji);
+
+        if (!member.MappedFlags.Contains(MemberFlagDdo.Patron))
+        {
+            throw new UserOperationException("The user is not a patron and is not allowed to set a patron emoji.");
+        }
+        
+        var memberEntity = await db.Members.FirstAsync(entity => entity.Login == member.Login);
+        memberEntity.Emoji = emoji;
+
+        db.Members.Update(memberEntity);
+        await db.SaveChangesAsync();
+    }
+
+    public async Task SetPatronizedMember(MemberDdo member, long? patronizedMemberDiscordId)
+    {
+        logger.LogTrace("SetPatronizedMember(member={member}, patronizedMemberDiscordId={patronizedMemberDiscordId})", member, patronizedMemberDiscordId);
+
+        if (!member.MappedFlags.Any(f => f is MemberFlagDdo.Patronizer or MemberFlagDdo.Admin))
+        {
+            throw new UserOperationException("The user is not a patronizer and is not allowed to set a patronized member.");
+        }
+
+        if (member.NextPatronizeDate > DateTimeOffset.UtcNow)
+        {
+            throw new UserOperationException(
+                $"Patronized member cooldown is active until {member.NextPatronizeDate :d}");
+        }
+        
+        var memberEntity = await db.Members.FirstAsync(entity => entity.Login == member.Login);
+        memberEntity.Patronize = InventoryHelper.SerializePatronizedMember(new Tuple<long?, DateTimeOffset>(patronizedMemberDiscordId, DateTimeOffset.UtcNow));
+
+        db.Members.Update(memberEntity);
+        await db.SaveChangesAsync();
     }
 }

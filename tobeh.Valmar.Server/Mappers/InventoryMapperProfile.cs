@@ -13,6 +13,7 @@ public class InventoryMapperProfile : Profile
         CreateMap<MemberSpriteSlotDdo, SpriteSlotConfigurationReply>().ReverseMap();
         CreateMap<BubbleCreditDdo, BubbleCreditReply>();
         CreateMap<DropCreditDdo, DropCreditReply>();
+        CreateMap<LeagueEventDropValueDdo, LeagueEventDropValueMessage>();
         CreateMap<EventCreditDdo, EventCreditReply>();
         CreateMap<SceneInventoryDdo, SceneInventoryReply>();
         CreateMap<AwardInventoryDdo, AwardInventoryMessage>();

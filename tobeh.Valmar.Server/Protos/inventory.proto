@@ -71,6 +71,22 @@ service Inventory {
   
   // gets the current gift loss rate
   rpc GetGiftLossRate (GetGiftLossRateMessage) returns (GiftLossRateMessage);
+  
+  // patronizes another member
+  rpc PatronizeMember (PatronizeMemberMessage) returns (google.protobuf.Empty);
+  
+  // set the patron emoji of a user
+  rpc SetPatronEmoji (SetPatronEmojiMessage) returns (google.protobuf.Empty);
+}
+
+message SetPatronEmojiMessage {
+  int32 login = 1;
+  google.protobuf.StringValue emoji = 2;
+}
+
+message PatronizeMemberMessage {
+  int32 login = 1;
+  google.protobuf.Int64Value patronizedDiscordId = 2;
 }
 
 message GetGiftLossRateMessage {
@@ -186,6 +202,11 @@ message GetDropCreditRequest {
   int32 login = 1;
 }
 
+message LeagueEventDropValueMessage {
+  int32 eventDropId = 1;
+  double value = 2;
+}
+
 message DropCreditReply {
   
   // the total amount of drops, consisting of regular drops + weighted league drops
@@ -196,6 +217,9 @@ message DropCreditReply {
   
   // the count (non-weighted) of league drops
   int32 leagueCount = 3;
+  
+  // the values of league event drops that the user has caught
+  repeated LeagueEventDropValueMessage leagueEventDropValues = 4;
 }
 
 message BuySpriteRequest {

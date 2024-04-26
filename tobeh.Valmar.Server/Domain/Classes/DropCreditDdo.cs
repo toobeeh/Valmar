@@ -1,3 +1,4 @@
 namespace tobeh.Valmar.Server.Domain.Classes;
 
-public record DropCreditDdo(int TotalCredit, int RegularCount, int LeagueCount);
+public record LeagueEventDropValueDdo(int EventDropId, double Value);
+public record DropCreditDdo(int TotalCredit, int RegularCount, int LeagueCount, List<LeagueEventDropValueDdo> LeagueEventDropValues);

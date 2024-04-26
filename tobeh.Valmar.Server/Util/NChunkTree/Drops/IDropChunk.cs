@@ -8,8 +8,8 @@ public interface IDropChunk
     long? DropIndexEnd { get; }
     DateTimeOffset? DropTimestampStart { get; }
     DateTimeOffset? DropTimestampEnd { get; }
-    Task<double> GetLeagueWeight(string id);
-    Task<double> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end);
+    Task<LeagueWeightDetails> GetLeagueWeight(string id);
+    Task<LeagueWeightDetails> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end);
     Task<int> GetLeagueCount(string id);
     Task<int> GetLeagueCount(string id, DateTimeOffset? start, DateTimeOffset? end);
     Task<IList<string>> GetLeagueParticipants();
@@ -21,6 +21,7 @@ public interface IDropChunk
     
 }
 
+public record LeagueWeightDetails(double RegularValue, ConcurrentDictionary<int, double> EventDropValues);
 public record StreakResult(int Tail, int Head, int Streak);
 public record EventResult(ConcurrentDictionary<int, ConcurrentDictionary<long, double>> RedeemableCredit, double Progress);
 public record LeagueResult(string Id, double Score, int Count, double AverageTime, double AverageWeight, StreakResult Streak);

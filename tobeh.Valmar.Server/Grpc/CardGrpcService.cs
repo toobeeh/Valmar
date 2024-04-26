@@ -45,7 +45,7 @@ public class CardGrpcService(
         logger.LogTrace("SetMemberCardSettings(request={request})", request);
         
         var member = await membersDomainService.GetMemberByLogin(request.Login);
-        var cardSettings = mapper.Map<CustomCardJson>(request);
+        var cardSettings = mapper.Map<CustomCardJson>(request.Settings);
         await cardDomainService.SaveCustomCardSettings(member, cardSettings);
         
         return new Empty();

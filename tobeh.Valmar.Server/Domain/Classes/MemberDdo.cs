@@ -14,5 +14,6 @@ public record MemberDdo(
     long? PatronizedDiscordId,
     string? PatronEmoji,
     List<MemberFlagDdo> MappedFlags,
-    DateTimeOffset NextAwardPackDate
+    DateTimeOffset NextAwardPackDate,
+    DateTimeOffset NextPatronizeDate
     );

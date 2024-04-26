@@ -23,4 +23,6 @@ public interface IInventoryDomainService
     Task<GiftLossRateDdo> GetGiftLossRateBase(MemberDdo member, List<SpriteDdo> eventSprites);
     Task<EventCreditGiftResultDdo> GiftEventCredit(MemberDdo fromMember, MemberDdo toMember, int amount, EventDropDdo eventDrop, GiftLossRateDdo lossRate);
     Task<int> RedeemEventLeagueDrops(MemberDdo member, int amount, int eventDropId);
+    Task SetPatronEmoji(MemberDdo member, string? emoji);
+    Task SetPatronizedMember(MemberDdo member, long? patronizedMemberDiscordId);
 }

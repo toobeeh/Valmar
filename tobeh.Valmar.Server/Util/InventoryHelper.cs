@@ -89,4 +89,29 @@ public static class InventoryHelper
             _ => 4
         };
     }
+    
+    public static Tuple<long?, DateTimeOffset> ParsePatronizedMember(string? patronized)
+    {
+        if (patronized == null || string.IsNullOrWhiteSpace(patronized))
+        {
+            return new Tuple<long?, DateTimeOffset>(null, DateTimeOffset.FromUnixTimeSeconds(0));
+        }
+        
+        var split = patronized.Split('#');
+        if (split.Length != 2) throw new ArgumentException($"patronize string was in invalid format: {patronized}");
+
+        long? targetId = null;
+        if (long.TryParse(split.Length > 0 ? split[0] : "", out var id))
+        {
+            targetId = id;
+        }
+        var date = DateTimeOffset.ParseExact(split[1], "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal);
+
+        return new Tuple<long?, DateTimeOffset>(targetId, date);
+    }
+    
+    public static string SerializePatronizedMember(Tuple<long?, DateTimeOffset> patronized)
+    {
+        return $"{patronized.Item1}#{patronized.Item2:MM/dd/yyyy HH:mm:ss}";
+    }
 }

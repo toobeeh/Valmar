@@ -77,6 +77,7 @@ message MemberReply {
   repeated MemberFlagMessage mappedFlags = 11;
   google.protobuf.Timestamp nextAwardPackDate = 12;
   google.protobuf.StringValue patronEmoji = 13;
+  google.protobuf.Timestamp nextPatronizeDate = 14;
 }
 
 // Reply containing the accesstoken of a member

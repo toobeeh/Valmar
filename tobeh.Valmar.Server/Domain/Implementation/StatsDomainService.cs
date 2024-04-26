@@ -39,7 +39,9 @@ public class StatsDomainService(
             Drops = member.Drops
         });
         
-        var ranking = leaderboard.OrderByDescending(member => mode == LeaderboardModeDdo.Bubbles ? member.Bubbles : member.Drops)
+        var ranking = leaderboard
+            .Where(member => !member.Member.MappedFlags.Any(flag => flag is MemberFlagDdo.PermaBan or MemberFlagDdo.BubbleFarming or MemberFlagDdo.DropBan))
+            .OrderByDescending(member => mode == LeaderboardModeDdo.Bubbles ? member.Bubbles : member.Drops)
             .Select((member, index) => new LeaderboardRankDdo(index + 1, member.Member.Login, member.Member.DiscordId, member.Bubbles, Convert.ToInt32(member.Drops), member.Member.Username))
             .ToList();
 

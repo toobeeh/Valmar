@@ -379,9 +379,6 @@ public class MembersDomainService(
         //var drops = dropTree.GetTree().Chunk;
         //var value = await drops.GetLeagueWeight(memberDetails.UserId);
         //var count = await drops.GetLeagueCount(memberDetails.UserId);
-        
-        // parse patronized details
-        long? patronizedId = member.Patronize is { } patronizeString ? Convert.ToInt64(patronizeString.Split("#")[0]) : null;
 
         // parse next award pack open date
         var mappedFlags = FlagHelper.GetFlags(member.Flag);
@@ -389,6 +386,12 @@ public class MembersDomainService(
         {
             mappedFlags.Add(MemberFlagDdo.Patron);
         }
+        
+        // parse patronized details
+        var patronize =
+            InventoryHelper.ParsePatronizedMember(mappedFlags.Any(f => f is MemberFlagDdo.Patronizer or MemberFlagDdo.Admin)
+                ? member.Patronize
+                : null);
         
         var awardPackCooldown = mappedFlags.Any(flag => flag is MemberFlagDdo.Admin or MemberFlagDdo.Patron) ? 5 : 7;
         var nextAwardPack = member.AwardPackOpened is {} timestamp ? 
@@ -407,10 +410,11 @@ public class MembersDomainService(
             memberDetails.UserName,
             Convert.ToInt32(memberDetails.UserLogin),
             memberDetails.Guilds.Select(guild => Convert.ToInt32(guild.ObserveToken)).ToList(),
-            patronizedId,
+            patronize.Item1,
             mappedFlags.Contains(MemberFlagDdo.Patron) ? member.Emoji : null,
             mappedFlags,
-            nextAwardPack
+            nextAwardPack,
+            patronize.Item2.AddDays(7)
         );
     }
 }

@@ -118,6 +118,10 @@ namespace tobeh.Valmar {
     static readonly grpc::Marshaller<global::tobeh.Valmar.GetGiftLossRateMessage> __Marshaller_inventory_GetGiftLossRateMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetGiftLossRateMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GiftLossRateMessage> __Marshaller_inventory_GiftLossRateMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GiftLossRateMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.PatronizeMemberMessage> __Marshaller_inventory_PatronizeMemberMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.PatronizeMemberMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.SetPatronEmojiMessage> __Marshaller_inventory_SetPatronEmojiMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.SetPatronEmojiMessage.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.GetBubbleCreditRequest, global::tobeh.Valmar.BubbleCreditReply> __Method_GetBubbleCredit = new grpc::Method<global::tobeh.Valmar.GetBubbleCreditRequest, global::tobeh.Valmar.BubbleCreditReply>(
@@ -278,6 +282,22 @@ namespace tobeh.Valmar {
         "GetGiftLossRate",
         __Marshaller_inventory_GetGiftLossRateMessage,
         __Marshaller_inventory_GiftLossRateMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.PatronizeMemberMessage, global::Google.Protobuf.WellKnownTypes.Empty> __Method_PatronizeMember = new grpc::Method<global::tobeh.Valmar.PatronizeMemberMessage, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "PatronizeMember",
+        __Marshaller_inventory_PatronizeMemberMessage,
+        __Marshaller_google_protobuf_Empty);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.SetPatronEmojiMessage, global::Google.Protobuf.WellKnownTypes.Empty> __Method_SetPatronEmoji = new grpc::Method<global::tobeh.Valmar.SetPatronEmojiMessage, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SetPatronEmoji",
+        __Marshaller_inventory_SetPatronEmojiMessage,
+        __Marshaller_google_protobuf_Empty);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -1199,6 +1219,102 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.GiftLossRateMessage> GetGiftLossRateAsync(global::tobeh.Valmar.GetGiftLossRateMessage request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetGiftLossRate, null, options, request);
+      }
+      /// <summary>
+      /// patronizes another member
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty PatronizeMember(global::tobeh.Valmar.PatronizeMemberMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return PatronizeMember(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// patronizes another member
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty PatronizeMember(global::tobeh.Valmar.PatronizeMemberMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_PatronizeMember, null, options, request);
+      }
+      /// <summary>
+      /// patronizes another member
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> PatronizeMemberAsync(global::tobeh.Valmar.PatronizeMemberMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return PatronizeMemberAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// patronizes another member
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> PatronizeMemberAsync(global::tobeh.Valmar.PatronizeMemberMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_PatronizeMember, null, options, request);
+      }
+      /// <summary>
+      /// set the patron emoji of a user
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty SetPatronEmoji(global::tobeh.Valmar.SetPatronEmojiMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SetPatronEmoji(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// set the patron emoji of a user
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty SetPatronEmoji(global::tobeh.Valmar.SetPatronEmojiMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SetPatronEmoji, null, options, request);
+      }
+      /// <summary>
+      /// set the patron emoji of a user
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> SetPatronEmojiAsync(global::tobeh.Valmar.SetPatronEmojiMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SetPatronEmojiAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// set the patron emoji of a user
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> SetPatronEmojiAsync(global::tobeh.Valmar.SetPatronEmojiMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SetPatronEmoji, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

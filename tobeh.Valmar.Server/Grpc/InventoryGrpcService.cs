@@ -216,4 +216,24 @@ public class InventoryGrpcService(
 
         return mapper.Map<GiftLossRateMessage>(lossRate);
     }
+
+    public override async Task<Empty> PatronizeMember(PatronizeMemberMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("PatronizeMember(request={request})", request);
+        
+        var member = await membersService.GetMemberByLogin(request.Login);
+        await inventoryService.SetPatronizedMember(member, request.PatronizedDiscordId);
+
+        return new Empty();
+    }
+
+    public override async Task<Empty> SetPatronEmoji(SetPatronEmojiMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("SetPatronEmoji(request={request})", request);
+        
+        var member = await membersService.GetMemberByLogin(request.Login);
+        await inventoryService.SetPatronEmoji(member, request.Emoji);
+
+        return new Empty();
+    }
 }
