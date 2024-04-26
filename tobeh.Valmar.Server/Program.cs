@@ -1,5 +1,6 @@
 using System.Globalization;
 using Calzolari.Grpc.AspNetCore.Validation;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Prometheus;
 using tobeh.Valmar.Server.Database;
 using tobeh.Valmar.Server.Domain;
@@ -23,6 +24,16 @@ public class Program
         CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
         
         var builder = WebApplication.CreateBuilder(args);
+        
+        // configure kestrel
+        builder.WebHost.ConfigureKestrel(options =>
+        {
+            // Setup a HTTP/2 endpoint without TLS.
+            options.ListenAnyIP(builder.Configuration.GetRequiredSection("Grpc").GetValue<int>("HostPort"), o => o.Protocols = HttpProtocols.Http2);
+            
+            // setup prometheus endpoint
+            options.ListenAnyIP(builder.Configuration.GetRequiredSection("Prometheus").GetValue<int>("HostPort"), o => o.Protocols = HttpProtocols.Http1);
+        });
 
         // Add services to the container.
         builder.Services.AddGrpc(options =>
