@@ -98,16 +98,16 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
         
         var drops = _db.PastDrops;
-        var weights = await drops
-            .Where(d => d.LeagueWeight > 0
-                        && (DropIndexStart == null || d.DropId >= DropIndexStart) 
-                        && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
-                        && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)
-                        && (endStamp == null ||  d.ValidFrom.CompareTo(endStamp) < 0)
-                        && d.CaughtLobbyPlayerId == id)
-            .Select(drop => new { EventDropId = Math.Abs(drop.EventDropId), drop.LeagueWeight})
-            .GroupBy(drop => drop.EventDropId)
-            .ToListAsync();
+        var weights = (await drops
+                .Where(d => d.LeagueWeight > 0
+                            && (DropIndexStart == null || d.DropId >= DropIndexStart)
+                            && (DropIndexEnd == null || d.DropId < DropIndexEnd)
+                            && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)
+                            && (endStamp == null || d.ValidFrom.CompareTo(endStamp) < 0)
+                            && d.CaughtLobbyPlayerId == id)
+                .ToListAsync()) // math abs somehow doesnt work in DB...
+            .Select(drop => new { EventDropId = Math.Abs(drop.EventDropId), drop.LeagueWeight })
+            .GroupBy(drop => drop.EventDropId);
         
         var scores = weights.Select(group => new
                 { EventDropId = group.Key, Value = group.Sum(d => DropHelper.Weight(d.LeagueWeight)) })
