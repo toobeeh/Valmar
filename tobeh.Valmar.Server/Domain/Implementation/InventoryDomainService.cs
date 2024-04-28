@@ -275,7 +275,7 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
     }
 
-    public async Task UseSpriteCombo(int login, List<int> combo, bool clearOther = false)
+    public async Task UseSpriteCombo(int login, List<int?> combo, bool clearOther = false)
     {
         logger.LogTrace("UseSpriteCombo(login={login}, combo={combo}, clearOther={clearOther})", login, combo, clearOther);
         
@@ -283,13 +283,13 @@ public class InventoryDomainService(
         var inv = InventoryHelper.ParseSpriteInventory(member.Sprites, member.RainbowSprites);
         
         // check if all sprites are in the inventory
-        if (combo.Any(id => inv.All(slot => slot.SpriteId != id)))
+        if (combo.Any(id => id is not null && inv.All(slot => slot.SpriteId != id)))
         {
             throw new UserOperationException($"The user does not own all sprites from the combo {combo}");
         }
         
         // check if all sprites are unique
-        if (combo.Distinct().Count() != combo.Count)
+        if (combo.Where(spt => spt is not null).Distinct().Count() != combo.Count(spt => spt is not null))
         {
             throw new UserOperationException("The combo contains duplicate sprites");
         }
@@ -311,9 +311,12 @@ public class InventoryDomainService(
             if(existingSprite != -1) inv[existingSprite] = inv[existingSprite] with { Slot = 0 };
             
             // set target sprite in slot
-            var targetSprite = inv.FindIndex(invSlot => invSlot.SpriteId == combo[slot]);
-            if(targetSprite != -1) inv[targetSprite] = inv[targetSprite] with { Slot = slot + 1 };
-            else throw new UserOperationException($"The user does not own the sprite {combo[slot]}");
+            if (combo[slot] is not null)
+            {
+                var targetSprite = inv.FindIndex(invSlot => invSlot.SpriteId == combo[slot]);
+                if(targetSprite != -1) inv[targetSprite] = inv[targetSprite] with { Slot = slot + 1 };
+                else throw new UserOperationException($"The user does not own the sprite {combo[slot]}");
+            }
         }
         
         // save combo

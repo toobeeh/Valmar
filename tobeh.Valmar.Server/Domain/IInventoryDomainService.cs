@@ -11,7 +11,7 @@ public interface IInventoryDomainService
     Task<List<EventCreditDdo>> GetEventCredit(MemberDdo member, List<int> eventDropIds);
     Task<DropCreditDdo> GetDropCredit(int login);
     Task<int> GetSpriteSlotCount(int login);
-    Task UseSpriteCombo(int login, List<int> combo, bool clearOther = false);
+    Task UseSpriteCombo(int login, List<int?> combo, bool clearOther = false);
     Task SetColorShiftConfiguration(int login, Dictionary<int, int?> colorShiftMap, bool clearOther = false);
     Task<SceneInventoryDdo> GetMemberSceneInventory(int login);
     Task UseScene(int login, int? sceneId);

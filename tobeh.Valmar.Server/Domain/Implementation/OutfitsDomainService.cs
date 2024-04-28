@@ -101,7 +101,7 @@ public class OutfitsDomainService(
 
         var outfit = await GetMemberOutfit(login, name);
 
-        await inventoryDomainService.UseSpriteCombo(login, outfit.SpriteSlotConfiguration.Select(s => s.SpriteId).ToList(),
+        await inventoryDomainService.UseSpriteCombo(login, outfit.SpriteSlotConfiguration.Select(s => (int?)s.SpriteId).ToList(),
             true);
 
         var shifts = outfit.SpriteSlotConfiguration.Where(slot => slot.ColorShift is not null)

@@ -229,7 +229,7 @@ message BuySpriteRequest {
 
 message SpriteSlotConfigurationRequest {
   int32 slotId = 1;
-  int32 spriteId = 2;
+  google.protobuf.Int32Value spriteId = 2;
 }
 
 message UseSpriteComboRequest {
