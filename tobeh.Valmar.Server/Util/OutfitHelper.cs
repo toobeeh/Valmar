@@ -7,7 +7,7 @@ public static class OutfitHelper
 {
     public static string SerializeSimpleCombo(List<MemberSpriteSlotDdo> slots)
     {
-        return string.Join(",", slots.Select(slot => slot.SpriteId));
+        return string.Join(",", slots.OrderBy(slot => slot.Slot).Select(slot => slot.SpriteId));
     }
     
     public static string SerializeSimpleColorConfig(List<MemberSpriteSlotDdo> slots)
