@@ -18,6 +18,22 @@ public class MembersDomainService(
     public async Task<MemberDdo> CreateMember(long discordId, string username, bool connectTypo)
     {
         logger.LogTrace("CreateMember(discordId={discordId}, username={username}, connectTypo={connectTypo})", discordId, username, connectTypo);
+
+        var memberExists = false;
+        try
+        {
+            await GetMemberByDiscordId(discordId);
+            memberExists = true;
+        }
+        catch
+        {
+            // ignore, user does not exist
+        }
+
+        if (memberExists)
+        {
+            throw new UserOperationException($"Member can not be created, already exists with given discord ID {discordId}");
+        }
         
         int login ;
         do
