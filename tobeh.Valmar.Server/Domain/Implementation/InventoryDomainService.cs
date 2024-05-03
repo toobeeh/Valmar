@@ -167,7 +167,7 @@ public class InventoryDomainService(
         var isAdmin = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Admin);
 
         // if clearing, remove all configs
-        if (!clearOther)
+        if (clearOther)
         {
             inv = inv.Select(slot => slot with { ColorShift = null }).ToList();
         }
