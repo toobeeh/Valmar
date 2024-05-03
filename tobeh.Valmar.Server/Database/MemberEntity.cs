@@ -17,8 +17,7 @@ namespace tobeh.Valmar.Server.Database
         public int Bubbles { get; set; }
         [Column(TypeName = "text")]
         public string Sprites { get; set; } = null!;
-        [Column(TypeName = "int(11)")]
-        public int Drops { get; set; }
+        public double Drops { get; set; }
         [Column(TypeName = "int(11)")]
         public int Flag { get; set; }
         [Column(TypeName = "text")]
