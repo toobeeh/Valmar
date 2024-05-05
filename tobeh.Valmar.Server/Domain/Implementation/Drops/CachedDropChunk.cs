@@ -39,42 +39,6 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
     public DateTimeOffset? DropTimestampEnd => Chunks.Count == 0 ? null : Chunks.Last().DropTimestampEnd;
     private List<IDropChunk> Chunks => Nodes.Select(node => node.Chunk).ToList(); // by accessing "Nodes" it will create new isntances every time - this actually makes it completely thread-safe+
     
-
-    public async Task<LeagueWeightDetails> GetLeagueWeight(string id)
-    {
-        return await GetLeagueWeight(id, null, null);
-    }
-
-    public async Task<LeagueWeightDetails> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end)
-    {
-        // sort out if this chunk is relevant
-        if (start > DropTimestampEnd) return new LeagueWeightDetails(0, new ConcurrentDictionary<int, double>());
-        if (end < DropTimestampStart) return new LeagueWeightDetails(0, new ConcurrentDictionary<int, double>());
-        
-        // set end or start to null if out if chunk range
-        if (start < DropTimestampStart) start = null;
-        if (end >= DropTimestampEnd) end = null;
-        
-        // get key for request identifiers; will mostly be league requests (start/end of month) or whole chunk span so not too diverse
-        var key = $"{id}//{start?.UtcTicks}//{end?.UtcTicks}";
-        
-        // set as dirty if chunk is open ended (can always be bigger than last checked!)
-        if(DropIndexEnd is null && _context.LeagueDropValue.TryGetValue(key, out var value)) value.Dirty();
-
-        var store = _context.LeagueDropValue.GetOrAdd(key,key =>  new KeyValueStore<string, LeagueWeightDetails>(key, async key =>
-            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetLeagueWeight(id, start, end), (a, b) =>
-            {
-                var combinedDicts = new ConcurrentDictionary<int, double>(a.EventDropValues);
-                foreach (var eventDropValuePair in b.EventDropValues)
-                {
-                    combinedDicts.AddOrUpdate(eventDropValuePair.Key, eventDropValuePair.Value, (akey, dropValue) => dropValue + eventDropValuePair.Value);
-                }
-                return new LeagueWeightDetails(a.RegularValue + b.RegularValue, combinedDicts);
-            }, new LeagueWeightDetails(0, new ConcurrentDictionary<int, double>())))
-        );
-        return await store.Retrieve();
-    }
-    
     public async Task<IList<string>> GetLeagueParticipants()
     {
         return await GetLeagueParticipants(null, null);
@@ -146,35 +110,21 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         return subChunks;
     }
     
-    public async Task<EventResult> GetEventLeagueDetails(int[] eventDropIds, string userid, int userLogin)
+    public async Task<EventResult> GetEventLeagueDetails(int[]? eventDropIds, string userid)
     {
         // get key for request identifiers
-        var key = $"{string.Join("-", eventDropIds)}//{userid}//{userLogin}";
+        var key = $"{string.Join("-", eventDropIds ?? [])}//{userid}";
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
-        if(DropIndexEnd is null && _context.EventDetails.ContainsKey(key)) _context.EventDetails[key].Dirty();
+        if(DropIndexEnd is null && _context.EventDetails.TryGetValue(key, out var detail)) detail.Dirty();
 
         var store = _context.EventDetails.GetOrAdd(key,key =>  new KeyValueStore<string, EventResult>(key, async key =>
-            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventDropIds, userid, userLogin),
+            await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventDropIds, userid),
                 (a, b) =>
                 {
-                    foreach (var key in b.RedeemableCredit.Keys)
-                    {
-                        // add all redeemable drop Ids to dictionary
-                        a.RedeemableCredit.AddOrUpdate(key, b.RedeemableCredit[key], (akey, value) =>
-                        {
-                            foreach (var dropId in b.RedeemableCredit[key].Keys)
-                            {
-                                value.TryAdd(dropId, b.RedeemableCredit[key][dropId]);
-                            }
-
-                            return value;
-                        });
-                    }
-                    
-                    return a with { Progress = a.Progress + b.Progress };
+                    return new EventResult(a.Progress + b.Progress);
                 }, 
-                new EventResult(new ConcurrentDictionary<int, ConcurrentDictionary<long, double>>(), 0)))
+                new EventResult(0)))
         );
         return await store.Retrieve();
     }
@@ -267,23 +217,5 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         var val = await store.Retrieve();
         
         return val;
-    }
-
-    public async Task MarkEventDropsAsRedeemed(string userId, List<long> dropIds)
-    {
-        // THIS IS NOT THREADSAFE - should make a lock in the context and lock for all read access
-        foreach (var chunk in Chunks)
-        {
-            await chunk.MarkEventDropsAsRedeemed(userId, dropIds);
-        }
-
-        foreach (var contextEventDetail in _context.EventDetails)
-        {
-            var identifiers = contextEventDetail.Key.Split("//");
-            if(identifiers[1] == userId)
-            {
-                contextEventDetail.Value.Dirty();
-            }
-        }
     }
 }

@@ -417,7 +417,7 @@ public class MembersDomainService(
         // build ddo
         return new MemberDdo(
             member.Bubbles,
-            (int) member.Drops,
+            member.Drops,
             member.Sprites,
             member.Scenes ?? "",
             member.Flag,

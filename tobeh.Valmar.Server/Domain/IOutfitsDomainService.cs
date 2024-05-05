@@ -9,5 +9,5 @@ public interface IOutfitsDomainService
     Task SaveOutfit(int login, OutfitDdo outfit);
     Task DeleteOutfit(int login, string name);
     Task<OutfitDdo> GetMemberOutfit(int login, string name);
-    Task UseOutfit(int login, string name);
+    Task UseOutfit(MemberDdo member, string name);
 }

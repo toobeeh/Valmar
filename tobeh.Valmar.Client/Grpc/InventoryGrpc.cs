@@ -109,8 +109,6 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.FirstSeenMessage> __Marshaller_inventory_FirstSeenMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.FirstSeenMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::tobeh.Valmar.RedeemLeagueEventDropMessage> __Marshaller_inventory_RedeemLeagueEventDropMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.RedeemLeagueEventDropMessage.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GiftEventCreditMessage> __Marshaller_inventory_GiftEventCreditMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GiftEventCreditMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GiftLossMessage> __Marshaller_inventory_GiftLossMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GiftLossMessage.Parser));
@@ -258,14 +256,6 @@ namespace tobeh.Valmar {
         "GetFirstSeenDate",
         __Marshaller_inventory_GetFirstSeenDateRequest,
         __Marshaller_inventory_FirstSeenMessage);
-
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::tobeh.Valmar.RedeemLeagueEventDropMessage, global::Google.Protobuf.WellKnownTypes.Empty> __Method_RedeemLeagueEventDrop = new grpc::Method<global::tobeh.Valmar.RedeemLeagueEventDropMessage, global::Google.Protobuf.WellKnownTypes.Empty>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "RedeemLeagueEventDrop",
-        __Marshaller_inventory_RedeemLeagueEventDropMessage,
-        __Marshaller_google_protobuf_Empty);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.GiftEventCreditMessage, global::tobeh.Valmar.GiftLossMessage> __Method_GiftEventCredit = new grpc::Method<global::tobeh.Valmar.GiftEventCreditMessage, global::tobeh.Valmar.GiftLossMessage>(
@@ -1075,54 +1065,6 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.FirstSeenMessage> GetFirstSeenDateAsync(global::tobeh.Valmar.GetFirstSeenDateRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetFirstSeenDate, null, options, request);
-      }
-      /// <summary>
-      /// redeems league event drops for a member
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Google.Protobuf.WellKnownTypes.Empty RedeemLeagueEventDrop(global::tobeh.Valmar.RedeemLeagueEventDropMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return RedeemLeagueEventDrop(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      /// redeems league event drops for a member
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Google.Protobuf.WellKnownTypes.Empty RedeemLeagueEventDrop(global::tobeh.Valmar.RedeemLeagueEventDropMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_RedeemLeagueEventDrop, null, options, request);
-      }
-      /// <summary>
-      /// redeems league event drops for a member
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> RedeemLeagueEventDropAsync(global::tobeh.Valmar.RedeemLeagueEventDropMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return RedeemLeagueEventDropAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      /// redeems league event drops for a member
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> RedeemLeagueEventDropAsync(global::tobeh.Valmar.RedeemLeagueEventDropMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_RedeemLeagueEventDrop, null, options, request);
       }
       /// <summary>
       /// gift an amount of event credit to another member

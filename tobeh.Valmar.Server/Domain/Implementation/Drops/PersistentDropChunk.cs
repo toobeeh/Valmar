@@ -87,38 +87,6 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         return Task.FromResult(drops);
     }
     
-    public async Task<LeagueWeightDetails> GetLeagueWeight(string id)
-    {
-        return await GetLeagueWeight(id, null, null);
-    }
-
-    public async Task<LeagueWeightDetails> GetLeagueWeight(string id, DateTimeOffset? start, DateTimeOffset? end)
-    {
-        var startStamp = start is { } startDate ? DropHelper.FormatDropTimestamp(startDate) : null;
-        var endStamp = end is { } endDate ? DropHelper.FormatDropTimestamp(endDate) : null;
-        
-        var drops = _db.PastDrops;
-        var weights = (await drops
-                .Where(d => d.LeagueWeight > 0
-                            && (DropIndexStart == null || d.DropId >= DropIndexStart)
-                            && (DropIndexEnd == null || d.DropId < DropIndexEnd)
-                            && (startStamp == null || d.ValidFrom.CompareTo(startStamp) >= 0)
-                            && (endStamp == null || d.ValidFrom.CompareTo(endStamp) < 0)
-                            && d.CaughtLobbyPlayerId == id)
-                .ToListAsync()) // math abs somehow doesnt work in DB...
-            .Select(drop => new { EventDropId = Math.Abs(drop.EventDropId), drop.LeagueWeight })
-            .GroupBy(drop => drop.EventDropId);
-        
-        var scores = weights.Select(group => new
-                { EventDropId = group.Key, Value = group.Sum(d => DropHelper.Weight(d.LeagueWeight)) })
-            .ToDictionary(drop => drop.EventDropId, drop => drop.Value);
-        
-        var regularValue = scores.TryGetValue(0, out var value) ? value : 0;
-        scores.Remove(0);
-        
-        return new LeagueWeightDetails(regularValue, new ConcurrentDictionary<int, double>(scores));
-    }
-    
     public async Task<int> GetLeagueCount(string id)
     {
         return await GetLeagueCount(id, null, null);
@@ -162,12 +130,12 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         return participants;
     }
 
-    public async Task<EventResult> GetEventLeagueDetails(int[] eventDropIds, string userid, int userLogin)
+    public async Task<EventResult> GetEventLeagueDetails(int[]? eventDropIds, string userid)
     {
         // get drops weights of eventdrops, either redeemable or already redeemed
         var leagueEventdropWeights = await _db.PastDrops
             .Where(d => d.LeagueWeight > 0
-                        && eventDropIds.Any(id => id == Math.Abs(d.EventDropId))
+                        && (eventDropIds == null || eventDropIds.Any(id => id == Math.Abs(d.EventDropId)))
                         && (DropIndexStart == null || d.DropId >= DropIndexStart) 
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
                         && d.CaughtLobbyPlayerId == userid)
@@ -186,25 +154,20 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
         // amount of regular drops that contributed to credit -> needed for loss rate
         var regularCaughtSum = await _db.PastDrops
             .Where(d => d.LeagueWeight == 0
-                        && eventDropIds.Any(id => id == Math.Abs(d.EventDropId))
+                        && (eventDropIds == null || eventDropIds.Any(id => id == Math.Abs(d.EventDropId)))
                         && (DropIndexStart == null || d.DropId >= DropIndexStart)
                         && (DropIndexEnd == null || d.DropId < DropIndexEnd)
                         && d.CaughtLobbyPlayerId == userid)
             .CountAsync();
         
         // build maps
-        var redeemableCreditMap = new ConcurrentDictionary<int, ConcurrentDictionary<long, double>>();
         double progress = regularCaughtSum + redeemedCredits;
-        
-        foreach (var redeemableCredit in redeemableCredits)
+        foreach (var redeemableCredit in redeemableCredits) // todo remove consideration of unredeemed credits when all have been redeemed automatically
         {
-            var dict = redeemableCredit.Credit.ToDictionary(credit => credit.DropId, credit => credit.Weight);
-            
-            redeemableCreditMap[redeemableCredit.EventDropId] = new ConcurrentDictionary<long, double>(dict);
             progress += redeemableCredit.Credit.Sum(c => c.Weight);
         }
 
-        return new EventResult(redeemableCreditMap, progress);
+        return new EventResult(progress);
     }
     
     public async Task<Dictionary<string, LeagueResult>> GetLeagueResults(DateTimeOffset? start, DateTimeOffset? end)
@@ -317,26 +280,5 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
 
         var results = resultList.ToDictionary(item => item.Id);
         return results;
-    }
-
-    public async Task MarkEventDropsAsRedeemed(string userId, List<long> dropIds)
-    {
-        var filteredIds = dropIds.Where(id => id >= DropIndexStart && id < DropIndexEnd).ToList();
-        
-        // get data from db
-        var drops = await _db.PastDrops
-            .Where(d => (DropIndexStart == null || d.DropId >= DropIndexStart) 
-                        && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
-                        && d.CaughtLobbyPlayerId == userId && d.EventDropId > 0
-                        && filteredIds.Contains(d.DropId))
-            .ToListAsync();
-        
-        foreach (var pastDropEntity in drops)
-        {
-            pastDropEntity.EventDropId = Math.Abs(pastDropEntity.EventDropId) * -1;
-        }
-        
-        _db.UpdateRange(drops);
-        await _db.SaveChangesAsync();
     }
 }

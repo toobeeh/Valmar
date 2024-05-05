@@ -20,6 +20,7 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<EventDropEntity> EventDrops { get; set; } = null!;
         public virtual DbSet<GuildLobbyEntity> GuildLobbies { get; set; } = null!;
         public virtual DbSet<GuildSettingEntity> GuildSettings { get; set; } = null!;
+        public virtual DbSet<LegacyDropCountEntity> LegacyDropCounts { get; set; } = null!;
         public virtual DbSet<LobEntity> Lobs { get; set; } = null!;
         public virtual DbSet<LobbyEntity> Lobbies { get; set; } = null!;
         public virtual DbSet<MemberEntity> Members { get; set; } = null!;
@@ -36,6 +37,7 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<SpriteEntity> Sprites { get; set; } = null!;
         public virtual DbSet<SpriteProfileEntity> SpriteProfiles { get; set; } = null!;
         public virtual DbSet<StatusEntity> Statuses { get; set; } = null!;
+        public virtual DbSet<TempUserNewDropCreditEntity> TempUserNewDropCredits { get; set; } = null!;
         public virtual DbSet<ThemeEntity> Themes { get; set; } = null!;
         public virtual DbSet<ThemeShareEntity> ThemeShares { get; set; } = null!;
         public virtual DbSet<UserThemeEntity> UserThemes { get; set; } = null!;
@@ -130,6 +132,14 @@ namespace tobeh.Valmar.Server.Database
                 entity.HasKey(e => e.GuildId)
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 32 });
+            });
+
+            modelBuilder.Entity<LegacyDropCountEntity>(entity =>
+            {
+                entity.HasKey(e => e.Login)
+                    .HasName("PRIMARY");
+
+                entity.Property(e => e.Login).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<LobEntity>(entity =>
@@ -229,6 +239,14 @@ namespace tobeh.Valmar.Server.Database
                 entity.HasKey(e => e.SessionId)
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 32 });
+            });
+
+            modelBuilder.Entity<TempUserNewDropCreditEntity>(entity =>
+            {
+                entity.HasKey(e => e.Login)
+                    .HasName("PRIMARY");
+
+                entity.Property(e => e.Login).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<ThemeEntity>(entity =>

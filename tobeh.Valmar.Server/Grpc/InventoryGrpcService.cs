@@ -20,8 +20,8 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("GetBubbleCredit(request={request})", request);
 
-        var dropCredit = await inventoryService.GetDropCredit(request.Login);
-        var credit = await inventoryService.GetBubbleCredit(request.Login, dropCredit);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var credit = await inventoryService.GetBubbleCredit(member);
         return mapper.Map<BubbleCreditReply>(credit);
     }
 
@@ -29,7 +29,8 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("GetDropCredit(request={request})", request);
 
-        var dropCredit = await inventoryService.GetDropCredit(request.Login);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var dropCredit = await inventoryService.GetDropCredit(member);
         return mapper.Map<DropCreditReply>(dropCredit);
     }
 
@@ -37,7 +38,8 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("GetSpriteSlotCount(request={request})", request);
 
-        var count = await inventoryService.GetSpriteSlotCount(request.Login);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var count = await inventoryService.GetSpriteSlotCount(member);
         return new SpriteSlotCountReply { UnlockedSlots = count };
     }
 
@@ -56,7 +58,8 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("GetSpriteInventory(request={request})", request);
 
-        var inv = await inventoryService.GetMemberSpriteInventory(request.Login);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var inv = await inventoryService.GetMemberSpriteInventory(member);
         await responseStream.WriteAllMappedAsync(inv, mapper.Map<SpriteSlotConfigurationReply>);
     }
 
@@ -79,7 +82,8 @@ public class InventoryGrpcService(
             slots[slot.SlotId - 1] = slot.SpriteId;
         }
         
-        await inventoryService.UseSpriteCombo(request.Login, slots, request.ClearOtherSlots);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        await inventoryService.UseSpriteCombo(member, slots, request.ClearOtherSlots);
         return new Empty();
     }
 
@@ -88,7 +92,8 @@ public class InventoryGrpcService(
         logger.LogTrace("SetSpriteColorConfiguration(request={request})", request);
         
         var configParams = request.ColorConfig.ToDictionary(config => config.SpriteId, config => config.ColorShift);
-        await inventoryService.SetColorShiftConfiguration(request.Login, configParams, request.ClearOtherConfigs);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        await inventoryService.SetColorShiftConfiguration(member, configParams, request.ClearOtherConfigs);
         return new Empty();
     }
 
@@ -96,7 +101,8 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("GetSceneInventory(request={request})", request);
         
-        var inv = await inventoryService.GetMemberSceneInventory(request.Login);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var inv = await inventoryService.GetMemberSceneInventory(member);
         return mapper.Map<SceneInventoryReply>(inv);
     }
 
@@ -104,7 +110,8 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("BuyScene(request={request})", request);
         
-        await inventoryService.BuyScene(request.Login, request.SceneId);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        await inventoryService.BuyScene(member, request.SceneId);
         return new Empty();
     }
 
@@ -112,7 +119,8 @@ public class InventoryGrpcService(
     {
         logger.LogTrace("UseScene(request={request})", request);
         
-        await inventoryService.UseScene(request.Login, request.SceneId);
+        var member = await membersService.GetMemberByLogin(request.Login);
+        await inventoryService.UseScene(member, request.SceneId);
         return new Empty();
     }
 
@@ -180,16 +188,6 @@ public class InventoryGrpcService(
 
         var firstSeen = await inventoryService.GetFirstSeenDate(request.Login);
         return new FirstSeenMessage { FirstSeen = mapper.Map<Timestamp>(firstSeen) };
-    }
-
-    public override async Task<Empty> RedeemLeagueEventDrop(RedeemLeagueEventDropMessage request, ServerCallContext context)
-    {
-        logger.LogTrace("RedeemLeagueEventDrop(request={request})", request);
-        
-        var member = await membersService.GetMemberByLogin(request.Login);
-        var result = await inventoryService.RedeemEventLeagueDrops(member, request.Amount, request.EventDropId);
-        
-        return new Empty();
     }
 
     public override async Task<GiftLossMessage> GiftEventCredit(GiftEventCreditMessage request, ServerCallContext context)

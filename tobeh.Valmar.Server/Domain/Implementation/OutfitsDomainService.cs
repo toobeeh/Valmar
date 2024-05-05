@@ -95,19 +95,19 @@ public class OutfitsDomainService(
         await db.SaveChangesAsync();
     }
     
-    public async Task UseOutfit(int login, string name)
+    public async Task UseOutfit(MemberDdo member, string name)
     {
-        logger.LogTrace("UseOutfit(login={login}, name={name})", login, name);
+        logger.LogTrace("UseOutfit(member={member}, name={name})", member, name);
 
-        var outfit = await GetMemberOutfit(login, name);
+        var outfit = await GetMemberOutfit(member.Login, name);
 
-        await inventoryDomainService.UseSpriteCombo(login, outfit.SpriteSlotConfiguration.Select(s => (int?)s.SpriteId).ToList(),
+        await inventoryDomainService.UseSpriteCombo(member, outfit.SpriteSlotConfiguration.Select(s => (int?)s.SpriteId).ToList(),
             true);
 
         var shifts = outfit.SpriteSlotConfiguration.Where(slot => slot.ColorShift is not null)
             .ToDictionary(slot => slot.SpriteId, slot => slot.ColorShift);
-        await inventoryDomainService.SetColorShiftConfiguration(login, shifts, true);
+        await inventoryDomainService.SetColorShiftConfiguration(member, shifts, true);
 
-        await inventoryDomainService.UseScene(login, outfit.SceneId);
+        await inventoryDomainService.UseScene(member, outfit.SceneId);
     }
 }

@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using tobeh.Valmar.Server.Database;
 using tobeh.Valmar.Server.Domain.Classes;
-using tobeh.Valmar.Server.Domain.Classes.JSON;
 using tobeh.Valmar.Server.Domain.Exceptions;
 using tobeh.Valmar.Server.Util;
 using tobeh.Valmar.Server.Util.NChunkTree.Bubbles;
@@ -12,7 +11,6 @@ namespace tobeh.Valmar.Server.Domain.Implementation;
 public class InventoryDomainService(
     ILogger<InventoryDomainService> logger, 
     PalantirContext db,
-    IMembersDomainService membersService,
     ISpritesDomainService spritesService,
     IScenesDomainService scenesService,
     IEventsDomainService eventsService,
@@ -21,29 +19,25 @@ public class InventoryDomainService(
     IAwardsDomainService awardsService,
     BubbleChunkTreeProvider bubbleChunks) : IInventoryDomainService
 {
-    public async Task<List<MemberSpriteSlotDdo>> GetMemberSpriteInventory(int login)
+    public Task<List<MemberSpriteSlotDdo>> GetMemberSpriteInventory(MemberDdo member)
     {
-        logger.LogTrace("GetMemberSpriteInventory(login={login})", login);
+        logger.LogTrace("GetMemberSpriteInventory(member={member})", member);
         
-        var member = await membersService.GetMemberByLogin(login);
         var inv = InventoryHelper.ParseSpriteInventory(member.Sprites, member.RainbowSprites);
-        return inv;
+        return Task.FromResult(inv);
     }
     
-    public async Task<SceneInventoryDdo> GetMemberSceneInventory(int login)
+    public Task<SceneInventoryDdo> GetMemberSceneInventory(MemberDdo member)
     {
-        logger.LogTrace("GetMemberSceneInventory(login={login})", login);
+        logger.LogTrace("GetMemberSceneInventory(member={member})", member);
         
-        var member = await membersService.GetMemberByLogin(login);
         var inv = InventoryHelper.ParseSceneInventory(member.Scenes);
-        return inv;
+        return Task.FromResult(inv);
     }
     
-    public async Task<BubbleCreditDdo> GetBubbleCredit(int login, DropCreditDdo dropCredit)
+    public async Task<BubbleCreditDdo> GetBubbleCredit(MemberDdo member)
     {
-        logger.LogTrace("GetBubbleCredit(login={login})", login);
-        
-        var member = await membersService.GetMemberByLogin(login);
+        logger.LogTrace("GetBubbleCredit(member={member})", member);
 
         var spriteInv = InventoryHelper.ParseSpriteInventory(member.Sprites, member.RainbowSprites).Select(inv => inv.SpriteId).ToArray();
         var invSum = await db.Sprites.Where(sprite => sprite.EventDropId == 0 && spriteInv.Contains(sprite.Id))
@@ -53,34 +47,28 @@ public class InventoryDomainService(
         var nonEventScenes = await db.Scenes.Where(scene => scene.EventId == 0 && !scene.Exclusive && sceneInv.Contains(scene.Id)).ToListAsync(); 
         var sceneSum = nonEventScenes.Select((scene, index) => SceneHelper.GetScenePrice(index)).Sum();
 
-        var totalBubbles = member.Bubbles + dropCredit.TotalCredit * 50;
+        var totalBubbles = member.Bubbles + (int)Math.Floor(member.Drops * 50);
         var availableBubbles = totalBubbles - invSum - sceneSum;
         
         return new BubbleCreditDdo(totalBubbles, availableBubbles, member.Bubbles);
     }
     
-    public async Task<DropCreditDdo> GetDropCredit(int login)
+    public async Task<DropCreditDdo> GetDropCredit(MemberDdo member)
     {
-        logger.LogTrace("GetDropCredit(login={login})", login);
-        
-        var member = await membersService.GetMemberByLogin(login);
+        logger.LogTrace("GetDropCredit(member={member})", member);
         
         var chunk = dropChunks.GetTree().Chunk;
-        var leagueDetails = await chunk.GetLeagueWeight(member.DiscordId.ToString());
-        var leagueEventValues = leagueDetails.EventDropValues
-            .Select(kv => new LeagueEventDropValueDdo(kv.Key, kv.Value))
-            .ToList();
-        var leagueValue = (int)Math.Floor(leagueDetails.RegularValue);
+        var legacyCount = (await db.LegacyDropCounts.FirstOrDefaultAsync(entity => entity.Login == member.Login))?.Count ?? 0;
         var leagueCount = await chunk.GetLeagueCount(member.DiscordId.ToString());
         
-        return new DropCreditDdo(member.Drops + leagueValue, member.Drops, leagueCount, leagueEventValues);
+        return new DropCreditDdo(member.Drops, legacyCount + leagueCount);
     }
     
     public async Task<List<EventCreditDdo>> GetEventCredit(MemberDdo member, List<int> eventDropIds)
     {
         logger.LogTrace("GetEventCredit(member={member})", member);
         
-        var inv = (await GetMemberSpriteInventory(member.Login)).Select(inv => inv.SpriteId).ToArray();
+        var inv = (await GetMemberSpriteInventory(member)).Select(inv => inv.SpriteId).ToArray();
         
         var spentCredits = await db.Sprites
             .Where(sprite => eventDropIds.Contains(sprite.EventDropId) && inv.Contains(sprite.Id))
@@ -92,17 +80,12 @@ public class InventoryDomainService(
             .Where(credit => credit.Login == member.Login && eventDropIds.Contains(credit.EventDropId))
             .ToListAsync();
 
-        var redeemables = await dropChunks.GetTree().Chunk
-            .GetEventLeagueDetails(eventDropIds.ToArray(), member.DiscordId.ToString(), member.Login);
-
         var creditResults = eventDropIds.Select(dropId =>
         {
             var totalCredit = credits.FirstOrDefault(credit => credit.EventDropId == dropId)?.Credit ?? 0;
             var availableCredit = totalCredit -
                                   (spentCredits.FirstOrDefault(spent => spent.EventDropId == dropId)?.Cost ?? 0);
-            var redeemableDrops = redeemables.RedeemableCredit.TryGetValue(dropId, out var redeemable) ? redeemable : [];
-            var redeemableCredit = redeemableDrops.Values.Sum();
-            return new EventCreditDdo(dropId, totalCredit, availableCredit, redeemableCredit);
+            return new EventCreditDdo(dropId, totalCredit, availableCredit);
         }).ToList();
         
         return creditResults;
@@ -113,7 +96,7 @@ public class InventoryDomainService(
         logger.LogTrace("BuySprite(member={member}, spriteId={spriteId})", member, spriteId);
         
         // check if the sprite is already in the inventory
-        var inv = await GetMemberSpriteInventory(member.Login);
+        var inv = await GetMemberSpriteInventory(member);
         if (inv.Any(slot => slot.SpriteId == spriteId))
         {
             throw new UserOperationException("The sprite is already in the inventory");
@@ -132,8 +115,7 @@ public class InventoryDomainService(
         }
         else
         {
-            var dropCredit = await GetDropCredit(member.Login);
-            var credit = await GetBubbleCredit(member.Login, dropCredit);
+            var credit = await GetBubbleCredit(member);
             if(credit.AvailableCredit < sprite.Cost) throw new UserOperationException($"The sprite price ({sprite.Cost}) exceeds the available bubble credit ({credit.AvailableCredit})");
         }
         
@@ -144,25 +126,23 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
     }
 
-    public async Task<int> GetSpriteSlotCount(int login)
+    public async Task<int> GetSpriteSlotCount(MemberDdo member)
     {
-        logger.LogTrace("GetSpriteSlotCount(login={login})", login);
+        logger.LogTrace("GetSpriteSlotCount(member={member})", member);
 
-        var member = await membersService.GetMemberByLogin(login);
         var isPatron = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Patron);
         var isAdmin = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Admin);
-        var dropCredit = await GetDropCredit(login);
+        var dropCredit = await GetDropCredit(member);
         
-        var slots = 1 + (isPatron ? 1 : 0) + (isAdmin ? 100 : 0) + dropCredit.TotalCredit / 1000;
-        return slots;
+        var slots = 1 + (isPatron ? 1 : 0) + (isAdmin ? 100 : 0) + member.Drops / 1000;
+        return (int)Math.Floor(slots);
     }
 
-    public async Task SetColorShiftConfiguration(int login, Dictionary<int, int?> colorShiftMap, bool clearOther = false)
+    public async Task SetColorShiftConfiguration(MemberDdo member, Dictionary<int, int?> colorShiftMap, bool clearOther = false)
     {
-        logger.LogTrace("SetColorShiftConfiguration(login={login}, colorShiftMap={colorShiftMap}, clearOther={clearOther})", login, colorShiftMap, clearOther);
+        logger.LogTrace("SetColorShiftConfiguration(member={member}, colorShiftMap={colorShiftMap}, clearOther={clearOther})", member, colorShiftMap, clearOther);
 
-        var member = await membersService.GetMemberByLogin(login);
-        var inv = await GetMemberSpriteInventory(login);
+        var inv = await GetMemberSpriteInventory(member);
         var isPatron = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Patron);
         var isAdmin = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Admin);
 
@@ -190,17 +170,16 @@ public class InventoryDomainService(
             .Where(slot => slot.ColorShift != null)
             .Select(slot => $"{slot.SpriteId}:{slot.ColorShift}"));
         
-        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The color shift configuration can't be saved because member doesn't exist");
+        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ?? throw new EntityNotFoundException("The color shift configuration can't be saved because member doesn't exist");
         memberEntity.RainbowSprites = configString;
         db.Members.Update(memberEntity);
         await db.SaveChangesAsync();
     }
     
-    public async Task UseScene(int login, int? sceneId)
+    public async Task UseScene(MemberDdo member, int? sceneId)
     {
-        logger.LogTrace("UseScene(login={login}, sceneId={sceneId})", login, sceneId);
+        logger.LogTrace("UseScene(member={member}, sceneId={sceneId})", member, sceneId);
         
-        var member = await membersService.GetMemberByLogin(login);
         var inv = InventoryHelper.ParseSceneInventory(member.Scenes);
         
         // check if user owns the scene 
@@ -212,17 +191,16 @@ public class InventoryDomainService(
         // set new active scene
         inv = inv with { ActiveId = sceneId };
         
-        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The scene can't be activated because member doesn't exist");
+        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ?? throw new EntityNotFoundException("The scene can't be activated because member doesn't exist");
         memberEntity.Scenes = InventoryHelper.SerializeSceneInventory(inv);
         db.Members.Update(memberEntity);
         await db.SaveChangesAsync();
     }
     
-    public async Task BuyScene(int login, int sceneId)
+    public async Task BuyScene(MemberDdo member, int sceneId)
     {
-        logger.LogTrace("BuyScene(login={login}, sceneId={sceneId})", login, sceneId);
+        logger.LogTrace("BuyScene(member={member}, sceneId={sceneId})", member, sceneId);
         
-        var member = await membersService.GetMemberByLogin(login);
         var inv = InventoryHelper.ParseSceneInventory(member.Scenes);
         
         // check if user owns the scene 
@@ -245,7 +223,7 @@ public class InventoryDomainService(
             var sceneEvent = await eventsService.GetEventById(scene.EventId);
             var eventPrice = EventHelper.GetEventScenePrice(sceneEvent.Length);
             var traceBeforeStart = sceneEvent.StartDate.AddDays(-1); // traces are record from end of day - event start credit is from day before start
-            var eventBubblesCollected = await statsService.GetMemberBubblesInRange(login, traceBeforeStart, sceneEvent.EndDate);
+            var eventBubblesCollected = await statsService.GetMemberBubblesInRange(member.Login, traceBeforeStart, sceneEvent.EndDate);
             var totalCollectedDuringEvent = eventBubblesCollected.EndAmount - eventBubblesCollected.StartAmount;
             
             if(eventPrice > totalCollectedDuringEvent)
@@ -256,8 +234,7 @@ public class InventoryDomainService(
         }
         else
         {
-            var dropCredit = await GetDropCredit(login);
-            var bubbleCredit = await GetBubbleCredit(login, dropCredit);
+            var bubbleCredit = await GetBubbleCredit(member);
             var scenePrice = SceneHelper.GetScenePrice(inv.SceneIds.Count);
             
             if(scenePrice > bubbleCredit.AvailableCredit)
@@ -269,17 +246,16 @@ public class InventoryDomainService(
         
         // add scene to inventory
         inv.SceneIds.Add(scene.Id);
-        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The scene can't be activated because member doesn't exist");
+        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ?? throw new EntityNotFoundException("The scene can't be activated because member doesn't exist");
         memberEntity.Scenes = InventoryHelper.SerializeSceneInventory(inv);
         db.Members.Update(memberEntity);
         await db.SaveChangesAsync();
     }
 
-    public async Task UseSpriteCombo(int login, List<int?> combo, bool clearOther = false)
+    public async Task UseSpriteCombo(MemberDdo member, List<int?> combo, bool clearOther = false)
     {
-        logger.LogTrace("UseSpriteCombo(login={login}, combo={combo}, clearOther={clearOther})", login, combo, clearOther);
+        logger.LogTrace("UseSpriteCombo(member={member}, combo={combo}, clearOther={clearOther})", member, combo, clearOther);
         
-        var member = await membersService.GetMemberByLogin(login);
         var inv = InventoryHelper.ParseSpriteInventory(member.Sprites, member.RainbowSprites);
         
         // check if all sprites are in the inventory
@@ -295,7 +271,7 @@ public class InventoryDomainService(
         }
         
         // check if user has enough sprite slots
-        if (combo.Count > await GetSpriteSlotCount(login))
+        if (combo.Count > await GetSpriteSlotCount(member))
         {
             throw new UserOperationException("The user does not have enough sprite slots to activate the combo");
         }
@@ -320,7 +296,7 @@ public class InventoryDomainService(
         }
         
         // save combo
-        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == login) ?? throw new EntityNotFoundException("The cant be activated because member doesn't exist");
+        var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ?? throw new EntityNotFoundException("The cant be activated because member doesn't exist");
         memberEntity.Sprites = InventoryHelper.SerializeSpriteInventory(inv);
         db.Members.Update(memberEntity);
         await db.SaveChangesAsync();
@@ -411,7 +387,7 @@ public class InventoryDomainService(
 
         var totalValue = eventSprites.Sum(sprite => sprite.Cost);
         var eventDetails = await dropChunks.GetTree().Chunk
-            .GetEventLeagueDetails(eventSprites.Select(sprite => sprite.EventDropId).ToArray(), member.DiscordId.ToString(), member.Login);
+            .GetEventLeagueDetails(eventSprites.Select(sprite => sprite.EventDropId).ToArray(), member.DiscordId.ToString());
         var lossRate = EventHelper.CalculateCurrentGiftLossRate(totalValue, eventDetails.Progress);
 
         return new GiftLossRateDdo(totalValue, eventDetails.Progress, lossRate);
@@ -454,52 +430,6 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
 
         return new EventCreditGiftResultDdo(lossRate, loss, amount);
-    }
-
-    public async Task<int> RedeemEventLeagueDrops(MemberDdo member, int amount, int eventDropId)
-    {
-        logger.LogTrace("RedeemEventLeagueDrops(member={member}, amount={amount}, eventDropId={eventDropId})", member, amount, eventDropId);
-        
-        var evtDrop = await eventsService.GetEventDropById(eventDropId);
-        var evt = await eventsService.GetEventById(evtDrop.EventId);
-        var otherDrops = (await eventsService.GetEventDrops(evt.Id)).Select(drop => drop.Id).ToArray();
-        var eventResult = await dropChunks.GetTree().Chunk.GetEventLeagueDetails(otherDrops, member.DiscordId.ToString(), member.Login);
-        
-        var dropsToRedeem = DropHelper.FindDropToRedeem(eventResult, amount, evt.Progressive ? eventDropId : null);
-        var totalRedeemed = eventResult.RedeemableCredit
-            .SelectMany(kv => kv.Value)
-            .Where(kv => dropsToRedeem.Contains(kv.Key))
-            .Sum(kv => kv.Value);
-
-        if (totalRedeemed < amount)
-        {
-            throw new UserOperationException($"Could not redeem the requested amount of drops - only {totalRedeemed} available");
-        }
-
-        var roundedRedeemed = (int)Math.Floor(totalRedeemed);
-        
-        await dropChunks.GetTree().Chunk.MarkEventDropsAsRedeemed(member.DiscordId.ToString(), dropsToRedeem);
-        
-        var credit = await db.EventCredits.FirstOrDefaultAsync(credit => credit.Login == member.Login && credit.EventDropId == eventDropId);
-        if(credit == null)
-        {
-            credit = new EventCreditEntity
-            {
-                Login = member.Login,
-                EventDropId = eventDropId,
-                Credit = roundedRedeemed
-            };
-            db.EventCredits.Add(credit);
-            await db.SaveChangesAsync();
-        }
-        else
-        {
-            credit.Credit += roundedRedeemed;
-            db.EventCredits.Update(credit);
-            await db.SaveChangesAsync();
-        }
-
-        return roundedRedeemed;
     }
 
     public async Task SetPatronEmoji(MemberDdo member, string? emoji)

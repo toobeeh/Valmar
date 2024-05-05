@@ -10,6 +10,7 @@ namespace tobeh.Valmar.Server.Grpc;
 public class OutfitsGrpcService(
     ILogger<OutfitsGrpcService> logger, 
     IMapper mapper,
+    IMembersDomainService membersDomainService,
     IOutfitsDomainService outfitsDomainService) : Outfits.OutfitsBase
 {
     public override async Task GetOutfits(GetOutfitsRequest request, IServerStreamWriter<OutfitMessage> responseStream, ServerCallContext context)
@@ -47,8 +48,9 @@ public class OutfitsGrpcService(
     public override async Task<Empty> UseOutfit(UseOutfitRequest request, ServerCallContext context)
     {
         logger.LogTrace("UseOutfit(request={request})", request);
-        
-        await outfitsDomainService.UseOutfit(request.Login, request.OutfitName);
+
+        var member = await membersDomainService.GetMemberByLogin(request.Login);
+        await outfitsDomainService.UseOutfit(member, request.OutfitName);
         return new Empty();
     }
 }

@@ -2,7 +2,7 @@ namespace tobeh.Valmar.Server.Domain.Classes;
 
 public record MemberDdo(
     int Bubbles,
-    int Drops,
+    double Drops,
     string Sprites,
     string Scenes,
     int Flags,
