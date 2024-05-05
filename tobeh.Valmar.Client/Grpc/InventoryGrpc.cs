@@ -65,6 +65,10 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.EventCreditReply> __Marshaller_inventory_EventCreditReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.EventCreditReply.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.GetEventProgressRequest> __Marshaller_inventory_GetEventProgressRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetEventProgressRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.EventProgressMessage> __Marshaller_inventory_EventProgressMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.EventProgressMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GetSpriteInventoryRequest> __Marshaller_inventory_GetSpriteInventoryRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetSpriteInventoryRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.SpriteSlotConfigurationReply> __Marshaller_inventory_SpriteSlotConfigurationReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.SpriteSlotConfigurationReply.Parser));
@@ -152,6 +156,14 @@ namespace tobeh.Valmar {
         "GetEventCredit",
         __Marshaller_inventory_GetEventCreditRequest,
         __Marshaller_inventory_EventCreditReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.GetEventProgressRequest, global::tobeh.Valmar.EventProgressMessage> __Method_GetEventProgress = new grpc::Method<global::tobeh.Valmar.GetEventProgressRequest, global::tobeh.Valmar.EventProgressMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetEventProgress",
+        __Marshaller_inventory_GetEventProgressRequest,
+        __Marshaller_inventory_EventProgressMessage);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.GetSpriteInventoryRequest, global::tobeh.Valmar.SpriteSlotConfigurationReply> __Method_GetSpriteInventory = new grpc::Method<global::tobeh.Valmar.GetSpriteInventoryRequest, global::tobeh.Valmar.SpriteSlotConfigurationReply>(
@@ -489,6 +501,54 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.EventCreditReply> GetEventCredit(global::tobeh.Valmar.GetEventCreditRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetEventCredit, null, options, request);
+      }
+      /// <summary>
+      /// gets progress of a member during an event
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.EventProgressMessage GetEventProgress(global::tobeh.Valmar.GetEventProgressRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetEventProgress(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// gets progress of a member during an event
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.EventProgressMessage GetEventProgress(global::tobeh.Valmar.GetEventProgressRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetEventProgress, null, options, request);
+      }
+      /// <summary>
+      /// gets progress of a member during an event
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.EventProgressMessage> GetEventProgressAsync(global::tobeh.Valmar.GetEventProgressRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetEventProgressAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// gets progress of a member during an event
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.EventProgressMessage> GetEventProgressAsync(global::tobeh.Valmar.GetEventProgressRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetEventProgress, null, options, request);
       }
       /// <summary>
       /// get the complete sprite inventory of a member (including inactive sprites -> slot = 0)

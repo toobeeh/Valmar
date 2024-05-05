@@ -24,4 +24,5 @@ public interface IInventoryDomainService
     Task<EventCreditGiftResultDdo> GiftEventCredit(MemberDdo fromMember, MemberDdo toMember, int amount, EventDropDdo eventDrop, GiftLossRateDdo lossRate);
     Task SetPatronEmoji(MemberDdo member, string? emoji);
     Task SetPatronizedMember(MemberDdo member, long? patronizedMemberDiscordId);
+    Task<EventResultDdo> GetEventProgress(MemberDdo member);
 }

@@ -388,9 +388,18 @@ public class InventoryDomainService(
         var totalValue = eventSprites.Sum(sprite => sprite.Cost);
         var eventDetails = await dropChunks.GetTree().Chunk
             .GetEventLeagueDetails(eventSprites.Select(sprite => sprite.EventDropId).ToArray(), member.DiscordId.ToString());
-        var lossRate = EventHelper.CalculateCurrentGiftLossRate(totalValue, eventDetails.Progress);
+        var lossRate = EventHelper.CalculateCurrentGiftLossRate(totalValue, eventDetails.TotalCollected);
 
-        return new GiftLossRateDdo(totalValue, eventDetails.Progress, lossRate);
+        return new GiftLossRateDdo(totalValue, eventDetails.TotalCollected, lossRate);
+    }
+
+    public async Task<EventResultDdo> GetEventProgress(MemberDdo member)
+    {
+        logger.LogTrace("GetTotalEventDropsCollected(member={member})", member);
+        var eventDetails = await dropChunks.GetTree().Chunk
+            .GetEventLeagueDetails(null, member.DiscordId.ToString());
+
+        return eventDetails;
     }
 
     public async Task<EventCreditGiftResultDdo> GiftEventCredit(MemberDdo fromMember, MemberDdo toMember, int amount, EventDropDdo eventDrop, GiftLossRateDdo lossRate)

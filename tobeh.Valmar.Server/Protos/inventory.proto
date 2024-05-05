@@ -23,6 +23,9 @@ service Inventory {
   
   // gets the event drop credit details of a member
   rpc GetEventCredit (GetEventCreditRequest) returns (stream EventCreditReply);
+
+  // gets progress of a member during an event
+  rpc GetEventProgress (GetEventProgressRequest) returns (EventProgressMessage);
   
   // get the complete sprite inventory of a member (including inactive sprites -> slot = 0)
   rpc GetSpriteInventory (GetSpriteInventoryRequest) returns (stream SpriteSlotConfigurationReply);
@@ -74,6 +77,21 @@ service Inventory {
   
   // set the patron emoji of a user
   rpc SetPatronEmoji (SetPatronEmojiMessage) returns (google.protobuf.Empty);
+}
+
+message GetEventProgressRequest {
+  int32 login = 1;
+  google.protobuf.Int32Value eventId = 2; // null if for all events
+}
+
+message EventDropProgressMessage {
+  int32 eventDropId = 1;
+  double value = 2;
+}
+
+message EventProgressMessage {
+  double totalCollected = 1;
+  repeated EventDropProgressMessage eventDropProgress = 2;
 }
 
 message SetPatronEmojiMessage {

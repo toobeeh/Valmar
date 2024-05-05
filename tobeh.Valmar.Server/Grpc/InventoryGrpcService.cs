@@ -53,6 +53,16 @@ public class InventoryGrpcService(
         await responseStream.WriteAllMappedAsync(credit, mapper.Map<EventCreditReply>);
     }
 
+    public override async Task<EventProgressMessage> GetEventProgress(GetEventProgressRequest request, ServerCallContext context)
+    {
+        logger.LogTrace("GetEventProgress(request={request})", request);
+
+        var member = await membersService.GetMemberByLogin(request.Login);
+        var progress = await inventoryService.GetEventProgress(member);
+
+        return mapper.Map<EventProgressMessage>(progress);
+    }
+
     public override async Task GetSpriteInventory(GetSpriteInventoryRequest request, IServerStreamWriter<SpriteSlotConfigurationReply> responseStream,
         ServerCallContext context)
     {

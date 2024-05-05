@@ -25,6 +25,10 @@ public class InventoryMapperProfile : Profile
 
         CreateMap<GiftLossRateDdo, GiftLossRateMessage>();
         CreateMap<EventCreditGiftResultDdo, GiftLossMessage>();
+        CreateMap<EventResultDdo, EventProgressMessage>();
+        CreateMap<KeyValuePair<int, double>, EventDropProgressMessage>()
+            .ForMember(msg => msg.EventDropId, options => options.MapFrom(ddo => ddo.Key))
+            .ForMember(msg => msg.Value, options => options.MapFrom(ddo => ddo.Value));
     }
     
     private static ConsumedAwardMessage MapConsumedAward(AwardeeEntity entity)

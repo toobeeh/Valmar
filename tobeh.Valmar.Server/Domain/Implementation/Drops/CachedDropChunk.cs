@@ -110,7 +110,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         return subChunks;
     }
     
-    public async Task<EventResult> GetEventLeagueDetails(int[]? eventDropIds, string userid)
+    public async Task<EventResultDdo> GetEventLeagueDetails(int[]? eventDropIds, string userid)
     {
         // get key for request identifiers
         var key = $"{string.Join("-", eventDropIds ?? [])}//{userid}";
@@ -118,13 +118,22 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.EventDetails.TryGetValue(key, out var detail)) detail.Dirty();
 
-        var store = _context.EventDetails.GetOrAdd(key,key =>  new KeyValueStore<string, EventResult>(key, async key =>
+        var store = _context.EventDetails.GetOrAdd(key,key =>  new KeyValueStore<string, EventResultDdo>(key, async key =>
             await ChunkHelper.ReduceParallel(Chunks, async c => await c.GetEventLeagueDetails(eventDropIds, userid),
                 (a, b) =>
                 {
-                    return new EventResult(a.Progress + b.Progress);
+                    var combinedDict = new Dictionary<int, double>(a.EventDropProgress);
+                    foreach (var kv in b.EventDropProgress)
+                    {
+                        if (!combinedDict.TryAdd(kv.Key, kv.Value))
+                        {
+                            combinedDict[kv.Key] += kv.Value;
+                        }
+                    }
+                    
+                    return new EventResultDdo(a.TotalCollected + b.TotalCollected, combinedDict);
                 }, 
-                new EventResult(0)))
+                new EventResultDdo(0, [])))
         );
         return await store.Retrieve();
     }
@@ -136,7 +145,6 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
         
         // set as dirty if chunk is open ended (can always be bigger than last checked!)
         if(DropIndexEnd is null && _context.LeagueResults.TryGetValue(key, out var detail)) detail.Dirty();
-        
         
         var store = _context.LeagueResults.GetOrAdd(key,_ =>  new KeyValueStore<string, Dictionary<string, LeagueResult>>(key, async _ =>
             await ChunkHelper.ReduceInOrder(Chunks, async c => await c.GetLeagueResults(start, end),
@@ -214,6 +222,7 @@ public class CachedDropChunk : DropChunkTree, IDropChunk
                 }, 
                 new Dictionary<string, LeagueResult>()))
         );
+        store.Dirty();
         var val = await store.Retrieve();
         
         return val;

@@ -27,7 +27,7 @@ namespace tobeh.Valmar {
             "Cg1tZW1iZXJzLnByb3RvEgdtZW1iZXJzGhtnb29nbGUvcHJvdG9idWYvZW1w",
             "dHkucHJvdG8aH2dvb2dsZS9wcm90b2J1Zi90aW1lc3RhbXAucHJvdG8aHmdv",
             "b2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90byKWAwoLTWVtYmVyUmVwbHkS",
-            "DwoHYnViYmxlcxgBIAEoBRINCgVkcm9wcxgCIAEoBRIPCgdzcHJpdGVzGAMg",
+            "DwoHYnViYmxlcxgBIAEoBRINCgVkcm9wcxgCIAEoARIPCgdzcHJpdGVzGAMg",
             "ASgJEg4KBnNjZW5lcxgEIAEoCRINCgVmbGFncxgFIAEoBRIWCg5yYWluYm93",
             "U3ByaXRlcxgGIAEoCRIRCglkaXNjb3JkSWQYByABKAMSEAoIdXNlcm5hbWUY",
             "CCABKAkSDQoFbG9naW4YCSABKAUSGQoRc2VydmVyQ29ubmVjdGlvbnMYCiAD",
@@ -190,10 +190,10 @@ namespace tobeh.Valmar {
 
     /// <summary>Field number for the "drops" field.</summary>
     public const int DropsFieldNumber = 2;
-    private int drops_;
+    private double drops_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int Drops {
+    public double Drops {
       get { return drops_; }
       set {
         drops_ = value;
@@ -360,7 +360,7 @@ namespace tobeh.Valmar {
         return true;
       }
       if (Bubbles != other.Bubbles) return false;
-      if (Drops != other.Drops) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Drops, other.Drops)) return false;
       if (Sprites != other.Sprites) return false;
       if (Scenes != other.Scenes) return false;
       if (Flags != other.Flags) return false;
@@ -381,7 +381,7 @@ namespace tobeh.Valmar {
     public override int GetHashCode() {
       int hash = 1;
       if (Bubbles != 0) hash ^= Bubbles.GetHashCode();
-      if (Drops != 0) hash ^= Drops.GetHashCode();
+      if (Drops != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Drops);
       if (Sprites.Length != 0) hash ^= Sprites.GetHashCode();
       if (Scenes.Length != 0) hash ^= Scenes.GetHashCode();
       if (Flags != 0) hash ^= Flags.GetHashCode();
@@ -416,9 +416,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt32(Bubbles);
       }
-      if (Drops != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Drops);
+      if (Drops != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(Drops);
       }
       if (Sprites.Length != 0) {
         output.WriteRawTag(26);
@@ -475,9 +475,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt32(Bubbles);
       }
-      if (Drops != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Drops);
+      if (Drops != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(Drops);
       }
       if (Sprites.Length != 0) {
         output.WriteRawTag(26);
@@ -533,8 +533,8 @@ namespace tobeh.Valmar {
       if (Bubbles != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Bubbles);
       }
-      if (Drops != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Drops);
+      if (Drops != 0D) {
+        size += 1 + 8;
       }
       if (Sprites.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Sprites);
@@ -583,7 +583,7 @@ namespace tobeh.Valmar {
       if (other.Bubbles != 0) {
         Bubbles = other.Bubbles;
       }
-      if (other.Drops != 0) {
+      if (other.Drops != 0D) {
         Drops = other.Drops;
       }
       if (other.Sprites.Length != 0) {
@@ -645,8 +645,8 @@ namespace tobeh.Valmar {
             Bubbles = input.ReadInt32();
             break;
           }
-          case 16: {
-            Drops = input.ReadInt32();
+          case 17: {
+            Drops = input.ReadDouble();
             break;
           }
           case 26: {
@@ -727,8 +727,8 @@ namespace tobeh.Valmar {
             Bubbles = input.ReadInt32();
             break;
           }
-          case 16: {
-            Drops = input.ReadInt32();
+          case 17: {
+            Drops = input.ReadDouble();
             break;
           }
           case 26: {

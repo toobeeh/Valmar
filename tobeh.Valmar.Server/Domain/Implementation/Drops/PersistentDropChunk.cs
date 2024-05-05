@@ -1,6 +1,9 @@
 using System.Collections.Concurrent;
+using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using tobeh.Valmar.Server.Database;
+using tobeh.Valmar.Server.Domain.Classes;
 using tobeh.Valmar.Server.Util;
 using tobeh.Valmar.Server.Util.NChunkTree;
 using tobeh.Valmar.Server.Util.NChunkTree.Drops;
@@ -73,8 +76,8 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
     {
         // find indexes to index chunks
         var drops = _db.PastDrops
-            .Where(d => d.LeagueWeight > 0
-                 && (DropIndexStart == null || d.DropId >= DropIndexStart) 
+            .Where(d =>
+                 (DropIndexStart == null || d.DropId >= DropIndexStart) 
                  && (DropIndexEnd == null || d.DropId < DropIndexEnd))
             .Select(drop => drop.DropId)
             .Distinct()
@@ -129,45 +132,42 @@ public class PersistentDropChunk : DropChunkLeaf, IDropChunk
             .ToListAsync();
         return participants;
     }
-
-    public async Task<EventResult> GetEventLeagueDetails(int[]? eventDropIds, string userid)
+    
+    public async Task<EventResultDdo> GetEventLeagueDetails(int[]? eventDropIds, string userid)
     {
-        // get drops weights of eventdrops, either redeemable or already redeemed
-        var leagueEventdropWeights = await _db.PastDrops
-            .Where(d => d.LeagueWeight > 0
-                        && (eventDropIds == null || eventDropIds.Any(id => id == Math.Abs(d.EventDropId)))
-                        && (DropIndexStart == null || d.DropId >= DropIndexStart) 
-                        && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
-                        && d.CaughtLobbyPlayerId == userid)
-            .Select(drop => new {EventDropId = Math.Abs(drop.EventDropId), Weight = drop.LeagueWeight, Redeemable = drop.EventDropId > 0, DropId = drop.DropId })
+        var candidates = await _db.PastDrops
+            .Where(d => d.EventDropId != -1
+                                           && (eventDropIds == null && Math.Abs(d.EventDropId) > 0 || eventDropIds != null && eventDropIds.Any(id => id == Math.Abs(d.EventDropId)))
+                                           && (DropIndexStart == null || d.DropId >= DropIndexStart) 
+                                           && (DropIndexEnd == null || d.DropId < DropIndexEnd) 
+                                           && d.CaughtLobbyPlayerId == userid)
+            .Select(drop => new {EventDropId = Math.Abs(drop.EventDropId), Weight = drop.LeagueWeight})
             .ToListAsync();
-
-        // credits that are still redeemable (drops that can be converted to the credit table)
-        var redeemableCredits = leagueEventdropWeights
-            .Where(d => d.Redeemable)
-            .GroupBy(d => d.EventDropId)
-            .Select(g => new {EventDropId = g.Key, Credit = g.Select(w => new { Weight = DropHelper.Weight(w.Weight), w.DropId })});
-                
-        // amount of credits that already has been converted to the credits table
-        var redeemedCredits = leagueEventdropWeights.Where(d => !d.Redeemable).Sum(w => DropHelper.Weight(w.Weight));
-
-        // amount of regular drops that contributed to credit -> needed for loss rate
-        var regularCaughtSum = await _db.PastDrops
-            .Where(d => d.LeagueWeight == 0
-                        && (eventDropIds == null || eventDropIds.Any(id => id == Math.Abs(d.EventDropId)))
-                        && (DropIndexStart == null || d.DropId >= DropIndexStart)
-                        && (DropIndexEnd == null || d.DropId < DropIndexEnd)
-                        && d.CaughtLobbyPlayerId == userid)
-            .CountAsync();
         
-        // build maps
-        double progress = regularCaughtSum + redeemedCredits;
-        foreach (var redeemableCredit in redeemableCredits) // todo remove consideration of unredeemed credits when all have been redeemed automatically
-        {
-            progress += redeemableCredit.Credit.Sum(c => c.Weight);
-        }
+        var collectedLeagueValues = candidates
+            .Where(c => c.Weight > 0)
+            .GroupBy(weight => weight.EventDropId)
+            .Select(group => new {EventDropId = group.Key, Value = group.Sum(w => DropHelper.Weight(w.Weight))})
+            .ToDictionary(sum => sum.EventDropId, sum => sum.Value);
+        
+        var collectedRegularValues = candidates
+            .Where(c => c.Weight == 0)
+            .GroupBy(weight => weight.EventDropId)
+            .Select(group => new {EventDropId = group.Key, Value = (double)group.Count()})
+            .ToDictionary(sum => sum.EventDropId, sum => sum.Value);
 
-        return new EventResult(progress);
+        var regularSum = collectedLeagueValues.Values.Sum();
+        var leagueSum = collectedRegularValues.Values.Sum();
+
+        foreach (var kv in collectedLeagueValues)
+        {
+            if (collectedRegularValues.TryAdd(kv.Key, kv.Value)) continue;
+            collectedRegularValues[kv.Key] += kv.Value;
+        }
+        
+        Console.WriteLine($"sum {regularSum + leagueSum} from {_dropIndexStart} to {_dropIndexEnd}" );
+        
+        return new EventResultDdo(regularSum + leagueSum, collectedRegularValues);
     }
     
     public async Task<Dictionary<string, LeagueResult>> GetLeagueResults(DateTimeOffset? start, DateTimeOffset? end)

@@ -65,7 +65,7 @@ service Members {
 // Response containing a member's properties.
 message MemberReply {
   int32 bubbles = 1;
-  int32 drops = 2;
+  double drops = 2;
   string sprites = 3;
   string scenes = 4;
   int32 flags = 5;
