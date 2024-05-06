@@ -37,7 +37,6 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<SpriteEntity> Sprites { get; set; } = null!;
         public virtual DbSet<SpriteProfileEntity> SpriteProfiles { get; set; } = null!;
         public virtual DbSet<StatusEntity> Statuses { get; set; } = null!;
-        public virtual DbSet<TempUserNewDropCreditEntity> TempUserNewDropCredits { get; set; } = null!;
         public virtual DbSet<ThemeEntity> Themes { get; set; } = null!;
         public virtual DbSet<ThemeShareEntity> ThemeShares { get; set; } = null!;
         public virtual DbSet<UserThemeEntity> UserThemes { get; set; } = null!;
@@ -239,14 +238,6 @@ namespace tobeh.Valmar.Server.Database
                 entity.HasKey(e => e.SessionId)
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 32 });
-            });
-
-            modelBuilder.Entity<TempUserNewDropCreditEntity>(entity =>
-            {
-                entity.HasKey(e => e.Login)
-                    .HasName("PRIMARY");
-
-                entity.Property(e => e.Login).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<ThemeEntity>(entity =>
