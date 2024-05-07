@@ -9,7 +9,7 @@ using grpc = global::Grpc.Core;
 
 namespace tobeh.Valmar {
   /// <summary>
-  /// Service definition for award resource access
+  /// Service definition for lobby resource access
   /// </summary>
   public static partial class Lobbies
   {
@@ -53,6 +53,8 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.LobbyReply> __Marshaller_lobbies_LobbyReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.LobbyReply.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.GetGuildLobbiesMessage> __Marshaller_lobbies_GetGuildLobbiesMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetGuildLobbiesMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GetLobbyDropClaimsRequest> __Marshaller_lobbies_GetLobbyDropClaimsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetLobbyDropClaimsRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.DropLogReply> __Marshaller_lobbies_DropLogReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.DropLogReply.Parser));
@@ -65,6 +67,14 @@ namespace tobeh.Valmar {
         __ServiceName,
         "GetCurrentLobbies",
         __Marshaller_google_protobuf_Empty,
+        __Marshaller_lobbies_LobbyReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.GetGuildLobbiesMessage, global::tobeh.Valmar.LobbyReply> __Method_GetCurrentGuildLobbies = new grpc::Method<global::tobeh.Valmar.GetGuildLobbiesMessage, global::tobeh.Valmar.LobbyReply>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "GetCurrentGuildLobbies",
+        __Marshaller_lobbies_GetGuildLobbiesMessage,
         __Marshaller_lobbies_LobbyReply);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -117,7 +127,7 @@ namespace tobeh.Valmar {
       }
 
       /// <summary>
-      /// Gets all awards
+      /// Gets all current lobbies
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -130,7 +140,7 @@ namespace tobeh.Valmar {
         return GetCurrentLobbies(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Gets all awards
+      /// Gets all current lobbies
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
@@ -141,7 +151,31 @@ namespace tobeh.Valmar {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetCurrentLobbies, null, options, request);
       }
       /// <summary>
-      /// Gets an award by its id
+      /// Gets all current lobbies for a guild
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.LobbyReply> GetCurrentGuildLobbies(global::tobeh.Valmar.GetGuildLobbiesMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetCurrentGuildLobbies(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Gets all current lobbies for a guild
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.LobbyReply> GetCurrentGuildLobbies(global::tobeh.Valmar.GetGuildLobbiesMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetCurrentGuildLobbies, null, options, request);
+      }
+      /// <summary>
+      /// Gets all drop  claims that have happened in a lobby
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -154,7 +188,7 @@ namespace tobeh.Valmar {
         return GetLobbyDropClaims(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Gets an award by its id
+      /// Gets all drop  claims that have happened in a lobby
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>

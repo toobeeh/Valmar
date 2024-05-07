@@ -89,6 +89,7 @@ public class Program
         services.AddScoped<ISplitsDomainService, SplitsDomainService>();
         services.AddScoped<IOutfitsDomainService, OutfitsDomainService>();
         services.AddScoped<ICardDomainService, CardDomainService>();
+        services.AddScoped<IWorkersDomainService, WorkersDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -109,6 +110,7 @@ public class Program
         app.MapGrpcService<SplitsGrpcService>();
         app.MapGrpcService<OutfitsGrpcService>();
         app.MapGrpcService<CardGrpcService>();
+        app.MapGrpcService<WorkersGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)
@@ -128,6 +130,7 @@ public class Program
             typeof(SceneMapperProfile),
             typeof(OutfitMapperProfile),
             typeof(CardMapperProfile),
+            typeof(WorkerMapperProfile),
             typeof(AwardMapperProfile));
     }
     

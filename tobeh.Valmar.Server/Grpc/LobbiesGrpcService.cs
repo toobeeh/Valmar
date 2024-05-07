@@ -34,6 +34,12 @@ public class LobbiesGrpcService(
         });
     }
 
+    public override async Task GetCurrentGuildLobbies(GetGuildLobbiesMessage request, IServerStreamWriter<LobbyReply> responseStream,
+        ServerCallContext context)
+    {
+        logger.LogTrace("GetCurrentGuildLobbies(request={request})", request);
+    }
+
     public override async Task GetLobbyDropClaims(GetLobbyDropClaimsRequest request, IServerStreamWriter<DropLogReply> responseStream,
         ServerCallContext context)
     {

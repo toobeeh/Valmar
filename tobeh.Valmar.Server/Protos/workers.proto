@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "tobeh.Valmar";
+package workers;
+
+// Service definition for manging lobby workers
+service Workers {
+  
+  rpc GetUnclaimedInstance (google.protobuf.Empty) returns (InstanceDetailsMessage);
+  
+  rpc ClaimInstance (ClaimInstanceMessage) returns (InstanceDetailsMessage);
+  
+  rpc GetAssignedGuildOptions (GetAssignedGuildOptionsMessage) returns (GuildOptionsMessage);
+  
+  rpc GetGuildOptionsById (GetGuildOptionsByIdMessage) returns (GuildOptionsMessage);
+  
+  rpc SetGuildOptions (GuildOptionsMessage) returns (google.protobuf.Empty);
+  
+  rpc AssignInstanceToServer (AssignInstanceToServerMessage) returns (InstanceDetailsMessage);
+}
+
+message AssignInstanceToServerMessage {
+  int32 login = 1;
+  int64 serverId = 2;
+}
+
+message GetAssignedGuildOptionsMessage {
+  int32 instanceId = 1;
+}
+
+message GetGuildOptionsByIdMessage {
+  int64 guildId = 1;
+}
+
+message GuildOptionsMessage {
+  int64 guildId = 1;
+  google.protobuf.Int64Value channelId = 2;
+  string name = 3;
+  int32 invite = 4;
+  string prefix = 5;
+}
+
+message ClaimInstanceMessage {
+  int32 instanceId = 1;
+  google.protobuf.StringValue lastClaimUlid = 2; // provide if the claim is a renewal of a previous, still valid claim
+  string claimUlid = 3;
+  string workerUlid = 4;
+}
+
+message InstanceDetailsMessage {
+  string botToken = 1;
+  int64 botId = 2;
+  int32 id = 3;
+}

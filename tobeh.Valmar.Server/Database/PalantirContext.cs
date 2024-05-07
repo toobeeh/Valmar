@@ -23,6 +23,9 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<LegacyDropCountEntity> LegacyDropCounts { get; set; } = null!;
         public virtual DbSet<LobEntity> Lobs { get; set; } = null!;
         public virtual DbSet<LobbyEntity> Lobbies { get; set; } = null!;
+        public virtual DbSet<LobbyBotClaimEntity> LobbyBotClaims { get; set; } = null!;
+        public virtual DbSet<LobbyBotInstanceEntity> LobbyBotInstances { get; set; } = null!;
+        public virtual DbSet<LobbyBotOptionEntity> LobbyBotOptions { get; set; } = null!;
         public virtual DbSet<MemberEntity> Members { get; set; } = null!;
         public virtual DbSet<NextDropEntity> NextDrops { get; set; } = null!;
         public virtual DbSet<OnlineItemEntity> OnlineItems { get; set; } = null!;
@@ -151,6 +154,22 @@ namespace tobeh.Valmar.Server.Database
                 entity.HasKey(e => e.LobbyId)
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 32 });
+            });
+
+            modelBuilder.Entity<LobbyBotClaimEntity>(entity =>
+            {
+                entity.HasKey(e => e.Login)
+                    .HasName("PRIMARY");
+
+                entity.Property(e => e.Login).ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<LobbyBotOptionEntity>(entity =>
+            {
+                entity.HasKey(e => e.GuildId)
+                    .HasName("PRIMARY");
+
+                entity.Property(e => e.GuildId).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<MemberEntity>(entity =>

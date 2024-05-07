@@ -110,7 +110,7 @@ public class LobbiesDomainService(
             return new PalantirLobbyPlayerDdo(
                 playerMatch?.Name ?? "",
                 Convert.ToInt32(player.PlayerMember.UserLogin),
-                playerMatch != null ? Convert.ToInt32(playerMatch.LobbyPlayerId) : -1,
+                playerMatch != null ? Convert.ToInt32(playerMatch.LobbyPlayerId) : null,
                 player.PlayerMember.UserName);
         });
     }
