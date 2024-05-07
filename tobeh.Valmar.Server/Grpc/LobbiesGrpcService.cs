@@ -7,17 +7,18 @@ using tobeh.Valmar.Server.Grpc.Utils;
 namespace tobeh.Valmar.Server.Grpc;
 
 public class LobbiesGrpcService(
-    ILogger<LobbiesGrpcService> logger, 
+    ILogger<LobbiesGrpcService> logger,
     IMapper mapper,
     ILobbiesDomainService lobbiesService) : Lobbies.LobbiesBase
 {
-    public override async Task GetCurrentLobbies(Empty request, IServerStreamWriter<LobbyReply> responseStream, ServerCallContext context)
+    public override async Task GetCurrentLobbies(Empty request, IServerStreamWriter<LobbyReply> responseStream,
+        ServerCallContext context)
     {
         logger.LogTrace($"GetCurrentLobbies(empty)");
-        
+
         // get all current lobbies' skribbl details
         var lobbies = await lobbiesService.GetPalantirLobbies();
-        
+
         // map lobbies with palantir details and players
         await responseStream.WriteAllMappedAsync(lobbies, async palantirLobby =>
         {
@@ -34,13 +35,8 @@ public class LobbiesGrpcService(
         });
     }
 
-    public override async Task GetCurrentGuildLobbies(GetGuildLobbiesMessage request, IServerStreamWriter<LobbyReply> responseStream,
-        ServerCallContext context)
-    {
-        logger.LogTrace("GetCurrentGuildLobbies(request={request})", request);
-    }
-
-    public override async Task GetLobbyDropClaims(GetLobbyDropClaimsRequest request, IServerStreamWriter<DropLogReply> responseStream,
+    public override async Task GetLobbyDropClaims(GetLobbyDropClaimsRequest request,
+        IServerStreamWriter<DropLogReply> responseStream,
         ServerCallContext context)
     {
         logger.LogTrace("GetLobbyDropClaims(request={request})", request);
@@ -49,7 +45,8 @@ public class LobbiesGrpcService(
         await responseStream.WriteAllMappedAsync(drops, mapper.Map<DropLogReply>);
     }
 
-    public override async Task GetOnlinePlayers(Empty request, IServerStreamWriter<OnlineMemberReply> responseStream, ServerCallContext context)
+    public override async Task GetOnlinePlayers(Empty request, IServerStreamWriter<OnlineMemberReply> responseStream,
+        ServerCallContext context)
     {
         logger.LogTrace("GetOnlinePlayers(empty)");
 
