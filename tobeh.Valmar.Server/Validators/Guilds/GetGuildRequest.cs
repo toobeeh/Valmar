@@ -6,6 +6,6 @@ public class GetGuildRequestValidator : AbstractValidator<GetGuildRequest>
 {
     public GetGuildRequestValidator()
     {
-        RuleFor(request => request.ObserveToken).GreaterThan(0);
+        RuleFor(request => request.Invite).GreaterThan(0);
     }
 }
