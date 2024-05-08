@@ -176,18 +176,11 @@ public class WorkersDomainService(
         var options = await db.LobbyBotOptions.FirstOrDefaultAsync(entity => entity.GuildId == serverId);
         if (options is null)
         {
-            // if there is an old palantir set, use the old invite - LEGACY
-            var existingLegacy = await db.Palantiris.FirstOrDefaultAsync(p => p.Palantir.Contains(serverId.ToString()));
-
             int invite;
-            if (existingLegacy == null)
+            do
             {
-                do
-                {
-                    invite = new Random().Next(999999);
-                } while (await db.LobbyBotOptions.AnyAsync(entity => entity.Invite == invite));
-            }
-            else invite = Convert.ToInt32(existingLegacy.Token);
+                invite = new Random().Next(999999);
+            } while (await db.LobbyBotOptions.AnyAsync(entity => entity.Invite == invite));
 
             options = new LobbyBotOptionEntity
             {
