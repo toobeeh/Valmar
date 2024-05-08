@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
+import "guilds.proto";
 
 option csharp_namespace = "tobeh.Valmar";
 package workers;
@@ -12,12 +13,8 @@ service Workers {
   rpc GetUnclaimedInstance (google.protobuf.Empty) returns (InstanceDetailsMessage);
   
   rpc ClaimInstance (ClaimInstanceMessage) returns (InstanceDetailsMessage);
-  
-  rpc GetAssignedGuildOptions (GetAssignedGuildOptionsMessage) returns (GuildOptionsMessage);
-  
-  rpc GetGuildOptionsById (GetGuildOptionsByIdMessage) returns (GuildOptionsMessage);
-  
-  rpc SetGuildOptions (GuildOptionsMessage) returns (google.protobuf.Empty);
+
+  rpc GetAssignedGuildOptions (GetAssignedGuildOptionsMessage) returns (guilds.GuildOptionsMessage);
   
   rpc AssignInstanceToServer (AssignInstanceToServerMessage) returns (InstanceDetailsMessage);
 }
@@ -29,18 +26,6 @@ message AssignInstanceToServerMessage {
 
 message GetAssignedGuildOptionsMessage {
   int32 instanceId = 1;
-}
-
-message GetGuildOptionsByIdMessage {
-  int64 guildId = 1;
-}
-
-message GuildOptionsMessage {
-  int64 guildId = 1;
-  google.protobuf.Int64Value channelId = 2;
-  string name = 3;
-  int32 invite = 4;
-  string prefix = 5;
 }
 
 message ClaimInstanceMessage {

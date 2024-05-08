@@ -2,9 +2,7 @@ namespace tobeh.Valmar.Server.Domain.Classes;
 
 public record GuildDetailDdo(
     long GuildId,
-    long ChannelId,
-    long MessageId,
-    int ObserveToken,
+    int Invite,
     string Name,
     int ConnectedMemberCount
-    );
+);

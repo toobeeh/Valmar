@@ -1,80 +1,84 @@
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using tobeh.Valmar.Server.Database;
 using tobeh.Valmar.Server.Domain.Classes;
-using tobeh.Valmar.Server.Domain.Classes.JSON;
 using tobeh.Valmar.Server.Domain.Exceptions;
 
 namespace tobeh.Valmar.Server.Domain.Implementation;
 
 public class GuildsDomainService(
-    ILogger<GuildsDomainService> logger, 
+    ILogger<GuildsDomainService> logger,
     PalantirContext db) : IGuildsDomainService
 {
-    public async Task<GuildDetailDdo> GetGuildByObserveToken(int observeToken)
+    public async Task<GuildDetailDdo> GetGuildByInvite(int invite)
     {
-        var guild = await db.Palantiris.FirstOrDefaultAsync(
-            guild => guild.Token == observeToken.ToString("00000000") || guild.Token == observeToken.ToString()); // TODO fix inconsistency of 0 paddings in db
+        var guild = await db.LobbyBotOptions.FirstOrDefaultAsync(
+            guild => guild.Invite == invite);
         if (guild is null)
         {
-            throw new EntityNotFoundException($"Guild with token {observeToken} does not exist");
+            throw new EntityNotFoundException($"Guild with invite {invite} does not exist");
         }
 
         return await ConvertToDdo(guild);
     }
-    
+
     public async Task<GuildDetailDdo> GetGuildByDiscordId(long discordId)
     {
-        var guilds = await db.Palantiris.Where(
-            guild => guild.Palantir.Contains(discordId.ToString()))
-            .ToListAsync(); // filter out matching candidates
+        var guild = await db.LobbyBotOptions.FirstOrDefaultAsync(
+            guild => guild.GuildId == discordId);
 
-        var matchingGuild =
-            (await Task.WhenAll(guilds.Select(ConvertToDdo))).FirstOrDefault(guild => guild.GuildId == discordId);
-        
-        if (matchingGuild is null)
+        if (guild is null)
         {
             throw new EntityNotFoundException($"Guild with discord id {discordId} does not exist");
         }
 
-        return matchingGuild;
+        return await ConvertToDdo(guild);
     }
 
-    private GuildPropertiesJson ParseGuildProperties(string guildJson)
+    public async Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix,
+        long? channelId = null)
     {
-        GuildPropertiesJson? guildProperties = null;
-        try
+        logger.LogTrace("UpdateGuildOptions(guildId={guildId}, name={name})", guildId, name);
+
+        var options = await db.LobbyBotOptions.FirstOrDefaultAsync(entity => entity.GuildId == guildId);
+        if (options is null)
         {
-            guildProperties = JsonSerializer.Deserialize<GuildPropertiesJson>(guildJson, ValmarJsonOptions.JsonSerializerOptions);
+            throw new EntityNotFoundException($"No guild options for id {guildId}");
         }
-        catch(Exception e)
-        {
-            logger.LogError(e, "Failed to parse guild");
-            guildProperties = null;
-        }
-        
-        if (guildProperties is null)
-        {
-            throw new NullReferenceException($"Failed to parse guild properties: \n{guildJson}");
-        }
-        
-        return guildProperties;
+
+        options.Name = name;
+        options.Prefix = prefix;
+        options.ChannelId = channelId;
+
+        db.LobbyBotOptions.Update(options);
+        await db.SaveChangesAsync();
+
+        return options;
     }
 
-    private async Task<GuildDetailDdo> ConvertToDdo(PalantiriEntity guild)
+    public async Task<LobbyBotOptionEntity> GetGuildOptionsByGuildId(long guildId)
+    {
+        logger.LogTrace("GetGuildOptionsByGuildId(guildId={guildId})", guildId);
+
+        var options = await db.LobbyBotOptions.FirstOrDefaultAsync(entity => entity.GuildId == guildId);
+        if (options is null)
+        {
+            throw new EntityNotFoundException($"No guild options for id {guildId}");
+        }
+
+        return options;
+    }
+
+    private async Task<GuildDetailDdo> ConvertToDdo(LobbyBotOptionEntity guild)
     {
         logger.LogTrace("ConvertToDdo(guild={guild})", guild);
-        
-        var guildProperties = ParseGuildProperties(guild.Palantir);
+
         var memberCount =
-            await db.Members.Where(member => member.Member1.Contains(guild.Token)).CountAsync(); // TODO improve safety, this is only a "inaccurate" count for performance
+            await db.ServerConnections.CountAsync(connection => connection.GuildId == guild.GuildId);
 
         var details = new GuildDetailDdo(
-            Convert.ToInt64(guildProperties.GuildId),
-            Convert.ToInt64(guildProperties.ChannelId),
-            Convert.ToInt64(guildProperties.MessageId),
-            Convert.ToInt32(guild.Token),
-            guildProperties.GuildName,
+            guild.GuildId,
+            guild.Invite,
+            guild.Name,
             memberCount
         );
 

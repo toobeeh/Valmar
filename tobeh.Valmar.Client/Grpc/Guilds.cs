@@ -24,22 +24,31 @@ namespace tobeh.Valmar {
     static GuildsReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxndWlsZHMucHJvdG8SBmd1aWxkcyKFAQoKR3VpbGRSZXBseRIPCgdndWls",
-            "ZElkGAEgASgDEhEKCWNoYW5uZWxJZBgCIAEoAxIRCgltZXNzYWdlSWQYAyAB",
-            "KAMSFAoMb2JzZXJ2ZVRva2VuGAQgASgFEgwKBG5hbWUYBSABKAkSHAoUY29u",
-            "bmVjdGVkTWVtYmVyQ291bnQYBiABKAUiJwoPR2V0R3VpbGRSZXF1ZXN0EhQK",
-            "DG9ic2VydmVUb2tlbhgBIAEoBSIoChNHZXRHdWlsZEJ5SWRNZXNzYWdlEhEK",
-            "CWRpc2NvcmRJZBgBIAEoAzKQAQoGR3VpbGRzEj4KD0dldEd1aWxkQnlUb2tl",
-            "bhIXLmd1aWxkcy5HZXRHdWlsZFJlcXVlc3QaEi5ndWlsZHMuR3VpbGRSZXBs",
-            "eRJGChNHZXRHdWlsZEJ5RGlzY29yZElkEhsuZ3VpbGRzLkdldEd1aWxkQnlJ",
-            "ZE1lc3NhZ2UaEi5ndWlsZHMuR3VpbGRSZXBseUIPqgIMdG9iZWguVmFsbWFy",
-            "YgZwcm90bzM="));
+            "CgxndWlsZHMucHJvdG8SBmd1aWxkcxoeZ29vZ2xlL3Byb3RvYnVmL3dyYXBw",
+            "ZXJzLnByb3RvGhtnb29nbGUvcHJvdG9idWYvZW1wdHkucHJvdG8iWQoKR3Vp",
+            "bGRSZXBseRIPCgdndWlsZElkGAEgASgDEg4KBmludml0ZRgEIAEoBRIMCgRu",
+            "YW1lGAUgASgJEhwKFGNvbm5lY3RlZE1lbWJlckNvdW50GAYgASgFIiEKD0dl",
+            "dEd1aWxkUmVxdWVzdBIOCgZpbnZpdGUYASABKAUiKAoTR2V0R3VpbGRCeUlk",
+            "TWVzc2FnZRIRCglkaXNjb3JkSWQYASABKAMiLQoaR2V0R3VpbGRPcHRpb25z",
+            "QnlJZE1lc3NhZ2USDwoHZ3VpbGRJZBgBIAEoAyKEAQoTR3VpbGRPcHRpb25z",
+            "TWVzc2FnZRIPCgdndWlsZElkGAEgASgDEi4KCWNoYW5uZWxJZBgCIAEoCzIb",
+            "Lmdvb2dsZS5wcm90b2J1Zi5JbnQ2NFZhbHVlEgwKBG5hbWUYAyABKAkSDgoG",
+            "aW52aXRlGAQgASgFEg4KBnByZWZpeBgFIAEoCTKqAgoGR3VpbGRzEj8KEEdl",
+            "dEd1aWxkQnlJbnZpdGUSFy5ndWlsZHMuR2V0R3VpbGRSZXF1ZXN0GhIuZ3Vp",
+            "bGRzLkd1aWxkUmVwbHkSPwoMR2V0R3VpbGRCeUlkEhsuZ3VpbGRzLkdldEd1",
+            "aWxkQnlJZE1lc3NhZ2UaEi5ndWlsZHMuR3VpbGRSZXBseRJWChNHZXRHdWls",
+            "ZE9wdGlvbnNCeUlkEiIuZ3VpbGRzLkdldEd1aWxkT3B0aW9uc0J5SWRNZXNz",
+            "YWdlGhsuZ3VpbGRzLkd1aWxkT3B0aW9uc01lc3NhZ2USRgoPU2V0R3VpbGRP",
+            "cHRpb25zEhsuZ3VpbGRzLkd1aWxkT3B0aW9uc01lc3NhZ2UaFi5nb29nbGUu",
+            "cHJvdG9idWYuRW1wdHlCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildReply), global::tobeh.Valmar.GuildReply.Parser, new[]{ "GuildId", "ChannelId", "MessageId", "ObserveToken", "Name", "ConnectedMemberCount" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildRequest), global::tobeh.Valmar.GetGuildRequest.Parser, new[]{ "ObserveToken" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildByIdMessage), global::tobeh.Valmar.GetGuildByIdMessage.Parser, new[]{ "DiscordId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildReply), global::tobeh.Valmar.GuildReply.Parser, new[]{ "GuildId", "Invite", "Name", "ConnectedMemberCount" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildRequest), global::tobeh.Valmar.GetGuildRequest.Parser, new[]{ "Invite" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildByIdMessage), global::tobeh.Valmar.GetGuildByIdMessage.Parser, new[]{ "DiscordId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildOptionsByIdMessage), global::tobeh.Valmar.GetGuildOptionsByIdMessage.Parser, new[]{ "GuildId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildOptionsMessage), global::tobeh.Valmar.GuildOptionsMessage.Parser, new[]{ "GuildId", "ChannelId", "Name", "Invite", "Prefix" }, null, null, null, null)
           }));
     }
     #endregion
@@ -84,9 +93,7 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public GuildReply(GuildReply other) : this() {
       guildId_ = other.guildId_;
-      channelId_ = other.channelId_;
-      messageId_ = other.messageId_;
-      observeToken_ = other.observeToken_;
+      invite_ = other.invite_;
       name_ = other.name_;
       connectedMemberCount_ = other.connectedMemberCount_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -110,39 +117,15 @@ namespace tobeh.Valmar {
       }
     }
 
-    /// <summary>Field number for the "channelId" field.</summary>
-    public const int ChannelIdFieldNumber = 2;
-    private long channelId_;
+    /// <summary>Field number for the "invite" field.</summary>
+    public const int InviteFieldNumber = 4;
+    private int invite_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long ChannelId {
-      get { return channelId_; }
+    public int Invite {
+      get { return invite_; }
       set {
-        channelId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "messageId" field.</summary>
-    public const int MessageIdFieldNumber = 3;
-    private long messageId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long MessageId {
-      get { return messageId_; }
-      set {
-        messageId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "observeToken" field.</summary>
-    public const int ObserveTokenFieldNumber = 4;
-    private int observeToken_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int ObserveToken {
-      get { return observeToken_; }
-      set {
-        observeToken_ = value;
+        invite_ = value;
       }
     }
 
@@ -186,9 +169,7 @@ namespace tobeh.Valmar {
         return true;
       }
       if (GuildId != other.GuildId) return false;
-      if (ChannelId != other.ChannelId) return false;
-      if (MessageId != other.MessageId) return false;
-      if (ObserveToken != other.ObserveToken) return false;
+      if (Invite != other.Invite) return false;
       if (Name != other.Name) return false;
       if (ConnectedMemberCount != other.ConnectedMemberCount) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -199,9 +180,7 @@ namespace tobeh.Valmar {
     public override int GetHashCode() {
       int hash = 1;
       if (GuildId != 0L) hash ^= GuildId.GetHashCode();
-      if (ChannelId != 0L) hash ^= ChannelId.GetHashCode();
-      if (MessageId != 0L) hash ^= MessageId.GetHashCode();
-      if (ObserveToken != 0) hash ^= ObserveToken.GetHashCode();
+      if (Invite != 0) hash ^= Invite.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (ConnectedMemberCount != 0) hash ^= ConnectedMemberCount.GetHashCode();
       if (_unknownFields != null) {
@@ -226,17 +205,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt64(GuildId);
       }
-      if (ChannelId != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(ChannelId);
-      }
-      if (MessageId != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(MessageId);
-      }
-      if (ObserveToken != 0) {
+      if (Invite != 0) {
         output.WriteRawTag(32);
-        output.WriteInt32(ObserveToken);
+        output.WriteInt32(Invite);
       }
       if (Name.Length != 0) {
         output.WriteRawTag(42);
@@ -260,17 +231,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt64(GuildId);
       }
-      if (ChannelId != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(ChannelId);
-      }
-      if (MessageId != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(MessageId);
-      }
-      if (ObserveToken != 0) {
+      if (Invite != 0) {
         output.WriteRawTag(32);
-        output.WriteInt32(ObserveToken);
+        output.WriteInt32(Invite);
       }
       if (Name.Length != 0) {
         output.WriteRawTag(42);
@@ -293,14 +256,8 @@ namespace tobeh.Valmar {
       if (GuildId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(GuildId);
       }
-      if (ChannelId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ChannelId);
-      }
-      if (MessageId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(MessageId);
-      }
-      if (ObserveToken != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ObserveToken);
+      if (Invite != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Invite);
       }
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
@@ -323,14 +280,8 @@ namespace tobeh.Valmar {
       if (other.GuildId != 0L) {
         GuildId = other.GuildId;
       }
-      if (other.ChannelId != 0L) {
-        ChannelId = other.ChannelId;
-      }
-      if (other.MessageId != 0L) {
-        MessageId = other.MessageId;
-      }
-      if (other.ObserveToken != 0) {
-        ObserveToken = other.ObserveToken;
+      if (other.Invite != 0) {
+        Invite = other.Invite;
       }
       if (other.Name.Length != 0) {
         Name = other.Name;
@@ -357,16 +308,8 @@ namespace tobeh.Valmar {
             GuildId = input.ReadInt64();
             break;
           }
-          case 16: {
-            ChannelId = input.ReadInt64();
-            break;
-          }
-          case 24: {
-            MessageId = input.ReadInt64();
-            break;
-          }
           case 32: {
-            ObserveToken = input.ReadInt32();
+            Invite = input.ReadInt32();
             break;
           }
           case 42: {
@@ -396,16 +339,8 @@ namespace tobeh.Valmar {
             GuildId = input.ReadInt64();
             break;
           }
-          case 16: {
-            ChannelId = input.ReadInt64();
-            break;
-          }
-          case 24: {
-            MessageId = input.ReadInt64();
-            break;
-          }
           case 32: {
-            ObserveToken = input.ReadInt32();
+            Invite = input.ReadInt32();
             break;
           }
           case 42: {
@@ -460,7 +395,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public GetGuildRequest(GetGuildRequest other) : this() {
-      observeToken_ = other.observeToken_;
+      invite_ = other.invite_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -470,15 +405,15 @@ namespace tobeh.Valmar {
       return new GetGuildRequest(this);
     }
 
-    /// <summary>Field number for the "observeToken" field.</summary>
-    public const int ObserveTokenFieldNumber = 1;
-    private int observeToken_;
+    /// <summary>Field number for the "invite" field.</summary>
+    public const int InviteFieldNumber = 1;
+    private int invite_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int ObserveToken {
-      get { return observeToken_; }
+    public int Invite {
+      get { return invite_; }
       set {
-        observeToken_ = value;
+        invite_ = value;
       }
     }
 
@@ -497,7 +432,7 @@ namespace tobeh.Valmar {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ObserveToken != other.ObserveToken) return false;
+      if (Invite != other.Invite) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -505,7 +440,7 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (ObserveToken != 0) hash ^= ObserveToken.GetHashCode();
+      if (Invite != 0) hash ^= Invite.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -524,9 +459,9 @@ namespace tobeh.Valmar {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ObserveToken != 0) {
+      if (Invite != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(ObserveToken);
+        output.WriteInt32(Invite);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -538,9 +473,9 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ObserveToken != 0) {
+      if (Invite != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(ObserveToken);
+        output.WriteInt32(Invite);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -552,8 +487,8 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (ObserveToken != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ObserveToken);
+      if (Invite != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Invite);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -567,8 +502,8 @@ namespace tobeh.Valmar {
       if (other == null) {
         return;
       }
-      if (other.ObserveToken != 0) {
-        ObserveToken = other.ObserveToken;
+      if (other.Invite != 0) {
+        Invite = other.Invite;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -586,7 +521,7 @@ namespace tobeh.Valmar {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            ObserveToken = input.ReadInt32();
+            Invite = input.ReadInt32();
             break;
           }
         }
@@ -605,7 +540,7 @@ namespace tobeh.Valmar {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            ObserveToken = input.ReadInt32();
+            Invite = input.ReadInt32();
             break;
           }
         }
@@ -798,6 +733,540 @@ namespace tobeh.Valmar {
             break;
           case 8: {
             DiscordId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class GetGuildOptionsByIdMessage : pb::IMessage<GetGuildOptionsByIdMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<GetGuildOptionsByIdMessage> _parser = new pb::MessageParser<GetGuildOptionsByIdMessage>(() => new GetGuildOptionsByIdMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<GetGuildOptionsByIdMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.GuildsReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public GetGuildOptionsByIdMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public GetGuildOptionsByIdMessage(GetGuildOptionsByIdMessage other) : this() {
+      guildId_ = other.guildId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public GetGuildOptionsByIdMessage Clone() {
+      return new GetGuildOptionsByIdMessage(this);
+    }
+
+    /// <summary>Field number for the "guildId" field.</summary>
+    public const int GuildIdFieldNumber = 1;
+    private long guildId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long GuildId {
+      get { return guildId_; }
+      set {
+        guildId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as GetGuildOptionsByIdMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(GetGuildOptionsByIdMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GuildId != other.GuildId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GuildId != 0L) hash ^= GuildId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (GuildId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(GuildId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (GuildId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(GuildId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (GuildId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GuildId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(GetGuildOptionsByIdMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GuildId != 0L) {
+        GuildId = other.GuildId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            GuildId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            GuildId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class GuildOptionsMessage : pb::IMessage<GuildOptionsMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<GuildOptionsMessage> _parser = new pb::MessageParser<GuildOptionsMessage>(() => new GuildOptionsMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<GuildOptionsMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.GuildsReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public GuildOptionsMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public GuildOptionsMessage(GuildOptionsMessage other) : this() {
+      guildId_ = other.guildId_;
+      ChannelId = other.ChannelId;
+      name_ = other.name_;
+      invite_ = other.invite_;
+      prefix_ = other.prefix_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public GuildOptionsMessage Clone() {
+      return new GuildOptionsMessage(this);
+    }
+
+    /// <summary>Field number for the "guildId" field.</summary>
+    public const int GuildIdFieldNumber = 1;
+    private long guildId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long GuildId {
+      get { return guildId_; }
+      set {
+        guildId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "channelId" field.</summary>
+    public const int ChannelIdFieldNumber = 2;
+    private static readonly pb::FieldCodec<long?> _single_channelId_codec = pb::FieldCodec.ForStructWrapper<long>(18);
+    private long? channelId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long? ChannelId {
+      get { return channelId_; }
+      set {
+        channelId_ = value;
+      }
+    }
+
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 3;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "invite" field.</summary>
+    public const int InviteFieldNumber = 4;
+    private int invite_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Invite {
+      get { return invite_; }
+      set {
+        invite_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "prefix" field.</summary>
+    public const int PrefixFieldNumber = 5;
+    private string prefix_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Prefix {
+      get { return prefix_; }
+      set {
+        prefix_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as GuildOptionsMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(GuildOptionsMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GuildId != other.GuildId) return false;
+      if (ChannelId != other.ChannelId) return false;
+      if (Name != other.Name) return false;
+      if (Invite != other.Invite) return false;
+      if (Prefix != other.Prefix) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GuildId != 0L) hash ^= GuildId.GetHashCode();
+      if (channelId_ != null) hash ^= ChannelId.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Invite != 0) hash ^= Invite.GetHashCode();
+      if (Prefix.Length != 0) hash ^= Prefix.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (GuildId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(GuildId);
+      }
+      if (channelId_ != null) {
+        _single_channelId_codec.WriteTagAndValue(output, ChannelId);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Name);
+      }
+      if (Invite != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Invite);
+      }
+      if (Prefix.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Prefix);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (GuildId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(GuildId);
+      }
+      if (channelId_ != null) {
+        _single_channelId_codec.WriteTagAndValue(ref output, ChannelId);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Name);
+      }
+      if (Invite != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Invite);
+      }
+      if (Prefix.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Prefix);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (GuildId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GuildId);
+      }
+      if (channelId_ != null) {
+        size += _single_channelId_codec.CalculateSizeWithTag(ChannelId);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Invite != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Invite);
+      }
+      if (Prefix.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Prefix);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(GuildOptionsMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GuildId != 0L) {
+        GuildId = other.GuildId;
+      }
+      if (other.channelId_ != null) {
+        if (channelId_ == null || other.ChannelId != 0L) {
+          ChannelId = other.ChannelId;
+        }
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Invite != 0) {
+        Invite = other.Invite;
+      }
+      if (other.Prefix.Length != 0) {
+        Prefix = other.Prefix;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            GuildId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            long? value = _single_channelId_codec.Read(input);
+            if (channelId_ == null || value != 0L) {
+              ChannelId = value;
+            }
+            break;
+          }
+          case 26: {
+            Name = input.ReadString();
+            break;
+          }
+          case 32: {
+            Invite = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            Prefix = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            GuildId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            long? value = _single_channelId_codec.Read(ref input);
+            if (channelId_ == null || value != 0L) {
+              ChannelId = value;
+            }
+            break;
+          }
+          case 26: {
+            Name = input.ReadString();
+            break;
+          }
+          case 32: {
+            Invite = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            Prefix = input.ReadString();
             break;
           }
         }

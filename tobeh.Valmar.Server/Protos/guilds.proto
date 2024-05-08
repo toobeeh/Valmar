@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
 option csharp_namespace = "tobeh.Valmar";
 package guilds;
 
@@ -7,28 +10,42 @@ package guilds;
 service Guilds {
   
   // Gets a guild by its observe token
-  rpc GetGuildByToken (GetGuildRequest) returns (GuildReply);
+  rpc GetGuildByInvite (GetGuildRequest) returns (GuildReply);
   
   // Gets a guild by its discord ID
-  rpc GetGuildByDiscordId (GetGuildByIdMessage) returns (GuildReply);
+  rpc GetGuildById (GetGuildByIdMessage) returns (GuildReply);
+
+  rpc GetGuildOptionsById (GetGuildOptionsByIdMessage) returns (GuildOptionsMessage);
+
+  rpc SetGuildOptions (GuildOptionsMessage) returns (google.protobuf.Empty);
 }
 
 // Response containing a guild's properties.
 message GuildReply {
   int64 guildId = 1;
-  int64 channelId = 2;
-  int64 messageId = 3;
-  int32 observeToken = 4;
+  int32 invite = 4;
   string name = 5;
   int32 connectedMemberCount = 6;
 }
 
 // Request containing a guild observe token
 message GetGuildRequest {
-  int32 observeToken = 1;
+  int32 invite = 1;
 }
 
 // Request containing a guild discord ID
 message GetGuildByIdMessage {
   int64 discordId = 1;
+}
+
+message GetGuildOptionsByIdMessage {
+  int64 guildId = 1;
+}
+
+message GuildOptionsMessage {
+  int64 guildId = 1;
+  google.protobuf.Int64Value channelId = 2;
+  string name = 3;
+  int32 invite = 4;
+  string prefix = 5;
 }

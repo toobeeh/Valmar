@@ -8,6 +8,7 @@ namespace tobeh.Valmar.Server.Domain.Implementation;
 public class WorkersDomainService(
     ILogger<WorkersDomainService> logger,
     IMembersDomainService membersDomainService,
+    IGuildsDomainService guildsDomainService,
     PalantirContext db) : IWorkersDomainService
 {
     public async Task<LobbyBotInstanceEntity> GetUnclaimedInstanceForWorker()
@@ -103,20 +104,7 @@ public class WorkersDomainService(
             throw new UserOperationException("Claim of the instance is no longer valid");
         }
 
-        return await GetGuildOptionsByGuildId(memberClaim.GuildId);
-    }
-
-    public async Task<LobbyBotOptionEntity> GetGuildOptionsByGuildId(long guildId)
-    {
-        logger.LogTrace("GetGuildOptionsByGuildId(guildId={guildId})", guildId);
-
-        var options = await db.LobbyBotOptions.FirstOrDefaultAsync(entity => entity.GuildId == guildId);
-        if (options is null)
-        {
-            throw new EntityNotFoundException($"No guild options for id {guildId}");
-        }
-
-        return options;
+        return await guildsDomainService.GetGuildOptionsByGuildId(memberClaim.GuildId);
     }
 
     public async Task<LobbyBotInstanceEntity> AssignInstanceToServer(MemberDdo member, long serverId)
@@ -196,27 +184,6 @@ public class WorkersDomainService(
         await db.SaveChangesAsync();
 
         return instance;
-    }
-
-    public async Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix,
-        long? channelId = null)
-    {
-        logger.LogTrace("UpdateGuildOptions(guildId={guildId}, name={name})", guildId, name);
-
-        var options = await db.LobbyBotOptions.FirstOrDefaultAsync(entity => entity.GuildId == guildId);
-        if (options is null)
-        {
-            throw new EntityNotFoundException($"No guild options for id {guildId}");
-        }
-
-        options.Name = name;
-        options.Prefix = prefix;
-        options.ChannelId = channelId;
-
-        db.LobbyBotOptions.Update(options);
-        await db.SaveChangesAsync();
-
-        return options;
     }
 
     private static bool CanClaimNewInstance(LobbyBotClaimEntity claim)

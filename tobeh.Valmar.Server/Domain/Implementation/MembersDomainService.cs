@@ -84,7 +84,7 @@ public class MembersDomainService(
     {
         logger.LogTrace("GetGuildMembers(observeToken={observeToken})", observeToken);
 
-        var guild = await guildsService.GetGuildByObserveToken(observeToken);
+        var guild = await guildsService.GetGuildByInvite(observeToken);
 
         var members = await db.Members.Where(member =>
             db.ServerConnections.Any(connection =>
@@ -338,7 +338,7 @@ public class MembersDomainService(
             throw new EntityNotFoundException($"No member found for login {login}");
         }
 
-        var guild = await guildsService.GetGuildByObserveToken(serverToken);
+        var guild = await guildsService.GetGuildByInvite(serverToken);
 
         if (await db.ServerConnections.AnyAsync(entity => entity.Login == login && entity.GuildId == guild.GuildId))
         {
@@ -365,14 +365,14 @@ public class MembersDomainService(
             throw new EntityNotFoundException($"No member found for login {login}");
         }
 
-        var guild = await guildsService.GetGuildByObserveToken(serverToken);
+        var guild = await guildsService.GetGuildByInvite(serverToken);
         var connection =
             await db.ServerConnections.FirstOrDefaultAsync(entity =>
                 entity.Login == login && entity.GuildId == guild.GuildId);
 
         if (connection is null)
         {
-            throw new EntityNotFoundException($"Member {login} is not connected to guild {guild.ObserveToken}");
+            throw new EntityNotFoundException($"Member {login} is not connected to guild {guild.Invite}");
         }
 
         db.ServerConnections.Remove(connection);

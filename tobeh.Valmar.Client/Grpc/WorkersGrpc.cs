@@ -57,9 +57,7 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GetAssignedGuildOptionsMessage> __Marshaller_workers_GetAssignedGuildOptionsMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetAssignedGuildOptionsMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::tobeh.Valmar.GuildOptionsMessage> __Marshaller_workers_GuildOptionsMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GuildOptionsMessage.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::tobeh.Valmar.GetGuildOptionsByIdMessage> __Marshaller_workers_GetGuildOptionsByIdMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetGuildOptionsByIdMessage.Parser));
+    static readonly grpc::Marshaller<global::tobeh.Valmar.GuildOptionsMessage> __Marshaller_guilds_GuildOptionsMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GuildOptionsMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.AssignInstanceToServerMessage> __Marshaller_workers_AssignInstanceToServerMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.AssignInstanceToServerMessage.Parser));
 
@@ -85,23 +83,7 @@ namespace tobeh.Valmar {
         __ServiceName,
         "GetAssignedGuildOptions",
         __Marshaller_workers_GetAssignedGuildOptionsMessage,
-        __Marshaller_workers_GuildOptionsMessage);
-
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::tobeh.Valmar.GetGuildOptionsByIdMessage, global::tobeh.Valmar.GuildOptionsMessage> __Method_GetGuildOptionsById = new grpc::Method<global::tobeh.Valmar.GetGuildOptionsByIdMessage, global::tobeh.Valmar.GuildOptionsMessage>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "GetGuildOptionsById",
-        __Marshaller_workers_GetGuildOptionsByIdMessage,
-        __Marshaller_workers_GuildOptionsMessage);
-
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::tobeh.Valmar.GuildOptionsMessage, global::Google.Protobuf.WellKnownTypes.Empty> __Method_SetGuildOptions = new grpc::Method<global::tobeh.Valmar.GuildOptionsMessage, global::Google.Protobuf.WellKnownTypes.Empty>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "SetGuildOptions",
-        __Marshaller_workers_GuildOptionsMessage,
-        __Marshaller_google_protobuf_Empty);
+        __Marshaller_guilds_GuildOptionsMessage);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.AssignInstanceToServerMessage, global::tobeh.Valmar.InstanceDetailsMessage> __Method_AssignInstanceToServer = new grpc::Method<global::tobeh.Valmar.AssignInstanceToServerMessage, global::tobeh.Valmar.InstanceDetailsMessage>(
@@ -203,46 +185,6 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.GuildOptionsMessage> GetAssignedGuildOptionsAsync(global::tobeh.Valmar.GetAssignedGuildOptionsMessage request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetAssignedGuildOptions, null, options, request);
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::tobeh.Valmar.GuildOptionsMessage GetGuildOptionsById(global::tobeh.Valmar.GetGuildOptionsByIdMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return GetGuildOptionsById(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::tobeh.Valmar.GuildOptionsMessage GetGuildOptionsById(global::tobeh.Valmar.GetGuildOptionsByIdMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_GetGuildOptionsById, null, options, request);
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.GuildOptionsMessage> GetGuildOptionsByIdAsync(global::tobeh.Valmar.GetGuildOptionsByIdMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return GetGuildOptionsByIdAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.GuildOptionsMessage> GetGuildOptionsByIdAsync(global::tobeh.Valmar.GetGuildOptionsByIdMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_GetGuildOptionsById, null, options, request);
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Google.Protobuf.WellKnownTypes.Empty SetGuildOptions(global::tobeh.Valmar.GuildOptionsMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return SetGuildOptions(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Google.Protobuf.WellKnownTypes.Empty SetGuildOptions(global::tobeh.Valmar.GuildOptionsMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_SetGuildOptions, null, options, request);
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> SetGuildOptionsAsync(global::tobeh.Valmar.GuildOptionsMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return SetGuildOptionsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> SetGuildOptionsAsync(global::tobeh.Valmar.GuildOptionsMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_SetGuildOptions, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::tobeh.Valmar.InstanceDetailsMessage AssignInstanceToServer(global::tobeh.Valmar.AssignInstanceToServerMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
