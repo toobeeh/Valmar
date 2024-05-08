@@ -38,22 +38,22 @@ namespace tobeh.Valmar {
             "RGF0ZRgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASKwoHZW5k",
             "RGF0ZRgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiQgoYQnVi",
             "YmxlVGltZXNwYW5SYW5nZVJlcGx5EhMKC3N0YXJ0QW1vdW50GAEgASgFEhEK",
-            "CWVuZEFtb3VudBgCIAEoBSJuChVHZXRMZWFkZXJib2FyZE1lc3NhZ2USLwoK",
-            "Z3VpbGRUb2tlbhgBIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVl",
-            "EiQKBG1vZGUYAiABKA4yFi5zdGF0cy5MZWFkZXJib2FyZE1vZGUiRAoSTGVh",
-            "ZGVyYm9hcmRNZXNzYWdlEi4KB2VudHJpZXMYASADKAsyHS5zdGF0cy5MZWFk",
-            "ZXJib2FyZFJhbmtNZXNzYWdlInoKFkxlYWRlcmJvYXJkUmFua01lc3NhZ2US",
-            "DAoEcmFuaxgBIAEoBRINCgVsb2dpbhgCIAEoBRIRCglkaXNjb3JkSWQYAyAB",
-            "KAMSEAoIdXNlcm5hbWUYBCABKAkSDwoHYnViYmxlcxgFIAEoBRINCgVkcm9w",
-            "cxgGIAEoBSopCg9MZWFkZXJib2FyZE1vZGUSCwoHQlVCQkxFUxAAEgkKBURS",
-            "T1BTEAEqOgoaQnViYmxlUHJvZ3Jlc3NJbnRlcnZhbE1vZGUSBwoDREFZEAAS",
-            "CAoEV0VFSxABEgkKBU1PTlRIEAIyhAIKBVN0YXRzElwKFkdldEJ1YmJsZVRp",
-            "bWVzcGFuUmFuZ2USIS5zdGF0cy5CdWJibGVUaW1lc3BhblJhbmdlUmVxdWVz",
-            "dBofLnN0YXRzLkJ1YmJsZVRpbWVzcGFuUmFuZ2VSZXBseRJSChFHZXRCdWJi",
-            "bGVQcm9ncmVzcxIfLnN0YXRzLkdldEJ1YmJsZVByb2dyZXNzTWVzc2FnZRoc",
-            "LnN0YXRzLkJ1YmJsZVByb2dyZXNzTWVzc2FnZRJJCg5HZXRMZWFkZXJib2Fy",
-            "ZBIcLnN0YXRzLkdldExlYWRlcmJvYXJkTWVzc2FnZRoZLnN0YXRzLkxlYWRl",
-            "cmJvYXJkTWVzc2FnZUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
+            "CWVuZEFtb3VudBgCIAEoBSJrChVHZXRMZWFkZXJib2FyZE1lc3NhZ2USLAoH",
+            "Z3VpbGRJZBgBIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQ2NFZhbHVlEiQK",
+            "BG1vZGUYAiABKA4yFi5zdGF0cy5MZWFkZXJib2FyZE1vZGUiRAoSTGVhZGVy",
+            "Ym9hcmRNZXNzYWdlEi4KB2VudHJpZXMYASADKAsyHS5zdGF0cy5MZWFkZXJi",
+            "b2FyZFJhbmtNZXNzYWdlInoKFkxlYWRlcmJvYXJkUmFua01lc3NhZ2USDAoE",
+            "cmFuaxgBIAEoBRINCgVsb2dpbhgCIAEoBRIRCglkaXNjb3JkSWQYAyABKAMS",
+            "EAoIdXNlcm5hbWUYBCABKAkSDwoHYnViYmxlcxgFIAEoBRINCgVkcm9wcxgG",
+            "IAEoBSopCg9MZWFkZXJib2FyZE1vZGUSCwoHQlVCQkxFUxAAEgkKBURST1BT",
+            "EAEqOgoaQnViYmxlUHJvZ3Jlc3NJbnRlcnZhbE1vZGUSBwoDREFZEAASCAoE",
+            "V0VFSxABEgkKBU1PTlRIEAIyhAIKBVN0YXRzElwKFkdldEJ1YmJsZVRpbWVz",
+            "cGFuUmFuZ2USIS5zdGF0cy5CdWJibGVUaW1lc3BhblJhbmdlUmVxdWVzdBof",
+            "LnN0YXRzLkJ1YmJsZVRpbWVzcGFuUmFuZ2VSZXBseRJSChFHZXRCdWJibGVQ",
+            "cm9ncmVzcxIfLnN0YXRzLkdldEJ1YmJsZVByb2dyZXNzTWVzc2FnZRocLnN0",
+            "YXRzLkJ1YmJsZVByb2dyZXNzTWVzc2FnZRJJCg5HZXRMZWFkZXJib2FyZBIc",
+            "LnN0YXRzLkdldExlYWRlcmJvYXJkTWVzc2FnZRoZLnN0YXRzLkxlYWRlcmJv",
+            "YXJkTWVzc2FnZUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::tobeh.Valmar.LeaderboardMode), typeof(global::tobeh.Valmar.BubbleProgressIntervalMode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -62,7 +62,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.BubbleProgressEntryMessage), global::tobeh.Valmar.BubbleProgressEntryMessage.Parser, new[]{ "Date", "Bubbles" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.BubbleTimespanRangeRequest), global::tobeh.Valmar.BubbleTimespanRangeRequest.Parser, new[]{ "Login", "StartDate", "EndDate" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.BubbleTimespanRangeReply), global::tobeh.Valmar.BubbleTimespanRangeReply.Parser, new[]{ "StartAmount", "EndAmount" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetLeaderboardMessage), global::tobeh.Valmar.GetLeaderboardMessage.Parser, new[]{ "GuildToken", "Mode" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetLeaderboardMessage), global::tobeh.Valmar.GetLeaderboardMessage.Parser, new[]{ "GuildId", "Mode" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeaderboardMessage), global::tobeh.Valmar.LeaderboardMessage.Parser, new[]{ "Entries" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeaderboardRankMessage), global::tobeh.Valmar.LeaderboardRankMessage.Parser, new[]{ "Rank", "Login", "DiscordId", "Username", "Bubbles", "Drops" }, null, null, null, null)
           }));
@@ -1357,7 +1357,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public GetLeaderboardMessage(GetLeaderboardMessage other) : this() {
-      GuildToken = other.GuildToken;
+      GuildId = other.GuildId;
       mode_ = other.mode_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1368,16 +1368,16 @@ namespace tobeh.Valmar {
       return new GetLeaderboardMessage(this);
     }
 
-    /// <summary>Field number for the "guildToken" field.</summary>
-    public const int GuildTokenFieldNumber = 1;
-    private static readonly pb::FieldCodec<int?> _single_guildToken_codec = pb::FieldCodec.ForStructWrapper<int>(10);
-    private int? guildToken_;
+    /// <summary>Field number for the "guildId" field.</summary>
+    public const int GuildIdFieldNumber = 1;
+    private static readonly pb::FieldCodec<long?> _single_guildId_codec = pb::FieldCodec.ForStructWrapper<long>(10);
+    private long? guildId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int? GuildToken {
-      get { return guildToken_; }
+    public long? GuildId {
+      get { return guildId_; }
       set {
-        guildToken_ = value;
+        guildId_ = value;
       }
     }
 
@@ -1409,7 +1409,7 @@ namespace tobeh.Valmar {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (GuildToken != other.GuildToken) return false;
+      if (GuildId != other.GuildId) return false;
       if (Mode != other.Mode) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1418,7 +1418,7 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (guildToken_ != null) hash ^= GuildToken.GetHashCode();
+      if (guildId_ != null) hash ^= GuildId.GetHashCode();
       if (Mode != global::tobeh.Valmar.LeaderboardMode.Bubbles) hash ^= Mode.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1438,8 +1438,8 @@ namespace tobeh.Valmar {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (guildToken_ != null) {
-        _single_guildToken_codec.WriteTagAndValue(output, GuildToken);
+      if (guildId_ != null) {
+        _single_guildId_codec.WriteTagAndValue(output, GuildId);
       }
       if (Mode != global::tobeh.Valmar.LeaderboardMode.Bubbles) {
         output.WriteRawTag(16);
@@ -1455,8 +1455,8 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (guildToken_ != null) {
-        _single_guildToken_codec.WriteTagAndValue(ref output, GuildToken);
+      if (guildId_ != null) {
+        _single_guildId_codec.WriteTagAndValue(ref output, GuildId);
       }
       if (Mode != global::tobeh.Valmar.LeaderboardMode.Bubbles) {
         output.WriteRawTag(16);
@@ -1472,8 +1472,8 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (guildToken_ != null) {
-        size += _single_guildToken_codec.CalculateSizeWithTag(GuildToken);
+      if (guildId_ != null) {
+        size += _single_guildId_codec.CalculateSizeWithTag(GuildId);
       }
       if (Mode != global::tobeh.Valmar.LeaderboardMode.Bubbles) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Mode);
@@ -1490,9 +1490,9 @@ namespace tobeh.Valmar {
       if (other == null) {
         return;
       }
-      if (other.guildToken_ != null) {
-        if (guildToken_ == null || other.GuildToken != 0) {
-          GuildToken = other.GuildToken;
+      if (other.guildId_ != null) {
+        if (guildId_ == null || other.GuildId != 0L) {
+          GuildId = other.GuildId;
         }
       }
       if (other.Mode != global::tobeh.Valmar.LeaderboardMode.Bubbles) {
@@ -1514,9 +1514,9 @@ namespace tobeh.Valmar {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            int? value = _single_guildToken_codec.Read(input);
-            if (guildToken_ == null || value != 0) {
-              GuildToken = value;
+            long? value = _single_guildId_codec.Read(input);
+            if (guildId_ == null || value != 0L) {
+              GuildId = value;
             }
             break;
           }
@@ -1540,9 +1540,9 @@ namespace tobeh.Valmar {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            int? value = _single_guildToken_codec.Read(ref input);
-            if (guildToken_ == null || value != 0) {
-              GuildToken = value;
+            long? value = _single_guildId_codec.Read(ref input);
+            if (guildId_ == null || value != 0L) {
+              GuildId = value;
             }
             break;
           }

@@ -80,11 +80,11 @@ public class MembersDomainService(
         return ConvertToDdo(member);
     }
 
-    public async Task<List<MemberDdo>> GetGuildMembers(int observeToken)
+    public async Task<List<MemberDdo>> GetGuildMembers(long guildId)
     {
-        logger.LogTrace("GetGuildMembers(observeToken={observeToken})", observeToken);
+        logger.LogTrace("GetGuildMembers(guildId={guildId})", guildId);
 
-        var guild = await guildsService.GetGuildByInvite(observeToken);
+        var guild = await guildsService.GetGuildByDiscordId(guildId);
 
         var members = await db.Members.Where(member =>
             db.ServerConnections.Any(connection =>

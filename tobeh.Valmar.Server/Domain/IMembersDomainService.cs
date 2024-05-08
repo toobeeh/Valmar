@@ -20,6 +20,6 @@ public interface IMembersDomainService
     Task<List<MemberJson>> GetMemberInfosFromDiscordIds(List<long> ids);
     Task<MemberDdo> GetPatronizedMemberOfPatronizer(long patronizerId);
     Task<List<MemberDdo>> GetAllMembers();
-    Task<List<MemberDdo>> GetGuildMembers(int observeToken);
+    Task<List<MemberDdo>> GetGuildMembers(long guildId);
     Task<List<MemberDdo>> GetMembersByLogin(List<int> logins);
 }

@@ -58,7 +58,7 @@ message BubbleTimespanRangeReply {
 }
 
 message GetLeaderboardMessage {
-  google.protobuf.Int32Value guildToken = 1;
+  google.protobuf.Int64Value guildId = 1;
   LeaderboardMode mode = 2;
 }
 
