@@ -104,11 +104,13 @@ public class MembersDomainService(
         logger.LogTrace("GetAllMembers()");
 
         var members = await db.Members.ToListAsync();
-        var memberDdos = members
-            .Select(member => Task.Run(() => ConvertToDdo(member)))
-            .ToList();
+        var memberDdos = new List<MemberDdo>();
+        foreach (var entity in members)
+        {
+            memberDdos.Add(await ConvertToDdo(entity)); // TODO review performance impact on big batches
+        }
 
-        return (await Task.WhenAll(memberDdos)).ToList();
+        return memberDdos;
     }
 
     public async Task<List<MemberDdo>> GetMembersByLogin(List<int> logins)
