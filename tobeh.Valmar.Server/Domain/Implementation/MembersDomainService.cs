@@ -77,7 +77,7 @@ public class MembersDomainService(
             throw new EntityNotFoundException($"No member found for login {login}");
         }
 
-        return ConvertToDdo(member);
+        return await ConvertToDdo(member);
     }
 
     public async Task<List<MemberDdo>> GetGuildMembers(long guildId)
@@ -89,9 +89,12 @@ public class MembersDomainService(
         var members = await db.Members.Where(member =>
             db.ServerConnections.Any(connection =>
                 connection.Login == member.Login && connection.GuildId == guild.GuildId)).ToListAsync();
-        var memberDdos = members
-            .Select(ConvertToDdo)
-            .ToList();
+
+        var memberDdos = new List<MemberDdo>();
+        foreach (var entity in members)
+        {
+            memberDdos.Add(await ConvertToDdo(entity)); // TODO review performance impact on big batches
+        }
 
         return memberDdos;
     }
@@ -113,9 +116,12 @@ public class MembersDomainService(
         logger.LogTrace("GetMembersByLogin(logins={logins})", logins);
 
         var members = await db.Members.Where(member => logins.Contains(member.Login)).ToListAsync();
-        var memberDdos = members
-            .Select(ConvertToDdo)
-            .ToList();
+
+        var memberDdos = new List<MemberDdo>();
+        foreach (var entity in members)
+        {
+            memberDdos.Add(await ConvertToDdo(entity)); // TODO review performance impact on big batches
+        }
 
         return memberDdos;
     }
@@ -387,17 +393,12 @@ public class MembersDomainService(
         return result;
     }
 
-    private MemberDdo ConvertToDdo(MemberEntity member)
+    private async Task<MemberDdo> ConvertToDdo(MemberEntity member)
     {
         logger.LogTrace("ConvertToDdo(member={member})", member);
 
         // parse details from json
         var memberDetails = ValmarJsonParser.TryParse<MemberJson>(member.Member1, logger);
-
-        // get league drop stats
-        //var drops = dropTree.GetTree().Chunk;
-        //var value = await drops.GetLeagueWeight(memberDetails.UserId);
-        //var count = await drops.GetLeagueCount(memberDetails.UserId);
 
         // parse next award pack open date
         var mappedFlags = FlagHelper.GetFlags(member.Flag);
@@ -418,11 +419,10 @@ public class MembersDomainService(
             ? DateTimeOffset.FromUnixTimeMilliseconds(timestamp).AddDays(awardPackCooldown)
             : DateTimeOffset.UtcNow;
 
-        // TODO make this a async task
-        var connections = db.ServerConnections
+        var connections = await db.ServerConnections
             .Where(connection => connection.Login == member.Login)
             .Join(db.LobbyBotOptions, conn => conn.GuildId, opt => opt.GuildId, (conn, opt) => opt.Invite)
-            .ToList();
+            .ToListAsync();
 
         // build ddo
         return new MemberDdo(
