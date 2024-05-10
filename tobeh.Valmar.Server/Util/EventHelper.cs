@@ -5,28 +5,30 @@ namespace tobeh.Valmar.Server.Util;
 public static class EventHelper
 {
     public static readonly string[] EventTimestampFormats = ["dd/MM/yyyy", "dd.MM.yyyy"];
+
     public static DateTimeOffset ParseEventTimestamp(string timestamp)
     {
-        return DateTimeOffset.ParseExact(timestamp, EventTimestampFormats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal);
+        return DateTimeOffset.ParseExact(timestamp, EventTimestampFormats,
+            System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal);
     }
 
     public static int GetEventScenePrice(int eventDayLength)
     {
         return 500 * eventDayLength;
     }
-    
-    public static List<ProgressiveEventDropReleaseSlotDdo> GetProgressiveEventDropReleaseSlots(DateTimeOffset eventStart, int eventDuration, List<int> eventDropIds)
+
+    public static List<ProgressiveEventDropReleaseSlotDdo> GetProgressiveEventDropReleaseSlots(
+        DateTimeOffset eventStart, int eventDuration, List<int> eventDropIds)
     {
         var daysPerDrop = eventDuration / eventDropIds.Count;
         var lastDropRemainder = eventDuration % eventDropIds.Count;
 
         var daySplits = Enumerable.Repeat(daysPerDrop, eventDropIds.Count).ToList();
-        for(var i = 0; i<daySplits.Count && lastDropRemainder > 0; i++)
+        for (var i = 0; i < daySplits.Count && lastDropRemainder > 0; i++)
         {
             daySplits[i]++;
             lastDropRemainder--;
         }
-        daySplits.Reverse(); // let last sprites have more time
 
         var slots = eventDropIds.Select((id, idx) =>
         {
@@ -43,7 +45,7 @@ public static class EventHelper
 
         return slots;
     }
-    
+
     public static double CalculateCurrentGiftLossRate(double required, double collected)
     {
         var ratio = collected / required;
@@ -54,12 +56,12 @@ public static class EventHelper
 
         return loss;
     }
-    
+
     public static double CalculateRandomGiftLoss(double lossBase, int amount)
     {
         var lossMin = Convert.ToInt32(Math.Round(lossBase * amount * 0.7));
         var lossMax = Convert.ToInt32(Math.Round(lossBase * amount * 1.1));
-        
+
         var loss = 0;
         if (lossMax <= 1)
         {
