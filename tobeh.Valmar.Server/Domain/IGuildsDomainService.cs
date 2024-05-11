@@ -15,4 +15,5 @@ public interface IGuildsDomainService
     Task<List<ServerWebhookEntity>> GetGuildWebhooks(long guildId);
     Task RemoveGuildWebhook(long guildId, string name);
     Task<ServerWebhookEntity> AddGuildWebhook(long guildId, string url, string name);
+    Task<List<int>> GetGuildSupporters(long guildId);
 }

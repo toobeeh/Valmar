@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
+import "members.proto";
 
 option csharp_namespace = "tobeh.Valmar";
 package guilds;
@@ -24,6 +25,11 @@ service Guilds {
   rpc RemoveGuildWebhook (RemoveGuildWebhookMessage) returns (google.protobuf.Empty);
 
   rpc GetGuildWebhooks (GetGuildWebhooksMessage) returns (stream GuildWebhookMessage);
+
+  rpc GetGuildSupporters (GetGuildSupportersMessage) returns (stream members.MemberReply);
+}
+message GetGuildSupportersMessage {
+  int64 guildId = 1;
 }
 
 message GuildWebhookMessage {
@@ -54,6 +60,7 @@ message GuildReply {
   int32 invite = 4;
   string name = 5;
   int32 connectedMemberCount = 6;
+  repeated int32 supporters = 7;
 }
 
 // Request containing a guild observe token

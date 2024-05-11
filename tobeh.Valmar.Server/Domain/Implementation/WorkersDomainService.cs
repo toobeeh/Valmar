@@ -47,6 +47,11 @@ public class WorkersDomainService(
             throw new EntityNotFoundException($"There is no free bot instance available to claim for servers");
         }
 
+        // remove all claims of this instance that may be left (must be invalid if any, as checked before)
+        var danglingClaims = memberClaims.Where(claim => claim.InstanceId == instance.Id);
+        db.LobbyBotClaims.RemoveRange(danglingClaims);
+        await db.SaveChangesAsync();
+
         return instance;
     }
 
@@ -132,16 +137,16 @@ public class WorkersDomainService(
 
         // check if user has claimed another server, or server is already chosen
         var memberClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(entity => entity.Login == member.Login);
-        var otherServerClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(entity => entity.GuildId == serverId);
+        var otherServerClaims = await db.LobbyBotClaims.Where(entity => entity.GuildId == serverId).ToListAsync();
         if (memberClaim is not null)
         {
             instance = await GetInstanceById(memberClaim.InstanceId);
             newClaim.InstanceId = memberClaim.InstanceId;
         }
-        else if (otherServerClaim is not null)
+        else if (otherServerClaims.Count > 0)
         {
-            instance = await GetInstanceById(otherServerClaim.InstanceId);
-            newClaim.InstanceId = otherServerClaim.InstanceId;
+            instance = await GetInstanceById(otherServerClaims.First().InstanceId);
+            newClaim.InstanceId = instance.Id;
         }
         else
         {

@@ -4,5 +4,6 @@ public record GuildDetailDdo(
     long GuildId,
     int Invite,
     string Name,
-    int ConnectedMemberCount
+    int ConnectedMemberCount,
+    List<int> Supporters
 );

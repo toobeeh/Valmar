@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using tobeh.Valmar.Server.Database;
 using tobeh.Valmar.Server.Domain.Classes;
 using tobeh.Valmar.Server.Domain.Exceptions;
+using tobeh.Valmar.Server.Util;
 
 namespace tobeh.Valmar.Server.Domain.Implementation;
 
@@ -19,6 +20,25 @@ public class GuildsDomainService(
         }
 
         return await ConvertToDdo(guild);
+    }
+
+    public async Task<List<int>> GetGuildSupporters(long guildId)
+    {
+        logger.LogTrace("GetGuildSupporters(guildId={guildId})", guildId);
+
+        var supporters = await db.LobbyBotClaims
+            .Where(claim => claim.GuildId == guildId)
+            .Join(db.Members, inner => inner.Login, outer => outer.Login,
+                (claim, member) => member)
+            .ToListAsync();
+
+        var activeSupporters = supporters
+            .Where(supporter => FlagHelper.GetFlags(supporter.Flag)
+                .Any(flag => flag is MemberFlagDdo.Patron or MemberFlagDdo.Admin))
+            .Select(supporter => supporter.Login)
+            .ToList();
+
+        return activeSupporters;
     }
 
     public async Task<GuildDetailDdo> GetGuildByDiscordId(long discordId)
@@ -39,6 +59,13 @@ public class GuildsDomainService(
     {
         logger.LogTrace("UpdateGuildOptions(guildId={guildId}, name={name})", guildId, name);
 
+        var supporters = await GetGuildSupporters(guildId);
+        if (supporters.Count == 0)
+        {
+            throw new UserOperationException(
+                "Guild is not supported by any patrons and is therefore no typo home server.");
+        }
+
         var options = await db.LobbyBotOptions.FirstOrDefaultAsync(entity => entity.GuildId == guildId);
         if (options is null)
         {
@@ -58,6 +85,13 @@ public class GuildsDomainService(
     public async Task<LobbyBotOptionEntity> GetGuildOptionsByGuildId(long guildId)
     {
         logger.LogTrace("GetGuildOptionsByGuildId(guildId={guildId})", guildId);
+
+        var supporters = await GetGuildSupporters(guildId);
+        if (supporters.Count == 0)
+        {
+            throw new UserOperationException(
+                "Guild is not supported by any patrons and is therefore no typo home server.");
+        }
 
         var options = await db.LobbyBotOptions.FirstOrDefaultAsync(entity => entity.GuildId == guildId);
         if (options is null)
@@ -83,6 +117,13 @@ public class GuildsDomainService(
     {
         logger.LogTrace("RemoveGuildWebhook(guildId={guildId}, name={name})", guildId, name);
 
+        var supporters = await GetGuildSupporters(guildId);
+        if (supporters.Count == 0)
+        {
+            throw new UserOperationException(
+                "Guild is not supported by any patrons and is therefore no typo home server.");
+        }
+
         var webhook = await db.ServerWebhooks
             .FirstOrDefaultAsync(webhook => webhook.GuildId == guildId && webhook.Name == name);
 
@@ -98,6 +139,13 @@ public class GuildsDomainService(
     public async Task<ServerWebhookEntity> AddGuildWebhook(long guildId, string url, string name)
     {
         logger.LogTrace("AddGuildWebhook(guildId={guildId}, url={url}, name={name})", guildId, url, name);
+
+        var supporters = await GetGuildSupporters(guildId);
+        if (supporters.Count == 0)
+        {
+            throw new UserOperationException(
+                "Guild is not supported by any patrons and is therefore no typo home server.");
+        }
 
         var guildWebhooks = await GetGuildWebhooks(guildId);
         if (guildWebhooks.Any(webhook => webhook.Name == name))
@@ -125,11 +173,14 @@ public class GuildsDomainService(
         var memberCount =
             await db.ServerConnections.CountAsync(connection => connection.GuildId == guild.GuildId);
 
+        var supporters = await GetGuildSupporters(guild.GuildId);
+
         var details = new GuildDetailDdo(
             guild.GuildId,
             guild.Invite,
             guild.Name,
-            memberCount
+            memberCount,
+            supporters
         );
 
         return details;

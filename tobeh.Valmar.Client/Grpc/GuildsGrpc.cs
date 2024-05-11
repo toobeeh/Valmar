@@ -68,6 +68,10 @@ namespace tobeh.Valmar {
     static readonly grpc::Marshaller<global::tobeh.Valmar.GetGuildWebhooksMessage> __Marshaller_guilds_GetGuildWebhooksMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetGuildWebhooksMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GuildWebhookMessage> __Marshaller_guilds_GuildWebhookMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GuildWebhookMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.GetGuildSupportersMessage> __Marshaller_guilds_GetGuildSupportersMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetGuildSupportersMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.MemberReply> __Marshaller_members_MemberReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.MemberReply.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.GetGuildRequest, global::tobeh.Valmar.GuildReply> __Method_GetGuildByInvite = new grpc::Method<global::tobeh.Valmar.GetGuildRequest, global::tobeh.Valmar.GuildReply>(
@@ -124,6 +128,14 @@ namespace tobeh.Valmar {
         "GetGuildWebhooks",
         __Marshaller_guilds_GetGuildWebhooksMessage,
         __Marshaller_guilds_GuildWebhookMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.GetGuildSupportersMessage, global::tobeh.Valmar.MemberReply> __Method_GetGuildSupporters = new grpc::Method<global::tobeh.Valmar.GetGuildSupportersMessage, global::tobeh.Valmar.MemberReply>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "GetGuildSupporters",
+        __Marshaller_guilds_GetGuildSupportersMessage,
+        __Marshaller_members_MemberReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -343,6 +355,16 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.GuildWebhookMessage> GetGuildWebhooks(global::tobeh.Valmar.GetGuildWebhooksMessage request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetGuildWebhooks, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.MemberReply> GetGuildSupporters(global::tobeh.Valmar.GetGuildSupportersMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetGuildSupporters(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.MemberReply> GetGuildSupporters(global::tobeh.Valmar.GetGuildSupportersMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetGuildSupporters, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
