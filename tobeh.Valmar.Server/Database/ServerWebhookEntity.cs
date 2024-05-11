@@ -9,7 +9,7 @@ namespace tobeh.Valmar.Server.Database
         [Column(TypeName = "bigint(20)")]
         public long GuildId { get; set; }
 
-        [StringLength(50)] public string Name { get; set; } = null!;
+        [Key] [StringLength(50)] public string Name { get; set; } = null!;
         [Column(TypeName = "text")] public string Url { get; set; } = null!;
     }
 }

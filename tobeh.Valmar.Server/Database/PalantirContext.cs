@@ -229,10 +229,9 @@ namespace tobeh.Valmar.Server.Database
 
             modelBuilder.Entity<ServerWebhookEntity>(entity =>
             {
-                entity.HasKey(e => e.GuildId)
-                    .HasName("PRIMARY");
-
-                entity.Property(e => e.GuildId).ValueGeneratedNever();
+                entity.HasKey(e => new { e.GuildId, e.Name })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
             });
 
             modelBuilder.Entity<SpEntity>(entity => { entity.ToView("sps"); });
