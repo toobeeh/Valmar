@@ -103,12 +103,6 @@ public class WorkersDomainService(
             throw new EntityNotFoundException($"No member has claimed instance with id {instanceId}");
         }
 
-        var member = await membersDomainService.GetMemberByLogin(memberClaim.Login);
-        if (!member.MappedFlags.Contains(MemberFlagDdo.Patron))
-        {
-            throw new UserOperationException("Claim of the instance is no longer valid");
-        }
-
         return await guildsDomainService.GetGuildOptionsByGuildId(memberClaim.GuildId);
     }
 
@@ -116,7 +110,7 @@ public class WorkersDomainService(
     {
         logger.LogTrace("AssignInstanceToServer(member={member}, serverId={serverId})", member, serverId);
 
-        if (!member.MappedFlags.Contains(MemberFlagDdo.Patron))
+        if (!member.MappedFlags.Any(flag => flag is MemberFlagDdo.Patron or MemberFlagDdo.Admin))
         {
             throw new UserOperationException("Member is not a patron and cant assign instances");
         }
