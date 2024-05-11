@@ -419,7 +419,7 @@ public class MembersDomainService(
         var awardPackCooldown = mappedFlags.Any(flag => flag is MemberFlagDdo.Admin or MemberFlagDdo.Patron) ? 5 : 7;
         var nextAwardPack = member.AwardPackOpened is { } timestamp
             ? DateTimeOffset.FromUnixTimeMilliseconds(timestamp).AddDays(awardPackCooldown)
-            : DateTimeOffset.UtcNow;
+            : DateTimeOffset.MinValue;
 
         var connections = await db.ServerConnections
             .Where(connection => connection.Login == member.Login)
@@ -429,7 +429,7 @@ public class MembersDomainService(
         var serverHomeClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(claim => claim.Login == member.Login);
         var serverHomeNextDate = serverHomeClaim is { } claim
             ? DateTimeOffset.FromUnixTimeMilliseconds(claim.ClaimTimestamp).AddDays(7)
-            : DateTimeOffset.UtcNow;
+            : DateTimeOffset.MinValue;
 
         // build ddo
         return new MemberDdo(
