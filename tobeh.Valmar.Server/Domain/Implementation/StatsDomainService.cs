@@ -43,13 +43,20 @@ public class StatsDomainService(
             .Join(db.Awards, inner => inner.Award, outer => outer.Id, (awardee, award) => new
             {
                 Login = awardee.AwardeeLogin,
+                Owner = awardee.OwnerLogin,
                 Rarity = award.Rarity
             })
             .GroupBy(result => result.Login)
-            .Select(group => new { Login = group.Key, Score = group.Sum(result => result.Rarity) })
+            .Select(group => new
+            {
+                Login = group.Key,
+                Awarders = group.DistinctBy(award => award.Owner).Count(),
+                Score = group.Sum(result => result.Rarity)
+            })
             .ToListAsync();
 
-        return awards.ToDictionary(award => award.Login ?? throw new NullReferenceException(), award => award.Score);
+        return awards.ToDictionary(award => award.Login ?? throw new NullReferenceException(),
+            award => award.Score + 5 * award.Awarders);
     }
 
     public async Task<List<LeaderboardRankDdo>> CreateLeaderboard(List<MemberDdo> members, LeaderboardModeDdo mode)
