@@ -42,18 +42,19 @@ namespace tobeh.Valmar {
             "Z3VpbGRJZBgBIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQ2NFZhbHVlEiQK",
             "BG1vZGUYAiABKA4yFi5zdGF0cy5MZWFkZXJib2FyZE1vZGUiRAoSTGVhZGVy",
             "Ym9hcmRNZXNzYWdlEi4KB2VudHJpZXMYASADKAsyHS5zdGF0cy5MZWFkZXJi",
-            "b2FyZFJhbmtNZXNzYWdlInoKFkxlYWRlcmJvYXJkUmFua01lc3NhZ2USDAoE",
-            "cmFuaxgBIAEoBRINCgVsb2dpbhgCIAEoBRIRCglkaXNjb3JkSWQYAyABKAMS",
-            "EAoIdXNlcm5hbWUYBCABKAkSDwoHYnViYmxlcxgFIAEoBRINCgVkcm9wcxgG",
-            "IAEoBSopCg9MZWFkZXJib2FyZE1vZGUSCwoHQlVCQkxFUxAAEgkKBURST1BT",
-            "EAEqOgoaQnViYmxlUHJvZ3Jlc3NJbnRlcnZhbE1vZGUSBwoDREFZEAASCAoE",
-            "V0VFSxABEgkKBU1PTlRIEAIyhAIKBVN0YXRzElwKFkdldEJ1YmJsZVRpbWVz",
-            "cGFuUmFuZ2USIS5zdGF0cy5CdWJibGVUaW1lc3BhblJhbmdlUmVxdWVzdBof",
-            "LnN0YXRzLkJ1YmJsZVRpbWVzcGFuUmFuZ2VSZXBseRJSChFHZXRCdWJibGVQ",
-            "cm9ncmVzcxIfLnN0YXRzLkdldEJ1YmJsZVByb2dyZXNzTWVzc2FnZRocLnN0",
-            "YXRzLkJ1YmJsZVByb2dyZXNzTWVzc2FnZRJJCg5HZXRMZWFkZXJib2FyZBIc",
-            "LnN0YXRzLkdldExlYWRlcmJvYXJkTWVzc2FnZRoZLnN0YXRzLkxlYWRlcmJv",
-            "YXJkTWVzc2FnZUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
+            "b2FyZFJhbmtNZXNzYWdlIooBChZMZWFkZXJib2FyZFJhbmtNZXNzYWdlEgwK",
+            "BHJhbmsYASABKAUSDQoFbG9naW4YAiABKAUSEQoJZGlzY29yZElkGAMgASgD",
+            "EhAKCHVzZXJuYW1lGAQgASgJEg8KB2J1YmJsZXMYBSABKAUSDQoFZHJvcHMY",
+            "BiABKAUSDgoGYXdhcmRzGAcgASgFKjUKD0xlYWRlcmJvYXJkTW9kZRILCgdC",
+            "VUJCTEVTEAASCQoFRFJPUFMQARIKCgZBV0FSRFMQAio6ChpCdWJibGVQcm9n",
+            "cmVzc0ludGVydmFsTW9kZRIHCgNEQVkQABIICgRXRUVLEAESCQoFTU9OVEgQ",
+            "AjKEAgoFU3RhdHMSXAoWR2V0QnViYmxlVGltZXNwYW5SYW5nZRIhLnN0YXRz",
+            "LkJ1YmJsZVRpbWVzcGFuUmFuZ2VSZXF1ZXN0Gh8uc3RhdHMuQnViYmxlVGlt",
+            "ZXNwYW5SYW5nZVJlcGx5ElIKEUdldEJ1YmJsZVByb2dyZXNzEh8uc3RhdHMu",
+            "R2V0QnViYmxlUHJvZ3Jlc3NNZXNzYWdlGhwuc3RhdHMuQnViYmxlUHJvZ3Jl",
+            "c3NNZXNzYWdlEkkKDkdldExlYWRlcmJvYXJkEhwuc3RhdHMuR2V0TGVhZGVy",
+            "Ym9hcmRNZXNzYWdlGhkuc3RhdHMuTGVhZGVyYm9hcmRNZXNzYWdlQg+qAgx0",
+            "b2JlaC5WYWxtYXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::tobeh.Valmar.LeaderboardMode), typeof(global::tobeh.Valmar.BubbleProgressIntervalMode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -64,7 +65,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.BubbleTimespanRangeReply), global::tobeh.Valmar.BubbleTimespanRangeReply.Parser, new[]{ "StartAmount", "EndAmount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetLeaderboardMessage), global::tobeh.Valmar.GetLeaderboardMessage.Parser, new[]{ "GuildId", "Mode" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeaderboardMessage), global::tobeh.Valmar.LeaderboardMessage.Parser, new[]{ "Entries" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeaderboardRankMessage), global::tobeh.Valmar.LeaderboardRankMessage.Parser, new[]{ "Rank", "Login", "DiscordId", "Username", "Bubbles", "Drops" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeaderboardRankMessage), global::tobeh.Valmar.LeaderboardRankMessage.Parser, new[]{ "Rank", "Login", "DiscordId", "Username", "Bubbles", "Drops", "Awards" }, null, null, null, null)
           }));
     }
     #endregion
@@ -74,6 +75,7 @@ namespace tobeh.Valmar {
   public enum LeaderboardMode {
     [pbr::OriginalName("BUBBLES")] Bubbles = 0,
     [pbr::OriginalName("DROPS")] Drops = 1,
+    [pbr::OriginalName("AWARDS")] Awards = 2,
   }
 
   public enum BubbleProgressIntervalMode {
@@ -1775,6 +1777,7 @@ namespace tobeh.Valmar {
       username_ = other.username_;
       bubbles_ = other.bubbles_;
       drops_ = other.drops_;
+      awards_ = other.awards_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1856,6 +1859,18 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "awards" field.</summary>
+    public const int AwardsFieldNumber = 7;
+    private int awards_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Awards {
+      get { return awards_; }
+      set {
+        awards_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1877,6 +1892,7 @@ namespace tobeh.Valmar {
       if (Username != other.Username) return false;
       if (Bubbles != other.Bubbles) return false;
       if (Drops != other.Drops) return false;
+      if (Awards != other.Awards) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1890,6 +1906,7 @@ namespace tobeh.Valmar {
       if (Username.Length != 0) hash ^= Username.GetHashCode();
       if (Bubbles != 0) hash ^= Bubbles.GetHashCode();
       if (Drops != 0) hash ^= Drops.GetHashCode();
+      if (Awards != 0) hash ^= Awards.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1932,6 +1949,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(48);
         output.WriteInt32(Drops);
       }
+      if (Awards != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(Awards);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1966,6 +1987,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(48);
         output.WriteInt32(Drops);
       }
+      if (Awards != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(Awards);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1993,6 +2018,9 @@ namespace tobeh.Valmar {
       }
       if (Drops != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Drops);
+      }
+      if (Awards != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Awards);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2023,6 +2051,9 @@ namespace tobeh.Valmar {
       }
       if (other.Drops != 0) {
         Drops = other.Drops;
+      }
+      if (other.Awards != 0) {
+        Awards = other.Awards;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2063,6 +2094,10 @@ namespace tobeh.Valmar {
             Drops = input.ReadInt32();
             break;
           }
+          case 56: {
+            Awards = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -2100,6 +2135,10 @@ namespace tobeh.Valmar {
           }
           case 48: {
             Drops = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            Awards = input.ReadInt32();
             break;
           }
         }

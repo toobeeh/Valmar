@@ -9,6 +9,7 @@ package stats;
 enum LeaderboardMode {
   BUBBLES = 0;
   DROPS = 1;
+  AWARDS = 2;
 }
 
 enum BubbleProgressIntervalMode {
@@ -73,4 +74,5 @@ message LeaderboardRankMessage {
   string username = 4;
   int32 bubbles = 5;
   int32 drops = 6;
+  int32 awardScore = 7;
 }

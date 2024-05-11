@@ -3,7 +3,15 @@ namespace tobeh.Valmar.Server.Domain.Classes;
 public enum LeaderboardModeDdo
 {
     Bubbles,
-    Drops
+    Drops,
+    Awards
 }
 
-public record LeaderboardRankDdo(int Rank, int Login, long DiscordId, int Bubbles, int Drops, string Username);
+public record LeaderboardRankDdo(
+    int Rank,
+    int Login,
+    long DiscordId,
+    int Bubbles,
+    int AwardScore,
+    int Drops,
+    string Username);
