@@ -50,7 +50,7 @@ public class StatsDomainService(
             .Select(group => new
             {
                 Login = group.Key,
-                Awarders = group.DistinctBy(award => award.Owner).Count(),
+                Awarders = group.Select(award => award.Owner).Distinct().Count(),
                 Score = group.Sum(result => result.Rarity)
             })
             .ToListAsync();
