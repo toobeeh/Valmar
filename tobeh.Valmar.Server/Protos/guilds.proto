@@ -18,6 +18,34 @@ service Guilds {
   rpc GetGuildOptionsById (GetGuildOptionsByIdMessage) returns (GuildOptionsMessage);
 
   rpc SetGuildOptions (GuildOptionsMessage) returns (google.protobuf.Empty);
+
+  rpc AddGuildWebhook (AddGuildWebhookMessage) returns (google.protobuf.Empty);
+
+  rpc RemoveGuildWebhook (RemoveGuildWebhookMessage) returns (google.protobuf.Empty);
+
+  rpc GetGuildWebhooks (GetGuildWebhooksMessage) returns (stream GuildWebhookMessage);
+}
+
+message GuildWebhookMessage {
+  string url = 1;
+  string name = 2;
+}
+
+message GetGuildWebhooksMessage {
+  int64 guildId = 1;
+}
+
+// Request containing a webhook URL
+message AddGuildWebhookMessage {
+  int64 guildId = 1;
+  string url = 2;
+  string name = 3;
+}
+
+// Request containing a webhook URL
+message RemoveGuildWebhookMessage {
+  int64 guildId = 1;
+  string name = 3;
 }
 
 // Response containing a guild's properties.

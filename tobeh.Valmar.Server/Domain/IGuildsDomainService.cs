@@ -12,4 +12,7 @@ public interface IGuildsDomainService
         long? channelId = null);
 
     Task<LobbyBotOptionEntity> GetGuildOptionsByGuildId(long guildId);
+    Task<List<ServerWebhookEntity>> GetGuildWebhooks(long guildId);
+    Task RemoveGuildWebhook(long guildId, string name);
+    Task<ServerWebhookEntity> AddGuildWebhook(long guildId, string url, string name);
 }

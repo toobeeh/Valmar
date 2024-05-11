@@ -426,6 +426,11 @@ public class MembersDomainService(
             .Join(db.LobbyBotOptions, conn => conn.GuildId, opt => opt.GuildId, (conn, opt) => opt.Invite)
             .ToListAsync();
 
+        var serverHomeClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(claim => claim.Login == member.Login);
+        var serverHomeNextDate = serverHomeClaim is { } claim
+            ? DateTimeOffset.FromUnixTimeMilliseconds(claim.ClaimTimestamp).AddDays(7)
+            : DateTimeOffset.UtcNow;
+
         // build ddo
         return new MemberDdo(
             member.Bubbles,
@@ -442,7 +447,8 @@ public class MembersDomainService(
             mappedFlags.Contains(MemberFlagDdo.Patron) ? member.Emoji : null,
             mappedFlags,
             nextAwardPack,
-            patronize.Item2.AddDays(7)
+            patronize.Item2.AddDays(7),
+            serverHomeNextDate
         );
     }
 }

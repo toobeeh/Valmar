@@ -78,6 +78,7 @@ message MemberReply {
   google.protobuf.Timestamp nextAwardPackDate = 12;
   google.protobuf.StringValue patronEmoji = 13;
   google.protobuf.Timestamp nextPatronizeDate = 14;
+  google.protobuf.Timestamp nextHomeChooseDate = 15;
 }
 
 // Reply containing the accesstoken of a member

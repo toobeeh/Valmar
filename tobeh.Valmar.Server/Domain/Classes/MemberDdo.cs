@@ -15,5 +15,6 @@ public record MemberDdo(
     string? PatronEmoji,
     List<MemberFlagDdo> MappedFlags,
     DateTimeOffset NextAwardPackDate,
-    DateTimeOffset NextPatronizeDate
-    );
+    DateTimeOffset NextPatronizeDate,
+    DateTimeOffset NextHomeChooseDate
+);

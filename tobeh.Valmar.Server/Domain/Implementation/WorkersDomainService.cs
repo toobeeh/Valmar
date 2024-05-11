@@ -116,8 +116,7 @@ public class WorkersDomainService(
             throw new UserOperationException("Member is not a patron and cant assign instances");
         }
 
-        var memberClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(entity => entity.Login == member.Login);
-        if (memberClaim is not null && !CanClaimNewInstance(memberClaim))
+        if (member.NextHomeChooseDate > DateTimeOffset.UtcNow)
         {
             throw new UserOperationException("Member has already claimed an instance in the last 7 days");
         }
@@ -132,6 +131,7 @@ public class WorkersDomainService(
         LobbyBotInstanceEntity instance;
 
         // check if user has claimed another server, or server is already chosen
+        var memberClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(entity => entity.Login == member.Login);
         var otherServerClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(entity => entity.GuildId == serverId);
         if (memberClaim is not null)
         {

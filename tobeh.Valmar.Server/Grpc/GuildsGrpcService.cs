@@ -42,4 +42,32 @@ public class GuildsGrpcService(
         await guildsService.UpdateGuildOptions(request.GuildId, request.Name, request.Prefix, request.ChannelId);
         return new Empty();
     }
+
+    public override async Task<Empty> AddGuildWebhook(AddGuildWebhookMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("AddGuildWebhook(request={request})", request);
+
+        await guildsService.AddGuildWebhook(request.GuildId, request.Url, request.Name);
+        return new Empty();
+    }
+
+    public override async Task<Empty> RemoveGuildWebhook(RemoveGuildWebhookMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("RemoveGuildWebhook(request={request})", request);
+
+        await guildsService.RemoveGuildWebhook(request.GuildId, request.Name);
+        return new Empty();
+    }
+
+    public override async Task GetGuildWebhooks(GetGuildWebhooksMessage request,
+        IServerStreamWriter<GuildWebhookMessage> responseStream, ServerCallContext context)
+    {
+        logger.LogTrace("GetGuildWebhooks(request={request})", request);
+
+        var webhooks = await guildsService.GetGuildWebhooks(request.GuildId);
+        foreach (var webhook in webhooks)
+        {
+            await responseStream.WriteAsync(mapper.Map<GuildWebhookMessage>(webhook));
+        }
+    }
 }
