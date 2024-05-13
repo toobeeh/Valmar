@@ -87,8 +87,9 @@ public class MembersDomainService(
         var guild = await guildsService.GetGuildByDiscordId(guildId);
 
         var members = await db.Members.Where(member =>
-            db.ServerConnections.Any(connection =>
-                connection.Login == member.Login && connection.GuildId == guild.GuildId)).ToListAsync();
+                db.ServerConnections.Any(connection =>
+                    !connection.Ban && connection.Login == member.Login && connection.GuildId == guild.GuildId))
+            .ToListAsync();
 
         var memberDdos = new List<MemberDdo>();
         foreach (var entity in members)
@@ -348,8 +349,13 @@ public class MembersDomainService(
 
         var guild = await guildsService.GetGuildByInvite(serverToken);
 
-        if (await db.ServerConnections.AnyAsync(entity => entity.Login == login && entity.GuildId == guild.GuildId))
+        var existingConnection =
+            await db.ServerConnections.FirstOrDefaultAsync(entity =>
+                entity.Login == login && entity.GuildId == guild.GuildId);
+        if (existingConnection is not null)
         {
+            if (existingConnection.Ban)
+                throw new UserOperationException("User has been banned and cannot modify the server connection");
             throw new EntityAlreadyExistsException($"Member {login} is already connected to {guild.Name}");
         }
 
@@ -381,6 +387,11 @@ public class MembersDomainService(
         if (connection is null)
         {
             throw new EntityNotFoundException($"Member {login} is not connected to guild {guild.Invite}");
+        }
+
+        if (connection.Ban)
+        {
+            throw new UserOperationException("User has been banned and cannot modify the server connection");
         }
 
         db.ServerConnections.Remove(connection);
@@ -422,7 +433,7 @@ public class MembersDomainService(
             : DateTimeOffset.MinValue;
 
         var connections = await db.ServerConnections
-            .Where(connection => connection.Login == member.Login)
+            .Where(connection => connection.Login == member.Login && !connection.Ban)
             .Join(db.LobbyBotOptions, conn => conn.GuildId, opt => opt.GuildId, (conn, opt) => opt.Invite)
             .ToListAsync();
 
