@@ -58,6 +58,10 @@ namespace tobeh.Valmar {
     static readonly grpc::Marshaller<global::tobeh.Valmar.DropLogReply> __Marshaller_lobbies_DropLogReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.DropLogReply.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.OnlineMemberReply> __Marshaller_lobbies_OnlineMemberReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.OnlineMemberReply.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.SetGuildLobbyLinksMessage> __Marshaller_lobbies_SetGuildLobbyLinksMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.SetGuildLobbyLinksMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.GuildLobbyLinkMessage> __Marshaller_lobbies_GuildLobbyLinkMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GuildLobbyLinkMessage.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.LobbyReply> __Method_GetCurrentLobbies = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.LobbyReply>(
@@ -82,6 +86,22 @@ namespace tobeh.Valmar {
         "GetOnlinePlayers",
         __Marshaller_google_protobuf_Empty,
         __Marshaller_lobbies_OnlineMemberReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.SetGuildLobbyLinksMessage, global::Google.Protobuf.WellKnownTypes.Empty> __Method_SetGuildLobbyLinks = new grpc::Method<global::tobeh.Valmar.SetGuildLobbyLinksMessage, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SetGuildLobbyLinks",
+        __Marshaller_lobbies_SetGuildLobbyLinksMessage,
+        __Marshaller_google_protobuf_Empty);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.GuildLobbyLinkMessage> __Method_GetLobbyLinks = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.GuildLobbyLinkMessage>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "GetLobbyLinks",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_lobbies_GuildLobbyLinkMessage);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -187,6 +207,36 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.OnlineMemberReply> GetOnlinePlayers(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetOnlinePlayers, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty SetGuildLobbyLinks(global::tobeh.Valmar.SetGuildLobbyLinksMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SetGuildLobbyLinks(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty SetGuildLobbyLinks(global::tobeh.Valmar.SetGuildLobbyLinksMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SetGuildLobbyLinks, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> SetGuildLobbyLinksAsync(global::tobeh.Valmar.SetGuildLobbyLinksMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SetGuildLobbyLinksAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> SetGuildLobbyLinksAsync(global::tobeh.Valmar.SetGuildLobbyLinksMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SetGuildLobbyLinks, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.GuildLobbyLinkMessage> GetLobbyLinks(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetLobbyLinks(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.GuildLobbyLinkMessage> GetLobbyLinks(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetLobbyLinks, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

@@ -1,5 +1,6 @@
 using AutoMapper;
 using tobeh.Valmar.Server.Database;
+using tobeh.Valmar.Server.Domain;
 using tobeh.Valmar.Server.Domain.Classes;
 using tobeh.Valmar.Server.Domain.Classes.JSON;
 
@@ -34,12 +35,8 @@ public class LobbyMapperProfile : Profile
         // mappings for onlinemembers
         CreateMap<OnlineMemberDdo, OnlineMemberReply>();
         CreateMap<JoinedLobbyDdo, JoinedLobbyMessage>();
-    }
 
-    private SkribblLobbyReportJson ConstructFromLobbyReply(LobbyReply reply)
-    {
-        return new SkribblLobbyReportJson(reply.SkribblDetails.Language, reply.SkribblDetails.Link,
-            reply.SkribblDetails.Private, reply.SkribblDetails.Round, "", "", []);
+        CreateMap<LobbyLinkDdo, GuildLobbyLinkMessage>().ReverseMap();
     }
 
     private DropLogReply MapDropEntity(PastDropEntity drop)

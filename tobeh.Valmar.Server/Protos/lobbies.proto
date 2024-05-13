@@ -18,6 +18,23 @@ service Lobbies {
   
   // Gets all currently playing member's details
   rpc GetOnlinePlayers (google.protobuf.Empty) returns (stream OnlineMemberReply);
+
+  rpc SetGuildLobbyLinks (SetGuildLobbyLinksMessage) returns (google.protobuf.Empty);
+
+  rpc GetLobbyLinks (google.protobuf.Empty) returns (stream GuildLobbyLinkMessage);
+}
+
+message SetGuildLobbyLinksMessage {
+  int64 guildId = 1;
+  repeated GuildLobbyLinkMessage links = 2;
+}
+
+message GuildLobbyLinkMessage {
+  int64 guildId = 1;
+  int32 login = 2;
+  string link = 3;
+  bool slotAvailable = 4;
+  string username = 5;
 }
 
 // Container for palantir lobby details, containing palantir relevant details

@@ -32,7 +32,7 @@ public class LobbiesGrpcService(
                 .Map(players, mapper);
 
             return response;
-        });
+        }, true);
     }
 
     public override async Task GetLobbyDropClaims(GetLobbyDropClaimsRequest request,
@@ -48,9 +48,26 @@ public class LobbiesGrpcService(
     public override async Task GetOnlinePlayers(Empty request, IServerStreamWriter<OnlineMemberReply> responseStream,
         ServerCallContext context)
     {
-        logger.LogTrace("GetOnlinePlayers(empty)");
+        logger.LogTrace("GetOnlinePlayers(request={request})", request);
 
         var members = await lobbiesService.GetOnlineMembers();
         await responseStream.WriteAllMappedAsync(members, mapper.Map<OnlineMemberReply>);
+    }
+
+    public override async Task<Empty> SetGuildLobbyLinks(SetGuildLobbyLinksMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("SetGuildLobbyLinks(request={request})", request);
+
+        await lobbiesService.SetGuildLobbyLinks(request.GuildId, mapper.Map<List<LobbyLinkDdo>>(request.Links));
+        return new Empty();
+    }
+
+    public override async Task GetLobbyLinks(Empty request, IServerStreamWriter<GuildLobbyLinkMessage> responseStream,
+        ServerCallContext context)
+    {
+        logger.LogTrace("GetLobbyLinks(request={request})", request);
+
+        var links = await lobbiesService.GetGuildLobbyLinks();
+        await responseStream.WriteAllMappedAsync(links, mapper.Map<GuildLobbyLinkMessage>);
     }
 }
