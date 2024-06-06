@@ -255,7 +255,10 @@ public class InventoryDomainService(
         else
         {
             var bubbleCredit = await GetBubbleCredit(member);
-            var scenePrice = SceneHelper.GetScenePrice(inv.SceneIds.Count);
+
+            var nonEventScenes = await db.Scenes
+                .Where(s => s.EventId == 0 && !s.Exclusive && inv.SceneIds.Contains(s.Id)).ToListAsync();
+            var scenePrice = SceneHelper.GetScenePrice(nonEventScenes.Count);
 
             if (scenePrice > bubbleCredit.AvailableCredit)
             {
