@@ -44,10 +44,11 @@ public class InventoryDomainService(
         var invSum = await db.Sprites.Where(sprite => sprite.EventDropId == 0 && spriteInv.Contains(sprite.Id))
             .SumAsync(sprite => sprite.Cost);
 
-        var sceneInv = InventoryHelper.ParseSceneInventory(member.Scenes).SceneIds.ToArray();
-        var nonEventScenes = await db.Scenes
+        var sceneInv = InventoryHelper.ParseSceneInventory(member.Scenes).Scenes.Select(scene => scene.SceneId)
+            .ToArray();
+        var regularScenes = await db.Scenes
             .Where(scene => scene.EventId == 0 && !scene.Exclusive && sceneInv.Contains(scene.Id)).ToListAsync();
-        var sceneSum = nonEventScenes.Select((scene, index) => SceneHelper.GetScenePrice(index)).Sum();
+        var sceneSum = regularScenes.Select((scene, index) => SceneHelper.GetScenePrice(index)).Sum();
 
         var totalBubbles = member.Bubbles + (int)Math.Floor(member.Drops * 50);
         var availableBubbles = totalBubbles - invSum - sceneSum;
@@ -191,20 +192,22 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
     }
 
-    public async Task UseScene(MemberDdo member, int? sceneId)
+    public async Task UseScene(MemberDdo member, int? sceneId, int? sceneShift)
     {
-        logger.LogTrace("UseScene(member={member}, sceneId={sceneId})", member, sceneId);
+        logger.LogTrace("UseScene(member={member}, sceneId={sceneId}, sceneShift={sceneShift})", member, sceneId,
+            sceneShift);
 
         var inv = InventoryHelper.ParseSceneInventory(member.Scenes);
 
         // check if user owns the scene 
-        if (sceneId is { } sceneIdValue && !inv.SceneIds.Contains(sceneIdValue))
+        if (sceneId is { } sceneIdValue &&
+            !inv.Scenes.Any(scene => scene.SceneId == sceneId && scene.SceneShift == sceneShift))
         {
-            throw new UserOperationException($"The user does not own the scene {sceneIdValue}");
+            throw new UserOperationException($"The user does not own the scene {sceneIdValue} with shift {sceneShift}");
         }
 
         // set new active scene
-        inv = inv with { ActiveId = sceneId };
+        inv = inv with { ActiveId = sceneId, ActiveShift = sceneShift };
 
         var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ??
                            throw new EntityNotFoundException(
@@ -214,14 +217,15 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
     }
 
-    public async Task BuyScene(MemberDdo member, int sceneId)
+    public async Task BuyScene(MemberDdo member, int sceneId, int? sceneShift)
     {
-        logger.LogTrace("BuyScene(member={member}, sceneId={sceneId})", member, sceneId);
+        logger.LogTrace("BuyScene(member={member}, sceneId={sceneId}, sceneShift={sceneShift})", member, sceneId,
+            sceneShift);
 
         var inv = InventoryHelper.ParseSceneInventory(member.Scenes);
 
         // check if user owns the scene 
-        if (inv.SceneIds.Contains(sceneId))
+        if (inv.Scenes.Any(scene => scene.SceneId == sceneId && scene.SceneShift == sceneShift))
         {
             throw new UserOperationException($"The user already owns the scene {sceneId}");
         }
@@ -232,6 +236,25 @@ public class InventoryDomainService(
         {
             throw new UserOperationException(
                 $"The scene {scene.Name} ({scene.Id}) is exclusive and can't be purchased");
+        }
+
+        // check if the scene has theme
+        if (sceneShift is { } shift)
+        {
+            var themes = await scenesService.GetThemesOfScene(sceneId);
+            if (themes.All(theme => theme.Shift != shift))
+            {
+                throw new UserOperationException(
+                    $"The scene {scene.Name} ({scene.Id}) has no theme with shift {shift}");
+            }
+        }
+
+        // if theme, check if user owns the base scene 
+        if (sceneShift is not null &&
+            !inv.Scenes.Any(invScene => invScene.SceneId == sceneId && invScene.SceneShift is null))
+        {
+            throw new UserOperationException(
+                $"The user does not own the scene {sceneId} which is required for this theme");
         }
 
         // check if scene is event scene or regular scene and verify price
@@ -256,8 +279,9 @@ public class InventoryDomainService(
         {
             var bubbleCredit = await GetBubbleCredit(member);
 
+            var sceneInv = inv.Scenes.Select(s => s.SceneId).ToArray();
             var nonEventScenes = await db.Scenes
-                .Where(s => s.EventId == 0 && !s.Exclusive && inv.SceneIds.Contains(s.Id)).ToListAsync();
+                .Where(s => s.EventId == 0 && !s.Exclusive && sceneInv.Contains(s.Id)).ToListAsync();
             var scenePrice = SceneHelper.GetScenePrice(nonEventScenes.Count);
 
             if (scenePrice > bubbleCredit.AvailableCredit)
@@ -268,7 +292,7 @@ public class InventoryDomainService(
         }
 
         // add scene to inventory
-        inv.SceneIds.Add(scene.Id);
+        inv.Scenes.Add(new SceneInventoryItemDdo(sceneId, sceneShift));
         var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ??
                            throw new EntityNotFoundException(
                                "The scene can't be activated because member doesn't exist");

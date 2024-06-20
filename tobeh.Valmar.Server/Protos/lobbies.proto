@@ -103,5 +103,6 @@ message OnlineMemberReply {
   repeated JoinedLobbyMessage joinedLobbies = 4;
   repeated inventory.SpriteSlotConfigurationReply spriteSlots = 5;
   google.protobuf.Int32Value sceneId = 6;
+  google.protobuf.Int32Value sceneShift = 7;
 }
 

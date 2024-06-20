@@ -8,11 +8,12 @@ public class SceneMapperProfile : Profile
 {
     public SceneMapperProfile()
     {
+        CreateMap<SceneThemeEntity, SceneThemeReply>();
         CreateMap<SceneRankingDdo, SceneRankingReply>();
         CreateMap<SceneEntity, SceneReply>()
-            .ForMember(s => s.EventId, 
+            .ForMember(s => s.EventId,
                 opt => opt.MapFrom(src => MapEventId(src)))
-            .ForMember(s => s.Artist, 
+            .ForMember(s => s.Artist,
                 opt => opt.MapFrom(src => MapArtist(src)));
     }
 

@@ -53,6 +53,8 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.SceneReply> __Marshaller_scenes_SceneReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.SceneReply.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.SceneThemeReply> __Marshaller_scenes_SceneThemeReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.SceneThemeReply.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GetSceneRequest> __Marshaller_scenes_GetSceneRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetSceneRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.SceneRankingReply> __Marshaller_scenes_SceneRankingReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.SceneRankingReply.Parser));
@@ -68,6 +70,22 @@ namespace tobeh.Valmar {
         "GetAllScenes",
         __Marshaller_google_protobuf_Empty,
         __Marshaller_scenes_SceneReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.SceneThemeReply> __Method_GetAllSceneThemes = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.SceneThemeReply>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "GetAllSceneThemes",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_scenes_SceneThemeReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.GetSceneRequest, global::tobeh.Valmar.SceneThemeReply> __Method_GetThemesOfScene = new grpc::Method<global::tobeh.Valmar.GetSceneRequest, global::tobeh.Valmar.SceneThemeReply>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "GetThemesOfScene",
+        __Marshaller_scenes_GetSceneRequest,
+        __Marshaller_scenes_SceneThemeReply);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.GetSceneRequest, global::tobeh.Valmar.SceneReply> __Method_GetSceneById = new grpc::Method<global::tobeh.Valmar.GetSceneRequest, global::tobeh.Valmar.SceneReply>(
@@ -149,6 +167,54 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.SceneReply> GetAllScenes(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetAllScenes, null, options, request);
+      }
+      /// <summary>
+      /// Gets all scene themes
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.SceneThemeReply> GetAllSceneThemes(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllSceneThemes(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Gets all scene themes
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.SceneThemeReply> GetAllSceneThemes(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetAllSceneThemes, null, options, request);
+      }
+      /// <summary>
+      /// Gets all themes of a scene
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.SceneThemeReply> GetThemesOfScene(global::tobeh.Valmar.GetSceneRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetThemesOfScene(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Gets all themes of a scene
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.SceneThemeReply> GetThemesOfScene(global::tobeh.Valmar.GetSceneRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetThemesOfScene, null, options, request);
       }
       /// <summary>
       /// Gets a scene by its id

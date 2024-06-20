@@ -7,7 +7,7 @@ using tobeh.Valmar.Server.Util;
 namespace tobeh.Valmar.Server.Domain.Implementation;
 
 public class OutfitsDomainService(
-    ILogger<OutfitsDomainService> logger, 
+    ILogger<OutfitsDomainService> logger,
     IInventoryDomainService inventoryDomainService,
     PalantirContext db) : IOutfitsDomainService
 {
@@ -30,7 +30,7 @@ public class OutfitsDomainService(
     public async Task<OutfitDdo> GetMemberOutfit(int login, string name)
     {
         logger.LogTrace("GetMemberOutfit(login={login}, name={name})", login, name);
-        
+
         var outfit = await db.SpriteProfiles
             .Where(profile => profile.Login == login && profile.Name == name)
             .FirstOrDefaultAsync();
@@ -39,13 +39,13 @@ public class OutfitsDomainService(
         {
             throw new EntityNotFoundException($"Outfit with name {name} not found for login {login}");
         }
-        
+
         return new OutfitDdo(
             outfit.Name,
             OutfitHelper.ParseComboFromOutfit(outfit.Combo, outfit.RainbowSprites),
             OutfitHelper.ParseSceneFromOutfit(outfit.Scene));
     }
-    
+
     public async Task SaveOutfit(int login, OutfitDdo outfit)
     {
         logger.LogTrace("SaveOutfit(login={login}, outfit={outfit})", login, outfit);
@@ -62,7 +62,7 @@ public class OutfitsDomainService(
                 Name = outfit.Name,
                 Combo = OutfitHelper.SerializeSimpleCombo(outfit.SpriteSlotConfiguration),
                 RainbowSprites = OutfitHelper.SerializeSimpleColorConfig(outfit.SpriteSlotConfiguration),
-                Scene = outfit.SceneId?.ToString() ?? ""
+                Scene = OutfitHelper.SerializeScene(outfit.Scene)
             };
 
             db.SpriteProfiles.Add(spriteProfile);
@@ -71,7 +71,7 @@ public class OutfitsDomainService(
         {
             spriteProfile.Combo = OutfitHelper.SerializeSimpleCombo(outfit.SpriteSlotConfiguration);
             spriteProfile.RainbowSprites = OutfitHelper.SerializeSimpleColorConfig(outfit.SpriteSlotConfiguration);
-            spriteProfile.Scene = outfit.SceneId?.ToString() ?? "";
+            spriteProfile.Scene = OutfitHelper.SerializeScene(outfit.Scene);
             db.Update(spriteProfile);
         }
 
@@ -81,7 +81,7 @@ public class OutfitsDomainService(
     public async Task DeleteOutfit(int login, string name)
     {
         logger.LogTrace("DeleteOutfit(login={login}, name={name})", login, name);
-        
+
         var spriteProfile = await db.SpriteProfiles
             .Where(profile => profile.Login == login && profile.Name == name)
             .FirstOrDefaultAsync();
@@ -90,24 +90,25 @@ public class OutfitsDomainService(
         {
             throw new EntityNotFoundException($"Outfit with name {name} not found for login {login}");
         }
-        
+
         db.SpriteProfiles.Remove(spriteProfile);
         await db.SaveChangesAsync();
     }
-    
+
     public async Task UseOutfit(MemberDdo member, string name)
     {
         logger.LogTrace("UseOutfit(member={member}, name={name})", member, name);
 
         var outfit = await GetMemberOutfit(member.Login, name);
 
-        await inventoryDomainService.UseSpriteCombo(member, outfit.SpriteSlotConfiguration.Select(s => (int?)s.SpriteId).ToList(),
+        await inventoryDomainService.UseSpriteCombo(member,
+            outfit.SpriteSlotConfiguration.Select(s => (int?)s.SpriteId).ToList(),
             true);
 
         var shifts = outfit.SpriteSlotConfiguration.Where(slot => slot.ColorShift is not null)
             .ToDictionary(slot => slot.SpriteId, slot => slot.ColorShift);
         await inventoryDomainService.SetColorShiftConfiguration(member, shifts, true);
 
-        await inventoryDomainService.UseScene(member, outfit.SceneId);
+        await inventoryDomainService.UseScene(member, outfit.Scene?.SceneId, outfit.Scene?.SceneShift);
     }
 }

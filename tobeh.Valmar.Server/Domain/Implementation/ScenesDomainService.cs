@@ -6,14 +6,13 @@ using tobeh.Valmar.Server.Domain.Exceptions;
 namespace tobeh.Valmar.Server.Domain.Implementation;
 
 public class ScenesDomainService(
-    ILogger<ScenesDomainService> logger, 
+    ILogger<ScenesDomainService> logger,
     PalantirContext db) : IScenesDomainService
 {
-    
     public async Task<SceneEntity> GetSceneById(int id)
     {
         logger.LogTrace("GetSceneById(id={id})", id);
-        
+
         var scene = await db.Scenes.FirstOrDefaultAsync(scene => scene.Id == id);
         if (scene is null)
         {
@@ -22,11 +21,11 @@ public class ScenesDomainService(
 
         return scene;
     }
-    
+
     public async Task<SceneEntity> GetSceneByEventId(int id)
     {
         logger.LogTrace("GetSceneByEventId(id={id})", id);
-        
+
         var scene = await db.Scenes.FirstOrDefaultAsync(scene => scene.EventId == id);
         if (scene is null)
         {
@@ -39,20 +38,39 @@ public class ScenesDomainService(
     public async Task<List<SceneEntity>> GetAllScenes()
     {
         logger.LogTrace("GetAllScenes()");
-        
+
         return await db.Scenes.ToListAsync();
     }
-    
+
+    public async Task<List<SceneThemeEntity>> GetAllSceneThemes()
+    {
+        logger.LogTrace("GetAllSceneThemes()");
+
+        return await db.SceneThemes.ToListAsync();
+    }
+
+    public async Task<List<SceneThemeEntity>> GetThemesOfScene(int sceneId)
+    {
+        logger.LogTrace("GetSceneThemesOfScene(sceneId={sceneId})", sceneId);
+
+        var sceneThemes = await db.SceneThemes
+            .Where(theme => theme.SceneId == sceneId)
+            .ToListAsync();
+        return sceneThemes;
+    }
+
     public async Task<List<SceneRankingDdo>> GetSceneRanking()
     {
         logger.LogTrace("GetSpriteRanking()");
 
         var scenes = await db.Scenes.Select(sprite => sprite.Id).ToListAsync();
-        var inventories = await db.Members.Select(member => member.Scenes).Where(inv => !string.IsNullOrWhiteSpace(inv)).ToListAsync();
+        var inventories = await db.Members.Select(member => member.Scenes).Where(inv => !string.IsNullOrWhiteSpace(inv))
+            .ToListAsync();
         var parsedInventories = inventories
             .Select(inv => inv!
                 .Split(",")
-                .Select(id => new { Id = Convert.ToInt32(id.Replace(".", "")), Active =  id.Contains('.')}).ToList())
+                .Select(id => new
+                    { Id = Convert.ToInt32(id.Split(":")[0].Replace(".", "")), Active = id.Contains('.') }).ToList())
             .ToList();
 
         var sceneRanking = scenes.Select(scene =>
@@ -63,13 +81,13 @@ public class ScenesDomainService(
                 return new SceneRankingDdo(scene, active, bought, active * 10 + bought);
             }
         ).ToList();
-        
+
         // map score property of record to index of ranking
         var orderedRanking = sceneRanking
             .OrderByDescending(scene => scene.Rank)
             .Select((scene, index) => scene with { Rank = index + 1 })
             .ToList();
-        
+
         return orderedRanking;
     }
 }

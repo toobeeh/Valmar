@@ -1,6 +1,5 @@
 using AutoMapper;
 using tobeh.Valmar.Server.Domain.Classes.Param;
-using tobeh.Valmar.Server.Database;
 
 namespace tobeh.Valmar.Server.Mappers;
 
@@ -12,9 +11,10 @@ public class AdminMapperProfile : Profile
         { OnlineItemType.Scene, "scene" },
         { OnlineItemType.ColorShift, "shift" },
         { OnlineItemType.Rewardee, "rewardee" },
-        { OnlineItemType.Award, "award" }
+        { OnlineItemType.Award, "award" },
+        { OnlineItemType.SceneTheme, "sceneTheme" }
     };
-    
+
     public AdminMapperProfile()
     {
         CreateMap<OnlineItemType, string>().ConvertUsing(item => _typeTranslations[item]);

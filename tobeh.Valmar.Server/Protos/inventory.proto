@@ -280,19 +280,27 @@ message GetSceneInventoryRequest {
   int32 login = 1;
 }
 
+message SceneInventoryItemReply {
+  int32 sceneId = 1;
+  google.protobuf.Int32Value sceneShift = 2;
+}
+
 message SceneInventoryReply {
   google.protobuf.Int32Value activeId = 1;
-  repeated int32 sceneIds = 2;
+  google.protobuf.Int32Value activeShift = 3;
+  repeated SceneInventoryItemReply scenes = 2;
 }
 
 message BuySceneRequest {
   int32 login = 1;
   int32 sceneId = 2;
+  google.protobuf.Int32Value sceneShift = 3;
 }
 
 message UseSceneRequest {
   int32 login = 1;
   google.protobuf.Int32Value sceneId = 2;
+  google.protobuf.Int32Value sceneShift = 3;
 }
 
 message ScenePriceRequest {

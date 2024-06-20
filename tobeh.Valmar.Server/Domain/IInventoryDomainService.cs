@@ -14,14 +14,17 @@ public interface IInventoryDomainService
     Task UseSpriteCombo(MemberDdo member, List<int?> combo, bool clearOther = false);
     Task SetColorShiftConfiguration(MemberDdo member, Dictionary<int, int?> colorShiftMap, bool clearOther = false);
     Task<SceneInventoryDdo> GetMemberSceneInventory(MemberDdo member);
-    Task UseScene(MemberDdo member, int? sceneId);
-    Task BuyScene(MemberDdo member, int sceneId);
+    Task UseScene(MemberDdo member, int? sceneId, int? sceneShift);
+    Task BuyScene(MemberDdo member, int sceneId, int? sceneShift);
     Task<AwardInventoryDdo> GetMemberAwardInventory(int login);
     Task<List<GalleryItemDdo>> GetImagesFromCloud(MemberDdo member, List<long> ids);
     Task<List<AwardEntity>> OpenAwardPack(MemberDdo member, int rarityLevel);
     Task<DateTimeOffset> GetFirstSeenDate(int login);
     Task<GiftLossRateDdo> GetGiftLossRateBase(MemberDdo member, List<SpriteDdo> eventSprites);
-    Task<EventCreditGiftResultDdo> GiftEventCredit(MemberDdo fromMember, MemberDdo toMember, int amount, EventDropDdo eventDrop, GiftLossRateDdo lossRate);
+
+    Task<EventCreditGiftResultDdo> GiftEventCredit(MemberDdo fromMember, MemberDdo toMember, int amount,
+        EventDropDdo eventDrop, GiftLossRateDdo lossRate);
+
     Task SetPatronEmoji(MemberDdo member, string? emoji);
     Task SetPatronizedMember(MemberDdo member, long? patronizedMemberDiscordId);
     Task<EventResultDdo> GetEventProgress(MemberDdo member);

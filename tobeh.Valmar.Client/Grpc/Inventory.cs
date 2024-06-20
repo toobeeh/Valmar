@@ -94,56 +94,62 @@ namespace tobeh.Valmar {
             "ZWRpdBgCIAEoBRITCgtldmVudERyb3BJZBgDIAEoBSIqChlHZXRTcHJpdGVT",
             "bG90Q291bnRSZXF1ZXN0Eg0KBWxvZ2luGAEgASgFIi0KFFNwcml0ZVNsb3RD",
             "b3VudFJlcGx5EhUKDXVubG9ja2VkU2xvdHMYASABKAUiKQoYR2V0U2NlbmVJ",
-            "bnZlbnRvcnlSZXF1ZXN0Eg0KBWxvZ2luGAEgASgFIlYKE1NjZW5lSW52ZW50",
-            "b3J5UmVwbHkSLQoIYWN0aXZlSWQYASABKAsyGy5nb29nbGUucHJvdG9idWYu",
-            "SW50MzJWYWx1ZRIQCghzY2VuZUlkcxgCIAMoBSIxCg9CdXlTY2VuZVJlcXVl",
-            "c3QSDQoFbG9naW4YASABKAUSDwoHc2NlbmVJZBgCIAEoBSJOCg9Vc2VTY2Vu",
-            "ZVJlcXVlc3QSDQoFbG9naW4YASABKAUSLAoHc2NlbmVJZBgCIAEoCzIbLmdv",
-            "b2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIi0KEVNjZW5lUHJpY2VSZXF1ZXN0",
-            "EhgKEGJvdWdodFNjZW5lQ291bnQYASABKAUiPwoPU2NlbmVQcmljZVJlcGx5",
-            "EhEKCW5leHRQcmljZRgBIAEoBRIZChF0b3RhbEJ1YmJsZXNTcGVudBgCIAEo",
-            "BTKkDgoJSW52ZW50b3J5ElIKD0dldEJ1YmJsZUNyZWRpdBIhLmludmVudG9y",
-            "eS5HZXRCdWJibGVDcmVkaXRSZXF1ZXN0GhwuaW52ZW50b3J5LkJ1YmJsZUNy",
-            "ZWRpdFJlcGx5EkwKDUdldERyb3BDcmVkaXQSHy5pbnZlbnRvcnkuR2V0RHJv",
-            "cENyZWRpdFJlcXVlc3QaGi5pbnZlbnRvcnkuRHJvcENyZWRpdFJlcGx5ElsK",
-            "EkdldFNwcml0ZVNsb3RDb3VudBIkLmludmVudG9yeS5HZXRTcHJpdGVTbG90",
-            "Q291bnRSZXF1ZXN0Gh8uaW52ZW50b3J5LlNwcml0ZVNsb3RDb3VudFJlcGx5",
-            "ElEKDkdldEV2ZW50Q3JlZGl0EiAuaW52ZW50b3J5LkdldEV2ZW50Q3JlZGl0",
-            "UmVxdWVzdBobLmludmVudG9yeS5FdmVudENyZWRpdFJlcGx5MAESVwoQR2V0",
-            "RXZlbnRQcm9ncmVzcxIiLmludmVudG9yeS5HZXRFdmVudFByb2dyZXNzUmVx",
-            "dWVzdBofLmludmVudG9yeS5FdmVudFByb2dyZXNzTWVzc2FnZRJlChJHZXRT",
-            "cHJpdGVJbnZlbnRvcnkSJC5pbnZlbnRvcnkuR2V0U3ByaXRlSW52ZW50b3J5",
-            "UmVxdWVzdBonLmludmVudG9yeS5TcHJpdGVTbG90Q29uZmlndXJhdGlvblJl",
-            "cGx5MAESQAoJQnV5U3ByaXRlEhsuaW52ZW50b3J5LkJ1eVNwcml0ZVJlcXVl",
-            "c3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkSSgoOVXNlU3ByaXRlQ29tYm8S",
-            "IC5pbnZlbnRvcnkuVXNlU3ByaXRlQ29tYm9SZXF1ZXN0GhYuZ29vZ2xlLnBy",
-            "b3RvYnVmLkVtcHR5ElcKG1NldFNwcml0ZUNvbG9yQ29uZmlndXJhdGlvbhIg",
-            "LmludmVudG9yeS5TZXRTcHJpdGVDb2xvclJlcXVlc3QaFi5nb29nbGUucHJv",
-            "dG9idWYuRW1wdHkSWAoRR2V0U2NlbmVJbnZlbnRvcnkSIy5pbnZlbnRvcnku",
-            "R2V0U2NlbmVJbnZlbnRvcnlSZXF1ZXN0Gh4uaW52ZW50b3J5LlNjZW5lSW52",
-            "ZW50b3J5UmVwbHkSPgoIQnV5U2NlbmUSGi5pbnZlbnRvcnkuQnV5U2NlbmVS",
-            "ZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Ej4KCFVzZVNjZW5lEhou",
-            "aW52ZW50b3J5LlVzZVNjZW5lUmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5F",
-            "bXB0eRJJCg1HZXRTY2VuZVByaWNlEhwuaW52ZW50b3J5LlNjZW5lUHJpY2VS",
-            "ZXF1ZXN0GhouaW52ZW50b3J5LlNjZW5lUHJpY2VSZXBseRJaChFHZXRBd2Fy",
-            "ZEludmVudG9yeRIjLmludmVudG9yeS5HZXRBd2FyZEludmVudG9yeU1lc3Nh",
-            "Z2UaIC5pbnZlbnRvcnkuQXdhcmRJbnZlbnRvcnlNZXNzYWdlEloKEUdldEF3",
-            "YXJkUGFja0xldmVsEiMuaW52ZW50b3J5LkdldEF3YXJkUGFja0xldmVsTWVz",
-            "c2FnZRogLmludmVudG9yeS5Bd2FyZFBhY2tMZXZlbE1lc3NhZ2USVQoPR2V0",
-            "R2FsbGVyeUl0ZW1zEiEuaW52ZW50b3J5LkdldEdhbGxlcnlJdGVtc01lc3Nh",
-            "Z2UaHS5pbnZlbnRvcnkuR2FsbGVyeUl0ZW1NZXNzYWdlMAESUwoNT3BlbkF3",
-            "YXJkUGFjaxIfLmludmVudG9yeS5PcGVuQXdhcmRQYWNrTWVzc2FnZRohLmlu",
-            "dmVudG9yeS5Bd2FyZFBhY2tSZXN1bHRNZXNzYWdlElMKEEdldEZpcnN0U2Vl",
-            "bkRhdGUSIi5pbnZlbnRvcnkuR2V0Rmlyc3RTZWVuRGF0ZVJlcXVlc3QaGy5p",
-            "bnZlbnRvcnkuRmlyc3RTZWVuTWVzc2FnZRJQCg9HaWZ0RXZlbnRDcmVkaXQS",
-            "IS5pbnZlbnRvcnkuR2lmdEV2ZW50Q3JlZGl0TWVzc2FnZRoaLmludmVudG9y",
-            "eS5HaWZ0TG9zc01lc3NhZ2USVAoPR2V0R2lmdExvc3NSYXRlEiEuaW52ZW50",
-            "b3J5LkdldEdpZnRMb3NzUmF0ZU1lc3NhZ2UaHi5pbnZlbnRvcnkuR2lmdExv",
-            "c3NSYXRlTWVzc2FnZRJMCg9QYXRyb25pemVNZW1iZXISIS5pbnZlbnRvcnku",
-            "UGF0cm9uaXplTWVtYmVyTWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0",
-            "eRJKCg5TZXRQYXRyb25FbW9qaRIgLmludmVudG9yeS5TZXRQYXRyb25FbW9q",
-            "aU1lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHlCD6oCDHRvYmVoLlZh",
-            "bG1hcmIGcHJvdG8z"));
+            "bnZlbnRvcnlSZXF1ZXN0Eg0KBWxvZ2luGAEgASgFIlsKF1NjZW5lSW52ZW50",
+            "b3J5SXRlbVJlcGx5Eg8KB3NjZW5lSWQYASABKAUSLwoKc2NlbmVTaGlmdBgC",
+            "IAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIqoBChNTY2VuZUlu",
+            "dmVudG9yeVJlcGx5Ei0KCGFjdGl2ZUlkGAEgASgLMhsuZ29vZ2xlLnByb3Rv",
+            "YnVmLkludDMyVmFsdWUSMAoLYWN0aXZlU2hpZnQYAyABKAsyGy5nb29nbGUu",
+            "cHJvdG9idWYuSW50MzJWYWx1ZRIyCgZzY2VuZXMYAiADKAsyIi5pbnZlbnRv",
+            "cnkuU2NlbmVJbnZlbnRvcnlJdGVtUmVwbHkiYgoPQnV5U2NlbmVSZXF1ZXN0",
+            "Eg0KBWxvZ2luGAEgASgFEg8KB3NjZW5lSWQYAiABKAUSLwoKc2NlbmVTaGlm",
+            "dBgDIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIn8KD1VzZVNj",
+            "ZW5lUmVxdWVzdBINCgVsb2dpbhgBIAEoBRIsCgdzY2VuZUlkGAIgASgLMhsu",
+            "Z29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUSLwoKc2NlbmVTaGlmdBgDIAEo",
+            "CzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIi0KEVNjZW5lUHJpY2VS",
+            "ZXF1ZXN0EhgKEGJvdWdodFNjZW5lQ291bnQYASABKAUiPwoPU2NlbmVQcmlj",
+            "ZVJlcGx5EhEKCW5leHRQcmljZRgBIAEoBRIZChF0b3RhbEJ1YmJsZXNTcGVu",
+            "dBgCIAEoBTKkDgoJSW52ZW50b3J5ElIKD0dldEJ1YmJsZUNyZWRpdBIhLmlu",
+            "dmVudG9yeS5HZXRCdWJibGVDcmVkaXRSZXF1ZXN0GhwuaW52ZW50b3J5LkJ1",
+            "YmJsZUNyZWRpdFJlcGx5EkwKDUdldERyb3BDcmVkaXQSHy5pbnZlbnRvcnku",
+            "R2V0RHJvcENyZWRpdFJlcXVlc3QaGi5pbnZlbnRvcnkuRHJvcENyZWRpdFJl",
+            "cGx5ElsKEkdldFNwcml0ZVNsb3RDb3VudBIkLmludmVudG9yeS5HZXRTcHJp",
+            "dGVTbG90Q291bnRSZXF1ZXN0Gh8uaW52ZW50b3J5LlNwcml0ZVNsb3RDb3Vu",
+            "dFJlcGx5ElEKDkdldEV2ZW50Q3JlZGl0EiAuaW52ZW50b3J5LkdldEV2ZW50",
+            "Q3JlZGl0UmVxdWVzdBobLmludmVudG9yeS5FdmVudENyZWRpdFJlcGx5MAES",
+            "VwoQR2V0RXZlbnRQcm9ncmVzcxIiLmludmVudG9yeS5HZXRFdmVudFByb2dy",
+            "ZXNzUmVxdWVzdBofLmludmVudG9yeS5FdmVudFByb2dyZXNzTWVzc2FnZRJl",
+            "ChJHZXRTcHJpdGVJbnZlbnRvcnkSJC5pbnZlbnRvcnkuR2V0U3ByaXRlSW52",
+            "ZW50b3J5UmVxdWVzdBonLmludmVudG9yeS5TcHJpdGVTbG90Q29uZmlndXJh",
+            "dGlvblJlcGx5MAESQAoJQnV5U3ByaXRlEhsuaW52ZW50b3J5LkJ1eVNwcml0",
+            "ZVJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkSSgoOVXNlU3ByaXRl",
+            "Q29tYm8SIC5pbnZlbnRvcnkuVXNlU3ByaXRlQ29tYm9SZXF1ZXN0GhYuZ29v",
+            "Z2xlLnByb3RvYnVmLkVtcHR5ElcKG1NldFNwcml0ZUNvbG9yQ29uZmlndXJh",
+            "dGlvbhIgLmludmVudG9yeS5TZXRTcHJpdGVDb2xvclJlcXVlc3QaFi5nb29n",
+            "bGUucHJvdG9idWYuRW1wdHkSWAoRR2V0U2NlbmVJbnZlbnRvcnkSIy5pbnZl",
+            "bnRvcnkuR2V0U2NlbmVJbnZlbnRvcnlSZXF1ZXN0Gh4uaW52ZW50b3J5LlNj",
+            "ZW5lSW52ZW50b3J5UmVwbHkSPgoIQnV5U2NlbmUSGi5pbnZlbnRvcnkuQnV5",
+            "U2NlbmVSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Ej4KCFVzZVNj",
+            "ZW5lEhouaW52ZW50b3J5LlVzZVNjZW5lUmVxdWVzdBoWLmdvb2dsZS5wcm90",
+            "b2J1Zi5FbXB0eRJJCg1HZXRTY2VuZVByaWNlEhwuaW52ZW50b3J5LlNjZW5l",
+            "UHJpY2VSZXF1ZXN0GhouaW52ZW50b3J5LlNjZW5lUHJpY2VSZXBseRJaChFH",
+            "ZXRBd2FyZEludmVudG9yeRIjLmludmVudG9yeS5HZXRBd2FyZEludmVudG9y",
+            "eU1lc3NhZ2UaIC5pbnZlbnRvcnkuQXdhcmRJbnZlbnRvcnlNZXNzYWdlEloK",
+            "EUdldEF3YXJkUGFja0xldmVsEiMuaW52ZW50b3J5LkdldEF3YXJkUGFja0xl",
+            "dmVsTWVzc2FnZRogLmludmVudG9yeS5Bd2FyZFBhY2tMZXZlbE1lc3NhZ2US",
+            "VQoPR2V0R2FsbGVyeUl0ZW1zEiEuaW52ZW50b3J5LkdldEdhbGxlcnlJdGVt",
+            "c01lc3NhZ2UaHS5pbnZlbnRvcnkuR2FsbGVyeUl0ZW1NZXNzYWdlMAESUwoN",
+            "T3BlbkF3YXJkUGFjaxIfLmludmVudG9yeS5PcGVuQXdhcmRQYWNrTWVzc2Fn",
+            "ZRohLmludmVudG9yeS5Bd2FyZFBhY2tSZXN1bHRNZXNzYWdlElMKEEdldEZp",
+            "cnN0U2VlbkRhdGUSIi5pbnZlbnRvcnkuR2V0Rmlyc3RTZWVuRGF0ZVJlcXVl",
+            "c3QaGy5pbnZlbnRvcnkuRmlyc3RTZWVuTWVzc2FnZRJQCg9HaWZ0RXZlbnRD",
+            "cmVkaXQSIS5pbnZlbnRvcnkuR2lmdEV2ZW50Q3JlZGl0TWVzc2FnZRoaLmlu",
+            "dmVudG9yeS5HaWZ0TG9zc01lc3NhZ2USVAoPR2V0R2lmdExvc3NSYXRlEiEu",
+            "aW52ZW50b3J5LkdldEdpZnRMb3NzUmF0ZU1lc3NhZ2UaHi5pbnZlbnRvcnku",
+            "R2lmdExvc3NSYXRlTWVzc2FnZRJMCg9QYXRyb25pemVNZW1iZXISIS5pbnZl",
+            "bnRvcnkuUGF0cm9uaXplTWVtYmVyTWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1",
+            "Zi5FbXB0eRJKCg5TZXRQYXRyb25FbW9qaRIgLmludmVudG9yeS5TZXRQYXRy",
+            "b25FbW9qaU1lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHlCD6oCDHRv",
+            "YmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::tobeh.Valmar.AwardsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -184,9 +190,10 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetSpriteSlotCountRequest), global::tobeh.Valmar.GetSpriteSlotCountRequest.Parser, new[]{ "Login" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteSlotCountReply), global::tobeh.Valmar.SpriteSlotCountReply.Parser, new[]{ "UnlockedSlots" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetSceneInventoryRequest), global::tobeh.Valmar.GetSceneInventoryRequest.Parser, new[]{ "Login" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SceneInventoryReply), global::tobeh.Valmar.SceneInventoryReply.Parser, new[]{ "ActiveId", "SceneIds" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.BuySceneRequest), global::tobeh.Valmar.BuySceneRequest.Parser, new[]{ "Login", "SceneId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.UseSceneRequest), global::tobeh.Valmar.UseSceneRequest.Parser, new[]{ "Login", "SceneId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SceneInventoryItemReply), global::tobeh.Valmar.SceneInventoryItemReply.Parser, new[]{ "SceneId", "SceneShift" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SceneInventoryReply), global::tobeh.Valmar.SceneInventoryReply.Parser, new[]{ "ActiveId", "ActiveShift", "Scenes" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.BuySceneRequest), global::tobeh.Valmar.BuySceneRequest.Parser, new[]{ "Login", "SceneId", "SceneShift" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.UseSceneRequest), global::tobeh.Valmar.UseSceneRequest.Parser, new[]{ "Login", "SceneId", "SceneShift" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScenePriceRequest), global::tobeh.Valmar.ScenePriceRequest.Parser, new[]{ "BoughtSceneCount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScenePriceReply), global::tobeh.Valmar.ScenePriceReply.Parser, new[]{ "NextPrice", "TotalBubblesSpent" }, null, null, null, null)
           }));
@@ -8803,6 +8810,240 @@ namespace tobeh.Valmar {
 
   }
 
+  public sealed partial class SceneInventoryItemReply : pb::IMessage<SceneInventoryItemReply>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SceneInventoryItemReply> _parser = new pb::MessageParser<SceneInventoryItemReply>(() => new SceneInventoryItemReply());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SceneInventoryItemReply> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[37]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SceneInventoryItemReply() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SceneInventoryItemReply(SceneInventoryItemReply other) : this() {
+      sceneId_ = other.sceneId_;
+      SceneShift = other.SceneShift;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SceneInventoryItemReply Clone() {
+      return new SceneInventoryItemReply(this);
+    }
+
+    /// <summary>Field number for the "sceneId" field.</summary>
+    public const int SceneIdFieldNumber = 1;
+    private int sceneId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int SceneId {
+      get { return sceneId_; }
+      set {
+        sceneId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sceneShift" field.</summary>
+    public const int SceneShiftFieldNumber = 2;
+    private static readonly pb::FieldCodec<int?> _single_sceneShift_codec = pb::FieldCodec.ForStructWrapper<int>(18);
+    private int? sceneShift_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int? SceneShift {
+      get { return sceneShift_; }
+      set {
+        sceneShift_ = value;
+      }
+    }
+
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SceneInventoryItemReply);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SceneInventoryItemReply other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SceneId != other.SceneId) return false;
+      if (SceneShift != other.SceneShift) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SceneId != 0) hash ^= SceneId.GetHashCode();
+      if (sceneShift_ != null) hash ^= SceneShift.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (SceneId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(SceneId);
+      }
+      if (sceneShift_ != null) {
+        _single_sceneShift_codec.WriteTagAndValue(output, SceneShift);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (SceneId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(SceneId);
+      }
+      if (sceneShift_ != null) {
+        _single_sceneShift_codec.WriteTagAndValue(ref output, SceneShift);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (SceneId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SceneId);
+      }
+      if (sceneShift_ != null) {
+        size += _single_sceneShift_codec.CalculateSizeWithTag(SceneShift);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SceneInventoryItemReply other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SceneId != 0) {
+        SceneId = other.SceneId;
+      }
+      if (other.sceneShift_ != null) {
+        if (sceneShift_ == null || other.SceneShift != 0) {
+          SceneShift = other.SceneShift;
+        }
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            SceneId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            int? value = _single_sceneShift_codec.Read(input);
+            if (sceneShift_ == null || value != 0) {
+              SceneShift = value;
+            }
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            SceneId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            int? value = _single_sceneShift_codec.Read(ref input);
+            if (sceneShift_ == null || value != 0) {
+              SceneShift = value;
+            }
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class SceneInventoryReply : pb::IMessage<SceneInventoryReply>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -8817,7 +9058,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[37]; }
+      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[38]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -8838,7 +9079,8 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SceneInventoryReply(SceneInventoryReply other) : this() {
       ActiveId = other.ActiveId;
-      sceneIds_ = other.sceneIds_.Clone();
+      ActiveShift = other.ActiveShift;
+      scenes_ = other.scenes_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -8862,15 +9104,29 @@ namespace tobeh.Valmar {
     }
 
 
-    /// <summary>Field number for the "sceneIds" field.</summary>
-    public const int SceneIdsFieldNumber = 2;
-    private static readonly pb::FieldCodec<int> _repeated_sceneIds_codec
-        = pb::FieldCodec.ForInt32(18);
-    private readonly pbc::RepeatedField<int> sceneIds_ = new pbc::RepeatedField<int>();
+    /// <summary>Field number for the "activeShift" field.</summary>
+    public const int ActiveShiftFieldNumber = 3;
+    private static readonly pb::FieldCodec<int?> _single_activeShift_codec = pb::FieldCodec.ForStructWrapper<int>(26);
+    private int? activeShift_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<int> SceneIds {
-      get { return sceneIds_; }
+    public int? ActiveShift {
+      get { return activeShift_; }
+      set {
+        activeShift_ = value;
+      }
+    }
+
+
+    /// <summary>Field number for the "scenes" field.</summary>
+    public const int ScenesFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::tobeh.Valmar.SceneInventoryItemReply> _repeated_scenes_codec
+        = pb::FieldCodec.ForMessage(18, global::tobeh.Valmar.SceneInventoryItemReply.Parser);
+    private readonly pbc::RepeatedField<global::tobeh.Valmar.SceneInventoryItemReply> scenes_ = new pbc::RepeatedField<global::tobeh.Valmar.SceneInventoryItemReply>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::tobeh.Valmar.SceneInventoryItemReply> Scenes {
+      get { return scenes_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -8889,7 +9145,8 @@ namespace tobeh.Valmar {
         return true;
       }
       if (ActiveId != other.ActiveId) return false;
-      if(!sceneIds_.Equals(other.sceneIds_)) return false;
+      if (ActiveShift != other.ActiveShift) return false;
+      if(!scenes_.Equals(other.scenes_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -8898,7 +9155,8 @@ namespace tobeh.Valmar {
     public override int GetHashCode() {
       int hash = 1;
       if (activeId_ != null) hash ^= ActiveId.GetHashCode();
-      hash ^= sceneIds_.GetHashCode();
+      if (activeShift_ != null) hash ^= ActiveShift.GetHashCode();
+      hash ^= scenes_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -8920,7 +9178,10 @@ namespace tobeh.Valmar {
       if (activeId_ != null) {
         _single_activeId_codec.WriteTagAndValue(output, ActiveId);
       }
-      sceneIds_.WriteTo(output, _repeated_sceneIds_codec);
+      scenes_.WriteTo(output, _repeated_scenes_codec);
+      if (activeShift_ != null) {
+        _single_activeShift_codec.WriteTagAndValue(output, ActiveShift);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -8934,7 +9195,10 @@ namespace tobeh.Valmar {
       if (activeId_ != null) {
         _single_activeId_codec.WriteTagAndValue(ref output, ActiveId);
       }
-      sceneIds_.WriteTo(ref output, _repeated_sceneIds_codec);
+      scenes_.WriteTo(ref output, _repeated_scenes_codec);
+      if (activeShift_ != null) {
+        _single_activeShift_codec.WriteTagAndValue(ref output, ActiveShift);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -8948,7 +9212,10 @@ namespace tobeh.Valmar {
       if (activeId_ != null) {
         size += _single_activeId_codec.CalculateSizeWithTag(ActiveId);
       }
-      size += sceneIds_.CalculateSize(_repeated_sceneIds_codec);
+      if (activeShift_ != null) {
+        size += _single_activeShift_codec.CalculateSizeWithTag(ActiveShift);
+      }
+      size += scenes_.CalculateSize(_repeated_scenes_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -8966,7 +9233,12 @@ namespace tobeh.Valmar {
           ActiveId = other.ActiveId;
         }
       }
-      sceneIds_.Add(other.sceneIds_);
+      if (other.activeShift_ != null) {
+        if (activeShift_ == null || other.ActiveShift != 0) {
+          ActiveShift = other.ActiveShift;
+        }
+      }
+      scenes_.Add(other.scenes_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -8989,9 +9261,15 @@ namespace tobeh.Valmar {
             }
             break;
           }
-          case 18:
-          case 16: {
-            sceneIds_.AddEntriesFrom(input, _repeated_sceneIds_codec);
+          case 18: {
+            scenes_.AddEntriesFrom(input, _repeated_scenes_codec);
+            break;
+          }
+          case 26: {
+            int? value = _single_activeShift_codec.Read(input);
+            if (activeShift_ == null || value != 0) {
+              ActiveShift = value;
+            }
             break;
           }
         }
@@ -9016,9 +9294,15 @@ namespace tobeh.Valmar {
             }
             break;
           }
-          case 18:
-          case 16: {
-            sceneIds_.AddEntriesFrom(ref input, _repeated_sceneIds_codec);
+          case 18: {
+            scenes_.AddEntriesFrom(ref input, _repeated_scenes_codec);
+            break;
+          }
+          case 26: {
+            int? value = _single_activeShift_codec.Read(ref input);
+            if (activeShift_ == null || value != 0) {
+              ActiveShift = value;
+            }
             break;
           }
         }
@@ -9042,7 +9326,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[38]; }
+      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[39]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -9064,6 +9348,7 @@ namespace tobeh.Valmar {
     public BuySceneRequest(BuySceneRequest other) : this() {
       login_ = other.login_;
       sceneId_ = other.sceneId_;
+      SceneShift = other.SceneShift;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -9097,6 +9382,20 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "sceneShift" field.</summary>
+    public const int SceneShiftFieldNumber = 3;
+    private static readonly pb::FieldCodec<int?> _single_sceneShift_codec = pb::FieldCodec.ForStructWrapper<int>(26);
+    private int? sceneShift_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int? SceneShift {
+      get { return sceneShift_; }
+      set {
+        sceneShift_ = value;
+      }
+    }
+
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -9114,6 +9413,7 @@ namespace tobeh.Valmar {
       }
       if (Login != other.Login) return false;
       if (SceneId != other.SceneId) return false;
+      if (SceneShift != other.SceneShift) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -9123,6 +9423,7 @@ namespace tobeh.Valmar {
       int hash = 1;
       if (Login != 0) hash ^= Login.GetHashCode();
       if (SceneId != 0) hash ^= SceneId.GetHashCode();
+      if (sceneShift_ != null) hash ^= SceneShift.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -9149,6 +9450,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(16);
         output.WriteInt32(SceneId);
       }
+      if (sceneShift_ != null) {
+        _single_sceneShift_codec.WriteTagAndValue(output, SceneShift);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -9167,6 +9471,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(16);
         output.WriteInt32(SceneId);
       }
+      if (sceneShift_ != null) {
+        _single_sceneShift_codec.WriteTagAndValue(ref output, SceneShift);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -9182,6 +9489,9 @@ namespace tobeh.Valmar {
       }
       if (SceneId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(SceneId);
+      }
+      if (sceneShift_ != null) {
+        size += _single_sceneShift_codec.CalculateSizeWithTag(SceneShift);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -9200,6 +9510,11 @@ namespace tobeh.Valmar {
       }
       if (other.SceneId != 0) {
         SceneId = other.SceneId;
+      }
+      if (other.sceneShift_ != null) {
+        if (sceneShift_ == null || other.SceneShift != 0) {
+          SceneShift = other.SceneShift;
+        }
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -9222,6 +9537,13 @@ namespace tobeh.Valmar {
           }
           case 16: {
             SceneId = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            int? value = _single_sceneShift_codec.Read(input);
+            if (sceneShift_ == null || value != 0) {
+              SceneShift = value;
+            }
             break;
           }
         }
@@ -9247,6 +9569,13 @@ namespace tobeh.Valmar {
             SceneId = input.ReadInt32();
             break;
           }
+          case 26: {
+            int? value = _single_sceneShift_codec.Read(ref input);
+            if (sceneShift_ == null || value != 0) {
+              SceneShift = value;
+            }
+            break;
+          }
         }
       }
     }
@@ -9268,7 +9597,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[39]; }
+      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[40]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -9290,6 +9619,7 @@ namespace tobeh.Valmar {
     public UseSceneRequest(UseSceneRequest other) : this() {
       login_ = other.login_;
       SceneId = other.SceneId;
+      SceneShift = other.SceneShift;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -9325,6 +9655,20 @@ namespace tobeh.Valmar {
     }
 
 
+    /// <summary>Field number for the "sceneShift" field.</summary>
+    public const int SceneShiftFieldNumber = 3;
+    private static readonly pb::FieldCodec<int?> _single_sceneShift_codec = pb::FieldCodec.ForStructWrapper<int>(26);
+    private int? sceneShift_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int? SceneShift {
+      get { return sceneShift_; }
+      set {
+        sceneShift_ = value;
+      }
+    }
+
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -9342,6 +9686,7 @@ namespace tobeh.Valmar {
       }
       if (Login != other.Login) return false;
       if (SceneId != other.SceneId) return false;
+      if (SceneShift != other.SceneShift) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -9351,6 +9696,7 @@ namespace tobeh.Valmar {
       int hash = 1;
       if (Login != 0) hash ^= Login.GetHashCode();
       if (sceneId_ != null) hash ^= SceneId.GetHashCode();
+      if (sceneShift_ != null) hash ^= SceneShift.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -9376,6 +9722,9 @@ namespace tobeh.Valmar {
       if (sceneId_ != null) {
         _single_sceneId_codec.WriteTagAndValue(output, SceneId);
       }
+      if (sceneShift_ != null) {
+        _single_sceneShift_codec.WriteTagAndValue(output, SceneShift);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -9393,6 +9742,9 @@ namespace tobeh.Valmar {
       if (sceneId_ != null) {
         _single_sceneId_codec.WriteTagAndValue(ref output, SceneId);
       }
+      if (sceneShift_ != null) {
+        _single_sceneShift_codec.WriteTagAndValue(ref output, SceneShift);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -9408,6 +9760,9 @@ namespace tobeh.Valmar {
       }
       if (sceneId_ != null) {
         size += _single_sceneId_codec.CalculateSizeWithTag(SceneId);
+      }
+      if (sceneShift_ != null) {
+        size += _single_sceneShift_codec.CalculateSizeWithTag(SceneShift);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -9427,6 +9782,11 @@ namespace tobeh.Valmar {
       if (other.sceneId_ != null) {
         if (sceneId_ == null || other.SceneId != 0) {
           SceneId = other.SceneId;
+        }
+      }
+      if (other.sceneShift_ != null) {
+        if (sceneShift_ == null || other.SceneShift != 0) {
+          SceneShift = other.SceneShift;
         }
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -9452,6 +9812,13 @@ namespace tobeh.Valmar {
             int? value = _single_sceneId_codec.Read(input);
             if (sceneId_ == null || value != 0) {
               SceneId = value;
+            }
+            break;
+          }
+          case 26: {
+            int? value = _single_sceneShift_codec.Read(input);
+            if (sceneShift_ == null || value != 0) {
+              SceneShift = value;
             }
             break;
           }
@@ -9481,6 +9848,13 @@ namespace tobeh.Valmar {
             }
             break;
           }
+          case 26: {
+            int? value = _single_sceneShift_codec.Read(ref input);
+            if (sceneShift_ == null || value != 0) {
+              SceneShift = value;
+            }
+            break;
+          }
         }
       }
     }
@@ -9502,7 +9876,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[40]; }
+      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[41]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -9691,7 +10065,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[41]; }
+      get { return global::tobeh.Valmar.InventoryReflection.Descriptor.MessageTypes[42]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

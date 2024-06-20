@@ -32,6 +32,7 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<PastDropEntity> PastDrops { get; set; } = null!;
         public virtual DbSet<ReportEntity> Reports { get; set; } = null!;
         public virtual DbSet<SceneEntity> Scenes { get; set; } = null!;
+        public virtual DbSet<SceneThemeEntity> SceneThemes { get; set; } = null!;
         public virtual DbSet<ServerConnectionEntity> ServerConnections { get; set; } = null!;
         public virtual DbSet<ServerLobbyLinkEntity> ServerLobbyLinks { get; set; } = null!;
         public virtual DbSet<ServerWebhookEntity> ServerWebhooks { get; set; } = null!;
@@ -57,8 +58,9 @@ namespace tobeh.Valmar.Server.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("name=ConnectionStrings:Palantir", Microsoft.EntityFrameworkCore.ServerVersion.Parse("11.3.2-mariadb"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseMySql("name=ConnectionStrings:Palantir",
+                    Microsoft.EntityFrameworkCore.ServerVersion.Parse("11.3.2-mariadb"));
             }
         }
 
@@ -75,15 +77,9 @@ namespace tobeh.Valmar.Server.Database
                 entity.Property(e => e.Login).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<BoostSplitEntity>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
+            modelBuilder.Entity<BoostSplitEntity>(entity => { entity.Property(e => e.Id).ValueGeneratedNever(); });
 
-            modelBuilder.Entity<BubbleTraceEntity>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
+            modelBuilder.Entity<BubbleTraceEntity>(entity => { entity.Property(e => e.Id).ValueGeneratedNever(); });
 
             modelBuilder.Entity<CardTemplateEntity>(entity =>
             {
@@ -105,10 +101,7 @@ namespace tobeh.Valmar.Server.Database
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
             });
 
-            modelBuilder.Entity<EventEntity>(entity =>
-            {
-                entity.Property(e => e.EventId).ValueGeneratedNever();
-            });
+            modelBuilder.Entity<EventEntity>(entity => { entity.Property(e => e.EventId).ValueGeneratedNever(); });
 
             modelBuilder.Entity<EventCreditEntity>(entity =>
             {
@@ -144,10 +137,7 @@ namespace tobeh.Valmar.Server.Database
                 entity.Property(e => e.Login).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<LobEntity>(entity =>
-            {
-                entity.ToView("lobs");
-            });
+            modelBuilder.Entity<LobEntity>(entity => { entity.ToView("lobs"); });
 
             modelBuilder.Entity<LobbyEntity>(entity =>
             {
@@ -230,9 +220,13 @@ namespace tobeh.Valmar.Server.Database
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 32, 0 });
             });
 
-            modelBuilder.Entity<SceneEntity>(entity =>
+            modelBuilder.Entity<SceneEntity>(entity => { entity.Property(e => e.Id).ValueGeneratedNever(); });
+
+            modelBuilder.Entity<SceneThemeEntity>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => new { e.SceneId, e.Shift })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
             });
 
             modelBuilder.Entity<ServerConnectionEntity>(entity =>
@@ -256,15 +250,9 @@ namespace tobeh.Valmar.Server.Database
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
             });
 
-            modelBuilder.Entity<SpEntity>(entity =>
-            {
-                entity.ToView("sps");
-            });
+            modelBuilder.Entity<SpEntity>(entity => { entity.ToView("sps"); });
 
-            modelBuilder.Entity<SpriteEntity>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
+            modelBuilder.Entity<SpriteEntity>(entity => { entity.Property(e => e.Id).ValueGeneratedNever(); });
 
             modelBuilder.Entity<SpriteProfileEntity>(entity =>
             {

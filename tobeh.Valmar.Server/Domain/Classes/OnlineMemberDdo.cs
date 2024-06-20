@@ -6,6 +6,7 @@ public record OnlineMemberDdo(
     List<JoinedLobbyDdo> JoinedLobbies,
     string? PatronEmoji,
     List<MemberSpriteSlotDdo> SpriteSlots,
-    int? SceneId);
+    int? SceneId,
+    int? SceneShift);
 
 public record JoinedLobbyDdo(int LobbyPlayerId, PalantirLobbyJson Lobby);

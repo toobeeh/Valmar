@@ -14,9 +14,10 @@ public class InventoryMapperProfile : Profile
         CreateMap<BubbleCreditDdo, BubbleCreditReply>();
         CreateMap<DropCreditDdo, DropCreditReply>();
         CreateMap<EventCreditDdo, EventCreditReply>();
+        CreateMap<SceneInventoryItemDdo, SceneInventoryItemReply>();
         CreateMap<SceneInventoryDdo, SceneInventoryReply>();
         CreateMap<AwardInventoryDdo, AwardInventoryMessage>();
-        
+
         CreateMap<AwardeeEntity, AvailableAwardMessage>()
             .ForMember(message => message.AwardId, options => options.MapFrom(entity => entity.Award));
         CreateMap<AwardeeEntity, ConsumedAwardMessage>().ConvertUsing(entity => MapConsumedAward(entity));
@@ -30,7 +31,7 @@ public class InventoryMapperProfile : Profile
             .ForMember(msg => msg.EventDropId, options => options.MapFrom(ddo => ddo.Key))
             .ForMember(msg => msg.Value, options => options.MapFrom(ddo => ddo.Value));
     }
-    
+
     private static ConsumedAwardMessage MapConsumedAward(AwardeeEntity entity)
     {
         return new ConsumedAwardMessage
@@ -40,7 +41,9 @@ public class InventoryMapperProfile : Profile
             AwardeeLogin = entity.AwardeeLogin ?? throw new NullReferenceException("Award has not been consumed"),
             LinkedImageId = entity.ImageId,
             AwardedTimestamp = Timestamp.FromDateTimeOffset(
-                DateTimeOffset.FromUnixTimeMilliseconds(entity.Date ?? throw new NullReferenceException("Award has not been consumed")))
+                DateTimeOffset.FromUnixTimeMilliseconds(entity.Date ??
+                                                        throw new NullReferenceException(
+                                                            "Award has not been consumed")))
         };
     }
 }

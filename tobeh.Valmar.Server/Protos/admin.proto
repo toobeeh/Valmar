@@ -12,6 +12,7 @@ enum OnlineItemType {
   Scene = 2;
   Award = 3;
   Rewardee = 5;
+  SceneTheme = 6;
 }
 
 // Service definition for administration and management actions

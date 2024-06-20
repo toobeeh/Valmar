@@ -33,20 +33,20 @@ namespace tobeh.Valmar {
             "JwoIaXRlbVR5cGUYASABKA4yFS5hZG1pbi5PbmxpbmVJdGVtVHlwZRIMCgRz",
             "bG90GAIgASgFEg4KBml0ZW1JZBgDIAEoBRIQCghsb2JieUtleRgEIAEoCRIV",
             "Cg1sb2JieVBsYXllcklkGAUgASgFIjUKHUluY3JlbWVudE1lbWJlckJ1YmJs",
-            "ZXNSZXF1ZXN0EhQKDG1lbWJlckxvZ2lucxgBIAMoBSpQCg5PbmxpbmVJdGVt",
+            "ZXNSZXF1ZXN0EhQKDG1lbWJlckxvZ2lucxgBIAMoBSpgCg5PbmxpbmVJdGVt",
             "VHlwZRIKCgZTcHJpdGUQABIOCgpDb2xvclNoaWZ0EAESCQoFU2NlbmUQAhIJ",
-            "CgVBd2FyZBADEgwKCFJld2FyZGVlEAUyyAMKBUFkbWluEkYKFFJlZXZhbHVh",
-            "dGVEcm9wQ2h1bmtzEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GhYuZ29vZ2xl",
-            "LnByb3RvYnVmLkVtcHR5EkwKEVVwZGF0ZU1lbWJlckZsYWdzEh8uYWRtaW4u",
-            "VXBkYXRlTWVtYmVyRmxhZ3NSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVt",
-            "cHR5EkQKEkNyZWF0ZUJ1YmJsZVRyYWNlcxIWLmdvb2dsZS5wcm90b2J1Zi5F",
-            "bXB0eRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJDChFDbGVhclZvbGF0aWxl",
-            "RGF0YRIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoWLmdvb2dsZS5wcm90b2J1",
-            "Zi5FbXB0eRJWChZJbmNyZW1lbnRNZW1iZXJCdWJibGVzEiQuYWRtaW4uSW5j",
-            "cmVtZW50TWVtYmVyQnViYmxlc1JlcXVlc3QaFi5nb29nbGUucHJvdG9idWYu",
-            "RW1wdHkSRgoOU2V0T25saW5lSXRlbXMSHC5hZG1pbi5TZXRPbmxpbmVJdGVt",
-            "c1JlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHlCD6oCDHRvYmVoLlZh",
-            "bG1hcmIGcHJvdG8z"));
+            "CgVBd2FyZBADEgwKCFJld2FyZGVlEAUSDgoKU2NlbmVUaGVtZRAGMsgDCgVB",
+            "ZG1pbhJGChRSZWV2YWx1YXRlRHJvcENodW5rcxIWLmdvb2dsZS5wcm90b2J1",
+            "Zi5FbXB0eRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJMChFVcGRhdGVNZW1i",
+            "ZXJGbGFncxIfLmFkbWluLlVwZGF0ZU1lbWJlckZsYWdzUmVxdWVzdBoWLmdv",
+            "b2dsZS5wcm90b2J1Zi5FbXB0eRJEChJDcmVhdGVCdWJibGVUcmFjZXMSFi5n",
+            "b29nbGUucHJvdG9idWYuRW1wdHkaFi5nb29nbGUucHJvdG9idWYuRW1wdHkS",
+            "QwoRQ2xlYXJWb2xhdGlsZURhdGESFi5nb29nbGUucHJvdG9idWYuRW1wdHka",
+            "Fi5nb29nbGUucHJvdG9idWYuRW1wdHkSVgoWSW5jcmVtZW50TWVtYmVyQnVi",
+            "YmxlcxIkLmFkbWluLkluY3JlbWVudE1lbWJlckJ1YmJsZXNSZXF1ZXN0GhYu",
+            "Z29vZ2xlLnByb3RvYnVmLkVtcHR5EkYKDlNldE9ubGluZUl0ZW1zEhwuYWRt",
+            "aW4uU2V0T25saW5lSXRlbXNSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVt",
+            "cHR5Qg+qAgx0b2JlaC5WYWxtYXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::tobeh.Valmar.OnlineItemType), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -66,6 +66,7 @@ namespace tobeh.Valmar {
     [pbr::OriginalName("Scene")] Scene = 2,
     [pbr::OriginalName("Award")] Award = 3,
     [pbr::OriginalName("Rewardee")] Rewardee = 5,
+    [pbr::OriginalName("SceneTheme")] SceneTheme = 6,
   }
 
   #endregion

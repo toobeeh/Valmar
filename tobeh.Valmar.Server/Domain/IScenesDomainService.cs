@@ -9,4 +9,6 @@ public interface IScenesDomainService
     Task<List<SceneEntity>> GetAllScenes();
     Task<List<SceneRankingDdo>> GetSceneRanking();
     Task<SceneEntity> GetSceneByEventId(int id);
+    Task<List<SceneThemeEntity>> GetAllSceneThemes();
+    Task<List<SceneThemeEntity>> GetThemesOfScene(int sceneId);
 }

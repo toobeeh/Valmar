@@ -2,13 +2,13 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using tobeh.Valmar.Server.Domain;
-using tobeh.Valmar.Server.Util;
 using tobeh.Valmar.Server.Grpc.Utils;
+using tobeh.Valmar.Server.Util;
 
 namespace tobeh.Valmar.Server.Grpc;
 
 public class InventoryGrpcService(
-    ILogger<InventoryGrpcService> logger, 
+    ILogger<InventoryGrpcService> logger,
     IMapper mapper,
     IMembersDomainService membersService,
     IEventsDomainService eventsService,
@@ -16,7 +16,8 @@ public class InventoryGrpcService(
     ISpritesDomainService spritesService,
     IInventoryDomainService inventoryService) : Inventory.InventoryBase
 {
-    public override async Task<BubbleCreditReply> GetBubbleCredit(GetBubbleCreditRequest request, ServerCallContext context)
+    public override async Task<BubbleCreditReply> GetBubbleCredit(GetBubbleCreditRequest request,
+        ServerCallContext context)
     {
         logger.LogTrace("GetBubbleCredit(request={request})", request);
 
@@ -34,7 +35,8 @@ public class InventoryGrpcService(
         return mapper.Map<DropCreditReply>(dropCredit);
     }
 
-    public override async Task<SpriteSlotCountReply> GetSpriteSlotCount(GetSpriteSlotCountRequest request, ServerCallContext context)
+    public override async Task<SpriteSlotCountReply> GetSpriteSlotCount(GetSpriteSlotCountRequest request,
+        ServerCallContext context)
     {
         logger.LogTrace("GetSpriteSlotCount(request={request})", request);
 
@@ -43,7 +45,8 @@ public class InventoryGrpcService(
         return new SpriteSlotCountReply { UnlockedSlots = count };
     }
 
-    public override async Task GetEventCredit(GetEventCreditRequest request, IServerStreamWriter<EventCreditReply> responseStream, ServerCallContext context)
+    public override async Task GetEventCredit(GetEventCreditRequest request,
+        IServerStreamWriter<EventCreditReply> responseStream, ServerCallContext context)
     {
         logger.LogTrace("GetEventCreditRequest(request={request})", request);
 
@@ -53,7 +56,8 @@ public class InventoryGrpcService(
         await responseStream.WriteAllMappedAsync(credit, mapper.Map<EventCreditReply>);
     }
 
-    public override async Task<EventProgressMessage> GetEventProgress(GetEventProgressRequest request, ServerCallContext context)
+    public override async Task<EventProgressMessage> GetEventProgress(GetEventProgressRequest request,
+        ServerCallContext context)
     {
         logger.LogTrace("GetEventProgress(request={request})", request);
 
@@ -63,7 +67,8 @@ public class InventoryGrpcService(
         return mapper.Map<EventProgressMessage>(progress);
     }
 
-    public override async Task GetSpriteInventory(GetSpriteInventoryRequest request, IServerStreamWriter<SpriteSlotConfigurationReply> responseStream,
+    public override async Task GetSpriteInventory(GetSpriteInventoryRequest request,
+        IServerStreamWriter<SpriteSlotConfigurationReply> responseStream,
         ServerCallContext context)
     {
         logger.LogTrace("GetSpriteInventory(request={request})", request);
@@ -76,7 +81,7 @@ public class InventoryGrpcService(
     public override async Task<Empty> BuySprite(BuySpriteRequest request, ServerCallContext context)
     {
         logger.LogTrace("BuySprite(request={request})", request);
-        
+
         var member = await membersService.GetMemberByLogin(request.Login);
         await inventoryService.BuySprite(member, request.SpriteId);
         return new Empty();
@@ -85,32 +90,35 @@ public class InventoryGrpcService(
     public override async Task<Empty> UseSpriteCombo(UseSpriteComboRequest request, ServerCallContext context)
     {
         logger.LogTrace("UseSpriteCombo(request={request})", request);
-        
-        var slots = Enumerable.Repeat<int?>(null, request.Combo.Count == 0 ? 0 : request.Combo.Max(slot => slot.SlotId)).ToList();
+
+        var slots = Enumerable.Repeat<int?>(null, request.Combo.Count == 0 ? 0 : request.Combo.Max(slot => slot.SlotId))
+            .ToList();
         foreach (var slot in request.Combo)
         {
             slots[slot.SlotId - 1] = slot.SpriteId;
         }
-        
+
         var member = await membersService.GetMemberByLogin(request.Login);
         await inventoryService.UseSpriteCombo(member, slots, request.ClearOtherSlots);
         return new Empty();
     }
 
-    public override async Task<Empty> SetSpriteColorConfiguration(SetSpriteColorRequest request, ServerCallContext context)
+    public override async Task<Empty> SetSpriteColorConfiguration(SetSpriteColorRequest request,
+        ServerCallContext context)
     {
         logger.LogTrace("SetSpriteColorConfiguration(request={request})", request);
-        
+
         var configParams = request.ColorConfig.ToDictionary(config => config.SpriteId, config => config.ColorShift);
         var member = await membersService.GetMemberByLogin(request.Login);
         await inventoryService.SetColorShiftConfiguration(member, configParams, request.ClearOtherConfigs);
         return new Empty();
     }
 
-    public override async Task<SceneInventoryReply> GetSceneInventory(GetSceneInventoryRequest request, ServerCallContext context)
+    public override async Task<SceneInventoryReply> GetSceneInventory(GetSceneInventoryRequest request,
+        ServerCallContext context)
     {
         logger.LogTrace("GetSceneInventory(request={request})", request);
-        
+
         var member = await membersService.GetMemberByLogin(request.Login);
         var inv = await inventoryService.GetMemberSceneInventory(member);
         return mapper.Map<SceneInventoryReply>(inv);
@@ -119,18 +127,18 @@ public class InventoryGrpcService(
     public override async Task<Empty> BuyScene(BuySceneRequest request, ServerCallContext context)
     {
         logger.LogTrace("BuyScene(request={request})", request);
-        
+
         var member = await membersService.GetMemberByLogin(request.Login);
-        await inventoryService.BuyScene(member, request.SceneId);
+        await inventoryService.BuyScene(member, request.SceneId, request.SceneShift);
         return new Empty();
     }
 
     public override async Task<Empty> UseScene(UseSceneRequest request, ServerCallContext context)
     {
         logger.LogTrace("UseScene(request={request})", request);
-        
+
         var member = await membersService.GetMemberByLogin(request.Login);
-        await inventoryService.UseScene(member, request.SceneId);
+        await inventoryService.UseScene(member, request.SceneId, request.SceneShift);
         return new Empty();
     }
 
@@ -139,23 +147,28 @@ public class InventoryGrpcService(
         logger.LogTrace("GetScenePrice(request={request})", request);
 
         var nextPrice = SceneHelper.GetScenePrice(request.BoughtSceneCount);
-        var spentAmount = request.BoughtSceneCount == 0 ? 0 : Enumerable.Range(0, request.BoughtSceneCount).Sum(SceneHelper.GetScenePrice);
+        var spentAmount = request.BoughtSceneCount == 0
+            ? 0
+            : Enumerable.Range(0, request.BoughtSceneCount).Sum(SceneHelper.GetScenePrice);
         return Task.FromResult(new ScenePriceReply { NextPrice = nextPrice, TotalBubblesSpent = spentAmount });
     }
 
-    public override async Task<AwardInventoryMessage> GetAwardInventory(GetAwardInventoryMessage request, ServerCallContext context)
+    public override async Task<AwardInventoryMessage> GetAwardInventory(GetAwardInventoryMessage request,
+        ServerCallContext context)
     {
         logger.LogTrace("GetAwardInventory(request={request})", request);
-        
+
         var inv = await inventoryService.GetMemberAwardInventory(request.Login);
         return mapper.Map<AwardInventoryMessage>(inv);
     }
 
-    public override async Task<AwardPackLevelMessage> GetAwardPackLevel(GetAwardPackLevelMessage request, ServerCallContext context)
+    public override async Task<AwardPackLevelMessage> GetAwardPackLevel(GetAwardPackLevelMessage request,
+        ServerCallContext context)
     {
         logger.LogTrace("GetAwardPackLevel(request={request})", request);
 
-        var bubblesCollected = await statsService.GetMemberBubblesInRange(request.Login, DateTimeOffset.UtcNow.AddDays(-8), DateTimeOffset.UtcNow);
+        var bubblesCollected = await statsService.GetMemberBubblesInRange(request.Login,
+            DateTimeOffset.UtcNow.AddDays(-8), DateTimeOffset.UtcNow);
         var diff = (bubblesCollected.EndAmount - bubblesCollected.StartAmount) ?? 0;
         var level = InventoryHelper.GetAwardPackRarity(diff);
 
@@ -166,7 +179,8 @@ public class InventoryGrpcService(
         };
     }
 
-    public override async Task GetGalleryItems(GetGalleryItemsMessage request, IServerStreamWriter<GalleryItemMessage> responseStream, ServerCallContext context)
+    public override async Task GetGalleryItems(GetGalleryItemsMessage request,
+        IServerStreamWriter<GalleryItemMessage> responseStream, ServerCallContext context)
     {
         logger.LogTrace("GetGalleryItems(request={request})", request);
 
@@ -175,12 +189,14 @@ public class InventoryGrpcService(
         await responseStream.WriteAllMappedAsync(images, mapper.Map<GalleryItemMessage>);
     }
 
-    public override async Task<AwardPackResultMessage> OpenAwardPack(OpenAwardPackMessage request, ServerCallContext context)
+    public override async Task<AwardPackResultMessage> OpenAwardPack(OpenAwardPackMessage request,
+        ServerCallContext context)
     {
         logger.LogTrace("OpenAwardPack(request={request})", request);
 
         var member = await membersService.GetMemberByLogin(request.Login);
-        var bubblesCollected = await statsService.GetMemberBubblesInRange(request.Login, DateTimeOffset.UtcNow.AddDays(-8), DateTimeOffset.UtcNow);
+        var bubblesCollected = await statsService.GetMemberBubblesInRange(request.Login,
+            DateTimeOffset.UtcNow.AddDays(-8), DateTimeOffset.UtcNow);
         var diff = (bubblesCollected.EndAmount - bubblesCollected.StartAmount) ?? 0;
         var level = InventoryHelper.GetAwardPackRarity(diff);
 
@@ -192,7 +208,8 @@ public class InventoryGrpcService(
         };
     }
 
-    public override async Task<FirstSeenMessage> GetFirstSeenDate(GetFirstSeenDateRequest request, ServerCallContext context)
+    public override async Task<FirstSeenMessage> GetFirstSeenDate(GetFirstSeenDateRequest request,
+        ServerCallContext context)
     {
         logger.LogTrace("GetFirstSeenDate(request={request})", request);
 
@@ -200,7 +217,8 @@ public class InventoryGrpcService(
         return new FirstSeenMessage { FirstSeen = mapper.Map<Timestamp>(firstSeen) };
     }
 
-    public override async Task<GiftLossMessage> GiftEventCredit(GiftEventCreditMessage request, ServerCallContext context)
+    public override async Task<GiftLossMessage> GiftEventCredit(GiftEventCreditMessage request,
+        ServerCallContext context)
     {
         logger.LogTrace("GiftEventCredit(request={request})", request);
 
@@ -214,7 +232,8 @@ public class InventoryGrpcService(
         return mapper.Map<GiftLossMessage>(result);
     }
 
-    public override async Task<GiftLossRateMessage> GetGiftLossRate(GetGiftLossRateMessage request, ServerCallContext context)
+    public override async Task<GiftLossRateMessage> GetGiftLossRate(GetGiftLossRateMessage request,
+        ServerCallContext context)
     {
         logger.LogTrace("GetGiftLossRate(request={request})", request);
 
@@ -228,7 +247,7 @@ public class InventoryGrpcService(
     public override async Task<Empty> PatronizeMember(PatronizeMemberMessage request, ServerCallContext context)
     {
         logger.LogTrace("PatronizeMember(request={request})", request);
-        
+
         var member = await membersService.GetMemberByLogin(request.Login);
         await inventoryService.SetPatronizedMember(member, request.PatronizedDiscordId);
 
@@ -238,7 +257,7 @@ public class InventoryGrpcService(
     public override async Task<Empty> SetPatronEmoji(SetPatronEmojiMessage request, ServerCallContext context)
     {
         logger.LogTrace("SetPatronEmoji(request={request})", request);
-        
+
         var member = await membersService.GetMemberByLogin(request.Login);
         await inventoryService.SetPatronEmoji(member, request.Emoji);
 

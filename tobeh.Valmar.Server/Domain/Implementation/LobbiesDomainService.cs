@@ -37,16 +37,21 @@ public class LobbiesDomainService(
                 lobby => ValmarJsonParser.TryParse<PalantirLobbyJson>(lobby.Lobby1, logger));
 
         return onlineMembers
-            .Select(member => new OnlineMemberDdo(
-                member.Member.Login,
-                member.Member.Bubbles,
-                member.Lobbies
-                    .Select(lobby => new JoinedLobbyDdo(Convert.ToInt32(lobby.PlayerId), lobbiesDict[lobby.Id]))
-                    .ToList(),
-                member.Member.PatronEmoji,
-                InventoryHelper.ParseActiveSlotsFromInventory(member.Member.Sprites, member.Member.RainbowSprites),
-                InventoryHelper.ParseSceneInventory(member.Member.Scenes).ActiveId
-            )).ToList();
+            .Select(member =>
+            {
+                var sceneInv = InventoryHelper.ParseSceneInventory(member.Member.Scenes);
+                return new OnlineMemberDdo(
+                    member.Member.Login,
+                    member.Member.Bubbles,
+                    member.Lobbies
+                        .Select(lobby => new JoinedLobbyDdo(Convert.ToInt32(lobby.PlayerId), lobbiesDict[lobby.Id]))
+                        .ToList(),
+                    member.Member.PatronEmoji,
+                    InventoryHelper.ParseActiveSlotsFromInventory(member.Member.Sprites, member.Member.RainbowSprites),
+                    sceneInv.ActiveId,
+                    sceneInv.ActiveShift
+                );
+            }).ToList();
     }
 
     public async Task<List<PalantirLobbyJson>> GetPalantirLobbies()

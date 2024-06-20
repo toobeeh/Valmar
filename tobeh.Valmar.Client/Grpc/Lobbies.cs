@@ -51,22 +51,23 @@ namespace tobeh.Valmar {
             "b2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEi8KCmxlYWd1ZVRpbWUYBiABKAsy",
             "Gy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1ZSJZChJKb2luZWRMb2JieU1l",
             "c3NhZ2USFQoNbG9iYnlQbGF5ZXJJZBgBIAEoBRIsCgVsb2JieRgCIAEoCzId",
-            "LmxvYmJpZXMuUGFsYW50aXJMb2JieURldGFpbHMihgIKEU9ubGluZU1lbWJl",
+            "LmxvYmJpZXMuUGFsYW50aXJMb2JieURldGFpbHMitwIKEU9ubGluZU1lbWJl",
             "clJlcGx5Eg0KBWxvZ2luGAEgASgFEg8KB2J1YmJsZXMYAiABKAUSMQoLcGF0",
             "cm9uRW1vamkYAyABKAsyHC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUS",
             "MgoNam9pbmVkTG9iYmllcxgEIAMoCzIbLmxvYmJpZXMuSm9pbmVkTG9iYnlN",
             "ZXNzYWdlEjwKC3Nwcml0ZVNsb3RzGAUgAygLMicuaW52ZW50b3J5LlNwcml0",
             "ZVNsb3RDb25maWd1cmF0aW9uUmVwbHkSLAoHc2NlbmVJZBgGIAEoCzIbLmdv",
-            "b2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlMocDCgdMb2JiaWVzEkIKEUdldEN1",
-            "cnJlbnRMb2JiaWVzEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GhMubG9iYmll",
-            "cy5Mb2JieVJlcGx5MAESUQoSR2V0TG9iYnlEcm9wQ2xhaW1zEiIubG9iYmll",
-            "cy5HZXRMb2JieURyb3BDbGFpbXNSZXF1ZXN0GhUubG9iYmllcy5Ecm9wTG9n",
-            "UmVwbHkwARJIChBHZXRPbmxpbmVQbGF5ZXJzEhYuZ29vZ2xlLnByb3RvYnVm",
-            "LkVtcHR5GhoubG9iYmllcy5PbmxpbmVNZW1iZXJSZXBseTABElAKElNldEd1",
-            "aWxkTG9iYnlMaW5rcxIiLmxvYmJpZXMuU2V0R3VpbGRMb2JieUxpbmtzTWVz",
-            "c2FnZRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJJCg1HZXRMb2JieUxpbmtz",
-            "EhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Gh4ubG9iYmllcy5HdWlsZExvYmJ5",
-            "TGlua01lc3NhZ2UwAUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
+            "b2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEi8KCnNjZW5lU2hpZnQYByABKAsy",
+            "Gy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1ZTKHAwoHTG9iYmllcxJCChFH",
+            "ZXRDdXJyZW50TG9iYmllcxIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoTLmxv",
+            "YmJpZXMuTG9iYnlSZXBseTABElEKEkdldExvYmJ5RHJvcENsYWltcxIiLmxv",
+            "YmJpZXMuR2V0TG9iYnlEcm9wQ2xhaW1zUmVxdWVzdBoVLmxvYmJpZXMuRHJv",
+            "cExvZ1JlcGx5MAESSAoQR2V0T25saW5lUGxheWVycxIWLmdvb2dsZS5wcm90",
+            "b2J1Zi5FbXB0eRoaLmxvYmJpZXMuT25saW5lTWVtYmVyUmVwbHkwARJQChJT",
+            "ZXRHdWlsZExvYmJ5TGlua3MSIi5sb2JiaWVzLlNldEd1aWxkTG9iYnlMaW5r",
+            "c01lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHkSSQoNR2V0TG9iYnlM",
+            "aW5rcxIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoeLmxvYmJpZXMuR3VpbGRM",
+            "b2JieUxpbmtNZXNzYWdlMAFCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::tobeh.Valmar.InventoryReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -80,7 +81,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LobbyReply), global::tobeh.Valmar.LobbyReply.Parser, new[]{ "SkribblDetails", "PalantirDetails", "Players" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.DropLogReply), global::tobeh.Valmar.DropLogReply.Parser, new[]{ "Id", "LobbyKey", "ClaimDiscordId", "ValidFrom", "EventDropId", "LeagueTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.JoinedLobbyMessage), global::tobeh.Valmar.JoinedLobbyMessage.Parser, new[]{ "LobbyPlayerId", "Lobby" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OnlineMemberReply), global::tobeh.Valmar.OnlineMemberReply.Parser, new[]{ "Login", "Bubbles", "PatronEmoji", "JoinedLobbies", "SpriteSlots", "SceneId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OnlineMemberReply), global::tobeh.Valmar.OnlineMemberReply.Parser, new[]{ "Login", "Bubbles", "PatronEmoji", "JoinedLobbies", "SpriteSlots", "SceneId", "SceneShift" }, null, null, null, null)
           }));
     }
     #endregion
@@ -3015,6 +3016,7 @@ namespace tobeh.Valmar {
       joinedLobbies_ = other.joinedLobbies_.Clone();
       spriteSlots_ = other.spriteSlots_.Clone();
       SceneId = other.SceneId;
+      SceneShift = other.SceneShift;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3098,6 +3100,20 @@ namespace tobeh.Valmar {
     }
 
 
+    /// <summary>Field number for the "sceneShift" field.</summary>
+    public const int SceneShiftFieldNumber = 7;
+    private static readonly pb::FieldCodec<int?> _single_sceneShift_codec = pb::FieldCodec.ForStructWrapper<int>(58);
+    private int? sceneShift_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int? SceneShift {
+      get { return sceneShift_; }
+      set {
+        sceneShift_ = value;
+      }
+    }
+
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3119,6 +3135,7 @@ namespace tobeh.Valmar {
       if(!joinedLobbies_.Equals(other.joinedLobbies_)) return false;
       if(!spriteSlots_.Equals(other.spriteSlots_)) return false;
       if (SceneId != other.SceneId) return false;
+      if (SceneShift != other.SceneShift) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3132,6 +3149,7 @@ namespace tobeh.Valmar {
       hash ^= joinedLobbies_.GetHashCode();
       hash ^= spriteSlots_.GetHashCode();
       if (sceneId_ != null) hash ^= SceneId.GetHashCode();
+      if (sceneShift_ != null) hash ^= SceneShift.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3166,6 +3184,9 @@ namespace tobeh.Valmar {
       if (sceneId_ != null) {
         _single_sceneId_codec.WriteTagAndValue(output, SceneId);
       }
+      if (sceneShift_ != null) {
+        _single_sceneShift_codec.WriteTagAndValue(output, SceneShift);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3192,6 +3213,9 @@ namespace tobeh.Valmar {
       if (sceneId_ != null) {
         _single_sceneId_codec.WriteTagAndValue(ref output, SceneId);
       }
+      if (sceneShift_ != null) {
+        _single_sceneShift_codec.WriteTagAndValue(ref output, SceneShift);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3215,6 +3239,9 @@ namespace tobeh.Valmar {
       size += spriteSlots_.CalculateSize(_repeated_spriteSlots_codec);
       if (sceneId_ != null) {
         size += _single_sceneId_codec.CalculateSizeWithTag(SceneId);
+      }
+      if (sceneShift_ != null) {
+        size += _single_sceneShift_codec.CalculateSizeWithTag(SceneShift);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3244,6 +3271,11 @@ namespace tobeh.Valmar {
       if (other.sceneId_ != null) {
         if (sceneId_ == null || other.SceneId != 0) {
           SceneId = other.SceneId;
+        }
+      }
+      if (other.sceneShift_ != null) {
+        if (sceneShift_ == null || other.SceneShift != 0) {
+          SceneShift = other.SceneShift;
         }
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -3291,6 +3323,13 @@ namespace tobeh.Valmar {
             }
             break;
           }
+          case 58: {
+            int? value = _single_sceneShift_codec.Read(input);
+            if (sceneShift_ == null || value != 0) {
+              SceneShift = value;
+            }
+            break;
+          }
         }
       }
     #endif
@@ -3333,6 +3372,13 @@ namespace tobeh.Valmar {
             int? value = _single_sceneId_codec.Read(ref input);
             if (sceneId_ == null || value != 0) {
               SceneId = value;
+            }
+            break;
+          }
+          case 58: {
+            int? value = _single_sceneShift_codec.Read(ref input);
+            if (sceneShift_ == null || value != 0) {
+              SceneShift = value;
             }
             break;
           }

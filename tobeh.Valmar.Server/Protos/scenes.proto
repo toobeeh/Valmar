@@ -12,6 +12,12 @@ service Scenes {
   // Gets all scenes
   rpc GetAllScenes (google.protobuf.Empty) returns (stream SceneReply);
 
+  // Gets all scene themes
+  rpc GetAllSceneThemes (google.protobuf.Empty) returns (stream SceneThemeReply);
+
+  // Gets all themes of a scene
+  rpc GetThemesOfScene (GetSceneRequest) returns (stream SceneThemeReply);
+
   // Gets a scene by its id
   rpc GetSceneById (GetSceneRequest) returns (SceneReply);
 
@@ -32,6 +38,13 @@ message SceneReply {
   google.protobuf.StringValue guessedColor = 6;
   google.protobuf.StringValue artist = 7;
   google.protobuf.Int32Value eventId = 8;
+}
+
+// Response containing a scene theme's properties.
+message SceneThemeReply {
+  string name = 1;
+  int32 sceneId = 2;
+  int32 shift = 3;
 }
 
 // Request containing a scene id
