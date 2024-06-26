@@ -33,18 +33,25 @@ namespace tobeh.Valmar {
             "b3RvYnVmLlN0cmluZ1ZhbHVlEhIKCmlzUmVsZWFzZWQYCSABKAgiHgoQR2V0",
             "U3ByaXRlUmVxdWVzdBIKCgJpZBgBIAEoBSJYChJTcHJpdGVSYW5raW5nUmVw",
             "bHkSCgoCaWQYASABKAUSEwoLYWN0aXZlVXNlcnMYAiABKAUSEwoLdG90YWxC",
-            "b3VnaHQYAyABKAUSDAoEcmFuaxgEIAEoBTLXAQoHU3ByaXRlcxI/Cg1HZXRB",
-            "bGxTcHJpdGVzEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GhQuc3ByaXRlcy5T",
-            "cHJpdGVSZXBseTABEkAKDUdldFNwcml0ZUJ5SWQSGS5zcHJpdGVzLkdldFNw",
-            "cml0ZVJlcXVlc3QaFC5zcHJpdGVzLlNwcml0ZVJlcGx5EkkKEEdldFNwcml0",
-            "ZVJhbmtpbmcSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaGy5zcHJpdGVzLlNw",
-            "cml0ZVJhbmtpbmdSZXBseTABQg+qAgx0b2JlaC5WYWxtYXJiBnByb3RvMw=="));
+            "b3VnaHQYAyABKAUSDAoEcmFuaxgEIAEoBSKuAQoQQWRkU3ByaXRlTWVzc2Fn",
+            "ZRIMCgRuYW1lGAEgASgJEgsKA3VybBgCIAEoCRIMCgRjb3N0GAMgASgFEhEK",
+            "CWlzUmFpbmJvdxgEIAEoCBIwCgtldmVudERyb3BJZBgGIAEoCzIbLmdvb2ds",
+            "ZS5wcm90b2J1Zi5JbnQzMlZhbHVlEiwKBmFydGlzdBgHIAEoCzIcLmdvb2ds",
+            "ZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZTKVAgoHU3ByaXRlcxI/Cg1HZXRBbGxT",
+            "cHJpdGVzEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GhQuc3ByaXRlcy5TcHJp",
+            "dGVSZXBseTABEkAKDUdldFNwcml0ZUJ5SWQSGS5zcHJpdGVzLkdldFNwcml0",
+            "ZVJlcXVlc3QaFC5zcHJpdGVzLlNwcml0ZVJlcGx5EkkKEEdldFNwcml0ZVJh",
+            "bmtpbmcSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaGy5zcHJpdGVzLlNwcml0",
+            "ZVJhbmtpbmdSZXBseTABEjwKCUFkZFNwcml0ZRIZLnNwcml0ZXMuQWRkU3By",
+            "aXRlTWVzc2FnZRoULnNwcml0ZXMuU3ByaXRlUmVwbHlCD6oCDHRvYmVoLlZh",
+            "bG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteReply), global::tobeh.Valmar.SpriteReply.Parser, new[]{ "Name", "Url", "Id", "Cost", "IsRainbow", "IsSpecial", "EventDropId", "Artist", "IsReleased" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetSpriteRequest), global::tobeh.Valmar.GetSpriteRequest.Parser, new[]{ "Id" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteRankingReply), global::tobeh.Valmar.SpriteRankingReply.Parser, new[]{ "Id", "ActiveUsers", "TotalBought", "Rank" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteRankingReply), global::tobeh.Valmar.SpriteRankingReply.Parser, new[]{ "Id", "ActiveUsers", "TotalBought", "Rank" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AddSpriteMessage), global::tobeh.Valmar.AddSpriteMessage.Parser, new[]{ "Name", "Url", "Cost", "IsRainbow", "EventDropId", "Artist" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1041,6 +1048,396 @@ namespace tobeh.Valmar {
           }
           case 32: {
             Rank = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class AddSpriteMessage : pb::IMessage<AddSpriteMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<AddSpriteMessage> _parser = new pb::MessageParser<AddSpriteMessage>(() => new AddSpriteMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<AddSpriteMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.SpritesReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AddSpriteMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AddSpriteMessage(AddSpriteMessage other) : this() {
+      name_ = other.name_;
+      url_ = other.url_;
+      cost_ = other.cost_;
+      isRainbow_ = other.isRainbow_;
+      EventDropId = other.EventDropId;
+      Artist = other.Artist;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AddSpriteMessage Clone() {
+      return new AddSpriteMessage(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "url" field.</summary>
+    public const int UrlFieldNumber = 2;
+    private string url_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Url {
+      get { return url_; }
+      set {
+        url_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "cost" field.</summary>
+    public const int CostFieldNumber = 3;
+    private int cost_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Cost {
+      get { return cost_; }
+      set {
+        cost_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isRainbow" field.</summary>
+    public const int IsRainbowFieldNumber = 4;
+    private bool isRainbow_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsRainbow {
+      get { return isRainbow_; }
+      set {
+        isRainbow_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "eventDropId" field.</summary>
+    public const int EventDropIdFieldNumber = 6;
+    private static readonly pb::FieldCodec<int?> _single_eventDropId_codec = pb::FieldCodec.ForStructWrapper<int>(50);
+    private int? eventDropId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int? EventDropId {
+      get { return eventDropId_; }
+      set {
+        eventDropId_ = value;
+      }
+    }
+
+
+    /// <summary>Field number for the "artist" field.</summary>
+    public const int ArtistFieldNumber = 7;
+    private static readonly pb::FieldCodec<string> _single_artist_codec = pb::FieldCodec.ForClassWrapper<string>(58);
+    private string artist_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Artist {
+      get { return artist_; }
+      set {
+        artist_ = value;
+      }
+    }
+
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as AddSpriteMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(AddSpriteMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (Url != other.Url) return false;
+      if (Cost != other.Cost) return false;
+      if (IsRainbow != other.IsRainbow) return false;
+      if (EventDropId != other.EventDropId) return false;
+      if (Artist != other.Artist) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Url.Length != 0) hash ^= Url.GetHashCode();
+      if (Cost != 0) hash ^= Cost.GetHashCode();
+      if (IsRainbow != false) hash ^= IsRainbow.GetHashCode();
+      if (eventDropId_ != null) hash ^= EventDropId.GetHashCode();
+      if (artist_ != null) hash ^= Artist.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (Url.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Url);
+      }
+      if (Cost != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Cost);
+      }
+      if (IsRainbow != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(IsRainbow);
+      }
+      if (eventDropId_ != null) {
+        _single_eventDropId_codec.WriteTagAndValue(output, EventDropId);
+      }
+      if (artist_ != null) {
+        _single_artist_codec.WriteTagAndValue(output, Artist);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (Url.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Url);
+      }
+      if (Cost != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Cost);
+      }
+      if (IsRainbow != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(IsRainbow);
+      }
+      if (eventDropId_ != null) {
+        _single_eventDropId_codec.WriteTagAndValue(ref output, EventDropId);
+      }
+      if (artist_ != null) {
+        _single_artist_codec.WriteTagAndValue(ref output, Artist);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Url.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Url);
+      }
+      if (Cost != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Cost);
+      }
+      if (IsRainbow != false) {
+        size += 1 + 1;
+      }
+      if (eventDropId_ != null) {
+        size += _single_eventDropId_codec.CalculateSizeWithTag(EventDropId);
+      }
+      if (artist_ != null) {
+        size += _single_artist_codec.CalculateSizeWithTag(Artist);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(AddSpriteMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Url.Length != 0) {
+        Url = other.Url;
+      }
+      if (other.Cost != 0) {
+        Cost = other.Cost;
+      }
+      if (other.IsRainbow != false) {
+        IsRainbow = other.IsRainbow;
+      }
+      if (other.eventDropId_ != null) {
+        if (eventDropId_ == null || other.EventDropId != 0) {
+          EventDropId = other.EventDropId;
+        }
+      }
+      if (other.artist_ != null) {
+        if (artist_ == null || other.Artist != "") {
+          Artist = other.Artist;
+        }
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            Url = input.ReadString();
+            break;
+          }
+          case 24: {
+            Cost = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            IsRainbow = input.ReadBool();
+            break;
+          }
+          case 50: {
+            int? value = _single_eventDropId_codec.Read(input);
+            if (eventDropId_ == null || value != 0) {
+              EventDropId = value;
+            }
+            break;
+          }
+          case 58: {
+            string value = _single_artist_codec.Read(input);
+            if (artist_ == null || value != "") {
+              Artist = value;
+            }
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            Url = input.ReadString();
+            break;
+          }
+          case 24: {
+            Cost = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            IsRainbow = input.ReadBool();
+            break;
+          }
+          case 50: {
+            int? value = _single_eventDropId_codec.Read(ref input);
+            if (eventDropId_ == null || value != 0) {
+              EventDropId = value;
+            }
+            break;
+          }
+          case 58: {
+            string value = _single_artist_codec.Read(ref input);
+            if (artist_ == null || value != "") {
+              Artist = value;
+            }
             break;
           }
         }

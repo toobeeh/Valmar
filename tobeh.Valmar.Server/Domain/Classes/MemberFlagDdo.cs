@@ -14,5 +14,6 @@ public enum MemberFlagDdo : ushort
     PermaBan = FlagHelper.PermanentBan,
     Beta = FlagHelper.Beta,
     BubbleFarming = FlagHelper.BubbleFarming,
-    UnlimitedCloud = FlagHelper.UnlimitedCloud
+    UnlimitedCloud = FlagHelper.UnlimitedCloud,
+    ContentModerator = FlagHelper.ContentModerator
 }

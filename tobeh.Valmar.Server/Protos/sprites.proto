@@ -17,6 +17,9 @@ service Sprites {
   
   // Gets the ranking of all sprites
   rpc GetSpriteRanking (google.protobuf.Empty) returns (stream SpriteRankingReply);
+
+  // Adds a new sprite
+  rpc AddSprite (AddSpriteMessage) returns (SpriteReply);
 }
 
 // Response containing a sprite's properties.
@@ -43,4 +46,13 @@ message SpriteRankingReply {
   int32 activeUsers = 2;
   int32 totalBought = 3;
   int32 rank = 4;
+}
+
+message AddSpriteMessage {
+  string name = 1;
+  string url = 2;
+  int32 cost = 3;
+  bool isRainbow = 4;
+  google.protobuf.Int32Value eventDropId = 6;
+  google.protobuf.StringValue artist = 7;
 }
