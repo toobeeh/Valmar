@@ -414,7 +414,7 @@ public class InventoryDomainService(
             return randomAward;
         }
 
-        var result = Enumerable.Repeat(GetRandomAward, 2).Select(func => func.Invoke()).ToList();
+        var result = Enumerable.Repeat(GetRandomAward, rarityLevel > 1 ? 2 : 1).Select(func => func.Invoke()).ToList();
 
         var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ??
                            throw new EntityNotFoundException(
