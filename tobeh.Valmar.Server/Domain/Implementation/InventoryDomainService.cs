@@ -137,15 +137,15 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
     }
 
-    public async Task<int> GetSpriteSlotCount(MemberDdo member)
+    public Task<int> GetSpriteSlotCount(MemberDdo member)
     {
         logger.LogTrace("GetSpriteSlotCount(member={member})", member);
 
         var isPatron = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Patron);
         var isAdmin = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Admin);
 
-        var slots = 1 + (isPatron ? 1 : 0) + (isAdmin ? 100 : 0) + InventoryHelper.GetSlotBaseCount(member.Drops);
-        return slots;
+        var slots = (isPatron ? 1 : 0) + (isAdmin ? 100 : 0) + InventoryHelper.GetSlotBaseCount(member.Drops);
+        return Task.FromResult(slots);
     }
 
     public async Task SetColorShiftConfiguration(MemberDdo member, Dictionary<int, int?> colorShiftMap,
