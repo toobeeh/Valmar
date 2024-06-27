@@ -130,12 +130,11 @@ public static class InventoryHelper
     {
         return drops switch
         {
-            > 30000 => 7 + Convert.ToInt32(Math.Floor((drops - 30000) / 20000)),
-            > 15 => 6,
-            > 8 => 5,
-            > 4 => 4,
-            > 2 => 3,
-            > 1 => 2,
+            > 30000 => 6 + Convert.ToInt32(Math.Floor((drops - 30000) / 20000)),
+            > 15000 => 5,
+            > 7000 => 4,
+            > 3000 => 3,
+            > 1000 => 2,
             _ => 1
         };
     }
