@@ -143,10 +143,9 @@ public class InventoryDomainService(
 
         var isPatron = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Patron);
         var isAdmin = FlagHelper.HasFlag(member.Flags, MemberFlagDdo.Admin);
-        var dropCredit = await GetDropCredit(member);
 
-        var slots = 1 + (isPatron ? 1 : 0) + (isAdmin ? 100 : 0) + member.Drops / 1000;
-        return (int)Math.Floor(slots);
+        var slots = 1 + (isPatron ? 1 : 0) + (isAdmin ? 100 : 0) + InventoryHelper.GetSlotBaseCount(member.Drops);
+        return slots;
     }
 
     public async Task SetColorShiftConfiguration(MemberDdo member, Dictionary<int, int?> colorShiftMap,

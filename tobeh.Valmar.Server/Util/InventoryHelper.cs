@@ -125,4 +125,18 @@ public static class InventoryHelper
     {
         return $"{patronized.Item1}#{patronized.Item2:MM/dd/yyyy HH:mm:ss}";
     }
+
+    public static int GetSlotBaseCount(double drops)
+    {
+        return drops switch
+        {
+            > 30000 => 7 + Convert.ToInt32(Math.Floor((drops - 30000) / 20000)),
+            > 15 => 6,
+            > 8 => 5,
+            > 4 => 4,
+            > 2 => 3,
+            > 1 => 2,
+            _ => 1
+        };
+    }
 }
