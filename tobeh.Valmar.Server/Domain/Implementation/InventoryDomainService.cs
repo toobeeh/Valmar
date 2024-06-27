@@ -47,8 +47,9 @@ public class InventoryDomainService(
         var sceneInv = InventoryHelper.ParseSceneInventory(member.Scenes).Scenes.Select(scene => scene.SceneId)
             .ToArray();
         var regularScenes = await db.Scenes
-            .Where(scene => scene.EventId == 0 && !scene.Exclusive && sceneInv.Contains(scene.Id)).ToListAsync();
-        var sceneSum = regularScenes.Select((scene, index) => SceneHelper.GetScenePrice(index)).Sum();
+            .Where(scene => scene.EventId == 0 && !scene.Exclusive).ToListAsync();
+        var regularInvScenes = sceneInv.Where(scene => regularScenes.Any(s => s.Id == scene)).ToList();
+        var sceneSum = regularInvScenes.Select((scene, index) => SceneHelper.GetScenePrice(index)).Sum();
 
         var totalBubbles = member.Bubbles + (int)Math.Floor(member.Drops * 50);
         var availableBubbles = totalBubbles - invSum - sceneSum;
