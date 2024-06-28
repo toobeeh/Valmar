@@ -36,6 +36,7 @@ message OutfitMessage {
   string name = 1;
   repeated inventory.SpriteSlotConfigurationReply spriteSlotConfiguration = 2;
   google.protobuf.Int32Value sceneId = 3;
+  google.protobuf.Int32Value sceneShift = 4;
 }
 
 message SaveOutfitRequest {
