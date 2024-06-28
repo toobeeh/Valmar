@@ -27,7 +27,8 @@ public class OutfitMapperProfile : Profile
                     ColorShift = slot.ColorShift
                 })
             },
-            SceneId = source.Scene?.SceneId
+            SceneId = source.Scene?.SceneId,
+            SceneShift = source.Scene?.SceneShift
         };
     }
 
