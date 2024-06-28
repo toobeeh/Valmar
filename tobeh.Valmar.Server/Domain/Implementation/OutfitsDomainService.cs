@@ -100,9 +100,12 @@ public class OutfitsDomainService(
         logger.LogTrace("UseOutfit(member={member}, name={name})", member, name);
 
         var outfit = await GetMemberOutfit(member.Login, name);
+        var slots = await inventoryDomainService.GetSpriteSlotCount(member);
 
         await inventoryDomainService.UseSpriteCombo(member,
-            outfit.SpriteSlotConfiguration.Select(s => (int?)s.SpriteId).ToList(),
+            outfit.SpriteSlotConfiguration
+                .Where(slot => slot.Slot <= slots)
+                .Select(s => (int?)s.SpriteId).ToList(),
             true);
 
         var shifts = outfit.SpriteSlotConfiguration.Where(slot => slot.ColorShift is not null)
