@@ -272,7 +272,7 @@ public class InventoryDomainService(
             if (eventPrice > totalCollectedDuringEvent)
             {
                 throw new UserOperationException(
-                    $"The scene price ({eventPrice}) exceeds the available bubbles ({totalCollectedDuringEvent})");
+                    $"The scene price ({eventPrice}) is higher than the amount of collected bubbles ({totalCollectedDuringEvent})");
             }
         }
         else
@@ -280,9 +280,10 @@ public class InventoryDomainService(
             var bubbleCredit = await GetBubbleCredit(member);
 
             var sceneInv = inv.Scenes.Select(s => s.SceneId).ToArray();
-            var nonEventScenes = await db.Scenes
+            var regularScenes = await db.Scenes
                 .Where(s => s.EventId == 0 && !s.Exclusive && sceneInv.Contains(s.Id)).ToListAsync();
-            var scenePrice = SceneHelper.GetScenePrice(nonEventScenes.Count);
+            var regularInvScenes = sceneInv.Where(scene => regularScenes.Any(s => s.Id == scene)).ToList();
+            var scenePrice = SceneHelper.GetScenePrice(regularInvScenes.Count);
 
             if (scenePrice > bubbleCredit.AvailableCredit)
             {
