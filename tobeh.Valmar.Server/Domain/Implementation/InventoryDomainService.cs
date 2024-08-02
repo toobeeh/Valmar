@@ -113,6 +113,12 @@ public class InventoryDomainService(
         if (sprite.Released == false)
             throw new UserOperationException($"The event sprite {sprite.Name} ({sprite.Id}) is not released yet");
 
+        // check if the user has a flag required by the sprite
+        if (!sprite.RequiredFlags.Any(flag => member.MappedFlags.Contains(flag)))
+        {
+            throw new UserOperationException($"The user has none of the required flags to buy the sprite");
+        }
+
         if (sprite.EventDropId > 0)
         {
             var credit = (await GetEventCredit(member, [sprite.EventDropId]))
