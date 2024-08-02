@@ -25,30 +25,31 @@ namespace tobeh.Valmar {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Cg1zcHJpdGVzLnByb3RvEgdzcHJpdGVzGh5nb29nbGUvcHJvdG9idWYvd3Jh",
-            "cHBlcnMucHJvdG8aG2dvb2dsZS9wcm90b2J1Zi9lbXB0eS5wcm90byLcAQoL",
-            "U3ByaXRlUmVwbHkSDAoEbmFtZRgBIAEoCRILCgN1cmwYAiABKAkSCgoCaWQY",
-            "AyABKAUSDAoEY29zdBgEIAEoBRIRCglpc1JhaW5ib3cYBSABKAgSEQoJaXNT",
-            "cGVjaWFsGAYgASgIEjAKC2V2ZW50RHJvcElkGAcgASgLMhsuZ29vZ2xlLnBy",
-            "b3RvYnVmLkludDMyVmFsdWUSLAoGYXJ0aXN0GAggASgLMhwuZ29vZ2xlLnBy",
-            "b3RvYnVmLlN0cmluZ1ZhbHVlEhIKCmlzUmVsZWFzZWQYCSABKAgiHgoQR2V0",
-            "U3ByaXRlUmVxdWVzdBIKCgJpZBgBIAEoBSJYChJTcHJpdGVSYW5raW5nUmVw",
-            "bHkSCgoCaWQYASABKAUSEwoLYWN0aXZlVXNlcnMYAiABKAUSEwoLdG90YWxC",
-            "b3VnaHQYAyABKAUSDAoEcmFuaxgEIAEoBSKuAQoQQWRkU3ByaXRlTWVzc2Fn",
-            "ZRIMCgRuYW1lGAEgASgJEgsKA3VybBgCIAEoCRIMCgRjb3N0GAMgASgFEhEK",
-            "CWlzUmFpbmJvdxgEIAEoCBIwCgtldmVudERyb3BJZBgGIAEoCzIbLmdvb2ds",
-            "ZS5wcm90b2J1Zi5JbnQzMlZhbHVlEiwKBmFydGlzdBgHIAEoCzIcLmdvb2ds",
-            "ZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZTKVAgoHU3ByaXRlcxI/Cg1HZXRBbGxT",
-            "cHJpdGVzEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GhQuc3ByaXRlcy5TcHJp",
-            "dGVSZXBseTABEkAKDUdldFNwcml0ZUJ5SWQSGS5zcHJpdGVzLkdldFNwcml0",
-            "ZVJlcXVlc3QaFC5zcHJpdGVzLlNwcml0ZVJlcGx5EkkKEEdldFNwcml0ZVJh",
-            "bmtpbmcSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaGy5zcHJpdGVzLlNwcml0",
-            "ZVJhbmtpbmdSZXBseTABEjwKCUFkZFNwcml0ZRIZLnNwcml0ZXMuQWRkU3By",
-            "aXRlTWVzc2FnZRoULnNwcml0ZXMuU3ByaXRlUmVwbHlCD6oCDHRvYmVoLlZh",
-            "bG1hcmIGcHJvdG8z"));
+            "cHBlcnMucHJvdG8aG2dvb2dsZS9wcm90b2J1Zi9lbXB0eS5wcm90bxoNbWVt",
+            "YmVycy5wcm90byKPAgoLU3ByaXRlUmVwbHkSDAoEbmFtZRgBIAEoCRILCgN1",
+            "cmwYAiABKAkSCgoCaWQYAyABKAUSDAoEY29zdBgEIAEoBRIRCglpc1JhaW5i",
+            "b3cYBSABKAgSEQoJaXNTcGVjaWFsGAYgASgIEjAKC2V2ZW50RHJvcElkGAcg",
+            "ASgLMhsuZ29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUSLAoGYXJ0aXN0GAgg",
+            "ASgLMhwuZ29vZ2xlLnByb3RvYnVmLlN0cmluZ1ZhbHVlEhIKCmlzUmVsZWFz",
+            "ZWQYCSABKAgSMQoNcmVxdWlyZWRGbGFncxgLIAMoDjIaLm1lbWJlcnMuTWVt",
+            "YmVyRmxhZ01lc3NhZ2UiHgoQR2V0U3ByaXRlUmVxdWVzdBIKCgJpZBgBIAEo",
+            "BSJYChJTcHJpdGVSYW5raW5nUmVwbHkSCgoCaWQYASABKAUSEwoLYWN0aXZl",
+            "VXNlcnMYAiABKAUSEwoLdG90YWxCb3VnaHQYAyABKAUSDAoEcmFuaxgEIAEo",
+            "BSKuAQoQQWRkU3ByaXRlTWVzc2FnZRIMCgRuYW1lGAEgASgJEgsKA3VybBgC",
+            "IAEoCRIMCgRjb3N0GAMgASgFEhEKCWlzUmFpbmJvdxgEIAEoCBIwCgtldmVu",
+            "dERyb3BJZBgGIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEiwK",
+            "BmFydGlzdBgHIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZTKV",
+            "AgoHU3ByaXRlcxI/Cg1HZXRBbGxTcHJpdGVzEhYuZ29vZ2xlLnByb3RvYnVm",
+            "LkVtcHR5GhQuc3ByaXRlcy5TcHJpdGVSZXBseTABEkAKDUdldFNwcml0ZUJ5",
+            "SWQSGS5zcHJpdGVzLkdldFNwcml0ZVJlcXVlc3QaFC5zcHJpdGVzLlNwcml0",
+            "ZVJlcGx5EkkKEEdldFNwcml0ZVJhbmtpbmcSFi5nb29nbGUucHJvdG9idWYu",
+            "RW1wdHkaGy5zcHJpdGVzLlNwcml0ZVJhbmtpbmdSZXBseTABEjwKCUFkZFNw",
+            "cml0ZRIZLnNwcml0ZXMuQWRkU3ByaXRlTWVzc2FnZRoULnNwcml0ZXMuU3By",
+            "aXRlUmVwbHlCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::tobeh.Valmar.MembersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteReply), global::tobeh.Valmar.SpriteReply.Parser, new[]{ "Name", "Url", "Id", "Cost", "IsRainbow", "IsSpecial", "EventDropId", "Artist", "IsReleased" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteReply), global::tobeh.Valmar.SpriteReply.Parser, new[]{ "Name", "Url", "Id", "Cost", "IsRainbow", "IsSpecial", "EventDropId", "Artist", "IsReleased", "RequiredFlags" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetSpriteRequest), global::tobeh.Valmar.GetSpriteRequest.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteRankingReply), global::tobeh.Valmar.SpriteRankingReply.Parser, new[]{ "Id", "ActiveUsers", "TotalBought", "Rank" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AddSpriteMessage), global::tobeh.Valmar.AddSpriteMessage.Parser, new[]{ "Name", "Url", "Cost", "IsRainbow", "EventDropId", "Artist" }, null, null, null, null)
@@ -104,6 +105,7 @@ namespace tobeh.Valmar {
       EventDropId = other.EventDropId;
       Artist = other.Artist;
       isReleased_ = other.isReleased_;
+      requiredFlags_ = other.requiredFlags_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -225,6 +227,17 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "requiredFlags" field.</summary>
+    public const int RequiredFlagsFieldNumber = 11;
+    private static readonly pb::FieldCodec<global::tobeh.Valmar.MemberFlagMessage> _repeated_requiredFlags_codec
+        = pb::FieldCodec.ForEnum(90, x => (int) x, x => (global::tobeh.Valmar.MemberFlagMessage) x);
+    private readonly pbc::RepeatedField<global::tobeh.Valmar.MemberFlagMessage> requiredFlags_ = new pbc::RepeatedField<global::tobeh.Valmar.MemberFlagMessage>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::tobeh.Valmar.MemberFlagMessage> RequiredFlags {
+      get { return requiredFlags_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -249,6 +262,7 @@ namespace tobeh.Valmar {
       if (EventDropId != other.EventDropId) return false;
       if (Artist != other.Artist) return false;
       if (IsReleased != other.IsReleased) return false;
+      if(!requiredFlags_.Equals(other.requiredFlags_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -265,6 +279,7 @@ namespace tobeh.Valmar {
       if (eventDropId_ != null) hash ^= EventDropId.GetHashCode();
       if (artist_ != null) hash ^= Artist.GetHashCode();
       if (IsReleased != false) hash ^= IsReleased.GetHashCode();
+      hash ^= requiredFlags_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -317,6 +332,7 @@ namespace tobeh.Valmar {
         output.WriteRawTag(72);
         output.WriteBool(IsReleased);
       }
+      requiredFlags_.WriteTo(output, _repeated_requiredFlags_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -361,6 +377,7 @@ namespace tobeh.Valmar {
         output.WriteRawTag(72);
         output.WriteBool(IsReleased);
       }
+      requiredFlags_.WriteTo(ref output, _repeated_requiredFlags_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -398,6 +415,7 @@ namespace tobeh.Valmar {
       if (IsReleased != false) {
         size += 1 + 1;
       }
+      size += requiredFlags_.CalculateSize(_repeated_requiredFlags_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -441,6 +459,7 @@ namespace tobeh.Valmar {
       if (other.IsReleased != false) {
         IsReleased = other.IsReleased;
       }
+      requiredFlags_.Add(other.requiredFlags_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -498,6 +517,11 @@ namespace tobeh.Valmar {
             IsReleased = input.ReadBool();
             break;
           }
+          case 90:
+          case 88: {
+            requiredFlags_.AddEntriesFrom(input, _repeated_requiredFlags_codec);
+            break;
+          }
         }
       }
     #endif
@@ -553,6 +577,11 @@ namespace tobeh.Valmar {
           }
           case 72: {
             IsReleased = input.ReadBool();
+            break;
+          }
+          case 90:
+          case 88: {
+            requiredFlags_.AddEntriesFrom(ref input, _repeated_requiredFlags_codec);
             break;
           }
         }

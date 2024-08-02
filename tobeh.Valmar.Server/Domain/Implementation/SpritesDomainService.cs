@@ -79,8 +79,10 @@ public class SpritesDomainService(
             }
         }
 
+        var mappedFlags = FlagHelper.GetFlags(sprite.RequiredFlags ?? 0);
+
         return new SpriteDdo(sprite.Id, sprite.Name, sprite.Url, sprite.Cost, sprite.Special, sprite.EventDropId,
-            sprite.Artist, sprite.Rainbow, released);
+            sprite.Artist, sprite.Rainbow, released, mappedFlags);
     }
 
     public async Task<List<SpriteDdo>> GetAllSprites(int? eventId = null)
@@ -127,8 +129,10 @@ public class SpritesDomainService(
                 var released =
                     !unreleasedEventDrops.Contains(sprite.EventDropId); // check if drop has been released yet
                 if (sprite.Id >= 1000) sprite.EventDropId = 0; // map exclusive sprites out of event
+                var mappedFlags = FlagHelper.GetFlags(sprite.RequiredFlags ?? 0);
+
                 return new SpriteDdo(sprite.Id, sprite.Name, sprite.Url, sprite.Cost, sprite.Special,
-                    sprite.EventDropId, sprite.Artist, sprite.Rainbow, released);
+                    sprite.EventDropId, sprite.Artist, sprite.Rainbow, released, mappedFlags);
             }).ToList();
     }
 

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
+import "members.proto";
 
 option csharp_namespace = "tobeh.Valmar";
 package sprites;
@@ -33,6 +34,7 @@ message SpriteReply {
   google.protobuf.Int32Value eventDropId = 7;
   google.protobuf.StringValue artist = 8;
   bool isReleased = 9;
+  repeated members.MemberFlagMessage requiredFlags = 11;
 }
 
 // Request containing a sprite id
