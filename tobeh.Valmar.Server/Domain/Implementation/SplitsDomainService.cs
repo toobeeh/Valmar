@@ -24,7 +24,7 @@ public class SplitsDomainService(
             SplitHelper.ParseSplitTimestamp(split.Date)
         )).ToList();
     }
-    
+
     public async Task<SplitDefinitionDdo> GetSplitById(int id)
     {
         logger.LogTrace("GetSplitById(id={id})", id);
@@ -47,7 +47,7 @@ public class SplitsDomainService(
     public async Task<List<SplitRewardDdo>> GetMemberSplitRewards(MemberDdo member)
     {
         logger.LogTrace("GetMemberSplitRewards(member={member})", member);
-        
+
         var rewards = await db.SplitCredits
             .Where(reward => reward.Login == member.Login)
             .ToListAsync();
@@ -63,7 +63,7 @@ public class SplitsDomainService(
                 ValueOverride = -1
             });
         }
-        
+
         if (member.MappedFlags.Contains(MemberFlagDdo.Patronizer))
         {
             rewards.Add(new SplitCreditEntity
@@ -84,7 +84,7 @@ public class SplitsDomainService(
                 ValueOverride = -1
             });
         }
-        
+
         rewards.Add(new SplitCreditEntity
         {
             Login = member.Login,
@@ -118,11 +118,13 @@ public class SplitsDomainService(
 
     public async Task RewardSplit(int rewardeeLogin, int splitId, string? comment, int? valueOverride)
     {
-        logger.LogTrace("RewardSplit(rewardeeLogin={rewardeeLogin}, splitId={splitId}, comment={comment}, valueOverride={valueOverride})", rewardeeLogin, splitId, comment, valueOverride);
+        logger.LogTrace(
+            "RewardSplit(rewardeeLogin={rewardeeLogin}, splitId={splitId}, comment={comment}, valueOverride={valueOverride})",
+            rewardeeLogin, splitId, comment, valueOverride);
 
         // check that split exists
         await GetSplitById(splitId);
-        
+
         // add to db
         db.SplitCredits.Add(new SplitCreditEntity
         {
@@ -139,11 +141,14 @@ public class SplitsDomainService(
     {
         var utcMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         var activeBoosts = await db.DropBoosts
-            .Where(boost => (login == null || boost.Login == login) 
+            .Where(boost => (login == null || boost.Login == login)
                             && (!onlyActive || Convert.ToInt64(boost.StartUtcs) + boost.DurationS > utcMs)
-                            && ((Convert.ToInt64(boost.StartUtcs) + 1000 * 60 * 60 * 24 * 7 - boost.CooldownBonusS) > utcMs || Convert.ToInt64(boost.StartUtcs) + boost.DurationS > utcMs) ) // filter out boosts older than cooldown that are also already inactive to prevent double spending at high cooldowns
+                            && ((Convert.ToInt64(boost.StartUtcs) + 1000 * 60 * 60 * 24 * 7 - boost.CooldownBonusS) >
+                                utcMs ||
+                                Convert.ToInt64(boost.StartUtcs) + boost.DurationS >
+                                utcMs)) // filter out boosts older than cooldown that are also already inactive to prevent double spending at high cooldowns
             .ToListAsync();
-        
+
 
         return activeBoosts.Select(boost =>
         {
@@ -164,7 +169,7 @@ public class SplitsDomainService(
             );
         }).ToList();
     }
-    
+
     public async Task<AvailableSplitsDdo> GetAvailableSplits(MemberDdo member)
     {
         logger.LogTrace("GetAvailableSplits(member={member})", member);
@@ -174,23 +179,29 @@ public class SplitsDomainService(
 
         var total = rewards.Where(reward => !reward.Expired).Sum(reward => reward.ValueOverride ?? reward.Split.Value);
         var used = boosts.Sum(boost => boost.Value);
-        var canStartBoost = total - used > 0 || boosts.Count == 0; // boost with 0 splits always allowed if no other boost active within cooldown period
+        var canStartBoost =
+            total - used > 0 ||
+            boosts.Count == 0; // boost with 0 splits always allowed if no other boost active within cooldown period
         return new AvailableSplitsDdo(total, total - used, boosts, canStartBoost);
     }
 
     public async Task StartDropboost(MemberDdo member, int factorSplits, int durationSplits, int cooldownSplits)
     {
-        logger.LogTrace("StartDropboost(member={member}, factorSplits={factorSplits}, durationSplits={durationSplits}, cooldownSplits={cooldownSplits})", member, factorSplits, durationSplits, cooldownSplits);
-        
-        if(factorSplits == 0) throw new UserOperationException("Cannot start boost with 0 factor splits");
-        
+        logger.LogTrace(
+            "StartDropboost(member={member}, factorSplits={factorSplits}, durationSplits={durationSplits}, cooldownSplits={cooldownSplits})",
+            member, factorSplits, durationSplits, cooldownSplits);
+
+        if (factorSplits == 0) throw new UserOperationException("Cannot start boost with 0 factor splits");
+
         var availableSplits = await GetAvailableSplits(member);
         if (availableSplits.AvailableSplits < factorSplits + durationSplits + cooldownSplits)
         {
-            throw new UserOperationException($"Cannot start boost, because not enough splits available ({availableSplits.AvailableSplits})");
+            throw new UserOperationException(
+                $"Cannot start boost, because not enough splits available ({availableSplits.AvailableSplits})");
         }
-        
-        if(factorSplits % SplitHelper.FactorSplitCost != 0 || durationSplits % SplitHelper.DurationSplitCost != 0 || cooldownSplits % SplitHelper.CooldownSplitCost != 0)
+
+        if (factorSplits % SplitHelper.FactorSplitCost != 0 || durationSplits % SplitHelper.DurationSplitCost != 0 ||
+            cooldownSplits % SplitHelper.CooldownSplitCost != 0)
         {
             throw new UserOperationException("Invalid split count provided");
         }
@@ -212,20 +223,26 @@ public class SplitsDomainService(
         await db.SaveChangesAsync();
     }
 
-    public async Task UpgradeDropboost(MemberDdo member, DateTimeOffset startDate,  int factorSplitsIncrease, int durationSplitsIncrease, int cooldownSplitsIncrease)
+    public async Task UpgradeDropboost(MemberDdo member, DateTimeOffset startDate, int factorSplitsIncrease,
+        int durationSplitsIncrease, int cooldownSplitsIncrease)
     {
-        logger.LogTrace("StartDropboost(member={member}, factorSplitsIncrease={factorSplitsIncrease}, durationSplitsIncrease={durationSplitsIncrease}, cooldownSplitsIncrease={cooldownSplitsIncrease})", member, factorSplitsIncrease, durationSplitsIncrease, cooldownSplitsIncrease);
+        logger.LogTrace(
+            "StartDropboost(member={member}, factorSplitsIncrease={factorSplitsIncrease}, durationSplitsIncrease={durationSplitsIncrease}, cooldownSplitsIncrease={cooldownSplitsIncrease})",
+            member, factorSplitsIncrease, durationSplitsIncrease, cooldownSplitsIncrease);
 
         var splitsSum = factorSplitsIncrease + durationSplitsIncrease + cooldownSplitsIncrease;
-        if(splitsSum == 0) throw new UserOperationException("Cannot upgrade a boost with 0 splits increase");
-        
+        if (splitsSum == 0) throw new UserOperationException("Cannot upgrade a boost with 0 splits increase");
+
         var availableSplits = await GetAvailableSplits(member);
         if (availableSplits.AvailableSplits < splitsSum)
         {
-            throw new UserOperationException($"Cannot upgrade boost, because not enough splits available ({availableSplits.AvailableSplits})");
+            throw new UserOperationException(
+                $"Cannot upgrade boost, because not enough splits available ({availableSplits.AvailableSplits})");
         }
-        
-        if(factorSplitsIncrease % SplitHelper.FactorSplitCost != 0 || durationSplitsIncrease % SplitHelper.DurationSplitCost != 0 || cooldownSplitsIncrease % SplitHelper.CooldownSplitCost != 0)
+
+        if (factorSplitsIncrease % SplitHelper.FactorSplitCost != 0 ||
+            durationSplitsIncrease % SplitHelper.DurationSplitCost != 0 ||
+            cooldownSplitsIncrease % SplitHelper.CooldownSplitCost != 0)
         {
             throw new UserOperationException("Invalid split count provided");
         }
@@ -234,12 +251,15 @@ public class SplitsDomainService(
             boost.Login == member.Login && boost.StartUtcs == startDate.ToUnixTimeMilliseconds().ToString());
         if (existingBoost is null)
         {
-            throw new EntityNotFoundException($"No boost started at {startDate.ToUnixTimeMilliseconds()} to upgrade found");
+            throw new EntityNotFoundException(
+                $"No boost started at {startDate.ToUnixTimeMilliseconds()} to upgrade found");
         }
 
         var factorIncrease = SplitHelper.CalculateFactorBoost(factorSplitsIncrease) - SplitHelper.DefaultFactor;
-        var durationSecondsIncrease = SplitHelper.CalculateDurationSecondsBoost(durationSplitsIncrease) - SplitHelper.DefaultDurationMinutes * 60;
-        var cooldownSecondsIncrease = SplitHelper.CalculateCooldownSecondsBoost(cooldownSplitsIncrease) - SplitHelper.DefaultCooldownHours * 60 * 60;
+        var durationSecondsIncrease = SplitHelper.CalculateDurationSecondsBoost(durationSplitsIncrease) -
+                                      SplitHelper.DefaultDurationMinutes * 60;
+        var cooldownSecondsIncrease = SplitHelper.CalculateCooldownSecondsBoost(cooldownSplitsIncrease) -
+                                      SplitHelper.DefaultCooldownHours * 60 * 60;
 
         existingBoost.DurationS += durationSecondsIncrease * 1000;
         existingBoost.Factor = (Convert.ToDouble(existingBoost.Factor) + factorIncrease).ToString();
@@ -247,5 +267,29 @@ public class SplitsDomainService(
 
         db.DropBoosts.Update(existingBoost);
         await db.SaveChangesAsync();
+    }
+
+    public async Task<SplitDefinitionDdo> CreateSplitReward(string name, string description, int value)
+    {
+        logger.LogTrace("CreateSplitReward(name={name}, description={description}, value={value})", name, description,
+            value);
+
+        var split = new BoostSplitEntity
+        {
+            Name = name,
+            Description = description,
+            Value = value,
+            Date = SplitHelper.FormatSplitTimestamp(DateTimeOffset.UtcNow)
+        };
+
+        db.BoostSplits.Add(split);
+        await db.SaveChangesAsync();
+        return new SplitDefinitionDdo(
+            split.Id,
+            split.Value,
+            split.Name,
+            split.Description,
+            SplitHelper.ParseSplitTimestamp(split.Date)
+        );
     }
 }

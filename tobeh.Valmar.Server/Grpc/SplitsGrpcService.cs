@@ -2,21 +2,22 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using tobeh.Valmar.Server.Domain;
-using tobeh.Valmar.Server.Util;
 using tobeh.Valmar.Server.Grpc.Utils;
+using tobeh.Valmar.Server.Util;
 
 namespace tobeh.Valmar.Server.Grpc;
 
 public class SplitsGrpcService(
-    ILogger<SplitsGrpcService> logger, 
+    ILogger<SplitsGrpcService> logger,
     IMapper mapper,
     IMembersDomainService membersDomainService,
     ISplitsDomainService splitsDomainService) : Splits.SplitsBase
 {
-    public override async Task GetSplits(Empty request, IServerStreamWriter<SplitReply> responseStream, ServerCallContext context)
+    public override async Task GetSplits(Empty request, IServerStreamWriter<SplitReply> responseStream,
+        ServerCallContext context)
     {
         logger.LogTrace("GetSplits(request={request})", request);
-        
+
         var splits = await splitsDomainService.GetSplits();
         await responseStream.WriteAllMappedAsync(splits, mapper.Map<SplitReply>);
     }
@@ -24,12 +25,13 @@ public class SplitsGrpcService(
     public override async Task<SplitReply> GetSplitById(GetSplitByIdRequest request, ServerCallContext context)
     {
         logger.LogTrace("GetSplitById(request={request})", request);
-        
+
         var split = await splitsDomainService.GetSplitById(request.Id);
         return mapper.Map<SplitReply>(split);
     }
 
-    public override async Task GetMemberSplitRewards(GetMemberSplitRewardsRequest request, IServerStreamWriter<SplitRewardReply> responseStream,
+    public override async Task GetMemberSplitRewards(GetMemberSplitRewardsRequest request,
+        IServerStreamWriter<SplitRewardReply> responseStream,
         ServerCallContext context)
     {
         logger.LogTrace("GetMemberSplitRewards(request={request})", request);
@@ -42,8 +44,9 @@ public class SplitsGrpcService(
     public override async Task<Empty> RewardSplit(RewardSplitRequest request, ServerCallContext context)
     {
         logger.LogTrace("RewardSplit(request={request})", request);
-        
-        await splitsDomainService.RewardSplit(request.RewardeeLogin, request.SplitId, request.Comment, request.ValueOverride);
+
+        await splitsDomainService.RewardSplit(request.RewardeeLogin, request.SplitId, request.Comment,
+            request.ValueOverride);
         return new Empty();
     }
 
@@ -65,21 +68,31 @@ public class SplitsGrpcService(
         });
     }
 
-    public override async Task GetActiveDropboosts(Empty request, IServerStreamWriter<ActiveDropboostReply> responseStream, ServerCallContext context)
+    public override async Task GetActiveDropboosts(Empty request,
+        IServerStreamWriter<ActiveDropboostReply> responseStream, ServerCallContext context)
     {
         logger.LogTrace("GetActiveDropboosts(request={request})", request);
-        
+
         var boosts = await splitsDomainService.GetDropboosts();
         await responseStream.WriteAllMappedAsync(boosts, mapper.Map<ActiveDropboostReply>);
     }
 
-    public override async Task GetActiveDropboostsOfMember(GetActiveDropboostsForMemberRequest request, IServerStreamWriter<ActiveDropboostReply> responseStream,
+    public override async Task GetActiveDropboostsOfMember(GetActiveDropboostsForMemberRequest request,
+        IServerStreamWriter<ActiveDropboostReply> responseStream,
         ServerCallContext context)
     {
         logger.LogTrace("GetActiveDropboostsOfMember(request={request})", request);
-        
+
         var boosts = await splitsDomainService.GetDropboosts(request.Login);
         await responseStream.WriteAllMappedAsync(boosts, mapper.Map<ActiveDropboostReply>);
+    }
+
+    public override async Task<SplitReply> CreateSplitReward(CreateSplitMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("CreateSplitReward(request={request})", request);
+
+        var split = await splitsDomainService.CreateSplitReward(request.Name, request.Description, request.Value);
+        return mapper.Map<SplitReply>(split);
     }
 
     public override async Task<Empty> StartDropboost(StartDropboostRequest request, ServerCallContext context)
@@ -98,12 +111,14 @@ public class SplitsGrpcService(
         logger.LogTrace("UpgradeDropboost(request={request})", request);
 
         var member = await membersDomainService.GetMemberByLogin(request.Login);
-        await splitsDomainService.UpgradeDropboost(member, request.StartDate.ToDateTimeOffset(), request.FactorSplitsIncrease, request.DurationSplitsIncrease, request.CooldownSplitsIncrease);
+        await splitsDomainService.UpgradeDropboost(member, request.StartDate.ToDateTimeOffset(),
+            request.FactorSplitsIncrease, request.DurationSplitsIncrease, request.CooldownSplitsIncrease);
 
         return new Empty();
     }
 
-    public override async Task<AvailableSplitsReply> GetAvailableSplits(GetAvailableSplitsRequest request, ServerCallContext context)
+    public override async Task<AvailableSplitsReply> GetAvailableSplits(GetAvailableSplitsRequest request,
+        ServerCallContext context)
     {
         logger.LogTrace("GetAvailableSplits(request={request})", request);
 

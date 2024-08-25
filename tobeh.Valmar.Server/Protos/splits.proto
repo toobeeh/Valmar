@@ -21,6 +21,9 @@ service Splits {
   
   // Reward a member with a split
   rpc RewardSplit(RewardSplitRequest) returns (google.protobuf.Empty);
+
+  // create a new split reward
+  rpc CreateSplitReward(CreateSplitMessage) returns (SplitReply);
   
   // Get information of the cost of a dropboost
   rpc GetBoostCostInformation(google.protobuf.Empty) returns (BoostCostInformationReply);
@@ -77,6 +80,12 @@ message SplitReply {
   string description = 3;
   google.protobuf.Timestamp creationDate = 4;
   int32 value = 5;
+}
+
+message CreateSplitMessage {
+  string name = 1;
+  string description = 2;
+  int32 value = 3;
 }
 
 // A split reward of a member
