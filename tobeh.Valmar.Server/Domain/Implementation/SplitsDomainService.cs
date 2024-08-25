@@ -279,7 +279,8 @@ public class SplitsDomainService(
             Name = name,
             Description = description,
             Value = value,
-            Date = SplitHelper.FormatSplitTimestamp(DateTimeOffset.UtcNow)
+            Date = SplitHelper.FormatSplitTimestamp(DateTimeOffset.UtcNow),
+            Id = await db.BoostSplits.MaxAsync(split => split.Id) + 1
         };
 
         db.BoostSplits.Add(split);
