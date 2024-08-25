@@ -55,7 +55,7 @@ public class GuildsDomainService(
     }
 
     public async Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix,
-        long? channelId = null)
+        long? channelId = null, string? botName = null)
     {
         logger.LogTrace("UpdateGuildOptions(guildId={guildId}, name={name})", guildId, name);
 
@@ -72,9 +72,15 @@ public class GuildsDomainService(
             throw new EntityNotFoundException($"No guild options for id {guildId}");
         }
 
+        if (botName?.Length is > 20 or 0)
+        {
+            throw new UserOperationException("Bot name must be either default or between 1-20 characters.");
+        }
+
         options.Name = name;
         options.Prefix = prefix;
         options.ChannelId = channelId;
+        options.BotName = botName;
 
         db.LobbyBotOptions.Update(options);
         await db.SaveChangesAsync();

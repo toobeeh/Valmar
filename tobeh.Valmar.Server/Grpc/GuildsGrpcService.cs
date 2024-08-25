@@ -39,7 +39,8 @@ public class GuildsGrpcService(
     {
         logger.LogTrace("SetGuildOptions(request={request})", request);
 
-        await guildsService.UpdateGuildOptions(request.GuildId, request.Name, request.Prefix, request.ChannelId);
+        await guildsService.UpdateGuildOptions(request.GuildId, request.Name, request.Prefix, request.ChannelId,
+            request.BotName);
         return new Empty();
     }
 

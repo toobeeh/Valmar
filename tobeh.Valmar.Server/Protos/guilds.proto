@@ -83,4 +83,5 @@ message GuildOptionsMessage {
   string name = 3;
   int32 invite = 4;
   string prefix = 5;
+  google.protobuf.StringValue botName = 6;
 }

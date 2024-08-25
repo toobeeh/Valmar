@@ -37,24 +37,25 @@ namespace tobeh.Valmar {
             "dW50GAYgASgFEhIKCnN1cHBvcnRlcnMYByADKAUiIQoPR2V0R3VpbGRSZXF1",
             "ZXN0Eg4KBmludml0ZRgBIAEoBSIoChNHZXRHdWlsZEJ5SWRNZXNzYWdlEhEK",
             "CWRpc2NvcmRJZBgBIAEoAyItChpHZXRHdWlsZE9wdGlvbnNCeUlkTWVzc2Fn",
-            "ZRIPCgdndWlsZElkGAEgASgDIoQBChNHdWlsZE9wdGlvbnNNZXNzYWdlEg8K",
+            "ZRIPCgdndWlsZElkGAEgASgDIrMBChNHdWlsZE9wdGlvbnNNZXNzYWdlEg8K",
             "B2d1aWxkSWQYASABKAMSLgoJY2hhbm5lbElkGAIgASgLMhsuZ29vZ2xlLnBy",
             "b3RvYnVmLkludDY0VmFsdWUSDAoEbmFtZRgDIAEoCRIOCgZpbnZpdGUYBCAB",
-            "KAUSDgoGcHJlZml4GAUgASgJMusECgZHdWlsZHMSPwoQR2V0R3VpbGRCeUlu",
-            "dml0ZRIXLmd1aWxkcy5HZXRHdWlsZFJlcXVlc3QaEi5ndWlsZHMuR3VpbGRS",
-            "ZXBseRI/CgxHZXRHdWlsZEJ5SWQSGy5ndWlsZHMuR2V0R3VpbGRCeUlkTWVz",
-            "c2FnZRoSLmd1aWxkcy5HdWlsZFJlcGx5ElYKE0dldEd1aWxkT3B0aW9uc0J5",
-            "SWQSIi5ndWlsZHMuR2V0R3VpbGRPcHRpb25zQnlJZE1lc3NhZ2UaGy5ndWls",
-            "ZHMuR3VpbGRPcHRpb25zTWVzc2FnZRJGCg9TZXRHdWlsZE9wdGlvbnMSGy5n",
-            "dWlsZHMuR3VpbGRPcHRpb25zTWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1Zi5F",
-            "bXB0eRJJCg9BZGRHdWlsZFdlYmhvb2sSHi5ndWlsZHMuQWRkR3VpbGRXZWJo",
-            "b29rTWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJPChJSZW1vdmVH",
-            "dWlsZFdlYmhvb2sSIS5ndWlsZHMuUmVtb3ZlR3VpbGRXZWJob29rTWVzc2Fn",
-            "ZRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJSChBHZXRHdWlsZFdlYmhvb2tz",
-            "Eh8uZ3VpbGRzLkdldEd1aWxkV2ViaG9va3NNZXNzYWdlGhsuZ3VpbGRzLkd1",
-            "aWxkV2ViaG9va01lc3NhZ2UwARJPChJHZXRHdWlsZFN1cHBvcnRlcnMSIS5n",
-            "dWlsZHMuR2V0R3VpbGRTdXBwb3J0ZXJzTWVzc2FnZRoULm1lbWJlcnMuTWVt",
-            "YmVyUmVwbHkwAUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
+            "KAUSDgoGcHJlZml4GAUgASgJEi0KB2JvdE5hbWUYBiABKAsyHC5nb29nbGUu",
+            "cHJvdG9idWYuU3RyaW5nVmFsdWUy6wQKBkd1aWxkcxI/ChBHZXRHdWlsZEJ5",
+            "SW52aXRlEhcuZ3VpbGRzLkdldEd1aWxkUmVxdWVzdBoSLmd1aWxkcy5HdWls",
+            "ZFJlcGx5Ej8KDEdldEd1aWxkQnlJZBIbLmd1aWxkcy5HZXRHdWlsZEJ5SWRN",
+            "ZXNzYWdlGhIuZ3VpbGRzLkd1aWxkUmVwbHkSVgoTR2V0R3VpbGRPcHRpb25z",
+            "QnlJZBIiLmd1aWxkcy5HZXRHdWlsZE9wdGlvbnNCeUlkTWVzc2FnZRobLmd1",
+            "aWxkcy5HdWlsZE9wdGlvbnNNZXNzYWdlEkYKD1NldEd1aWxkT3B0aW9ucxIb",
+            "Lmd1aWxkcy5HdWlsZE9wdGlvbnNNZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVm",
+            "LkVtcHR5EkkKD0FkZEd1aWxkV2ViaG9vaxIeLmd1aWxkcy5BZGRHdWlsZFdl",
+            "Ymhvb2tNZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Ek8KElJlbW92",
+            "ZUd1aWxkV2ViaG9vaxIhLmd1aWxkcy5SZW1vdmVHdWlsZFdlYmhvb2tNZXNz",
+            "YWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5ElIKEEdldEd1aWxkV2ViaG9v",
+            "a3MSHy5ndWlsZHMuR2V0R3VpbGRXZWJob29rc01lc3NhZ2UaGy5ndWlsZHMu",
+            "R3VpbGRXZWJob29rTWVzc2FnZTABEk8KEkdldEd1aWxkU3VwcG9ydGVycxIh",
+            "Lmd1aWxkcy5HZXRHdWlsZFN1cHBvcnRlcnNNZXNzYWdlGhQubWVtYmVycy5N",
+            "ZW1iZXJSZXBseTABQg+qAgx0b2JlaC5WYWxtYXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::tobeh.Valmar.MembersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -67,7 +68,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildRequest), global::tobeh.Valmar.GetGuildRequest.Parser, new[]{ "Invite" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildByIdMessage), global::tobeh.Valmar.GetGuildByIdMessage.Parser, new[]{ "DiscordId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildOptionsByIdMessage), global::tobeh.Valmar.GetGuildOptionsByIdMessage.Parser, new[]{ "GuildId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildOptionsMessage), global::tobeh.Valmar.GuildOptionsMessage.Parser, new[]{ "GuildId", "ChannelId", "Name", "Invite", "Prefix" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildOptionsMessage), global::tobeh.Valmar.GuildOptionsMessage.Parser, new[]{ "GuildId", "ChannelId", "Name", "Invite", "Prefix", "BotName" }, null, null, null, null)
           }));
     }
     #endregion
@@ -2116,6 +2117,7 @@ namespace tobeh.Valmar {
       name_ = other.name_;
       invite_ = other.invite_;
       prefix_ = other.prefix_;
+      BotName = other.BotName;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2187,6 +2189,20 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "botName" field.</summary>
+    public const int BotNameFieldNumber = 6;
+    private static readonly pb::FieldCodec<string> _single_botName_codec = pb::FieldCodec.ForClassWrapper<string>(50);
+    private string botName_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string BotName {
+      get { return botName_; }
+      set {
+        botName_ = value;
+      }
+    }
+
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2207,6 +2223,7 @@ namespace tobeh.Valmar {
       if (Name != other.Name) return false;
       if (Invite != other.Invite) return false;
       if (Prefix != other.Prefix) return false;
+      if (BotName != other.BotName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2219,6 +2236,7 @@ namespace tobeh.Valmar {
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Invite != 0) hash ^= Invite.GetHashCode();
       if (Prefix.Length != 0) hash ^= Prefix.GetHashCode();
+      if (botName_ != null) hash ^= BotName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2256,6 +2274,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(42);
         output.WriteString(Prefix);
       }
+      if (botName_ != null) {
+        _single_botName_codec.WriteTagAndValue(output, BotName);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2285,6 +2306,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(42);
         output.WriteString(Prefix);
       }
+      if (botName_ != null) {
+        _single_botName_codec.WriteTagAndValue(ref output, BotName);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2309,6 +2333,9 @@ namespace tobeh.Valmar {
       }
       if (Prefix.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Prefix);
+      }
+      if (botName_ != null) {
+        size += _single_botName_codec.CalculateSizeWithTag(BotName);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2338,6 +2365,11 @@ namespace tobeh.Valmar {
       }
       if (other.Prefix.Length != 0) {
         Prefix = other.Prefix;
+      }
+      if (other.botName_ != null) {
+        if (botName_ == null || other.BotName != "") {
+          BotName = other.BotName;
+        }
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2377,6 +2409,13 @@ namespace tobeh.Valmar {
             Prefix = input.ReadString();
             break;
           }
+          case 50: {
+            string value = _single_botName_codec.Read(input);
+            if (botName_ == null || value != "") {
+              BotName = value;
+            }
+            break;
+          }
         }
       }
     #endif
@@ -2413,6 +2452,13 @@ namespace tobeh.Valmar {
           }
           case 42: {
             Prefix = input.ReadString();
+            break;
+          }
+          case 50: {
+            string value = _single_botName_codec.Read(ref input);
+            if (botName_ == null || value != "") {
+              BotName = value;
+            }
             break;
           }
         }

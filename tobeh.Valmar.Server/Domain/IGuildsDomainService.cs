@@ -9,7 +9,7 @@ public interface IGuildsDomainService
     Task<GuildDetailDdo> GetGuildByDiscordId(long discordId);
 
     Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix,
-        long? channelId = null);
+        long? channelId = null, string? botName = null);
 
     Task<LobbyBotOptionEntity> GetGuildOptionsByGuildId(long guildId);
     Task<List<ServerWebhookEntity>> GetGuildWebhooks(long guildId);
