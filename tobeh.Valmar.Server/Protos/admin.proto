@@ -23,6 +23,9 @@ service Admin {
   
   // Update the flags of members
   rpc UpdateMemberFlags (UpdateMemberFlagsRequest) returns (google.protobuf.Empty);
+
+  // Get all temporary patrons
+  rpc GetTemporaryPatrons (google.protobuf.Empty) returns (stream TemporaryPatronMessage);
   
   // Fetch current member bubble count and save as bubble traces
   rpc CreateBubbleTraces (google.protobuf.Empty) returns (google.protobuf.Empty);
@@ -47,6 +50,10 @@ message UpdateMemberFlagsRequest {
 
 message SetOnlineItemsRequest {
   repeated OnlineItemMessage items = 1;
+}
+
+message TemporaryPatronMessage {
+  int32 login = 1;
 }
 
 message OnlineItemMessage {

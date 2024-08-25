@@ -3,14 +3,14 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using tobeh.Valmar.Server.Domain;
 using tobeh.Valmar.Server.Domain.Classes.Param;
-using tobeh.Valmar.Server.Domain.Implementation;
+using tobeh.Valmar.Server.Grpc.Utils;
 
 namespace tobeh.Valmar.Server.Grpc;
 
 public class AdminGrpcService(
-    ILogger<AdminGrpcService> logger, 
+    ILogger<AdminGrpcService> logger,
     IMapper mapper,
-    IAdminDomainService adminService) : Admin.AdminBase 
+    IAdminDomainService adminService) : Admin.AdminBase
 {
     public override async Task<Empty> UpdateMemberFlags(UpdateMemberFlagsRequest request, ServerCallContext context)
     {
@@ -34,7 +34,8 @@ public class AdminGrpcService(
         return new Empty();
     }
 
-    public override async Task<Empty> IncrementMemberBubbles(IncrementMemberBubblesRequest request, ServerCallContext context)
+    public override async Task<Empty> IncrementMemberBubbles(IncrementMemberBubblesRequest request,
+        ServerCallContext context)
     {
         logger.LogTrace("IncrementMemberBubbles(request={request})", request);
         await adminService.IncrementMemberBubbles(request.MemberLogins);
@@ -45,7 +46,7 @@ public class AdminGrpcService(
     {
         logger.LogTrace("SetOnlineItems(request={request})", request);
         await adminService.WriteOnlineItems(
-            request.Items.Select(mapper.Map<OnlineItemMessage, OnlineItemDdo>).ToList()); 
+            request.Items.Select(mapper.Map<OnlineItemMessage, OnlineItemDdo>).ToList());
         return new Empty();
     }
 
@@ -54,5 +55,14 @@ public class AdminGrpcService(
         logger.LogTrace("ReevaluateDropChunks(empty)");
         await adminService.ReevaluateDropChunks();
         return new Empty();
+    }
+
+    public override async Task GetTemporaryPatrons(Empty request,
+        IServerStreamWriter<TemporaryPatronMessage> responseStream, ServerCallContext context)
+    {
+        logger.LogTrace("GetTemporaryPatrons(empty)");
+
+        var patrons = await adminService.GetTemporaryPatronLogins();
+        await responseStream.WriteAllMappedAsync(patrons, patron => new() { Login = patron });
     }
 }

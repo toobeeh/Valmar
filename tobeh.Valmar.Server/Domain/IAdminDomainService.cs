@@ -11,4 +11,5 @@ public interface IAdminDomainService
     Task ClearVolatileData();
     Task IncrementMemberBubbles(IList<int> userLogins);
     Task WriteOnlineItems(List<OnlineItemDdo> items);
+    Task<List<int>> GetTemporaryPatronLogins();
 }

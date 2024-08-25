@@ -7,21 +7,20 @@ using tobeh.Valmar.Server.Util.NChunkTree.Drops;
 namespace tobeh.Valmar.Server.Domain.Implementation;
 
 public class AdminDomainService(
-    ILogger<AdminDomainService> logger, 
+    ILogger<AdminDomainService> logger,
     PalantirContext db,
     IMembersDomainService membersService,
     DropChunkTreeProvider dropChunks) : IAdminDomainService
 {
-    
     public Task ReevaluateDropChunks()
     {
         logger.LogTrace("ReevaluateDropChunks()");
-        
+
         var tree = dropChunks.GetTree();
         dropChunks.RepartitionTree(tree);
         return Task.CompletedTask;
     }
-    
+
     public async Task WriteOnlineItems(List<OnlineItemDdo> items)
     {
         logger.LogTrace("WriteOnlineItems(items={items})", items);
@@ -36,13 +35,14 @@ public class AdminDomainService(
             LobbyKey = item.LobbyKey,
             LobbyPlayerId = item.LobbyPlayerId
         });
-        
+
         var duplicates = (await db.OnlineItems.ToListAsync())
-            .Where(item => items.Any(i => 
-                i.ItemType == item.ItemType && i.Slot == item.Slot && i.LobbyKey == item.LobbyKey && i.LobbyPlayerId == item.LobbyPlayerId));
+            .Where(item => items.Any(i =>
+                i.ItemType == item.ItemType && i.Slot == item.Slot && i.LobbyKey == item.LobbyKey &&
+                i.LobbyPlayerId == item.LobbyPlayerId));
         db.OnlineItems.RemoveRange(duplicates);
         await db.SaveChangesAsync();
-        
+
         await db.OnlineItems.AddRangeAsync(entities);
         await db.SaveChangesAsync();
     }
@@ -67,11 +67,11 @@ public class AdminDomainService(
 
         var memberStats = await db.Members.Select(member => new { member.Bubbles, member.Login }).ToListAsync();
         var date = BubbleHelper.FormatTraceTimestamp(DateTimeOffset.UtcNow);
-        
+
         db.BubbleTraces.RemoveRange(db.BubbleTraces.Where(trace => trace.Date == date));
         await db.SaveChangesAsync();
         var maxId = await db.BubbleTraces.Select(trace => trace.Id).MaxAsync();
-        
+
         var traces = memberStats.Select(member => new BubbleTraceEntity
         {
             Login = member.Login,
@@ -83,7 +83,7 @@ public class AdminDomainService(
         await db.BubbleTraces.AddRangeAsync(traces);
         await db.SaveChangesAsync();
     }
-    
+
     public async Task ClearVolatileData()
     {
         logger.LogTrace("ClearVolatileData()");
@@ -101,34 +101,39 @@ public class AdminDomainService(
                 (DateTimeOffset)(object)sprite.Date < now.AddSeconds(-30));
         var outdatedItems = db.OnlineItems
             .Where(item =>
-                item.ItemType != "award" && item.Date < now.AddSeconds(-30).ToUnixTimeSeconds() || 
+                item.ItemType != "award" && item.Date < now.AddSeconds(-30).ToUnixTimeSeconds() ||
                 item.ItemType == "award" && item.Date < now.AddDays(-2).ToUnixTimeSeconds());
         var outdatedLobbies = db.Lobbies
             .Where(lobby =>
                 (long)(object)lobby.LobbyId < now.AddDays(-1).ToUnixTimeMilliseconds() &&
-                !db.Statuses.Any(status => status.Status1.Contains(lobby.LobbyId)));         // where no status references the lobby
-        
+                !db.Statuses.Any(status =>
+                    status.Status1.Contains(lobby.LobbyId))); // where no status references the lobby
+
         // TODO ensure that there are no duplicate lobby keys (same key, other ID - fix in future by making key the PK)
-        
+
         db.Reports.RemoveRange(outdatedReports);
         db.Statuses.RemoveRange(outdatedStatus);
         db.OnlineSprites.RemoveRange(outdatedSprites);
         db.OnlineItems.RemoveRange(outdatedItems);
         db.Lobbies.RemoveRange(outdatedLobbies);
-        
+
         await db.SaveChangesAsync();
     }
 
     public async Task SetPermissionFlag(IList<long> userIds, int flag, bool state, bool toggleOthers)
     {
-        logger.LogTrace("SetPermissionFlag(userIds={userIds}, flag={flag}, state={state}, toggleOthers={toggleOthers})", userIds, flag, state, toggleOthers);
-        
-        var memberLogins = (await membersService.GetMemberInfosFromDiscordIds(userIds.ToList())).Select(m => m.UserLogin);
-        
+        logger.LogTrace("SetPermissionFlag(userIds={userIds}, flag={flag}, state={state}, toggleOthers={toggleOthers})",
+            userIds, flag, state, toggleOthers);
+
+        var memberLogins =
+            (await membersService.GetMemberInfosFromDiscordIds(userIds.ToList())).Select(m => m.UserLogin);
+
         var positives = await db.Members.Where(m => memberLogins.Contains(m.Login.ToString())).ToListAsync();
-        var negatives = toggleOthers ? await db.Members.Where(m => !memberLogins.Contains(m.Login.ToString())).ToListAsync() : [];
+        var negatives = toggleOthers
+            ? await db.Members.Where(m => !memberLogins.Contains(m.Login.ToString())).ToListAsync()
+            : [];
         var updates = new List<MemberEntity>();
-        
+
         foreach (var member in positives)
         {
             var newFlag = RecalculateFlag(member.Flag, flag, state);
@@ -136,7 +141,7 @@ public class AdminDomainService(
             member.Flag = newFlag;
             updates.Add(member);
         }
-        
+
         foreach (var member in negatives)
         {
             var newFlag = RecalculateFlag(member.Flag, flag, !state);
@@ -149,7 +154,18 @@ public class AdminDomainService(
 
         await db.SaveChangesAsync();
     }
-    
+
+    public async Task<List<int>> GetTemporaryPatronLogins()
+    {
+        logger.LogTrace("GetTemporaryPatronLogins()");
+
+        var patrons = await db.TemporaryPatrons
+            .Select(patron => patron.Login)
+            .ToListAsync();
+
+        return patrons;
+    }
+
     private static int RecalculateFlag(int flag, int flagIndex, bool state)
     {
         return state ? flag | (1 << flagIndex) : flag & ~(1 << flagIndex);
