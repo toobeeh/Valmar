@@ -5,8 +5,6 @@ namespace tobeh.Valmar.Server.Database
 {
     public partial class TemporaryPatronEntity
     {
-        [Key]
-        [Column(TypeName = "bigint(20)")]
-        public long Login { get; set; }
+        [Key] [Column(TypeName = "int(20)")] public int Login { get; set; }
     }
 }
