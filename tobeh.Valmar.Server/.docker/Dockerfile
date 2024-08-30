@@ -6,9 +6,6 @@ WORKDIR /app
 EXPOSE 8080 
 EXPOSE 9090
 
-ARG DB_DOMAIN_NAME="db.domain.tld"
-ENV DB_DOMAIN_NAME "${DB_DOMAIN_NAME}"
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
@@ -27,12 +24,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-# Copy the entrypoint script
-COPY .docker/entrypoint.sh .
-USER root
-RUN ls -lR
-RUN chmod +x entrypoint.sh
-USER $APP_UID
-
-ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["sh", "-c", "dotnet tobeh.Valmar.Server.dll"]

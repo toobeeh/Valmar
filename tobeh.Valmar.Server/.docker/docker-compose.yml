@@ -6,8 +6,8 @@ services:
     build:
       context: ../
       dockerfile: .docker/Dockerfile
-    restart: no
-    environment:
-      - DB_DOMAIN_NAME=host.docker.internal
+    restart: unless-stopped
+    volumes:
+      - path-to-appsettings.json:/app/appsettings.json
     ports:
       - "8080:8080"

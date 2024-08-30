@@ -36,4 +36,9 @@
         <PackageReference Include="prometheus-net.AspNetCore.Grpc" Version="8.2.1" />
         <PackageReference Include="Ulid" Version="1.3.3" />
     </ItemGroup>
+
+    <ItemGroup>
+        <Content Include=".docker\docker-compose.yml"/>
+        <Content Include=".docker\Dockerfile"/>
+    </ItemGroup>
 </Project>
