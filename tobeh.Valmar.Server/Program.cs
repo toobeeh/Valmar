@@ -22,17 +22,19 @@ public class Program
     {
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
         CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
-        
+
         var builder = WebApplication.CreateBuilder(args);
-        
+
         // configure kestrel
         builder.WebHost.ConfigureKestrel(options =>
         {
             // Setup a HTTP/2 endpoint without TLS.
-            options.ListenAnyIP(builder.Configuration.GetRequiredSection("Grpc").GetValue<int>("HostPort"), o => o.Protocols = HttpProtocols.Http2);
-            
+            options.ListenAnyIP(builder.Configuration.GetRequiredSection("Grpc").GetValue<int>("HostPort"),
+                o => o.Protocols = HttpProtocols.Http2);
+
             // setup prometheus endpoint
-            options.ListenAnyIP(builder.Configuration.GetRequiredSection("Prometheus").GetValue<int>("HostPort"), o => o.Protocols = HttpProtocols.Http1);
+            options.ListenAnyIP(builder.Configuration.GetRequiredSection("Prometheus").GetValue<int>("HostPort"),
+                o => o.Protocols = HttpProtocols.Http1);
         });
 
         // Add services to the container.
@@ -52,7 +54,7 @@ public class Program
 
         // Register routes and start app
         var app = builder.Build();
-        
+
         // initialize drop & bubble chunks to prevent inconsistency with first requests
         var drops = app.Services.GetRequiredService<DropChunkTreeProvider>();
         var bubbles = app.Services.GetRequiredService<BubbleChunkTreeProvider>();
@@ -67,7 +69,7 @@ public class Program
         app.UseRouting();
         app.UseGrpcMetrics();
         app.MapMetrics();
-            
+
         await app.RunAsync();
     }
 
@@ -90,6 +92,7 @@ public class Program
         services.AddScoped<IOutfitsDomainService, OutfitsDomainService>();
         services.AddScoped<ICardDomainService, CardDomainService>();
         services.AddScoped<IWorkersDomainService, WorkersDomainService>();
+        services.AddScoped<ICloudDomainService, CloudDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -111,6 +114,7 @@ public class Program
         app.MapGrpcService<OutfitsGrpcService>();
         app.MapGrpcService<CardGrpcService>();
         app.MapGrpcService<WorkersGrpcService>();
+        app.MapGrpcService<CloudGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)
@@ -131,9 +135,10 @@ public class Program
             typeof(OutfitMapperProfile),
             typeof(CardMapperProfile),
             typeof(WorkerMapperProfile),
+            typeof(CloudMapperProfile),
             typeof(AwardMapperProfile));
     }
-    
+
     private static void RegisterDropChunkAbstraction(WebApplicationBuilder builder)
     {
         var services = builder.Services;
@@ -141,9 +146,10 @@ public class Program
         services.AddSingleton<DropChunkTreeProvider>();
         services.AddScoped<PersistentDropChunk>();
         services.AddScoped<CachedDropChunk>();
-        services.AddScoped<NChunkTreeNodeContext>(c => throw new InvalidOperationException("Context cannot be created from DI"));
+        services.AddScoped<NChunkTreeNodeContext>(c =>
+            throw new InvalidOperationException("Context cannot be created from DI"));
     }
-    
+
     private static void RegisterBubbleChunkAbstraction(WebApplicationBuilder builder)
     {
         var services = builder.Services;
@@ -151,6 +157,7 @@ public class Program
         services.AddSingleton<BubbleChunkTreeProvider>();
         services.AddScoped<PersistentBubbleChunk>();
         services.AddScoped<CachedBubbleChunk>();
-        services.AddScoped<NChunkTreeNodeContext>(c => throw new InvalidOperationException("Context cannot be created from DI"));
+        services.AddScoped<NChunkTreeNodeContext>(c =>
+            throw new InvalidOperationException("Context cannot be created from DI"));
     }
 }

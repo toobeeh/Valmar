@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "tobeh.Valmar";
+package cloud;
+
+// Service definition for cloud resource access
+service Cloud {
+
+  rpc SearchCloud (SearchCloudMessage) returns (stream CloudImageMessage);
+}
+
+message SearchCloudMessage {
+  int32 page = 1;
+  int32 pageSize = 2;
+  int32 ownerLogin = 3;
+  google.protobuf.StringValue authorQuery = 4;
+  google.protobuf.StringValue languageQuery = 5;
+  google.protobuf.Int64Value createdBeforeQuery = 6;
+  google.protobuf.Int64Value createdAfterQuery = 7;
+  google.protobuf.BoolValue createdInPrivateLobbyQuery = 8;
+  google.protobuf.BoolValue isOwnQuery = 9;
+  google.protobuf.StringValue titleQuery = 10;
+}
+
+message CloudImageMessage {
+  int64 id = 1;
+  string imageUrl = 2;
+  string metaUrl = 3;
+  string commandsUrl = 4;
+  CloudTagMessage tags = 5;
+}
+
+message CloudTagMessage {
+  string title = 1;
+  string author = 2;
+  string language = 3;
+  int64 createdAt = 4;
+  bool createdInPrivateLobby = 5;
+  bool isOwn = 6;
+}
