@@ -8,4 +8,5 @@ public record CloudImageTagDdo(
     string Language,
     DateTimeOffset CreatedAt,
     bool CreatedInPrivateLobby,
-    bool IsOwn);
+    bool IsOwn,
+    int OwnerLogin);

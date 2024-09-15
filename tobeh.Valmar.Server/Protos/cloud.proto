@@ -10,6 +10,12 @@ package cloud;
 service Cloud {
 
   rpc SearchCloud (SearchCloudMessage) returns (stream CloudImageMessage);
+
+  rpc SaveCloudTags (CloudTagMessage) returns (CloudImageIdMessage);
+
+  rpc GetCloudTagsById (GetCloudTagsByIdMessage) returns (CloudImageMessage);
+
+  rpc DeleteCloudTags (DeleteCloudTagsMessage) returns (google.protobuf.Empty);
 }
 
 message SearchCloudMessage {
@@ -40,4 +46,19 @@ message CloudTagMessage {
   int64 createdAt = 4;
   bool createdInPrivateLobby = 5;
   bool isOwn = 6;
+  int32 ownerLogin = 7;
+}
+
+message CloudImageIdMessage {
+  int64 id = 1;
+}
+
+message GetCloudTagsByIdMessage {
+  int64 id = 1;
+  int32 ownerLogin = 2;
+}
+
+message DeleteCloudTagsMessage {
+  int32 ownerLogin = 1;
+  repeated int64 ids = 2;
 }

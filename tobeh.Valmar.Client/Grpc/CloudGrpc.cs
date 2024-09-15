@@ -52,6 +52,16 @@ namespace tobeh.Valmar {
     static readonly grpc::Marshaller<global::tobeh.Valmar.SearchCloudMessage> __Marshaller_cloud_SearchCloudMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.SearchCloudMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.CloudImageMessage> __Marshaller_cloud_CloudImageMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.CloudImageMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.CloudTagMessage> __Marshaller_cloud_CloudTagMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.CloudTagMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.CloudImageIdMessage> __Marshaller_cloud_CloudImageIdMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.CloudImageIdMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.GetCloudTagsByIdMessage> __Marshaller_cloud_GetCloudTagsByIdMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetCloudTagsByIdMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.DeleteCloudTagsMessage> __Marshaller_cloud_DeleteCloudTagsMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.DeleteCloudTagsMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Empty.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.SearchCloudMessage, global::tobeh.Valmar.CloudImageMessage> __Method_SearchCloud = new grpc::Method<global::tobeh.Valmar.SearchCloudMessage, global::tobeh.Valmar.CloudImageMessage>(
@@ -60,6 +70,30 @@ namespace tobeh.Valmar {
         "SearchCloud",
         __Marshaller_cloud_SearchCloudMessage,
         __Marshaller_cloud_CloudImageMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.CloudTagMessage, global::tobeh.Valmar.CloudImageIdMessage> __Method_SaveCloudTags = new grpc::Method<global::tobeh.Valmar.CloudTagMessage, global::tobeh.Valmar.CloudImageIdMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SaveCloudTags",
+        __Marshaller_cloud_CloudTagMessage,
+        __Marshaller_cloud_CloudImageIdMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.GetCloudTagsByIdMessage, global::tobeh.Valmar.CloudImageMessage> __Method_GetCloudTagsById = new grpc::Method<global::tobeh.Valmar.GetCloudTagsByIdMessage, global::tobeh.Valmar.CloudImageMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetCloudTagsById",
+        __Marshaller_cloud_GetCloudTagsByIdMessage,
+        __Marshaller_cloud_CloudImageMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.DeleteCloudTagsMessage, global::Google.Protobuf.WellKnownTypes.Empty> __Method_DeleteCloudTags = new grpc::Method<global::tobeh.Valmar.DeleteCloudTagsMessage, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "DeleteCloudTags",
+        __Marshaller_cloud_DeleteCloudTagsMessage,
+        __Marshaller_google_protobuf_Empty);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -103,6 +137,66 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.CloudImageMessage> SearchCloud(global::tobeh.Valmar.SearchCloudMessage request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchCloud, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.CloudImageIdMessage SaveCloudTags(global::tobeh.Valmar.CloudTagMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SaveCloudTags(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.CloudImageIdMessage SaveCloudTags(global::tobeh.Valmar.CloudTagMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SaveCloudTags, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.CloudImageIdMessage> SaveCloudTagsAsync(global::tobeh.Valmar.CloudTagMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SaveCloudTagsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.CloudImageIdMessage> SaveCloudTagsAsync(global::tobeh.Valmar.CloudTagMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SaveCloudTags, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.CloudImageMessage GetCloudTagsById(global::tobeh.Valmar.GetCloudTagsByIdMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetCloudTagsById(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.CloudImageMessage GetCloudTagsById(global::tobeh.Valmar.GetCloudTagsByIdMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetCloudTagsById, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.CloudImageMessage> GetCloudTagsByIdAsync(global::tobeh.Valmar.GetCloudTagsByIdMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetCloudTagsByIdAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.CloudImageMessage> GetCloudTagsByIdAsync(global::tobeh.Valmar.GetCloudTagsByIdMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetCloudTagsById, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty DeleteCloudTags(global::tobeh.Valmar.DeleteCloudTagsMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DeleteCloudTags(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty DeleteCloudTags(global::tobeh.Valmar.DeleteCloudTagsMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_DeleteCloudTags, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> DeleteCloudTagsAsync(global::tobeh.Valmar.DeleteCloudTagsMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DeleteCloudTagsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> DeleteCloudTagsAsync(global::tobeh.Valmar.DeleteCloudTagsMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_DeleteCloudTags, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

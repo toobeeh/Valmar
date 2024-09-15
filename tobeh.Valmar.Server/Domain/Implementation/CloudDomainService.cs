@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using SnowflakeGenerator;
 using tobeh.Valmar.Server.Database;
 using tobeh.Valmar.Server.Domain.Classes;
+using tobeh.Valmar.Server.Domain.Exceptions;
 
 namespace tobeh.Valmar.Server.Domain.Implementation;
 
@@ -38,7 +40,67 @@ public class CloudDomainService(
             $"https://cloud.typo.rip/{member.DiscordId}/{image.ImageId}/meta.json",
             $"https://cloud.typo.rip/{member.DiscordId}/{image.ImageId}/commands.json",
             new CloudImageTagDdo(image.Title, image.Author, image.Language,
-                DateTimeOffset.FromUnixTimeMilliseconds(image.Date), image.Private, image.Own)
+                DateTimeOffset.FromUnixTimeMilliseconds(image.Date), image.Private, image.Own, image.Owner)
         )).ToList();
+    }
+
+    public async Task<CloudImageDdo> GetCloudTagsById(int ownerLogin, long id)
+    {
+        logger.LogTrace("GetCloudTagsById({login}, {id})", ownerLogin, id);
+
+        var tag = await db.CloudTags.FirstAsync(tag => tag.Owner == ownerLogin && tag.ImageId == id);
+        if (tag is null)
+        {
+            throw new EntityNotFoundException($"No cloud tags found with id {id}");
+        }
+
+        return MapToDdo(tag);
+    }
+
+    public async Task DeleteCloudTags(int ownerLogin, IEnumerable<long> ids)
+    {
+        logger.LogTrace("DeleteCloudTags({login}, {ids})", ownerLogin, ids);
+
+        var tags = await db.CloudTags.Where(tag => tag.Owner == ownerLogin && ids.Contains(tag.ImageId)).ToListAsync();
+        if (tags.Count != ids.Count())
+        {
+            throw new EntityNotFoundException("Some given cloud tags were not found");
+        }
+
+        db.CloudTags.RemoveRange(tags);
+        await db.SaveChangesAsync();
+    }
+
+    public async Task<long> SaveCloudTags(CloudImageTagDdo tags)
+    {
+        logger.LogTrace("SaveCloudTags({tags})", tags);
+
+        var tag = new CloudTagEntity
+        {
+            Title = tags.Title,
+            Author = tags.Author,
+            Language = tags.Language,
+            Date = tags.CreatedAt.ToUnixTimeMilliseconds(),
+            Private = tags.CreatedInPrivateLobby,
+            Own = tags.IsOwn,
+            Owner = tags.OwnerLogin,
+            ImageId = new Snowflake().NextID()
+        };
+
+        await db.CloudTags.AddAsync(tag);
+        await db.SaveChangesAsync();
+        return tag.ImageId;
+    }
+
+    private CloudImageDdo MapToDdo(CloudTagEntity tag)
+    {
+        return new CloudImageDdo(
+            tag.ImageId,
+            $"https://cloud.typo.rip/{tag.Owner}/{tag.ImageId}/image.png",
+            $"https://cloud.typo.rip/{tag.Owner}/{tag.ImageId}/meta.json",
+            $"https://cloud.typo.rip/{tag.Owner}/{tag.ImageId}/commands.json",
+            new CloudImageTagDdo(tag.Title, tag.Author, tag.Language,
+                DateTimeOffset.FromUnixTimeMilliseconds(tag.Date), tag.Private, tag.Own, tag.Owner)
+        );
     }
 }
