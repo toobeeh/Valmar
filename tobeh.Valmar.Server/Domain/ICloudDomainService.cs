@@ -10,4 +10,5 @@ public interface ICloudDomainService
     Task<long> SaveCloudTags(CloudImageTagDdo tags);
     Task<CloudImageDdo> GetCloudTagsById(int ownerLogin, long id);
     Task DeleteCloudTags(int ownerLogin, IEnumerable<long> ids);
+    Task LinkImageToAward(int ownerLogin, long imageId, int awardId);
 }

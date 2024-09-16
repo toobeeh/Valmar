@@ -44,15 +44,19 @@ namespace tobeh.Valmar {
             "aXZhdGVMb2JieRgFIAEoCBINCgVpc093bhgGIAEoCBISCgpvd25lckxvZ2lu",
             "GAcgASgFIiEKE0Nsb3VkSW1hZ2VJZE1lc3NhZ2USCgoCaWQYASABKAMiOQoX",
             "R2V0Q2xvdWRUYWdzQnlJZE1lc3NhZ2USCgoCaWQYASABKAMSEgoKb3duZXJM",
-            "b2dpbhgCIAEoBSI5ChZEZWxldGVDbG91ZFRhZ3NNZXNzYWdlEhIKCm93bmVy",
-            "TG9naW4YASABKAUSCwoDaWRzGAIgAygDMqoCCgVDbG91ZBJECgtTZWFyY2hD",
-            "bG91ZBIZLmNsb3VkLlNlYXJjaENsb3VkTWVzc2FnZRoYLmNsb3VkLkNsb3Vk",
-            "SW1hZ2VNZXNzYWdlMAESQwoNU2F2ZUNsb3VkVGFncxIWLmNsb3VkLkNsb3Vk",
-            "VGFnTWVzc2FnZRoaLmNsb3VkLkNsb3VkSW1hZ2VJZE1lc3NhZ2USTAoQR2V0",
-            "Q2xvdWRUYWdzQnlJZBIeLmNsb3VkLkdldENsb3VkVGFnc0J5SWRNZXNzYWdl",
-            "GhguY2xvdWQuQ2xvdWRJbWFnZU1lc3NhZ2USSAoPRGVsZXRlQ2xvdWRUYWdz",
-            "Eh0uY2xvdWQuRGVsZXRlQ2xvdWRUYWdzTWVzc2FnZRoWLmdvb2dsZS5wcm90",
-            "b2J1Zi5FbXB0eUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
+            "b2dpbhgCIAEoBSJTChdMaW5rSW1hZ2VUb0F3YXJkTWVzc2FnZRIKCgJpZBgB",
+            "IAEoAxISCgpvd25lckxvZ2luGAIgASgFEhgKEGF3YXJkSW52ZW50b3J5SWQY",
+            "AyABKAUiOQoWRGVsZXRlQ2xvdWRUYWdzTWVzc2FnZRISCgpvd25lckxvZ2lu",
+            "GAEgASgFEgsKA2lkcxgCIAMoAzL2AgoFQ2xvdWQSRAoLU2VhcmNoQ2xvdWQS",
+            "GS5jbG91ZC5TZWFyY2hDbG91ZE1lc3NhZ2UaGC5jbG91ZC5DbG91ZEltYWdl",
+            "TWVzc2FnZTABEkMKDVNhdmVDbG91ZFRhZ3MSFi5jbG91ZC5DbG91ZFRhZ01l",
+            "c3NhZ2UaGi5jbG91ZC5DbG91ZEltYWdlSWRNZXNzYWdlEkwKEEdldENsb3Vk",
+            "VGFnc0J5SWQSHi5jbG91ZC5HZXRDbG91ZFRhZ3NCeUlkTWVzc2FnZRoYLmNs",
+            "b3VkLkNsb3VkSW1hZ2VNZXNzYWdlEkgKD0RlbGV0ZUNsb3VkVGFncxIdLmNs",
+            "b3VkLkRlbGV0ZUNsb3VkVGFnc01lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYu",
+            "RW1wdHkSSgoQTGlua0ltYWdlVG9Bd2FyZBIeLmNsb3VkLkxpbmtJbWFnZVRv",
+            "QXdhcmRNZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Qg+qAgx0b2Jl",
+            "aC5WYWxtYXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -61,6 +65,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CloudTagMessage), global::tobeh.Valmar.CloudTagMessage.Parser, new[]{ "Title", "Author", "Language", "CreatedAt", "CreatedInPrivateLobby", "IsOwn", "OwnerLogin" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CloudImageIdMessage), global::tobeh.Valmar.CloudImageIdMessage.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetCloudTagsByIdMessage), global::tobeh.Valmar.GetCloudTagsByIdMessage.Parser, new[]{ "Id", "OwnerLogin" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LinkImageToAwardMessage), global::tobeh.Valmar.LinkImageToAwardMessage.Parser, new[]{ "Id", "OwnerLogin", "AwardInventoryId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.DeleteCloudTagsMessage), global::tobeh.Valmar.DeleteCloudTagsMessage.Parser, new[]{ "OwnerLogin", "Ids" }, null, null, null, null)
           }));
     }
@@ -1818,6 +1823,269 @@ namespace tobeh.Valmar {
 
   }
 
+  public sealed partial class LinkImageToAwardMessage : pb::IMessage<LinkImageToAwardMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<LinkImageToAwardMessage> _parser = new pb::MessageParser<LinkImageToAwardMessage>(() => new LinkImageToAwardMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<LinkImageToAwardMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.CloudReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LinkImageToAwardMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LinkImageToAwardMessage(LinkImageToAwardMessage other) : this() {
+      id_ = other.id_;
+      ownerLogin_ = other.ownerLogin_;
+      awardInventoryId_ = other.awardInventoryId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LinkImageToAwardMessage Clone() {
+      return new LinkImageToAwardMessage(this);
+    }
+
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private long id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ownerLogin" field.</summary>
+    public const int OwnerLoginFieldNumber = 2;
+    private int ownerLogin_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int OwnerLogin {
+      get { return ownerLogin_; }
+      set {
+        ownerLogin_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "awardInventoryId" field.</summary>
+    public const int AwardInventoryIdFieldNumber = 3;
+    private int awardInventoryId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int AwardInventoryId {
+      get { return awardInventoryId_; }
+      set {
+        awardInventoryId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as LinkImageToAwardMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(LinkImageToAwardMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (OwnerLogin != other.OwnerLogin) return false;
+      if (AwardInventoryId != other.AwardInventoryId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0L) hash ^= Id.GetHashCode();
+      if (OwnerLogin != 0) hash ^= OwnerLogin.GetHashCode();
+      if (AwardInventoryId != 0) hash ^= AwardInventoryId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (OwnerLogin != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(OwnerLogin);
+      }
+      if (AwardInventoryId != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(AwardInventoryId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (OwnerLogin != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(OwnerLogin);
+      }
+      if (AwardInventoryId != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(AwardInventoryId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (OwnerLogin != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(OwnerLogin);
+      }
+      if (AwardInventoryId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(AwardInventoryId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(LinkImageToAwardMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0L) {
+        Id = other.Id;
+      }
+      if (other.OwnerLogin != 0) {
+        OwnerLogin = other.OwnerLogin;
+      }
+      if (other.AwardInventoryId != 0) {
+        AwardInventoryId = other.AwardInventoryId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            OwnerLogin = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            AwardInventoryId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            OwnerLogin = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            AwardInventoryId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class DeleteCloudTagsMessage : pb::IMessage<DeleteCloudTagsMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1832,7 +2100,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.CloudReflection.Descriptor.MessageTypes[5]; }
+      get { return global::tobeh.Valmar.CloudReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

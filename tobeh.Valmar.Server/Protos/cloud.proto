@@ -16,6 +16,8 @@ service Cloud {
   rpc GetCloudTagsById (GetCloudTagsByIdMessage) returns (CloudImageMessage);
 
   rpc DeleteCloudTags (DeleteCloudTagsMessage) returns (google.protobuf.Empty);
+
+  rpc LinkImageToAward (LinkImageToAwardMessage) returns (google.protobuf.Empty);
 }
 
 message SearchCloudMessage {
@@ -56,6 +58,12 @@ message CloudImageIdMessage {
 message GetCloudTagsByIdMessage {
   int64 id = 1;
   int32 ownerLogin = 2;
+}
+
+message LinkImageToAwardMessage {
+  int64 id = 1;
+  int32 ownerLogin = 2;
+  int32 awardInventoryId = 3;
 }
 
 message DeleteCloudTagsMessage {

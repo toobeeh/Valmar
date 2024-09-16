@@ -92,6 +92,22 @@ public class CloudDomainService(
         return tag.ImageId;
     }
 
+    public async Task LinkImageToAward(int ownerLogin, long imageId, int awardId)
+    {
+        logger.LogTrace("LinkImageToAward({ownerLogin}, {imageId}, {awardId})", ownerLogin, imageId, awardId);
+
+        var award = await db.Awardees.FirstAsync(award => award.AwardeeLogin == ownerLogin && award.Id == awardId);
+        if (award is null)
+        {
+            throw new EntityNotFoundException($"No award found with id {awardId} in inventory of {ownerLogin}");
+        }
+
+        award.ImageId = imageId;
+        db.Awardees.Update(award);
+
+        await db.SaveChangesAsync();
+    }
+
     private CloudImageDdo MapToDdo(CloudTagEntity tag)
     {
         return new CloudImageDdo(
