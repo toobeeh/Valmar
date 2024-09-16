@@ -102,6 +102,12 @@ public class CloudDomainService(
             throw new EntityNotFoundException($"No award found with id {awardId} in inventory of {ownerLogin}");
         }
 
+        if (award.ImageId != null)
+        {
+            throw new EntityAlreadyExistsException(
+                $"Award {awardId} in inventory of {ownerLogin} already has an image linked");
+        }
+
         award.ImageId = imageId;
         db.Awardees.Update(award);
 
