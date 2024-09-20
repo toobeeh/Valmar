@@ -373,6 +373,7 @@ public class InventoryDomainService(
         return new AwardInventoryDdo(ownAvailableAwards, ownConsumedAwards, receivedAwards);
     }
 
+    // TODO remove and use cloud service
     public async Task<List<GalleryItemDdo>> GetImagesFromCloud(MemberDdo member, List<long> ids)
     {
         logger.LogTrace("GetImagesFromCloud(member={member}, ids={ids})", member, ids);
@@ -382,7 +383,7 @@ public class InventoryDomainService(
 
         return images.Select(image => new GalleryItemDdo(
             image.ImageId,
-            $"https://cloud.typo.rip/{member.DiscordId}/{image.ImageId}/image.png",
+            $"https://s3.typo.rip/cloud/{member.Login}/{image.ImageId}/image.png",
             image.Title,
             image.Author,
             DateTimeOffset.FromUnixTimeMilliseconds(image.Date),
