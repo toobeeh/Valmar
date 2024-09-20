@@ -34,14 +34,7 @@ public class CloudDomainService(
             .ToListAsync();
 
 
-        return results.Select(image => new CloudImageDdo(
-            image.ImageId,
-            $"https://cloud.typo.rip/{member.DiscordId}/{image.ImageId}/image.png",
-            $"https://cloud.typo.rip/{member.DiscordId}/{image.ImageId}/meta.json",
-            $"https://cloud.typo.rip/{member.DiscordId}/{image.ImageId}/commands.json",
-            new CloudImageTagDdo(image.Title, image.Author, image.Language,
-                DateTimeOffset.FromUnixTimeMilliseconds(image.Date), image.Private, image.Own, image.Owner)
-        )).ToList();
+        return results.Select(MapToDdo).ToList();
     }
 
     public async Task<CloudImageDdo> GetCloudTagsById(int ownerLogin, long id)
@@ -118,9 +111,9 @@ public class CloudDomainService(
     {
         return new CloudImageDdo(
             tag.ImageId,
-            $"https://cloud.typo.rip/{tag.Owner}/{tag.ImageId}/image.png",
-            $"https://cloud.typo.rip/{tag.Owner}/{tag.ImageId}/meta.json",
-            $"https://cloud.typo.rip/{tag.Owner}/{tag.ImageId}/commands.json",
+            $"https://s3.typo.rip/cloud/{tag.Owner}/{tag.ImageId}/image.png",
+            $"https://s3.typo.rip/cloud/{tag.Owner}/{tag.ImageId}/meta.json",
+            $"https://s3.typo.rip/cloud/{tag.Owner}/{tag.ImageId}/commands.json",
             new CloudImageTagDdo(tag.Title, tag.Author, tag.Language,
                 DateTimeOffset.FromUnixTimeMilliseconds(tag.Date), tag.Private, tag.Own, tag.Owner)
         );
