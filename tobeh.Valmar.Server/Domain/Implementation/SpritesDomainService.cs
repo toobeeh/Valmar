@@ -56,13 +56,20 @@ public class SpritesDomainService(
         var released = true;
         if (sprite.EventDropId > 0)
         {
-            // find progressive event of eventsprite
+            // find event of eventsprite
             var evt = await db.Events.FirstOrDefaultAsync(evt =>
                 evt.Progressive == 1 && db.EventDrops.Any(drop =>
                     drop.EventId == evt.EventId && drop.EventDropId == sprite.EventDropId));
 
-            // check if sprite is released in progressive event
-            if (evt != null)
+            // if event not progressive, sprite released as soon as event active
+            if (evt?.Progressive == 0)
+            {
+                var eventStart = EventHelper.ParseEventTimestamp(evt.ValidFrom);
+                released = DateTimeOffset.UtcNow > eventStart;
+            }
+
+            // else calculate release slots
+            else if (evt is { Progressive: 1 })
             {
                 var eventStart = EventHelper.ParseEventTimestamp(evt.ValidFrom);
 
