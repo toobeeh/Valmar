@@ -43,9 +43,12 @@ public class DropsDomainService(
         min += 20; // minimum offset
 
         // modify by boosts
-        var boostModifier = Math.Pow(Math.E, boostFactor / 4);
-        var boostModifiedOffset = min - min / Math.Pow(Math.E, 0.25);
-        min = Convert.ToInt32(Math.Round(boostModifiedOffset + min / boostModifier, 0));
+        var boostModifiedOffset =
+            min -
+            min / Math.Pow(0.8 * Math.E, 0.5) +
+            min / Math.Pow(0.8 * Math.E, boostFactor / 2);
+
+        min = Convert.ToInt32(Math.Round(boostModifiedOffset, 0));
 
         return Task.FromResult(new Tuple<int, int>(min, 4 * min));
     }
