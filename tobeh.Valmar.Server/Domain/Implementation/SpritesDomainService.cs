@@ -58,7 +58,7 @@ public class SpritesDomainService(
         {
             // find event of eventsprite
             var evt = await db.Events.FirstOrDefaultAsync(evt =>
-                evt.Progressive == 1 && db.EventDrops.Any(drop =>
+                db.EventDrops.Any(drop =>
                     drop.EventId == evt.EventId && drop.EventDropId == sprite.EventDropId));
 
             // if event not progressive, sprite released as soon as event active
