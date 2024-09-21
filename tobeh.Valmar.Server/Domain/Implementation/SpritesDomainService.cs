@@ -113,6 +113,16 @@ public class SpritesDomainService(
         // find all progressive event drops of eventsprites
         var progressiveEventDrops = eventDrops.Where(drop => drop.Event.Progressive == 1).ToList();
 
+        // find all regular events that have not started yet
+        var unreleasedRegularEventDrops = eventDrops
+            .Where(drop =>
+            {
+                var eventStart = EventHelper.ParseEventTimestamp(drop.Event.ValidFrom);
+                return DateTimeOffset.UtcNow < eventStart;
+            })
+            .SelectMany(drop => drop.Drops)
+            .ToList();
+
         // filter drops of progressive events that are not released yet
         var unreleasedEventDrops = progressiveEventDrops
             .SelectMany(evt =>
@@ -134,6 +144,7 @@ public class SpritesDomainService(
             .Select(sprite =>
             {
                 var released =
+                    !unreleasedRegularEventDrops.Contains(sprite.EventDropId) &&
                     !unreleasedEventDrops.Contains(sprite.EventDropId); // check if drop has been released yet
                 if (sprite.Id >= 1000) sprite.EventDropId = 0; // map exclusive sprites out of event
                 var mappedFlags = FlagHelper.GetFlags(sprite.RequiredFlags ?? 0);
