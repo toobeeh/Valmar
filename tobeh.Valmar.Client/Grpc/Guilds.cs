@@ -32,9 +32,10 @@ namespace tobeh.Valmar {
             "Z3VpbGRJZBgBIAEoAyJEChZBZGRHdWlsZFdlYmhvb2tNZXNzYWdlEg8KB2d1",
             "aWxkSWQYASABKAMSCwoDdXJsGAIgASgJEgwKBG5hbWUYAyABKAkiOgoZUmVt",
             "b3ZlR3VpbGRXZWJob29rTWVzc2FnZRIPCgdndWlsZElkGAEgASgDEgwKBG5h",
-            "bWUYAyABKAkibQoKR3VpbGRSZXBseRIPCgdndWlsZElkGAEgASgDEg4KBmlu",
-            "dml0ZRgEIAEoBRIMCgRuYW1lGAUgASgJEhwKFGNvbm5lY3RlZE1lbWJlckNv",
-            "dW50GAYgASgFEhIKCnN1cHBvcnRlcnMYByADKAUiIQoPR2V0R3VpbGRSZXF1",
+            "bWUYAyABKAkimQEKCkd1aWxkUmVwbHkSDwoHZ3VpbGRJZBgBIAEoAxIOCgZp",
+            "bnZpdGUYBCABKAUSDAoEbmFtZRgFIAEoCRIcChRjb25uZWN0ZWRNZW1iZXJD",
+            "b3VudBgGIAEoBRISCgpzdXBwb3J0ZXJzGAcgAygFEioKBWJvdElkGAggASgL",
+            "MhsuZ29vZ2xlLnByb3RvYnVmLkludDY0VmFsdWUiIQoPR2V0R3VpbGRSZXF1",
             "ZXN0Eg4KBmludml0ZRgBIAEoBSIoChNHZXRHdWlsZEJ5SWRNZXNzYWdlEhEK",
             "CWRpc2NvcmRJZBgBIAEoAyItChpHZXRHdWlsZE9wdGlvbnNCeUlkTWVzc2Fn",
             "ZRIPCgdndWlsZElkGAEgASgDIrMBChNHdWlsZE9wdGlvbnNNZXNzYWdlEg8K",
@@ -64,7 +65,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildWebhooksMessage), global::tobeh.Valmar.GetGuildWebhooksMessage.Parser, new[]{ "GuildId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AddGuildWebhookMessage), global::tobeh.Valmar.AddGuildWebhookMessage.Parser, new[]{ "GuildId", "Url", "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.RemoveGuildWebhookMessage), global::tobeh.Valmar.RemoveGuildWebhookMessage.Parser, new[]{ "GuildId", "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildReply), global::tobeh.Valmar.GuildReply.Parser, new[]{ "GuildId", "Invite", "Name", "ConnectedMemberCount", "Supporters" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildReply), global::tobeh.Valmar.GuildReply.Parser, new[]{ "GuildId", "Invite", "Name", "ConnectedMemberCount", "Supporters", "BotId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildRequest), global::tobeh.Valmar.GetGuildRequest.Parser, new[]{ "Invite" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildByIdMessage), global::tobeh.Valmar.GetGuildByIdMessage.Parser, new[]{ "DiscordId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildOptionsByIdMessage), global::tobeh.Valmar.GetGuildOptionsByIdMessage.Parser, new[]{ "GuildId" }, null, null, null, null),
@@ -1216,6 +1217,7 @@ namespace tobeh.Valmar {
       name_ = other.name_;
       connectedMemberCount_ = other.connectedMemberCount_;
       supporters_ = other.supporters_.Clone();
+      BotId = other.BotId;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1284,6 +1286,20 @@ namespace tobeh.Valmar {
       get { return supporters_; }
     }
 
+    /// <summary>Field number for the "botId" field.</summary>
+    public const int BotIdFieldNumber = 8;
+    private static readonly pb::FieldCodec<long?> _single_botId_codec = pb::FieldCodec.ForStructWrapper<long>(66);
+    private long? botId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long? BotId {
+      get { return botId_; }
+      set {
+        botId_ = value;
+      }
+    }
+
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1304,6 +1320,7 @@ namespace tobeh.Valmar {
       if (Name != other.Name) return false;
       if (ConnectedMemberCount != other.ConnectedMemberCount) return false;
       if(!supporters_.Equals(other.supporters_)) return false;
+      if (BotId != other.BotId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1316,6 +1333,7 @@ namespace tobeh.Valmar {
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (ConnectedMemberCount != 0) hash ^= ConnectedMemberCount.GetHashCode();
       hash ^= supporters_.GetHashCode();
+      if (botId_ != null) hash ^= BotId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1351,6 +1369,9 @@ namespace tobeh.Valmar {
         output.WriteInt32(ConnectedMemberCount);
       }
       supporters_.WriteTo(output, _repeated_supporters_codec);
+      if (botId_ != null) {
+        _single_botId_codec.WriteTagAndValue(output, BotId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1378,6 +1399,9 @@ namespace tobeh.Valmar {
         output.WriteInt32(ConnectedMemberCount);
       }
       supporters_.WriteTo(ref output, _repeated_supporters_codec);
+      if (botId_ != null) {
+        _single_botId_codec.WriteTagAndValue(ref output, BotId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1401,6 +1425,9 @@ namespace tobeh.Valmar {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ConnectedMemberCount);
       }
       size += supporters_.CalculateSize(_repeated_supporters_codec);
+      if (botId_ != null) {
+        size += _single_botId_codec.CalculateSizeWithTag(BotId);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1426,6 +1453,11 @@ namespace tobeh.Valmar {
         ConnectedMemberCount = other.ConnectedMemberCount;
       }
       supporters_.Add(other.supporters_);
+      if (other.botId_ != null) {
+        if (botId_ == null || other.BotId != 0L) {
+          BotId = other.BotId;
+        }
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1462,6 +1494,13 @@ namespace tobeh.Valmar {
             supporters_.AddEntriesFrom(input, _repeated_supporters_codec);
             break;
           }
+          case 66: {
+            long? value = _single_botId_codec.Read(input);
+            if (botId_ == null || value != 0L) {
+              BotId = value;
+            }
+            break;
+          }
         }
       }
     #endif
@@ -1496,6 +1535,13 @@ namespace tobeh.Valmar {
           case 58:
           case 56: {
             supporters_.AddEntriesFrom(ref input, _repeated_supporters_codec);
+            break;
+          }
+          case 66: {
+            long? value = _single_botId_codec.Read(ref input);
+            if (botId_ == null || value != 0L) {
+              BotId = value;
+            }
             break;
           }
         }

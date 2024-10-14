@@ -19,7 +19,13 @@ public class GuildsDomainService(
             throw new EntityNotFoundException($"Guild with invite {invite} does not exist");
         }
 
-        return await ConvertToDdo(guild);
+        var claim = await db.LobbyBotClaims
+            .FirstOrDefaultAsync(claim => claim.GuildId == guild.GuildId);
+        var worker = claim is not null
+            ? await db.LobbyBotInstances.FirstOrDefaultAsync(instance => instance.Id == claim.InstanceId)
+            : null;
+
+        return await ConvertToDdo(guild, worker?.BotId);
     }
 
     public async Task<List<int>> GetGuildSupporters(long guildId)
@@ -51,7 +57,13 @@ public class GuildsDomainService(
             throw new EntityNotFoundException($"Guild with discord id {discordId} does not exist");
         }
 
-        return await ConvertToDdo(guild);
+        var claim = await db.LobbyBotClaims
+            .FirstOrDefaultAsync(claim => claim.GuildId == guild.GuildId);
+        var worker = claim is not null
+            ? await db.LobbyBotInstances.FirstOrDefaultAsync(instance => instance.Id == claim.InstanceId)
+            : null;
+
+        return await ConvertToDdo(guild, worker?.BotId);
     }
 
     public async Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix,
@@ -172,7 +184,7 @@ public class GuildsDomainService(
         return webhook;
     }
 
-    private async Task<GuildDetailDdo> ConvertToDdo(LobbyBotOptionEntity guild)
+    private async Task<GuildDetailDdo> ConvertToDdo(LobbyBotOptionEntity guild, long? botId)
     {
         logger.LogTrace("ConvertToDdo(guild={guild})", guild);
 
@@ -186,7 +198,8 @@ public class GuildsDomainService(
             guild.Invite,
             guild.Name,
             memberCount,
-            supporters
+            supporters,
+            botId
         );
 
         return details;

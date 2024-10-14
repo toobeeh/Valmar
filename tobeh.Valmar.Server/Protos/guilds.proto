@@ -61,6 +61,7 @@ message GuildReply {
   string name = 5;
   int32 connectedMemberCount = 6;
   repeated int32 supporters = 7;
+  google.protobuf.Int64Value botId = 8;
 }
 
 // Request containing a guild observe token

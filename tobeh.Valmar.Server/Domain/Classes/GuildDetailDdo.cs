@@ -5,5 +5,6 @@ public record GuildDetailDdo(
     int Invite,
     string Name,
     int ConnectedMemberCount,
-    List<int> Supporters
+    List<int> Supporters,
+    long? BotId
 );
