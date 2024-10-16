@@ -15,5 +15,6 @@ public enum MemberFlagDdo : ushort
     Beta = FlagHelper.Beta,
     BubbleFarming = FlagHelper.BubbleFarming,
     UnlimitedCloud = FlagHelper.UnlimitedCloud,
-    ContentModerator = FlagHelper.ContentModerator
+    ContentModerator = FlagHelper.ContentModerator,
+    EmojiManagement = FlagHelper.EmojiManagement
 }

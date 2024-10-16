@@ -15,7 +15,8 @@ public static class FlagHelper
         Patronizer = 128,
         Booster = 256,
         Beta = 512,
-        ContentModerator = 1024;
+        ContentModerator = 1024,
+        EmojiManagement = 2048;
 
     public static bool HasFlag(int flags, MemberFlagDdo flag) => ((MemberFlagDdo)flags).HasFlag(flag);
 

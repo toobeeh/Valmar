@@ -19,6 +19,7 @@ enum MemberFlagMessage {
   BubbleFarming = 8;
   UnlimitedCloud = 9;
   ContentModerator = 10;
+  EmojiManagement = 11;
 }
 
 // Service definition for member resource access
