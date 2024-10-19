@@ -348,6 +348,12 @@ public class MembersDomainService(
         }
 
         var guild = await guildsService.GetGuildByInvite(serverToken);
+        var options = await guildsService.GetGuildOptionsByGuildId(guild.GuildId);
+
+        if (!(options.ShowInvite ?? true))
+        {
+            throw new ApplicationException("Guild has not enabled connecting via invite");
+        }
 
         var existingConnection =
             await db.ServerConnections.FirstOrDefaultAsync(entity =>
