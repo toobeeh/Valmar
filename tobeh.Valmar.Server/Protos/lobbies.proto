@@ -22,6 +22,18 @@ service Lobbies {
   rpc SetGuildLobbyLinks (SetGuildLobbyLinksMessage) returns (google.protobuf.Empty);
 
   rpc GetLobbyLinks (google.protobuf.Empty) returns (stream GuildLobbyLinkMessage);
+
+  rpc DecryptLobbyLinkToken (EncryptedLobbyLinkTokenMessage) returns (PlainLobbyLinkMessage);
+
+  rpc EncryptLobbyLinkToken (PlainLobbyLinkMessage) returns (EncryptedLobbyLinkTokenMessage);
+}
+
+message EncryptedLobbyLinkTokenMessage {
+  string token = 1;
+}
+
+message PlainLobbyLinkMessage {
+  string link = 1;
 }
 
 message SetGuildLobbyLinksMessage {

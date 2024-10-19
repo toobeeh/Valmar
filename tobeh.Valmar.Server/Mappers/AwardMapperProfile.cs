@@ -11,7 +11,7 @@ public class AwardMapperProfile : Profile
         CreateMap<sbyte, AwardRarityMessage>().ConstructUsing(rarity => MapAwardRarity(rarity));
         CreateMap<AwardEntity, AwardReply>();
     }
-    
+
     private static AwardRarityMessage MapAwardRarity(int rarity)
     {
         return rarity switch
@@ -22,5 +22,10 @@ public class AwardMapperProfile : Profile
             4 => AwardRarityMessage.Legendary,
             _ => throw new ArgumentException($"Rarity value {rarity} is not valid.")
         };
+    }
+
+    private static int MapAwardRarity(AwardRarityMessage rarity)
+    {
+        return (int)rarity + 1;
     }
 }

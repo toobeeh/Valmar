@@ -155,6 +155,21 @@ public class InventoryDomainService(
         return Task.FromResult(slots);
     }
 
+    public Task<double> GetNextSlotRemainingDrops(MemberDdo member)
+    {
+        logger.LogTrace("GetNextSlotRemainingDrops(member={member})", member);
+
+        var baseSlots = InventoryHelper.GetSlotBaseCount(member.Drops);
+        var usedDrops = Enumerable
+            .Repeat(1, baseSlots)
+            .Select((_, i) => InventoryHelper.GetRequiredDropsForNextSlot(i + 1))
+            .Sum();
+        var availableDrops = member.Drops - usedDrops;
+        var remainingDrops = InventoryHelper.GetRequiredDropsForNextSlot(baseSlots + 1) - availableDrops;
+
+        return Task.FromResult(remainingDrops);
+    }
+
     public async Task SetColorShiftConfiguration(MemberDdo member, Dictionary<int, int?> colorShiftMap,
         bool clearOther = false)
     {

@@ -274,6 +274,7 @@ message GetSpriteSlotCountRequest {
 
 message SpriteSlotCountReply {
   int32 unlockedSlots = 1;
+  double dropsUntilNextSlot = 2;
 }
 
 message GetSceneInventoryRequest {

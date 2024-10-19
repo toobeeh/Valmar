@@ -54,6 +54,8 @@ namespace tobeh.Valmar {
     static readonly grpc::Marshaller<global::tobeh.Valmar.AwardReply> __Marshaller_awards_AwardReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.AwardReply.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GetAwardRequest> __Marshaller_awards_GetAwardRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetAwardRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.CreateAwardRequest> __Marshaller_awards_CreateAwardRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.CreateAwardRequest.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.AwardReply> __Method_GetAllAwards = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.AwardReply>(
@@ -69,6 +71,14 @@ namespace tobeh.Valmar {
         __ServiceName,
         "GetAwardById",
         __Marshaller_awards_GetAwardRequest,
+        __Marshaller_awards_AwardReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.CreateAwardRequest, global::tobeh.Valmar.AwardReply> __Method_CreateAward = new grpc::Method<global::tobeh.Valmar.CreateAwardRequest, global::tobeh.Valmar.AwardReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "CreateAward",
+        __Marshaller_awards_CreateAwardRequest,
         __Marshaller_awards_AwardReply);
 
     /// <summary>Service descriptor</summary>
@@ -175,6 +185,54 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.AwardReply> GetAwardByIdAsync(global::tobeh.Valmar.GetAwardRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetAwardById, null, options, request);
+      }
+      /// <summary>
+      /// Creates an award
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.AwardReply CreateAward(global::tobeh.Valmar.CreateAwardRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateAward(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Creates an award
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.AwardReply CreateAward(global::tobeh.Valmar.CreateAwardRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_CreateAward, null, options, request);
+      }
+      /// <summary>
+      /// Creates an award
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.AwardReply> CreateAwardAsync(global::tobeh.Valmar.CreateAwardRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateAwardAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Creates an award
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.AwardReply> CreateAwardAsync(global::tobeh.Valmar.CreateAwardRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_CreateAward, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

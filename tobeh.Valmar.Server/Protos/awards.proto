@@ -20,6 +20,9 @@ service Awards {
 
   // Gets an award by its id
   rpc GetAwardById (GetAwardRequest) returns (AwardReply);
+
+  // Creates an award
+  rpc CreateAward (CreateAwardRequest) returns (AwardReply);
 }
 
 // Response containing a award's properties.
@@ -30,6 +33,13 @@ message AwardReply {
   string description = 4;
   int32 rarityNum = 5  [deprecated = true];
   AwardRarityMessage rarity = 6;
+}
+
+message CreateAwardRequest {
+  string name = 1;
+  string url = 2;
+  string description = 3;
+  AwardRarityMessage rarity = 4;
 }
 
 // Request containing a award id

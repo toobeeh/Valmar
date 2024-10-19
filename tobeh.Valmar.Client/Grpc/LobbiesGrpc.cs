@@ -62,6 +62,10 @@ namespace tobeh.Valmar {
     static readonly grpc::Marshaller<global::tobeh.Valmar.SetGuildLobbyLinksMessage> __Marshaller_lobbies_SetGuildLobbyLinksMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.SetGuildLobbyLinksMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GuildLobbyLinkMessage> __Marshaller_lobbies_GuildLobbyLinkMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GuildLobbyLinkMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage> __Marshaller_lobbies_EncryptedLobbyLinkTokenMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.PlainLobbyLinkMessage> __Marshaller_lobbies_PlainLobbyLinkMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.PlainLobbyLinkMessage.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.LobbyReply> __Method_GetCurrentLobbies = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.LobbyReply>(
@@ -102,6 +106,22 @@ namespace tobeh.Valmar {
         "GetLobbyLinks",
         __Marshaller_google_protobuf_Empty,
         __Marshaller_lobbies_GuildLobbyLinkMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage, global::tobeh.Valmar.PlainLobbyLinkMessage> __Method_DecryptLobbyLinkToken = new grpc::Method<global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage, global::tobeh.Valmar.PlainLobbyLinkMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "DecryptLobbyLinkToken",
+        __Marshaller_lobbies_EncryptedLobbyLinkTokenMessage,
+        __Marshaller_lobbies_PlainLobbyLinkMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.PlainLobbyLinkMessage, global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage> __Method_EncryptLobbyLinkToken = new grpc::Method<global::tobeh.Valmar.PlainLobbyLinkMessage, global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "EncryptLobbyLinkToken",
+        __Marshaller_lobbies_PlainLobbyLinkMessage,
+        __Marshaller_lobbies_EncryptedLobbyLinkTokenMessage);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -237,6 +257,46 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.GuildLobbyLinkMessage> GetLobbyLinks(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetLobbyLinks, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.PlainLobbyLinkMessage DecryptLobbyLinkToken(global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DecryptLobbyLinkToken(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.PlainLobbyLinkMessage DecryptLobbyLinkToken(global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_DecryptLobbyLinkToken, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.PlainLobbyLinkMessage> DecryptLobbyLinkTokenAsync(global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DecryptLobbyLinkTokenAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.PlainLobbyLinkMessage> DecryptLobbyLinkTokenAsync(global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_DecryptLobbyLinkToken, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage EncryptLobbyLinkToken(global::tobeh.Valmar.PlainLobbyLinkMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EncryptLobbyLinkToken(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage EncryptLobbyLinkToken(global::tobeh.Valmar.PlainLobbyLinkMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_EncryptLobbyLinkToken, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage> EncryptLobbyLinkTokenAsync(global::tobeh.Valmar.PlainLobbyLinkMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EncryptLobbyLinkTokenAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage> EncryptLobbyLinkTokenAsync(global::tobeh.Valmar.PlainLobbyLinkMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_EncryptLobbyLinkToken, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

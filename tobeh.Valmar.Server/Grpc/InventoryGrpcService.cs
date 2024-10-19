@@ -42,7 +42,8 @@ public class InventoryGrpcService(
 
         var member = await membersService.GetMemberByLogin(request.Login);
         var count = await inventoryService.GetSpriteSlotCount(member);
-        return new SpriteSlotCountReply { UnlockedSlots = count };
+        var remainingDrops = await inventoryService.GetNextSlotRemainingDrops(member);
+        return new SpriteSlotCountReply { UnlockedSlots = count, DropsUntilNextSlot = remainingDrops };
     }
 
     public override async Task GetEventCredit(GetEventCreditRequest request,

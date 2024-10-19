@@ -92,64 +92,65 @@ namespace tobeh.Valmar {
             "c3QSDQoFbG9naW4YASABKAUSDwoHZXZlbnRJZBgCIAEoBSJVChBFdmVudENy",
             "ZWRpdFJlcGx5EhMKC3RvdGFsQ3JlZGl0GAEgASgFEhcKD2F2YWlsYWJsZUNy",
             "ZWRpdBgCIAEoBRITCgtldmVudERyb3BJZBgDIAEoBSIqChlHZXRTcHJpdGVT",
-            "bG90Q291bnRSZXF1ZXN0Eg0KBWxvZ2luGAEgASgFIi0KFFNwcml0ZVNsb3RD",
-            "b3VudFJlcGx5EhUKDXVubG9ja2VkU2xvdHMYASABKAUiKQoYR2V0U2NlbmVJ",
-            "bnZlbnRvcnlSZXF1ZXN0Eg0KBWxvZ2luGAEgASgFIlsKF1NjZW5lSW52ZW50",
-            "b3J5SXRlbVJlcGx5Eg8KB3NjZW5lSWQYASABKAUSLwoKc2NlbmVTaGlmdBgC",
-            "IAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIqoBChNTY2VuZUlu",
-            "dmVudG9yeVJlcGx5Ei0KCGFjdGl2ZUlkGAEgASgLMhsuZ29vZ2xlLnByb3Rv",
-            "YnVmLkludDMyVmFsdWUSMAoLYWN0aXZlU2hpZnQYAyABKAsyGy5nb29nbGUu",
-            "cHJvdG9idWYuSW50MzJWYWx1ZRIyCgZzY2VuZXMYAiADKAsyIi5pbnZlbnRv",
-            "cnkuU2NlbmVJbnZlbnRvcnlJdGVtUmVwbHkiYgoPQnV5U2NlbmVSZXF1ZXN0",
-            "Eg0KBWxvZ2luGAEgASgFEg8KB3NjZW5lSWQYAiABKAUSLwoKc2NlbmVTaGlm",
-            "dBgDIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIn8KD1VzZVNj",
-            "ZW5lUmVxdWVzdBINCgVsb2dpbhgBIAEoBRIsCgdzY2VuZUlkGAIgASgLMhsu",
-            "Z29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUSLwoKc2NlbmVTaGlmdBgDIAEo",
-            "CzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIi0KEVNjZW5lUHJpY2VS",
-            "ZXF1ZXN0EhgKEGJvdWdodFNjZW5lQ291bnQYASABKAUiPwoPU2NlbmVQcmlj",
-            "ZVJlcGx5EhEKCW5leHRQcmljZRgBIAEoBRIZChF0b3RhbEJ1YmJsZXNTcGVu",
-            "dBgCIAEoBTKkDgoJSW52ZW50b3J5ElIKD0dldEJ1YmJsZUNyZWRpdBIhLmlu",
-            "dmVudG9yeS5HZXRCdWJibGVDcmVkaXRSZXF1ZXN0GhwuaW52ZW50b3J5LkJ1",
-            "YmJsZUNyZWRpdFJlcGx5EkwKDUdldERyb3BDcmVkaXQSHy5pbnZlbnRvcnku",
-            "R2V0RHJvcENyZWRpdFJlcXVlc3QaGi5pbnZlbnRvcnkuRHJvcENyZWRpdFJl",
-            "cGx5ElsKEkdldFNwcml0ZVNsb3RDb3VudBIkLmludmVudG9yeS5HZXRTcHJp",
-            "dGVTbG90Q291bnRSZXF1ZXN0Gh8uaW52ZW50b3J5LlNwcml0ZVNsb3RDb3Vu",
-            "dFJlcGx5ElEKDkdldEV2ZW50Q3JlZGl0EiAuaW52ZW50b3J5LkdldEV2ZW50",
-            "Q3JlZGl0UmVxdWVzdBobLmludmVudG9yeS5FdmVudENyZWRpdFJlcGx5MAES",
-            "VwoQR2V0RXZlbnRQcm9ncmVzcxIiLmludmVudG9yeS5HZXRFdmVudFByb2dy",
-            "ZXNzUmVxdWVzdBofLmludmVudG9yeS5FdmVudFByb2dyZXNzTWVzc2FnZRJl",
-            "ChJHZXRTcHJpdGVJbnZlbnRvcnkSJC5pbnZlbnRvcnkuR2V0U3ByaXRlSW52",
-            "ZW50b3J5UmVxdWVzdBonLmludmVudG9yeS5TcHJpdGVTbG90Q29uZmlndXJh",
-            "dGlvblJlcGx5MAESQAoJQnV5U3ByaXRlEhsuaW52ZW50b3J5LkJ1eVNwcml0",
-            "ZVJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkSSgoOVXNlU3ByaXRl",
-            "Q29tYm8SIC5pbnZlbnRvcnkuVXNlU3ByaXRlQ29tYm9SZXF1ZXN0GhYuZ29v",
-            "Z2xlLnByb3RvYnVmLkVtcHR5ElcKG1NldFNwcml0ZUNvbG9yQ29uZmlndXJh",
-            "dGlvbhIgLmludmVudG9yeS5TZXRTcHJpdGVDb2xvclJlcXVlc3QaFi5nb29n",
-            "bGUucHJvdG9idWYuRW1wdHkSWAoRR2V0U2NlbmVJbnZlbnRvcnkSIy5pbnZl",
-            "bnRvcnkuR2V0U2NlbmVJbnZlbnRvcnlSZXF1ZXN0Gh4uaW52ZW50b3J5LlNj",
-            "ZW5lSW52ZW50b3J5UmVwbHkSPgoIQnV5U2NlbmUSGi5pbnZlbnRvcnkuQnV5",
-            "U2NlbmVSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Ej4KCFVzZVNj",
-            "ZW5lEhouaW52ZW50b3J5LlVzZVNjZW5lUmVxdWVzdBoWLmdvb2dsZS5wcm90",
-            "b2J1Zi5FbXB0eRJJCg1HZXRTY2VuZVByaWNlEhwuaW52ZW50b3J5LlNjZW5l",
-            "UHJpY2VSZXF1ZXN0GhouaW52ZW50b3J5LlNjZW5lUHJpY2VSZXBseRJaChFH",
-            "ZXRBd2FyZEludmVudG9yeRIjLmludmVudG9yeS5HZXRBd2FyZEludmVudG9y",
-            "eU1lc3NhZ2UaIC5pbnZlbnRvcnkuQXdhcmRJbnZlbnRvcnlNZXNzYWdlEloK",
-            "EUdldEF3YXJkUGFja0xldmVsEiMuaW52ZW50b3J5LkdldEF3YXJkUGFja0xl",
-            "dmVsTWVzc2FnZRogLmludmVudG9yeS5Bd2FyZFBhY2tMZXZlbE1lc3NhZ2US",
-            "VQoPR2V0R2FsbGVyeUl0ZW1zEiEuaW52ZW50b3J5LkdldEdhbGxlcnlJdGVt",
-            "c01lc3NhZ2UaHS5pbnZlbnRvcnkuR2FsbGVyeUl0ZW1NZXNzYWdlMAESUwoN",
-            "T3BlbkF3YXJkUGFjaxIfLmludmVudG9yeS5PcGVuQXdhcmRQYWNrTWVzc2Fn",
-            "ZRohLmludmVudG9yeS5Bd2FyZFBhY2tSZXN1bHRNZXNzYWdlElMKEEdldEZp",
-            "cnN0U2VlbkRhdGUSIi5pbnZlbnRvcnkuR2V0Rmlyc3RTZWVuRGF0ZVJlcXVl",
-            "c3QaGy5pbnZlbnRvcnkuRmlyc3RTZWVuTWVzc2FnZRJQCg9HaWZ0RXZlbnRD",
-            "cmVkaXQSIS5pbnZlbnRvcnkuR2lmdEV2ZW50Q3JlZGl0TWVzc2FnZRoaLmlu",
-            "dmVudG9yeS5HaWZ0TG9zc01lc3NhZ2USVAoPR2V0R2lmdExvc3NSYXRlEiEu",
-            "aW52ZW50b3J5LkdldEdpZnRMb3NzUmF0ZU1lc3NhZ2UaHi5pbnZlbnRvcnku",
-            "R2lmdExvc3NSYXRlTWVzc2FnZRJMCg9QYXRyb25pemVNZW1iZXISIS5pbnZl",
-            "bnRvcnkuUGF0cm9uaXplTWVtYmVyTWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1",
-            "Zi5FbXB0eRJKCg5TZXRQYXRyb25FbW9qaRIgLmludmVudG9yeS5TZXRQYXRy",
-            "b25FbW9qaU1lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHlCD6oCDHRv",
-            "YmVoLlZhbG1hcmIGcHJvdG8z"));
+            "bG90Q291bnRSZXF1ZXN0Eg0KBWxvZ2luGAEgASgFIkkKFFNwcml0ZVNsb3RD",
+            "b3VudFJlcGx5EhUKDXVubG9ja2VkU2xvdHMYASABKAUSGgoSZHJvcHNVbnRp",
+            "bE5leHRTbG90GAIgASgBIikKGEdldFNjZW5lSW52ZW50b3J5UmVxdWVzdBIN",
+            "CgVsb2dpbhgBIAEoBSJbChdTY2VuZUludmVudG9yeUl0ZW1SZXBseRIPCgdz",
+            "Y2VuZUlkGAEgASgFEi8KCnNjZW5lU2hpZnQYAiABKAsyGy5nb29nbGUucHJv",
+            "dG9idWYuSW50MzJWYWx1ZSKqAQoTU2NlbmVJbnZlbnRvcnlSZXBseRItCghh",
+            "Y3RpdmVJZBgBIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEjAK",
+            "C2FjdGl2ZVNoaWZ0GAMgASgLMhsuZ29vZ2xlLnByb3RvYnVmLkludDMyVmFs",
+            "dWUSMgoGc2NlbmVzGAIgAygLMiIuaW52ZW50b3J5LlNjZW5lSW52ZW50b3J5",
+            "SXRlbVJlcGx5ImIKD0J1eVNjZW5lUmVxdWVzdBINCgVsb2dpbhgBIAEoBRIP",
+            "CgdzY2VuZUlkGAIgASgFEi8KCnNjZW5lU2hpZnQYAyABKAsyGy5nb29nbGUu",
+            "cHJvdG9idWYuSW50MzJWYWx1ZSJ/Cg9Vc2VTY2VuZVJlcXVlc3QSDQoFbG9n",
+            "aW4YASABKAUSLAoHc2NlbmVJZBgCIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5J",
+            "bnQzMlZhbHVlEi8KCnNjZW5lU2hpZnQYAyABKAsyGy5nb29nbGUucHJvdG9i",
+            "dWYuSW50MzJWYWx1ZSItChFTY2VuZVByaWNlUmVxdWVzdBIYChBib3VnaHRT",
+            "Y2VuZUNvdW50GAEgASgFIj8KD1NjZW5lUHJpY2VSZXBseRIRCgluZXh0UHJp",
+            "Y2UYASABKAUSGQoRdG90YWxCdWJibGVzU3BlbnQYAiABKAUypA4KCUludmVu",
+            "dG9yeRJSCg9HZXRCdWJibGVDcmVkaXQSIS5pbnZlbnRvcnkuR2V0QnViYmxl",
+            "Q3JlZGl0UmVxdWVzdBocLmludmVudG9yeS5CdWJibGVDcmVkaXRSZXBseRJM",
+            "Cg1HZXREcm9wQ3JlZGl0Eh8uaW52ZW50b3J5LkdldERyb3BDcmVkaXRSZXF1",
+            "ZXN0GhouaW52ZW50b3J5LkRyb3BDcmVkaXRSZXBseRJbChJHZXRTcHJpdGVT",
+            "bG90Q291bnQSJC5pbnZlbnRvcnkuR2V0U3ByaXRlU2xvdENvdW50UmVxdWVz",
+            "dBofLmludmVudG9yeS5TcHJpdGVTbG90Q291bnRSZXBseRJRCg5HZXRFdmVu",
+            "dENyZWRpdBIgLmludmVudG9yeS5HZXRFdmVudENyZWRpdFJlcXVlc3QaGy5p",
+            "bnZlbnRvcnkuRXZlbnRDcmVkaXRSZXBseTABElcKEEdldEV2ZW50UHJvZ3Jl",
+            "c3MSIi5pbnZlbnRvcnkuR2V0RXZlbnRQcm9ncmVzc1JlcXVlc3QaHy5pbnZl",
+            "bnRvcnkuRXZlbnRQcm9ncmVzc01lc3NhZ2USZQoSR2V0U3ByaXRlSW52ZW50",
+            "b3J5EiQuaW52ZW50b3J5LkdldFNwcml0ZUludmVudG9yeVJlcXVlc3QaJy5p",
+            "bnZlbnRvcnkuU3ByaXRlU2xvdENvbmZpZ3VyYXRpb25SZXBseTABEkAKCUJ1",
+            "eVNwcml0ZRIbLmludmVudG9yeS5CdXlTcHJpdGVSZXF1ZXN0GhYuZ29vZ2xl",
+            "LnByb3RvYnVmLkVtcHR5EkoKDlVzZVNwcml0ZUNvbWJvEiAuaW52ZW50b3J5",
+            "LlVzZVNwcml0ZUNvbWJvUmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0",
+            "eRJXChtTZXRTcHJpdGVDb2xvckNvbmZpZ3VyYXRpb24SIC5pbnZlbnRvcnku",
+            "U2V0U3ByaXRlQ29sb3JSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5",
+            "ElgKEUdldFNjZW5lSW52ZW50b3J5EiMuaW52ZW50b3J5LkdldFNjZW5lSW52",
+            "ZW50b3J5UmVxdWVzdBoeLmludmVudG9yeS5TY2VuZUludmVudG9yeVJlcGx5",
+            "Ej4KCEJ1eVNjZW5lEhouaW52ZW50b3J5LkJ1eVNjZW5lUmVxdWVzdBoWLmdv",
+            "b2dsZS5wcm90b2J1Zi5FbXB0eRI+CghVc2VTY2VuZRIaLmludmVudG9yeS5V",
+            "c2VTY2VuZVJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkSSQoNR2V0",
+            "U2NlbmVQcmljZRIcLmludmVudG9yeS5TY2VuZVByaWNlUmVxdWVzdBoaLmlu",
+            "dmVudG9yeS5TY2VuZVByaWNlUmVwbHkSWgoRR2V0QXdhcmRJbnZlbnRvcnkS",
+            "Iy5pbnZlbnRvcnkuR2V0QXdhcmRJbnZlbnRvcnlNZXNzYWdlGiAuaW52ZW50",
+            "b3J5LkF3YXJkSW52ZW50b3J5TWVzc2FnZRJaChFHZXRBd2FyZFBhY2tMZXZl",
+            "bBIjLmludmVudG9yeS5HZXRBd2FyZFBhY2tMZXZlbE1lc3NhZ2UaIC5pbnZl",
+            "bnRvcnkuQXdhcmRQYWNrTGV2ZWxNZXNzYWdlElUKD0dldEdhbGxlcnlJdGVt",
+            "cxIhLmludmVudG9yeS5HZXRHYWxsZXJ5SXRlbXNNZXNzYWdlGh0uaW52ZW50",
+            "b3J5LkdhbGxlcnlJdGVtTWVzc2FnZTABElMKDU9wZW5Bd2FyZFBhY2sSHy5p",
+            "bnZlbnRvcnkuT3BlbkF3YXJkUGFja01lc3NhZ2UaIS5pbnZlbnRvcnkuQXdh",
+            "cmRQYWNrUmVzdWx0TWVzc2FnZRJTChBHZXRGaXJzdFNlZW5EYXRlEiIuaW52",
+            "ZW50b3J5LkdldEZpcnN0U2VlbkRhdGVSZXF1ZXN0GhsuaW52ZW50b3J5LkZp",
+            "cnN0U2Vlbk1lc3NhZ2USUAoPR2lmdEV2ZW50Q3JlZGl0EiEuaW52ZW50b3J5",
+            "LkdpZnRFdmVudENyZWRpdE1lc3NhZ2UaGi5pbnZlbnRvcnkuR2lmdExvc3NN",
+            "ZXNzYWdlElQKD0dldEdpZnRMb3NzUmF0ZRIhLmludmVudG9yeS5HZXRHaWZ0",
+            "TG9zc1JhdGVNZXNzYWdlGh4uaW52ZW50b3J5LkdpZnRMb3NzUmF0ZU1lc3Nh",
+            "Z2USTAoPUGF0cm9uaXplTWVtYmVyEiEuaW52ZW50b3J5LlBhdHJvbml6ZU1l",
+            "bWJlck1lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHkSSgoOU2V0UGF0",
+            "cm9uRW1vamkSIC5pbnZlbnRvcnkuU2V0UGF0cm9uRW1vamlNZXNzYWdlGhYu",
+            "Z29vZ2xlLnByb3RvYnVmLkVtcHR5Qg+qAgx0b2JlaC5WYWxtYXJiBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::tobeh.Valmar.AwardsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -188,7 +189,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetEventCreditRequest), global::tobeh.Valmar.GetEventCreditRequest.Parser, new[]{ "Login", "EventId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.EventCreditReply), global::tobeh.Valmar.EventCreditReply.Parser, new[]{ "TotalCredit", "AvailableCredit", "EventDropId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetSpriteSlotCountRequest), global::tobeh.Valmar.GetSpriteSlotCountRequest.Parser, new[]{ "Login" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteSlotCountReply), global::tobeh.Valmar.SpriteSlotCountReply.Parser, new[]{ "UnlockedSlots" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteSlotCountReply), global::tobeh.Valmar.SpriteSlotCountReply.Parser, new[]{ "UnlockedSlots", "DropsUntilNextSlot" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetSceneInventoryRequest), global::tobeh.Valmar.GetSceneInventoryRequest.Parser, new[]{ "Login" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SceneInventoryItemReply), global::tobeh.Valmar.SceneInventoryItemReply.Parser, new[]{ "SceneId", "SceneShift" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SceneInventoryReply), global::tobeh.Valmar.SceneInventoryReply.Parser, new[]{ "ActiveId", "ActiveShift", "Scenes" }, null, null, null, null),
@@ -8467,6 +8468,7 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SpriteSlotCountReply(SpriteSlotCountReply other) : this() {
       unlockedSlots_ = other.unlockedSlots_;
+      dropsUntilNextSlot_ = other.dropsUntilNextSlot_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -8488,6 +8490,18 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "dropsUntilNextSlot" field.</summary>
+    public const int DropsUntilNextSlotFieldNumber = 2;
+    private double dropsUntilNextSlot_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double DropsUntilNextSlot {
+      get { return dropsUntilNextSlot_; }
+      set {
+        dropsUntilNextSlot_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -8504,6 +8518,7 @@ namespace tobeh.Valmar {
         return true;
       }
       if (UnlockedSlots != other.UnlockedSlots) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(DropsUntilNextSlot, other.DropsUntilNextSlot)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -8512,6 +8527,7 @@ namespace tobeh.Valmar {
     public override int GetHashCode() {
       int hash = 1;
       if (UnlockedSlots != 0) hash ^= UnlockedSlots.GetHashCode();
+      if (DropsUntilNextSlot != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(DropsUntilNextSlot);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -8534,6 +8550,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt32(UnlockedSlots);
       }
+      if (DropsUntilNextSlot != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(DropsUntilNextSlot);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -8548,6 +8568,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt32(UnlockedSlots);
       }
+      if (DropsUntilNextSlot != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(DropsUntilNextSlot);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -8560,6 +8584,9 @@ namespace tobeh.Valmar {
       int size = 0;
       if (UnlockedSlots != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(UnlockedSlots);
+      }
+      if (DropsUntilNextSlot != 0D) {
+        size += 1 + 8;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -8575,6 +8602,9 @@ namespace tobeh.Valmar {
       }
       if (other.UnlockedSlots != 0) {
         UnlockedSlots = other.UnlockedSlots;
+      }
+      if (other.DropsUntilNextSlot != 0D) {
+        DropsUntilNextSlot = other.DropsUntilNextSlot;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -8595,6 +8625,10 @@ namespace tobeh.Valmar {
             UnlockedSlots = input.ReadInt32();
             break;
           }
+          case 17: {
+            DropsUntilNextSlot = input.ReadDouble();
+            break;
+          }
         }
       }
     #endif
@@ -8612,6 +8646,10 @@ namespace tobeh.Valmar {
             break;
           case 8: {
             UnlockedSlots = input.ReadInt32();
+            break;
+          }
+          case 17: {
+            DropsUntilNextSlot = input.ReadDouble();
             break;
           }
         }

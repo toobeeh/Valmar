@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using tobeh.Valmar.Server.Domain.Classes;
 
@@ -116,7 +117,7 @@ public static class InventoryHelper
         }
 
         var date = DateTimeOffset.ParseExact(split[1], "MM/dd/yyyy HH:mm:ss",
-            System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal);
+            CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
 
         return new Tuple<long?, DateTimeOffset>(targetId, date);
     }
@@ -136,6 +137,19 @@ public static class InventoryHelper
             > 3000 => 3,
             > 1000 => 2,
             _ => 1
+        };
+    }
+
+    public static int GetRequiredDropsForNextSlot(int slot)
+    {
+        return slot switch
+        {
+            1 => 0,
+            2 => 1000,
+            3 => 3000,
+            4 => 7000,
+            5 => 15000,
+            _ => 20000
         };
     }
 }

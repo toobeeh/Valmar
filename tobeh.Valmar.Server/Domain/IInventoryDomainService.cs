@@ -28,4 +28,5 @@ public interface IInventoryDomainService
     Task SetPatronEmoji(MemberDdo member, string? emoji);
     Task SetPatronizedMember(MemberDdo member, long? patronizedMemberDiscordId);
     Task<EventResultDdo> GetEventProgress(MemberDdo member);
+    Task<double> GetNextSlotRemainingDrops(MemberDdo member);
 }
