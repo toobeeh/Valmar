@@ -27,59 +27,59 @@ namespace tobeh.Valmar {
             "Cg1sb2JiaWVzLnByb3RvEgdsb2JiaWVzGhtnb29nbGUvcHJvdG9idWYvZW1w",
             "dHkucHJvdG8aHmdvb2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90bxoPaW52",
             "ZW50b3J5LnByb3RvIi8KHkVuY3J5cHRlZExvYmJ5TGlua1Rva2VuTWVzc2Fn",
-            "ZRINCgV0b2tlbhgBIAEoCSIlChVQbGFpbkxvYmJ5TGlua01lc3NhZ2USDAoE",
-            "bGluaxgBIAEoCSJbChlTZXRHdWlsZExvYmJ5TGlua3NNZXNzYWdlEg8KB2d1",
-            "aWxkSWQYASABKAMSLQoFbGlua3MYAiADKAsyHi5sb2JiaWVzLkd1aWxkTG9i",
-            "YnlMaW5rTWVzc2FnZSJuChVHdWlsZExvYmJ5TGlua01lc3NhZ2USDwoHZ3Vp",
-            "bGRJZBgBIAEoAxINCgVsb2dpbhgCIAEoBRIMCgRsaW5rGAMgASgJEhUKDXNs",
-            "b3RBdmFpbGFibGUYBCABKAgSEAoIdXNlcm5hbWUYBSABKAkiWQoUUGFsYW50",
-            "aXJMb2JieURldGFpbHMSEwoLZGVzY3JpcHRpb24YASABKAkSCwoDa2V5GAIg",
-            "ASgJEgoKAmlkGAMgASgJEhMKC3Jlc3RyaWN0aW9uGAQgASgJIoMBChNTa3Jp",
-            "YmJsTG9iYnlEZXRhaWxzEhAKCGxhbmd1YWdlGAEgASgJEgwKBGxpbmsYAiAB",
-            "KAkSDwoHcHJpdmF0ZRgDIAEoCBINCgVyb3VuZBgEIAEoBRIsCgdwbGF5ZXJz",
-            "GAUgAygLMhsubG9iYmllcy5Ta3JpYmJsTG9iYnlQbGF5ZXIieAoTUGFsYW50",
-            "aXJMb2JieVBsYXllchIMCgRuYW1lGAEgASgJEg0KBWxvZ2luGAIgASgFEhAK",
-            "CHVzZXJuYW1lGAMgASgJEjIKDWxvYmJ5UGxheWVySWQYBCABKAsyGy5nb29n",
-            "bGUucHJvdG9idWYuSW50MzJWYWx1ZSJZChJTa3JpYmJsTG9iYnlQbGF5ZXIS",
-            "DAoEbmFtZRgBIAEoCRINCgVzY29yZRgCIAEoBRIPCgdkcmF3aW5nGAMgASgI",
-            "EhUKDWxvYmJ5UGxheWVySWQYBCABKAUiLQoZR2V0TG9iYnlEcm9wQ2xhaW1z",
-            "UmVxdWVzdBIQCghsb2JieUtleRgBIAEoCSKpAQoKTG9iYnlSZXBseRI0Cg5z",
-            "a3JpYmJsRGV0YWlscxgBIAEoCzIcLmxvYmJpZXMuU2tyaWJibExvYmJ5RGV0",
-            "YWlscxI2Cg9wYWxhbnRpckRldGFpbHMYAiABKAsyHS5sb2JiaWVzLlBhbGFu",
-            "dGlyTG9iYnlEZXRhaWxzEi0KB3BsYXllcnMYAyADKAsyHC5sb2JiaWVzLlBh",
-            "bGFudGlyTG9iYnlQbGF5ZXIiugEKDERyb3BMb2dSZXBseRIKCgJpZBgBIAEo",
-            "AxIQCghsb2JieUtleRgCIAEoCRIWCg5jbGFpbURpc2NvcmRJZBgDIAEoAxIR",
-            "Cgl2YWxpZEZyb20YBCABKAkSMAoLZXZlbnREcm9wSWQYBSABKAsyGy5nb29n",
-            "bGUucHJvdG9idWYuSW50MzJWYWx1ZRIvCgpsZWFndWVUaW1lGAYgASgLMhsu",
-            "Z29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUiWQoSSm9pbmVkTG9iYnlNZXNz",
-            "YWdlEhUKDWxvYmJ5UGxheWVySWQYASABKAUSLAoFbG9iYnkYAiABKAsyHS5s",
-            "b2JiaWVzLlBhbGFudGlyTG9iYnlEZXRhaWxzIrcCChFPbmxpbmVNZW1iZXJS",
-            "ZXBseRINCgVsb2dpbhgBIAEoBRIPCgdidWJibGVzGAIgASgFEjEKC3BhdHJv",
-            "bkVtb2ppGAMgASgLMhwuZ29vZ2xlLnByb3RvYnVmLlN0cmluZ1ZhbHVlEjIK",
-            "DWpvaW5lZExvYmJpZXMYBCADKAsyGy5sb2JiaWVzLkpvaW5lZExvYmJ5TWVz",
-            "c2FnZRI8CgtzcHJpdGVTbG90cxgFIAMoCzInLmludmVudG9yeS5TcHJpdGVT",
-            "bG90Q29uZmlndXJhdGlvblJlcGx5EiwKB3NjZW5lSWQYBiABKAsyGy5nb29n",
-            "bGUucHJvdG9idWYuSW50MzJWYWx1ZRIvCgpzY2VuZVNoaWZ0GAcgASgLMhsu",
-            "Z29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUyywQKB0xvYmJpZXMSQgoRR2V0",
-            "Q3VycmVudExvYmJpZXMSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaEy5sb2Ji",
-            "aWVzLkxvYmJ5UmVwbHkwARJRChJHZXRMb2JieURyb3BDbGFpbXMSIi5sb2Ji",
-            "aWVzLkdldExvYmJ5RHJvcENsYWltc1JlcXVlc3QaFS5sb2JiaWVzLkRyb3BM",
-            "b2dSZXBseTABEkgKEEdldE9ubGluZVBsYXllcnMSFi5nb29nbGUucHJvdG9i",
-            "dWYuRW1wdHkaGi5sb2JiaWVzLk9ubGluZU1lbWJlclJlcGx5MAESUAoSU2V0",
-            "R3VpbGRMb2JieUxpbmtzEiIubG9iYmllcy5TZXRHdWlsZExvYmJ5TGlua3NN",
-            "ZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5EkkKDUdldExvYmJ5TGlu",
-            "a3MSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaHi5sb2JiaWVzLkd1aWxkTG9i",
-            "YnlMaW5rTWVzc2FnZTABEmAKFURlY3J5cHRMb2JieUxpbmtUb2tlbhInLmxv",
-            "YmJpZXMuRW5jcnlwdGVkTG9iYnlMaW5rVG9rZW5NZXNzYWdlGh4ubG9iYmll",
-            "cy5QbGFpbkxvYmJ5TGlua01lc3NhZ2USYAoVRW5jcnlwdExvYmJ5TGlua1Rv",
-            "a2VuEh4ubG9iYmllcy5QbGFpbkxvYmJ5TGlua01lc3NhZ2UaJy5sb2JiaWVz",
-            "LkVuY3J5cHRlZExvYmJ5TGlua1Rva2VuTWVzc2FnZUIPqgIMdG9iZWguVmFs",
-            "bWFyYgZwcm90bzM="));
+            "ZRINCgV0b2tlbhgBIAEoCSI2ChVQbGFpbkxvYmJ5TGlua01lc3NhZ2USDAoE",
+            "bGluaxgBIAEoCRIPCgdndWlsZElkGAIgASgDIlsKGVNldEd1aWxkTG9iYnlM",
+            "aW5rc01lc3NhZ2USDwoHZ3VpbGRJZBgBIAEoAxItCgVsaW5rcxgCIAMoCzIe",
+            "LmxvYmJpZXMuR3VpbGRMb2JieUxpbmtNZXNzYWdlIm4KFUd1aWxkTG9iYnlM",
+            "aW5rTWVzc2FnZRIPCgdndWlsZElkGAEgASgDEg0KBWxvZ2luGAIgASgFEgwK",
+            "BGxpbmsYAyABKAkSFQoNc2xvdEF2YWlsYWJsZRgEIAEoCBIQCgh1c2VybmFt",
+            "ZRgFIAEoCSJZChRQYWxhbnRpckxvYmJ5RGV0YWlscxITCgtkZXNjcmlwdGlv",
+            "bhgBIAEoCRILCgNrZXkYAiABKAkSCgoCaWQYAyABKAkSEwoLcmVzdHJpY3Rp",
+            "b24YBCABKAkigwEKE1NrcmliYmxMb2JieURldGFpbHMSEAoIbGFuZ3VhZ2UY",
+            "ASABKAkSDAoEbGluaxgCIAEoCRIPCgdwcml2YXRlGAMgASgIEg0KBXJvdW5k",
+            "GAQgASgFEiwKB3BsYXllcnMYBSADKAsyGy5sb2JiaWVzLlNrcmliYmxMb2Ji",
+            "eVBsYXllciJ4ChNQYWxhbnRpckxvYmJ5UGxheWVyEgwKBG5hbWUYASABKAkS",
+            "DQoFbG9naW4YAiABKAUSEAoIdXNlcm5hbWUYAyABKAkSMgoNbG9iYnlQbGF5",
+            "ZXJJZBgEIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIlkKElNr",
+            "cmliYmxMb2JieVBsYXllchIMCgRuYW1lGAEgASgJEg0KBXNjb3JlGAIgASgF",
+            "Eg8KB2RyYXdpbmcYAyABKAgSFQoNbG9iYnlQbGF5ZXJJZBgEIAEoBSItChlH",
+            "ZXRMb2JieURyb3BDbGFpbXNSZXF1ZXN0EhAKCGxvYmJ5S2V5GAEgASgJIqkB",
+            "CgpMb2JieVJlcGx5EjQKDnNrcmliYmxEZXRhaWxzGAEgASgLMhwubG9iYmll",
+            "cy5Ta3JpYmJsTG9iYnlEZXRhaWxzEjYKD3BhbGFudGlyRGV0YWlscxgCIAEo",
+            "CzIdLmxvYmJpZXMuUGFsYW50aXJMb2JieURldGFpbHMSLQoHcGxheWVycxgD",
+            "IAMoCzIcLmxvYmJpZXMuUGFsYW50aXJMb2JieVBsYXllciK6AQoMRHJvcExv",
+            "Z1JlcGx5EgoKAmlkGAEgASgDEhAKCGxvYmJ5S2V5GAIgASgJEhYKDmNsYWlt",
+            "RGlzY29yZElkGAMgASgDEhEKCXZhbGlkRnJvbRgEIAEoCRIwCgtldmVudERy",
+            "b3BJZBgFIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEi8KCmxl",
+            "YWd1ZVRpbWUYBiABKAsyGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1ZSJZ",
+            "ChJKb2luZWRMb2JieU1lc3NhZ2USFQoNbG9iYnlQbGF5ZXJJZBgBIAEoBRIs",
+            "CgVsb2JieRgCIAEoCzIdLmxvYmJpZXMuUGFsYW50aXJMb2JieURldGFpbHMi",
+            "twIKEU9ubGluZU1lbWJlclJlcGx5Eg0KBWxvZ2luGAEgASgFEg8KB2J1YmJs",
+            "ZXMYAiABKAUSMQoLcGF0cm9uRW1vamkYAyABKAsyHC5nb29nbGUucHJvdG9i",
+            "dWYuU3RyaW5nVmFsdWUSMgoNam9pbmVkTG9iYmllcxgEIAMoCzIbLmxvYmJp",
+            "ZXMuSm9pbmVkTG9iYnlNZXNzYWdlEjwKC3Nwcml0ZVNsb3RzGAUgAygLMicu",
+            "aW52ZW50b3J5LlNwcml0ZVNsb3RDb25maWd1cmF0aW9uUmVwbHkSLAoHc2Nl",
+            "bmVJZBgGIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEi8KCnNj",
+            "ZW5lU2hpZnQYByABKAsyGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1ZTLL",
+            "BAoHTG9iYmllcxJCChFHZXRDdXJyZW50TG9iYmllcxIWLmdvb2dsZS5wcm90",
+            "b2J1Zi5FbXB0eRoTLmxvYmJpZXMuTG9iYnlSZXBseTABElEKEkdldExvYmJ5",
+            "RHJvcENsYWltcxIiLmxvYmJpZXMuR2V0TG9iYnlEcm9wQ2xhaW1zUmVxdWVz",
+            "dBoVLmxvYmJpZXMuRHJvcExvZ1JlcGx5MAESSAoQR2V0T25saW5lUGxheWVy",
+            "cxIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoaLmxvYmJpZXMuT25saW5lTWVt",
+            "YmVyUmVwbHkwARJQChJTZXRHdWlsZExvYmJ5TGlua3MSIi5sb2JiaWVzLlNl",
+            "dEd1aWxkTG9iYnlMaW5rc01lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1w",
+            "dHkSSQoNR2V0TG9iYnlMaW5rcxIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoe",
+            "LmxvYmJpZXMuR3VpbGRMb2JieUxpbmtNZXNzYWdlMAESYAoVRGVjcnlwdExv",
+            "YmJ5TGlua1Rva2VuEicubG9iYmllcy5FbmNyeXB0ZWRMb2JieUxpbmtUb2tl",
+            "bk1lc3NhZ2UaHi5sb2JiaWVzLlBsYWluTG9iYnlMaW5rTWVzc2FnZRJgChVF",
+            "bmNyeXB0TG9iYnlMaW5rVG9rZW4SHi5sb2JiaWVzLlBsYWluTG9iYnlMaW5r",
+            "TWVzc2FnZRonLmxvYmJpZXMuRW5jcnlwdGVkTG9iYnlMaW5rVG9rZW5NZXNz",
+            "YWdlQg+qAgx0b2JlaC5WYWxtYXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::tobeh.Valmar.InventoryReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage), global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage.Parser, new[]{ "Token" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.PlainLobbyLinkMessage), global::tobeh.Valmar.PlainLobbyLinkMessage.Parser, new[]{ "Link" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.PlainLobbyLinkMessage), global::tobeh.Valmar.PlainLobbyLinkMessage.Parser, new[]{ "Link", "GuildId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SetGuildLobbyLinksMessage), global::tobeh.Valmar.SetGuildLobbyLinksMessage.Parser, new[]{ "GuildId", "Links" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildLobbyLinkMessage), global::tobeh.Valmar.GuildLobbyLinkMessage.Parser, new[]{ "GuildId", "Login", "Link", "SlotAvailable", "Username" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.PalantirLobbyDetails), global::tobeh.Valmar.PalantirLobbyDetails.Parser, new[]{ "Description", "Key", "Id", "Restriction" }, null, null, null, null),
@@ -321,6 +321,7 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public PlainLobbyLinkMessage(PlainLobbyLinkMessage other) : this() {
       link_ = other.link_;
+      guildId_ = other.guildId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -342,6 +343,18 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "guildId" field.</summary>
+    public const int GuildIdFieldNumber = 2;
+    private long guildId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long GuildId {
+      get { return guildId_; }
+      set {
+        guildId_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -358,6 +371,7 @@ namespace tobeh.Valmar {
         return true;
       }
       if (Link != other.Link) return false;
+      if (GuildId != other.GuildId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -366,6 +380,7 @@ namespace tobeh.Valmar {
     public override int GetHashCode() {
       int hash = 1;
       if (Link.Length != 0) hash ^= Link.GetHashCode();
+      if (GuildId != 0L) hash ^= GuildId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -388,6 +403,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(10);
         output.WriteString(Link);
       }
+      if (GuildId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(GuildId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -402,6 +421,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(10);
         output.WriteString(Link);
       }
+      if (GuildId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(GuildId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -414,6 +437,9 @@ namespace tobeh.Valmar {
       int size = 0;
       if (Link.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Link);
+      }
+      if (GuildId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GuildId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -429,6 +455,9 @@ namespace tobeh.Valmar {
       }
       if (other.Link.Length != 0) {
         Link = other.Link;
+      }
+      if (other.GuildId != 0L) {
+        GuildId = other.GuildId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -449,6 +478,10 @@ namespace tobeh.Valmar {
             Link = input.ReadString();
             break;
           }
+          case 16: {
+            GuildId = input.ReadInt64();
+            break;
+          }
         }
       }
     #endif
@@ -466,6 +499,10 @@ namespace tobeh.Valmar {
             break;
           case 10: {
             Link = input.ReadString();
+            break;
+          }
+          case 16: {
+            GuildId = input.ReadInt64();
             break;
           }
         }

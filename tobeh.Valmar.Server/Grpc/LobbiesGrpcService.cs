@@ -2,6 +2,7 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using tobeh.Valmar.Server.Domain;
+using tobeh.Valmar.Server.Domain.Classes;
 using tobeh.Valmar.Server.Grpc.Utils;
 using tobeh.Valmar.Server.Util;
 
@@ -66,14 +67,15 @@ public class LobbiesGrpcService(
     public override Task<PlainLobbyLinkMessage> DecryptLobbyLinkToken(EncryptedLobbyLinkTokenMessage request,
         ServerCallContext context)
     {
-        return Task.FromResult(new PlainLobbyLinkMessage { Link = LobbiesHelper.DecryptLobbyLink(request.Token) });
+        var plain = LobbiesHelper.DecryptLobbyLink(request.Token);
+        return Task.FromResult(new PlainLobbyLinkMessage { Link = plain.Link, GuildId = plain.GuildId });
     }
 
     public override Task<EncryptedLobbyLinkTokenMessage> EncryptLobbyLinkToken(PlainLobbyLinkMessage request,
         ServerCallContext context)
     {
         return Task.FromResult(new EncryptedLobbyLinkTokenMessage
-            { Token = LobbiesHelper.EncryptLobbyLink(request.Link) });
+            { Token = LobbiesHelper.EncryptLobbyLink(new PlainLobbyLinkDdo(request.Link, request.GuildId)) });
     }
 
     public override async Task GetLobbyLinks(Empty request, IServerStreamWriter<GuildLobbyLinkMessage> responseStream,

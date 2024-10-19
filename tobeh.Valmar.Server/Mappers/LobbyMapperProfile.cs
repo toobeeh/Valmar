@@ -15,6 +15,7 @@ public class LobbyMapperProfile : Profile
         CreateMap<SkribblLobbyReportJson, SkribblLobbyDetails>();
         CreateMap<SkribblLobbyPlayerReportJson, SkribblLobbyPlayer>();
         CreateMap<PalantirLobbyPlayerDdo, PalantirLobbyPlayer>();
+        CreateMap<PlainLobbyLinkDdo, PlainLobbyLinkMessage>().ReverseMap();
 
         // mappings for partial mapping of lobby reply
         CreateMap<PalantirLobbyJson, LobbyReply>().ForMember(
