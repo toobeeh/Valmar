@@ -1,3 +1,4 @@
+using System.Globalization;
 using tobeh.Valmar.Server.Domain.Classes;
 
 namespace tobeh.Valmar.Server.Util;
@@ -9,7 +10,12 @@ public static class EventHelper
     public static DateTimeOffset ParseEventTimestamp(string timestamp)
     {
         return DateTimeOffset.ParseExact(timestamp, EventTimestampFormats,
-            System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal);
+            CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+    }
+
+    public static string ToEventTimestamp(DateTimeOffset timestamp)
+    {
+        return timestamp.ToString(EventTimestampFormats[0]);
     }
 
     public static int GetEventScenePrice(int eventDayLength)

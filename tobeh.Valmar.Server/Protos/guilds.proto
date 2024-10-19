@@ -27,8 +27,23 @@ service Guilds {
   rpc GetGuildWebhooks (GetGuildWebhooksMessage) returns (stream GuildWebhookMessage);
 
   rpc GetGuildSupporters (GetGuildSupportersMessage) returns (stream members.MemberReply);
+
+  rpc GetGuildBans (GetGuildBansMessage) returns (stream members.MemberReply);
+
+  rpc BanGuildMember (BanGuildMemberMessage) returns (google.protobuf.Empty);
 }
+
 message GetGuildSupportersMessage {
+  int64 guildId = 1;
+}
+
+message BanGuildMemberMessage {
+  int64 guildId = 1;
+  int64 memberId = 2;
+  bool ban = 3;
+}
+
+message GetGuildBansMessage {
   int64 guildId = 1;
 }
 

@@ -47,8 +47,74 @@ public class GuildsDomainService(
         return activeSupporters;
     }
 
+    public async Task BanMemberFromGuild(int login, long guildId)
+    {
+        logger.LogTrace("BanMemberFromGuild(login={login}, guildId={guildId})", login, guildId);
+
+        var connection =
+            await db.ServerConnections.FirstOrDefaultAsync(conn => conn.Login == login && conn.GuildId == guildId);
+        if (connection is null)
+        {
+            db.ServerConnections.Add(new ServerConnectionEntity
+            {
+                Ban = true,
+                GuildId = guildId,
+                Login = login
+            });
+        }
+        else
+        {
+            if (connection.Ban)
+            {
+                logger.LogWarning("Member {login} is already banned from guild {guildId}", login, guildId);
+                throw new ApplicationException("Member is already banned");
+            }
+
+            connection.Ban = true;
+            db.ServerConnections.Update(connection);
+        }
+
+        await db.SaveChangesAsync();
+    }
+
+    public async Task UnbanMemberFromGuild(int login, long guildId)
+    {
+        logger.LogTrace("UnbanMemberFromGuild(login={login}, guildId={guildId})", login, guildId);
+
+        var connection =
+            await db.ServerConnections.FirstOrDefaultAsync(conn => conn.Login == login && conn.GuildId == guildId);
+        if (connection is null)
+        {
+            throw new EntityNotFoundException($"No connection for login {login} and guild {guildId}");
+        }
+
+        if (connection.Ban is false)
+        {
+            logger.LogWarning("Member {login} is not banned from guild {guildId}", login, guildId);
+            throw new ApplicationException("Member is not banned");
+        }
+
+        connection.Ban = false;
+        db.ServerConnections.Update(connection);
+        await db.SaveChangesAsync();
+    }
+
+    public async Task<List<int>> GetBannedMembers(long guildId)
+    {
+        logger.LogTrace("GetBannedMembers(guildId={guildId})", guildId);
+
+        var bannedMembers = await db.ServerConnections
+            .Where(conn => conn.GuildId == guildId && conn.Ban)
+            .Select(conn => conn.Login)
+            .ToListAsync();
+
+        return bannedMembers;
+    }
+
     public async Task<GuildDetailDdo> GetGuildByDiscordId(long discordId)
     {
+        logger.LogTrace("GetGuildByDiscordId(discordId={discordId})", discordId);
+
         var guild = await db.LobbyBotOptions.FirstOrDefaultAsync(
             guild => guild.GuildId == discordId);
 

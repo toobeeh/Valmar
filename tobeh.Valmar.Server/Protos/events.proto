@@ -26,10 +26,28 @@ service Events {
   
   // Gets all eventdrops of an event
   rpc GetEventDropsOfEvent (GetEventRequest) returns (stream EventDropReply);
+
+  // Creates a new event
+  rpc CreateEvent (CreateEventMessage) returns (EventReply);
+
+  // Creates a new event drop
+  rpc CreateEventDrop (CreateEventDropMessage) returns (EventDropReply);
   
-  // gets the release slots of an progressive event
-  rpc GetEventReleaseSlots (GetEventRequest) returns (stream google.protobuf.Timestamp);
-  
+}
+
+message CreateEventMessage {
+  string name = 1;
+  string description = 2;
+  int32 length = 3;
+  bool progressive = 4;
+  int32 startInDays = 5;
+  int32 durationDays = 6;
+}
+
+message CreateEventDropMessage {
+  string name = 1;
+  string url = 2;
+  int32 eventId = 3;
 }
 
 // A palantir event

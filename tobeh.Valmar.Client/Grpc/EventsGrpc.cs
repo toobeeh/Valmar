@@ -59,7 +59,9 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GetEventDropRequest> __Marshaller_events_GetEventDropRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetEventDropRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Timestamp> __Marshaller_google_protobuf_Timestamp = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Timestamp.Parser));
+    static readonly grpc::Marshaller<global::tobeh.Valmar.CreateEventMessage> __Marshaller_events_CreateEventMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.CreateEventMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.CreateEventDropMessage> __Marshaller_events_CreateEventDropMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.CreateEventDropMessage.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.EventReply> __Method_GetAllEvents = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::tobeh.Valmar.EventReply>(
@@ -110,12 +112,20 @@ namespace tobeh.Valmar {
         __Marshaller_events_EventDropReply);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::tobeh.Valmar.GetEventRequest, global::Google.Protobuf.WellKnownTypes.Timestamp> __Method_GetEventReleaseSlots = new grpc::Method<global::tobeh.Valmar.GetEventRequest, global::Google.Protobuf.WellKnownTypes.Timestamp>(
-        grpc::MethodType.ServerStreaming,
+    static readonly grpc::Method<global::tobeh.Valmar.CreateEventMessage, global::tobeh.Valmar.EventReply> __Method_CreateEvent = new grpc::Method<global::tobeh.Valmar.CreateEventMessage, global::tobeh.Valmar.EventReply>(
+        grpc::MethodType.Unary,
         __ServiceName,
-        "GetEventReleaseSlots",
-        __Marshaller_events_GetEventRequest,
-        __Marshaller_google_protobuf_Timestamp);
+        "CreateEvent",
+        __Marshaller_events_CreateEventMessage,
+        __Marshaller_events_EventReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.CreateEventDropMessage, global::tobeh.Valmar.EventDropReply> __Method_CreateEventDrop = new grpc::Method<global::tobeh.Valmar.CreateEventDropMessage, global::tobeh.Valmar.EventDropReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "CreateEventDrop",
+        __Marshaller_events_CreateEventDropMessage,
+        __Marshaller_events_EventDropReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -367,7 +377,31 @@ namespace tobeh.Valmar {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetEventDropsOfEvent, null, options, request);
       }
       /// <summary>
-      /// gets the release slots of an progressive event
+      /// Creates a new event
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.EventReply CreateEvent(global::tobeh.Valmar.CreateEventMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateEvent(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Creates a new event
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.EventReply CreateEvent(global::tobeh.Valmar.CreateEventMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_CreateEvent, null, options, request);
+      }
+      /// <summary>
+      /// Creates a new event
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -375,20 +409,68 @@ namespace tobeh.Valmar {
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncServerStreamingCall<global::Google.Protobuf.WellKnownTypes.Timestamp> GetEventReleaseSlots(global::tobeh.Valmar.GetEventRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.EventReply> CreateEventAsync(global::tobeh.Valmar.CreateEventMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetEventReleaseSlots(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return CreateEventAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// gets the release slots of an progressive event
+      /// Creates a new event
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncServerStreamingCall<global::Google.Protobuf.WellKnownTypes.Timestamp> GetEventReleaseSlots(global::tobeh.Valmar.GetEventRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.EventReply> CreateEventAsync(global::tobeh.Valmar.CreateEventMessage request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncServerStreamingCall(__Method_GetEventReleaseSlots, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_CreateEvent, null, options, request);
+      }
+      /// <summary>
+      /// Creates a new event drop
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.EventDropReply CreateEventDrop(global::tobeh.Valmar.CreateEventDropMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateEventDrop(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Creates a new event drop
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.EventDropReply CreateEventDrop(global::tobeh.Valmar.CreateEventDropMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_CreateEventDrop, null, options, request);
+      }
+      /// <summary>
+      /// Creates a new event drop
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.EventDropReply> CreateEventDropAsync(global::tobeh.Valmar.CreateEventDropMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateEventDropAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Creates a new event drop
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.EventDropReply> CreateEventDropAsync(global::tobeh.Valmar.CreateEventDropMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_CreateEventDrop, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
