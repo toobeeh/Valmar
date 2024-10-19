@@ -16,5 +16,7 @@ namespace tobeh.Valmar.Server.Database
         [Column(TypeName = "int(11)")] public int Invite { get; set; }
         [Column(TypeName = "text")] public string Prefix { get; set; } = null!;
         [Column(TypeName = "text")] public string? BotName { get; set; }
+        [Required] public bool? ShowInvite { get; set; }
+        [Required] public bool? ProxyLinks { get; set; }
     }
 }

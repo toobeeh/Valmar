@@ -40,29 +40,30 @@ namespace tobeh.Valmar {
             "cnMYByADKAUSKgoFYm90SWQYCCABKAsyGy5nb29nbGUucHJvdG9idWYuSW50",
             "NjRWYWx1ZSIhCg9HZXRHdWlsZFJlcXVlc3QSDgoGaW52aXRlGAEgASgFIigK",
             "E0dldEd1aWxkQnlJZE1lc3NhZ2USEQoJZGlzY29yZElkGAEgASgDIi0KGkdl",
-            "dEd1aWxkT3B0aW9uc0J5SWRNZXNzYWdlEg8KB2d1aWxkSWQYASABKAMiswEK",
+            "dEd1aWxkT3B0aW9uc0J5SWRNZXNzYWdlEg8KB2d1aWxkSWQYASABKAMi2wEK",
             "E0d1aWxkT3B0aW9uc01lc3NhZ2USDwoHZ3VpbGRJZBgBIAEoAxIuCgljaGFu",
             "bmVsSWQYAiABKAsyGy5nb29nbGUucHJvdG9idWYuSW50NjRWYWx1ZRIMCgRu",
             "YW1lGAMgASgJEg4KBmludml0ZRgEIAEoBRIOCgZwcmVmaXgYBSABKAkSLQoH",
-            "Ym90TmFtZRgGIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZTL5",
-            "BQoGR3VpbGRzEj8KEEdldEd1aWxkQnlJbnZpdGUSFy5ndWlsZHMuR2V0R3Vp",
-            "bGRSZXF1ZXN0GhIuZ3VpbGRzLkd1aWxkUmVwbHkSPwoMR2V0R3VpbGRCeUlk",
-            "EhsuZ3VpbGRzLkdldEd1aWxkQnlJZE1lc3NhZ2UaEi5ndWlsZHMuR3VpbGRS",
-            "ZXBseRJWChNHZXRHdWlsZE9wdGlvbnNCeUlkEiIuZ3VpbGRzLkdldEd1aWxk",
-            "T3B0aW9uc0J5SWRNZXNzYWdlGhsuZ3VpbGRzLkd1aWxkT3B0aW9uc01lc3Nh",
-            "Z2USRgoPU2V0R3VpbGRPcHRpb25zEhsuZ3VpbGRzLkd1aWxkT3B0aW9uc01l",
-            "c3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHkSSQoPQWRkR3VpbGRXZWJo",
-            "b29rEh4uZ3VpbGRzLkFkZEd1aWxkV2ViaG9va01lc3NhZ2UaFi5nb29nbGUu",
-            "cHJvdG9idWYuRW1wdHkSTwoSUmVtb3ZlR3VpbGRXZWJob29rEiEuZ3VpbGRz",
-            "LlJlbW92ZUd1aWxkV2ViaG9va01lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYu",
-            "RW1wdHkSUgoQR2V0R3VpbGRXZWJob29rcxIfLmd1aWxkcy5HZXRHdWlsZFdl",
-            "Ymhvb2tzTWVzc2FnZRobLmd1aWxkcy5HdWlsZFdlYmhvb2tNZXNzYWdlMAES",
-            "TwoSR2V0R3VpbGRTdXBwb3J0ZXJzEiEuZ3VpbGRzLkdldEd1aWxkU3VwcG9y",
-            "dGVyc01lc3NhZ2UaFC5tZW1iZXJzLk1lbWJlclJlcGx5MAESQwoMR2V0R3Vp",
-            "bGRCYW5zEhsuZ3VpbGRzLkdldEd1aWxkQmFuc01lc3NhZ2UaFC5tZW1iZXJz",
-            "Lk1lbWJlclJlcGx5MAESRwoOQmFuR3VpbGRNZW1iZXISHS5ndWlsZHMuQmFu",
-            "R3VpbGRNZW1iZXJNZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Qg+q",
-            "Agx0b2JlaC5WYWxtYXJiBnByb3RvMw=="));
+            "Ym90TmFtZRgGIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRIS",
+            "Cgpwcm94eUxpbmtzGAcgASgIEhIKCnNob3dJbnZpdGUYCCABKAgy+QUKBkd1",
+            "aWxkcxI/ChBHZXRHdWlsZEJ5SW52aXRlEhcuZ3VpbGRzLkdldEd1aWxkUmVx",
+            "dWVzdBoSLmd1aWxkcy5HdWlsZFJlcGx5Ej8KDEdldEd1aWxkQnlJZBIbLmd1",
+            "aWxkcy5HZXRHdWlsZEJ5SWRNZXNzYWdlGhIuZ3VpbGRzLkd1aWxkUmVwbHkS",
+            "VgoTR2V0R3VpbGRPcHRpb25zQnlJZBIiLmd1aWxkcy5HZXRHdWlsZE9wdGlv",
+            "bnNCeUlkTWVzc2FnZRobLmd1aWxkcy5HdWlsZE9wdGlvbnNNZXNzYWdlEkYK",
+            "D1NldEd1aWxkT3B0aW9ucxIbLmd1aWxkcy5HdWlsZE9wdGlvbnNNZXNzYWdl",
+            "GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5EkkKD0FkZEd1aWxkV2ViaG9vaxIe",
+            "Lmd1aWxkcy5BZGRHdWlsZFdlYmhvb2tNZXNzYWdlGhYuZ29vZ2xlLnByb3Rv",
+            "YnVmLkVtcHR5Ek8KElJlbW92ZUd1aWxkV2ViaG9vaxIhLmd1aWxkcy5SZW1v",
+            "dmVHdWlsZFdlYmhvb2tNZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5",
+            "ElIKEEdldEd1aWxkV2ViaG9va3MSHy5ndWlsZHMuR2V0R3VpbGRXZWJob29r",
+            "c01lc3NhZ2UaGy5ndWlsZHMuR3VpbGRXZWJob29rTWVzc2FnZTABEk8KEkdl",
+            "dEd1aWxkU3VwcG9ydGVycxIhLmd1aWxkcy5HZXRHdWlsZFN1cHBvcnRlcnNN",
+            "ZXNzYWdlGhQubWVtYmVycy5NZW1iZXJSZXBseTABEkMKDEdldEd1aWxkQmFu",
+            "cxIbLmd1aWxkcy5HZXRHdWlsZEJhbnNNZXNzYWdlGhQubWVtYmVycy5NZW1i",
+            "ZXJSZXBseTABEkcKDkJhbkd1aWxkTWVtYmVyEh0uZ3VpbGRzLkJhbkd1aWxk",
+            "TWVtYmVyTWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eUIPqgIMdG9i",
+            "ZWguVmFsbWFyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::tobeh.Valmar.MembersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -77,7 +78,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildRequest), global::tobeh.Valmar.GetGuildRequest.Parser, new[]{ "Invite" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildByIdMessage), global::tobeh.Valmar.GetGuildByIdMessage.Parser, new[]{ "DiscordId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildOptionsByIdMessage), global::tobeh.Valmar.GetGuildOptionsByIdMessage.Parser, new[]{ "GuildId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildOptionsMessage), global::tobeh.Valmar.GuildOptionsMessage.Parser, new[]{ "GuildId", "ChannelId", "Name", "Invite", "Prefix", "BotName" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildOptionsMessage), global::tobeh.Valmar.GuildOptionsMessage.Parser, new[]{ "GuildId", "ChannelId", "Name", "Invite", "Prefix", "BotName", "ProxyLinks", "ShowInvite" }, null, null, null, null)
           }));
     }
     #endregion
@@ -2624,6 +2625,8 @@ namespace tobeh.Valmar {
       invite_ = other.invite_;
       prefix_ = other.prefix_;
       BotName = other.BotName;
+      proxyLinks_ = other.proxyLinks_;
+      showInvite_ = other.showInvite_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2709,6 +2712,30 @@ namespace tobeh.Valmar {
     }
 
 
+    /// <summary>Field number for the "proxyLinks" field.</summary>
+    public const int ProxyLinksFieldNumber = 7;
+    private bool proxyLinks_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool ProxyLinks {
+      get { return proxyLinks_; }
+      set {
+        proxyLinks_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "showInvite" field.</summary>
+    public const int ShowInviteFieldNumber = 8;
+    private bool showInvite_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool ShowInvite {
+      get { return showInvite_; }
+      set {
+        showInvite_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2730,6 +2757,8 @@ namespace tobeh.Valmar {
       if (Invite != other.Invite) return false;
       if (Prefix != other.Prefix) return false;
       if (BotName != other.BotName) return false;
+      if (ProxyLinks != other.ProxyLinks) return false;
+      if (ShowInvite != other.ShowInvite) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2743,6 +2772,8 @@ namespace tobeh.Valmar {
       if (Invite != 0) hash ^= Invite.GetHashCode();
       if (Prefix.Length != 0) hash ^= Prefix.GetHashCode();
       if (botName_ != null) hash ^= BotName.GetHashCode();
+      if (ProxyLinks != false) hash ^= ProxyLinks.GetHashCode();
+      if (ShowInvite != false) hash ^= ShowInvite.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2783,6 +2814,14 @@ namespace tobeh.Valmar {
       if (botName_ != null) {
         _single_botName_codec.WriteTagAndValue(output, BotName);
       }
+      if (ProxyLinks != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(ProxyLinks);
+      }
+      if (ShowInvite != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(ShowInvite);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2815,6 +2854,14 @@ namespace tobeh.Valmar {
       if (botName_ != null) {
         _single_botName_codec.WriteTagAndValue(ref output, BotName);
       }
+      if (ProxyLinks != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(ProxyLinks);
+      }
+      if (ShowInvite != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(ShowInvite);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2842,6 +2889,12 @@ namespace tobeh.Valmar {
       }
       if (botName_ != null) {
         size += _single_botName_codec.CalculateSizeWithTag(BotName);
+      }
+      if (ProxyLinks != false) {
+        size += 1 + 1;
+      }
+      if (ShowInvite != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2876,6 +2929,12 @@ namespace tobeh.Valmar {
         if (botName_ == null || other.BotName != "") {
           BotName = other.BotName;
         }
+      }
+      if (other.ProxyLinks != false) {
+        ProxyLinks = other.ProxyLinks;
+      }
+      if (other.ShowInvite != false) {
+        ShowInvite = other.ShowInvite;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2922,6 +2981,14 @@ namespace tobeh.Valmar {
             }
             break;
           }
+          case 56: {
+            ProxyLinks = input.ReadBool();
+            break;
+          }
+          case 64: {
+            ShowInvite = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -2965,6 +3032,14 @@ namespace tobeh.Valmar {
             if (botName_ == null || value != "") {
               BotName = value;
             }
+            break;
+          }
+          case 56: {
+            ProxyLinks = input.ReadBool();
+            break;
+          }
+          case 64: {
+            ShowInvite = input.ReadBool();
             break;
           }
         }

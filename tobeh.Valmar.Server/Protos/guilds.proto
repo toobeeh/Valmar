@@ -100,4 +100,6 @@ message GuildOptionsMessage {
   int32 invite = 4;
   string prefix = 5;
   google.protobuf.StringValue botName = 6;
+  bool proxyLinks = 7;
+  bool showInvite = 8;
 }
