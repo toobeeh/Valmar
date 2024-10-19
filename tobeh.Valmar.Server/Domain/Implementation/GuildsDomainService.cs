@@ -94,8 +94,7 @@ public class GuildsDomainService(
             throw new ApplicationException("Member is not banned");
         }
 
-        connection.Ban = false;
-        db.ServerConnections.Update(connection);
+        db.ServerConnections.Remove(connection);
         await db.SaveChangesAsync();
     }
 
