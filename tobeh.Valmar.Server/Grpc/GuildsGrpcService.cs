@@ -113,7 +113,7 @@ public class GuildsGrpcService(
         }
         else
         {
-            await guildsService.UnbanMemberFromGuild(member.Login, request.MemberId);
+            await guildsService.UnbanMemberFromGuild(member.Login, request.GuildId);
         }
 
         return new Empty();
