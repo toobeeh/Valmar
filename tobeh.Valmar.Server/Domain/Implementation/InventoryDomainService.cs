@@ -160,7 +160,7 @@ public class InventoryDomainService(
         logger.LogTrace("GetNextSlotRemainingDrops(member={member})", member);
 
         var baseSlots = InventoryHelper.GetSlotBaseCount(member.Drops);
-        var remainingDrops = member.Drops - InventoryHelper.GetRequiredDropsForNextSlot(baseSlots + 1);
+        var remainingDrops = InventoryHelper.GetRequiredDropsForNextSlot(baseSlots + 1) - member.Drops;
 
         return Task.FromResult(remainingDrops);
     }
