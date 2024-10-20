@@ -8,7 +8,8 @@ public interface IGuildsDomainService
     Task<GuildDetailDdo> GetGuildByInvite(int invite);
     Task<GuildDetailDdo> GetGuildByDiscordId(long discordId);
 
-    Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix,
+    Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix, bool showInvite,
+        bool proxyLinks,
         long? channelId = null, string? botName = null);
 
     Task<LobbyBotOptionEntity> GetGuildOptionsByGuildId(long guildId);

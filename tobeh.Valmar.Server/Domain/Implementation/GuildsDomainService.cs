@@ -132,6 +132,7 @@ public class GuildsDomainService(
     }
 
     public async Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix,
+        bool showInvite, bool proxyLinks,
         long? channelId = null, string? botName = null)
     {
         logger.LogTrace("UpdateGuildOptions(guildId={guildId}, name={name})", guildId, name);
@@ -158,6 +159,8 @@ public class GuildsDomainService(
         options.Prefix = prefix;
         options.ChannelId = channelId;
         options.BotName = botName;
+        options.ShowInvite = showInvite;
+        options.ProxyLinks = proxyLinks;
 
         db.LobbyBotOptions.Update(options);
         await db.SaveChangesAsync();
