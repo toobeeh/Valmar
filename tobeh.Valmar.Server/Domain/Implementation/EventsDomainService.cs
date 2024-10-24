@@ -112,7 +112,7 @@ public class EventsDomainService(
 
         if (active is null)
         {
-            throw new EntityNotFoundException($"No event is currently active.");
+            throw new EntityNotFoundException($"No event is currently active.", false);
         }
 
         return ConvertEventEntityToDdo(active);

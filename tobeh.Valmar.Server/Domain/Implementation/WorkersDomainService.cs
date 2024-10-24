@@ -44,7 +44,7 @@ public class WorkersDomainService(
         var instance = freeInstances.FirstOrDefault();
         if (instance is null)
         {
-            throw new EntityNotFoundException($"There is no free bot instance available to claim for servers");
+            throw new EntityNotFoundException($"There is no free bot instance available to claim for servers", false);
         }
 
         // remove all claims of this instance that may be left (must be invalid if any, as checked before)
@@ -77,7 +77,8 @@ public class WorkersDomainService(
         if (!InstanceUnclaimedOrExpired(instance) && lastClaimUlid != instance.ClaimUlid)
         {
             throw new UserOperationException(
-                $"Instance {instanceId} is already claimed by another worker, or renewal claim rejected because old claim {lastClaimUlid} did not match {instance.ClaimUlid}.");
+                $"Instance {instanceId} is already claimed by another worker, or renewal claim rejected because old claim {lastClaimUlid} did not match {instance.ClaimUlid}.",
+                false);
         }
 
         if (instance.ClaimUlid == claimUlid)
@@ -100,7 +101,7 @@ public class WorkersDomainService(
         var memberClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(entity => entity.InstanceId == instanceId);
         if (memberClaim is null)
         {
-            throw new EntityNotFoundException($"No member has claimed instance with id {instanceId}");
+            throw new EntityNotFoundException($"No member has claimed instance with id {instanceId}", false);
         }
 
         return await guildsDomainService.GetGuildOptionsByGuildId(memberClaim.GuildId);
