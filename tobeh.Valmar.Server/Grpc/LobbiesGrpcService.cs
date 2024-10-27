@@ -3,7 +3,6 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using tobeh.Valmar.Server.Domain;
 using tobeh.Valmar.Server.Domain.Classes;
-using tobeh.Valmar.Server.Domain.Classes.Param;
 using tobeh.Valmar.Server.Grpc.Utils;
 using tobeh.Valmar.Server.Util;
 
@@ -119,6 +118,7 @@ public class LobbiesGrpcService(
 
         await lobbiesService.SetMemberStatusesInSkribblLobby(request.LobbyId,
             mapper.Map<List<SkribblLobbyTypoMemberDdo>>(request.Members));
+        logger.LogInformation("Set {count} member statuses in lobby {lobbyId}", request.Members.Count, request.LobbyId);
 
         return new Empty();
     }
@@ -149,6 +149,7 @@ public class LobbiesGrpcService(
         logger.LogTrace("GetOnlineLobbyPlayers(request={request})", request);
 
         var players = await lobbiesService.GetOnlineLobbyPlayers(request.GuildId);
+        logger.LogInformation("Found {count} online players for request {rew}", players.Count, request);
         await responseStream.WriteAllMappedAsync(players, mapper.Map<SkribblLobbyTypoMembersMessage>);
     }
 
@@ -166,6 +167,7 @@ public class LobbiesGrpcService(
         logger.LogTrace("GetLobbiesById(request={request})", request);
 
         var lobbies = await lobbiesService.GetLobbiesById(request.LobbyIds.ToList());
+        logger.LogInformation("Found {count} lobbies", lobbies.Count);
         await responseStream.WriteAllMappedAsync(lobbies,
             lobby => Task.FromResult(mapper.Map<SkribblLobbyMessage>(lobby)), true);
     }

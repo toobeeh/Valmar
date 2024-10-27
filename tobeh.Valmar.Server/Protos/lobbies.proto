@@ -101,6 +101,11 @@ message SkribblLobbyTypoMemberMessage{
   int32 login = 1;
   int32 lobbyPlayerId = 2;
   int64 ownershipClaim = 3;
+  int32 bubbles = 4;
+  google.protobuf.StringValue patronEmoji = 5;
+  google.protobuf.Int32Value sceneId = 6;
+  google.protobuf.Int32Value sceneShift = 7;
+  repeated inventory.SpriteSlotConfigurationReply spriteSlots = 8;
 }
 
 message SkribblLobbyTypoMembersMessage {

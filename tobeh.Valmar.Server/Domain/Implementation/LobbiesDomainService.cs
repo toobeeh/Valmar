@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using tobeh.Valmar.Server.Database;
 using tobeh.Valmar.Server.Domain.Classes;
 using tobeh.Valmar.Server.Domain.Classes.JSON;
-using tobeh.Valmar.Server.Domain.Classes.Param;
 using tobeh.Valmar.Server.Domain.Exceptions;
 using tobeh.Valmar.Server.Util;
 
@@ -324,11 +323,14 @@ public class LobbiesDomainService(
                 .ToListAsync())
             .ToList();
 
+        var members = (await membersService.GetMembersByLogin(players.Select(player => player.Login).ToList()))
+            .ToDictionary(member => member.Login);
+
         var lobbies = players
             .GroupBy(player => player.LobbyId)
             .Select(lobby => new SkribblLobbyTypoMembersDdo(
                 lobby.Key,
-                lobby.Select(MapSkribblLobbyTypoMemberToDdo).ToList()));
+                lobby.Select(member => MapSkribblLobbyTypoMemberToDdo(member, members[member.Login])).ToList()));
 
         return lobbies.ToList();
     }
@@ -396,9 +398,22 @@ public class LobbiesDomainService(
         );
     }
 
-    private SkribblLobbyTypoMemberDdo MapSkribblLobbyTypoMemberToDdo(SkribblOnlinePlayerEntity player)
+    private SkribblLobbyTypoMemberDdo MapSkribblLobbyTypoMemberToDdo(SkribblOnlinePlayerEntity player, MemberDdo member)
     {
-        return new SkribblLobbyTypoMemberDdo(player.Login, player.LobbyPlayerId, player.OwnershipClaim);
+        var sceneInv = InventoryHelper.ParseSceneInventory(member.Scenes);
+        var spriteInv =
+            InventoryHelper.ParseActiveSlotsFromInventory(member.Sprites, member.RainbowSprites);
+
+        return new SkribblLobbyTypoMemberDdo(
+            player.Login,
+            player.LobbyPlayerId,
+            player.OwnershipClaim,
+            member.Bubbles,
+            member.PatronEmoji,
+            sceneInv.ActiveId,
+            sceneInv.ActiveShift,
+            spriteInv
+        );
     }
 
     private SkribblLobbyTypoSettingsDdo MapSkribblLobbyTypoSettingsToDdo(SkribblLobbyEntity lobby)
