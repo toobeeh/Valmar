@@ -119,7 +119,7 @@ message SkribblLobbyTypoSettingsMessage {
   bool whitelistAllowedServers = 3;
   repeated int64 allowedServers = 4;
   google.protobuf.Int64Value LobbyOwnershipClaim = 5;
-  google.protobuf.Timestamp FirstSeem = 6;
+  google.protobuf.Timestamp FirstSeen = 6;
   google.protobuf.Timestamp LastUpdated = 7;
 }
 

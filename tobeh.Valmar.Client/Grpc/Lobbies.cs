@@ -55,7 +55,7 @@ namespace tobeh.Valmar {
             "c2FnZRIPCgdsb2JieUlkGAEgASgJEhMKC2Rlc2NyaXB0aW9uGAIgASgJEh8K",
             "F3doaXRlbGlzdEFsbG93ZWRTZXJ2ZXJzGAMgASgIEhYKDmFsbG93ZWRTZXJ2",
             "ZXJzGAQgAygDEjgKE0xvYmJ5T3duZXJzaGlwQ2xhaW0YBSABKAsyGy5nb29n",
-            "bGUucHJvdG9idWYuSW50NjRWYWx1ZRItCglGaXJzdFNlZW0YBiABKAsyGi5n",
+            "bGUucHJvdG9idWYuSW50NjRWYWx1ZRItCglGaXJzdFNlZW4YBiABKAsyGi5n",
             "b29nbGUucHJvdG9idWYuVGltZXN0YW1wEi8KC0xhc3RVcGRhdGVkGAcgASgL",
             "MhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIvCh5FbmNyeXB0ZWRMb2Ji",
             "eUxpbmtUb2tlbk1lc3NhZ2USDQoFdG9rZW4YASABKAkiNgoVUGxhaW5Mb2Ji",
@@ -139,7 +139,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SkribblLobbyTypoMemberMessage), global::tobeh.Valmar.SkribblLobbyTypoMemberMessage.Parser, new[]{ "Login", "LobbyPlayerId", "OwnershipClaim" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SkribblLobbyTypoMembersMessage), global::tobeh.Valmar.SkribblLobbyTypoMembersMessage.Parser, new[]{ "Members", "LobbyId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SkribblLobbyIdentificationMessage), global::tobeh.Valmar.SkribblLobbyIdentificationMessage.Parser, new[]{ "Link" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SkribblLobbyTypoSettingsMessage), global::tobeh.Valmar.SkribblLobbyTypoSettingsMessage.Parser, new[]{ "LobbyId", "Description", "WhitelistAllowedServers", "AllowedServers", "LobbyOwnershipClaim", "FirstSeem", "LastUpdated" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SkribblLobbyTypoSettingsMessage), global::tobeh.Valmar.SkribblLobbyTypoSettingsMessage.Parser, new[]{ "LobbyId", "Description", "WhitelistAllowedServers", "AllowedServers", "LobbyOwnershipClaim", "FirstSeen", "LastUpdated" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage), global::tobeh.Valmar.EncryptedLobbyLinkTokenMessage.Parser, new[]{ "Token" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.PlainLobbyLinkMessage), global::tobeh.Valmar.PlainLobbyLinkMessage.Parser, new[]{ "Link", "GuildId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SetGuildLobbyLinksMessage), global::tobeh.Valmar.SetGuildLobbyLinksMessage.Parser, new[]{ "GuildId", "Links" }, null, null, null, null),
@@ -2853,7 +2853,7 @@ namespace tobeh.Valmar {
       whitelistAllowedServers_ = other.whitelistAllowedServers_;
       allowedServers_ = other.allowedServers_.Clone();
       LobbyOwnershipClaim = other.LobbyOwnershipClaim;
-      firstSeem_ = other.firstSeem_ != null ? other.firstSeem_.Clone() : null;
+      firstSeen_ = other.firstSeen_ != null ? other.firstSeen_.Clone() : null;
       lastUpdated_ = other.lastUpdated_ != null ? other.lastUpdated_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -2925,15 +2925,15 @@ namespace tobeh.Valmar {
     }
 
 
-    /// <summary>Field number for the "FirstSeem" field.</summary>
-    public const int FirstSeemFieldNumber = 6;
-    private global::Google.Protobuf.WellKnownTypes.Timestamp firstSeem_;
+    /// <summary>Field number for the "FirstSeen" field.</summary>
+    public const int FirstSeenFieldNumber = 6;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp firstSeen_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Google.Protobuf.WellKnownTypes.Timestamp FirstSeem {
-      get { return firstSeem_; }
+    public global::Google.Protobuf.WellKnownTypes.Timestamp FirstSeen {
+      get { return firstSeen_; }
       set {
-        firstSeem_ = value;
+        firstSeen_ = value;
       }
     }
 
@@ -2969,7 +2969,7 @@ namespace tobeh.Valmar {
       if (WhitelistAllowedServers != other.WhitelistAllowedServers) return false;
       if(!allowedServers_.Equals(other.allowedServers_)) return false;
       if (LobbyOwnershipClaim != other.LobbyOwnershipClaim) return false;
-      if (!object.Equals(FirstSeem, other.FirstSeem)) return false;
+      if (!object.Equals(FirstSeen, other.FirstSeen)) return false;
       if (!object.Equals(LastUpdated, other.LastUpdated)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -2983,7 +2983,7 @@ namespace tobeh.Valmar {
       if (WhitelistAllowedServers != false) hash ^= WhitelistAllowedServers.GetHashCode();
       hash ^= allowedServers_.GetHashCode();
       if (lobbyOwnershipClaim_ != null) hash ^= LobbyOwnershipClaim.GetHashCode();
-      if (firstSeem_ != null) hash ^= FirstSeem.GetHashCode();
+      if (firstSeen_ != null) hash ^= FirstSeen.GetHashCode();
       if (lastUpdated_ != null) hash ^= LastUpdated.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3019,9 +3019,9 @@ namespace tobeh.Valmar {
       if (lobbyOwnershipClaim_ != null) {
         _single_lobbyOwnershipClaim_codec.WriteTagAndValue(output, LobbyOwnershipClaim);
       }
-      if (firstSeem_ != null) {
+      if (firstSeen_ != null) {
         output.WriteRawTag(50);
-        output.WriteMessage(FirstSeem);
+        output.WriteMessage(FirstSeen);
       }
       if (lastUpdated_ != null) {
         output.WriteRawTag(58);
@@ -3053,9 +3053,9 @@ namespace tobeh.Valmar {
       if (lobbyOwnershipClaim_ != null) {
         _single_lobbyOwnershipClaim_codec.WriteTagAndValue(ref output, LobbyOwnershipClaim);
       }
-      if (firstSeem_ != null) {
+      if (firstSeen_ != null) {
         output.WriteRawTag(50);
-        output.WriteMessage(FirstSeem);
+        output.WriteMessage(FirstSeen);
       }
       if (lastUpdated_ != null) {
         output.WriteRawTag(58);
@@ -3084,8 +3084,8 @@ namespace tobeh.Valmar {
       if (lobbyOwnershipClaim_ != null) {
         size += _single_lobbyOwnershipClaim_codec.CalculateSizeWithTag(LobbyOwnershipClaim);
       }
-      if (firstSeem_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(FirstSeem);
+      if (firstSeen_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(FirstSeen);
       }
       if (lastUpdated_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(LastUpdated);
@@ -3117,11 +3117,11 @@ namespace tobeh.Valmar {
           LobbyOwnershipClaim = other.LobbyOwnershipClaim;
         }
       }
-      if (other.firstSeem_ != null) {
-        if (firstSeem_ == null) {
-          FirstSeem = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+      if (other.firstSeen_ != null) {
+        if (firstSeen_ == null) {
+          FirstSeen = new global::Google.Protobuf.WellKnownTypes.Timestamp();
         }
-        FirstSeem.MergeFrom(other.FirstSeem);
+        FirstSeen.MergeFrom(other.FirstSeen);
       }
       if (other.lastUpdated_ != null) {
         if (lastUpdated_ == null) {
@@ -3169,10 +3169,10 @@ namespace tobeh.Valmar {
             break;
           }
           case 50: {
-            if (firstSeem_ == null) {
-              FirstSeem = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            if (firstSeen_ == null) {
+              FirstSeen = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(FirstSeem);
+            input.ReadMessage(FirstSeen);
             break;
           }
           case 58: {
@@ -3222,10 +3222,10 @@ namespace tobeh.Valmar {
             break;
           }
           case 50: {
-            if (firstSeem_ == null) {
-              FirstSeem = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            if (firstSeen_ == null) {
+              FirstSeen = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(FirstSeem);
+            input.ReadMessage(FirstSeen);
             break;
           }
           case 58: {
