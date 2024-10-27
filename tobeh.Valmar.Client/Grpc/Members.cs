@@ -26,66 +26,66 @@ namespace tobeh.Valmar {
           string.Concat(
             "Cg1tZW1iZXJzLnByb3RvEgdtZW1iZXJzGhtnb29nbGUvcHJvdG9idWYvZW1w",
             "dHkucHJvdG8aH2dvb2dsZS9wcm90b2J1Zi90aW1lc3RhbXAucHJvdG8aHmdv",
-            "b2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90byLOAwoLTWVtYmVyUmVwbHkS",
+            "b2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90byLzAwoLTWVtYmVyUmVwbHkS",
             "DwoHYnViYmxlcxgBIAEoBRINCgVkcm9wcxgCIAEoARIPCgdzcHJpdGVzGAMg",
             "ASgJEg4KBnNjZW5lcxgEIAEoCRINCgVmbGFncxgFIAEoBRIWCg5yYWluYm93",
             "U3ByaXRlcxgGIAEoCRIRCglkaXNjb3JkSWQYByABKAMSEAoIdXNlcm5hbWUY",
-            "CCABKAkSDQoFbG9naW4YCSABKAUSGQoRc2VydmVyQ29ubmVjdGlvbnMYCiAD",
-            "KAUSLwoLbWFwcGVkRmxhZ3MYCyADKA4yGi5tZW1iZXJzLk1lbWJlckZsYWdN",
-            "ZXNzYWdlEjUKEW5leHRBd2FyZFBhY2tEYXRlGAwgASgLMhouZ29vZ2xlLnBy",
-            "b3RvYnVmLlRpbWVzdGFtcBIxCgtwYXRyb25FbW9qaRgNIAEoCzIcLmdvb2ds",
-            "ZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRI1ChFuZXh0UGF0cm9uaXplRGF0ZRgO",
-            "IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASNgoSbmV4dEhvbWVD",
-            "aG9vc2VEYXRlGA8gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIn",
-            "ChBBY2Nlc3NUb2tlblJlcGx5EhMKC2FjY2Vzc1Rva2VuGAEgASgJIiQKDlJh",
-            "d01lbWJlclJlcGx5EhIKCm1lbWJlckpzb24YASABKAkiWgoRTWVtYmVyU2Vh",
-            "cmNoUmVwbHkSEAoIdXNlcm5hbWUYASABKAkSDQoFbG9naW4YAiABKAUSJAoD",
-            "cmF3GAMgASgLMhcubWVtYmVycy5SYXdNZW1iZXJSZXBseSItChxJZGVudGlm",
-            "eU1lbWJlckJ5TG9naW5SZXF1ZXN0Eg0KBWxvZ2luGAEgASgFIioKGEdldE1l",
-            "bWJlcnNCeUxvZ2luTWVzc2FnZRIOCgZsb2dpbnMYASADKAUiOQoiSWRlbnRp",
-            "ZnlNZW1iZXJCeUFjY2Vzc1Rva2VuUmVxdWVzdBITCgthY2Nlc3NUb2tlbhgB",
-            "IAEoCSIuCiBJZGVudGlmeU1lbWJlckJ5RGlzY29yZElkUmVxdWVzdBIKCgJp",
-            "ZBgBIAEoAyIkChNTZWFyY2hNZW1iZXJSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJ",
-            "IkMKHU1vZGlmeVNlcnZlckNvbm5lY3Rpb25SZXF1ZXN0Eg0KBWxvZ2luGAEg",
-            "ASgFEhMKC3NlcnZlclRva2VuGAIgASgFIjoKFlVwZGF0ZURpc2NvcmRJZFJl",
-            "cXVlc3QSDQoFbG9naW4YASABKAUSEQoJZGlzY29yZElkGAIgASgDIloKFkNy",
-            "ZWF0ZU5ld01lbWJlclJlcXVlc3QSEQoJZGlzY29yZElkGAEgASgDEhAKCHVz",
-            "ZXJuYW1lGAIgASgJEhsKE2Nvbm5lY3RUb1R5cG9TZXJ2ZXIYAyABKAgqzQEK",
-            "EU1lbWJlckZsYWdNZXNzYWdlEgkKBUFkbWluEAASDQoJTW9kZXJhdG9yEAES",
-            "CgoGUGF0cm9uEAISDgoKUGF0cm9uaXplchADEgsKB0Jvb3N0ZXIQBBILCgdE",
-            "cm9wQmFuEAUSDAoIUGVybWFCYW4QBhIICgRCZXRhEAcSEQoNQnViYmxlRmFy",
-            "bWluZxAIEhIKDlVubGltaXRlZENsb3VkEAkSFAoQQ29udGVudE1vZGVyYXRv",
-            "chAKEhMKD0Vtb2ppTWFuYWdlbWVudBALMuYICgdNZW1iZXJzEkgKD0NyZWF0",
-            "ZU5ld01lbWJlchIfLm1lbWJlcnMuQ3JlYXRlTmV3TWVtYmVyUmVxdWVzdBoU",
-            "Lm1lbWJlcnMuTWVtYmVyUmVwbHkSTwoQR2V0TWVtYmVyQnlMb2dpbhIlLm1l",
-            "bWJlcnMuSWRlbnRpZnlNZW1iZXJCeUxvZ2luUmVxdWVzdBoULm1lbWJlcnMu",
-            "TWVtYmVyUmVwbHkSTgoRR2V0TWVtYmVyc0J5TG9naW4SIS5tZW1iZXJzLkdl",
-            "dE1lbWJlcnNCeUxvZ2luTWVzc2FnZRoULm1lbWJlcnMuTWVtYmVyUmVwbHkw",
-            "ARJbChZHZXRNZW1iZXJCeUFjY2Vzc1Rva2VuEisubWVtYmVycy5JZGVudGlm",
-            "eU1lbWJlckJ5QWNjZXNzVG9rZW5SZXF1ZXN0GhQubWVtYmVycy5NZW1iZXJS",
-            "ZXBseRJXChRHZXRNZW1iZXJCeURpc2NvcmRJZBIpLm1lbWJlcnMuSWRlbnRp",
-            "ZnlNZW1iZXJCeURpc2NvcmRJZFJlcXVlc3QaFC5tZW1iZXJzLk1lbWJlclJl",
-            "cGx5ElgKFUdldFBhdHJvbml6ZWRPZk1lbWJlchIpLm1lbWJlcnMuSWRlbnRp",
-            "ZnlNZW1iZXJCeURpc2NvcmRJZFJlcXVlc3QaFC5tZW1iZXJzLk1lbWJlclJl",
-            "cGx5EkoKDFNlYXJjaE1lbWJlchIcLm1lbWJlcnMuU2VhcmNoTWVtYmVyUmVx",
-            "dWVzdBoaLm1lbWJlcnMuTWVtYmVyU2VhcmNoUmVwbHkwARJVChNHZXRSYXdN",
-            "ZW1iZXJCeUxvZ2luEiUubWVtYmVycy5JZGVudGlmeU1lbWJlckJ5TG9naW5S",
-            "ZXF1ZXN0GhcubWVtYmVycy5SYXdNZW1iZXJSZXBseRJZChVHZXRBY2Nlc3NU",
-            "b2tlbkJ5TG9naW4SJS5tZW1iZXJzLklkZW50aWZ5TWVtYmVyQnlMb2dpblJl",
-            "cXVlc3QaGS5tZW1iZXJzLkFjY2Vzc1Rva2VuUmVwbHkSTgoVVXBkYXRlTWVt",
-            "YmVyRGlzY29yZElkEh8ubWVtYmVycy5VcGRhdGVEaXNjb3JkSWRSZXF1ZXN0",
-            "GhQubWVtYmVycy5NZW1iZXJSZXBseRJVChRDbGVhck1lbWJlckRyb3Bib29z",
-            "dBIlLm1lbWJlcnMuSWRlbnRpZnlNZW1iZXJCeUxvZ2luUmVxdWVzdBoWLmdv",
-            "b2dsZS5wcm90b2J1Zi5FbXB0eRJbChlBZGRNZW1iZXJTZXJ2ZXJDb25uZWN0",
-            "aW9uEiYubWVtYmVycy5Nb2RpZnlTZXJ2ZXJDb25uZWN0aW9uUmVxdWVzdBoW",
-            "Lmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJeChxSZW1vdmVNZW1iZXJTZXJ2ZXJD",
-            "b25uZWN0aW9uEiYubWVtYmVycy5Nb2RpZnlTZXJ2ZXJDb25uZWN0aW9uUmVx",
-            "dWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eUIPqgIMdG9iZWguVmFsbWFy",
-            "YgZwcm90bzM="));
+            "CCABKAkSDQoFbG9naW4YCSABKAUSIwoXc2VydmVyQ29ubmVjdGlvbkludml0",
+            "ZXMYCiADKAVCAhgBEi8KC21hcHBlZEZsYWdzGAsgAygOMhoubWVtYmVycy5N",
+            "ZW1iZXJGbGFnTWVzc2FnZRI1ChFuZXh0QXdhcmRQYWNrRGF0ZRgMIAEoCzIa",
+            "Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMQoLcGF0cm9uRW1vamkYDSAB",
+            "KAsyHC5nb29nbGUucHJvdG9idWYuU3RyaW5nVmFsdWUSNQoRbmV4dFBhdHJv",
+            "bml6ZURhdGUYDiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjYK",
+            "Em5leHRIb21lQ2hvb3NlRGF0ZRgPIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5U",
+            "aW1lc3RhbXASGQoRc2VydmVyQ29ubmVjdGlvbnMYECADKAMiJwoQQWNjZXNz",
+            "VG9rZW5SZXBseRITCgthY2Nlc3NUb2tlbhgBIAEoCSIkCg5SYXdNZW1iZXJS",
+            "ZXBseRISCgptZW1iZXJKc29uGAEgASgJIloKEU1lbWJlclNlYXJjaFJlcGx5",
+            "EhAKCHVzZXJuYW1lGAEgASgJEg0KBWxvZ2luGAIgASgFEiQKA3JhdxgDIAEo",
+            "CzIXLm1lbWJlcnMuUmF3TWVtYmVyUmVwbHkiLQocSWRlbnRpZnlNZW1iZXJC",
+            "eUxvZ2luUmVxdWVzdBINCgVsb2dpbhgBIAEoBSIqChhHZXRNZW1iZXJzQnlM",
+            "b2dpbk1lc3NhZ2USDgoGbG9naW5zGAEgAygFIjkKIklkZW50aWZ5TWVtYmVy",
+            "QnlBY2Nlc3NUb2tlblJlcXVlc3QSEwoLYWNjZXNzVG9rZW4YASABKAkiLgog",
+            "SWRlbnRpZnlNZW1iZXJCeURpc2NvcmRJZFJlcXVlc3QSCgoCaWQYASABKAMi",
+            "JAoTU2VhcmNoTWVtYmVyUmVxdWVzdBINCgVxdWVyeRgBIAEoCSJDCh1Nb2Rp",
+            "ZnlTZXJ2ZXJDb25uZWN0aW9uUmVxdWVzdBINCgVsb2dpbhgBIAEoBRITCgtz",
+            "ZXJ2ZXJUb2tlbhgCIAEoBSI6ChZVcGRhdGVEaXNjb3JkSWRSZXF1ZXN0Eg0K",
+            "BWxvZ2luGAEgASgFEhEKCWRpc2NvcmRJZBgCIAEoAyJaChZDcmVhdGVOZXdN",
+            "ZW1iZXJSZXF1ZXN0EhEKCWRpc2NvcmRJZBgBIAEoAxIQCgh1c2VybmFtZRgC",
+            "IAEoCRIbChNjb25uZWN0VG9UeXBvU2VydmVyGAMgASgIKs0BChFNZW1iZXJG",
+            "bGFnTWVzc2FnZRIJCgVBZG1pbhAAEg0KCU1vZGVyYXRvchABEgoKBlBhdHJv",
+            "bhACEg4KClBhdHJvbml6ZXIQAxILCgdCb29zdGVyEAQSCwoHRHJvcEJhbhAF",
+            "EgwKCFBlcm1hQmFuEAYSCAoEQmV0YRAHEhEKDUJ1YmJsZUZhcm1pbmcQCBIS",
+            "Cg5VbmxpbWl0ZWRDbG91ZBAJEhQKEENvbnRlbnRNb2RlcmF0b3IQChITCg9F",
+            "bW9qaU1hbmFnZW1lbnQQCzLmCAoHTWVtYmVycxJICg9DcmVhdGVOZXdNZW1i",
+            "ZXISHy5tZW1iZXJzLkNyZWF0ZU5ld01lbWJlclJlcXVlc3QaFC5tZW1iZXJz",
+            "Lk1lbWJlclJlcGx5Ek8KEEdldE1lbWJlckJ5TG9naW4SJS5tZW1iZXJzLklk",
+            "ZW50aWZ5TWVtYmVyQnlMb2dpblJlcXVlc3QaFC5tZW1iZXJzLk1lbWJlclJl",
+            "cGx5Ek4KEUdldE1lbWJlcnNCeUxvZ2luEiEubWVtYmVycy5HZXRNZW1iZXJz",
+            "QnlMb2dpbk1lc3NhZ2UaFC5tZW1iZXJzLk1lbWJlclJlcGx5MAESWwoWR2V0",
+            "TWVtYmVyQnlBY2Nlc3NUb2tlbhIrLm1lbWJlcnMuSWRlbnRpZnlNZW1iZXJC",
+            "eUFjY2Vzc1Rva2VuUmVxdWVzdBoULm1lbWJlcnMuTWVtYmVyUmVwbHkSVwoU",
+            "R2V0TWVtYmVyQnlEaXNjb3JkSWQSKS5tZW1iZXJzLklkZW50aWZ5TWVtYmVy",
+            "QnlEaXNjb3JkSWRSZXF1ZXN0GhQubWVtYmVycy5NZW1iZXJSZXBseRJYChVH",
+            "ZXRQYXRyb25pemVkT2ZNZW1iZXISKS5tZW1iZXJzLklkZW50aWZ5TWVtYmVy",
+            "QnlEaXNjb3JkSWRSZXF1ZXN0GhQubWVtYmVycy5NZW1iZXJSZXBseRJKCgxT",
+            "ZWFyY2hNZW1iZXISHC5tZW1iZXJzLlNlYXJjaE1lbWJlclJlcXVlc3QaGi5t",
+            "ZW1iZXJzLk1lbWJlclNlYXJjaFJlcGx5MAESVQoTR2V0UmF3TWVtYmVyQnlM",
+            "b2dpbhIlLm1lbWJlcnMuSWRlbnRpZnlNZW1iZXJCeUxvZ2luUmVxdWVzdBoX",
+            "Lm1lbWJlcnMuUmF3TWVtYmVyUmVwbHkSWQoVR2V0QWNjZXNzVG9rZW5CeUxv",
+            "Z2luEiUubWVtYmVycy5JZGVudGlmeU1lbWJlckJ5TG9naW5SZXF1ZXN0Ghku",
+            "bWVtYmVycy5BY2Nlc3NUb2tlblJlcGx5Ek4KFVVwZGF0ZU1lbWJlckRpc2Nv",
+            "cmRJZBIfLm1lbWJlcnMuVXBkYXRlRGlzY29yZElkUmVxdWVzdBoULm1lbWJl",
+            "cnMuTWVtYmVyUmVwbHkSVQoUQ2xlYXJNZW1iZXJEcm9wYm9vc3QSJS5tZW1i",
+            "ZXJzLklkZW50aWZ5TWVtYmVyQnlMb2dpblJlcXVlc3QaFi5nb29nbGUucHJv",
+            "dG9idWYuRW1wdHkSWwoZQWRkTWVtYmVyU2VydmVyQ29ubmVjdGlvbhImLm1l",
+            "bWJlcnMuTW9kaWZ5U2VydmVyQ29ubmVjdGlvblJlcXVlc3QaFi5nb29nbGUu",
+            "cHJvdG9idWYuRW1wdHkSXgocUmVtb3ZlTWVtYmVyU2VydmVyQ29ubmVjdGlv",
+            "bhImLm1lbWJlcnMuTW9kaWZ5U2VydmVyQ29ubmVjdGlvblJlcXVlc3QaFi5n",
+            "b29nbGUucHJvdG9idWYuRW1wdHlCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::tobeh.Valmar.MemberFlagMessage), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.MemberReply), global::tobeh.Valmar.MemberReply.Parser, new[]{ "Bubbles", "Drops", "Sprites", "Scenes", "Flags", "RainbowSprites", "DiscordId", "Username", "Login", "ServerConnections", "MappedFlags", "NextAwardPackDate", "PatronEmoji", "NextPatronizeDate", "NextHomeChooseDate" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.MemberReply), global::tobeh.Valmar.MemberReply.Parser, new[]{ "Bubbles", "Drops", "Sprites", "Scenes", "Flags", "RainbowSprites", "DiscordId", "Username", "Login", "ServerConnectionInvites", "MappedFlags", "NextAwardPackDate", "PatronEmoji", "NextPatronizeDate", "NextHomeChooseDate", "ServerConnections" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AccessTokenReply), global::tobeh.Valmar.AccessTokenReply.Parser, new[]{ "AccessToken" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.RawMemberReply), global::tobeh.Valmar.RawMemberReply.Parser, new[]{ "MemberJson" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.MemberSearchReply), global::tobeh.Valmar.MemberSearchReply.Parser, new[]{ "Username", "Login", "Raw" }, null, null, null, null),
@@ -167,12 +167,13 @@ namespace tobeh.Valmar {
       discordId_ = other.discordId_;
       username_ = other.username_;
       login_ = other.login_;
-      serverConnections_ = other.serverConnections_.Clone();
+      serverConnectionInvites_ = other.serverConnectionInvites_.Clone();
       mappedFlags_ = other.mappedFlags_.Clone();
       nextAwardPackDate_ = other.nextAwardPackDate_ != null ? other.nextAwardPackDate_.Clone() : null;
       PatronEmoji = other.PatronEmoji;
       nextPatronizeDate_ = other.nextPatronizeDate_ != null ? other.nextPatronizeDate_.Clone() : null;
       nextHomeChooseDate_ = other.nextHomeChooseDate_ != null ? other.nextHomeChooseDate_.Clone() : null;
+      serverConnections_ = other.serverConnections_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -290,15 +291,16 @@ namespace tobeh.Valmar {
       }
     }
 
-    /// <summary>Field number for the "serverConnections" field.</summary>
-    public const int ServerConnectionsFieldNumber = 10;
-    private static readonly pb::FieldCodec<int> _repeated_serverConnections_codec
+    /// <summary>Field number for the "serverConnectionInvites" field.</summary>
+    public const int ServerConnectionInvitesFieldNumber = 10;
+    private static readonly pb::FieldCodec<int> _repeated_serverConnectionInvites_codec
         = pb::FieldCodec.ForInt32(82);
-    private readonly pbc::RepeatedField<int> serverConnections_ = new pbc::RepeatedField<int>();
+    private readonly pbc::RepeatedField<int> serverConnectionInvites_ = new pbc::RepeatedField<int>();
+    [global::System.ObsoleteAttribute]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<int> ServerConnections {
-      get { return serverConnections_; }
+    public pbc::RepeatedField<int> ServerConnectionInvites {
+      get { return serverConnectionInvites_; }
     }
 
     /// <summary>Field number for the "mappedFlags" field.</summary>
@@ -362,6 +364,17 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "serverConnections" field.</summary>
+    public const int ServerConnectionsFieldNumber = 16;
+    private static readonly pb::FieldCodec<long> _repeated_serverConnections_codec
+        = pb::FieldCodec.ForInt64(130);
+    private readonly pbc::RepeatedField<long> serverConnections_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<long> ServerConnections {
+      get { return serverConnections_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -386,12 +399,13 @@ namespace tobeh.Valmar {
       if (DiscordId != other.DiscordId) return false;
       if (Username != other.Username) return false;
       if (Login != other.Login) return false;
-      if(!serverConnections_.Equals(other.serverConnections_)) return false;
+      if(!serverConnectionInvites_.Equals(other.serverConnectionInvites_)) return false;
       if(!mappedFlags_.Equals(other.mappedFlags_)) return false;
       if (!object.Equals(NextAwardPackDate, other.NextAwardPackDate)) return false;
       if (PatronEmoji != other.PatronEmoji) return false;
       if (!object.Equals(NextPatronizeDate, other.NextPatronizeDate)) return false;
       if (!object.Equals(NextHomeChooseDate, other.NextHomeChooseDate)) return false;
+      if(!serverConnections_.Equals(other.serverConnections_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -408,12 +422,13 @@ namespace tobeh.Valmar {
       if (DiscordId != 0L) hash ^= DiscordId.GetHashCode();
       if (Username.Length != 0) hash ^= Username.GetHashCode();
       if (Login != 0) hash ^= Login.GetHashCode();
-      hash ^= serverConnections_.GetHashCode();
+      hash ^= serverConnectionInvites_.GetHashCode();
       hash ^= mappedFlags_.GetHashCode();
       if (nextAwardPackDate_ != null) hash ^= NextAwardPackDate.GetHashCode();
       if (patronEmoji_ != null) hash ^= PatronEmoji.GetHashCode();
       if (nextPatronizeDate_ != null) hash ^= NextPatronizeDate.GetHashCode();
       if (nextHomeChooseDate_ != null) hash ^= NextHomeChooseDate.GetHashCode();
+      hash ^= serverConnections_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -468,7 +483,7 @@ namespace tobeh.Valmar {
         output.WriteRawTag(72);
         output.WriteInt32(Login);
       }
-      serverConnections_.WriteTo(output, _repeated_serverConnections_codec);
+      serverConnectionInvites_.WriteTo(output, _repeated_serverConnectionInvites_codec);
       mappedFlags_.WriteTo(output, _repeated_mappedFlags_codec);
       if (nextAwardPackDate_ != null) {
         output.WriteRawTag(98);
@@ -485,6 +500,7 @@ namespace tobeh.Valmar {
         output.WriteRawTag(122);
         output.WriteMessage(NextHomeChooseDate);
       }
+      serverConnections_.WriteTo(output, _repeated_serverConnections_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -531,7 +547,7 @@ namespace tobeh.Valmar {
         output.WriteRawTag(72);
         output.WriteInt32(Login);
       }
-      serverConnections_.WriteTo(ref output, _repeated_serverConnections_codec);
+      serverConnectionInvites_.WriteTo(ref output, _repeated_serverConnectionInvites_codec);
       mappedFlags_.WriteTo(ref output, _repeated_mappedFlags_codec);
       if (nextAwardPackDate_ != null) {
         output.WriteRawTag(98);
@@ -548,6 +564,7 @@ namespace tobeh.Valmar {
         output.WriteRawTag(122);
         output.WriteMessage(NextHomeChooseDate);
       }
+      serverConnections_.WriteTo(ref output, _repeated_serverConnections_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -585,7 +602,7 @@ namespace tobeh.Valmar {
       if (Login != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Login);
       }
-      size += serverConnections_.CalculateSize(_repeated_serverConnections_codec);
+      size += serverConnectionInvites_.CalculateSize(_repeated_serverConnectionInvites_codec);
       size += mappedFlags_.CalculateSize(_repeated_mappedFlags_codec);
       if (nextAwardPackDate_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(NextAwardPackDate);
@@ -599,6 +616,7 @@ namespace tobeh.Valmar {
       if (nextHomeChooseDate_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(NextHomeChooseDate);
       }
+      size += serverConnections_.CalculateSize(_repeated_serverConnections_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -638,7 +656,7 @@ namespace tobeh.Valmar {
       if (other.Login != 0) {
         Login = other.Login;
       }
-      serverConnections_.Add(other.serverConnections_);
+      serverConnectionInvites_.Add(other.serverConnectionInvites_);
       mappedFlags_.Add(other.mappedFlags_);
       if (other.nextAwardPackDate_ != null) {
         if (nextAwardPackDate_ == null) {
@@ -663,6 +681,7 @@ namespace tobeh.Valmar {
         }
         NextHomeChooseDate.MergeFrom(other.NextHomeChooseDate);
       }
+      serverConnections_.Add(other.serverConnections_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -716,7 +735,7 @@ namespace tobeh.Valmar {
           }
           case 82:
           case 80: {
-            serverConnections_.AddEntriesFrom(input, _repeated_serverConnections_codec);
+            serverConnectionInvites_.AddEntriesFrom(input, _repeated_serverConnectionInvites_codec);
             break;
           }
           case 90:
@@ -750,6 +769,11 @@ namespace tobeh.Valmar {
               NextHomeChooseDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(NextHomeChooseDate);
+            break;
+          }
+          case 130:
+          case 128: {
+            serverConnections_.AddEntriesFrom(input, _repeated_serverConnections_codec);
             break;
           }
         }
@@ -805,7 +829,7 @@ namespace tobeh.Valmar {
           }
           case 82:
           case 80: {
-            serverConnections_.AddEntriesFrom(ref input, _repeated_serverConnections_codec);
+            serverConnectionInvites_.AddEntriesFrom(ref input, _repeated_serverConnectionInvites_codec);
             break;
           }
           case 90:
@@ -839,6 +863,11 @@ namespace tobeh.Valmar {
               NextHomeChooseDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(NextHomeChooseDate);
+            break;
+          }
+          case 130:
+          case 128: {
+            serverConnections_.AddEntriesFrom(ref input, _repeated_serverConnections_codec);
             break;
           }
         }

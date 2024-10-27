@@ -11,5 +11,9 @@ public class BasicMapperProfile : Profile
             .ConstructUsing(time => Timestamp.FromDateTimeOffset(time));
         CreateMap<DateTimeOffset, long>()
             .ConstructUsing(time => time.ToUnixTimeMilliseconds());
+        CreateMap<long, Timestamp>()
+            .ConstructUsing(ticks => Timestamp.FromDateTimeOffset(DateTimeOffset.FromUnixTimeMilliseconds(ticks)));
+        CreateMap<Timestamp, long>()
+            .ConstructUsing(time => time.ToDateTimeOffset().ToUnixTimeMilliseconds());
     }
 }

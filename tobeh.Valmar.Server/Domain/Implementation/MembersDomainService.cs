@@ -438,6 +438,11 @@ public class MembersDomainService(
             .Join(db.LobbyBotOptions, conn => conn.GuildId, opt => opt.GuildId, (conn, opt) => opt.Invite)
             .ToListAsync();
 
+        var memberConnectionIds = await db.ServerConnections
+            .Where(connection => connection.Login == member.Login && !connection.Ban)
+            .Select(connection => connection.GuildId)
+            .ToListAsync();
+
         var serverHomeClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(claim => claim.Login == member.Login);
         var serverHomeNextDate = serverHomeClaim is { } claim
             ? DateTimeOffset.FromUnixTimeMilliseconds(claim.ClaimTimestamp).AddDays(7)
@@ -455,6 +460,7 @@ public class MembersDomainService(
             memberDetails.UserName,
             Convert.ToInt32(memberDetails.UserLogin),
             connections,
+            memberConnectionIds,
             patronize.Item1,
             mappedFlags.Contains(MemberFlagDdo.Patron) ? member.Emoji : null,
             mappedFlags,

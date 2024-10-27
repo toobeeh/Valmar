@@ -75,12 +75,13 @@ message MemberReply {
   int64 discordId = 7;
   string username = 8;
   int32 login = 9;
-  repeated int32 serverConnections = 10;
+  repeated int32 serverConnectionInvites = 10 [deprecated = true];
   repeated MemberFlagMessage mappedFlags = 11;
   google.protobuf.Timestamp nextAwardPackDate = 12;
   google.protobuf.StringValue patronEmoji = 13;
   google.protobuf.Timestamp nextPatronizeDate = 14;
   google.protobuf.Timestamp nextHomeChooseDate = 15;
+  repeated int64 serverConnections = 16;
 }
 
 // Reply containing the accesstoken of a member

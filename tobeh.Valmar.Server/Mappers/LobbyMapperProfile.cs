@@ -3,6 +3,7 @@ using tobeh.Valmar.Server.Database;
 using tobeh.Valmar.Server.Domain;
 using tobeh.Valmar.Server.Domain.Classes;
 using tobeh.Valmar.Server.Domain.Classes.JSON;
+using tobeh.Valmar.Server.Domain.Classes.Param;
 
 namespace tobeh.Valmar.Server.Mappers;
 
@@ -17,12 +18,20 @@ public class LobbyMapperProfile : Profile
         CreateMap<PalantirLobbyPlayerDdo, PalantirLobbyPlayer>();
         CreateMap<PlainLobbyLinkDdo, PlainLobbyLinkMessage>().ReverseMap();
 
+        CreateMap<SkribblLobbyTypoMemberDdo, SkribblLobbyTypoMemberMessage>().ReverseMap();
+        CreateMap<SkribblLobbyTypoMembersDdo, SkribblLobbyTypoMembersMessage>().ReverseMap();
+        CreateMap<SkribblLobbyStateDdo, SkribblLobbyStateMessage>().ReverseMap();
+        CreateMap<SkribblLobbyDdo, SkribblLobbyMessage>();
+        CreateMap<SkribblLobbyTypoSettingsDdo, SkribblLobbyTypoSettingsMessage>().ReverseMap();
+        CreateMap<SkribblLobbySkribblPlayerDdo, SkribblLobbySkribblPlayerMessage>().ReverseMap();
+        CreateMap<SkribblLobbySkribblSettingsDdo, SkribblLobbySkribblSettingsMessage>().ReverseMap();
+
         // mappings for partial mapping of lobby reply
         CreateMap<PalantirLobbyJson, LobbyReply>().ForMember(
             dest => dest.PalantirDetails,
             opt => opt.MapFrom(src => src));
         CreateMap<SkribblLobbyReportJson, LobbyReply>()
-            .ForMember(dest => dest.Players, opt => opt.Ignore()) // ignore ambigious property name
+            .ForMember(dest => dest.Players, opt => opt.Ignore()) // ignore ambiguous property name
             .ForMember(
                 dest => dest.SkribblDetails,
                 opt => opt.MapFrom(src => src));

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
 import "inventory.proto";
 
 option csharp_namespace = "tobeh.Valmar";
@@ -26,6 +27,100 @@ service Lobbies {
   rpc DecryptLobbyLinkToken (EncryptedLobbyLinkTokenMessage) returns (PlainLobbyLinkMessage);
 
   rpc EncryptLobbyLinkToken (PlainLobbyLinkMessage) returns (EncryptedLobbyLinkTokenMessage);
+
+  // Get a skribbl lobby from the db, if lobby is expired or not existing, new is created
+  rpc GetSkribblLobbyTypoSettings(SkribblLobbyIdentificationMessage) returns (SkribblLobbyTypoSettingsMessage);
+
+  // Updates the typo settings of a saved skribbl lobby
+  rpc SetSkribblLobbyTypoSettings(SkribblLobbyTypoSettingsMessage) returns (google.protobuf.Empty);
+
+  // Sets the status of players in a lobby
+  rpc SetMemberStatusesInLobby(SkribblLobbyTypoMembersMessage) returns (google.protobuf.Empty);
+
+  // remove the statuses of players in a lobby
+  rpc RemoveMemberStatusesInLobby(SkribblLobbyTypoMembersMessage) returns (google.protobuf.Empty);
+
+  // Sets the lobby state of a skribbl lobby
+  rpc SetSkribblLobbyState(SkribblLobbyStateMessage) returns (google.protobuf.Empty);
+
+  // get online players of a guild
+  rpc GetOnlineLobbyPlayers(GetOnlinePlayersRequest) returns (stream SkribblLobbyTypoMembersMessage);
+
+  rpc GetLobbyById(GetLobbyByIdRequest) returns (SkribblLobbyMessage);
+
+  rpc GetLobbiesById(GetLobbiesByIdRequest) returns (stream SkribblLobbyMessage);
+
+  rpc ClearOrphanedLobbyData(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+
+message GetOnlinePlayerJoinDetailsMessage {
+  int64 guildId = 1;
+}
+
+message GetLobbyByIdRequest {
+  string lobbyId = 1;
+}
+
+message GetLobbiesByIdRequest {
+  repeated string lobbyIds = 1;
+}
+
+message GetOnlinePlayersRequest {
+  google.protobuf.Int64Value guildId = 1; // filter players who are connected to this guild
+}
+
+message SkribblLobbyMessage {
+  SkribblLobbyStateMessage skribblState = 1;
+  SkribblLobbyTypoSettingsMessage typoSettings = 2;
+}
+
+message SkribblLobbyStateMessage {
+  string lobbyId = 1;
+  int32 round = 3;
+  google.protobuf.Int32Value ownerId = 4;
+  google.protobuf.Int32Value drawerId = 5;
+  SkribblLobbySkribblSettingsMessage settings = 6;
+  repeated SkribblLobbySkribblPlayerMessage players = 7;
+}
+
+message SkribblLobbySkribblSettingsMessage {
+  string language = 1;
+  int32 players = 2;
+  int32 rounds = 3;
+  int32 drawTime = 4;
+}
+
+message SkribblLobbySkribblPlayerMessage {
+  string name = 1;
+  int32 playerId = 2;
+  int32 score = 3;
+  bool guessed = 4;
+}
+
+message SkribblLobbyTypoMemberMessage{
+  int32 login = 1;
+  int32 lobbyPlayerId = 2;
+  int64 ownershipClaim = 3;
+}
+
+message SkribblLobbyTypoMembersMessage {
+  repeated SkribblLobbyTypoMemberMessage members = 1;
+  string lobbyId = 2;
+}
+
+
+message SkribblLobbyIdentificationMessage {
+  string link = 1;
+}
+
+message SkribblLobbyTypoSettingsMessage {
+  string lobbyId = 1;
+  string description = 2;
+  bool whitelistAllowedServers = 3;
+  repeated int64 allowedServers = 4;
+  google.protobuf.Int64Value LobbyOwnershipClaim = 5;
+  google.protobuf.Timestamp FirstSeem = 6;
+  google.protobuf.Timestamp LastUpdated = 7;
 }
 
 message EncryptedLobbyLinkTokenMessage {

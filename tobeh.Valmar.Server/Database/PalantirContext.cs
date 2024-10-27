@@ -36,6 +36,8 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<ServerConnectionEntity> ServerConnections { get; set; } = null!;
         public virtual DbSet<ServerLobbyLinkEntity> ServerLobbyLinks { get; set; } = null!;
         public virtual DbSet<ServerWebhookEntity> ServerWebhooks { get; set; } = null!;
+        public virtual DbSet<SkribblLobbyEntity> SkribblLobbies { get; set; } = null!;
+        public virtual DbSet<SkribblOnlinePlayerEntity> SkribblOnlinePlayers { get; set; } = null!;
         public virtual DbSet<SpEntity> Sps { get; set; } = null!;
         public virtual DbSet<SplitCreditEntity> SplitCredits { get; set; } = null!;
         public virtual DbSet<SpriteEntity> Sprites { get; set; } = null!;
@@ -248,6 +250,19 @@ namespace tobeh.Valmar.Server.Database
                 entity.HasKey(e => new { e.GuildId, e.Name })
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            });
+
+            modelBuilder.Entity<SkribblLobbyEntity>(entity =>
+            {
+                entity.HasKey(e => e.LobbyId)
+                    .HasName("PRIMARY");
+            });
+
+            modelBuilder.Entity<SkribblOnlinePlayerEntity>(entity =>
+            {
+                entity.HasKey(e => new { e.Login, e.LobbyId, e.LobbyPlayerId })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0 });
             });
 
             modelBuilder.Entity<SpEntity>(entity => { entity.ToView("sps"); });
