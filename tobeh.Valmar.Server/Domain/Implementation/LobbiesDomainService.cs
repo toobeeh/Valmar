@@ -376,16 +376,12 @@ public class LobbiesDomainService(
         db.SkribblLobbies.RemoveRange(oldLobbies);
         await db.SaveChangesAsync();
 
-        // delete orphaned status and lobbies
+        // delete orphaned status
         var orphanedStatus = await db.SkribblOnlinePlayers
             .Where(status => !db.SkribblLobbies.Select(lobby => lobby.LobbyId).Contains(status.LobbyId))
             .ToListAsync();
-        var orphanedLobbies = await db.SkribblLobbies
-            .Where(lobby => !db.SkribblOnlinePlayers.Select(status => status.LobbyId).Contains(lobby.LobbyId))
-            .ToListAsync();
 
         db.SkribblOnlinePlayers.RemoveRange(orphanedStatus);
-        db.SkribblLobbies.RemoveRange(orphanedLobbies);
         await db.SaveChangesAsync();
     }
 
