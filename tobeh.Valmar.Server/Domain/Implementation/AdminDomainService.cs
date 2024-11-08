@@ -47,6 +47,18 @@ public class AdminDomainService(
         await db.SaveChangesAsync();
     }
 
+    public async Task<List<OnlineItemDdo>> GetAllOnlineItems()
+    {
+        logger.LogTrace("GetAllOnlineItems()");
+
+        var nowSeconds = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        var items = await db.OnlineItems.Where(item => nowSeconds - item.Date < 20).ToListAsync();
+        return items
+            .Select(item => new OnlineItemDdo(item.ItemType, item.Slot, Convert.ToInt32(item.ItemId), item.LobbyKey,
+                item.LobbyPlayerId))
+            .ToList();
+    }
+
     public async Task IncrementMemberBubbles(IList<int> userLogins)
     {
         logger.LogTrace("IncrementMemberBubbles(userIds={userLogins})", userLogins);

@@ -12,4 +12,5 @@ public interface IAdminDomainService
     Task IncrementMemberBubbles(IList<int> userLogins);
     Task WriteOnlineItems(List<OnlineItemDdo> items);
     Task<List<int>> GetTemporaryPatronLogins();
+    Task<List<OnlineItemDdo>> GetAllOnlineItems();
 }

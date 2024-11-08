@@ -38,6 +38,9 @@ service Admin {
   
   // Writes a set of new onlineitems to the database
   rpc SetOnlineItems (SetOnlineItemsRequest) returns (google.protobuf.Empty);
+
+  // gets all onlineitems from the database
+  rpc GetOnlineItems (google.protobuf.Empty) returns (stream OnlineItemMessage);
 }
 
 // Request to update the flags of members

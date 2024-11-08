@@ -65,4 +65,13 @@ public class AdminGrpcService(
         var patrons = await adminService.GetTemporaryPatronLogins();
         await responseStream.WriteAllMappedAsync(patrons, patron => new() { Login = patron });
     }
+
+    public override async Task GetOnlineItems(Empty request, IServerStreamWriter<OnlineItemMessage> responseStream,
+        ServerCallContext context)
+    {
+        logger.LogTrace("GetOnlineItems(empty)");
+
+        var items = await adminService.GetAllOnlineItems();
+        await responseStream.WriteAllMappedAsync(items, mapper.Map<OnlineItemDdo, OnlineItemMessage>);
+    }
 }

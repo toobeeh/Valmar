@@ -36,7 +36,7 @@ namespace tobeh.Valmar {
             "YmJ5UGxheWVySWQYBSABKAUiNQodSW5jcmVtZW50TWVtYmVyQnViYmxlc1Jl",
             "cXVlc3QSFAoMbWVtYmVyTG9naW5zGAEgAygFKmAKDk9ubGluZUl0ZW1UeXBl",
             "EgoKBlNwcml0ZRAAEg4KCkNvbG9yU2hpZnQQARIJCgVTY2VuZRACEgkKBUF3",
-            "YXJkEAMSDAoIUmV3YXJkZWUQBRIOCgpTY2VuZVRoZW1lEAYymAQKBUFkbWlu",
+            "YXJkEAMSDAoIUmV3YXJkZWUQBRIOCgpTY2VuZVRoZW1lEAYy3gQKBUFkbWlu",
             "EkYKFFJlZXZhbHVhdGVEcm9wQ2h1bmtzEhYuZ29vZ2xlLnByb3RvYnVmLkVt",
             "cHR5GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5EkwKEVVwZGF0ZU1lbWJlckZs",
             "YWdzEh8uYWRtaW4uVXBkYXRlTWVtYmVyRmxhZ3NSZXF1ZXN0GhYuZ29vZ2xl",
@@ -48,8 +48,9 @@ namespace tobeh.Valmar {
             "YnVmLkVtcHR5ElYKFkluY3JlbWVudE1lbWJlckJ1YmJsZXMSJC5hZG1pbi5J",
             "bmNyZW1lbnRNZW1iZXJCdWJibGVzUmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1",
             "Zi5FbXB0eRJGCg5TZXRPbmxpbmVJdGVtcxIcLmFkbWluLlNldE9ubGluZUl0",
-            "ZW1zUmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eUIPqgIMdG9iZWgu",
-            "VmFsbWFyYgZwcm90bzM="));
+            "ZW1zUmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJECg5HZXRPbmxp",
+            "bmVJdGVtcxIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoYLmFkbWluLk9ubGlu",
+            "ZUl0ZW1NZXNzYWdlMAFCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::tobeh.Valmar.OnlineItemType), }, null, new pbr::GeneratedClrTypeInfo[] {
