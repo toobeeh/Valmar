@@ -176,7 +176,8 @@ public class WorkersDomainService(
                 Name = "Server",
                 Prefix = ".",
                 ChannelId = null,
-                Invite = invite
+                Invite = invite,
+                ProxyLinks = true
             };
             db.LobbyBotOptions.Add(options);
         }
