@@ -141,7 +141,8 @@ public class GuildsDomainService(
         if (supporters.Count == 0)
         {
             throw new UserOperationException(
-                "Guild is not supported by any patrons and is therefore no typo home server.");
+                "Guild is not supported by any patrons and is therefore no typo home server.",
+                false);
         }
 
         var options = await db.LobbyBotOptions.FirstOrDefaultAsync(entity => entity.GuildId == guildId);
@@ -176,7 +177,8 @@ public class GuildsDomainService(
         if (supporters.Count == 0)
         {
             throw new UserOperationException(
-                "Guild is not supported by any patrons and is therefore no typo home server.");
+                "Guild is not supported by any patrons and is therefore no typo home server.",
+                false);
         }
 
         var options = await db.LobbyBotOptions.FirstOrDefaultAsync(entity => entity.GuildId == guildId);
@@ -207,7 +209,8 @@ public class GuildsDomainService(
         if (supporters.Count == 0)
         {
             throw new UserOperationException(
-                "Guild is not supported by any patrons and is therefore no typo home server.");
+                "Guild is not supported by any patrons and is therefore no typo home server.",
+                false);
         }
 
         var webhook = await db.ServerWebhooks
@@ -230,7 +233,8 @@ public class GuildsDomainService(
         if (supporters.Count == 0)
         {
             throw new UserOperationException(
-                "Guild is not supported by any patrons and is therefore no typo home server.");
+                "Guild is not supported by any patrons and is therefore no typo home server.",
+                false);
         }
 
         var guildWebhooks = await GetGuildWebhooks(guildId);

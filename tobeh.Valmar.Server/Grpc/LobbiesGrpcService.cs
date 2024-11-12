@@ -149,7 +149,7 @@ public class LobbiesGrpcService(
         logger.LogTrace("GetOnlineLobbyPlayers(request={request})", request);
 
         var players = await lobbiesService.GetOnlineLobbyPlayers(request.GuildId);
-        logger.LogInformation("Found {count} online players for request {rew}", players.Count, request);
+        logger.LogDebug("Found {count} online players for request {request}", players.Count, request);
         await responseStream.WriteAllMappedAsync(players, mapper.Map<SkribblLobbyTypoMembersMessage>);
     }
 
@@ -167,7 +167,7 @@ public class LobbiesGrpcService(
         logger.LogTrace("GetLobbiesById(request={request})", request);
 
         var lobbies = await lobbiesService.GetLobbiesById(request.LobbyIds.ToList());
-        logger.LogInformation("Found {count} lobbies", lobbies.Count);
+        logger.LogDebug("Found {count} lobbies", lobbies.Count);
         await responseStream.WriteAllMappedAsync(lobbies,
             lobby => Task.FromResult(mapper.Map<SkribblLobbyMessage>(lobby)), true);
     }

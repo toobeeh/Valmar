@@ -140,7 +140,7 @@ public static class InventoryHelper
         };
     }
 
-    public static int GetRequiredDropsForNextSlot(int slot)
+    public static int GetRequiredDropsForSlot(int slot)
     {
         return slot switch
         {
@@ -149,7 +149,8 @@ public static class InventoryHelper
             3 => 3000,
             4 => 7000,
             5 => 15000,
-            _ => 20000
+            6 => 30000,
+            _ => (slot - 6) * 20000 + 30000
         };
     }
 }
