@@ -24,7 +24,7 @@ message AnnouncementMessage {
   google.protobuf.Timestamp date = 1;
   string title = 2;
   string content = 3;
-  google.protobuf.StringValue affectedVersion = 4;
+  google.protobuf.StringValue affectedTypoVersion = 4;
   AnnouncementType type = 5;
 }
 
