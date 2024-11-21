@@ -46,6 +46,7 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<TemporaryPatronEntity> TemporaryPatrons { get; set; } = null!;
         public virtual DbSet<ThemeEntity> Themes { get; set; } = null!;
         public virtual DbSet<ThemeShareEntity> ThemeShares { get; set; } = null!;
+        public virtual DbSet<TypoAnnouncementEntity> TypoAnnouncements { get; set; } = null!;
         public virtual DbSet<UserThemeEntity> UserThemes { get; set; } = null!;
         public virtual DbSet<WebhookEntity> Webhooks { get; set; } = null!;
 
@@ -296,6 +297,14 @@ namespace tobeh.Valmar.Server.Database
                 entity.HasKey(e => e.Ticket)
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 32 });
+            });
+
+            modelBuilder.Entity<TypoAnnouncementEntity>(entity =>
+            {
+                entity.HasKey(e => e.Date)
+                    .HasName("PRIMARY");
+
+                entity.Property(e => e.Date).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<WebhookEntity>(entity =>

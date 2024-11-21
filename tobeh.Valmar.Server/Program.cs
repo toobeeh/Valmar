@@ -93,6 +93,7 @@ public class Program
         services.AddScoped<ICardDomainService, CardDomainService>();
         services.AddScoped<IWorkersDomainService, WorkersDomainService>();
         services.AddScoped<ICloudDomainService, CloudDomainService>();
+        services.AddScoped<IAnnouncementsDomainService, AnnouncementsDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -115,6 +116,7 @@ public class Program
         app.MapGrpcService<CardGrpcService>();
         app.MapGrpcService<WorkersGrpcService>();
         app.MapGrpcService<CloudGrpcService>();
+        app.MapGrpcService<AnnouncementsGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)
@@ -136,6 +138,7 @@ public class Program
             typeof(CardMapperProfile),
             typeof(WorkerMapperProfile),
             typeof(CloudMapperProfile),
+            typeof(AnnouncementsMapperProfile),
             typeof(AwardMapperProfile));
     }
 
