@@ -26,21 +26,21 @@ namespace tobeh.Valmar {
           string.Concat(
             "ChNhbm5vdW5jZW1lbnRzLnByb3RvEg1hbm5vdW5jZW1lbnRzGhtnb29nbGUv",
             "cHJvdG9idWYvZW1wdHkucHJvdG8aH2dvb2dsZS9wcm90b2J1Zi90aW1lc3Rh",
-            "bXAucHJvdG8aHmdvb2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90byLFAQoT",
+            "bXAucHJvdG8aHmdvb2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90byLJAQoT",
             "QW5ub3VuY2VtZW50TWVzc2FnZRIoCgRkYXRlGAEgASgLMhouZ29vZ2xlLnBy",
             "b3RvYnVmLlRpbWVzdGFtcBINCgV0aXRsZRgCIAEoCRIPCgdjb250ZW50GAMg",
-            "ASgJEjUKD2FmZmVjdGVkVmVyc2lvbhgEIAEoCzIcLmdvb2dsZS5wcm90b2J1",
-            "Zi5TdHJpbmdWYWx1ZRItCgR0eXBlGAUgASgOMh8uYW5ub3VuY2VtZW50cy5B",
-            "bm5vdW5jZW1lbnRUeXBlIhkKF0dldEFubm91bmNlbWVudHNNZXNzYWdlKjMK",
-            "EEFubm91bmNlbWVudFR5cGUSDQoJQ2hhbmdlbG9nEAASEAoMQW5ub3VuY2Vt",
-            "ZW50EAEydAoNQW5ub3VuY2VtZW50cxJjChNHZXRBbGxBbm5vdW5jZW1lbnRz",
-            "EiYuYW5ub3VuY2VtZW50cy5HZXRBbm5vdW5jZW1lbnRzTWVzc2FnZRoiLmFu",
-            "bm91bmNlbWVudHMuQW5ub3VuY2VtZW50TWVzc2FnZTABQg+qAgx0b2JlaC5W",
-            "YWxtYXJiBnByb3RvMw=="));
+            "ASgJEjkKE2FmZmVjdGVkVHlwb1ZlcnNpb24YBCABKAsyHC5nb29nbGUucHJv",
+            "dG9idWYuU3RyaW5nVmFsdWUSLQoEdHlwZRgFIAEoDjIfLmFubm91bmNlbWVu",
+            "dHMuQW5ub3VuY2VtZW50VHlwZSIZChdHZXRBbm5vdW5jZW1lbnRzTWVzc2Fn",
+            "ZSozChBBbm5vdW5jZW1lbnRUeXBlEg0KCUNoYW5nZWxvZxAAEhAKDEFubm91",
+            "bmNlbWVudBABMnQKDUFubm91bmNlbWVudHMSYwoTR2V0QWxsQW5ub3VuY2Vt",
+            "ZW50cxImLmFubm91bmNlbWVudHMuR2V0QW5ub3VuY2VtZW50c01lc3NhZ2Ua",
+            "Ii5hbm5vdW5jZW1lbnRzLkFubm91bmNlbWVudE1lc3NhZ2UwAUIPqgIMdG9i",
+            "ZWguVmFsbWFyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::tobeh.Valmar.AnnouncementType), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AnnouncementMessage), global::tobeh.Valmar.AnnouncementMessage.Parser, new[]{ "Date", "Title", "Content", "AffectedVersion", "Type" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AnnouncementMessage), global::tobeh.Valmar.AnnouncementMessage.Parser, new[]{ "Date", "Title", "Content", "AffectedTypoVersion", "Type" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetAnnouncementsMessage), global::tobeh.Valmar.GetAnnouncementsMessage.Parser, null, null, null, null, null)
           }));
     }
@@ -93,7 +93,7 @@ namespace tobeh.Valmar {
       date_ = other.date_ != null ? other.date_.Clone() : null;
       title_ = other.title_;
       content_ = other.content_;
-      AffectedVersion = other.AffectedVersion;
+      AffectedTypoVersion = other.AffectedTypoVersion;
       type_ = other.type_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -140,16 +140,16 @@ namespace tobeh.Valmar {
       }
     }
 
-    /// <summary>Field number for the "affectedVersion" field.</summary>
-    public const int AffectedVersionFieldNumber = 4;
-    private static readonly pb::FieldCodec<string> _single_affectedVersion_codec = pb::FieldCodec.ForClassWrapper<string>(34);
-    private string affectedVersion_;
+    /// <summary>Field number for the "affectedTypoVersion" field.</summary>
+    public const int AffectedTypoVersionFieldNumber = 4;
+    private static readonly pb::FieldCodec<string> _single_affectedTypoVersion_codec = pb::FieldCodec.ForClassWrapper<string>(34);
+    private string affectedTypoVersion_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string AffectedVersion {
-      get { return affectedVersion_; }
+    public string AffectedTypoVersion {
+      get { return affectedTypoVersion_; }
       set {
-        affectedVersion_ = value;
+        affectedTypoVersion_ = value;
       }
     }
 
@@ -184,7 +184,7 @@ namespace tobeh.Valmar {
       if (!object.Equals(Date, other.Date)) return false;
       if (Title != other.Title) return false;
       if (Content != other.Content) return false;
-      if (AffectedVersion != other.AffectedVersion) return false;
+      if (AffectedTypoVersion != other.AffectedTypoVersion) return false;
       if (Type != other.Type) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -196,7 +196,7 @@ namespace tobeh.Valmar {
       if (date_ != null) hash ^= Date.GetHashCode();
       if (Title.Length != 0) hash ^= Title.GetHashCode();
       if (Content.Length != 0) hash ^= Content.GetHashCode();
-      if (affectedVersion_ != null) hash ^= AffectedVersion.GetHashCode();
+      if (affectedTypoVersion_ != null) hash ^= AffectedTypoVersion.GetHashCode();
       if (Type != global::tobeh.Valmar.AnnouncementType.Changelog) hash ^= Type.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -228,8 +228,8 @@ namespace tobeh.Valmar {
         output.WriteRawTag(26);
         output.WriteString(Content);
       }
-      if (affectedVersion_ != null) {
-        _single_affectedVersion_codec.WriteTagAndValue(output, AffectedVersion);
+      if (affectedTypoVersion_ != null) {
+        _single_affectedTypoVersion_codec.WriteTagAndValue(output, AffectedTypoVersion);
       }
       if (Type != global::tobeh.Valmar.AnnouncementType.Changelog) {
         output.WriteRawTag(40);
@@ -257,8 +257,8 @@ namespace tobeh.Valmar {
         output.WriteRawTag(26);
         output.WriteString(Content);
       }
-      if (affectedVersion_ != null) {
-        _single_affectedVersion_codec.WriteTagAndValue(ref output, AffectedVersion);
+      if (affectedTypoVersion_ != null) {
+        _single_affectedTypoVersion_codec.WriteTagAndValue(ref output, AffectedTypoVersion);
       }
       if (Type != global::tobeh.Valmar.AnnouncementType.Changelog) {
         output.WriteRawTag(40);
@@ -283,8 +283,8 @@ namespace tobeh.Valmar {
       if (Content.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Content);
       }
-      if (affectedVersion_ != null) {
-        size += _single_affectedVersion_codec.CalculateSizeWithTag(AffectedVersion);
+      if (affectedTypoVersion_ != null) {
+        size += _single_affectedTypoVersion_codec.CalculateSizeWithTag(AffectedTypoVersion);
       }
       if (Type != global::tobeh.Valmar.AnnouncementType.Changelog) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
@@ -313,9 +313,9 @@ namespace tobeh.Valmar {
       if (other.Content.Length != 0) {
         Content = other.Content;
       }
-      if (other.affectedVersion_ != null) {
-        if (affectedVersion_ == null || other.AffectedVersion != "") {
-          AffectedVersion = other.AffectedVersion;
+      if (other.affectedTypoVersion_ != null) {
+        if (affectedTypoVersion_ == null || other.AffectedTypoVersion != "") {
+          AffectedTypoVersion = other.AffectedTypoVersion;
         }
       }
       if (other.Type != global::tobeh.Valmar.AnnouncementType.Changelog) {
@@ -352,9 +352,9 @@ namespace tobeh.Valmar {
             break;
           }
           case 34: {
-            string value = _single_affectedVersion_codec.Read(input);
-            if (affectedVersion_ == null || value != "") {
-              AffectedVersion = value;
+            string value = _single_affectedTypoVersion_codec.Read(input);
+            if (affectedTypoVersion_ == null || value != "") {
+              AffectedTypoVersion = value;
             }
             break;
           }
@@ -393,9 +393,9 @@ namespace tobeh.Valmar {
             break;
           }
           case 34: {
-            string value = _single_affectedVersion_codec.Read(ref input);
-            if (affectedVersion_ == null || value != "") {
-              AffectedVersion = value;
+            string value = _single_affectedTypoVersion_codec.Read(ref input);
+            if (affectedTypoVersion_ == null || value != "") {
+              AffectedTypoVersion = value;
             }
             break;
           }
