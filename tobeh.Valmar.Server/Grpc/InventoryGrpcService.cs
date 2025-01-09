@@ -96,7 +96,7 @@ public class InventoryGrpcService(
             .ToList();
         foreach (var slot in request.Combo)
         {
-            slots[slot.SlotId - 1] = slot.SpriteId;
+            slots[slot.SlotId - 1] = slot.SpriteId ?? 0; // if slot present, but null, interpret as clear request
         }
 
         var member = await membersService.GetMemberByLogin(request.Login);

@@ -318,6 +318,14 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="member"></param>
+    /// <param name="combo">Array of int. value is either sprite ID, null if slot is unchanged (when overwriting, also emptied), or 0 if slot should be emptied</param>
+    /// <param name="clearOther"></param>
+    /// <exception cref="UserOperationException"></exception>
+    /// <exception cref="EntityNotFoundException"></exception>
     public async Task UseSpriteCombo(MemberDdo member, List<int?> combo, bool clearOther = false)
     {
         logger.LogTrace("UseSpriteCombo(member={member}, combo={combo}, clearOther={clearOther})", member, combo,
@@ -326,7 +334,7 @@ public class InventoryDomainService(
         var inv = InventoryHelper.ParseSpriteInventory(member.Sprites, member.RainbowSprites);
 
         // check if all sprites are in the inventory
-        if (combo.Any(id => id is not null && inv.All(slot => slot.SpriteId != id)))
+        if (combo.Any(id => id is not null && id != 0 && inv.All(slot => slot.SpriteId != id)))
         {
             throw new UserOperationException($"The user does not own all sprites from the combo {combo}");
         }
@@ -349,22 +357,26 @@ public class InventoryDomainService(
         // activate new combo
         for (var slot = 0; slot < combo.Count; slot++)
         {
-            // clear existing sprite in slot
-            var existingSprite = inv.FindIndex(invSlot => invSlot.Slot == slot + 1);
-            if (existingSprite != -1) inv[existingSprite] = inv[existingSprite] with { Slot = 0 };
-
-            // set target sprite in slot
+            // clear existing sprite in slot if not ignored (null) and set new sprite
             if (combo[slot] is not null)
             {
-                var targetSprite = inv.FindIndex(invSlot => invSlot.SpriteId == combo[slot]);
-                if (targetSprite != -1) inv[targetSprite] = inv[targetSprite] with { Slot = slot + 1 };
-                else throw new UserOperationException($"The user does not own the sprite {combo[slot]}");
+                var existingSprite = inv.FindIndex(invSlot => invSlot.Slot == slot + 1);
+                if (existingSprite != -1) inv[existingSprite] = inv[existingSprite] with { Slot = 0 };
+
+                // set target sprite in slot
+                if (combo[slot] != 0)
+                {
+                    var targetSprite = inv.FindIndex(invSlot => invSlot.SpriteId == combo[slot]);
+                    if (targetSprite != -1) inv[targetSprite] = inv[targetSprite] with { Slot = slot + 1 };
+                    else throw new UserOperationException($"The user does not own the sprite {combo[slot]}");
+                }
             }
         }
 
         // save combo
         var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ??
-                           throw new EntityNotFoundException("The cant be activated because member doesn't exist");
+                           throw new EntityNotFoundException(
+                               "The combo cant be activated because member doesn't exist");
         memberEntity.Sprites = InventoryHelper.SerializeSpriteInventory(inv);
         db.Members.Update(memberEntity);
         await db.SaveChangesAsync();
