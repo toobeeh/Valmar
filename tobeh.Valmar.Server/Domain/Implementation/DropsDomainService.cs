@@ -106,6 +106,7 @@ public class DropsDomainService(
             db.CurrrentDrops.Update(drop);
             await db.SaveChangesAsync();
             firstClaim = true;
+            clearedDrop = drop.Cleared;
         }
         else if (validClaim && dropCatchTime > TimeSpan.FromSeconds(1))
         {
