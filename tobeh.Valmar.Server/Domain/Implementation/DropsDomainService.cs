@@ -116,7 +116,9 @@ public class DropsDomainService(
 
         if (!validClaim)
         {
-            throw new UserOperationException("Invalid drop claim for drop id " + dropId);
+            throw new UserOperationException(dropCatchTime > TimeSpan.FromSeconds(2)
+                ? "The drop timed out"
+                : "Someone else cleared the drop");
         }
 
         /* calculate drop claim result */
