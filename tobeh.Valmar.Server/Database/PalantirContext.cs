@@ -11,6 +11,7 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<BubbleTraceEntity> BubbleTraces { get; set; } = null!;
         public virtual DbSet<CardTemplateEntity> CardTemplates { get; set; } = null!;
         public virtual DbSet<CloudTagEntity> CloudTags { get; set; } = null!;
+        public virtual DbSet<CurrrentDropEntity> CurrrentDrops { get; set; } = null!;
         public virtual DbSet<DropBoostEntity> DropBoosts { get; set; } = null!;
         public virtual DbSet<EventEntity> Events { get; set; } = null!;
         public virtual DbSet<EventCreditEntity> EventCredits { get; set; } = null!;
@@ -96,6 +97,8 @@ namespace tobeh.Valmar.Server.Database
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
             });
+
+            modelBuilder.Entity<CurrrentDropEntity>(entity => { entity.Property(e => e.Id).ValueGeneratedNever(); });
 
             modelBuilder.Entity<DropBoostEntity>(entity =>
             {

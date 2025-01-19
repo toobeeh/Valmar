@@ -139,6 +139,7 @@ public class Program
             typeof(WorkerMapperProfile),
             typeof(CloudMapperProfile),
             typeof(AnnouncementsMapperProfile),
+            typeof(DropMapperProfile),
             typeof(AwardMapperProfile));
     }
 

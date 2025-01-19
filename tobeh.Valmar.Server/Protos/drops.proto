@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 option csharp_namespace = "tobeh.Valmar";
@@ -17,6 +18,44 @@ service Drops {
 
   // Calculate min and max drop delay bounds for given online count and boost factor
   rpc CalculateDropDelayBounds (CalculateDelayRequest) returns (DropDelayBoundsReply);
+
+  // claim a drop and receive result
+  rpc ClaimDrop (ClaimDropMessage) returns (ClaimDropResultMessage);
+
+  // log a drop claim
+  rpc LogDropClaim (LogDropMessage) returns (google.protobuf.Empty);
+
+  // reward a drop
+  rpc RewardDrop (RewardDropMessage) returns (google.protobuf.Empty);
+}
+
+message ClaimDropMessage {
+  int64 dropId = 1;
+  int64 discordId = 2;
+}
+
+message ClaimDropResultMessage {
+  int64 dropId = 1;
+  bool firstClaim = 3;
+  bool clearedDrop = 4;
+  int32 catchMs = 5;
+  double leagueWeight = 6;
+  google.protobuf.Int32Value eventDropId = 7;
+}
+
+message RewardDropMessage {
+  int32 login = 1;
+  google.protobuf.Int32Value eventDropId = 2;
+  double value = 3;
+}
+
+message LogDropMessage {
+  int64 dropId = 1;
+  int64 discordId = 2;
+  int64 claimTimestamp = 3;
+  string lobbyKey = 4;
+  int32 catchMs = 5;
+  google.protobuf.Int32Value eventDropId = 6;
 }
 
 // request to schedule a new drop
