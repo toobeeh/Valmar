@@ -36,7 +36,8 @@ public class DropsDomainService(
         db.CurrrentDrops.Add(new CurrrentDropEntity()
         {
             Id = timestamp,
-            Timestamp = timestamp,
+            Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(timestamp).AddSeconds(delaySeconds)
+                .ToUnixTimeMilliseconds(),
             EventDropId = eventDropId,
             Cleared = false,
             Claimed = false
