@@ -1,3 +1,4 @@
+using tobeh.Valmar.Server.Database;
 using tobeh.Valmar.Server.Domain.Classes;
 
 namespace tobeh.Valmar.Server.Domain;
@@ -10,4 +11,5 @@ public interface IDropsDomainService
     Task<ClaimDropResultDdo> ClaimDrop(long dropId);
     Task RewardDrop(int login, int? eventDropId, double value);
     Task LogDropClaim(long dropId, long discordId, long claimTimestamp, string lobbyKey, int catchMs, int? eventDropId);
+    Task<CurrrentDropEntity> GetScheduledDrop();
 }

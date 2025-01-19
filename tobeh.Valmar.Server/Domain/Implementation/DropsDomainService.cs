@@ -45,6 +45,12 @@ public class DropsDomainService(
         await db.SaveChangesAsync();
     }
 
+    public async Task<CurrrentDropEntity> GetScheduledDrop()
+    {
+        logger.LogTrace("GetScheduledDrop()");
+        return await db.CurrrentDrops.FirstAsync();
+    }
+
     public Task<Tuple<int, int>> CalculateDropDelayBounds(int playerCount, double boostFactor)
     {
         logger.LogTrace("CalculateDropDelayBounds(playerCount={playerCount}, boostFactor={boostFactor})", playerCount,

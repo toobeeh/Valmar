@@ -13,6 +13,9 @@ service Drops {
   // Schedule a new drop to be dispatched
   rpc ScheduleDrop (ScheduleDropRequest) returns (google.protobuf.Empty);
 
+  // Get the enxt scheduled drop
+  rpc GetScheduledDrop (google.protobuf.Empty) returns (ScheduledDropMessage);
+
   // Get the current boost factor for drop delays
   rpc GetCurrentBoostFactor (google.protobuf.Empty) returns (CurrentBoostFactorReply);
 
@@ -27,6 +30,12 @@ service Drops {
 
   // reward a drop
   rpc RewardDrop (RewardDropMessage) returns (google.protobuf.Empty);
+}
+
+message ScheduledDropMessage {
+  int64 id = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  google.protobuf.Int32Value eventDropId = 3;
 }
 
 message ClaimDropMessage {

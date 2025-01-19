@@ -19,6 +19,14 @@ public class DropsGrpcService(
         return new Empty();
     }
 
+    public override async Task<ScheduledDropMessage> GetScheduledDrop(Empty request, ServerCallContext context)
+    {
+        logger.LogTrace("GetScheduledDrop(empty)");
+
+        var drop = await dropsService.GetScheduledDrop();
+        return mapper.Map<ScheduledDropMessage>(drop);
+    }
+
     public override async Task<CurrentBoostFactorReply> GetCurrentBoostFactor(Empty request, ServerCallContext context)
     {
         logger.LogTrace("GetCurrentBoostFactor(empty)");
