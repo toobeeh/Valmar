@@ -29,41 +29,41 @@ namespace tobeh.Valmar {
             "L3Byb3RvYnVmL3dyYXBwZXJzLnByb3RvIoMBChRTY2hlZHVsZWREcm9wTWVz",
             "c2FnZRIKCgJpZBgBIAEoAxItCgl0aW1lc3RhbXAYAiABKAsyGi5nb29nbGUu",
             "cHJvdG9idWYuVGltZXN0YW1wEjAKC2V2ZW50RHJvcElkGAMgASgLMhsuZ29v",
-            "Z2xlLnByb3RvYnVmLkludDMyVmFsdWUiNQoQQ2xhaW1Ecm9wTWVzc2FnZRIO",
-            "CgZkcm9wSWQYASABKAMSEQoJZGlzY29yZElkGAIgASgDIqoBChZDbGFpbURy",
-            "b3BSZXN1bHRNZXNzYWdlEg4KBmRyb3BJZBgBIAEoAxISCgpmaXJzdENsYWlt",
-            "GAMgASgIEhMKC2NsZWFyZWREcm9wGAQgASgIEg8KB2NhdGNoTXMYBSABKAUS",
-            "FAoMbGVhZ3VlV2VpZ2h0GAYgASgBEjAKC2V2ZW50RHJvcElkGAcgASgLMhsu",
-            "Z29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUiYwoRUmV3YXJkRHJvcE1lc3Nh",
-            "Z2USDQoFbG9naW4YASABKAUSMAoLZXZlbnREcm9wSWQYAiABKAsyGy5nb29n",
-            "bGUucHJvdG9idWYuSW50MzJWYWx1ZRINCgV2YWx1ZRgDIAEoASKgAQoOTG9n",
-            "RHJvcE1lc3NhZ2USDgoGZHJvcElkGAEgASgDEhEKCWRpc2NvcmRJZBgCIAEo",
-            "AxIWCg5jbGFpbVRpbWVzdGFtcBgDIAEoAxIQCghsb2JieUtleRgEIAEoCRIP",
-            "CgdjYXRjaE1zGAUgASgFEjAKC2V2ZW50RHJvcElkGAYgASgLMhsuZ29vZ2xl",
-            "LnByb3RvYnVmLkludDMyVmFsdWUiXQoTU2NoZWR1bGVEcm9wUmVxdWVzdBIU",
-            "CgxkZWxheVNlY29uZHMYASABKAUSMAoLZXZlbnREcm9wSWQYAiABKAsyGy5n",
-            "b29nbGUucHJvdG9idWYuSW50MzJWYWx1ZSJHChVDYWxjdWxhdGVEZWxheVJl",
-            "cXVlc3QSGQoRb25saW5lUGxheWVyQ291bnQYASABKAUSEwoLYm9vc3RGYWN0",
-            "b3IYAiABKAEiSAoURHJvcERlbGF5Qm91bmRzUmVwbHkSFwoPbWluRGVsYXlT",
-            "ZWNvbmRzGAEgASgFEhcKD21heERlbGF5U2Vjb25kcxgCIAEoBSIoChdDdXJy",
-            "ZW50Qm9vc3RGYWN0b3JSZXBseRINCgVib29zdBgBIAEoATKABAoFRHJvcHMS",
-            "QgoMU2NoZWR1bGVEcm9wEhouYWRtaW4uU2NoZWR1bGVEcm9wUmVxdWVzdBoW",
-            "Lmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJHChBHZXRTY2hlZHVsZWREcm9wEhYu",
-            "Z29vZ2xlLnByb3RvYnVmLkVtcHR5GhsuYWRtaW4uU2NoZWR1bGVkRHJvcE1l",
-            "c3NhZ2USTwoVR2V0Q3VycmVudEJvb3N0RmFjdG9yEhYuZ29vZ2xlLnByb3Rv",
-            "YnVmLkVtcHR5Gh4uYWRtaW4uQ3VycmVudEJvb3N0RmFjdG9yUmVwbHkSVQoY",
-            "Q2FsY3VsYXRlRHJvcERlbGF5Qm91bmRzEhwuYWRtaW4uQ2FsY3VsYXRlRGVs",
-            "YXlSZXF1ZXN0GhsuYWRtaW4uRHJvcERlbGF5Qm91bmRzUmVwbHkSQwoJQ2xh",
-            "aW1Ecm9wEhcuYWRtaW4uQ2xhaW1Ecm9wTWVzc2FnZRodLmFkbWluLkNsYWlt",
-            "RHJvcFJlc3VsdE1lc3NhZ2USPQoMTG9nRHJvcENsYWltEhUuYWRtaW4uTG9n",
-            "RHJvcE1lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHkSPgoKUmV3YXJk",
-            "RHJvcBIYLmFkbWluLlJld2FyZERyb3BNZXNzYWdlGhYuZ29vZ2xlLnByb3Rv",
-            "YnVmLkVtcHR5Qg+qAgx0b2JlaC5WYWxtYXJiBnByb3RvMw=="));
+            "Z2xlLnByb3RvYnVmLkludDMyVmFsdWUiIgoQQ2xhaW1Ecm9wTWVzc2FnZRIO",
+            "CgZkcm9wSWQYASABKAMiqgEKFkNsYWltRHJvcFJlc3VsdE1lc3NhZ2USDgoG",
+            "ZHJvcElkGAEgASgDEhIKCmZpcnN0Q2xhaW0YAyABKAgSEwoLY2xlYXJlZERy",
+            "b3AYBCABKAgSDwoHY2F0Y2hNcxgFIAEoBRIUCgxsZWFndWVXZWlnaHQYBiAB",
+            "KAESMAoLZXZlbnREcm9wSWQYByABKAsyGy5nb29nbGUucHJvdG9idWYuSW50",
+            "MzJWYWx1ZSJjChFSZXdhcmREcm9wTWVzc2FnZRINCgVsb2dpbhgBIAEoBRIw",
+            "CgtldmVudERyb3BJZBgCIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZh",
+            "bHVlEg0KBXZhbHVlGAMgASgBIqABCg5Mb2dEcm9wTWVzc2FnZRIOCgZkcm9w",
+            "SWQYASABKAMSEQoJZGlzY29yZElkGAIgASgDEhYKDmNsYWltVGltZXN0YW1w",
+            "GAMgASgDEhAKCGxvYmJ5S2V5GAQgASgJEg8KB2NhdGNoTXMYBSABKAUSMAoL",
+            "ZXZlbnREcm9wSWQYBiABKAsyGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1",
+            "ZSJdChNTY2hlZHVsZURyb3BSZXF1ZXN0EhQKDGRlbGF5U2Vjb25kcxgBIAEo",
+            "BRIwCgtldmVudERyb3BJZBgCIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQz",
+            "MlZhbHVlIkcKFUNhbGN1bGF0ZURlbGF5UmVxdWVzdBIZChFvbmxpbmVQbGF5",
+            "ZXJDb3VudBgBIAEoBRITCgtib29zdEZhY3RvchgCIAEoASJIChREcm9wRGVs",
+            "YXlCb3VuZHNSZXBseRIXCg9taW5EZWxheVNlY29uZHMYASABKAUSFwoPbWF4",
+            "RGVsYXlTZWNvbmRzGAIgASgFIigKF0N1cnJlbnRCb29zdEZhY3RvclJlcGx5",
+            "Eg0KBWJvb3N0GAEgASgBMoAECgVEcm9wcxJCCgxTY2hlZHVsZURyb3ASGi5h",
+            "ZG1pbi5TY2hlZHVsZURyb3BSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVt",
+            "cHR5EkcKEEdldFNjaGVkdWxlZERyb3ASFi5nb29nbGUucHJvdG9idWYuRW1w",
+            "dHkaGy5hZG1pbi5TY2hlZHVsZWREcm9wTWVzc2FnZRJPChVHZXRDdXJyZW50",
+            "Qm9vc3RGYWN0b3ISFi5nb29nbGUucHJvdG9idWYuRW1wdHkaHi5hZG1pbi5D",
+            "dXJyZW50Qm9vc3RGYWN0b3JSZXBseRJVChhDYWxjdWxhdGVEcm9wRGVsYXlC",
+            "b3VuZHMSHC5hZG1pbi5DYWxjdWxhdGVEZWxheVJlcXVlc3QaGy5hZG1pbi5E",
+            "cm9wRGVsYXlCb3VuZHNSZXBseRJDCglDbGFpbURyb3ASFy5hZG1pbi5DbGFp",
+            "bURyb3BNZXNzYWdlGh0uYWRtaW4uQ2xhaW1Ecm9wUmVzdWx0TWVzc2FnZRI9",
+            "CgxMb2dEcm9wQ2xhaW0SFS5hZG1pbi5Mb2dEcm9wTWVzc2FnZRoWLmdvb2ds",
+            "ZS5wcm90b2J1Zi5FbXB0eRI+CgpSZXdhcmREcm9wEhguYWRtaW4uUmV3YXJk",
+            "RHJvcE1lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHlCD6oCDHRvYmVo",
+            "LlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScheduledDropMessage), global::tobeh.Valmar.ScheduledDropMessage.Parser, new[]{ "Id", "Timestamp", "EventDropId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ClaimDropMessage), global::tobeh.Valmar.ClaimDropMessage.Parser, new[]{ "DropId", "DiscordId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ClaimDropMessage), global::tobeh.Valmar.ClaimDropMessage.Parser, new[]{ "DropId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ClaimDropResultMessage), global::tobeh.Valmar.ClaimDropResultMessage.Parser, new[]{ "DropId", "FirstClaim", "ClearedDrop", "CatchMs", "LeagueWeight", "EventDropId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.RewardDropMessage), global::tobeh.Valmar.RewardDropMessage.Parser, new[]{ "Login", "EventDropId", "Value" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LogDropMessage), global::tobeh.Valmar.LogDropMessage.Parser, new[]{ "DropId", "DiscordId", "ClaimTimestamp", "LobbyKey", "CatchMs", "EventDropId" }, null, null, null, null),
@@ -392,7 +392,6 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ClaimDropMessage(ClaimDropMessage other) : this() {
       dropId_ = other.dropId_;
-      discordId_ = other.discordId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -414,18 +413,6 @@ namespace tobeh.Valmar {
       }
     }
 
-    /// <summary>Field number for the "discordId" field.</summary>
-    public const int DiscordIdFieldNumber = 2;
-    private long discordId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long DiscordId {
-      get { return discordId_; }
-      set {
-        discordId_ = value;
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -442,7 +429,6 @@ namespace tobeh.Valmar {
         return true;
       }
       if (DropId != other.DropId) return false;
-      if (DiscordId != other.DiscordId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -451,7 +437,6 @@ namespace tobeh.Valmar {
     public override int GetHashCode() {
       int hash = 1;
       if (DropId != 0L) hash ^= DropId.GetHashCode();
-      if (DiscordId != 0L) hash ^= DiscordId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -474,10 +459,6 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt64(DropId);
       }
-      if (DiscordId != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(DiscordId);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -492,10 +473,6 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt64(DropId);
       }
-      if (DiscordId != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(DiscordId);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -508,9 +485,6 @@ namespace tobeh.Valmar {
       int size = 0;
       if (DropId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(DropId);
-      }
-      if (DiscordId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(DiscordId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -526,9 +500,6 @@ namespace tobeh.Valmar {
       }
       if (other.DropId != 0L) {
         DropId = other.DropId;
-      }
-      if (other.DiscordId != 0L) {
-        DiscordId = other.DiscordId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -549,10 +520,6 @@ namespace tobeh.Valmar {
             DropId = input.ReadInt64();
             break;
           }
-          case 16: {
-            DiscordId = input.ReadInt64();
-            break;
-          }
         }
       }
     #endif
@@ -570,10 +537,6 @@ namespace tobeh.Valmar {
             break;
           case 8: {
             DropId = input.ReadInt64();
-            break;
-          }
-          case 16: {
-            DiscordId = input.ReadInt64();
             break;
           }
         }

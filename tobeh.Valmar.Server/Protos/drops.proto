@@ -40,7 +40,6 @@ message ScheduledDropMessage {
 
 message ClaimDropMessage {
   int64 dropId = 1;
-  int64 discordId = 2;
 }
 
 message ClaimDropResultMessage {
