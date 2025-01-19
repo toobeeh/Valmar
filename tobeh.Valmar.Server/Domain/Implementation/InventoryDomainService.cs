@@ -395,6 +395,33 @@ public class InventoryDomainService(
         return new AwardInventoryDdo(ownAvailableAwards, ownConsumedAwards, receivedAwards);
     }
 
+    public async Task GiveAward(int login, int awardInventoryId, string lobbyId, int receiverLobbyPlayerId)
+    {
+        logger.LogTrace(
+            "GiveAward(login={login}, awardInventoryId={awardInventoryId}, lobbyId={lobbyId}, receiverLobbyPlayerId={receiverLobbyPlayerId})",
+            login, awardInventoryId, lobbyId, receiverLobbyPlayerId);
+
+        var award = await db.Awardees.FirstOrDefaultAsync(awardee =>
+                        awardee.Id == awardInventoryId && awardee.OwnerLogin == login) ??
+                    throw new EntityNotFoundException(
+                        "The award can't be given because it doesn't exist in the owner inventory");
+
+        if (award.AwardeeLogin != null)
+        {
+            throw new UserOperationException("The award can't be given because it has already been given to someone");
+        }
+
+        var receiver =
+            await db.SkribblOnlinePlayers.FirstOrDefaultAsync(player =>
+                player.LobbyPlayerId == receiverLobbyPlayerId && player.LobbyId == lobbyId) ??
+            throw new EntityNotFoundException(
+                "The award can't be given because the receiver doesn't exist in the lobby");
+
+        award.AwardeeLogin = receiver.Login;
+        db.Awardees.Update(award);
+        await db.SaveChangesAsync();
+    }
+
     // TODO remove and use cloud service
     public async Task<List<GalleryItemDdo>> GetImagesFromCloud(MemberDdo member, List<long> ids)
     {

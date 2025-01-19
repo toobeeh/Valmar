@@ -209,6 +209,16 @@ public class InventoryGrpcService(
         };
     }
 
+    public override async Task<Empty> GiveAward(GiveAwardMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("GiveAward(request={request})", request);
+
+        await inventoryService.GiveAward(request.Login, request.AwardInventoryId, request.LobbyId,
+            request.ReceiverLobbyPlayerId);
+
+        return new Empty();
+    }
+
     public override async Task<FirstSeenMessage> GetFirstSeenDate(GetFirstSeenDateRequest request,
         ServerCallContext context)
     {

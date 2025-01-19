@@ -62,6 +62,9 @@ service Inventory {
   
   // open an award pack
   rpc OpenAwardPack (OpenAwardPackMessage) returns (AwardPackResultMessage);
+
+  // give an award to a player
+  rpc GiveAward (GiveAwardMessage) returns (google.protobuf.Empty);
   
   // gets the first seen date of a member
   rpc GetFirstSeenDate (GetFirstSeenDateRequest) returns (FirstSeenMessage);
@@ -77,6 +80,13 @@ service Inventory {
   
   // set the patron emoji of a user
   rpc SetPatronEmoji (SetPatronEmojiMessage) returns (google.protobuf.Empty);
+}
+
+message GiveAwardMessage {
+  int32 login = 1;
+  int32 awardInventoryId = 2;
+  string lobbyId = 3;
+  int32 receiverLobbyPlayerId = 4;
 }
 
 message GetEventProgressRequest {

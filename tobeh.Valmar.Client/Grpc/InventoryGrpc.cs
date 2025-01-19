@@ -109,6 +109,8 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.AwardPackResultMessage> __Marshaller_inventory_AwardPackResultMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.AwardPackResultMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.GiveAwardMessage> __Marshaller_inventory_GiveAwardMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GiveAwardMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.GetFirstSeenDateRequest> __Marshaller_inventory_GetFirstSeenDateRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetFirstSeenDateRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.FirstSeenMessage> __Marshaller_inventory_FirstSeenMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.FirstSeenMessage.Parser));
@@ -260,6 +262,14 @@ namespace tobeh.Valmar {
         "OpenAwardPack",
         __Marshaller_inventory_OpenAwardPackMessage,
         __Marshaller_inventory_AwardPackResultMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.GiveAwardMessage, global::Google.Protobuf.WellKnownTypes.Empty> __Method_GiveAward = new grpc::Method<global::tobeh.Valmar.GiveAwardMessage, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GiveAward",
+        __Marshaller_inventory_GiveAwardMessage,
+        __Marshaller_google_protobuf_Empty);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.GetFirstSeenDateRequest, global::tobeh.Valmar.FirstSeenMessage> __Method_GetFirstSeenDate = new grpc::Method<global::tobeh.Valmar.GetFirstSeenDateRequest, global::tobeh.Valmar.FirstSeenMessage>(
@@ -1077,6 +1087,54 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.AwardPackResultMessage> OpenAwardPackAsync(global::tobeh.Valmar.OpenAwardPackMessage request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_OpenAwardPack, null, options, request);
+      }
+      /// <summary>
+      /// give an award to a player
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty GiveAward(global::tobeh.Valmar.GiveAwardMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GiveAward(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// give an award to a player
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty GiveAward(global::tobeh.Valmar.GiveAwardMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GiveAward, null, options, request);
+      }
+      /// <summary>
+      /// give an award to a player
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> GiveAwardAsync(global::tobeh.Valmar.GiveAwardMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GiveAwardAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// give an award to a player
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> GiveAwardAsync(global::tobeh.Valmar.GiveAwardMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GiveAward, null, options, request);
       }
       /// <summary>
       /// gets the first seen date of a member
