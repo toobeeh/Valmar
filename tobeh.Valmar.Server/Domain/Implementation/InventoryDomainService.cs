@@ -395,7 +395,7 @@ public class InventoryDomainService(
         return new AwardInventoryDdo(ownAvailableAwards, ownConsumedAwards, receivedAwards);
     }
 
-    public async Task GiveAward(int login, int awardInventoryId, string lobbyId, int receiverLobbyPlayerId)
+    public async Task<AwardEntity> GiveAward(int login, int awardInventoryId, string lobbyId, int receiverLobbyPlayerId)
     {
         logger.LogTrace(
             "GiveAward(login={login}, awardInventoryId={awardInventoryId}, lobbyId={lobbyId}, receiverLobbyPlayerId={receiverLobbyPlayerId})",
@@ -420,6 +420,9 @@ public class InventoryDomainService(
         award.AwardeeLogin = receiver.Login;
         db.Awardees.Update(award);
         await db.SaveChangesAsync();
+
+        var awardEntity = await db.Awards.FirstAsync(a => a.Id == award.Award);
+        return awardEntity;
     }
 
     // TODO remove and use cloud service

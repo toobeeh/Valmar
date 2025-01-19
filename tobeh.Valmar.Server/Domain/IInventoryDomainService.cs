@@ -29,5 +29,5 @@ public interface IInventoryDomainService
     Task SetPatronizedMember(MemberDdo member, long? patronizedMemberDiscordId);
     Task<EventResultDdo> GetEventProgress(MemberDdo member);
     Task<double> GetNextSlotRemainingDrops(MemberDdo member);
-    Task GiveAward(int login, int awardInventoryId, string lobbyId, int receiverLobbyPlayerId);
+    Task<AwardEntity> GiveAward(int login, int awardInventoryId, string lobbyId, int receiverLobbyPlayerId);
 }

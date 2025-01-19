@@ -209,14 +209,14 @@ public class InventoryGrpcService(
         };
     }
 
-    public override async Task<Empty> GiveAward(GiveAwardMessage request, ServerCallContext context)
+    public override async Task<AwardReply> GiveAward(GiveAwardMessage request, ServerCallContext context)
     {
         logger.LogTrace("GiveAward(request={request})", request);
 
-        await inventoryService.GiveAward(request.Login, request.AwardInventoryId, request.LobbyId,
+        var award = await inventoryService.GiveAward(request.Login, request.AwardInventoryId, request.LobbyId,
             request.ReceiverLobbyPlayerId);
 
-        return new Empty();
+        return mapper.Map<AwardReply>(award);
     }
 
     public override async Task<FirstSeenMessage> GetFirstSeenDate(GetFirstSeenDateRequest request,

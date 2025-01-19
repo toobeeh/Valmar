@@ -64,7 +64,7 @@ service Inventory {
   rpc OpenAwardPack (OpenAwardPackMessage) returns (AwardPackResultMessage);
 
   // give an award to a player
-  rpc GiveAward (GiveAwardMessage) returns (google.protobuf.Empty);
+  rpc GiveAward (GiveAwardMessage) returns (awards.AwardReply);
   
   // gets the first seen date of a member
   rpc GetFirstSeenDate (GetFirstSeenDateRequest) returns (FirstSeenMessage);
