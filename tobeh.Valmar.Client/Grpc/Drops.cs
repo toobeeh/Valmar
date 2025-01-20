@@ -29,42 +29,43 @@ namespace tobeh.Valmar {
             "L3Byb3RvYnVmL3dyYXBwZXJzLnByb3RvIoMBChRTY2hlZHVsZWREcm9wTWVz",
             "c2FnZRIKCgJpZBgBIAEoAxItCgl0aW1lc3RhbXAYAiABKAsyGi5nb29nbGUu",
             "cHJvdG9idWYuVGltZXN0YW1wEjAKC2V2ZW50RHJvcElkGAMgASgLMhsuZ29v",
-            "Z2xlLnByb3RvYnVmLkludDMyVmFsdWUiIgoQQ2xhaW1Ecm9wTWVzc2FnZRIO",
-            "CgZkcm9wSWQYASABKAMiqgEKFkNsYWltRHJvcFJlc3VsdE1lc3NhZ2USDgoG",
-            "ZHJvcElkGAEgASgDEhIKCmZpcnN0Q2xhaW0YAyABKAgSEwoLY2xlYXJlZERy",
-            "b3AYBCABKAgSDwoHY2F0Y2hNcxgFIAEoBRIUCgxsZWFndWVXZWlnaHQYBiAB",
-            "KAESMAoLZXZlbnREcm9wSWQYByABKAsyGy5nb29nbGUucHJvdG9idWYuSW50",
-            "MzJWYWx1ZSJjChFSZXdhcmREcm9wTWVzc2FnZRINCgVsb2dpbhgBIAEoBRIw",
-            "CgtldmVudERyb3BJZBgCIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZh",
-            "bHVlEg0KBXZhbHVlGAMgASgBIqABCg5Mb2dEcm9wTWVzc2FnZRIOCgZkcm9w",
-            "SWQYASABKAMSEQoJZGlzY29yZElkGAIgASgDEhYKDmNsYWltVGltZXN0YW1w",
-            "GAMgASgDEhAKCGxvYmJ5S2V5GAQgASgJEg8KB2NhdGNoTXMYBSABKAUSMAoL",
-            "ZXZlbnREcm9wSWQYBiABKAsyGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1",
-            "ZSJdChNTY2hlZHVsZURyb3BSZXF1ZXN0EhQKDGRlbGF5U2Vjb25kcxgBIAEo",
-            "BRIwCgtldmVudERyb3BJZBgCIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQz",
-            "MlZhbHVlIkcKFUNhbGN1bGF0ZURlbGF5UmVxdWVzdBIZChFvbmxpbmVQbGF5",
-            "ZXJDb3VudBgBIAEoBRITCgtib29zdEZhY3RvchgCIAEoASJIChREcm9wRGVs",
-            "YXlCb3VuZHNSZXBseRIXCg9taW5EZWxheVNlY29uZHMYASABKAUSFwoPbWF4",
-            "RGVsYXlTZWNvbmRzGAIgASgFIigKF0N1cnJlbnRCb29zdEZhY3RvclJlcGx5",
-            "Eg0KBWJvb3N0GAEgASgBMoAECgVEcm9wcxJCCgxTY2hlZHVsZURyb3ASGi5h",
-            "ZG1pbi5TY2hlZHVsZURyb3BSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVt",
-            "cHR5EkcKEEdldFNjaGVkdWxlZERyb3ASFi5nb29nbGUucHJvdG9idWYuRW1w",
-            "dHkaGy5hZG1pbi5TY2hlZHVsZWREcm9wTWVzc2FnZRJPChVHZXRDdXJyZW50",
-            "Qm9vc3RGYWN0b3ISFi5nb29nbGUucHJvdG9idWYuRW1wdHkaHi5hZG1pbi5D",
-            "dXJyZW50Qm9vc3RGYWN0b3JSZXBseRJVChhDYWxjdWxhdGVEcm9wRGVsYXlC",
-            "b3VuZHMSHC5hZG1pbi5DYWxjdWxhdGVEZWxheVJlcXVlc3QaGy5hZG1pbi5E",
-            "cm9wRGVsYXlCb3VuZHNSZXBseRJDCglDbGFpbURyb3ASFy5hZG1pbi5DbGFp",
-            "bURyb3BNZXNzYWdlGh0uYWRtaW4uQ2xhaW1Ecm9wUmVzdWx0TWVzc2FnZRI9",
-            "CgxMb2dEcm9wQ2xhaW0SFS5hZG1pbi5Mb2dEcm9wTWVzc2FnZRoWLmdvb2ds",
-            "ZS5wcm90b2J1Zi5FbXB0eRI+CgpSZXdhcmREcm9wEhguYWRtaW4uUmV3YXJk",
-            "RHJvcE1lc3NhZ2UaFi5nb29nbGUucHJvdG9idWYuRW1wdHlCD6oCDHRvYmVo",
-            "LlZhbG1hcmIGcHJvdG8z"));
+            "Z2xlLnByb3RvYnVmLkludDMyVmFsdWUiNgoQQ2xhaW1Ecm9wTWVzc2FnZRIO",
+            "CgZkcm9wSWQYASABKAMSEgoKbGVhZ3VlTW9kZRgCIAEoCCK+AQoWQ2xhaW1E",
+            "cm9wUmVzdWx0TWVzc2FnZRIOCgZkcm9wSWQYASABKAMSEgoKZmlyc3RDbGFp",
+            "bRgDIAEoCBITCgtjbGVhcmVkRHJvcBgEIAEoCBIPCgdjYXRjaE1zGAUgASgF",
+            "EhQKDGxlYWd1ZVdlaWdodBgGIAEoARIwCgtldmVudERyb3BJZBgHIAEoCzIb",
+            "Lmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEhIKCmxlYWd1ZU1vZGUYCCAB",
+            "KAgiYwoRUmV3YXJkRHJvcE1lc3NhZ2USDQoFbG9naW4YASABKAUSMAoLZXZl",
+            "bnREcm9wSWQYAiABKAsyGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1ZRIN",
+            "CgV2YWx1ZRgDIAEoASKgAQoOTG9nRHJvcE1lc3NhZ2USDgoGZHJvcElkGAEg",
+            "ASgDEhEKCWRpc2NvcmRJZBgCIAEoAxIWCg5jbGFpbVRpbWVzdGFtcBgDIAEo",
+            "AxIQCghsb2JieUtleRgEIAEoCRIPCgdjYXRjaE1zGAUgASgFEjAKC2V2ZW50",
+            "RHJvcElkGAYgASgLMhsuZ29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUiXQoT",
+            "U2NoZWR1bGVEcm9wUmVxdWVzdBIUCgxkZWxheVNlY29uZHMYASABKAUSMAoL",
+            "ZXZlbnREcm9wSWQYAiABKAsyGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1",
+            "ZSJHChVDYWxjdWxhdGVEZWxheVJlcXVlc3QSGQoRb25saW5lUGxheWVyQ291",
+            "bnQYASABKAUSEwoLYm9vc3RGYWN0b3IYAiABKAEiSAoURHJvcERlbGF5Qm91",
+            "bmRzUmVwbHkSFwoPbWluRGVsYXlTZWNvbmRzGAEgASgFEhcKD21heERlbGF5",
+            "U2Vjb25kcxgCIAEoBSIoChdDdXJyZW50Qm9vc3RGYWN0b3JSZXBseRINCgVi",
+            "b29zdBgBIAEoATKABAoFRHJvcHMSQgoMU2NoZWR1bGVEcm9wEhouYWRtaW4u",
+            "U2NoZWR1bGVEcm9wUmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJH",
+            "ChBHZXRTY2hlZHVsZWREcm9wEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Ghsu",
+            "YWRtaW4uU2NoZWR1bGVkRHJvcE1lc3NhZ2USTwoVR2V0Q3VycmVudEJvb3N0",
+            "RmFjdG9yEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Gh4uYWRtaW4uQ3VycmVu",
+            "dEJvb3N0RmFjdG9yUmVwbHkSVQoYQ2FsY3VsYXRlRHJvcERlbGF5Qm91bmRz",
+            "EhwuYWRtaW4uQ2FsY3VsYXRlRGVsYXlSZXF1ZXN0GhsuYWRtaW4uRHJvcERl",
+            "bGF5Qm91bmRzUmVwbHkSQwoJQ2xhaW1Ecm9wEhcuYWRtaW4uQ2xhaW1Ecm9w",
+            "TWVzc2FnZRodLmFkbWluLkNsYWltRHJvcFJlc3VsdE1lc3NhZ2USPQoMTG9n",
+            "RHJvcENsYWltEhUuYWRtaW4uTG9nRHJvcE1lc3NhZ2UaFi5nb29nbGUucHJv",
+            "dG9idWYuRW1wdHkSPgoKUmV3YXJkRHJvcBIYLmFkbWluLlJld2FyZERyb3BN",
+            "ZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Qg+qAgx0b2JlaC5WYWxt",
+            "YXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScheduledDropMessage), global::tobeh.Valmar.ScheduledDropMessage.Parser, new[]{ "Id", "Timestamp", "EventDropId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ClaimDropMessage), global::tobeh.Valmar.ClaimDropMessage.Parser, new[]{ "DropId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ClaimDropResultMessage), global::tobeh.Valmar.ClaimDropResultMessage.Parser, new[]{ "DropId", "FirstClaim", "ClearedDrop", "CatchMs", "LeagueWeight", "EventDropId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ClaimDropMessage), global::tobeh.Valmar.ClaimDropMessage.Parser, new[]{ "DropId", "LeagueMode" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ClaimDropResultMessage), global::tobeh.Valmar.ClaimDropResultMessage.Parser, new[]{ "DropId", "FirstClaim", "ClearedDrop", "CatchMs", "LeagueWeight", "EventDropId", "LeagueMode" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.RewardDropMessage), global::tobeh.Valmar.RewardDropMessage.Parser, new[]{ "Login", "EventDropId", "Value" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LogDropMessage), global::tobeh.Valmar.LogDropMessage.Parser, new[]{ "DropId", "DiscordId", "ClaimTimestamp", "LobbyKey", "CatchMs", "EventDropId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScheduleDropRequest), global::tobeh.Valmar.ScheduleDropRequest.Parser, new[]{ "DelaySeconds", "EventDropId" }, null, null, null, null),
@@ -392,6 +393,7 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ClaimDropMessage(ClaimDropMessage other) : this() {
       dropId_ = other.dropId_;
+      leagueMode_ = other.leagueMode_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -413,6 +415,18 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "leagueMode" field.</summary>
+    public const int LeagueModeFieldNumber = 2;
+    private bool leagueMode_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool LeagueMode {
+      get { return leagueMode_; }
+      set {
+        leagueMode_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -429,6 +443,7 @@ namespace tobeh.Valmar {
         return true;
       }
       if (DropId != other.DropId) return false;
+      if (LeagueMode != other.LeagueMode) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -437,6 +452,7 @@ namespace tobeh.Valmar {
     public override int GetHashCode() {
       int hash = 1;
       if (DropId != 0L) hash ^= DropId.GetHashCode();
+      if (LeagueMode != false) hash ^= LeagueMode.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -459,6 +475,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt64(DropId);
       }
+      if (LeagueMode != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(LeagueMode);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -473,6 +493,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(8);
         output.WriteInt64(DropId);
       }
+      if (LeagueMode != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(LeagueMode);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -485,6 +509,9 @@ namespace tobeh.Valmar {
       int size = 0;
       if (DropId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(DropId);
+      }
+      if (LeagueMode != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -500,6 +527,9 @@ namespace tobeh.Valmar {
       }
       if (other.DropId != 0L) {
         DropId = other.DropId;
+      }
+      if (other.LeagueMode != false) {
+        LeagueMode = other.LeagueMode;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -520,6 +550,10 @@ namespace tobeh.Valmar {
             DropId = input.ReadInt64();
             break;
           }
+          case 16: {
+            LeagueMode = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -537,6 +571,10 @@ namespace tobeh.Valmar {
             break;
           case 8: {
             DropId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            LeagueMode = input.ReadBool();
             break;
           }
         }
@@ -586,6 +624,7 @@ namespace tobeh.Valmar {
       catchMs_ = other.catchMs_;
       leagueWeight_ = other.leagueWeight_;
       EventDropId = other.EventDropId;
+      leagueMode_ = other.leagueMode_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -669,6 +708,18 @@ namespace tobeh.Valmar {
     }
 
 
+    /// <summary>Field number for the "leagueMode" field.</summary>
+    public const int LeagueModeFieldNumber = 8;
+    private bool leagueMode_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool LeagueMode {
+      get { return leagueMode_; }
+      set {
+        leagueMode_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -690,6 +741,7 @@ namespace tobeh.Valmar {
       if (CatchMs != other.CatchMs) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(LeagueWeight, other.LeagueWeight)) return false;
       if (EventDropId != other.EventDropId) return false;
+      if (LeagueMode != other.LeagueMode) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -703,6 +755,7 @@ namespace tobeh.Valmar {
       if (CatchMs != 0) hash ^= CatchMs.GetHashCode();
       if (LeagueWeight != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(LeagueWeight);
       if (eventDropId_ != null) hash ^= EventDropId.GetHashCode();
+      if (LeagueMode != false) hash ^= LeagueMode.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -744,6 +797,10 @@ namespace tobeh.Valmar {
       if (eventDropId_ != null) {
         _single_eventDropId_codec.WriteTagAndValue(output, EventDropId);
       }
+      if (LeagueMode != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(LeagueMode);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -777,6 +834,10 @@ namespace tobeh.Valmar {
       if (eventDropId_ != null) {
         _single_eventDropId_codec.WriteTagAndValue(ref output, EventDropId);
       }
+      if (LeagueMode != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(LeagueMode);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -804,6 +865,9 @@ namespace tobeh.Valmar {
       }
       if (eventDropId_ != null) {
         size += _single_eventDropId_codec.CalculateSizeWithTag(EventDropId);
+      }
+      if (LeagueMode != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -836,6 +900,9 @@ namespace tobeh.Valmar {
         if (eventDropId_ == null || other.EventDropId != 0) {
           EventDropId = other.EventDropId;
         }
+      }
+      if (other.LeagueMode != false) {
+        LeagueMode = other.LeagueMode;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -879,6 +946,10 @@ namespace tobeh.Valmar {
             }
             break;
           }
+          case 64: {
+            LeagueMode = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -919,6 +990,10 @@ namespace tobeh.Valmar {
             if (eventDropId_ == null || value != 0) {
               EventDropId = value;
             }
+            break;
+          }
+          case 64: {
+            LeagueMode = input.ReadBool();
             break;
           }
         }

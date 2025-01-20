@@ -86,7 +86,7 @@ public class DropsDomainService(
         return boost;
     }
 
-    public async Task<ClaimDropResultDdo> ClaimDrop(long dropId)
+    public async Task<ClaimDropResultDdo> ClaimDrop(long dropId, bool leagueMode)
     {
         logger.LogTrace("ClaimDrop(dropId={dropId})", dropId);
 
@@ -99,7 +99,7 @@ public class DropsDomainService(
         var clearedDrop = false;
 
         /* save the drop as claimed/cleared as fast as possible - the only possible race condition */
-        if (validClaim && !drop.Claimed)
+        if (!leagueMode && validClaim && !drop.Claimed)
         {
             drop.Claimed = true;
             drop.Cleared = dropCatchTime > TimeSpan.FromSeconds(1);
@@ -108,7 +108,7 @@ public class DropsDomainService(
             firstClaim = true;
             clearedDrop = drop.Cleared;
         }
-        else if (validClaim && dropCatchTime > TimeSpan.FromSeconds(1))
+        else if (!leagueMode && validClaim && dropCatchTime > TimeSpan.FromSeconds(1))
         {
             drop.Cleared = true;
             db.CurrrentDrops.Update(drop);
@@ -126,7 +126,7 @@ public class DropsDomainService(
         /* calculate drop claim result */
         var catchMs = Convert.ToInt32(dropCatchTime.TotalMilliseconds);
         var weight = DropHelper.Weight(catchMs);
-        var result = new ClaimDropResultDdo(drop.Id, firstClaim, clearedDrop, catchMs, weight);
+        var result = new ClaimDropResultDdo(drop.Id, firstClaim, clearedDrop, catchMs, weight, leagueMode);
 
         return result;
     }

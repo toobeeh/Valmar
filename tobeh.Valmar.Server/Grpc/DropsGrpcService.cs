@@ -49,7 +49,7 @@ public class DropsGrpcService(
     {
         logger.LogTrace("ClaimDrop(request={request})", request);
 
-        var result = await dropsService.ClaimDrop(request.DropId);
+        var result = await dropsService.ClaimDrop(request.DropId, request.LeagueMode);
         return mapper.Map<ClaimDropResultMessage>(result);
     }
 

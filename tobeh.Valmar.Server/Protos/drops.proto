@@ -40,6 +40,7 @@ message ScheduledDropMessage {
 
 message ClaimDropMessage {
   int64 dropId = 1;
+  bool leagueMode = 2;
 }
 
 message ClaimDropResultMessage {
@@ -49,6 +50,7 @@ message ClaimDropResultMessage {
   int32 catchMs = 5;
   double leagueWeight = 6;
   google.protobuf.Int32Value eventDropId = 7;
+  bool leagueMode = 8;
 }
 
 message RewardDropMessage {
