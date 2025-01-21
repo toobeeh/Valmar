@@ -417,6 +417,12 @@ public class InventoryDomainService(
             throw new EntityNotFoundException(
                 "The award can't be given because the receiver doesn't exist in the lobby");
 
+        if (receiver.Login == award.OwnerLogin)
+        {
+            throw new UserOperationException(
+                "The award cannot be given because receiver and owner are the same person");
+        }
+
         award.AwardeeLogin = receiver.Login;
         db.Awardees.Update(award);
         await db.SaveChangesAsync();
