@@ -57,7 +57,7 @@ public class DropsGrpcService(
     {
         logger.LogTrace("LogDropClaim(request={request})", request);
 
-        await dropsService.LogDropClaim(request.DropId, request.DropId, request.ClaimTimestamp, request.LobbyKey,
+        await dropsService.LogDropClaim(request.DropId, request.DiscordId, request.ClaimTimestamp, request.LobbyKey,
             request.CatchMs, request.EventDropId);
         return new Empty();
     }
