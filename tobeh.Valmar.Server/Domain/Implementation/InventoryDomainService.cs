@@ -424,6 +424,7 @@ public class InventoryDomainService(
         }
 
         award.AwardeeLogin = receiver.Login;
+        award.Date = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         db.Awardees.Update(award);
         await db.SaveChangesAsync();
 
