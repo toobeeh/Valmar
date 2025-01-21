@@ -436,7 +436,7 @@ public class InventoryDomainService(
             LobbyPlayerId = receiverLobbyPlayerId,
             LobbyKey = LobbiesHelper.CalculateLobbyKey(lobbyId),
             Slot = award.Id,
-            ItemId = award.Id,
+            ItemId = award.Award,
             Date = Convert.ToInt32(DateTimeOffset.UtcNow.ToUnixTimeSeconds())
         };
         db.OnlineItems.Add(onlineItem);
