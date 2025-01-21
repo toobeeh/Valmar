@@ -432,7 +432,7 @@ public class InventoryDomainService(
         /* add onlineitem for award */
         var onlineItem = new OnlineItemEntity
         {
-            ItemType = "rewardee",
+            ItemType = "award",
             LobbyPlayerId = receiverLobbyPlayerId,
             LobbyKey = LobbiesHelper.CalculateLobbyKey(lobbyId),
             Slot = award.Id,
