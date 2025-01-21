@@ -19,6 +19,7 @@ public class InventoryMapperProfile : Profile
         CreateMap<AwardInventoryDdo, AwardInventoryMessage>();
 
         CreateMap<AwardeeEntity, AvailableAwardMessage>()
+            .ForMember(message => message.InventoryId, options => options.MapFrom(entity => entity.Id))
             .ForMember(message => message.AwardId, options => options.MapFrom(entity => entity.Award));
         CreateMap<AwardeeEntity, ConsumedAwardMessage>().ConvertUsing(entity => MapConsumedAward(entity));
 

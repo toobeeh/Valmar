@@ -160,6 +160,7 @@ message ConsumedAwardMessage {
 
 message AvailableAwardMessage {
   int32 awardId = 1;
+  int32 inventoryId = 2;
 }
 
 message AwardInventoryMessage {
