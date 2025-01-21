@@ -140,7 +140,7 @@ public class MembersDomainService(
             return patronized;
         }
 
-        throw new EntityNotFoundException("User has no member patronized");
+        throw new EntityNotFoundException("User has no member patronized", false);
     }
 
     public async Task<List<MemberJson>> GetMemberInfosFromDiscordIds(List<long> ids)

@@ -118,7 +118,6 @@ public class LobbiesGrpcService(
 
         await lobbiesService.SetMemberStatusesInSkribblLobby(request.LobbyId,
             mapper.Map<List<SkribblLobbyTypoMemberDdo>>(request.Members));
-        logger.LogInformation("Set {count} member statuses in lobby {lobbyId}", request.Members.Count, request.LobbyId);
 
         return new Empty();
     }
