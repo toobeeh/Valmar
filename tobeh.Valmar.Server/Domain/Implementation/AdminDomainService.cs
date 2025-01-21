@@ -52,7 +52,7 @@ public class AdminDomainService(
         logger.LogTrace("GetAllOnlineItems()");
 
         var nowSeconds = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        var items = await db.OnlineItems.Where(item => nowSeconds - item.Date < 20).ToListAsync();
+        var items = await db.OnlineItems.ToListAsync(); /* outdated are deleted by schedule over clearvolatiledata */
         return items
             .Select(item => new OnlineItemDdo(item.ItemType, item.Slot, Convert.ToInt32(item.ItemId), item.LobbyKey,
                 item.LobbyPlayerId))
