@@ -423,9 +423,24 @@ public class InventoryDomainService(
                 "The award cannot be given because receiver and owner are the same person");
         }
 
+        /* update award to assign to receiver */
+        var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         award.AwardeeLogin = receiver.Login;
-        award.Date = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        award.Date = now;
         db.Awardees.Update(award);
+
+        /* add onlineitem for award */
+        var onlineItem = new OnlineItemEntity
+        {
+            ItemType = "rewardee",
+            LobbyPlayerId = receiverLobbyPlayerId,
+            LobbyKey = LobbiesHelper.CalculateLobbyKey(lobbyId),
+            Slot = award.Id,
+            ItemId = award.Id,
+            Date = Convert.ToInt32(DateTimeOffset.UtcNow.ToUnixTimeSeconds())
+        };
+        db.OnlineItems.Add(onlineItem);
+
         await db.SaveChangesAsync();
 
         var awardEntity = await db.Awards.FirstAsync(a => a.Id == award.Award);

@@ -22,4 +22,18 @@ public static class LobbiesHelper
         var link = stringContent[(guild.Length + 1)..];
         return new PlainLobbyLinkDdo(link, Convert.ToInt64(guild));
     }
+
+    /// <summary>
+    /// Generate a lobby key from a lobby id
+    /// this has the purpose of comparing lobbies without revealing the id
+    /// </summary>
+    /// <param name="lobbyId"></param>
+    /// <returns></returns>
+    public static string CalculateLobbyKey(string lobbyId)
+    {
+        var sum = lobbyId.Sum(c => c);
+        var hashed = lobbyId.Select(c => (char)(c + sum));
+        var key = new string(hashed.ToArray());
+        return key;
+    }
 }
