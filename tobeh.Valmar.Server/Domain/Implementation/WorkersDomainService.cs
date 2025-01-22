@@ -98,13 +98,22 @@ public class WorkersDomainService(
     {
         logger.LogTrace("GetAssignedGuildOptions(instanceId={instanceId})", instanceId);
 
-        var memberClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(entity => entity.InstanceId == instanceId);
-        if (memberClaim is null)
+        var memberClaims = await db.LobbyBotClaims.Where(entity => entity.InstanceId == instanceId).ToListAsync();
+        if (memberClaims.Count == 0)
         {
             throw new EntityNotFoundException($"No member has claimed instance with id {instanceId}", false);
         }
 
-        return await guildsDomainService.GetGuildOptionsByGuildId(memberClaim.GuildId);
+        /* find valid claim */
+        foreach (var claim in memberClaims)
+        {
+            var member = await membersDomainService.GetMemberByLogin(claim.Login);
+            if (member.MappedFlags.Contains(MemberFlagDdo.Patron))
+                return await guildsDomainService.GetGuildOptionsByGuildId(claim.GuildId);
+        }
+
+        throw new EntityNotFoundException($"No member with active patronage has claimed instance with id {instanceId}",
+            false);
     }
 
     public async Task<LobbyBotInstanceEntity> AssignInstanceToServer(MemberDdo member, long serverId)
@@ -133,11 +142,29 @@ public class WorkersDomainService(
         // check if user has claimed another server, or server is already chosen
         var memberClaim = await db.LobbyBotClaims.FirstOrDefaultAsync(entity => entity.Login == member.Login);
         var otherServerClaims = await db.LobbyBotClaims.Where(entity => entity.GuildId == serverId).ToListAsync();
+
+        // clean expired server claims
+        var expiredClaims = new List<LobbyBotClaimEntity>();
+        foreach (var claim in otherServerClaims)
+        {
+            var memberCheck = await membersDomainService.GetMemberByLogin(claim.Login);
+            if (!memberCheck.MappedFlags.Contains(MemberFlagDdo.Patron)) expiredClaims.Add(claim);
+        }
+
+        db.LobbyBotClaims.RemoveRange(expiredClaims);
+        await db.SaveChangesAsync();
+        otherServerClaims = otherServerClaims.Where(claim => !expiredClaims.Contains(claim)).ToList();
+
+        /* if member has already an instance claimed, change associated server or if server has already instance, claim with server id */
         if (memberClaim is not null)
         {
-            instance = await GetInstanceById(memberClaim.InstanceId);
-            newClaim.InstanceId = memberClaim.InstanceId;
+            /* prefer to set instance already in use by other server members */
+            var id = otherServerClaims.Count > 0 ? otherServerClaims.First().InstanceId : memberClaim.InstanceId;
+
+            instance = await GetInstanceById(id);
+            newClaim.InstanceId = id;
         }
+        /* if member not yet claimed any but server has an instance, claim the same */
         else if (otherServerClaims.Count > 0)
         {
             instance = await GetInstanceById(otherServerClaims.First().InstanceId);
