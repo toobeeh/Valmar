@@ -373,6 +373,17 @@ public class InventoryDomainService(
             }
         }
 
+        // check if there are multiple sprites in the new combo that are special
+        var invSprites = inv.Where(slot => slot.Slot > 0).Select(slot => slot.SpriteId).ToArray();
+        var specialSprites = await db.Sprites
+            .Where(sprite => invSprites.Contains(sprite.Id) && sprite.Special)
+            .CountAsync();
+        if (specialSprites > 1)
+        {
+            throw new UserOperationException(
+                "The combo cannot be activated because it contains multiple special sprites");
+        }
+
         // save combo
         var memberEntity = await db.Members.FirstOrDefaultAsync(memberEntity => memberEntity.Login == member.Login) ??
                            throw new EntityNotFoundException(
