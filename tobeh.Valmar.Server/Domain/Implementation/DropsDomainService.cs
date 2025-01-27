@@ -98,7 +98,7 @@ public class DropsDomainService(
         var firstClaim = false;
         var clearedDrop = false;
 
-        if (dropCatchTime < TimeSpan.FromSeconds(2))
+        if (dropCatchTime > TimeSpan.FromSeconds(2))
         {
             throw new UserOperationException("The drop has timed out");
         }
