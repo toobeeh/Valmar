@@ -18,7 +18,9 @@ service Lobbies {
   rpc GetLobbyDropClaims (GetLobbyDropClaimsRequest) returns (stream DropLogReply);
   
   // Gets all currently playing member's details
-  rpc GetOnlinePlayers (google.protobuf.Empty) returns (stream OnlineMemberReply);
+  rpc GetOnlinePlayers (google.protobuf.Empty) returns (stream OnlineMemberReply) {
+    option deprecated = true;
+  };
 
   rpc SetGuildLobbyLinks (SetGuildLobbyLinksMessage) returns (google.protobuf.Empty);
 

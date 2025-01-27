@@ -94,12 +94,27 @@ public class DropsDomainService(
         var drop = await db.CurrrentDrops.FirstAsync();
         var dropValidFrom = DateTimeOffset.FromUnixTimeMilliseconds(drop.Timestamp);
         var dropCatchTime = now - dropValidFrom;
-        var validClaim = !drop.Cleared && drop.Id == dropId && dropCatchTime < TimeSpan.FromSeconds(2);
+
         var firstClaim = false;
         var clearedDrop = false;
 
+        if (dropCatchTime < TimeSpan.FromSeconds(2))
+        {
+            throw new UserOperationException("The drop has timed out");
+        }
+
+        if (drop.Cleared)
+        {
+            throw new UserOperationException("The drop has already been cleared by someone else");
+        }
+
+        if (drop.Id != dropId)
+        {
+            throw new UserOperationException("The drop claim is invalid");
+        }
+
         /* save the drop as claimed/cleared as fast as possible - the only possible race condition */
-        if (!leagueMode && validClaim && !drop.Claimed)
+        if (!leagueMode && !drop.Claimed)
         {
             drop.Claimed = true;
             drop.Cleared = dropCatchTime > TimeSpan.FromSeconds(1);
@@ -108,19 +123,12 @@ public class DropsDomainService(
             firstClaim = true;
             clearedDrop = drop.Cleared;
         }
-        else if (!leagueMode && validClaim && dropCatchTime > TimeSpan.FromSeconds(1))
+        else if (!leagueMode && dropCatchTime > TimeSpan.FromSeconds(1))
         {
             drop.Cleared = true;
             db.CurrrentDrops.Update(drop);
             await db.SaveChangesAsync();
             clearedDrop = true;
-        }
-
-        if (!validClaim)
-        {
-            throw new UserOperationException(dropCatchTime > TimeSpan.FromSeconds(2)
-                ? "The drop timed out"
-                : "Someone else cleared the drop");
         }
 
         /* calculate drop claim result */
