@@ -103,6 +103,11 @@ public class DropsDomainService(
             throw new UserOperationException("The drop has timed out");
         }
 
+        if (dropCatchTime < TimeSpan.FromMilliseconds(187))
+        {
+            throw new UserOperationException("The claim has been rejected as spam");
+        }
+
         if (drop.Cleared)
         {
             throw new UserOperationException("The drop has already been cleared by someone else");
