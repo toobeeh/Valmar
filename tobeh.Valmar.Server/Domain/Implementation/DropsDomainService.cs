@@ -166,6 +166,7 @@ public class DropsDomainService(
                     Login = login,
                     Credit = Convert.ToSingle(value)
                 };
+                db.EventCredits.Add(credit);
             }
 
             await db.SaveChangesAsync();
