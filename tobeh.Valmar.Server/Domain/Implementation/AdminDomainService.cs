@@ -36,10 +36,13 @@ public class AdminDomainService(
             LobbyPlayerId = item.LobbyPlayerId
         });
 
+        /* remove old sprites, scenes and slots from lobby players that are now being updated */
         var duplicates = (await db.OnlineItems.ToListAsync())
-            .Where(item => items.Any(i =>
-                i.ItemType == item.ItemType && i.Slot == item.Slot && i.LobbyKey == item.LobbyKey &&
-                i.LobbyPlayerId == item.LobbyPlayerId));
+            .Where(item =>
+                (item.ItemType == "sprite" || item.ItemType == "scene" || item.ItemType == "sceneTheme" ||
+                 item.ItemType == "shift")
+                && items.Any(i => i.LobbyKey == item.LobbyKey && i.LobbyPlayerId == item.LobbyPlayerId));
+
         db.OnlineItems.RemoveRange(duplicates);
         await db.SaveChangesAsync();
 
