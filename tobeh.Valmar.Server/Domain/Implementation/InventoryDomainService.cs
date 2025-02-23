@@ -17,6 +17,7 @@ public class InventoryDomainService(
     IStatsDomainService statsService,
     DropChunkTreeProvider dropChunks,
     IAwardsDomainService awardsService,
+    ISplitsDomainService splitsService,
     BubbleChunkTreeProvider bubbleChunks) : IInventoryDomainService
 {
     public Task<List<MemberSpriteSlotDdo>> GetMemberSpriteInventory(MemberDdo member)
@@ -455,6 +456,18 @@ public class InventoryDomainService(
         await db.SaveChangesAsync();
 
         var awardEntity = await db.Awards.FirstAsync(a => a.Id == award.Award);
+
+        /* reward splits */
+        switch (awardEntity.Rarity)
+        {
+            case 3:
+                await splitsService.RewardSplit(receiver.Login, 20, $"{awardEntity.Name} awarded", null);
+                break;
+            case 4:
+                await splitsService.RewardSplit(receiver.Login, 21, $"{awardEntity.Name} awarded", null);
+                break;
+        }
+
         return awardEntity;
     }
 
