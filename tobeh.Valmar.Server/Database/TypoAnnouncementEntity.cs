@@ -15,5 +15,6 @@ namespace tobeh.Valmar.Server.Database
         [Column(TypeName = "text")] public string? AffectedTypoVersion { get; set; }
         [Column(TypeName = "text")] public string Title { get; set; } = null!;
         [Column(TypeName = "text")] public string Content { get; set; } = null!;
+        [Column(TypeName = "text")] public string? Details { get; set; }
     }
 }

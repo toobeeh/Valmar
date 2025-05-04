@@ -26,21 +26,22 @@ namespace tobeh.Valmar {
           string.Concat(
             "ChNhbm5vdW5jZW1lbnRzLnByb3RvEg1hbm5vdW5jZW1lbnRzGhtnb29nbGUv",
             "cHJvdG9idWYvZW1wdHkucHJvdG8aH2dvb2dsZS9wcm90b2J1Zi90aW1lc3Rh",
-            "bXAucHJvdG8aHmdvb2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90byLJAQoT",
+            "bXAucHJvdG8aHmdvb2dsZS9wcm90b2J1Zi93cmFwcGVycy5wcm90byL4AQoT",
             "QW5ub3VuY2VtZW50TWVzc2FnZRIoCgRkYXRlGAEgASgLMhouZ29vZ2xlLnBy",
             "b3RvYnVmLlRpbWVzdGFtcBINCgV0aXRsZRgCIAEoCRIPCgdjb250ZW50GAMg",
             "ASgJEjkKE2FmZmVjdGVkVHlwb1ZlcnNpb24YBCABKAsyHC5nb29nbGUucHJv",
             "dG9idWYuU3RyaW5nVmFsdWUSLQoEdHlwZRgFIAEoDjIfLmFubm91bmNlbWVu",
-            "dHMuQW5ub3VuY2VtZW50VHlwZSIZChdHZXRBbm5vdW5jZW1lbnRzTWVzc2Fn",
-            "ZSozChBBbm5vdW5jZW1lbnRUeXBlEg0KCUNoYW5nZWxvZxAAEhAKDEFubm91",
-            "bmNlbWVudBABMnQKDUFubm91bmNlbWVudHMSYwoTR2V0QWxsQW5ub3VuY2Vt",
-            "ZW50cxImLmFubm91bmNlbWVudHMuR2V0QW5ub3VuY2VtZW50c01lc3NhZ2Ua",
-            "Ii5hbm5vdW5jZW1lbnRzLkFubm91bmNlbWVudE1lc3NhZ2UwAUIPqgIMdG9i",
-            "ZWguVmFsbWFyYgZwcm90bzM="));
+            "dHMuQW5ub3VuY2VtZW50VHlwZRItCgdkZXRhaWxzGAYgASgLMhwuZ29vZ2xl",
+            "LnByb3RvYnVmLlN0cmluZ1ZhbHVlIhkKF0dldEFubm91bmNlbWVudHNNZXNz",
+            "YWdlKjMKEEFubm91bmNlbWVudFR5cGUSDQoJQ2hhbmdlbG9nEAASEAoMQW5u",
+            "b3VuY2VtZW50EAEydAoNQW5ub3VuY2VtZW50cxJjChNHZXRBbGxBbm5vdW5j",
+            "ZW1lbnRzEiYuYW5ub3VuY2VtZW50cy5HZXRBbm5vdW5jZW1lbnRzTWVzc2Fn",
+            "ZRoiLmFubm91bmNlbWVudHMuQW5ub3VuY2VtZW50TWVzc2FnZTABQg+qAgx0",
+            "b2JlaC5WYWxtYXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::tobeh.Valmar.AnnouncementType), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AnnouncementMessage), global::tobeh.Valmar.AnnouncementMessage.Parser, new[]{ "Date", "Title", "Content", "AffectedTypoVersion", "Type" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AnnouncementMessage), global::tobeh.Valmar.AnnouncementMessage.Parser, new[]{ "Date", "Title", "Content", "AffectedTypoVersion", "Type", "Details" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetAnnouncementsMessage), global::tobeh.Valmar.GetAnnouncementsMessage.Parser, null, null, null, null, null)
           }));
     }
@@ -95,6 +96,7 @@ namespace tobeh.Valmar {
       content_ = other.content_;
       AffectedTypoVersion = other.AffectedTypoVersion;
       type_ = other.type_;
+      Details = other.Details;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -166,6 +168,20 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "details" field.</summary>
+    public const int DetailsFieldNumber = 6;
+    private static readonly pb::FieldCodec<string> _single_details_codec = pb::FieldCodec.ForClassWrapper<string>(50);
+    private string details_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Details {
+      get { return details_; }
+      set {
+        details_ = value;
+      }
+    }
+
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -186,6 +202,7 @@ namespace tobeh.Valmar {
       if (Content != other.Content) return false;
       if (AffectedTypoVersion != other.AffectedTypoVersion) return false;
       if (Type != other.Type) return false;
+      if (Details != other.Details) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -198,6 +215,7 @@ namespace tobeh.Valmar {
       if (Content.Length != 0) hash ^= Content.GetHashCode();
       if (affectedTypoVersion_ != null) hash ^= AffectedTypoVersion.GetHashCode();
       if (Type != global::tobeh.Valmar.AnnouncementType.Changelog) hash ^= Type.GetHashCode();
+      if (details_ != null) hash ^= Details.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -235,6 +253,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(40);
         output.WriteEnum((int) Type);
       }
+      if (details_ != null) {
+        _single_details_codec.WriteTagAndValue(output, Details);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -264,6 +285,9 @@ namespace tobeh.Valmar {
         output.WriteRawTag(40);
         output.WriteEnum((int) Type);
       }
+      if (details_ != null) {
+        _single_details_codec.WriteTagAndValue(ref output, Details);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -288,6 +312,9 @@ namespace tobeh.Valmar {
       }
       if (Type != global::tobeh.Valmar.AnnouncementType.Changelog) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+      }
+      if (details_ != null) {
+        size += _single_details_codec.CalculateSizeWithTag(Details);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -320,6 +347,11 @@ namespace tobeh.Valmar {
       }
       if (other.Type != global::tobeh.Valmar.AnnouncementType.Changelog) {
         Type = other.Type;
+      }
+      if (other.details_ != null) {
+        if (details_ == null || other.Details != "") {
+          Details = other.Details;
+        }
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -362,6 +394,13 @@ namespace tobeh.Valmar {
             Type = (global::tobeh.Valmar.AnnouncementType) input.ReadEnum();
             break;
           }
+          case 50: {
+            string value = _single_details_codec.Read(input);
+            if (details_ == null || value != "") {
+              Details = value;
+            }
+            break;
+          }
         }
       }
     #endif
@@ -401,6 +440,13 @@ namespace tobeh.Valmar {
           }
           case 40: {
             Type = (global::tobeh.Valmar.AnnouncementType) input.ReadEnum();
+            break;
+          }
+          case 50: {
+            string value = _single_details_codec.Read(ref input);
+            if (details_ == null || value != "") {
+              Details = value;
+            }
             break;
           }
         }

@@ -26,6 +26,7 @@ message AnnouncementMessage {
   string content = 3;
   google.protobuf.StringValue affectedTypoVersion = 4;
   AnnouncementType type = 5;
+  google.protobuf.StringValue details = 6;
 }
 
 message GetAnnouncementsMessage {
