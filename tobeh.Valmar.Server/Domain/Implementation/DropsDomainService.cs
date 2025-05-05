@@ -139,7 +139,8 @@ public class DropsDomainService(
         /* calculate drop claim result */
         var catchMs = Convert.ToInt32(dropCatchTime.TotalMilliseconds);
         var weight = DropHelper.Weight(catchMs);
-        var result = new ClaimDropResultDdo(drop.Id, firstClaim, clearedDrop, catchMs, weight, leagueMode);
+        var result = new ClaimDropResultDdo(drop.Id, firstClaim, clearedDrop, catchMs, weight, leagueMode,
+            drop.EventDropId);
 
         return result;
     }

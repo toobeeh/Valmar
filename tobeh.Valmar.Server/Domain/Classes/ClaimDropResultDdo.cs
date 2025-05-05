@@ -6,4 +6,5 @@ public record ClaimDropResultDdo(
     bool ClearedDrop,
     int CatchMs,
     double LeagueWeight,
-    bool LeagueMode);
+    bool LeagueMode,
+    int? EventDropId);
