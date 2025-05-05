@@ -142,6 +142,9 @@ public class DropsDomainService(
         var result = new ClaimDropResultDdo(drop.Id, firstClaim, clearedDrop, catchMs, weight, leagueMode,
             drop.EventDropId);
 
+        logger.LogInformation(
+            "Finished processing drop: {dropId} (firstClaim={firstClaim}, clearedDrop={clearedDrop}, catchMs={catchMs}, weight={weight})",
+            drop.Id, firstClaim, clearedDrop, catchMs, weight);
         return result;
     }
 
