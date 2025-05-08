@@ -263,6 +263,14 @@ public class GuildsDomainService(
         var memberCount =
             await db.ServerConnections.CountAsync(connection => connection.GuildId == guild.GuildId);
 
+        var onlineMemberCount = await db.ServerConnections
+            .Where(connection => connection.GuildId == guild.GuildId)
+            .Join(db.SkribblOnlinePlayers,
+                connection => connection.Login,
+                player => player.Login,
+                (connection, player) => player)
+            .CountAsync();
+
         var supporters = await GetGuildSupporters(guild.GuildId);
 
         var details = new GuildDetailDdo(
@@ -270,6 +278,7 @@ public class GuildsDomainService(
             guild.Invite,
             guild.Name,
             memberCount,
+            onlineMemberCount,
             supporters,
             botId
         );
