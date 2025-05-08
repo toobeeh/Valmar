@@ -34,36 +34,36 @@ namespace tobeh.Valmar {
             "dWlsZFdlYmhvb2tzTWVzc2FnZRIPCgdndWlsZElkGAEgASgDIkQKFkFkZEd1",
             "aWxkV2ViaG9va01lc3NhZ2USDwoHZ3VpbGRJZBgBIAEoAxILCgN1cmwYAiAB",
             "KAkSDAoEbmFtZRgDIAEoCSI6ChlSZW1vdmVHdWlsZFdlYmhvb2tNZXNzYWdl",
-            "Eg8KB2d1aWxkSWQYASABKAMSDAoEbmFtZRgDIAEoCSKZAQoKR3VpbGRSZXBs",
+            "Eg8KB2d1aWxkSWQYASABKAMSDAoEbmFtZRgDIAEoCSK0AQoKR3VpbGRSZXBs",
             "eRIPCgdndWlsZElkGAEgASgDEg4KBmludml0ZRgEIAEoBRIMCgRuYW1lGAUg",
             "ASgJEhwKFGNvbm5lY3RlZE1lbWJlckNvdW50GAYgASgFEhIKCnN1cHBvcnRl",
             "cnMYByADKAUSKgoFYm90SWQYCCABKAsyGy5nb29nbGUucHJvdG9idWYuSW50",
-            "NjRWYWx1ZSIhCg9HZXRHdWlsZFJlcXVlc3QSDgoGaW52aXRlGAEgASgFIigK",
-            "E0dldEd1aWxkQnlJZE1lc3NhZ2USEQoJZGlzY29yZElkGAEgASgDIi0KGkdl",
-            "dEd1aWxkT3B0aW9uc0J5SWRNZXNzYWdlEg8KB2d1aWxkSWQYASABKAMi2wEK",
-            "E0d1aWxkT3B0aW9uc01lc3NhZ2USDwoHZ3VpbGRJZBgBIAEoAxIuCgljaGFu",
-            "bmVsSWQYAiABKAsyGy5nb29nbGUucHJvdG9idWYuSW50NjRWYWx1ZRIMCgRu",
-            "YW1lGAMgASgJEg4KBmludml0ZRgEIAEoBRIOCgZwcmVmaXgYBSABKAkSLQoH",
-            "Ym90TmFtZRgGIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRIS",
-            "Cgpwcm94eUxpbmtzGAcgASgIEhIKCnNob3dJbnZpdGUYCCABKAgy+QUKBkd1",
-            "aWxkcxI/ChBHZXRHdWlsZEJ5SW52aXRlEhcuZ3VpbGRzLkdldEd1aWxkUmVx",
-            "dWVzdBoSLmd1aWxkcy5HdWlsZFJlcGx5Ej8KDEdldEd1aWxkQnlJZBIbLmd1",
-            "aWxkcy5HZXRHdWlsZEJ5SWRNZXNzYWdlGhIuZ3VpbGRzLkd1aWxkUmVwbHkS",
-            "VgoTR2V0R3VpbGRPcHRpb25zQnlJZBIiLmd1aWxkcy5HZXRHdWlsZE9wdGlv",
-            "bnNCeUlkTWVzc2FnZRobLmd1aWxkcy5HdWlsZE9wdGlvbnNNZXNzYWdlEkYK",
-            "D1NldEd1aWxkT3B0aW9ucxIbLmd1aWxkcy5HdWlsZE9wdGlvbnNNZXNzYWdl",
-            "GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5EkkKD0FkZEd1aWxkV2ViaG9vaxIe",
-            "Lmd1aWxkcy5BZGRHdWlsZFdlYmhvb2tNZXNzYWdlGhYuZ29vZ2xlLnByb3Rv",
-            "YnVmLkVtcHR5Ek8KElJlbW92ZUd1aWxkV2ViaG9vaxIhLmd1aWxkcy5SZW1v",
-            "dmVHdWlsZFdlYmhvb2tNZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5",
-            "ElIKEEdldEd1aWxkV2ViaG9va3MSHy5ndWlsZHMuR2V0R3VpbGRXZWJob29r",
-            "c01lc3NhZ2UaGy5ndWlsZHMuR3VpbGRXZWJob29rTWVzc2FnZTABEk8KEkdl",
-            "dEd1aWxkU3VwcG9ydGVycxIhLmd1aWxkcy5HZXRHdWlsZFN1cHBvcnRlcnNN",
-            "ZXNzYWdlGhQubWVtYmVycy5NZW1iZXJSZXBseTABEkMKDEdldEd1aWxkQmFu",
-            "cxIbLmd1aWxkcy5HZXRHdWlsZEJhbnNNZXNzYWdlGhQubWVtYmVycy5NZW1i",
-            "ZXJSZXBseTABEkcKDkJhbkd1aWxkTWVtYmVyEh0uZ3VpbGRzLkJhbkd1aWxk",
-            "TWVtYmVyTWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eUIPqgIMdG9i",
-            "ZWguVmFsbWFyYgZwcm90bzM="));
+            "NjRWYWx1ZRIZChFvbmxpbmVNZW1iZXJDb3VudBgJIAEoBSIhCg9HZXRHdWls",
+            "ZFJlcXVlc3QSDgoGaW52aXRlGAEgASgFIigKE0dldEd1aWxkQnlJZE1lc3Nh",
+            "Z2USEQoJZGlzY29yZElkGAEgASgDIi0KGkdldEd1aWxkT3B0aW9uc0J5SWRN",
+            "ZXNzYWdlEg8KB2d1aWxkSWQYASABKAMi2wEKE0d1aWxkT3B0aW9uc01lc3Nh",
+            "Z2USDwoHZ3VpbGRJZBgBIAEoAxIuCgljaGFubmVsSWQYAiABKAsyGy5nb29n",
+            "bGUucHJvdG9idWYuSW50NjRWYWx1ZRIMCgRuYW1lGAMgASgJEg4KBmludml0",
+            "ZRgEIAEoBRIOCgZwcmVmaXgYBSABKAkSLQoHYm90TmFtZRgGIAEoCzIcLmdv",
+            "b2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZRISCgpwcm94eUxpbmtzGAcgASgI",
+            "EhIKCnNob3dJbnZpdGUYCCABKAgy+QUKBkd1aWxkcxI/ChBHZXRHdWlsZEJ5",
+            "SW52aXRlEhcuZ3VpbGRzLkdldEd1aWxkUmVxdWVzdBoSLmd1aWxkcy5HdWls",
+            "ZFJlcGx5Ej8KDEdldEd1aWxkQnlJZBIbLmd1aWxkcy5HZXRHdWlsZEJ5SWRN",
+            "ZXNzYWdlGhIuZ3VpbGRzLkd1aWxkUmVwbHkSVgoTR2V0R3VpbGRPcHRpb25z",
+            "QnlJZBIiLmd1aWxkcy5HZXRHdWlsZE9wdGlvbnNCeUlkTWVzc2FnZRobLmd1",
+            "aWxkcy5HdWlsZE9wdGlvbnNNZXNzYWdlEkYKD1NldEd1aWxkT3B0aW9ucxIb",
+            "Lmd1aWxkcy5HdWlsZE9wdGlvbnNNZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVm",
+            "LkVtcHR5EkkKD0FkZEd1aWxkV2ViaG9vaxIeLmd1aWxkcy5BZGRHdWlsZFdl",
+            "Ymhvb2tNZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Ek8KElJlbW92",
+            "ZUd1aWxkV2ViaG9vaxIhLmd1aWxkcy5SZW1vdmVHdWlsZFdlYmhvb2tNZXNz",
+            "YWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5ElIKEEdldEd1aWxkV2ViaG9v",
+            "a3MSHy5ndWlsZHMuR2V0R3VpbGRXZWJob29rc01lc3NhZ2UaGy5ndWlsZHMu",
+            "R3VpbGRXZWJob29rTWVzc2FnZTABEk8KEkdldEd1aWxkU3VwcG9ydGVycxIh",
+            "Lmd1aWxkcy5HZXRHdWlsZFN1cHBvcnRlcnNNZXNzYWdlGhQubWVtYmVycy5N",
+            "ZW1iZXJSZXBseTABEkMKDEdldEd1aWxkQmFucxIbLmd1aWxkcy5HZXRHdWls",
+            "ZEJhbnNNZXNzYWdlGhQubWVtYmVycy5NZW1iZXJSZXBseTABEkcKDkJhbkd1",
+            "aWxkTWVtYmVyEh0uZ3VpbGRzLkJhbkd1aWxkTWVtYmVyTWVzc2FnZRoWLmdv",
+            "b2dsZS5wcm90b2J1Zi5FbXB0eUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::tobeh.Valmar.MembersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -74,7 +74,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildWebhooksMessage), global::tobeh.Valmar.GetGuildWebhooksMessage.Parser, new[]{ "GuildId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AddGuildWebhookMessage), global::tobeh.Valmar.AddGuildWebhookMessage.Parser, new[]{ "GuildId", "Url", "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.RemoveGuildWebhookMessage), global::tobeh.Valmar.RemoveGuildWebhookMessage.Parser, new[]{ "GuildId", "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildReply), global::tobeh.Valmar.GuildReply.Parser, new[]{ "GuildId", "Invite", "Name", "ConnectedMemberCount", "Supporters", "BotId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GuildReply), global::tobeh.Valmar.GuildReply.Parser, new[]{ "GuildId", "Invite", "Name", "ConnectedMemberCount", "Supporters", "BotId", "OnlineMemberCount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildRequest), global::tobeh.Valmar.GetGuildRequest.Parser, new[]{ "Invite" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildByIdMessage), global::tobeh.Valmar.GetGuildByIdMessage.Parser, new[]{ "DiscordId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetGuildOptionsByIdMessage), global::tobeh.Valmar.GetGuildOptionsByIdMessage.Parser, new[]{ "GuildId" }, null, null, null, null),
@@ -1679,6 +1679,7 @@ namespace tobeh.Valmar {
       connectedMemberCount_ = other.connectedMemberCount_;
       supporters_ = other.supporters_.Clone();
       BotId = other.BotId;
+      onlineMemberCount_ = other.onlineMemberCount_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1761,6 +1762,18 @@ namespace tobeh.Valmar {
     }
 
 
+    /// <summary>Field number for the "onlineMemberCount" field.</summary>
+    public const int OnlineMemberCountFieldNumber = 9;
+    private int onlineMemberCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int OnlineMemberCount {
+      get { return onlineMemberCount_; }
+      set {
+        onlineMemberCount_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1782,6 +1795,7 @@ namespace tobeh.Valmar {
       if (ConnectedMemberCount != other.ConnectedMemberCount) return false;
       if(!supporters_.Equals(other.supporters_)) return false;
       if (BotId != other.BotId) return false;
+      if (OnlineMemberCount != other.OnlineMemberCount) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1795,6 +1809,7 @@ namespace tobeh.Valmar {
       if (ConnectedMemberCount != 0) hash ^= ConnectedMemberCount.GetHashCode();
       hash ^= supporters_.GetHashCode();
       if (botId_ != null) hash ^= BotId.GetHashCode();
+      if (OnlineMemberCount != 0) hash ^= OnlineMemberCount.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1833,6 +1848,10 @@ namespace tobeh.Valmar {
       if (botId_ != null) {
         _single_botId_codec.WriteTagAndValue(output, BotId);
       }
+      if (OnlineMemberCount != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(OnlineMemberCount);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1863,6 +1882,10 @@ namespace tobeh.Valmar {
       if (botId_ != null) {
         _single_botId_codec.WriteTagAndValue(ref output, BotId);
       }
+      if (OnlineMemberCount != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(OnlineMemberCount);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1888,6 +1911,9 @@ namespace tobeh.Valmar {
       size += supporters_.CalculateSize(_repeated_supporters_codec);
       if (botId_ != null) {
         size += _single_botId_codec.CalculateSizeWithTag(BotId);
+      }
+      if (OnlineMemberCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(OnlineMemberCount);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1918,6 +1944,9 @@ namespace tobeh.Valmar {
         if (botId_ == null || other.BotId != 0L) {
           BotId = other.BotId;
         }
+      }
+      if (other.OnlineMemberCount != 0) {
+        OnlineMemberCount = other.OnlineMemberCount;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1962,6 +1991,10 @@ namespace tobeh.Valmar {
             }
             break;
           }
+          case 72: {
+            OnlineMemberCount = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -2003,6 +2036,10 @@ namespace tobeh.Valmar {
             if (botId_ == null || value != 0L) {
               BotId = value;
             }
+            break;
+          }
+          case 72: {
+            OnlineMemberCount = input.ReadInt32();
             break;
           }
         }
