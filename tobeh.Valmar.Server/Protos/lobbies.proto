@@ -10,21 +10,9 @@ package lobbies;
 
 // Service definition for lobby resource access
 service Lobbies {
-  
-  // Gets all current lobbies
-  rpc GetCurrentLobbies (google.protobuf.Empty) returns (stream LobbyReply);
 
   // Gets all drop  claims that have happened in a lobby
   rpc GetLobbyDropClaims (GetLobbyDropClaimsRequest) returns (stream DropLogReply);
-  
-  // Gets all currently playing member's details
-  rpc GetOnlinePlayers (google.protobuf.Empty) returns (stream OnlineMemberReply) {
-    option deprecated = true;
-  };
-
-  rpc SetGuildLobbyLinks (SetGuildLobbyLinksMessage) returns (google.protobuf.Empty);
-
-  rpc GetLobbyLinks (google.protobuf.Empty) returns (stream GuildLobbyLinkMessage);
 
   rpc DecryptLobbyLinkToken (EncryptedLobbyLinkTokenMessage) returns (PlainLobbyLinkMessage);
 
@@ -152,48 +140,9 @@ message GuildLobbyLinkMessage {
   string username = 5;
 }
 
-// Container for palantir lobby details, containing palantir relevant details
-message PalantirLobbyDetails {
-  string description = 1;
-  string key = 2;
-  string id = 3;
-  string restriction = 4;
-}
-
-// Container for skribbl lobby details, containing skribbl relevant details
-message SkribblLobbyDetails {
-  string language = 1;
-  string link = 2;
-  bool private = 3;
-  int32 round = 4;
-  repeated SkribblLobbyPlayer players = 5;
-}
-
-// Container for a palantir lobby player, containing palantir relevant details
-message PalantirLobbyPlayer {
-  string name = 1;
-  int32 login = 2;
-  string username = 3;
-  google.protobuf.Int32Value lobbyPlayerId = 4;
-}
-
-// Container for a skribbl lobby player, containing skribbl relevant details
-message SkribblLobbyPlayer {
-  string name = 1;
-  int32 score = 2;
-  bool drawing = 3;
-  int32 lobbyPlayerId = 4;
-}
 
 message GetLobbyDropClaimsRequest {
   string lobbyKey = 1;
-}
-
-// Response containing a lobby's properties.
-message LobbyReply {
-  SkribblLobbyDetails skribblDetails = 1;
-  PalantirLobbyDetails palantirDetails = 2;
-  repeated PalantirLobbyPlayer players = 3;
 }
 
 // Request containing a logged drop claim from a lobby
@@ -206,18 +155,4 @@ message DropLogReply {
   google.protobuf.Int32Value leagueTime = 6;
 }
 
-message JoinedLobbyMessage {
-  int32 lobbyPlayerId = 1;
-  PalantirLobbyDetails lobby = 2;
-}
-
-message OnlineMemberReply {
-  int32 login = 1;
-  int32 bubbles = 2;
-  google.protobuf.StringValue patronEmoji = 3;
-  repeated JoinedLobbyMessage joinedLobbies = 4;
-  repeated inventory.SpriteSlotConfigurationReply spriteSlots = 5;
-  google.protobuf.Int32Value sceneId = 6;
-  google.protobuf.Int32Value sceneShift = 7;
-}
 

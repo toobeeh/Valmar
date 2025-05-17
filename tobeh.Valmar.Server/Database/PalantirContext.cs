@@ -19,23 +19,17 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<GuildLobbyEntity> GuildLobbies { get; set; } = null!;
         public virtual DbSet<GuildSettingEntity> GuildSettings { get; set; } = null!;
         public virtual DbSet<LegacyDropCountEntity> LegacyDropCounts { get; set; } = null!;
-        public virtual DbSet<LobEntity> Lobs { get; set; } = null!;
-        public virtual DbSet<LobbyEntity> Lobbies { get; set; } = null!;
         public virtual DbSet<LobbyBotClaimEntity> LobbyBotClaims { get; set; } = null!;
         public virtual DbSet<LobbyBotInstanceEntity> LobbyBotInstances { get; set; } = null!;
         public virtual DbSet<LobbyBotOptionEntity> LobbyBotOptions { get; set; } = null!;
         public virtual DbSet<MemberEntity> Members { get; set; } = null!;
-        public virtual DbSet<NextDropEntity> NextDrops { get; set; } = null!;
         public virtual DbSet<OnlineItemEntity> OnlineItems { get; set; } = null!;
-        public virtual DbSet<OnlineSpriteEntity> OnlineSprites { get; set; } = null!;
         public virtual DbSet<PalantiriEntity> Palantiris { get; set; } = null!;
         public virtual DbSet<PalantiriNightlyEntity> PalantiriNightlies { get; set; } = null!;
         public virtual DbSet<PastDropEntity> PastDrops { get; set; } = null!;
-        public virtual DbSet<ReportEntity> Reports { get; set; } = null!;
         public virtual DbSet<SceneEntity> Scenes { get; set; } = null!;
         public virtual DbSet<SceneThemeEntity> SceneThemes { get; set; } = null!;
         public virtual DbSet<ServerConnectionEntity> ServerConnections { get; set; } = null!;
-        public virtual DbSet<ServerLobbyLinkEntity> ServerLobbyLinks { get; set; } = null!;
         public virtual DbSet<ServerWebhookEntity> ServerWebhooks { get; set; } = null!;
         public virtual DbSet<SkribblLobbyEntity> SkribblLobbies { get; set; } = null!;
         public virtual DbSet<SkribblOnlinePlayerEntity> SkribblOnlinePlayers { get; set; } = null!;
@@ -43,13 +37,10 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<SplitCreditEntity> SplitCredits { get; set; } = null!;
         public virtual DbSet<SpriteEntity> Sprites { get; set; } = null!;
         public virtual DbSet<SpriteProfileEntity> SpriteProfiles { get; set; } = null!;
-        public virtual DbSet<StatusEntity> Statuses { get; set; } = null!;
         public virtual DbSet<TemporaryPatronEntity> TemporaryPatrons { get; set; } = null!;
-        public virtual DbSet<ThemeEntity> Themes { get; set; } = null!;
         public virtual DbSet<ThemeShareEntity> ThemeShares { get; set; } = null!;
         public virtual DbSet<TypoAnnouncementEntity> TypoAnnouncements { get; set; } = null!;
         public virtual DbSet<UserThemeEntity> UserThemes { get; set; } = null!;
-        public virtual DbSet<WebhookEntity> Webhooks { get; set; } = null!;
 
         public PalantirContext()
         {

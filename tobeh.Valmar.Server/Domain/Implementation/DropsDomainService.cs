@@ -17,21 +17,6 @@ public class DropsDomainService(
             eventDropId);
 
         var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        var validFrom =
-            DropHelper.FormatDropTimestamp(DateTimeOffset.FromUnixTimeMilliseconds(timestamp).AddSeconds(delaySeconds));
-
-        // TODO remove this and table after typo refactor complete
-        db.NextDrops.RemoveRange(db.NextDrops);
-        db.NextDrops.Add(new NextDropEntity()
-        {
-            CaughtLobbyKey = "",
-            CaughtLobbyPlayerId = "",
-            DropId = timestamp,
-            EventDropId = eventDropId ?? 0,
-            LeagueWeight = 0,
-            ValidFrom = validFrom
-        });
-
         db.CurrrentDrops.RemoveRange(db.CurrrentDrops);
         db.CurrrentDrops.Add(new CurrrentDropEntity()
         {
