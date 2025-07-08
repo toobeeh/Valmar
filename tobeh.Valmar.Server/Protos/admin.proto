@@ -28,7 +28,7 @@ service Admin {
   rpc GetTemporaryPatrons (google.protobuf.Empty) returns (stream TemporaryPatronMessage);
   
   // Fetch current member bubble count and save as bubble traces
-  rpc CreateBubbleTraces (google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc CreateBubbleTraces (google.protobuf.Empty) returns (BubbleTracesCreatedMessage);
 
   // Clear volatile data from tables, like sprites, lobbies and online status
   rpc ClearVolatileData (google.protobuf.Empty) returns (google.protobuf.Empty);
@@ -70,4 +70,8 @@ message OnlineItemMessage {
 // Request to increment the bubble count of a range of members
 message IncrementMemberBubblesRequest {
   repeated int32 memberLogins = 1;
+}
+
+message BubbleTracesCreatedMessage {
+  int32 dailyPlayers = 1;
 }

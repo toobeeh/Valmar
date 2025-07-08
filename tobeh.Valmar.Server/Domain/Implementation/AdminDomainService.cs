@@ -80,7 +80,7 @@ public class AdminDomainService(
         await db.SaveChangesAsync();
     }
 
-    public async Task CreateBubbleTraces()
+    public async Task<int> CreateBubbleTraces()
     {
         logger.LogTrace("CreateBubbleTraces()");
 
@@ -99,8 +99,18 @@ public class AdminDomainService(
             Id = ++maxId
         }).ToList();
 
+        var previousDate = BubbleHelper.FormatTraceTimestamp(DateTimeOffset.Now.AddDays(-1));
+        var previousTraces = await db.BubbleTraces
+            .Where(trace => trace.Date == previousDate)
+            .ToListAsync();
+
+        var changedTraces = traces
+            .Where(trace => !previousTraces.Any(prev => prev.Login == trace.Login && prev.Bubbles == trace.Bubbles))
+            .ToList();
+
         await db.BubbleTraces.AddRangeAsync(traces);
         await db.SaveChangesAsync();
+        return changedTraces.Count;
     }
 
     public async Task ClearVolatileData()

@@ -20,11 +20,11 @@ public class AdminGrpcService(
         return new Empty();
     }
 
-    public override async Task<Empty> CreateBubbleTraces(Empty request, ServerCallContext context)
+    public override async Task<BubbleTracesCreatedMessage> CreateBubbleTraces(Empty request, ServerCallContext context)
     {
         logger.LogTrace("CreateBubbleTraces(empty)");
-        await adminService.CreateBubbleTraces();
-        return new Empty();
+        var traces = await adminService.CreateBubbleTraces();
+        return new BubbleTracesCreatedMessage { DailyPlayers = traces };
     }
 
     public override async Task<Empty> ClearVolatileData(Empty request, ServerCallContext context)
