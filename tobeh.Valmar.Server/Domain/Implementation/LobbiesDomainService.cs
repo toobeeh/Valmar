@@ -162,7 +162,7 @@ public class LobbiesDomainService(
         var players = guildId is not null
             ? (await db.SkribblOnlinePlayers
                 .Where(status => now - status.Timestamp < 10000)
-                .Join(db.ServerConnections.Where(connection => connection.GuildId == guildId),
+                .Join(db.ServerConnections.Where(connection => connection.GuildId == guildId && !connection.Ban),
                     status => status.Login,
                     connection => connection.Login,
                     (status, connection) => status)
