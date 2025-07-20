@@ -60,6 +60,7 @@ public class SpritesGrpcService(
             request.Sprite.Cost,
             request.Sprite.EventDropId, request.Sprite.Artist, request.Sprite.IsRainbow);
 
-        return mapper.Map<SpriteReply>(sprite);
+        var ddo = await spritesService.GetSpriteById(sprite.Id);
+        return mapper.Map<SpriteReply>(ddo);
     }
 }
