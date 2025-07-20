@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "tobeh.Valmar";
+package authorization;
+
+// Service definition for authorization
+service Authorization {
+
+  // Gets all available scopes
+  rpc GetAvailableScopes (GetAvailableScopesMessage) returns (stream ScopeMessage);
+
+  // Request signature for a scope authorization request
+  rpc SignScopeRequest (SignScopeRequestMessage) returns (ScopeRequestSignatureMessage);
+
+  // Authorize a JWT token based on a scope request with signature
+  rpc AuthorizeJwt (ScopeRequestSignatureMessage) returns (AuthorizedJwtMessage);
+}
+
+message GetAvailableScopesMessage {}
+
+message ScopeMessage {
+  string name = 1;
+  string description = 2;
+}
+
+message SignScopeRequestMessage {
+  int32 typoId = 1;
+  repeated string scopes = 2;
+  google.protobuf.Timestamp expiry = 3;
+  string applicationName = 4;
+  string redirectUri = 5;
+}
+
+message ScopeRequestSignatureMessage {
+  string signature = 1;
+  SignScopeRequestMessage request = 2;
+}
+
+message AuthorizedJwtMessage {
+  string jwt = 1;
+  int32 typoId = 2;
+}

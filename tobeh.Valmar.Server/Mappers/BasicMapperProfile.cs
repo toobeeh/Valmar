@@ -9,6 +9,8 @@ public class BasicMapperProfile : Profile
     {
         CreateMap<DateTimeOffset, Timestamp>()
             .ConstructUsing(time => Timestamp.FromDateTimeOffset(time));
+        CreateMap<Timestamp, DateTimeOffset>()
+            .ConstructUsing(time => time.ToDateTimeOffset());
         CreateMap<DateTimeOffset, long>()
             .ConstructUsing(time => time.ToUnixTimeMilliseconds());
         CreateMap<long, Timestamp>()

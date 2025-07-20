@@ -10,6 +10,7 @@ using tobeh.Valmar.Server.Domain.Implementation.Drops;
 using tobeh.Valmar.Server.Grpc;
 using tobeh.Valmar.Server.Grpc.Interceptors;
 using tobeh.Valmar.Server.Mappers;
+using tobeh.Valmar.Server.Util.Authorization;
 using tobeh.Valmar.Server.Util.NChunkTree;
 using tobeh.Valmar.Server.Util.NChunkTree.Bubbles;
 using tobeh.Valmar.Server.Util.NChunkTree.Drops;
@@ -47,6 +48,10 @@ public class Program
         builder.Services.AddValidators();
         builder.Services.AddGrpcValidation();
         builder.Services.AddDbContext<PalantirContext>();
+
+        builder.Services.Configure<AuthorizationConfig>(builder.Configuration.GetSection("Authorization"));
+        builder.Services.AddSingleton<SignatureService>();
+
         RegisterMapperProfiles(builder.Services);
         RegisterDomainServices(builder.Services);
         RegisterDropChunkAbstraction(builder);
@@ -94,6 +99,7 @@ public class Program
         services.AddScoped<IWorkersDomainService, WorkersDomainService>();
         services.AddScoped<ICloudDomainService, CloudDomainService>();
         services.AddScoped<IAnnouncementsDomainService, AnnouncementsDomainService>();
+        services.AddScoped<IAuthorizationDomainService, AuthorizationDomainService>();
     }
 
     private static void RegisterGrpcServices(IEndpointRouteBuilder app)
@@ -117,6 +123,7 @@ public class Program
         app.MapGrpcService<WorkersGrpcService>();
         app.MapGrpcService<CloudGrpcService>();
         app.MapGrpcService<AnnouncementsGrpcService>();
+        app.MapGrpcService<AuthorizationGrpcService>();
     }
 
     private static void RegisterMapperProfiles(IServiceCollection services)
@@ -140,6 +147,7 @@ public class Program
             typeof(CloudMapperProfile),
             typeof(AnnouncementsMapperProfile),
             typeof(DropMapperProfile),
+            typeof(AuthorizationMapperProfile),
             typeof(AwardMapperProfile));
     }
 
