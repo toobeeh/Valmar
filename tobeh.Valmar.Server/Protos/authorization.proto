@@ -11,11 +11,8 @@ service Authorization {
   // Gets all available scopes
   rpc GetAvailableScopes (GetAvailableScopesMessage) returns (stream ScopeMessage);
 
-  // Request signature for a scope authorization request
-  rpc SignScopeRequest (SignScopeRequestMessage) returns (ScopeRequestSignatureMessage);
-
-  // Authorize a JWT token based on a scope request with signature
-  rpc AuthorizeJwt (ScopeRequestSignatureMessage) returns (AuthorizedJwtMessage);
+  // Create a jwt with given parameters
+  rpc CreateJwt (JwtParametersMessage) returns (JwtMessage);
 }
 
 message GetAvailableScopesMessage {}
@@ -25,7 +22,7 @@ message ScopeMessage {
   string description = 2;
 }
 
-message SignScopeRequestMessage {
+message JwtParametersMessage {
   int32 typoId = 1;
   repeated string scopes = 2;
   google.protobuf.Timestamp expiry = 3;
@@ -33,12 +30,7 @@ message SignScopeRequestMessage {
   string redirectUri = 5;
 }
 
-message ScopeRequestSignatureMessage {
-  string signature = 1;
-  SignScopeRequestMessage request = 2;
-}
-
-message AuthorizedJwtMessage {
+message JwtMessage {
   string jwt = 1;
   int32 typoId = 2;
 }

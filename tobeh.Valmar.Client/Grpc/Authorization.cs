@@ -27,29 +27,23 @@ namespace tobeh.Valmar {
             "ChNhdXRob3JpemF0aW9uLnByb3RvEg1hdXRob3JpemF0aW9uGh9nb29nbGUv",
             "cHJvdG9idWYvdGltZXN0YW1wLnByb3RvIhsKGUdldEF2YWlsYWJsZVNjb3Bl",
             "c01lc3NhZ2UiMQoMU2NvcGVNZXNzYWdlEgwKBG5hbWUYASABKAkSEwoLZGVz",
-            "Y3JpcHRpb24YAiABKAkikwEKF1NpZ25TY29wZVJlcXVlc3RNZXNzYWdlEg4K",
-            "BnR5cG9JZBgBIAEoBRIOCgZzY29wZXMYAiADKAkSKgoGZXhwaXJ5GAMgASgL",
-            "MhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIXCg9hcHBsaWNhdGlvbk5h",
-            "bWUYBCABKAkSEwoLcmVkaXJlY3RVcmkYBSABKAkiagocU2NvcGVSZXF1ZXN0",
-            "U2lnbmF0dXJlTWVzc2FnZRIRCglzaWduYXR1cmUYASABKAkSNwoHcmVxdWVz",
-            "dBgCIAEoCzImLmF1dGhvcml6YXRpb24uU2lnblNjb3BlUmVxdWVzdE1lc3Nh",
-            "Z2UiMwoUQXV0aG9yaXplZEp3dE1lc3NhZ2USCwoDand0GAEgASgJEg4KBnR5",
-            "cG9JZBgCIAEoBTK5AgoNQXV0aG9yaXphdGlvbhJdChJHZXRBdmFpbGFibGVT",
-            "Y29wZXMSKC5hdXRob3JpemF0aW9uLkdldEF2YWlsYWJsZVNjb3Blc01lc3Nh",
-            "Z2UaGy5hdXRob3JpemF0aW9uLlNjb3BlTWVzc2FnZTABEmcKEFNpZ25TY29w",
-            "ZVJlcXVlc3QSJi5hdXRob3JpemF0aW9uLlNpZ25TY29wZVJlcXVlc3RNZXNz",
-            "YWdlGisuYXV0aG9yaXphdGlvbi5TY29wZVJlcXVlc3RTaWduYXR1cmVNZXNz",
-            "YWdlEmAKDEF1dGhvcml6ZUp3dBIrLmF1dGhvcml6YXRpb24uU2NvcGVSZXF1",
-            "ZXN0U2lnbmF0dXJlTWVzc2FnZRojLmF1dGhvcml6YXRpb24uQXV0aG9yaXpl",
-            "ZEp3dE1lc3NhZ2VCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
+            "Y3JpcHRpb24YAiABKAkikAEKFEp3dFBhcmFtZXRlcnNNZXNzYWdlEg4KBnR5",
+            "cG9JZBgBIAEoBRIOCgZzY29wZXMYAiADKAkSKgoGZXhwaXJ5GAMgASgLMhou",
+            "Z29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIXCg9hcHBsaWNhdGlvbk5hbWUY",
+            "BCABKAkSEwoLcmVkaXJlY3RVcmkYBSABKAkiKQoKSnd0TWVzc2FnZRILCgNq",
+            "d3QYASABKAkSDgoGdHlwb0lkGAIgASgFMrsBCg1BdXRob3JpemF0aW9uEl0K",
+            "EkdldEF2YWlsYWJsZVNjb3BlcxIoLmF1dGhvcml6YXRpb24uR2V0QXZhaWxh",
+            "YmxlU2NvcGVzTWVzc2FnZRobLmF1dGhvcml6YXRpb24uU2NvcGVNZXNzYWdl",
+            "MAESSwoJQ3JlYXRlSnd0EiMuYXV0aG9yaXphdGlvbi5Kd3RQYXJhbWV0ZXJz",
+            "TWVzc2FnZRoZLmF1dGhvcml6YXRpb24uSnd0TWVzc2FnZUIPqgIMdG9iZWgu",
+            "VmFsbWFyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetAvailableScopesMessage), global::tobeh.Valmar.GetAvailableScopesMessage.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScopeMessage), global::tobeh.Valmar.ScopeMessage.Parser, new[]{ "Name", "Description" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SignScopeRequestMessage), global::tobeh.Valmar.SignScopeRequestMessage.Parser, new[]{ "TypoId", "Scopes", "Expiry", "ApplicationName", "RedirectUri" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScopeRequestSignatureMessage), global::tobeh.Valmar.ScopeRequestSignatureMessage.Parser, new[]{ "Signature", "Request" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AuthorizedJwtMessage), global::tobeh.Valmar.AuthorizedJwtMessage.Parser, new[]{ "Jwt", "TypoId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.JwtParametersMessage), global::tobeh.Valmar.JwtParametersMessage.Parser, new[]{ "TypoId", "Scopes", "Expiry", "ApplicationName", "RedirectUri" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.JwtMessage), global::tobeh.Valmar.JwtMessage.Parser, new[]{ "Jwt", "TypoId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -434,16 +428,16 @@ namespace tobeh.Valmar {
 
   }
 
-  public sealed partial class SignScopeRequestMessage : pb::IMessage<SignScopeRequestMessage>
+  public sealed partial class JwtParametersMessage : pb::IMessage<JwtParametersMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SignScopeRequestMessage> _parser = new pb::MessageParser<SignScopeRequestMessage>(() => new SignScopeRequestMessage());
+    private static readonly pb::MessageParser<JwtParametersMessage> _parser = new pb::MessageParser<JwtParametersMessage>(() => new JwtParametersMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SignScopeRequestMessage> Parser { get { return _parser; } }
+    public static pb::MessageParser<JwtParametersMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -459,7 +453,7 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SignScopeRequestMessage() {
+    public JwtParametersMessage() {
       OnConstruction();
     }
 
@@ -467,7 +461,7 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SignScopeRequestMessage(SignScopeRequestMessage other) : this() {
+    public JwtParametersMessage(JwtParametersMessage other) : this() {
       typoId_ = other.typoId_;
       scopes_ = other.scopes_.Clone();
       expiry_ = other.expiry_ != null ? other.expiry_.Clone() : null;
@@ -478,8 +472,8 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SignScopeRequestMessage Clone() {
-      return new SignScopeRequestMessage(this);
+    public JwtParametersMessage Clone() {
+      return new JwtParametersMessage(this);
     }
 
     /// <summary>Field number for the "typoId" field.</summary>
@@ -544,12 +538,12 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SignScopeRequestMessage);
+      return Equals(other as JwtParametersMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SignScopeRequestMessage other) {
+    public bool Equals(JwtParametersMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -666,7 +660,7 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SignScopeRequestMessage other) {
+    public void MergeFrom(JwtParametersMessage other) {
       if (other == null) {
         return;
       }
@@ -769,16 +763,16 @@ namespace tobeh.Valmar {
 
   }
 
-  public sealed partial class ScopeRequestSignatureMessage : pb::IMessage<ScopeRequestSignatureMessage>
+  public sealed partial class JwtMessage : pb::IMessage<JwtMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<ScopeRequestSignatureMessage> _parser = new pb::MessageParser<ScopeRequestSignatureMessage>(() => new ScopeRequestSignatureMessage());
+    private static readonly pb::MessageParser<JwtMessage> _parser = new pb::MessageParser<JwtMessage>(() => new JwtMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<ScopeRequestSignatureMessage> Parser { get { return _parser; } }
+    public static pb::MessageParser<JwtMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -794,7 +788,7 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public ScopeRequestSignatureMessage() {
+    public JwtMessage() {
       OnConstruction();
     }
 
@@ -802,242 +796,7 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public ScopeRequestSignatureMessage(ScopeRequestSignatureMessage other) : this() {
-      signature_ = other.signature_;
-      request_ = other.request_ != null ? other.request_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public ScopeRequestSignatureMessage Clone() {
-      return new ScopeRequestSignatureMessage(this);
-    }
-
-    /// <summary>Field number for the "signature" field.</summary>
-    public const int SignatureFieldNumber = 1;
-    private string signature_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Signature {
-      get { return signature_; }
-      set {
-        signature_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "request" field.</summary>
-    public const int RequestFieldNumber = 2;
-    private global::tobeh.Valmar.SignScopeRequestMessage request_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::tobeh.Valmar.SignScopeRequestMessage Request {
-      get { return request_; }
-      set {
-        request_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as ScopeRequestSignatureMessage);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(ScopeRequestSignatureMessage other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Signature != other.Signature) return false;
-      if (!object.Equals(Request, other.Request)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Signature.Length != 0) hash ^= Signature.GetHashCode();
-      if (request_ != null) hash ^= Request.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (Signature.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Signature);
-      }
-      if (request_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Request);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Signature.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Signature);
-      }
-      if (request_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Request);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (Signature.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Signature);
-      }
-      if (request_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Request);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(ScopeRequestSignatureMessage other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Signature.Length != 0) {
-        Signature = other.Signature;
-      }
-      if (other.request_ != null) {
-        if (request_ == null) {
-          Request = new global::tobeh.Valmar.SignScopeRequestMessage();
-        }
-        Request.MergeFrom(other.Request);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            Signature = input.ReadString();
-            break;
-          }
-          case 18: {
-            if (request_ == null) {
-              Request = new global::tobeh.Valmar.SignScopeRequestMessage();
-            }
-            input.ReadMessage(Request);
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            Signature = input.ReadString();
-            break;
-          }
-          case 18: {
-            if (request_ == null) {
-              Request = new global::tobeh.Valmar.SignScopeRequestMessage();
-            }
-            input.ReadMessage(Request);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  public sealed partial class AuthorizedJwtMessage : pb::IMessage<AuthorizedJwtMessage>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<AuthorizedJwtMessage> _parser = new pb::MessageParser<AuthorizedJwtMessage>(() => new AuthorizedJwtMessage());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<AuthorizedJwtMessage> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AuthorizedJwtMessage() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AuthorizedJwtMessage(AuthorizedJwtMessage other) : this() {
+    public JwtMessage(JwtMessage other) : this() {
       jwt_ = other.jwt_;
       typoId_ = other.typoId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -1045,8 +804,8 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AuthorizedJwtMessage Clone() {
-      return new AuthorizedJwtMessage(this);
+    public JwtMessage Clone() {
+      return new JwtMessage(this);
     }
 
     /// <summary>Field number for the "jwt" field.</summary>
@@ -1076,12 +835,12 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as AuthorizedJwtMessage);
+      return Equals(other as JwtMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(AuthorizedJwtMessage other) {
+    public bool Equals(JwtMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1167,7 +926,7 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(AuthorizedJwtMessage other) {
+    public void MergeFrom(JwtMessage other) {
       if (other == null) {
         return;
       }

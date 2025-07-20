@@ -53,11 +53,9 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.ScopeMessage> __Marshaller_authorization_ScopeMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.ScopeMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::tobeh.Valmar.SignScopeRequestMessage> __Marshaller_authorization_SignScopeRequestMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.SignScopeRequestMessage.Parser));
+    static readonly grpc::Marshaller<global::tobeh.Valmar.JwtParametersMessage> __Marshaller_authorization_JwtParametersMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.JwtParametersMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::tobeh.Valmar.ScopeRequestSignatureMessage> __Marshaller_authorization_ScopeRequestSignatureMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.ScopeRequestSignatureMessage.Parser));
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::tobeh.Valmar.AuthorizedJwtMessage> __Marshaller_authorization_AuthorizedJwtMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.AuthorizedJwtMessage.Parser));
+    static readonly grpc::Marshaller<global::tobeh.Valmar.JwtMessage> __Marshaller_authorization_JwtMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.JwtMessage.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.GetAvailableScopesMessage, global::tobeh.Valmar.ScopeMessage> __Method_GetAvailableScopes = new grpc::Method<global::tobeh.Valmar.GetAvailableScopesMessage, global::tobeh.Valmar.ScopeMessage>(
@@ -68,20 +66,12 @@ namespace tobeh.Valmar {
         __Marshaller_authorization_ScopeMessage);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::tobeh.Valmar.SignScopeRequestMessage, global::tobeh.Valmar.ScopeRequestSignatureMessage> __Method_SignScopeRequest = new grpc::Method<global::tobeh.Valmar.SignScopeRequestMessage, global::tobeh.Valmar.ScopeRequestSignatureMessage>(
+    static readonly grpc::Method<global::tobeh.Valmar.JwtParametersMessage, global::tobeh.Valmar.JwtMessage> __Method_CreateJwt = new grpc::Method<global::tobeh.Valmar.JwtParametersMessage, global::tobeh.Valmar.JwtMessage>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "SignScopeRequest",
-        __Marshaller_authorization_SignScopeRequestMessage,
-        __Marshaller_authorization_ScopeRequestSignatureMessage);
-
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::tobeh.Valmar.ScopeRequestSignatureMessage, global::tobeh.Valmar.AuthorizedJwtMessage> __Method_AuthorizeJwt = new grpc::Method<global::tobeh.Valmar.ScopeRequestSignatureMessage, global::tobeh.Valmar.AuthorizedJwtMessage>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "AuthorizeJwt",
-        __Marshaller_authorization_ScopeRequestSignatureMessage,
-        __Marshaller_authorization_AuthorizedJwtMessage);
+        "CreateJwt",
+        __Marshaller_authorization_JwtParametersMessage,
+        __Marshaller_authorization_JwtMessage);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -141,7 +131,7 @@ namespace tobeh.Valmar {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetAvailableScopes, null, options, request);
       }
       /// <summary>
-      /// Request signature for a scope authorization request
+      /// Create a jwt with given parameters
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -149,23 +139,23 @@ namespace tobeh.Valmar {
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::tobeh.Valmar.ScopeRequestSignatureMessage SignScopeRequest(global::tobeh.Valmar.SignScopeRequestMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::tobeh.Valmar.JwtMessage CreateJwt(global::tobeh.Valmar.JwtParametersMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return SignScopeRequest(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return CreateJwt(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Request signature for a scope authorization request
+      /// Create a jwt with given parameters
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::tobeh.Valmar.ScopeRequestSignatureMessage SignScopeRequest(global::tobeh.Valmar.SignScopeRequestMessage request, grpc::CallOptions options)
+      public virtual global::tobeh.Valmar.JwtMessage CreateJwt(global::tobeh.Valmar.JwtParametersMessage request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_SignScopeRequest, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_CreateJwt, null, options, request);
       }
       /// <summary>
-      /// Request signature for a scope authorization request
+      /// Create a jwt with given parameters
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
@@ -173,68 +163,20 @@ namespace tobeh.Valmar {
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.ScopeRequestSignatureMessage> SignScopeRequestAsync(global::tobeh.Valmar.SignScopeRequestMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.JwtMessage> CreateJwtAsync(global::tobeh.Valmar.JwtParametersMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return SignScopeRequestAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return CreateJwtAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       /// <summary>
-      /// Request signature for a scope authorization request
+      /// Create a jwt with given parameters
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.ScopeRequestSignatureMessage> SignScopeRequestAsync(global::tobeh.Valmar.SignScopeRequestMessage request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.JwtMessage> CreateJwtAsync(global::tobeh.Valmar.JwtParametersMessage request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_SignScopeRequest, null, options, request);
-      }
-      /// <summary>
-      /// Authorize a JWT token based on a scope request with signature
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::tobeh.Valmar.AuthorizedJwtMessage AuthorizeJwt(global::tobeh.Valmar.ScopeRequestSignatureMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return AuthorizeJwt(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      /// Authorize a JWT token based on a scope request with signature
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::tobeh.Valmar.AuthorizedJwtMessage AuthorizeJwt(global::tobeh.Valmar.ScopeRequestSignatureMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_AuthorizeJwt, null, options, request);
-      }
-      /// <summary>
-      /// Authorize a JWT token based on a scope request with signature
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.AuthorizedJwtMessage> AuthorizeJwtAsync(global::tobeh.Valmar.ScopeRequestSignatureMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return AuthorizeJwtAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      /// Authorize a JWT token based on a scope request with signature
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.AuthorizedJwtMessage> AuthorizeJwtAsync(global::tobeh.Valmar.ScopeRequestSignatureMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_AuthorizeJwt, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_CreateJwt, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

@@ -23,38 +23,25 @@ public class AuthorizationDomainService(
         return await db.JwtScopes.ToListAsync();
     }
 
-    public async Task<string> SignScopeRequest(ScopeRequestDdo request)
+    public async Task<JwtSecurityToken> CreateJwt(int typoId, string applicationName, DateTime expiry,
+        List<string> scopes)
     {
-        logger.LogTrace("SignScopeRequest(request: {Request})", request);
+        logger.LogTrace(
+            "CreateJwt(typoId: {TypoId}, applicationName: {ApplicationName}, expiry: {Expiry}, scopes: {Scopes})",
+            typoId, applicationName, expiry, scopes);
 
         // verify all scopes exist
         var matchingScopes = await db.JwtScopes
-            .Where(scope => request.Scopes.Contains(scope.Name))
+            .Where(scope => scopes.Contains(scope.Name))
             .ToListAsync();
 
-        if (matchingScopes.Count != request.Scopes.Count)
+        if (matchingScopes.Count != scopes.Count)
         {
             throw new ArgumentException("One or more requested scopes do not exist.");
         }
 
-        var signature = signatureService.Sign(request.ToString());
-        return signature;
-    }
-
-    public async Task<JwtSecurityToken> CreateJwt(ScopeRequestDdo request, string requestSignature)
-    {
-        logger.LogTrace("CreateJwt(request: {Request}, requestSignature: {RequestSignature})", request,
-            requestSignature);
-
-        // verify the signature to make sure it has been signed by the server before
-        if (!signatureService.Verify(request.ToString(), requestSignature))
-        {
-            logger.LogWarning("CreateJwt: Invalid signature for request: {Request}", request);
-            throw new ArgumentException("Invalid signature for scope request.");
-        }
-
         // verify member exists and is not banned
-        var member = await membersDomainService.GetMemberByLogin(request.TypoId);
+        var member = await membersDomainService.GetMemberByLogin(typoId);
         if (member.MappedFlags.Contains(MemberFlagDdo.PermaBan))
         {
             throw new InvalidOperationException("Member is banned and cannot request scopes.");
@@ -67,14 +54,14 @@ public class AuthorizationDomainService(
         var config = options.Value;
         var token = new JwtSecurityToken(
             issuer: config.JwtIssuer,
-            audience: request.ApplicationName,
+            audience: applicationName,
             claims:
             [
-                new Claim(JwtRegisteredClaimNames.Sub, request.TypoId.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, typoId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Name, member.Username),
-                .. request.Scopes.Select(scope => new Claim("scope", scope)).ToList(),
+                .. scopes.Select(scope => new Claim("scope", scope)).ToList(),
             ],
-            expires: request.Expiry.UtcDateTime,
+            expires: expiry,
             signingCredentials: credentials
         );
 
