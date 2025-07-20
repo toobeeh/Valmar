@@ -21,6 +21,9 @@ service Sprites {
 
   // Adds a new sprite
   rpc AddSprite (AddSpriteMessage) returns (SpriteReply);
+
+  // Updates an existing sprite
+  rpc UpdateSprite (UpdateSpriteMessage) returns (SpriteReply);
 }
 
 // Response containing a sprite's properties.
@@ -57,4 +60,9 @@ message AddSpriteMessage {
   bool isRainbow = 4;
   google.protobuf.Int32Value eventDropId = 6;
   google.protobuf.StringValue artist = 7;
+}
+
+message UpdateSpriteMessage {
+  int32 id = 1;
+  AddSpriteMessage sprite = 2;
 }

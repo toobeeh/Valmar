@@ -51,4 +51,15 @@ public class SpritesGrpcService(
         var ranking = await spritesService.GetSpriteRanking();
         await responseStream.WriteAllMappedAsync(ranking, mapper.Map<SpriteRankingReply>);
     }
+
+    public override async Task<SpriteReply> UpdateSprite(UpdateSpriteMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("UpdateSprite(request={request})", request);
+
+        var sprite = await spritesService.UpdateSprite(request.Id, request.Sprite.Name, request.Sprite.Url,
+            request.Sprite.Cost,
+            request.Sprite.EventDropId, request.Sprite.Artist, request.Sprite.IsRainbow);
+
+        return mapper.Map<SpriteReply>(sprite);
+    }
 }

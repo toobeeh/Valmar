@@ -33,7 +33,6 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<ServerWebhookEntity> ServerWebhooks { get; set; } = null!;
         public virtual DbSet<SkribblLobbyEntity> SkribblLobbies { get; set; } = null!;
         public virtual DbSet<SkribblOnlinePlayerEntity> SkribblOnlinePlayers { get; set; } = null!;
-        public virtual DbSet<SpEntity> Sps { get; set; } = null!;
         public virtual DbSet<SplitCreditEntity> SplitCredits { get; set; } = null!;
         public virtual DbSet<SpriteEntity> Sprites { get; set; } = null!;
         public virtual DbSet<SpriteProfileEntity> SpriteProfiles { get; set; } = null!;
@@ -55,13 +54,13 @@ namespace tobeh.Valmar.Server.Database
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("name=ConnectionStrings:Palantir", ServerVersion.Parse("11.3.2-mariadb"));
+                optionsBuilder.UseMySql("name=ConnectionStrings:Palantir", ServerVersion.Parse("11.8.2-mariadb"));
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseCollation("utf8mb4_general_ci")
+            modelBuilder.UseCollation("utf8mb4_uca1400_ai_ci")
                 .HasCharSet("utf8mb4");
 
             modelBuilder.Entity<AccessTokenEntity>(entity =>
@@ -134,15 +133,6 @@ namespace tobeh.Valmar.Server.Database
                 entity.Property(e => e.Login).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<LobEntity>(entity => { entity.ToView("lobs"); });
-
-            modelBuilder.Entity<LobbyEntity>(entity =>
-            {
-                entity.HasKey(e => e.LobbyId)
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 32 });
-            });
-
             modelBuilder.Entity<LobbyBotClaimEntity>(entity =>
             {
                 entity.HasKey(e => e.Login)
@@ -167,26 +157,11 @@ namespace tobeh.Valmar.Server.Database
                 entity.Property(e => e.Login).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<NextDropEntity>(entity =>
-            {
-                entity.HasKey(e => e.DropId)
-                    .HasName("PRIMARY");
-
-                entity.Property(e => e.DropId).ValueGeneratedNever();
-            });
-
             modelBuilder.Entity<OnlineItemEntity>(entity =>
             {
                 entity.HasKey(e => new { e.ItemType, e.Slot, e.LobbyKey, e.LobbyPlayerId, e.Date })
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 32, 0, 32, 0, 0 });
-            });
-
-            modelBuilder.Entity<OnlineSpriteEntity>(entity =>
-            {
-                entity.HasKey(e => new { e.LobbyKey, e.LobbyPlayerId, e.Slot })
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 32, 0, 0 });
             });
 
             modelBuilder.Entity<PalantiriEntity>(entity =>
@@ -210,13 +185,6 @@ namespace tobeh.Valmar.Server.Database
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0 });
             });
 
-            modelBuilder.Entity<ReportEntity>(entity =>
-            {
-                entity.HasKey(e => new { e.LobbyId, e.ObserveToken })
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 32, 0 });
-            });
-
             modelBuilder.Entity<SceneEntity>(entity => { entity.Property(e => e.Id).ValueGeneratedNever(); });
 
             modelBuilder.Entity<SceneThemeEntity>(entity =>
@@ -231,13 +199,6 @@ namespace tobeh.Valmar.Server.Database
                 entity.HasKey(e => new { e.Login, e.GuildId })
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-            });
-
-            modelBuilder.Entity<ServerLobbyLinkEntity>(entity =>
-            {
-                entity.HasKey(e => new { e.GuildId, e.Login, e.Link, e.Username })
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0, 0 });
             });
 
             modelBuilder.Entity<ServerWebhookEntity>(entity =>
@@ -260,8 +221,6 @@ namespace tobeh.Valmar.Server.Database
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0 });
             });
 
-            modelBuilder.Entity<SpEntity>(entity => { entity.ToView("sps"); });
-
             modelBuilder.Entity<SpriteEntity>(entity => { entity.Property(e => e.Id).ValueGeneratedNever(); });
 
             modelBuilder.Entity<SpriteProfileEntity>(entity =>
@@ -269,13 +228,6 @@ namespace tobeh.Valmar.Server.Database
                 entity.HasKey(e => new { e.Login, e.Name })
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 32 });
-            });
-
-            modelBuilder.Entity<StatusEntity>(entity =>
-            {
-                entity.HasKey(e => e.SessionId)
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 32 });
             });
 
             modelBuilder.Entity<TemporaryPatronEntity>(entity =>
@@ -286,26 +238,12 @@ namespace tobeh.Valmar.Server.Database
                 entity.Property(e => e.Login).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<ThemeEntity>(entity =>
-            {
-                entity.HasKey(e => e.Ticket)
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 32 });
-            });
-
             modelBuilder.Entity<TypoAnnouncementEntity>(entity =>
             {
                 entity.HasKey(e => e.Date)
                     .HasName("PRIMARY");
 
                 entity.Property(e => e.Date).ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<WebhookEntity>(entity =>
-            {
-                entity.HasKey(e => new { e.ServerId, e.Name })
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 32, 32 });
             });
 
             OnModelCreatingPartial(modelBuilder);

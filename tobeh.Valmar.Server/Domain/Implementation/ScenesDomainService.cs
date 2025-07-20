@@ -90,4 +90,44 @@ public class ScenesDomainService(
 
         return orderedRanking;
     }
+
+    public async Task<SceneEntity> AddScene(string name, string url, string? artist, bool exclusive, int? eventId)
+    {
+        logger.LogTrace("AddScene(name={name}, url={url}, artist={artist}, exclusive={exclusive}, eventId={eventId})",
+            name, url, artist, exclusive, eventId);
+
+        var scene = new SceneEntity
+        {
+            Name = name,
+            Url = url,
+            Artist = artist ?? "",
+            Exclusive = exclusive,
+            EventId = eventId ?? 0
+        };
+
+        var entity = db.Scenes.Add(scene);
+        await db.SaveChangesAsync();
+
+        return entity.Entity;
+    }
+
+    public async Task<SceneEntity> UpdateScene(int id, string name, string url, string? artist, bool exclusive,
+        int? eventId)
+    {
+        logger.LogTrace(
+            "UpdateScene(id={id}, name={name}, url={url}, artist={artist}, exclusive={exclusive}, eventId={eventId})",
+            id, name, url, artist, exclusive, eventId);
+
+        var scene = await GetSceneById(id);
+        scene.Name = name;
+        scene.Url = url;
+        scene.Artist = artist ?? "";
+        scene.Exclusive = exclusive;
+        scene.EventId = eventId ?? 0;
+
+        db.Scenes.Update(scene);
+        await db.SaveChangesAsync();
+
+        return scene;
+    }
 }

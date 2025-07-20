@@ -26,6 +26,12 @@ service Scenes {
   
   // Gets the price and scene of an event
   rpc GetEventScene (GetEventSceneRequest) returns (EventSceneReply);
+
+  // Adds a new scene
+  rpc AddScene (SceneSubmissionMessage) returns (SceneReply);
+
+  // Updates an existing scene 
+  rpc UpdateScene (UpdateSceneMessage) returns (SceneReply);
 }
 
 // Response containing a scene's properties.
@@ -68,3 +74,17 @@ message EventSceneReply {
 message GetEventSceneRequest {
   int32 eventId = 1;
 }
+
+message SceneSubmissionMessage {
+  string name = 1;
+  string url = 2;
+  bool exclusive = 3;
+  google.protobuf.StringValue artist = 4;
+  google.protobuf.Int32Value eventId = 5;
+}
+
+message UpdateSceneMessage {
+  int32 id = 1;
+  SceneSubmissionMessage scene = 2;
+}
+

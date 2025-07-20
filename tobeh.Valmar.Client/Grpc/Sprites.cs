@@ -38,21 +38,25 @@ namespace tobeh.Valmar {
             "BSKuAQoQQWRkU3ByaXRlTWVzc2FnZRIMCgRuYW1lGAEgASgJEgsKA3VybBgC",
             "IAEoCRIMCgRjb3N0GAMgASgFEhEKCWlzUmFpbmJvdxgEIAEoCBIwCgtldmVu",
             "dERyb3BJZBgGIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEiwK",
-            "BmFydGlzdBgHIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZTKV",
-            "AgoHU3ByaXRlcxI/Cg1HZXRBbGxTcHJpdGVzEhYuZ29vZ2xlLnByb3RvYnVm",
-            "LkVtcHR5GhQuc3ByaXRlcy5TcHJpdGVSZXBseTABEkAKDUdldFNwcml0ZUJ5",
-            "SWQSGS5zcHJpdGVzLkdldFNwcml0ZVJlcXVlc3QaFC5zcHJpdGVzLlNwcml0",
-            "ZVJlcGx5EkkKEEdldFNwcml0ZVJhbmtpbmcSFi5nb29nbGUucHJvdG9idWYu",
-            "RW1wdHkaGy5zcHJpdGVzLlNwcml0ZVJhbmtpbmdSZXBseTABEjwKCUFkZFNw",
-            "cml0ZRIZLnNwcml0ZXMuQWRkU3ByaXRlTWVzc2FnZRoULnNwcml0ZXMuU3By",
-            "aXRlUmVwbHlCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
+            "BmFydGlzdBgHIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1ZSJM",
+            "ChNVcGRhdGVTcHJpdGVNZXNzYWdlEgoKAmlkGAEgASgFEikKBnNwcml0ZRgC",
+            "IAEoCzIZLnNwcml0ZXMuQWRkU3ByaXRlTWVzc2FnZTLZAgoHU3ByaXRlcxI/",
+            "Cg1HZXRBbGxTcHJpdGVzEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GhQuc3By",
+            "aXRlcy5TcHJpdGVSZXBseTABEkAKDUdldFNwcml0ZUJ5SWQSGS5zcHJpdGVz",
+            "LkdldFNwcml0ZVJlcXVlc3QaFC5zcHJpdGVzLlNwcml0ZVJlcGx5EkkKEEdl",
+            "dFNwcml0ZVJhbmtpbmcSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaGy5zcHJp",
+            "dGVzLlNwcml0ZVJhbmtpbmdSZXBseTABEjwKCUFkZFNwcml0ZRIZLnNwcml0",
+            "ZXMuQWRkU3ByaXRlTWVzc2FnZRoULnNwcml0ZXMuU3ByaXRlUmVwbHkSQgoM",
+            "VXBkYXRlU3ByaXRlEhwuc3ByaXRlcy5VcGRhdGVTcHJpdGVNZXNzYWdlGhQu",
+            "c3ByaXRlcy5TcHJpdGVSZXBseUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::tobeh.Valmar.MembersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteReply), global::tobeh.Valmar.SpriteReply.Parser, new[]{ "Name", "Url", "Id", "Cost", "IsRainbow", "IsSpecial", "EventDropId", "Artist", "IsReleased", "RequiredFlags" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetSpriteRequest), global::tobeh.Valmar.GetSpriteRequest.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SpriteRankingReply), global::tobeh.Valmar.SpriteRankingReply.Parser, new[]{ "Id", "ActiveUsers", "TotalBought", "Rank" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AddSpriteMessage), global::tobeh.Valmar.AddSpriteMessage.Parser, new[]{ "Name", "Url", "Cost", "IsRainbow", "EventDropId", "Artist" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.AddSpriteMessage), global::tobeh.Valmar.AddSpriteMessage.Parser, new[]{ "Name", "Url", "Cost", "IsRainbow", "EventDropId", "Artist" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.UpdateSpriteMessage), global::tobeh.Valmar.UpdateSpriteMessage.Parser, new[]{ "Id", "Sprite" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1467,6 +1471,241 @@ namespace tobeh.Valmar {
             if (artist_ == null || value != "") {
               Artist = value;
             }
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class UpdateSpriteMessage : pb::IMessage<UpdateSpriteMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<UpdateSpriteMessage> _parser = new pb::MessageParser<UpdateSpriteMessage>(() => new UpdateSpriteMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<UpdateSpriteMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.SpritesReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public UpdateSpriteMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public UpdateSpriteMessage(UpdateSpriteMessage other) : this() {
+      id_ = other.id_;
+      sprite_ = other.sprite_ != null ? other.sprite_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public UpdateSpriteMessage Clone() {
+      return new UpdateSpriteMessage(this);
+    }
+
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sprite" field.</summary>
+    public const int SpriteFieldNumber = 2;
+    private global::tobeh.Valmar.AddSpriteMessage sprite_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::tobeh.Valmar.AddSpriteMessage Sprite {
+      get { return sprite_; }
+      set {
+        sprite_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as UpdateSpriteMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(UpdateSpriteMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (!object.Equals(Sprite, other.Sprite)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (sprite_ != null) hash ^= Sprite.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (sprite_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Sprite);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (sprite_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Sprite);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (sprite_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Sprite);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(UpdateSpriteMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      if (other.sprite_ != null) {
+        if (sprite_ == null) {
+          Sprite = new global::tobeh.Valmar.AddSpriteMessage();
+        }
+        Sprite.MergeFrom(other.Sprite);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            if (sprite_ == null) {
+              Sprite = new global::tobeh.Valmar.AddSpriteMessage();
+            }
+            input.ReadMessage(Sprite);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            if (sprite_ == null) {
+              Sprite = new global::tobeh.Valmar.AddSpriteMessage();
+            }
+            input.ReadMessage(Sprite);
             break;
           }
         }

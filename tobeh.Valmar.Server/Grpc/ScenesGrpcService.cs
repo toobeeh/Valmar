@@ -75,4 +75,24 @@ public class ScenesGrpcService(
         var price = EventHelper.GetEventScenePrice(evt.Length);
         return new EventSceneReply { Price = price, Scene = mapper.Map<SceneReply>(scene) };
     }
+
+    public override async Task<SceneReply> AddScene(SceneSubmissionMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("AddScene(request={request})", request);
+
+        var scene = await scenesService.AddScene(request.Name, request.Url,
+            request.Artist, request.Exclusive, request.EventId);
+
+        return mapper.Map<SceneReply>(scene);
+    }
+
+    public override async Task<SceneReply> UpdateScene(UpdateSceneMessage request, ServerCallContext context)
+    {
+        logger.LogTrace("UpdateScene(request={request})", request);
+
+        var scene = await scenesService.UpdateScene(request.Id, request.Scene.Name, request.Scene.Url,
+            request.Scene.Artist, request.Scene.Exclusive, request.Scene.EventId);
+
+        return mapper.Map<SceneReply>(scene);
+    }
 }

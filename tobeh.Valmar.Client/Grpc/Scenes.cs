@@ -38,17 +38,25 @@ namespace tobeh.Valmar {
             "cxgCIAEoBRITCgt0b3RhbEJvdWdodBgDIAEoBRIMCgRyYW5rGAQgASgFIkMK",
             "D0V2ZW50U2NlbmVSZXBseRIhCgVzY2VuZRgBIAEoCzISLnNjZW5lcy5TY2Vu",
             "ZVJlcGx5Eg0KBXByaWNlGAIgASgFIicKFEdldEV2ZW50U2NlbmVSZXF1ZXN0",
-            "Eg8KB2V2ZW50SWQYASABKAUyowMKBlNjZW5lcxI8CgxHZXRBbGxTY2VuZXMS",
-            "Fi5nb29nbGUucHJvdG9idWYuRW1wdHkaEi5zY2VuZXMuU2NlbmVSZXBseTAB",
-            "EkYKEUdldEFsbFNjZW5lVGhlbWVzEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5",
-            "Ghcuc2NlbmVzLlNjZW5lVGhlbWVSZXBseTABEkYKEEdldFRoZW1lc09mU2Nl",
-            "bmUSFy5zY2VuZXMuR2V0U2NlbmVSZXF1ZXN0Ghcuc2NlbmVzLlNjZW5lVGhl",
-            "bWVSZXBseTABEjsKDEdldFNjZW5lQnlJZBIXLnNjZW5lcy5HZXRTY2VuZVJl",
-            "cXVlc3QaEi5zY2VuZXMuU2NlbmVSZXBseRJGCg9HZXRTY2VuZVJhbmtpbmcS",
-            "Fi5nb29nbGUucHJvdG9idWYuRW1wdHkaGS5zY2VuZXMuU2NlbmVSYW5raW5n",
-            "UmVwbHkwARJGCg1HZXRFdmVudFNjZW5lEhwuc2NlbmVzLkdldEV2ZW50U2Nl",
-            "bmVSZXF1ZXN0Ghcuc2NlbmVzLkV2ZW50U2NlbmVSZXBseUIPqgIMdG9iZWgu",
-            "VmFsbWFyYgZwcm90bzM="));
+            "Eg8KB2V2ZW50SWQYASABKAUiogEKFlNjZW5lU3VibWlzc2lvbk1lc3NhZ2US",
+            "DAoEbmFtZRgBIAEoCRILCgN1cmwYAiABKAkSEQoJZXhjbHVzaXZlGAMgASgI",
+            "EiwKBmFydGlzdBgEIAEoCzIcLmdvb2dsZS5wcm90b2J1Zi5TdHJpbmdWYWx1",
+            "ZRIsCgdldmVudElkGAUgASgLMhsuZ29vZ2xlLnByb3RvYnVmLkludDMyVmFs",
+            "dWUiTwoSVXBkYXRlU2NlbmVNZXNzYWdlEgoKAmlkGAEgASgFEi0KBXNjZW5l",
+            "GAIgASgLMh4uc2NlbmVzLlNjZW5lU3VibWlzc2lvbk1lc3NhZ2UyogQKBlNj",
+            "ZW5lcxI8CgxHZXRBbGxTY2VuZXMSFi5nb29nbGUucHJvdG9idWYuRW1wdHka",
+            "Ei5zY2VuZXMuU2NlbmVSZXBseTABEkYKEUdldEFsbFNjZW5lVGhlbWVzEhYu",
+            "Z29vZ2xlLnByb3RvYnVmLkVtcHR5Ghcuc2NlbmVzLlNjZW5lVGhlbWVSZXBs",
+            "eTABEkYKEEdldFRoZW1lc09mU2NlbmUSFy5zY2VuZXMuR2V0U2NlbmVSZXF1",
+            "ZXN0Ghcuc2NlbmVzLlNjZW5lVGhlbWVSZXBseTABEjsKDEdldFNjZW5lQnlJ",
+            "ZBIXLnNjZW5lcy5HZXRTY2VuZVJlcXVlc3QaEi5zY2VuZXMuU2NlbmVSZXBs",
+            "eRJGCg9HZXRTY2VuZVJhbmtpbmcSFi5nb29nbGUucHJvdG9idWYuRW1wdHka",
+            "GS5zY2VuZXMuU2NlbmVSYW5raW5nUmVwbHkwARJGCg1HZXRFdmVudFNjZW5l",
+            "Ehwuc2NlbmVzLkdldEV2ZW50U2NlbmVSZXF1ZXN0Ghcuc2NlbmVzLkV2ZW50",
+            "U2NlbmVSZXBseRI+CghBZGRTY2VuZRIeLnNjZW5lcy5TY2VuZVN1Ym1pc3Np",
+            "b25NZXNzYWdlGhIuc2NlbmVzLlNjZW5lUmVwbHkSPQoLVXBkYXRlU2NlbmUS",
+            "Gi5zY2VuZXMuVXBkYXRlU2NlbmVNZXNzYWdlGhIuc2NlbmVzLlNjZW5lUmVw",
+            "bHlCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -57,7 +65,9 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetSceneRequest), global::tobeh.Valmar.GetSceneRequest.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SceneRankingReply), global::tobeh.Valmar.SceneRankingReply.Parser, new[]{ "Id", "ActiveUsers", "TotalBought", "Rank" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.EventSceneReply), global::tobeh.Valmar.EventSceneReply.Parser, new[]{ "Scene", "Price" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetEventSceneRequest), global::tobeh.Valmar.GetEventSceneRequest.Parser, new[]{ "EventId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetEventSceneRequest), global::tobeh.Valmar.GetEventSceneRequest.Parser, new[]{ "EventId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.SceneSubmissionMessage), global::tobeh.Valmar.SceneSubmissionMessage.Parser, new[]{ "Name", "Url", "Exclusive", "Artist", "EventId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.UpdateSceneMessage), global::tobeh.Valmar.UpdateSceneMessage.Parser, new[]{ "Id", "Scene" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1723,6 +1733,594 @@ namespace tobeh.Valmar {
             break;
           case 8: {
             EventId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class SceneSubmissionMessage : pb::IMessage<SceneSubmissionMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SceneSubmissionMessage> _parser = new pb::MessageParser<SceneSubmissionMessage>(() => new SceneSubmissionMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SceneSubmissionMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.ScenesReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SceneSubmissionMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SceneSubmissionMessage(SceneSubmissionMessage other) : this() {
+      name_ = other.name_;
+      url_ = other.url_;
+      exclusive_ = other.exclusive_;
+      Artist = other.Artist;
+      EventId = other.EventId;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SceneSubmissionMessage Clone() {
+      return new SceneSubmissionMessage(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "url" field.</summary>
+    public const int UrlFieldNumber = 2;
+    private string url_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Url {
+      get { return url_; }
+      set {
+        url_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "exclusive" field.</summary>
+    public const int ExclusiveFieldNumber = 3;
+    private bool exclusive_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Exclusive {
+      get { return exclusive_; }
+      set {
+        exclusive_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "artist" field.</summary>
+    public const int ArtistFieldNumber = 4;
+    private static readonly pb::FieldCodec<string> _single_artist_codec = pb::FieldCodec.ForClassWrapper<string>(34);
+    private string artist_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Artist {
+      get { return artist_; }
+      set {
+        artist_ = value;
+      }
+    }
+
+
+    /// <summary>Field number for the "eventId" field.</summary>
+    public const int EventIdFieldNumber = 5;
+    private static readonly pb::FieldCodec<int?> _single_eventId_codec = pb::FieldCodec.ForStructWrapper<int>(42);
+    private int? eventId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int? EventId {
+      get { return eventId_; }
+      set {
+        eventId_ = value;
+      }
+    }
+
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SceneSubmissionMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SceneSubmissionMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (Url != other.Url) return false;
+      if (Exclusive != other.Exclusive) return false;
+      if (Artist != other.Artist) return false;
+      if (EventId != other.EventId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Url.Length != 0) hash ^= Url.GetHashCode();
+      if (Exclusive != false) hash ^= Exclusive.GetHashCode();
+      if (artist_ != null) hash ^= Artist.GetHashCode();
+      if (eventId_ != null) hash ^= EventId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (Url.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Url);
+      }
+      if (Exclusive != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Exclusive);
+      }
+      if (artist_ != null) {
+        _single_artist_codec.WriteTagAndValue(output, Artist);
+      }
+      if (eventId_ != null) {
+        _single_eventId_codec.WriteTagAndValue(output, EventId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (Url.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Url);
+      }
+      if (Exclusive != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Exclusive);
+      }
+      if (artist_ != null) {
+        _single_artist_codec.WriteTagAndValue(ref output, Artist);
+      }
+      if (eventId_ != null) {
+        _single_eventId_codec.WriteTagAndValue(ref output, EventId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Url.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Url);
+      }
+      if (Exclusive != false) {
+        size += 1 + 1;
+      }
+      if (artist_ != null) {
+        size += _single_artist_codec.CalculateSizeWithTag(Artist);
+      }
+      if (eventId_ != null) {
+        size += _single_eventId_codec.CalculateSizeWithTag(EventId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SceneSubmissionMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Url.Length != 0) {
+        Url = other.Url;
+      }
+      if (other.Exclusive != false) {
+        Exclusive = other.Exclusive;
+      }
+      if (other.artist_ != null) {
+        if (artist_ == null || other.Artist != "") {
+          Artist = other.Artist;
+        }
+      }
+      if (other.eventId_ != null) {
+        if (eventId_ == null || other.EventId != 0) {
+          EventId = other.EventId;
+        }
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            Url = input.ReadString();
+            break;
+          }
+          case 24: {
+            Exclusive = input.ReadBool();
+            break;
+          }
+          case 34: {
+            string value = _single_artist_codec.Read(input);
+            if (artist_ == null || value != "") {
+              Artist = value;
+            }
+            break;
+          }
+          case 42: {
+            int? value = _single_eventId_codec.Read(input);
+            if (eventId_ == null || value != 0) {
+              EventId = value;
+            }
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            Url = input.ReadString();
+            break;
+          }
+          case 24: {
+            Exclusive = input.ReadBool();
+            break;
+          }
+          case 34: {
+            string value = _single_artist_codec.Read(ref input);
+            if (artist_ == null || value != "") {
+              Artist = value;
+            }
+            break;
+          }
+          case 42: {
+            int? value = _single_eventId_codec.Read(ref input);
+            if (eventId_ == null || value != 0) {
+              EventId = value;
+            }
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class UpdateSceneMessage : pb::IMessage<UpdateSceneMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<UpdateSceneMessage> _parser = new pb::MessageParser<UpdateSceneMessage>(() => new UpdateSceneMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<UpdateSceneMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.ScenesReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public UpdateSceneMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public UpdateSceneMessage(UpdateSceneMessage other) : this() {
+      id_ = other.id_;
+      scene_ = other.scene_ != null ? other.scene_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public UpdateSceneMessage Clone() {
+      return new UpdateSceneMessage(this);
+    }
+
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "scene" field.</summary>
+    public const int SceneFieldNumber = 2;
+    private global::tobeh.Valmar.SceneSubmissionMessage scene_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::tobeh.Valmar.SceneSubmissionMessage Scene {
+      get { return scene_; }
+      set {
+        scene_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as UpdateSceneMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(UpdateSceneMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (!object.Equals(Scene, other.Scene)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (scene_ != null) hash ^= Scene.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (scene_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Scene);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (scene_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Scene);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (scene_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Scene);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(UpdateSceneMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      if (other.scene_ != null) {
+        if (scene_ == null) {
+          Scene = new global::tobeh.Valmar.SceneSubmissionMessage();
+        }
+        Scene.MergeFrom(other.Scene);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            if (scene_ == null) {
+              Scene = new global::tobeh.Valmar.SceneSubmissionMessage();
+            }
+            input.ReadMessage(Scene);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            if (scene_ == null) {
+              Scene = new global::tobeh.Valmar.SceneSubmissionMessage();
+            }
+            input.ReadMessage(Scene);
             break;
           }
         }

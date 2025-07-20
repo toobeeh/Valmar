@@ -184,4 +184,30 @@ public class SpritesDomainService(
 
         return nextId;
     }
+
+    public async Task<SpriteEntity> UpdateSprite(int id, string name, string url, int cost,
+        int? eventDropId, string? artist, bool rainbow)
+    {
+        logger.LogTrace(
+            "UpdateSprite(id={id}, name={name}, url={url}, cost={cost}, eventDropId={eventDropId}, artist={artist}, rainbow={rainbow})",
+            id, name, url, cost, eventDropId, artist, rainbow);
+
+        var sprite = await db.Sprites.FirstOrDefaultAsync(s => s.Id == id);
+        if (sprite is null)
+        {
+            throw new EntityNotFoundException($"Sprite with id {id} does not exist.");
+        }
+
+        sprite.Name = name;
+        sprite.Url = url;
+        sprite.Cost = cost;
+        sprite.EventDropId = eventDropId ?? 0;
+        sprite.Artist = artist;
+        sprite.Rainbow = rainbow ? 1 : 0;
+
+        db.Sprites.Update(sprite);
+        await db.SaveChangesAsync();
+
+        return sprite;
+    }
 }

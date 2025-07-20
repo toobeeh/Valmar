@@ -1,3 +1,4 @@
+using tobeh.Valmar.Server.Database;
 using tobeh.Valmar.Server.Domain.Classes;
 
 namespace tobeh.Valmar.Server.Domain;
@@ -10,4 +11,7 @@ public interface ISpritesDomainService
 
     Task<int> AddSprite(string name, string url, int cost, int? eventDropId,
         string? artist, bool rainbow);
+
+    Task<SpriteEntity> UpdateSprite(int id, string name, string url, int cost,
+        int? eventDropId, string? artist, bool rainbow);
 }

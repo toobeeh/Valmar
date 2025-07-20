@@ -11,4 +11,8 @@ public interface IScenesDomainService
     Task<SceneEntity> GetSceneByEventId(int id);
     Task<List<SceneThemeEntity>> GetAllSceneThemes();
     Task<List<SceneThemeEntity>> GetThemesOfScene(int sceneId);
+    Task<SceneEntity> AddScene(string name, string url, string? artist, bool exclusive, int? eventId);
+
+    Task<SceneEntity> UpdateScene(int id, string name, string url, string? artist, bool exclusive,
+        int? eventId);
 }
