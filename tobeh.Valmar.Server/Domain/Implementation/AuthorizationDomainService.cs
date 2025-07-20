@@ -24,7 +24,7 @@ public class AuthorizationDomainService(
     }
 
     public async Task<JwtSecurityToken> CreateJwt(int typoId, string applicationName, DateTime expiry,
-        List<string> scopes)
+        List<string> scopes, string redirectUri)
     {
         logger.LogTrace(
             "CreateJwt(typoId: {TypoId}, applicationName: {ApplicationName}, expiry: {Expiry}, scopes: {Scopes})",
@@ -59,6 +59,7 @@ public class AuthorizationDomainService(
             [
                 new Claim(JwtRegisteredClaimNames.Sub, typoId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Name, member.Username),
+                new Claim("redirect_uri", redirectUri),
                 .. scopes.Select(scope => new Claim("scope", scope)).ToList(),
             ],
             expires: expiry,

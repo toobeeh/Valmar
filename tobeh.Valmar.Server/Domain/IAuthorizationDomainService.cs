@@ -7,5 +7,7 @@ public interface IAuthorizationDomainService
 {
     Task<List<JwtScopeEntity>> GetAvailableScopes();
     string GetJwtString(JwtSecurityToken jwt);
-    Task<JwtSecurityToken> CreateJwt(int typoId, string applicationName, DateTime expiry, List<string> scopes);
+
+    Task<JwtSecurityToken> CreateJwt(int typoId, string applicationName, DateTime expiry, List<string> scopes,
+        string redirectUri);
 }

@@ -30,8 +30,7 @@ public class AuthorizationGrpcService(
             request.TypoId,
             request.ApplicationName,
             request.Expiry.ToDateTime(),
-            request.Scopes.ToList()
-        );
+            request.Scopes.ToList(), request.RedirectUri);
         var token = authorizationService.GetJwtString(jwt);
 
         var response = new JwtMessage()
