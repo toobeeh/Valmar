@@ -139,24 +139,17 @@ public class AuthorizationDomainService(
         return new OAuth2AuthorizationCodeDdo(code.Code, code.ClientId, client.RedirectUri);
     }
 
-    public async Task<string> ExchangeOauth2AuthorizationCode(
-        string code, int clientId, string redirectUri)
+    public async Task<string> ExchangeOauth2AuthorizationCode(string code, int clientId)
     {
         logger.LogTrace(
-            "ExchangeOauth2AuthorizationCode(code: {Code}, clientId: {ClientId}, redirectUri: {RedirectUri})",
-            code, clientId, redirectUri);
+            "ExchangeOauth2AuthorizationCode(code: {Code}, clientId: {ClientId})",
+            code, clientId);
 
         // get client
         var client = await GetOauth2ClientById(clientId);
         if (client == null)
         {
             throw new ArgumentException("Client not found.");
-        }
-
-        // verify redirect URI matches
-        if (client.RedirectUri != redirectUri)
-        {
-            throw new ArgumentException("Redirect URI does not match the client's registered URI.");
         }
 
         // find the authorization code
@@ -166,6 +159,12 @@ public class AuthorizationDomainService(
         if (authCode == null)
         {
             throw new ArgumentException("Authorization code not found or invalid.");
+        }
+
+        // verify auth code client matches
+        if (authCode.ClientId != clientId)
+        {
+            throw new ArgumentException("Authorization code does not belong to the specified client.");
         }
 
         // get member

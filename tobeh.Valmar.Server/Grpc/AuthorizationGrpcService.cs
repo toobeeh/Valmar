@@ -28,16 +28,21 @@ public class AuthorizationGrpcService(
         logger.LogTrace("CreateOAuth2AuthorizationCode(request: {Request})", request);
 
         var code = await authorizationService.CreateOAuth2AuthorizationCode(request.TypoId, request.Oauth2ClientId);
-        return mapper.Map<OAuth2AuthorizationCodeMessage>(code);
+        var client = await authorizationService.GetOauth2ClientById(request.Oauth2ClientId);
+        return new OAuth2AuthorizationCodeMessage
+        {
+            Oauth2AuthorizationCode = code.OAuth2AuthorizationCode,
+            Oauth2Client = mapper.Map<OAuth2ClientMessage>(client)
+        };
     }
 
     public override async Task<OAuth2AccessTokenMessage> ExchangeOauth2AuthorizationCode(
-        OAuth2AuthorizationCodeMessage request, ServerCallContext context)
+        OAuth2AuthorizationCodeExchangeMessage request, ServerCallContext context)
     {
         logger.LogTrace("ExchangeOauth2AuthorizationCode(request: {Request})", request);
 
         var jwt = await authorizationService.ExchangeOauth2AuthorizationCode(
-            request.Oauth2AuthorizationCode, request.Oauth2ClientId, request.RedirectUri);
+            request.Oauth2AuthorizationCode, request.Oauth2ClientId);
 
         return new OAuth2AccessTokenMessage
         {
