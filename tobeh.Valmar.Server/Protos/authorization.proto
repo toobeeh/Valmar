@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 option csharp_namespace = "tobeh.Valmar";
 package authorization;
@@ -11,11 +11,17 @@ service Authorization {
   // Gets all available scopes
   rpc GetAvailableScopes (GetAvailableScopesMessage) returns (stream ScopeMessage);
 
-  // Create a jwt with given parameters
-  rpc CreateJwt (JwtParametersMessage) returns (JwtMessage);
+  // Creates a new OAuth2 authorization code for a given client and typo member
+  rpc CreateOAuth2AuthorizationCode (CreateOAuth2AuthorizationCodeMessage) returns (OAuth2AuthorizationCodeMessage);
 
-  // Create a jwt for a verified application
-  rpc CreateJwtForVerifiedApplication (JwtVerifiedParametersMessage) returns (JwtMessage);
+  // Exchange a oauth2 authorization code for an access token (jwt)
+  rpc ExchangeOauth2AuthorizationCode (OAuth2AuthorizationCodeMessage) returns (OAuth2AccessTokenMessage);
+
+  // Creates a new OAuth2 client
+  rpc CreateOauth2Client (CreateOAuth2ClientMessage) returns (OAuth2ClientMessage);
+
+  // Gets all OAuth2 clients
+  rpc GetOauth2Clients (google.protobuf.Empty) returns (stream OAuth2ClientMessage);
 }
 
 message GetAvailableScopesMessage {}
@@ -25,20 +31,34 @@ message ScopeMessage {
   string description = 2;
 }
 
-message JwtParametersMessage {
-  int32 typoId = 1;
+message CreateOAuth2ClientMessage {
+  string name = 1;
   repeated string scopes = 2;
-  google.protobuf.Timestamp expiry = 3;
-  string applicationName = 4;
-  string redirectUri = 5;
+  string redirectUri = 3;
+  int32 ownerTypoId = 4;
 }
 
-message JwtVerifiedParametersMessage {
-  int32 typoId = 1;
-  int32 applicationId = 2;
+message OAuth2ClientMessage {
+  int32 clientId = 1;
+  string name = 2;
+  repeated string scopes = 3;
+  string redirectUri = 4;
+  bool verified = 5;
+  int64 tokenExpiry = 6;
+  int32 ownerTypoId = 7;
 }
 
-message JwtMessage {
-  string jwt = 1;
+message CreateOAuth2AuthorizationCodeMessage {
+  int32 oauth2ClientId = 1;
   int32 typoId = 2;
+}
+
+message OAuth2AuthorizationCodeMessage {
+  string oauth2AuthorizationCode = 1;
+  int32 oauth2ClientId = 2;
+  string redirectUri = 3;
+}
+
+message OAuth2AccessTokenMessage {
+  string jwt = 1;
 }

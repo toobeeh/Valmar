@@ -16,22 +16,29 @@ public class AuthorizationDomainService(
     SignatureService signatureService
 ) : IAuthorizationDomainService
 {
-    public async Task<List<JwtScopeEntity>> GetAvailableScopes()
+    public async Task<List<Oauth2ScopeEntity>> GetAvailableScopes()
     {
         logger.LogTrace("GetAvailableScopes()");
 
-        return await db.JwtScopes.ToListAsync();
+        return await db.Oauth2Scopes.ToListAsync();
     }
 
-    public async Task<JwtSecurityToken> CreateJwt(int typoId, string applicationName, DateTime expiry,
-        List<string> scopes, string redirectUri, int? verifiedAppId = null)
+    public async Task<List<Oauth2ClientEntity>> GetOauth2Clients()
+    {
+        logger.LogTrace("GetOauth2Clients()");
+
+        return await db.Oauth2Clients.ToListAsync();
+    }
+
+    public async Task<Oauth2ClientEntity> CreateOauth2Client(
+        string name, string redirectUri, List<string> scopes, int ownerTypoId)
     {
         logger.LogTrace(
-            "CreateJwt(typoId: {TypoId}, applicationName: {ApplicationName}, expiry: {Expiry}, scopes: {Scopes})",
-            typoId, applicationName, expiry, scopes);
+            "CreateOauth2Client(name: {Name}, redirectUri: {RedirectUri}, scopes: {Scopes}, ownerTypoId: {OwnerTypoId})",
+            name, redirectUri, scopes, ownerTypoId);
 
         // verify all scopes exist
-        var matchingScopes = await db.JwtScopes
+        var matchingScopes = await db.Oauth2Scopes
             .Where(scope => scopes.Contains(scope.Name))
             .ToListAsync();
 
@@ -41,63 +48,172 @@ public class AuthorizationDomainService(
         }
 
         // verify member exists and is not banned
+        var member = await membersDomainService.GetMemberByLogin(ownerTypoId);
+        if (member.MappedFlags.Contains(MemberFlagDdo.PermaBan))
+        {
+            throw new InvalidOperationException("Member is banned and cannot create clients.");
+        }
+
+        // verify member has not more than 5 clients
+        var existingClients = await db.Oauth2Clients
+            .Where(client => client.Owner == ownerTypoId)
+            .CountAsync();
+
+        if (existingClients >= 5)
+        {
+            throw new InvalidOperationException("Member has reached the maximum number of OAuth2 clients (5).");
+        }
+
+        // create the client
+        var client = new Oauth2ClientEntity
+        {
+            Name = name,
+            RedirectUri = redirectUri,
+            Scopes = string.Join(",", matchingScopes.Select(s => s.Name)),
+            Owner = ownerTypoId,
+            TokenExpiry = 60 * 60 * 24 * 365, // 1 year
+            Verified = false
+        };
+
+        db.Oauth2Clients.Add(client);
+        await db.SaveChangesAsync();
+
+        return client;
+    }
+
+    public async Task<Oauth2ClientEntity> GetOauth2ClientById(int clientId)
+    {
+        logger.LogTrace("GetOauth2ClientById(clientId: {ClientId})", clientId);
+
+        var client = await db.Oauth2Clients
+            .FirstOrDefaultAsync(c => c.Id == clientId);
+
+        if (client == null)
+        {
+            throw new ArgumentException("Client not found.");
+        }
+
+        return client;
+    }
+
+    public async Task<OAuth2AuthorizationCodeDdo> CreateOAuth2AuthorizationCode(int typoId, int clientId)
+    {
+        logger.LogTrace("CreateOAuth2AuthorizationCode(typoId: {TypoId}, clientId: {ClientId})", typoId, clientId);
+
+        // verify member exists and is not banned
         var member = await membersDomainService.GetMemberByLogin(typoId);
         if (member.MappedFlags.Contains(MemberFlagDdo.PermaBan))
         {
-            throw new InvalidOperationException("Member is banned and cannot request scopes.");
+            throw new InvalidOperationException("Member is banned and cannot request authorization codes.");
         }
 
-        // get credentials
+        // verify client exists
+        var client = await GetOauth2ClientById(clientId);
+        if (client == null)
+        {
+            throw new ArgumentException("Client not found.");
+        }
+
+        // create the authorization code
+        var code = new Oauth2AuthorizationCodeEntity
+        {
+            TypoId = typoId,
+            ClientId = clientId,
+            Code = signatureService.GenerateRandomString(30),
+            Expiry = DateTimeOffset.UtcNow.AddMinutes(5).ToUnixTimeSeconds()
+        };
+
+        // remove any existing authorization codes for this member and client
+        var existingCodes = await db.Oauth2AuthorizationCodes
+            .Where(ac => ac.TypoId == typoId && ac.ClientId == clientId)
+            .ToListAsync();
+
+        if (existingCodes.Count != 0)
+        {
+            db.Oauth2AuthorizationCodes.RemoveRange(existingCodes);
+        }
+
+        db.Oauth2AuthorizationCodes.Add(code);
+        await db.SaveChangesAsync();
+
+        return new OAuth2AuthorizationCodeDdo(code.Code, code.ClientId, client.RedirectUri);
+    }
+
+    public async Task<string> ExchangeOauth2AuthorizationCode(
+        string code, int clientId, string redirectUri)
+    {
+        logger.LogTrace(
+            "ExchangeOauth2AuthorizationCode(code: {Code}, clientId: {ClientId}, redirectUri: {RedirectUri})",
+            code, clientId, redirectUri);
+
+        // get client
+        var client = await GetOauth2ClientById(clientId);
+        if (client == null)
+        {
+            throw new ArgumentException("Client not found.");
+        }
+
+        // verify redirect URI matches
+        if (client.RedirectUri != redirectUri)
+        {
+            throw new ArgumentException("Redirect URI does not match the client's registered URI.");
+        }
+
+        // find the authorization code
+        var authCode = await db.Oauth2AuthorizationCodes
+            .FirstOrDefaultAsync(ac => ac.Code == code && ac.ClientId == clientId);
+
+        if (authCode == null)
+        {
+            throw new ArgumentException("Authorization code not found or invalid.");
+        }
+
+        // get member
+        var member = await membersDomainService.GetMemberByLogin(authCode.TypoId);
+        if (member == null)
+        {
+            throw new ArgumentException("Member not found for the provided authorization code.");
+        }
+
+        // verify authorization code is not expired (5 min)
+        if (authCode.Expiry < DateTimeOffset.UtcNow.ToUnixTimeSeconds())
+        {
+            db.Oauth2AuthorizationCodes.Remove(authCode);
+            await db.SaveChangesAsync();
+
+            throw new InvalidOperationException("Authorization code has expired.");
+        }
+
+        // create access token
         var credentials = signatureService.SigningCredentials;
 
         List<Claim> claims =
         [
-            new Claim(JwtRegisteredClaimNames.Sub, typoId.ToString()),
-            new Claim(JwtRegisteredClaimNames.Name, member.Username),
-            new Claim("redirect_uri", redirectUri),
-            .. scopes.Select(scope => new Claim("scope", scope)).ToList(),
+            new(JwtRegisteredClaimNames.Sub, member.Login.ToString()),
+            new(JwtRegisteredClaimNames.Name, member.Username),
+            .. client.Scopes.Split(",").Select(scope => new Claim("scope", scope)).ToList(),
         ];
 
-        if (verifiedAppId is { } verifiedAppIdVal)
+        if (client.Verified)
         {
-            claims.Add(new Claim("verified_app_id", verifiedAppIdVal.ToString()));
+            claims.Add(new Claim("client_verified", "true"));
         }
 
         // create the JWT
         var config = options.Value;
-        var token = new JwtSecurityToken(
+        var jwt = new JwtSecurityToken(
             issuer: config.JwtIssuer,
-            audience: applicationName,
+            audience: client.Name,
             claims: claims,
-            expires: expiry,
+            expires: DateTime.UtcNow.AddSeconds(client.TokenExpiry),
             signingCredentials: credentials
         );
 
-        return token;
-    }
+        // remove the authorization code
+        db.Oauth2AuthorizationCodes.Remove(authCode);
+        await db.SaveChangesAsync();
 
-    public async Task<JwtSecurityToken> CreateJwtForVerifiedApplication(
-        int typoId, int applicationId)
-    {
-        logger.LogTrace(
-            "CreateJwtForVerifiedApplication(typoId: {TypoId}, applicationId: {ApplicationId})",
-            typoId, applicationId);
-
-        // get application from db
-        var app = await db.JwtVerifiedApplications.FirstOrDefaultAsync(app => app.Id == applicationId);
-        if (app == null)
-        {
-            throw new ArgumentException("Application not found.");
-        }
-
-        return await CreateJwt(
-            typoId,
-            app.Name,
-            DateTime.UtcNow.AddMilliseconds(app.JwtExpiry),
-            app.JwtScopes.Split(",").ToList(),
-            app.RedirectUri,
-            app.Id
-        );
+        return GetJwtString(jwt);
     }
 
     public string GetJwtString(JwtSecurityToken jwt)

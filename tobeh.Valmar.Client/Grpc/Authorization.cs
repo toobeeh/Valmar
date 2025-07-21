@@ -24,31 +24,43 @@ namespace tobeh.Valmar {
     static AuthorizationReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNhdXRob3JpemF0aW9uLnByb3RvEg1hdXRob3JpemF0aW9uGh9nb29nbGUv",
-            "cHJvdG9idWYvdGltZXN0YW1wLnByb3RvIhsKGUdldEF2YWlsYWJsZVNjb3Bl",
-            "c01lc3NhZ2UiMQoMU2NvcGVNZXNzYWdlEgwKBG5hbWUYASABKAkSEwoLZGVz",
-            "Y3JpcHRpb24YAiABKAkikAEKFEp3dFBhcmFtZXRlcnNNZXNzYWdlEg4KBnR5",
-            "cG9JZBgBIAEoBRIOCgZzY29wZXMYAiADKAkSKgoGZXhwaXJ5GAMgASgLMhou",
-            "Z29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIXCg9hcHBsaWNhdGlvbk5hbWUY",
-            "BCABKAkSEwoLcmVkaXJlY3RVcmkYBSABKAkiRQocSnd0VmVyaWZpZWRQYXJh",
-            "bWV0ZXJzTWVzc2FnZRIOCgZ0eXBvSWQYASABKAUSFQoNYXBwbGljYXRpb25J",
-            "ZBgCIAEoBSIpCgpKd3RNZXNzYWdlEgsKA2p3dBgBIAEoCRIOCgZ0eXBvSWQY",
-            "AiABKAUypgIKDUF1dGhvcml6YXRpb24SXQoSR2V0QXZhaWxhYmxlU2NvcGVz",
-            "EiguYXV0aG9yaXphdGlvbi5HZXRBdmFpbGFibGVTY29wZXNNZXNzYWdlGhsu",
-            "YXV0aG9yaXphdGlvbi5TY29wZU1lc3NhZ2UwARJLCglDcmVhdGVKd3QSIy5h",
-            "dXRob3JpemF0aW9uLkp3dFBhcmFtZXRlcnNNZXNzYWdlGhkuYXV0aG9yaXph",
-            "dGlvbi5Kd3RNZXNzYWdlEmkKH0NyZWF0ZUp3dEZvclZlcmlmaWVkQXBwbGlj",
-            "YXRpb24SKy5hdXRob3JpemF0aW9uLkp3dFZlcmlmaWVkUGFyYW1ldGVyc01l",
-            "c3NhZ2UaGS5hdXRob3JpemF0aW9uLkp3dE1lc3NhZ2VCD6oCDHRvYmVoLlZh",
-            "bG1hcmIGcHJvdG8z"));
+            "ChNhdXRob3JpemF0aW9uLnByb3RvEg1hdXRob3JpemF0aW9uGhtnb29nbGUv",
+            "cHJvdG9idWYvZW1wdHkucHJvdG8iGwoZR2V0QXZhaWxhYmxlU2NvcGVzTWVz",
+            "c2FnZSIxCgxTY29wZU1lc3NhZ2USDAoEbmFtZRgBIAEoCRITCgtkZXNjcmlw",
+            "dGlvbhgCIAEoCSJjChlDcmVhdGVPQXV0aDJDbGllbnRNZXNzYWdlEgwKBG5h",
+            "bWUYASABKAkSDgoGc2NvcGVzGAIgAygJEhMKC3JlZGlyZWN0VXJpGAMgASgJ",
+            "EhMKC293bmVyVHlwb0lkGAQgASgFIpYBChNPQXV0aDJDbGllbnRNZXNzYWdl",
+            "EhAKCGNsaWVudElkGAEgASgFEgwKBG5hbWUYAiABKAkSDgoGc2NvcGVzGAMg",
+            "AygJEhMKC3JlZGlyZWN0VXJpGAQgASgJEhAKCHZlcmlmaWVkGAUgASgIEhMK",
+            "C3Rva2VuRXhwaXJ5GAYgASgDEhMKC293bmVyVHlwb0lkGAcgASgFIk4KJENy",
+            "ZWF0ZU9BdXRoMkF1dGhvcml6YXRpb25Db2RlTWVzc2FnZRIWCg5vYXV0aDJD",
+            "bGllbnRJZBgBIAEoBRIOCgZ0eXBvSWQYAiABKAUibgoeT0F1dGgyQXV0aG9y",
+            "aXphdGlvbkNvZGVNZXNzYWdlEh8KF29hdXRoMkF1dGhvcml6YXRpb25Db2Rl",
+            "GAEgASgJEhYKDm9hdXRoMkNsaWVudElkGAIgASgFEhMKC3JlZGlyZWN0VXJp",
+            "GAMgASgJIicKGE9BdXRoMkFjY2Vzc1Rva2VuTWVzc2FnZRILCgNqd3QYASAB",
+            "KAkypQQKDUF1dGhvcml6YXRpb24SXQoSR2V0QXZhaWxhYmxlU2NvcGVzEigu",
+            "YXV0aG9yaXphdGlvbi5HZXRBdmFpbGFibGVTY29wZXNNZXNzYWdlGhsuYXV0",
+            "aG9yaXphdGlvbi5TY29wZU1lc3NhZ2UwARKDAQodQ3JlYXRlT0F1dGgyQXV0",
+            "aG9yaXphdGlvbkNvZGUSMy5hdXRob3JpemF0aW9uLkNyZWF0ZU9BdXRoMkF1",
+            "dGhvcml6YXRpb25Db2RlTWVzc2FnZRotLmF1dGhvcml6YXRpb24uT0F1dGgy",
+            "QXV0aG9yaXphdGlvbkNvZGVNZXNzYWdlEnkKH0V4Y2hhbmdlT2F1dGgyQXV0",
+            "aG9yaXphdGlvbkNvZGUSLS5hdXRob3JpemF0aW9uLk9BdXRoMkF1dGhvcml6",
+            "YXRpb25Db2RlTWVzc2FnZRonLmF1dGhvcml6YXRpb24uT0F1dGgyQWNjZXNz",
+            "VG9rZW5NZXNzYWdlEmIKEkNyZWF0ZU9hdXRoMkNsaWVudBIoLmF1dGhvcml6",
+            "YXRpb24uQ3JlYXRlT0F1dGgyQ2xpZW50TWVzc2FnZRoiLmF1dGhvcml6YXRp",
+            "b24uT0F1dGgyQ2xpZW50TWVzc2FnZRJQChBHZXRPYXV0aDJDbGllbnRzEhYu",
+            "Z29vZ2xlLnByb3RvYnVmLkVtcHR5GiIuYXV0aG9yaXphdGlvbi5PQXV0aDJD",
+            "bGllbnRNZXNzYWdlMAFCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetAvailableScopesMessage), global::tobeh.Valmar.GetAvailableScopesMessage.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScopeMessage), global::tobeh.Valmar.ScopeMessage.Parser, new[]{ "Name", "Description" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.JwtParametersMessage), global::tobeh.Valmar.JwtParametersMessage.Parser, new[]{ "TypoId", "Scopes", "Expiry", "ApplicationName", "RedirectUri" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.JwtVerifiedParametersMessage), global::tobeh.Valmar.JwtVerifiedParametersMessage.Parser, new[]{ "TypoId", "ApplicationId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.JwtMessage), global::tobeh.Valmar.JwtMessage.Parser, new[]{ "Jwt", "TypoId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CreateOAuth2ClientMessage), global::tobeh.Valmar.CreateOAuth2ClientMessage.Parser, new[]{ "Name", "Scopes", "RedirectUri", "OwnerTypoId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2ClientMessage), global::tobeh.Valmar.OAuth2ClientMessage.Parser, new[]{ "ClientId", "Name", "Scopes", "RedirectUri", "Verified", "TokenExpiry", "OwnerTypoId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CreateOAuth2AuthorizationCodeMessage), global::tobeh.Valmar.CreateOAuth2AuthorizationCodeMessage.Parser, new[]{ "Oauth2ClientId", "TypoId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2AuthorizationCodeMessage), global::tobeh.Valmar.OAuth2AuthorizationCodeMessage.Parser, new[]{ "Oauth2AuthorizationCode", "Oauth2ClientId", "RedirectUri" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2AccessTokenMessage), global::tobeh.Valmar.OAuth2AccessTokenMessage.Parser, new[]{ "Jwt" }, null, null, null, null)
           }));
     }
     #endregion
@@ -433,16 +445,16 @@ namespace tobeh.Valmar {
 
   }
 
-  public sealed partial class JwtParametersMessage : pb::IMessage<JwtParametersMessage>
+  public sealed partial class CreateOAuth2ClientMessage : pb::IMessage<CreateOAuth2ClientMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<JwtParametersMessage> _parser = new pb::MessageParser<JwtParametersMessage>(() => new JwtParametersMessage());
+    private static readonly pb::MessageParser<CreateOAuth2ClientMessage> _parser = new pb::MessageParser<CreateOAuth2ClientMessage>(() => new CreateOAuth2ClientMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<JwtParametersMessage> Parser { get { return _parser; } }
+    public static pb::MessageParser<CreateOAuth2ClientMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -458,7 +470,7 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public JwtParametersMessage() {
+    public CreateOAuth2ClientMessage() {
       OnConstruction();
     }
 
@@ -466,30 +478,29 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public JwtParametersMessage(JwtParametersMessage other) : this() {
-      typoId_ = other.typoId_;
+    public CreateOAuth2ClientMessage(CreateOAuth2ClientMessage other) : this() {
+      name_ = other.name_;
       scopes_ = other.scopes_.Clone();
-      expiry_ = other.expiry_ != null ? other.expiry_.Clone() : null;
-      applicationName_ = other.applicationName_;
       redirectUri_ = other.redirectUri_;
+      ownerTypoId_ = other.ownerTypoId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public JwtParametersMessage Clone() {
-      return new JwtParametersMessage(this);
+    public CreateOAuth2ClientMessage Clone() {
+      return new CreateOAuth2ClientMessage(this);
     }
 
-    /// <summary>Field number for the "typoId" field.</summary>
-    public const int TypoIdFieldNumber = 1;
-    private int typoId_;
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int TypoId {
-      get { return typoId_; }
+    public string Name {
+      get { return name_; }
       set {
-        typoId_ = value;
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -504,32 +515,923 @@ namespace tobeh.Valmar {
       get { return scopes_; }
     }
 
-    /// <summary>Field number for the "expiry" field.</summary>
-    public const int ExpiryFieldNumber = 3;
-    private global::Google.Protobuf.WellKnownTypes.Timestamp expiry_;
+    /// <summary>Field number for the "redirectUri" field.</summary>
+    public const int RedirectUriFieldNumber = 3;
+    private string redirectUri_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Google.Protobuf.WellKnownTypes.Timestamp Expiry {
-      get { return expiry_; }
+    public string RedirectUri {
+      get { return redirectUri_; }
       set {
-        expiry_ = value;
+        redirectUri_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
-    /// <summary>Field number for the "applicationName" field.</summary>
-    public const int ApplicationNameFieldNumber = 4;
-    private string applicationName_ = "";
+    /// <summary>Field number for the "ownerTypoId" field.</summary>
+    public const int OwnerTypoIdFieldNumber = 4;
+    private int ownerTypoId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string ApplicationName {
-      get { return applicationName_; }
+    public int OwnerTypoId {
+      get { return ownerTypoId_; }
       set {
-        applicationName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        ownerTypoId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as CreateOAuth2ClientMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(CreateOAuth2ClientMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if(!scopes_.Equals(other.scopes_)) return false;
+      if (RedirectUri != other.RedirectUri) return false;
+      if (OwnerTypoId != other.OwnerTypoId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      hash ^= scopes_.GetHashCode();
+      if (RedirectUri.Length != 0) hash ^= RedirectUri.GetHashCode();
+      if (OwnerTypoId != 0) hash ^= OwnerTypoId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      scopes_.WriteTo(output, _repeated_scopes_codec);
+      if (RedirectUri.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(RedirectUri);
+      }
+      if (OwnerTypoId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(OwnerTypoId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      scopes_.WriteTo(ref output, _repeated_scopes_codec);
+      if (RedirectUri.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(RedirectUri);
+      }
+      if (OwnerTypoId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(OwnerTypoId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      size += scopes_.CalculateSize(_repeated_scopes_codec);
+      if (RedirectUri.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(RedirectUri);
+      }
+      if (OwnerTypoId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(OwnerTypoId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(CreateOAuth2ClientMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      scopes_.Add(other.scopes_);
+      if (other.RedirectUri.Length != 0) {
+        RedirectUri = other.RedirectUri;
+      }
+      if (other.OwnerTypoId != 0) {
+        OwnerTypoId = other.OwnerTypoId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            scopes_.AddEntriesFrom(input, _repeated_scopes_codec);
+            break;
+          }
+          case 26: {
+            RedirectUri = input.ReadString();
+            break;
+          }
+          case 32: {
+            OwnerTypoId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 18: {
+            scopes_.AddEntriesFrom(ref input, _repeated_scopes_codec);
+            break;
+          }
+          case 26: {
+            RedirectUri = input.ReadString();
+            break;
+          }
+          case 32: {
+            OwnerTypoId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class OAuth2ClientMessage : pb::IMessage<OAuth2ClientMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<OAuth2ClientMessage> _parser = new pb::MessageParser<OAuth2ClientMessage>(() => new OAuth2ClientMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<OAuth2ClientMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public OAuth2ClientMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public OAuth2ClientMessage(OAuth2ClientMessage other) : this() {
+      clientId_ = other.clientId_;
+      name_ = other.name_;
+      scopes_ = other.scopes_.Clone();
+      redirectUri_ = other.redirectUri_;
+      verified_ = other.verified_;
+      tokenExpiry_ = other.tokenExpiry_;
+      ownerTypoId_ = other.ownerTypoId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public OAuth2ClientMessage Clone() {
+      return new OAuth2ClientMessage(this);
+    }
+
+    /// <summary>Field number for the "clientId" field.</summary>
+    public const int ClientIdFieldNumber = 1;
+    private int clientId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int ClientId {
+      get { return clientId_; }
+      set {
+        clientId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 2;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "scopes" field.</summary>
+    public const int ScopesFieldNumber = 3;
+    private static readonly pb::FieldCodec<string> _repeated_scopes_codec
+        = pb::FieldCodec.ForString(26);
+    private readonly pbc::RepeatedField<string> scopes_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<string> Scopes {
+      get { return scopes_; }
+    }
+
+    /// <summary>Field number for the "redirectUri" field.</summary>
+    public const int RedirectUriFieldNumber = 4;
+    private string redirectUri_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string RedirectUri {
+      get { return redirectUri_; }
+      set {
+        redirectUri_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "verified" field.</summary>
+    public const int VerifiedFieldNumber = 5;
+    private bool verified_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Verified {
+      get { return verified_; }
+      set {
+        verified_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "tokenExpiry" field.</summary>
+    public const int TokenExpiryFieldNumber = 6;
+    private long tokenExpiry_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long TokenExpiry {
+      get { return tokenExpiry_; }
+      set {
+        tokenExpiry_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ownerTypoId" field.</summary>
+    public const int OwnerTypoIdFieldNumber = 7;
+    private int ownerTypoId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int OwnerTypoId {
+      get { return ownerTypoId_; }
+      set {
+        ownerTypoId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as OAuth2ClientMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(OAuth2ClientMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ClientId != other.ClientId) return false;
+      if (Name != other.Name) return false;
+      if(!scopes_.Equals(other.scopes_)) return false;
+      if (RedirectUri != other.RedirectUri) return false;
+      if (Verified != other.Verified) return false;
+      if (TokenExpiry != other.TokenExpiry) return false;
+      if (OwnerTypoId != other.OwnerTypoId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ClientId != 0) hash ^= ClientId.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      hash ^= scopes_.GetHashCode();
+      if (RedirectUri.Length != 0) hash ^= RedirectUri.GetHashCode();
+      if (Verified != false) hash ^= Verified.GetHashCode();
+      if (TokenExpiry != 0L) hash ^= TokenExpiry.GetHashCode();
+      if (OwnerTypoId != 0) hash ^= OwnerTypoId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (ClientId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ClientId);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      scopes_.WriteTo(output, _repeated_scopes_codec);
+      if (RedirectUri.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(RedirectUri);
+      }
+      if (Verified != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(Verified);
+      }
+      if (TokenExpiry != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(TokenExpiry);
+      }
+      if (OwnerTypoId != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(OwnerTypoId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (ClientId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ClientId);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      scopes_.WriteTo(ref output, _repeated_scopes_codec);
+      if (RedirectUri.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(RedirectUri);
+      }
+      if (Verified != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(Verified);
+      }
+      if (TokenExpiry != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(TokenExpiry);
+      }
+      if (OwnerTypoId != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(OwnerTypoId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (ClientId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ClientId);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      size += scopes_.CalculateSize(_repeated_scopes_codec);
+      if (RedirectUri.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(RedirectUri);
+      }
+      if (Verified != false) {
+        size += 1 + 1;
+      }
+      if (TokenExpiry != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TokenExpiry);
+      }
+      if (OwnerTypoId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(OwnerTypoId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(OAuth2ClientMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ClientId != 0) {
+        ClientId = other.ClientId;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      scopes_.Add(other.scopes_);
+      if (other.RedirectUri.Length != 0) {
+        RedirectUri = other.RedirectUri;
+      }
+      if (other.Verified != false) {
+        Verified = other.Verified;
+      }
+      if (other.TokenExpiry != 0L) {
+        TokenExpiry = other.TokenExpiry;
+      }
+      if (other.OwnerTypoId != 0) {
+        OwnerTypoId = other.OwnerTypoId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ClientId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Name = input.ReadString();
+            break;
+          }
+          case 26: {
+            scopes_.AddEntriesFrom(input, _repeated_scopes_codec);
+            break;
+          }
+          case 34: {
+            RedirectUri = input.ReadString();
+            break;
+          }
+          case 40: {
+            Verified = input.ReadBool();
+            break;
+          }
+          case 48: {
+            TokenExpiry = input.ReadInt64();
+            break;
+          }
+          case 56: {
+            OwnerTypoId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            ClientId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Name = input.ReadString();
+            break;
+          }
+          case 26: {
+            scopes_.AddEntriesFrom(ref input, _repeated_scopes_codec);
+            break;
+          }
+          case 34: {
+            RedirectUri = input.ReadString();
+            break;
+          }
+          case 40: {
+            Verified = input.ReadBool();
+            break;
+          }
+          case 48: {
+            TokenExpiry = input.ReadInt64();
+            break;
+          }
+          case 56: {
+            OwnerTypoId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class CreateOAuth2AuthorizationCodeMessage : pb::IMessage<CreateOAuth2AuthorizationCodeMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<CreateOAuth2AuthorizationCodeMessage> _parser = new pb::MessageParser<CreateOAuth2AuthorizationCodeMessage>(() => new CreateOAuth2AuthorizationCodeMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<CreateOAuth2AuthorizationCodeMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CreateOAuth2AuthorizationCodeMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CreateOAuth2AuthorizationCodeMessage(CreateOAuth2AuthorizationCodeMessage other) : this() {
+      oauth2ClientId_ = other.oauth2ClientId_;
+      typoId_ = other.typoId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CreateOAuth2AuthorizationCodeMessage Clone() {
+      return new CreateOAuth2AuthorizationCodeMessage(this);
+    }
+
+    /// <summary>Field number for the "oauth2ClientId" field.</summary>
+    public const int Oauth2ClientIdFieldNumber = 1;
+    private int oauth2ClientId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Oauth2ClientId {
+      get { return oauth2ClientId_; }
+      set {
+        oauth2ClientId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "typoId" field.</summary>
+    public const int TypoIdFieldNumber = 2;
+    private int typoId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int TypoId {
+      get { return typoId_; }
+      set {
+        typoId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as CreateOAuth2AuthorizationCodeMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(CreateOAuth2AuthorizationCodeMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Oauth2ClientId != other.Oauth2ClientId) return false;
+      if (TypoId != other.TypoId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Oauth2ClientId != 0) hash ^= Oauth2ClientId.GetHashCode();
+      if (TypoId != 0) hash ^= TypoId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Oauth2ClientId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Oauth2ClientId);
+      }
+      if (TypoId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(TypoId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Oauth2ClientId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Oauth2ClientId);
+      }
+      if (TypoId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(TypoId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Oauth2ClientId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Oauth2ClientId);
+      }
+      if (TypoId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TypoId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(CreateOAuth2AuthorizationCodeMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Oauth2ClientId != 0) {
+        Oauth2ClientId = other.Oauth2ClientId;
+      }
+      if (other.TypoId != 0) {
+        TypoId = other.TypoId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Oauth2ClientId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            TypoId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Oauth2ClientId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            TypoId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class OAuth2AuthorizationCodeMessage : pb::IMessage<OAuth2AuthorizationCodeMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<OAuth2AuthorizationCodeMessage> _parser = new pb::MessageParser<OAuth2AuthorizationCodeMessage>(() => new OAuth2AuthorizationCodeMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<OAuth2AuthorizationCodeMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public OAuth2AuthorizationCodeMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public OAuth2AuthorizationCodeMessage(OAuth2AuthorizationCodeMessage other) : this() {
+      oauth2AuthorizationCode_ = other.oauth2AuthorizationCode_;
+      oauth2ClientId_ = other.oauth2ClientId_;
+      redirectUri_ = other.redirectUri_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public OAuth2AuthorizationCodeMessage Clone() {
+      return new OAuth2AuthorizationCodeMessage(this);
+    }
+
+    /// <summary>Field number for the "oauth2AuthorizationCode" field.</summary>
+    public const int Oauth2AuthorizationCodeFieldNumber = 1;
+    private string oauth2AuthorizationCode_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Oauth2AuthorizationCode {
+      get { return oauth2AuthorizationCode_; }
+      set {
+        oauth2AuthorizationCode_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "oauth2ClientId" field.</summary>
+    public const int Oauth2ClientIdFieldNumber = 2;
+    private int oauth2ClientId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Oauth2ClientId {
+      get { return oauth2ClientId_; }
+      set {
+        oauth2ClientId_ = value;
       }
     }
 
     /// <summary>Field number for the "redirectUri" field.</summary>
-    public const int RedirectUriFieldNumber = 5;
+    public const int RedirectUriFieldNumber = 3;
     private string redirectUri_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -543,22 +1445,20 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as JwtParametersMessage);
+      return Equals(other as OAuth2AuthorizationCodeMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(JwtParametersMessage other) {
+    public bool Equals(OAuth2AuthorizationCodeMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (TypoId != other.TypoId) return false;
-      if(!scopes_.Equals(other.scopes_)) return false;
-      if (!object.Equals(Expiry, other.Expiry)) return false;
-      if (ApplicationName != other.ApplicationName) return false;
+      if (Oauth2AuthorizationCode != other.Oauth2AuthorizationCode) return false;
+      if (Oauth2ClientId != other.Oauth2ClientId) return false;
       if (RedirectUri != other.RedirectUri) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -567,10 +1467,8 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (TypoId != 0) hash ^= TypoId.GetHashCode();
-      hash ^= scopes_.GetHashCode();
-      if (expiry_ != null) hash ^= Expiry.GetHashCode();
-      if (ApplicationName.Length != 0) hash ^= ApplicationName.GetHashCode();
+      if (Oauth2AuthorizationCode.Length != 0) hash ^= Oauth2AuthorizationCode.GetHashCode();
+      if (Oauth2ClientId != 0) hash ^= Oauth2ClientId.GetHashCode();
       if (RedirectUri.Length != 0) hash ^= RedirectUri.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -590,21 +1488,16 @@ namespace tobeh.Valmar {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (TypoId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(TypoId);
+      if (Oauth2AuthorizationCode.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Oauth2AuthorizationCode);
       }
-      scopes_.WriteTo(output, _repeated_scopes_codec);
-      if (expiry_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(Expiry);
-      }
-      if (ApplicationName.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(ApplicationName);
+      if (Oauth2ClientId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Oauth2ClientId);
       }
       if (RedirectUri.Length != 0) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(26);
         output.WriteString(RedirectUri);
       }
       if (_unknownFields != null) {
@@ -617,21 +1510,16 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (TypoId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(TypoId);
+      if (Oauth2AuthorizationCode.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Oauth2AuthorizationCode);
       }
-      scopes_.WriteTo(ref output, _repeated_scopes_codec);
-      if (expiry_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(Expiry);
-      }
-      if (ApplicationName.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(ApplicationName);
+      if (Oauth2ClientId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Oauth2ClientId);
       }
       if (RedirectUri.Length != 0) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(26);
         output.WriteString(RedirectUri);
       }
       if (_unknownFields != null) {
@@ -644,15 +1532,11 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (TypoId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TypoId);
+      if (Oauth2AuthorizationCode.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Oauth2AuthorizationCode);
       }
-      size += scopes_.CalculateSize(_repeated_scopes_codec);
-      if (expiry_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Expiry);
-      }
-      if (ApplicationName.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApplicationName);
+      if (Oauth2ClientId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Oauth2ClientId);
       }
       if (RedirectUri.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(RedirectUri);
@@ -665,22 +1549,15 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(JwtParametersMessage other) {
+    public void MergeFrom(OAuth2AuthorizationCodeMessage other) {
       if (other == null) {
         return;
       }
-      if (other.TypoId != 0) {
-        TypoId = other.TypoId;
+      if (other.Oauth2AuthorizationCode.Length != 0) {
+        Oauth2AuthorizationCode = other.Oauth2AuthorizationCode;
       }
-      scopes_.Add(other.scopes_);
-      if (other.expiry_ != null) {
-        if (expiry_ == null) {
-          Expiry = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-        }
-        Expiry.MergeFrom(other.Expiry);
-      }
-      if (other.ApplicationName.Length != 0) {
-        ApplicationName = other.ApplicationName;
+      if (other.Oauth2ClientId != 0) {
+        Oauth2ClientId = other.Oauth2ClientId;
       }
       if (other.RedirectUri.Length != 0) {
         RedirectUri = other.RedirectUri;
@@ -700,26 +1577,15 @@ namespace tobeh.Valmar {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            TypoId = input.ReadInt32();
+          case 10: {
+            Oauth2AuthorizationCode = input.ReadString();
             break;
           }
-          case 18: {
-            scopes_.AddEntriesFrom(input, _repeated_scopes_codec);
+          case 16: {
+            Oauth2ClientId = input.ReadInt32();
             break;
           }
           case 26: {
-            if (expiry_ == null) {
-              Expiry = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-            }
-            input.ReadMessage(Expiry);
-            break;
-          }
-          case 34: {
-            ApplicationName = input.ReadString();
-            break;
-          }
-          case 42: {
             RedirectUri = input.ReadString();
             break;
           }
@@ -738,26 +1604,15 @@ namespace tobeh.Valmar {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            TypoId = input.ReadInt32();
+          case 10: {
+            Oauth2AuthorizationCode = input.ReadString();
             break;
           }
-          case 18: {
-            scopes_.AddEntriesFrom(ref input, _repeated_scopes_codec);
+          case 16: {
+            Oauth2ClientId = input.ReadInt32();
             break;
           }
           case 26: {
-            if (expiry_ == null) {
-              Expiry = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-            }
-            input.ReadMessage(Expiry);
-            break;
-          }
-          case 34: {
-            ApplicationName = input.ReadString();
-            break;
-          }
-          case 42: {
             RedirectUri = input.ReadString();
             break;
           }
@@ -768,21 +1623,21 @@ namespace tobeh.Valmar {
 
   }
 
-  public sealed partial class JwtVerifiedParametersMessage : pb::IMessage<JwtVerifiedParametersMessage>
+  public sealed partial class OAuth2AccessTokenMessage : pb::IMessage<OAuth2AccessTokenMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<JwtVerifiedParametersMessage> _parser = new pb::MessageParser<JwtVerifiedParametersMessage>(() => new JwtVerifiedParametersMessage());
+    private static readonly pb::MessageParser<OAuth2AccessTokenMessage> _parser = new pb::MessageParser<OAuth2AccessTokenMessage>(() => new OAuth2AccessTokenMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<JwtVerifiedParametersMessage> Parser { get { return _parser; } }
+    public static pb::MessageParser<OAuth2AccessTokenMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[3]; }
+      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -793,7 +1648,7 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public JwtVerifiedParametersMessage() {
+    public OAuth2AccessTokenMessage() {
       OnConstruction();
     }
 
@@ -801,242 +1656,15 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public JwtVerifiedParametersMessage(JwtVerifiedParametersMessage other) : this() {
-      typoId_ = other.typoId_;
-      applicationId_ = other.applicationId_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public JwtVerifiedParametersMessage Clone() {
-      return new JwtVerifiedParametersMessage(this);
-    }
-
-    /// <summary>Field number for the "typoId" field.</summary>
-    public const int TypoIdFieldNumber = 1;
-    private int typoId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int TypoId {
-      get { return typoId_; }
-      set {
-        typoId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "applicationId" field.</summary>
-    public const int ApplicationIdFieldNumber = 2;
-    private int applicationId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int ApplicationId {
-      get { return applicationId_; }
-      set {
-        applicationId_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as JwtVerifiedParametersMessage);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(JwtVerifiedParametersMessage other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (TypoId != other.TypoId) return false;
-      if (ApplicationId != other.ApplicationId) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (TypoId != 0) hash ^= TypoId.GetHashCode();
-      if (ApplicationId != 0) hash ^= ApplicationId.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (TypoId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(TypoId);
-      }
-      if (ApplicationId != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(ApplicationId);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (TypoId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(TypoId);
-      }
-      if (ApplicationId != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(ApplicationId);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (TypoId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TypoId);
-      }
-      if (ApplicationId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ApplicationId);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(JwtVerifiedParametersMessage other) {
-      if (other == null) {
-        return;
-      }
-      if (other.TypoId != 0) {
-        TypoId = other.TypoId;
-      }
-      if (other.ApplicationId != 0) {
-        ApplicationId = other.ApplicationId;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            TypoId = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            ApplicationId = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 8: {
-            TypoId = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            ApplicationId = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  public sealed partial class JwtMessage : pb::IMessage<JwtMessage>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<JwtMessage> _parser = new pb::MessageParser<JwtMessage>(() => new JwtMessage());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<JwtMessage> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public JwtMessage() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public JwtMessage(JwtMessage other) : this() {
+    public OAuth2AccessTokenMessage(OAuth2AccessTokenMessage other) : this() {
       jwt_ = other.jwt_;
-      typoId_ = other.typoId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public JwtMessage Clone() {
-      return new JwtMessage(this);
+    public OAuth2AccessTokenMessage Clone() {
+      return new OAuth2AccessTokenMessage(this);
     }
 
     /// <summary>Field number for the "jwt" field.</summary>
@@ -1051,27 +1679,15 @@ namespace tobeh.Valmar {
       }
     }
 
-    /// <summary>Field number for the "typoId" field.</summary>
-    public const int TypoIdFieldNumber = 2;
-    private int typoId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int TypoId {
-      get { return typoId_; }
-      set {
-        typoId_ = value;
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as JwtMessage);
+      return Equals(other as OAuth2AccessTokenMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(JwtMessage other) {
+    public bool Equals(OAuth2AccessTokenMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1079,7 +1695,6 @@ namespace tobeh.Valmar {
         return true;
       }
       if (Jwt != other.Jwt) return false;
-      if (TypoId != other.TypoId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1088,7 +1703,6 @@ namespace tobeh.Valmar {
     public override int GetHashCode() {
       int hash = 1;
       if (Jwt.Length != 0) hash ^= Jwt.GetHashCode();
-      if (TypoId != 0) hash ^= TypoId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1111,10 +1725,6 @@ namespace tobeh.Valmar {
         output.WriteRawTag(10);
         output.WriteString(Jwt);
       }
-      if (TypoId != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(TypoId);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1129,10 +1739,6 @@ namespace tobeh.Valmar {
         output.WriteRawTag(10);
         output.WriteString(Jwt);
       }
-      if (TypoId != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(TypoId);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1146,9 +1752,6 @@ namespace tobeh.Valmar {
       if (Jwt.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Jwt);
       }
-      if (TypoId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TypoId);
-      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1157,15 +1760,12 @@ namespace tobeh.Valmar {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(JwtMessage other) {
+    public void MergeFrom(OAuth2AccessTokenMessage other) {
       if (other == null) {
         return;
       }
       if (other.Jwt.Length != 0) {
         Jwt = other.Jwt;
-      }
-      if (other.TypoId != 0) {
-        TypoId = other.TypoId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1186,10 +1786,6 @@ namespace tobeh.Valmar {
             Jwt = input.ReadString();
             break;
           }
-          case 16: {
-            TypoId = input.ReadInt32();
-            break;
-          }
         }
       }
     #endif
@@ -1207,10 +1803,6 @@ namespace tobeh.Valmar {
             break;
           case 10: {
             Jwt = input.ReadString();
-            break;
-          }
-          case 16: {
-            TypoId = input.ReadInt32();
             break;
           }
         }

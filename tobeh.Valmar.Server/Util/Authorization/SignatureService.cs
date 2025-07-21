@@ -54,4 +54,22 @@ public class SignatureService
         rsa.ImportFromPem(pem.ToCharArray());
         return rsa;
     }
+
+    public string GenerateRandomString(int length)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var randomBytes = new byte[length];
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomBytes);
+        }
+
+        var result = new StringBuilder(length);
+        foreach (var b in randomBytes)
+        {
+            result.Append(chars[b % chars.Length]);
+        }
+
+        return result.ToString();
+    }
 }

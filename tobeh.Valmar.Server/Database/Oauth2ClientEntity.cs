@@ -3,17 +3,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace tobeh.Valmar.Server.Database
 {
-    public partial class JwtVerifiedApplicationEntity
+    /// <summary>
+    /// Registered OAuth2 clients
+    /// </summary>
+    [Table("OAuth2Clients")]
+    public partial class Oauth2ClientEntity
     {
         /// <summary>
-        /// Identifier of the application
+        /// Identifier of the client
         /// </summary>
         [Key]
         [Column(TypeName = "int(11)")]
         public int Id { get; set; }
 
         /// <summary>
-        /// Name of the application
+        /// Name of the client
         /// </summary>
         [Column(TypeName = "text")]
         public string Name { get; set; } = null!;
@@ -25,15 +29,26 @@ namespace tobeh.Valmar.Server.Database
         public string RedirectUri { get; set; } = null!;
 
         /// <summary>
-        /// Expiry in ms of an issued jwt
+        /// Expiry in s of issued access token
         /// </summary>
         [Column(TypeName = "bigint(20)")]
-        public long JwtExpiry { get; set; }
+        public long TokenExpiry { get; set; }
 
         /// <summary>
-        /// Comma-separated list of scopes which this application uses
+        /// Comma-separated list of scopes which this client uses
         /// </summary>
         [Column(TypeName = "text")]
-        public string JwtScopes { get; set; } = null!;
+        public string Scopes { get; set; } = null!;
+
+        /// <summary>
+        /// Whether this client has been verified by typo
+        /// </summary>
+        public bool Verified { get; set; }
+
+        /// <summary>
+        /// Owner typo id of this client
+        /// </summary>
+        [Column(TypeName = "int(11)")]
+        public int Owner { get; set; }
     }
 }

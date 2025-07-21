@@ -1,16 +1,23 @@
 using System.IdentityModel.Tokens.Jwt;
 using tobeh.Valmar.Server.Database;
+using tobeh.Valmar.Server.Domain.Classes;
 
 namespace tobeh.Valmar.Server.Domain;
 
 public interface IAuthorizationDomainService
 {
-    Task<List<JwtScopeEntity>> GetAvailableScopes();
+    Task<List<Oauth2ScopeEntity>> GetAvailableScopes();
     string GetJwtString(JwtSecurityToken jwt);
 
-    Task<JwtSecurityToken> CreateJwt(int typoId, string applicationName, DateTime expiry, List<string> scopes,
-        string redirectUri, int? verifiedAppId = null);
+    Task<List<Oauth2ClientEntity>> GetOauth2Clients();
 
-    Task<JwtSecurityToken> CreateJwtForVerifiedApplication(
-        int typoId, int applicationId);
+    Task<Oauth2ClientEntity> CreateOauth2Client(
+        string name, string redirectUri, List<string> scopes, int ownerTypoId);
+
+    Task<Oauth2ClientEntity> GetOauth2ClientById(int clientId);
+
+    Task<OAuth2AuthorizationCodeDdo> CreateOAuth2AuthorizationCode(int typoId, int clientId);
+
+    Task<string> ExchangeOauth2AuthorizationCode(
+        string code, int clientId, string redirectUri);
 }

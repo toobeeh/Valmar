@@ -3,7 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace tobeh.Valmar.Server.Database
 {
-    public partial class JwtScopeEntity
+    /// <summary>
+    /// Scopes available in OAuth2 for JWT claims
+    /// </summary>
+    [Table("OAuth2Scopes")]
+    public partial class Oauth2ScopeEntity
     {
         /// <summary>
         /// The identifier of the scope that an application might access

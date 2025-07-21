@@ -18,13 +18,14 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<EventDropEntity> EventDrops { get; set; } = null!;
         public virtual DbSet<GuildLobbyEntity> GuildLobbies { get; set; } = null!;
         public virtual DbSet<GuildSettingEntity> GuildSettings { get; set; } = null!;
-        public virtual DbSet<JwtScopeEntity> JwtScopes { get; set; } = null!;
-        public virtual DbSet<JwtVerifiedApplicationEntity> JwtVerifiedApplications { get; set; } = null!;
         public virtual DbSet<LegacyDropCountEntity> LegacyDropCounts { get; set; } = null!;
         public virtual DbSet<LobbyBotClaimEntity> LobbyBotClaims { get; set; } = null!;
         public virtual DbSet<LobbyBotInstanceEntity> LobbyBotInstances { get; set; } = null!;
         public virtual DbSet<LobbyBotOptionEntity> LobbyBotOptions { get; set; } = null!;
         public virtual DbSet<MemberEntity> Members { get; set; } = null!;
+        public virtual DbSet<Oauth2AuthorizationCodeEntity> Oauth2AuthorizationCodes { get; set; } = null!;
+        public virtual DbSet<Oauth2ClientEntity> Oauth2Clients { get; set; } = null!;
+        public virtual DbSet<Oauth2ScopeEntity> Oauth2Scopes { get; set; } = null!;
         public virtual DbSet<OnlineItemEntity> OnlineItems { get; set; } = null!;
         public virtual DbSet<PalantiriEntity> Palantiris { get; set; } = null!;
         public virtual DbSet<PalantiriNightlyEntity> PalantiriNightlies { get; set; } = null!;
@@ -127,17 +128,6 @@ namespace tobeh.Valmar.Server.Database
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 32 });
             });
 
-            modelBuilder.Entity<JwtScopeEntity>(entity =>
-            {
-                entity.HasKey(e => e.Name)
-                    .HasName("PRIMARY");
-            });
-
-            modelBuilder.Entity<JwtVerifiedApplicationEntity>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
-
             modelBuilder.Entity<LegacyDropCountEntity>(entity =>
             {
                 entity.HasKey(e => e.Login)
@@ -168,6 +158,25 @@ namespace tobeh.Valmar.Server.Database
                     .HasName("PRIMARY");
 
                 entity.Property(e => e.Login).ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<Oauth2AuthorizationCodeEntity>(entity =>
+            {
+                entity.HasKey(e => e.Code)
+                    .HasName("PRIMARY");
+            });
+
+            modelBuilder.Entity<Oauth2ClientEntity>(entity =>
+            {
+                entity.HasAnnotation("Relational:Comment", "Registered OAuth2 clients");
+            });
+
+            modelBuilder.Entity<Oauth2ScopeEntity>(entity =>
+            {
+                entity.HasKey(e => e.Name)
+                    .HasName("PRIMARY");
+
+                entity.HasAnnotation("Relational:Comment", "Scopes available in OAuth2 for JWT claims");
             });
 
             modelBuilder.Entity<OnlineItemEntity>(entity =>
