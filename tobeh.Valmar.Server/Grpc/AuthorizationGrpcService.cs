@@ -41,4 +41,23 @@ public class AuthorizationGrpcService(
 
         return response;
     }
+
+    public override async Task<JwtMessage> CreateJwtForVerifiedApplication(JwtVerifiedParametersMessage request,
+        ServerCallContext context)
+    {
+        logger.LogTrace("CreateJwtForVerifiedApplication(request: {Request})", request);
+
+        var jwt = await authorizationService.CreateJwtForVerifiedApplication(
+            request.TypoId,
+            request.ApplicationId);
+        var token = authorizationService.GetJwtString(jwt);
+
+        var response = new JwtMessage()
+        {
+            Jwt = token,
+            TypoId = request.TypoId
+        };
+
+        return response;
+    }
 }

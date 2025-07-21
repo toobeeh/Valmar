@@ -9,5 +9,8 @@ public interface IAuthorizationDomainService
     string GetJwtString(JwtSecurityToken jwt);
 
     Task<JwtSecurityToken> CreateJwt(int typoId, string applicationName, DateTime expiry, List<string> scopes,
-        string redirectUri);
+        string redirectUri, int? verifiedAppId = null);
+
+    Task<JwtSecurityToken> CreateJwtForVerifiedApplication(
+        int typoId, int applicationId);
 }

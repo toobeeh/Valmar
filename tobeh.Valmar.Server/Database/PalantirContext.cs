@@ -19,6 +19,7 @@ namespace tobeh.Valmar.Server.Database
         public virtual DbSet<GuildLobbyEntity> GuildLobbies { get; set; } = null!;
         public virtual DbSet<GuildSettingEntity> GuildSettings { get; set; } = null!;
         public virtual DbSet<JwtScopeEntity> JwtScopes { get; set; } = null!;
+        public virtual DbSet<JwtVerifiedApplicationEntity> JwtVerifiedApplications { get; set; } = null!;
         public virtual DbSet<LegacyDropCountEntity> LegacyDropCounts { get; set; } = null!;
         public virtual DbSet<LobbyBotClaimEntity> LobbyBotClaims { get; set; } = null!;
         public virtual DbSet<LobbyBotInstanceEntity> LobbyBotInstances { get; set; } = null!;
@@ -130,6 +131,11 @@ namespace tobeh.Valmar.Server.Database
             {
                 entity.HasKey(e => e.Name)
                     .HasName("PRIMARY");
+            });
+
+            modelBuilder.Entity<JwtVerifiedApplicationEntity>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<LegacyDropCountEntity>(entity =>

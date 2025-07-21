@@ -56,6 +56,8 @@ namespace tobeh.Valmar {
     static readonly grpc::Marshaller<global::tobeh.Valmar.JwtParametersMessage> __Marshaller_authorization_JwtParametersMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.JwtParametersMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.JwtMessage> __Marshaller_authorization_JwtMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.JwtMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.JwtVerifiedParametersMessage> __Marshaller_authorization_JwtVerifiedParametersMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.JwtVerifiedParametersMessage.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.GetAvailableScopesMessage, global::tobeh.Valmar.ScopeMessage> __Method_GetAvailableScopes = new grpc::Method<global::tobeh.Valmar.GetAvailableScopesMessage, global::tobeh.Valmar.ScopeMessage>(
@@ -71,6 +73,14 @@ namespace tobeh.Valmar {
         __ServiceName,
         "CreateJwt",
         __Marshaller_authorization_JwtParametersMessage,
+        __Marshaller_authorization_JwtMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.JwtVerifiedParametersMessage, global::tobeh.Valmar.JwtMessage> __Method_CreateJwtForVerifiedApplication = new grpc::Method<global::tobeh.Valmar.JwtVerifiedParametersMessage, global::tobeh.Valmar.JwtMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "CreateJwtForVerifiedApplication",
+        __Marshaller_authorization_JwtVerifiedParametersMessage,
         __Marshaller_authorization_JwtMessage);
 
     /// <summary>Service descriptor</summary>
@@ -177,6 +187,54 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.JwtMessage> CreateJwtAsync(global::tobeh.Valmar.JwtParametersMessage request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateJwt, null, options, request);
+      }
+      /// <summary>
+      /// Create a jwt for a verified application
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.JwtMessage CreateJwtForVerifiedApplication(global::tobeh.Valmar.JwtVerifiedParametersMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateJwtForVerifiedApplication(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Create a jwt for a verified application
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.JwtMessage CreateJwtForVerifiedApplication(global::tobeh.Valmar.JwtVerifiedParametersMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_CreateJwtForVerifiedApplication, null, options, request);
+      }
+      /// <summary>
+      /// Create a jwt for a verified application
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.JwtMessage> CreateJwtForVerifiedApplicationAsync(global::tobeh.Valmar.JwtVerifiedParametersMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateJwtForVerifiedApplicationAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Create a jwt for a verified application
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.JwtMessage> CreateJwtForVerifiedApplicationAsync(global::tobeh.Valmar.JwtVerifiedParametersMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_CreateJwtForVerifiedApplication, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

@@ -30,19 +30,24 @@ namespace tobeh.Valmar {
             "Y3JpcHRpb24YAiABKAkikAEKFEp3dFBhcmFtZXRlcnNNZXNzYWdlEg4KBnR5",
             "cG9JZBgBIAEoBRIOCgZzY29wZXMYAiADKAkSKgoGZXhwaXJ5GAMgASgLMhou",
             "Z29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIXCg9hcHBsaWNhdGlvbk5hbWUY",
-            "BCABKAkSEwoLcmVkaXJlY3RVcmkYBSABKAkiKQoKSnd0TWVzc2FnZRILCgNq",
-            "d3QYASABKAkSDgoGdHlwb0lkGAIgASgFMrsBCg1BdXRob3JpemF0aW9uEl0K",
-            "EkdldEF2YWlsYWJsZVNjb3BlcxIoLmF1dGhvcml6YXRpb24uR2V0QXZhaWxh",
-            "YmxlU2NvcGVzTWVzc2FnZRobLmF1dGhvcml6YXRpb24uU2NvcGVNZXNzYWdl",
-            "MAESSwoJQ3JlYXRlSnd0EiMuYXV0aG9yaXphdGlvbi5Kd3RQYXJhbWV0ZXJz",
-            "TWVzc2FnZRoZLmF1dGhvcml6YXRpb24uSnd0TWVzc2FnZUIPqgIMdG9iZWgu",
-            "VmFsbWFyYgZwcm90bzM="));
+            "BCABKAkSEwoLcmVkaXJlY3RVcmkYBSABKAkiRQocSnd0VmVyaWZpZWRQYXJh",
+            "bWV0ZXJzTWVzc2FnZRIOCgZ0eXBvSWQYASABKAUSFQoNYXBwbGljYXRpb25J",
+            "ZBgCIAEoBSIpCgpKd3RNZXNzYWdlEgsKA2p3dBgBIAEoCRIOCgZ0eXBvSWQY",
+            "AiABKAUypgIKDUF1dGhvcml6YXRpb24SXQoSR2V0QXZhaWxhYmxlU2NvcGVz",
+            "EiguYXV0aG9yaXphdGlvbi5HZXRBdmFpbGFibGVTY29wZXNNZXNzYWdlGhsu",
+            "YXV0aG9yaXphdGlvbi5TY29wZU1lc3NhZ2UwARJLCglDcmVhdGVKd3QSIy5h",
+            "dXRob3JpemF0aW9uLkp3dFBhcmFtZXRlcnNNZXNzYWdlGhkuYXV0aG9yaXph",
+            "dGlvbi5Kd3RNZXNzYWdlEmkKH0NyZWF0ZUp3dEZvclZlcmlmaWVkQXBwbGlj",
+            "YXRpb24SKy5hdXRob3JpemF0aW9uLkp3dFZlcmlmaWVkUGFyYW1ldGVyc01l",
+            "c3NhZ2UaGS5hdXRob3JpemF0aW9uLkp3dE1lc3NhZ2VCD6oCDHRvYmVoLlZh",
+            "bG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetAvailableScopesMessage), global::tobeh.Valmar.GetAvailableScopesMessage.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScopeMessage), global::tobeh.Valmar.ScopeMessage.Parser, new[]{ "Name", "Description" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.JwtParametersMessage), global::tobeh.Valmar.JwtParametersMessage.Parser, new[]{ "TypoId", "Scopes", "Expiry", "ApplicationName", "RedirectUri" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.JwtVerifiedParametersMessage), global::tobeh.Valmar.JwtVerifiedParametersMessage.Parser, new[]{ "TypoId", "ApplicationId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.JwtMessage), global::tobeh.Valmar.JwtMessage.Parser, new[]{ "Jwt", "TypoId" }, null, null, null, null)
           }));
     }
@@ -763,6 +768,232 @@ namespace tobeh.Valmar {
 
   }
 
+  public sealed partial class JwtVerifiedParametersMessage : pb::IMessage<JwtVerifiedParametersMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<JwtVerifiedParametersMessage> _parser = new pb::MessageParser<JwtVerifiedParametersMessage>(() => new JwtVerifiedParametersMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<JwtVerifiedParametersMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public JwtVerifiedParametersMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public JwtVerifiedParametersMessage(JwtVerifiedParametersMessage other) : this() {
+      typoId_ = other.typoId_;
+      applicationId_ = other.applicationId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public JwtVerifiedParametersMessage Clone() {
+      return new JwtVerifiedParametersMessage(this);
+    }
+
+    /// <summary>Field number for the "typoId" field.</summary>
+    public const int TypoIdFieldNumber = 1;
+    private int typoId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int TypoId {
+      get { return typoId_; }
+      set {
+        typoId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "applicationId" field.</summary>
+    public const int ApplicationIdFieldNumber = 2;
+    private int applicationId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int ApplicationId {
+      get { return applicationId_; }
+      set {
+        applicationId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as JwtVerifiedParametersMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(JwtVerifiedParametersMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TypoId != other.TypoId) return false;
+      if (ApplicationId != other.ApplicationId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TypoId != 0) hash ^= TypoId.GetHashCode();
+      if (ApplicationId != 0) hash ^= ApplicationId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (TypoId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(TypoId);
+      }
+      if (ApplicationId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(ApplicationId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (TypoId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(TypoId);
+      }
+      if (ApplicationId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(ApplicationId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (TypoId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TypoId);
+      }
+      if (ApplicationId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ApplicationId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(JwtVerifiedParametersMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TypoId != 0) {
+        TypoId = other.TypoId;
+      }
+      if (other.ApplicationId != 0) {
+        ApplicationId = other.ApplicationId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            TypoId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            ApplicationId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            TypoId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            ApplicationId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class JwtMessage : pb::IMessage<JwtMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -777,7 +1008,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[3]; }
+      get { return global::tobeh.Valmar.AuthorizationReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

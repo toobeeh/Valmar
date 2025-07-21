@@ -24,7 +24,7 @@ public class AuthorizationDomainService(
     }
 
     public async Task<JwtSecurityToken> CreateJwt(int typoId, string applicationName, DateTime expiry,
-        List<string> scopes, string redirectUri)
+        List<string> scopes, string redirectUri, int? verifiedAppId = null)
     {
         logger.LogTrace(
             "CreateJwt(typoId: {TypoId}, applicationName: {ApplicationName}, expiry: {Expiry}, scopes: {Scopes})",
@@ -50,23 +50,54 @@ public class AuthorizationDomainService(
         // get credentials
         var credentials = signatureService.SigningCredentials;
 
+        List<Claim> claims =
+        [
+            new Claim(JwtRegisteredClaimNames.Sub, typoId.ToString()),
+            new Claim(JwtRegisteredClaimNames.Name, member.Username),
+            new Claim("redirect_uri", redirectUri),
+            .. scopes.Select(scope => new Claim("scope", scope)).ToList(),
+        ];
+
+        if (verifiedAppId is { } verifiedAppIdVal)
+        {
+            claims.Add(new Claim("verified_app_id", verifiedAppIdVal.ToString()));
+        }
+
         // create the JWT
         var config = options.Value;
         var token = new JwtSecurityToken(
             issuer: config.JwtIssuer,
             audience: applicationName,
-            claims:
-            [
-                new Claim(JwtRegisteredClaimNames.Sub, typoId.ToString()),
-                new Claim(JwtRegisteredClaimNames.Name, member.Username),
-                new Claim("redirect_uri", redirectUri),
-                .. scopes.Select(scope => new Claim("scope", scope)).ToList(),
-            ],
+            claims: claims,
             expires: expiry,
             signingCredentials: credentials
         );
 
         return token;
+    }
+
+    public async Task<JwtSecurityToken> CreateJwtForVerifiedApplication(
+        int typoId, int applicationId)
+    {
+        logger.LogTrace(
+            "CreateJwtForVerifiedApplication(typoId: {TypoId}, applicationId: {ApplicationId})",
+            typoId, applicationId);
+
+        // get application from db
+        var app = await db.JwtVerifiedApplications.FirstOrDefaultAsync(app => app.Id == applicationId);
+        if (app == null)
+        {
+            throw new ArgumentException("Application not found.");
+        }
+
+        return await CreateJwt(
+            typoId,
+            app.Name,
+            DateTime.UtcNow.AddMilliseconds(app.JwtExpiry),
+            app.JwtScopes.Split(",").ToList(),
+            app.RedirectUri,
+            app.Id
+        );
     }
 
     public string GetJwtString(JwtSecurityToken jwt)

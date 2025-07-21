@@ -13,6 +13,9 @@ service Authorization {
 
   // Create a jwt with given parameters
   rpc CreateJwt (JwtParametersMessage) returns (JwtMessage);
+
+  // Create a jwt for a verified application
+  rpc CreateJwtForVerifiedApplication (JwtVerifiedParametersMessage) returns (JwtMessage);
 }
 
 message GetAvailableScopesMessage {}
@@ -28,6 +31,11 @@ message JwtParametersMessage {
   google.protobuf.Timestamp expiry = 3;
   string applicationName = 4;
   string redirectUri = 5;
+}
+
+message JwtVerifiedParametersMessage {
+  int32 typoId = 1;
+  int32 applicationId = 2;
 }
 
 message JwtMessage {
