@@ -21,6 +21,7 @@ public class SignatureService
             new RsaSecurityKey(_privateRsa),
             SecurityAlgorithms.RsaSha256
         );
+        SigningCredentials.Key.KeyId = "default";
     }
 
     public string Sign(string data)
