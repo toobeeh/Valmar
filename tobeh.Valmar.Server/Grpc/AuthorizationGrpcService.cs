@@ -42,7 +42,7 @@ public class AuthorizationGrpcService(
         logger.LogTrace("ExchangeOauth2AuthorizationCode(request: {Request})", request);
 
         var jwt = await authorizationService.ExchangeOauth2AuthorizationCode(
-            request.Oauth2AuthorizationCode, request.Oauth2ClientId);
+            request.Oauth2AuthorizationCode, request.Oauth2ClientId, request.JwtIssuer);
 
         return new OAuth2AccessTokenMessage
         {

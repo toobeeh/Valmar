@@ -56,6 +56,7 @@ message CreateOAuth2AuthorizationCodeMessage {
 message OAuth2AuthorizationCodeExchangeMessage {
   string oauth2AuthorizationCode = 1;
   int32 oauth2ClientId = 2;
+  string jwtIssuer = 3;
 }
 
 message OAuth2AuthorizationCodeMessage {

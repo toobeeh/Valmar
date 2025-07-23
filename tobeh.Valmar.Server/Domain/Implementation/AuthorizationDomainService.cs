@@ -139,7 +139,7 @@ public class AuthorizationDomainService(
         return new OAuth2AuthorizationCodeDdo(code.Code, code.ClientId, client.RedirectUri);
     }
 
-    public async Task<string> ExchangeOauth2AuthorizationCode(string code, int clientId)
+    public async Task<string> ExchangeOauth2AuthorizationCode(string code, int clientId, string issuer)
     {
         logger.LogTrace(
             "ExchangeOauth2AuthorizationCode(code: {Code}, clientId: {ClientId})",
@@ -201,7 +201,7 @@ public class AuthorizationDomainService(
         // create the JWT
         var config = options.Value;
         var jwt = new JwtSecurityToken(
-            issuer: config.JwtIssuer,
+            issuer,
             audience: client.Name,
             claims: claims,
             expires: DateTime.UtcNow.AddSeconds(client.TokenExpiry),

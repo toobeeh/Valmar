@@ -34,26 +34,26 @@ namespace tobeh.Valmar {
             "AygJEhMKC3JlZGlyZWN0VXJpGAQgASgJEhAKCHZlcmlmaWVkGAUgASgIEhMK",
             "C3Rva2VuRXhwaXJ5GAYgASgDEhMKC293bmVyVHlwb0lkGAcgASgFIk4KJENy",
             "ZWF0ZU9BdXRoMkF1dGhvcml6YXRpb25Db2RlTWVzc2FnZRIWCg5vYXV0aDJD",
-            "bGllbnRJZBgBIAEoBRIOCgZ0eXBvSWQYAiABKAUiYQomT0F1dGgyQXV0aG9y",
+            "bGllbnRJZBgBIAEoBRIOCgZ0eXBvSWQYAiABKAUidAomT0F1dGgyQXV0aG9y",
             "aXphdGlvbkNvZGVFeGNoYW5nZU1lc3NhZ2USHwoXb2F1dGgyQXV0aG9yaXph",
-            "dGlvbkNvZGUYASABKAkSFgoOb2F1dGgyQ2xpZW50SWQYAiABKAUiewoeT0F1",
-            "dGgyQXV0aG9yaXphdGlvbkNvZGVNZXNzYWdlEh8KF29hdXRoMkF1dGhvcml6",
-            "YXRpb25Db2RlGAEgASgJEjgKDG9hdXRoMkNsaWVudBgCIAEoCzIiLmF1dGhv",
-            "cml6YXRpb24uT0F1dGgyQ2xpZW50TWVzc2FnZSInChhPQXV0aDJBY2Nlc3NU",
-            "b2tlbk1lc3NhZ2USCwoDand0GAEgASgJMq4ECg1BdXRob3JpemF0aW9uEl0K",
-            "EkdldEF2YWlsYWJsZVNjb3BlcxIoLmF1dGhvcml6YXRpb24uR2V0QXZhaWxh",
-            "YmxlU2NvcGVzTWVzc2FnZRobLmF1dGhvcml6YXRpb24uU2NvcGVNZXNzYWdl",
-            "MAESgwEKHUNyZWF0ZU9BdXRoMkF1dGhvcml6YXRpb25Db2RlEjMuYXV0aG9y",
-            "aXphdGlvbi5DcmVhdGVPQXV0aDJBdXRob3JpemF0aW9uQ29kZU1lc3NhZ2Ua",
-            "LS5hdXRob3JpemF0aW9uLk9BdXRoMkF1dGhvcml6YXRpb25Db2RlTWVzc2Fn",
-            "ZRKBAQofRXhjaGFuZ2VPYXV0aDJBdXRob3JpemF0aW9uQ29kZRI1LmF1dGhv",
-            "cml6YXRpb24uT0F1dGgyQXV0aG9yaXphdGlvbkNvZGVFeGNoYW5nZU1lc3Nh",
-            "Z2UaJy5hdXRob3JpemF0aW9uLk9BdXRoMkFjY2Vzc1Rva2VuTWVzc2FnZRJi",
-            "ChJDcmVhdGVPYXV0aDJDbGllbnQSKC5hdXRob3JpemF0aW9uLkNyZWF0ZU9B",
-            "dXRoMkNsaWVudE1lc3NhZ2UaIi5hdXRob3JpemF0aW9uLk9BdXRoMkNsaWVu",
-            "dE1lc3NhZ2USUAoQR2V0T2F1dGgyQ2xpZW50cxIWLmdvb2dsZS5wcm90b2J1",
-            "Zi5FbXB0eRoiLmF1dGhvcml6YXRpb24uT0F1dGgyQ2xpZW50TWVzc2FnZTAB",
-            "Qg+qAgx0b2JlaC5WYWxtYXJiBnByb3RvMw=="));
+            "dGlvbkNvZGUYASABKAkSFgoOb2F1dGgyQ2xpZW50SWQYAiABKAUSEQoJand0",
+            "SXNzdWVyGAMgASgJInsKHk9BdXRoMkF1dGhvcml6YXRpb25Db2RlTWVzc2Fn",
+            "ZRIfChdvYXV0aDJBdXRob3JpemF0aW9uQ29kZRgBIAEoCRI4CgxvYXV0aDJD",
+            "bGllbnQYAiABKAsyIi5hdXRob3JpemF0aW9uLk9BdXRoMkNsaWVudE1lc3Nh",
+            "Z2UiJwoYT0F1dGgyQWNjZXNzVG9rZW5NZXNzYWdlEgsKA2p3dBgBIAEoCTKu",
+            "BAoNQXV0aG9yaXphdGlvbhJdChJHZXRBdmFpbGFibGVTY29wZXMSKC5hdXRo",
+            "b3JpemF0aW9uLkdldEF2YWlsYWJsZVNjb3Blc01lc3NhZ2UaGy5hdXRob3Jp",
+            "emF0aW9uLlNjb3BlTWVzc2FnZTABEoMBCh1DcmVhdGVPQXV0aDJBdXRob3Jp",
+            "emF0aW9uQ29kZRIzLmF1dGhvcml6YXRpb24uQ3JlYXRlT0F1dGgyQXV0aG9y",
+            "aXphdGlvbkNvZGVNZXNzYWdlGi0uYXV0aG9yaXphdGlvbi5PQXV0aDJBdXRo",
+            "b3JpemF0aW9uQ29kZU1lc3NhZ2USgQEKH0V4Y2hhbmdlT2F1dGgyQXV0aG9y",
+            "aXphdGlvbkNvZGUSNS5hdXRob3JpemF0aW9uLk9BdXRoMkF1dGhvcml6YXRp",
+            "b25Db2RlRXhjaGFuZ2VNZXNzYWdlGicuYXV0aG9yaXphdGlvbi5PQXV0aDJB",
+            "Y2Nlc3NUb2tlbk1lc3NhZ2USYgoSQ3JlYXRlT2F1dGgyQ2xpZW50EiguYXV0",
+            "aG9yaXphdGlvbi5DcmVhdGVPQXV0aDJDbGllbnRNZXNzYWdlGiIuYXV0aG9y",
+            "aXphdGlvbi5PQXV0aDJDbGllbnRNZXNzYWdlElAKEEdldE9hdXRoMkNsaWVu",
+            "dHMSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaIi5hdXRob3JpemF0aW9uLk9B",
+            "dXRoMkNsaWVudE1lc3NhZ2UwAUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -62,7 +62,7 @@ namespace tobeh.Valmar {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CreateOAuth2ClientMessage), global::tobeh.Valmar.CreateOAuth2ClientMessage.Parser, new[]{ "Name", "Scopes", "RedirectUri", "OwnerTypoId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2ClientMessage), global::tobeh.Valmar.OAuth2ClientMessage.Parser, new[]{ "ClientId", "Name", "Scopes", "RedirectUri", "Verified", "TokenExpiry", "OwnerTypoId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CreateOAuth2AuthorizationCodeMessage), global::tobeh.Valmar.CreateOAuth2AuthorizationCodeMessage.Parser, new[]{ "Oauth2ClientId", "TypoId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2AuthorizationCodeExchangeMessage), global::tobeh.Valmar.OAuth2AuthorizationCodeExchangeMessage.Parser, new[]{ "Oauth2AuthorizationCode", "Oauth2ClientId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2AuthorizationCodeExchangeMessage), global::tobeh.Valmar.OAuth2AuthorizationCodeExchangeMessage.Parser, new[]{ "Oauth2AuthorizationCode", "Oauth2ClientId", "JwtIssuer" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2AuthorizationCodeMessage), global::tobeh.Valmar.OAuth2AuthorizationCodeMessage.Parser, new[]{ "Oauth2AuthorizationCode", "Oauth2Client" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2AccessTokenMessage), global::tobeh.Valmar.OAuth2AccessTokenMessage.Parser, new[]{ "Jwt" }, null, null, null, null)
           }));
@@ -1400,6 +1400,7 @@ namespace tobeh.Valmar {
     public OAuth2AuthorizationCodeExchangeMessage(OAuth2AuthorizationCodeExchangeMessage other) : this() {
       oauth2AuthorizationCode_ = other.oauth2AuthorizationCode_;
       oauth2ClientId_ = other.oauth2ClientId_;
+      jwtIssuer_ = other.jwtIssuer_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1433,6 +1434,18 @@ namespace tobeh.Valmar {
       }
     }
 
+    /// <summary>Field number for the "jwtIssuer" field.</summary>
+    public const int JwtIssuerFieldNumber = 3;
+    private string jwtIssuer_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string JwtIssuer {
+      get { return jwtIssuer_; }
+      set {
+        jwtIssuer_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1450,6 +1463,7 @@ namespace tobeh.Valmar {
       }
       if (Oauth2AuthorizationCode != other.Oauth2AuthorizationCode) return false;
       if (Oauth2ClientId != other.Oauth2ClientId) return false;
+      if (JwtIssuer != other.JwtIssuer) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1459,6 +1473,7 @@ namespace tobeh.Valmar {
       int hash = 1;
       if (Oauth2AuthorizationCode.Length != 0) hash ^= Oauth2AuthorizationCode.GetHashCode();
       if (Oauth2ClientId != 0) hash ^= Oauth2ClientId.GetHashCode();
+      if (JwtIssuer.Length != 0) hash ^= JwtIssuer.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1485,6 +1500,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(16);
         output.WriteInt32(Oauth2ClientId);
       }
+      if (JwtIssuer.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(JwtIssuer);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1503,6 +1522,10 @@ namespace tobeh.Valmar {
         output.WriteRawTag(16);
         output.WriteInt32(Oauth2ClientId);
       }
+      if (JwtIssuer.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(JwtIssuer);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1518,6 +1541,9 @@ namespace tobeh.Valmar {
       }
       if (Oauth2ClientId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Oauth2ClientId);
+      }
+      if (JwtIssuer.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(JwtIssuer);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1536,6 +1562,9 @@ namespace tobeh.Valmar {
       }
       if (other.Oauth2ClientId != 0) {
         Oauth2ClientId = other.Oauth2ClientId;
+      }
+      if (other.JwtIssuer.Length != 0) {
+        JwtIssuer = other.JwtIssuer;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1560,6 +1589,10 @@ namespace tobeh.Valmar {
             Oauth2ClientId = input.ReadInt32();
             break;
           }
+          case 26: {
+            JwtIssuer = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -1581,6 +1614,10 @@ namespace tobeh.Valmar {
           }
           case 16: {
             Oauth2ClientId = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            JwtIssuer = input.ReadString();
             break;
           }
         }
