@@ -17,6 +17,9 @@ service Authorization {
   // Exchange a oauth2 authorization code for an access token (jwt)
   rpc ExchangeOauth2AuthorizationCode (OAuth2AuthorizationCodeExchangeMessage) returns (OAuth2AccessTokenMessage);
 
+  // Create a oauth2 access token. should be used only in authorized preconditions like auth code or token exchange grants
+  rpc CreateOauth2Token (CreateOAuth2TokenMessage) returns (OAuth2AccessTokenMessage);
+
   // Creates a new OAuth2 client
   rpc CreateOauth2Client (CreateOAuth2ClientMessage) returns (OAuth2ClientMessage);
 
@@ -36,6 +39,7 @@ message CreateOAuth2ClientMessage {
   repeated string scopes = 2;
   string redirectUri = 3;
   int32 ownerTypoId = 4;
+  string audience = 5;
 }
 
 message OAuth2ClientMessage {
@@ -46,6 +50,7 @@ message OAuth2ClientMessage {
   bool verified = 5;
   int64 tokenExpiry = 6;
   int32 ownerTypoId = 7;
+  string audience = 8;
 }
 
 message CreateOAuth2AuthorizationCodeMessage {
@@ -57,6 +62,13 @@ message OAuth2AuthorizationCodeExchangeMessage {
   string oauth2AuthorizationCode = 1;
   int32 oauth2ClientId = 2;
   string jwtIssuer = 3;
+}
+
+message CreateOAuth2TokenMessage {
+  int32 typoId = 1;
+  int32 oauth2ClientId = 2;
+  string jwtIssuer = 3;
+  string requestedAudience = 4;
 }
 
 message OAuth2AuthorizationCodeMessage {

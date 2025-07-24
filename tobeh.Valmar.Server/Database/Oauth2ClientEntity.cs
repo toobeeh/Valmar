@@ -50,5 +50,11 @@ namespace tobeh.Valmar.Server.Database
         /// </summary>
         [Column(TypeName = "int(11)")]
         public int Owner { get; set; }
+
+        /// <summary>
+        /// The target audience that this client accesses
+        /// </summary>
+        [Column(TypeName = "text")]
+        public string Audience { get; set; } = null!;
     }
 }

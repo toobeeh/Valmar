@@ -19,4 +19,5 @@ public interface IAuthorizationDomainService
     Task<OAuth2AuthorizationCodeDdo> CreateOAuth2AuthorizationCode(int typoId, int clientId);
 
     Task<string> ExchangeOauth2AuthorizationCode(string code, int clientId, string issuer);
+    Task<string> ExchangeOauth2TokenForAudience(int typoId, int clientId, string issuer, string requestedAudience);
 }

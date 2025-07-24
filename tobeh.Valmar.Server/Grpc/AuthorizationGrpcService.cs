@@ -64,6 +64,20 @@ public class AuthorizationGrpcService(
         return mapper.Map<OAuth2ClientMessage>(client);
     }
 
+    public override async Task<OAuth2AccessTokenMessage> CreateOauth2Token(CreateOAuth2TokenMessage request,
+        ServerCallContext context)
+    {
+        logger.LogTrace("ExchangeOauth2Token(request: {Request})", request);
+
+        var jwt = await authorizationService.ExchangeOauth2TokenForAudience(request.TypoId, request.Oauth2ClientId,
+            request.JwtIssuer, request.RequestedAudience);
+
+        return new OAuth2AccessTokenMessage
+        {
+            Jwt = jwt
+        };
+    }
+
     public override async Task GetOauth2Clients(Empty request, IServerStreamWriter<OAuth2ClientMessage> responseStream,
         ServerCallContext context)
     {

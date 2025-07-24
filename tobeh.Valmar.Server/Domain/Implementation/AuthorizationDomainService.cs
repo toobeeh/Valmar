@@ -109,10 +109,6 @@ public class AuthorizationDomainService(
 
         // verify client exists
         var client = await GetOauth2ClientById(clientId);
-        if (client == null)
-        {
-            throw new ArgumentException("Client not found.");
-        }
 
         // create the authorization code
         var code = new Oauth2AuthorizationCodeEntity
@@ -139,18 +135,62 @@ public class AuthorizationDomainService(
         return new OAuth2AuthorizationCodeDdo(code.Code, code.ClientId, client.RedirectUri);
     }
 
-    public async Task<string> ExchangeOauth2AuthorizationCode(string code, int clientId, string issuer)
+    public async Task<string> ExchangeOauth2TokenForAudience(int typoId, int clientId, string issuer,
+        string requestedAudience)
     {
         logger.LogTrace(
-            "ExchangeOauth2AuthorizationCode(code: {Code}, clientId: {ClientId})",
-            code, clientId);
+            "ExchangeOauth2TokenForAudience(typoId: {typoId}, clientId: {ClientId}, issuer: {Issuer}, requestedAudience: {RequestedAudience})",
+            typoId, clientId, issuer, requestedAudience);
 
         // get client
         var client = await GetOauth2ClientById(clientId);
-        if (client == null)
+
+        // get member
+        var member = await membersDomainService.GetMemberByLogin(typoId);
+
+        // verify issuer not null or empty
+        if (string.IsNullOrWhiteSpace(issuer))
         {
-            throw new ArgumentException("Client not found.");
+            throw new ArgumentException("Issuer must be provided.");
         }
+
+        // create access token
+        var credentials = signatureService.SigningCredentials;
+
+        List<Claim> claims =
+        [
+            new(JwtRegisteredClaimNames.Sub, member.Login.ToString()),
+            new(JwtRegisteredClaimNames.Name, member.Username),
+            new(JwtRegisteredClaimNames.Azp, client.Id.ToString()),
+            new("aud_name", client.Name),
+            .. client.Scopes.Split(",").Select(scope => new Claim("scope", scope)).ToList(),
+        ];
+
+        if (client.Verified)
+        {
+            claims.Add(new Claim("client_verified", "true"));
+        }
+
+        // create the JWT
+        var jwt = new JwtSecurityToken(
+            issuer,
+            audience: client.Audience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddSeconds(client.TokenExpiry),
+            signingCredentials: credentials
+        );
+
+        return GetJwtString(jwt);
+    }
+
+    public async Task<string> ExchangeOauth2AuthorizationCode(string code, int clientId, string issuer)
+    {
+        logger.LogTrace(
+            "ExchangeOauth2AuthorizationCode(code: {Code}, clientId: {ClientId}, issuer: {Issuer}, audience: {Audience})",
+            code, clientId, issuer);
+
+        // get client
+        var client = await GetOauth2ClientById(clientId);
 
         // find the authorization code
         var authCode = await db.Oauth2AuthorizationCodes
@@ -167,13 +207,6 @@ public class AuthorizationDomainService(
             throw new ArgumentException("Authorization code does not belong to the specified client.");
         }
 
-        // get member
-        var member = await membersDomainService.GetMemberByLogin(authCode.TypoId);
-        if (member == null)
-        {
-            throw new ArgumentException("Member not found for the provided authorization code.");
-        }
-
         // verify authorization code is not expired (5 min)
         if (authCode.Expiry < DateTimeOffset.UtcNow.ToUnixTimeSeconds())
         {
@@ -183,36 +216,13 @@ public class AuthorizationDomainService(
             throw new InvalidOperationException("Authorization code has expired.");
         }
 
-        // create access token
-        var credentials = signatureService.SigningCredentials;
-
-        List<Claim> claims =
-        [
-            new(JwtRegisteredClaimNames.Sub, member.Login.ToString()),
-            new(JwtRegisteredClaimNames.Name, member.Username),
-            .. client.Scopes.Split(",").Select(scope => new Claim("scope", scope)).ToList(),
-        ];
-
-        if (client.Verified)
-        {
-            claims.Add(new Claim("client_verified", "true"));
-        }
-
-        // create the JWT
-        var config = options.Value;
-        var jwt = new JwtSecurityToken(
-            issuer,
-            audience: client.Name,
-            claims: claims,
-            expires: DateTime.UtcNow.AddSeconds(client.TokenExpiry),
-            signingCredentials: credentials
-        );
+        var jwt = await ExchangeOauth2TokenForAudience(authCode.TypoId, client.Id, issuer, client.Audience);
 
         // remove the authorization code
         db.Oauth2AuthorizationCodes.Remove(authCode);
         await db.SaveChangesAsync();
 
-        return GetJwtString(jwt);
+        return jwt;
     }
 
     public string GetJwtString(JwtSecurityToken jwt)

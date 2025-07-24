@@ -61,6 +61,8 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.OAuth2AccessTokenMessage> __Marshaller_authorization_OAuth2AccessTokenMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.OAuth2AccessTokenMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.CreateOAuth2TokenMessage> __Marshaller_authorization_CreateOAuth2TokenMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.CreateOAuth2TokenMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.CreateOAuth2ClientMessage> __Marshaller_authorization_CreateOAuth2ClientMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.CreateOAuth2ClientMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.OAuth2ClientMessage> __Marshaller_authorization_OAuth2ClientMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.OAuth2ClientMessage.Parser));
@@ -89,6 +91,14 @@ namespace tobeh.Valmar {
         __ServiceName,
         "ExchangeOauth2AuthorizationCode",
         __Marshaller_authorization_OAuth2AuthorizationCodeExchangeMessage,
+        __Marshaller_authorization_OAuth2AccessTokenMessage);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.CreateOAuth2TokenMessage, global::tobeh.Valmar.OAuth2AccessTokenMessage> __Method_CreateOauth2Token = new grpc::Method<global::tobeh.Valmar.CreateOAuth2TokenMessage, global::tobeh.Valmar.OAuth2AccessTokenMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "CreateOauth2Token",
+        __Marshaller_authorization_CreateOAuth2TokenMessage,
         __Marshaller_authorization_OAuth2AccessTokenMessage);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -259,6 +269,54 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.OAuth2AccessTokenMessage> ExchangeOauth2AuthorizationCodeAsync(global::tobeh.Valmar.OAuth2AuthorizationCodeExchangeMessage request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_ExchangeOauth2AuthorizationCode, null, options, request);
+      }
+      /// <summary>
+      /// Create a oauth2 access token. should be used only in authorized preconditions like auth code or token exchange grants
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.OAuth2AccessTokenMessage CreateOauth2Token(global::tobeh.Valmar.CreateOAuth2TokenMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateOauth2Token(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Create a oauth2 access token. should be used only in authorized preconditions like auth code or token exchange grants
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.OAuth2AccessTokenMessage CreateOauth2Token(global::tobeh.Valmar.CreateOAuth2TokenMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_CreateOauth2Token, null, options, request);
+      }
+      /// <summary>
+      /// Create a oauth2 access token. should be used only in authorized preconditions like auth code or token exchange grants
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.OAuth2AccessTokenMessage> CreateOauth2TokenAsync(global::tobeh.Valmar.CreateOAuth2TokenMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateOauth2TokenAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Create a oauth2 access token. should be used only in authorized preconditions like auth code or token exchange grants
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.OAuth2AccessTokenMessage> CreateOauth2TokenAsync(global::tobeh.Valmar.CreateOAuth2TokenMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_CreateOauth2Token, null, options, request);
       }
       /// <summary>
       /// Creates a new OAuth2 client
