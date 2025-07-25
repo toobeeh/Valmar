@@ -135,11 +135,11 @@ public class AuthorizationDomainService(
         return new OAuth2AuthorizationCodeDdo(code.Code, code.ClientId, client.RedirectUri);
     }
 
-    public async Task<string> ExchangeOauth2TokenForAudience(int typoId, int clientId, string issuer,
+    public async Task<string> CreateOauth2Token(int typoId, int clientId, string issuer,
         string requestedAudience)
     {
         logger.LogTrace(
-            "ExchangeOauth2TokenForAudience(typoId: {typoId}, clientId: {ClientId}, issuer: {Issuer}, requestedAudience: {RequestedAudience})",
+            "CreateOauth2Token(typoId: {typoId}, clientId: {ClientId}, issuer: {Issuer}, requestedAudience: {RequestedAudience})",
             typoId, clientId, issuer, requestedAudience);
 
         // get client
@@ -174,7 +174,7 @@ public class AuthorizationDomainService(
         // create the JWT
         var jwt = new JwtSecurityToken(
             issuer,
-            audience: client.Audience,
+            audience: requestedAudience,
             claims: claims,
             expires: DateTime.UtcNow.AddSeconds(client.TokenExpiry),
             signingCredentials: credentials
@@ -216,7 +216,7 @@ public class AuthorizationDomainService(
             throw new InvalidOperationException("Authorization code has expired.");
         }
 
-        var jwt = await ExchangeOauth2TokenForAudience(authCode.TypoId, client.Id, issuer, client.Audience);
+        var jwt = await CreateOauth2Token(authCode.TypoId, client.Id, issuer, client.Audience);
 
         // remove the authorization code
         db.Oauth2AuthorizationCodes.Remove(authCode);
