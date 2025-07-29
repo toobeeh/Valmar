@@ -11,12 +11,13 @@ public class AuthorizationMapperProfile : Profile
         CreateMap<Oauth2ClientEntity, OAuth2ClientMessage>()
             .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.OwnerTypoId, opt => opt.MapFrom(src => src.Owner))
-            .ForMember(dest => dest.Scopes, opt => opt.MapFrom(src => SplitScopes(src.Scopes)));
+            .ForMember(dest => dest.Scopes, opt => opt.MapFrom(src => SplitList(src.Scopes)))
+            .ForMember(dest => dest.RedirectUris, opt => opt.MapFrom(src => SplitList(src.RedirectUris)));
     }
 
-    private static List<string> SplitScopes(string scopes)
+    private static List<string> SplitList(string csvList)
     {
-        return scopes
+        return csvList
             .Split(',')
             .Select(scope => scope.Trim())
             .Where(scope => !string.IsNullOrEmpty(scope))
