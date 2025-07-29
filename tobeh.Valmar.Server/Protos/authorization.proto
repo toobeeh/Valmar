@@ -37,7 +37,7 @@ message ScopeMessage {
 message CreateOAuth2ClientMessage {
   string name = 1;
   repeated string scopes = 2;
-  string redirectUri = 3;
+  repeated string redirectUris = 3;
   int32 ownerTypoId = 4;
   string audience = 5;
 }
@@ -46,7 +46,7 @@ message OAuth2ClientMessage {
   int32 clientId = 1;
   string name = 2;
   repeated string scopes = 3;
-  string redirectUri = 4;
+  repeated string redirectUris = 4;
   bool verified = 5;
   int64 tokenExpiry = 6;
   int32 ownerTypoId = 7;

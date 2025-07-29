@@ -57,7 +57,7 @@ public class AuthorizationGrpcService(
 
         var client = await authorizationService.CreateOauth2Client(
             request.Name,
-            request.RedirectUri,
+            request.RedirectUris.ToList(),
             request.Scopes.ToList(),
             request.OwnerTypoId);
 

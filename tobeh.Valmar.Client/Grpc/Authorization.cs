@@ -27,46 +27,46 @@ namespace tobeh.Valmar {
             "ChNhdXRob3JpemF0aW9uLnByb3RvEg1hdXRob3JpemF0aW9uGhtnb29nbGUv",
             "cHJvdG9idWYvZW1wdHkucHJvdG8iGwoZR2V0QXZhaWxhYmxlU2NvcGVzTWVz",
             "c2FnZSIxCgxTY29wZU1lc3NhZ2USDAoEbmFtZRgBIAEoCRITCgtkZXNjcmlw",
-            "dGlvbhgCIAEoCSJ1ChlDcmVhdGVPQXV0aDJDbGllbnRNZXNzYWdlEgwKBG5h",
-            "bWUYASABKAkSDgoGc2NvcGVzGAIgAygJEhMKC3JlZGlyZWN0VXJpGAMgASgJ",
-            "EhMKC293bmVyVHlwb0lkGAQgASgFEhAKCGF1ZGllbmNlGAUgASgJIqgBChNP",
-            "QXV0aDJDbGllbnRNZXNzYWdlEhAKCGNsaWVudElkGAEgASgFEgwKBG5hbWUY",
-            "AiABKAkSDgoGc2NvcGVzGAMgAygJEhMKC3JlZGlyZWN0VXJpGAQgASgJEhAK",
-            "CHZlcmlmaWVkGAUgASgIEhMKC3Rva2VuRXhwaXJ5GAYgASgDEhMKC293bmVy",
-            "VHlwb0lkGAcgASgFEhAKCGF1ZGllbmNlGAggASgJIk4KJENyZWF0ZU9BdXRo",
-            "MkF1dGhvcml6YXRpb25Db2RlTWVzc2FnZRIWCg5vYXV0aDJDbGllbnRJZBgB",
-            "IAEoBRIOCgZ0eXBvSWQYAiABKAUidAomT0F1dGgyQXV0aG9yaXphdGlvbkNv",
-            "ZGVFeGNoYW5nZU1lc3NhZ2USHwoXb2F1dGgyQXV0aG9yaXphdGlvbkNvZGUY",
-            "ASABKAkSFgoOb2F1dGgyQ2xpZW50SWQYAiABKAUSEQoJand0SXNzdWVyGAMg",
-            "ASgJInAKGENyZWF0ZU9BdXRoMlRva2VuTWVzc2FnZRIOCgZ0eXBvSWQYASAB",
-            "KAUSFgoOb2F1dGgyQ2xpZW50SWQYAiABKAUSEQoJand0SXNzdWVyGAMgASgJ",
-            "EhkKEXJlcXVlc3RlZEF1ZGllbmNlGAQgASgJInsKHk9BdXRoMkF1dGhvcml6",
-            "YXRpb25Db2RlTWVzc2FnZRIfChdvYXV0aDJBdXRob3JpemF0aW9uQ29kZRgB",
-            "IAEoCRI4CgxvYXV0aDJDbGllbnQYAiABKAsyIi5hdXRob3JpemF0aW9uLk9B",
-            "dXRoMkNsaWVudE1lc3NhZ2UiJwoYT0F1dGgyQWNjZXNzVG9rZW5NZXNzYWdl",
-            "EgsKA2p3dBgBIAEoCTKVBQoNQXV0aG9yaXphdGlvbhJdChJHZXRBdmFpbGFi",
-            "bGVTY29wZXMSKC5hdXRob3JpemF0aW9uLkdldEF2YWlsYWJsZVNjb3Blc01l",
-            "c3NhZ2UaGy5hdXRob3JpemF0aW9uLlNjb3BlTWVzc2FnZTABEoMBCh1DcmVh",
-            "dGVPQXV0aDJBdXRob3JpemF0aW9uQ29kZRIzLmF1dGhvcml6YXRpb24uQ3Jl",
-            "YXRlT0F1dGgyQXV0aG9yaXphdGlvbkNvZGVNZXNzYWdlGi0uYXV0aG9yaXph",
-            "dGlvbi5PQXV0aDJBdXRob3JpemF0aW9uQ29kZU1lc3NhZ2USgQEKH0V4Y2hh",
-            "bmdlT2F1dGgyQXV0aG9yaXphdGlvbkNvZGUSNS5hdXRob3JpemF0aW9uLk9B",
-            "dXRoMkF1dGhvcml6YXRpb25Db2RlRXhjaGFuZ2VNZXNzYWdlGicuYXV0aG9y",
-            "aXphdGlvbi5PQXV0aDJBY2Nlc3NUb2tlbk1lc3NhZ2USZQoRQ3JlYXRlT2F1",
-            "dGgyVG9rZW4SJy5hdXRob3JpemF0aW9uLkNyZWF0ZU9BdXRoMlRva2VuTWVz",
-            "c2FnZRonLmF1dGhvcml6YXRpb24uT0F1dGgyQWNjZXNzVG9rZW5NZXNzYWdl",
-            "EmIKEkNyZWF0ZU9hdXRoMkNsaWVudBIoLmF1dGhvcml6YXRpb24uQ3JlYXRl",
-            "T0F1dGgyQ2xpZW50TWVzc2FnZRoiLmF1dGhvcml6YXRpb24uT0F1dGgyQ2xp",
-            "ZW50TWVzc2FnZRJQChBHZXRPYXV0aDJDbGllbnRzEhYuZ29vZ2xlLnByb3Rv",
-            "YnVmLkVtcHR5GiIuYXV0aG9yaXphdGlvbi5PQXV0aDJDbGllbnRNZXNzYWdl",
-            "MAFCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
+            "dGlvbhgCIAEoCSJ2ChlDcmVhdGVPQXV0aDJDbGllbnRNZXNzYWdlEgwKBG5h",
+            "bWUYASABKAkSDgoGc2NvcGVzGAIgAygJEhQKDHJlZGlyZWN0VXJpcxgDIAMo",
+            "CRITCgtvd25lclR5cG9JZBgEIAEoBRIQCghhdWRpZW5jZRgFIAEoCSKpAQoT",
+            "T0F1dGgyQ2xpZW50TWVzc2FnZRIQCghjbGllbnRJZBgBIAEoBRIMCgRuYW1l",
+            "GAIgASgJEg4KBnNjb3BlcxgDIAMoCRIUCgxyZWRpcmVjdFVyaXMYBCADKAkS",
+            "EAoIdmVyaWZpZWQYBSABKAgSEwoLdG9rZW5FeHBpcnkYBiABKAMSEwoLb3du",
+            "ZXJUeXBvSWQYByABKAUSEAoIYXVkaWVuY2UYCCABKAkiTgokQ3JlYXRlT0F1",
+            "dGgyQXV0aG9yaXphdGlvbkNvZGVNZXNzYWdlEhYKDm9hdXRoMkNsaWVudElk",
+            "GAEgASgFEg4KBnR5cG9JZBgCIAEoBSJ0CiZPQXV0aDJBdXRob3JpemF0aW9u",
+            "Q29kZUV4Y2hhbmdlTWVzc2FnZRIfChdvYXV0aDJBdXRob3JpemF0aW9uQ29k",
+            "ZRgBIAEoCRIWCg5vYXV0aDJDbGllbnRJZBgCIAEoBRIRCglqd3RJc3N1ZXIY",
+            "AyABKAkicAoYQ3JlYXRlT0F1dGgyVG9rZW5NZXNzYWdlEg4KBnR5cG9JZBgB",
+            "IAEoBRIWCg5vYXV0aDJDbGllbnRJZBgCIAEoBRIRCglqd3RJc3N1ZXIYAyAB",
+            "KAkSGQoRcmVxdWVzdGVkQXVkaWVuY2UYBCABKAkiewoeT0F1dGgyQXV0aG9y",
+            "aXphdGlvbkNvZGVNZXNzYWdlEh8KF29hdXRoMkF1dGhvcml6YXRpb25Db2Rl",
+            "GAEgASgJEjgKDG9hdXRoMkNsaWVudBgCIAEoCzIiLmF1dGhvcml6YXRpb24u",
+            "T0F1dGgyQ2xpZW50TWVzc2FnZSInChhPQXV0aDJBY2Nlc3NUb2tlbk1lc3Nh",
+            "Z2USCwoDand0GAEgASgJMpUFCg1BdXRob3JpemF0aW9uEl0KEkdldEF2YWls",
+            "YWJsZVNjb3BlcxIoLmF1dGhvcml6YXRpb24uR2V0QXZhaWxhYmxlU2NvcGVz",
+            "TWVzc2FnZRobLmF1dGhvcml6YXRpb24uU2NvcGVNZXNzYWdlMAESgwEKHUNy",
+            "ZWF0ZU9BdXRoMkF1dGhvcml6YXRpb25Db2RlEjMuYXV0aG9yaXphdGlvbi5D",
+            "cmVhdGVPQXV0aDJBdXRob3JpemF0aW9uQ29kZU1lc3NhZ2UaLS5hdXRob3Jp",
+            "emF0aW9uLk9BdXRoMkF1dGhvcml6YXRpb25Db2RlTWVzc2FnZRKBAQofRXhj",
+            "aGFuZ2VPYXV0aDJBdXRob3JpemF0aW9uQ29kZRI1LmF1dGhvcml6YXRpb24u",
+            "T0F1dGgyQXV0aG9yaXphdGlvbkNvZGVFeGNoYW5nZU1lc3NhZ2UaJy5hdXRo",
+            "b3JpemF0aW9uLk9BdXRoMkFjY2Vzc1Rva2VuTWVzc2FnZRJlChFDcmVhdGVP",
+            "YXV0aDJUb2tlbhInLmF1dGhvcml6YXRpb24uQ3JlYXRlT0F1dGgyVG9rZW5N",
+            "ZXNzYWdlGicuYXV0aG9yaXphdGlvbi5PQXV0aDJBY2Nlc3NUb2tlbk1lc3Nh",
+            "Z2USYgoSQ3JlYXRlT2F1dGgyQ2xpZW50EiguYXV0aG9yaXphdGlvbi5DcmVh",
+            "dGVPQXV0aDJDbGllbnRNZXNzYWdlGiIuYXV0aG9yaXphdGlvbi5PQXV0aDJD",
+            "bGllbnRNZXNzYWdlElAKEEdldE9hdXRoMkNsaWVudHMSFi5nb29nbGUucHJv",
+            "dG9idWYuRW1wdHkaIi5hdXRob3JpemF0aW9uLk9BdXRoMkNsaWVudE1lc3Nh",
+            "Z2UwAUIPqgIMdG9iZWguVmFsbWFyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetAvailableScopesMessage), global::tobeh.Valmar.GetAvailableScopesMessage.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScopeMessage), global::tobeh.Valmar.ScopeMessage.Parser, new[]{ "Name", "Description" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CreateOAuth2ClientMessage), global::tobeh.Valmar.CreateOAuth2ClientMessage.Parser, new[]{ "Name", "Scopes", "RedirectUri", "OwnerTypoId", "Audience" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2ClientMessage), global::tobeh.Valmar.OAuth2ClientMessage.Parser, new[]{ "ClientId", "Name", "Scopes", "RedirectUri", "Verified", "TokenExpiry", "OwnerTypoId", "Audience" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CreateOAuth2ClientMessage), global::tobeh.Valmar.CreateOAuth2ClientMessage.Parser, new[]{ "Name", "Scopes", "RedirectUris", "OwnerTypoId", "Audience" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2ClientMessage), global::tobeh.Valmar.OAuth2ClientMessage.Parser, new[]{ "ClientId", "Name", "Scopes", "RedirectUris", "Verified", "TokenExpiry", "OwnerTypoId", "Audience" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CreateOAuth2AuthorizationCodeMessage), global::tobeh.Valmar.CreateOAuth2AuthorizationCodeMessage.Parser, new[]{ "Oauth2ClientId", "TypoId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.OAuth2AuthorizationCodeExchangeMessage), global::tobeh.Valmar.OAuth2AuthorizationCodeExchangeMessage.Parser, new[]{ "Oauth2AuthorizationCode", "Oauth2ClientId", "JwtIssuer" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.CreateOAuth2TokenMessage), global::tobeh.Valmar.CreateOAuth2TokenMessage.Parser, new[]{ "TypoId", "Oauth2ClientId", "JwtIssuer", "RequestedAudience" }, null, null, null, null),
@@ -492,7 +492,7 @@ namespace tobeh.Valmar {
     public CreateOAuth2ClientMessage(CreateOAuth2ClientMessage other) : this() {
       name_ = other.name_;
       scopes_ = other.scopes_.Clone();
-      redirectUri_ = other.redirectUri_;
+      redirectUris_ = other.redirectUris_.Clone();
       ownerTypoId_ = other.ownerTypoId_;
       audience_ = other.audience_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -527,16 +527,15 @@ namespace tobeh.Valmar {
       get { return scopes_; }
     }
 
-    /// <summary>Field number for the "redirectUri" field.</summary>
-    public const int RedirectUriFieldNumber = 3;
-    private string redirectUri_ = "";
+    /// <summary>Field number for the "redirectUris" field.</summary>
+    public const int RedirectUrisFieldNumber = 3;
+    private static readonly pb::FieldCodec<string> _repeated_redirectUris_codec
+        = pb::FieldCodec.ForString(26);
+    private readonly pbc::RepeatedField<string> redirectUris_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string RedirectUri {
-      get { return redirectUri_; }
-      set {
-        redirectUri_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public pbc::RepeatedField<string> RedirectUris {
+      get { return redirectUris_; }
     }
 
     /// <summary>Field number for the "ownerTypoId" field.</summary>
@@ -580,7 +579,7 @@ namespace tobeh.Valmar {
       }
       if (Name != other.Name) return false;
       if(!scopes_.Equals(other.scopes_)) return false;
-      if (RedirectUri != other.RedirectUri) return false;
+      if(!redirectUris_.Equals(other.redirectUris_)) return false;
       if (OwnerTypoId != other.OwnerTypoId) return false;
       if (Audience != other.Audience) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -592,7 +591,7 @@ namespace tobeh.Valmar {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       hash ^= scopes_.GetHashCode();
-      if (RedirectUri.Length != 0) hash ^= RedirectUri.GetHashCode();
+      hash ^= redirectUris_.GetHashCode();
       if (OwnerTypoId != 0) hash ^= OwnerTypoId.GetHashCode();
       if (Audience.Length != 0) hash ^= Audience.GetHashCode();
       if (_unknownFields != null) {
@@ -618,10 +617,7 @@ namespace tobeh.Valmar {
         output.WriteString(Name);
       }
       scopes_.WriteTo(output, _repeated_scopes_codec);
-      if (RedirectUri.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(RedirectUri);
-      }
+      redirectUris_.WriteTo(output, _repeated_redirectUris_codec);
       if (OwnerTypoId != 0) {
         output.WriteRawTag(32);
         output.WriteInt32(OwnerTypoId);
@@ -645,10 +641,7 @@ namespace tobeh.Valmar {
         output.WriteString(Name);
       }
       scopes_.WriteTo(ref output, _repeated_scopes_codec);
-      if (RedirectUri.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(RedirectUri);
-      }
+      redirectUris_.WriteTo(ref output, _repeated_redirectUris_codec);
       if (OwnerTypoId != 0) {
         output.WriteRawTag(32);
         output.WriteInt32(OwnerTypoId);
@@ -671,9 +664,7 @@ namespace tobeh.Valmar {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
       size += scopes_.CalculateSize(_repeated_scopes_codec);
-      if (RedirectUri.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(RedirectUri);
-      }
+      size += redirectUris_.CalculateSize(_repeated_redirectUris_codec);
       if (OwnerTypoId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(OwnerTypoId);
       }
@@ -696,9 +687,7 @@ namespace tobeh.Valmar {
         Name = other.Name;
       }
       scopes_.Add(other.scopes_);
-      if (other.RedirectUri.Length != 0) {
-        RedirectUri = other.RedirectUri;
-      }
+      redirectUris_.Add(other.redirectUris_);
       if (other.OwnerTypoId != 0) {
         OwnerTypoId = other.OwnerTypoId;
       }
@@ -729,7 +718,7 @@ namespace tobeh.Valmar {
             break;
           }
           case 26: {
-            RedirectUri = input.ReadString();
+            redirectUris_.AddEntriesFrom(input, _repeated_redirectUris_codec);
             break;
           }
           case 32: {
@@ -764,7 +753,7 @@ namespace tobeh.Valmar {
             break;
           }
           case 26: {
-            RedirectUri = input.ReadString();
+            redirectUris_.AddEntriesFrom(ref input, _repeated_redirectUris_codec);
             break;
           }
           case 32: {
@@ -819,7 +808,7 @@ namespace tobeh.Valmar {
       clientId_ = other.clientId_;
       name_ = other.name_;
       scopes_ = other.scopes_.Clone();
-      redirectUri_ = other.redirectUri_;
+      redirectUris_ = other.redirectUris_.Clone();
       verified_ = other.verified_;
       tokenExpiry_ = other.tokenExpiry_;
       ownerTypoId_ = other.ownerTypoId_;
@@ -868,16 +857,15 @@ namespace tobeh.Valmar {
       get { return scopes_; }
     }
 
-    /// <summary>Field number for the "redirectUri" field.</summary>
-    public const int RedirectUriFieldNumber = 4;
-    private string redirectUri_ = "";
+    /// <summary>Field number for the "redirectUris" field.</summary>
+    public const int RedirectUrisFieldNumber = 4;
+    private static readonly pb::FieldCodec<string> _repeated_redirectUris_codec
+        = pb::FieldCodec.ForString(34);
+    private readonly pbc::RepeatedField<string> redirectUris_ = new pbc::RepeatedField<string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string RedirectUri {
-      get { return redirectUri_; }
-      set {
-        redirectUri_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public pbc::RepeatedField<string> RedirectUris {
+      get { return redirectUris_; }
     }
 
     /// <summary>Field number for the "verified" field.</summary>
@@ -946,7 +934,7 @@ namespace tobeh.Valmar {
       if (ClientId != other.ClientId) return false;
       if (Name != other.Name) return false;
       if(!scopes_.Equals(other.scopes_)) return false;
-      if (RedirectUri != other.RedirectUri) return false;
+      if(!redirectUris_.Equals(other.redirectUris_)) return false;
       if (Verified != other.Verified) return false;
       if (TokenExpiry != other.TokenExpiry) return false;
       if (OwnerTypoId != other.OwnerTypoId) return false;
@@ -961,7 +949,7 @@ namespace tobeh.Valmar {
       if (ClientId != 0) hash ^= ClientId.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       hash ^= scopes_.GetHashCode();
-      if (RedirectUri.Length != 0) hash ^= RedirectUri.GetHashCode();
+      hash ^= redirectUris_.GetHashCode();
       if (Verified != false) hash ^= Verified.GetHashCode();
       if (TokenExpiry != 0L) hash ^= TokenExpiry.GetHashCode();
       if (OwnerTypoId != 0) hash ^= OwnerTypoId.GetHashCode();
@@ -993,10 +981,7 @@ namespace tobeh.Valmar {
         output.WriteString(Name);
       }
       scopes_.WriteTo(output, _repeated_scopes_codec);
-      if (RedirectUri.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(RedirectUri);
-      }
+      redirectUris_.WriteTo(output, _repeated_redirectUris_codec);
       if (Verified != false) {
         output.WriteRawTag(40);
         output.WriteBool(Verified);
@@ -1032,10 +1017,7 @@ namespace tobeh.Valmar {
         output.WriteString(Name);
       }
       scopes_.WriteTo(ref output, _repeated_scopes_codec);
-      if (RedirectUri.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(RedirectUri);
-      }
+      redirectUris_.WriteTo(ref output, _repeated_redirectUris_codec);
       if (Verified != false) {
         output.WriteRawTag(40);
         output.WriteBool(Verified);
@@ -1069,9 +1051,7 @@ namespace tobeh.Valmar {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
       size += scopes_.CalculateSize(_repeated_scopes_codec);
-      if (RedirectUri.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(RedirectUri);
-      }
+      size += redirectUris_.CalculateSize(_repeated_redirectUris_codec);
       if (Verified != false) {
         size += 1 + 1;
       }
@@ -1103,9 +1083,7 @@ namespace tobeh.Valmar {
         Name = other.Name;
       }
       scopes_.Add(other.scopes_);
-      if (other.RedirectUri.Length != 0) {
-        RedirectUri = other.RedirectUri;
-      }
+      redirectUris_.Add(other.redirectUris_);
       if (other.Verified != false) {
         Verified = other.Verified;
       }
@@ -1146,7 +1124,7 @@ namespace tobeh.Valmar {
             break;
           }
           case 34: {
-            RedirectUri = input.ReadString();
+            redirectUris_.AddEntriesFrom(input, _repeated_redirectUris_codec);
             break;
           }
           case 40: {
@@ -1193,7 +1171,7 @@ namespace tobeh.Valmar {
             break;
           }
           case 34: {
-            RedirectUri = input.ReadString();
+            redirectUris_.AddEntriesFrom(ref input, _repeated_redirectUris_codec);
             break;
           }
           case 40: {

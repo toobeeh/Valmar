@@ -12,7 +12,7 @@ public interface IAuthorizationDomainService
     Task<List<Oauth2ClientEntity>> GetOauth2Clients();
 
     Task<Oauth2ClientEntity> CreateOauth2Client(
-        string name, string redirectUri, List<string> scopes, int ownerTypoId);
+        string name, List<string> redirectUris, List<string> scopes, int ownerTypoId);
 
     Task<Oauth2ClientEntity> GetOauth2ClientById(int clientId);
 

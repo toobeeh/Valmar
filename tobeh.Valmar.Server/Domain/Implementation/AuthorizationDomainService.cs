@@ -31,11 +31,11 @@ public class AuthorizationDomainService(
     }
 
     public async Task<Oauth2ClientEntity> CreateOauth2Client(
-        string name, string redirectUri, List<string> scopes, int ownerTypoId)
+        string name, List<string> redirectUris, List<string> scopes, int ownerTypoId)
     {
         logger.LogTrace(
-            "CreateOauth2Client(name: {Name}, redirectUri: {RedirectUri}, scopes: {Scopes}, ownerTypoId: {OwnerTypoId})",
-            name, redirectUri, scopes, ownerTypoId);
+            "CreateOauth2Client(name: {Name}, redirectUris: {redirectUris}, scopes: {Scopes}, ownerTypoId: {OwnerTypoId})",
+            name, redirectUris, scopes, ownerTypoId);
 
         // verify all scopes exist
         var matchingScopes = await db.Oauth2Scopes
@@ -68,7 +68,7 @@ public class AuthorizationDomainService(
         var client = new Oauth2ClientEntity
         {
             Name = name,
-            RedirectUri = redirectUri,
+            RedirectUris = string.Join(",", redirectUris),
             Scopes = string.Join(",", matchingScopes.Select(s => s.Name)),
             Owner = ownerTypoId,
             TokenExpiry = 60 * 60 * 24 * 365, // 1 year
@@ -132,7 +132,7 @@ public class AuthorizationDomainService(
         db.Oauth2AuthorizationCodes.Add(code);
         await db.SaveChangesAsync();
 
-        return new OAuth2AuthorizationCodeDdo(code.Code, code.ClientId, client.RedirectUri);
+        return new OAuth2AuthorizationCodeDdo(code.Code, code.ClientId, client.RedirectUris.Split(",").ToList());
     }
 
     public async Task<string> CreateOauth2Token(int typoId, int clientId, string issuer,
@@ -186,7 +186,7 @@ public class AuthorizationDomainService(
     public async Task<string> ExchangeOauth2AuthorizationCode(string code, int clientId, string issuer)
     {
         logger.LogTrace(
-            "ExchangeOauth2AuthorizationCode(code: {Code}, clientId: {ClientId}, issuer: {Issuer}, audience: {Audience})",
+            "ExchangeOauth2AuthorizationCode(code: {Code}, clientId: {ClientId}, issuer: {Issuer})",
             code, clientId, issuer);
 
         // get client

@@ -23,10 +23,10 @@ namespace tobeh.Valmar.Server.Database
         public string Name { get; set; } = null!;
 
         /// <summary>
-        /// Redirect uri of the authorization flow
+        /// Comma-separated allowed redirect uris of the authorization flow
         /// </summary>
         [Column(TypeName = "text")]
-        public string RedirectUri { get; set; } = null!;
+        public string RedirectUris { get; set; } = null!;
 
         /// <summary>
         /// Expiry in s of issued access token
