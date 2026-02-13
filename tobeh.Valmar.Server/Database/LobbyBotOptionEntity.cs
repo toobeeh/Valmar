@@ -18,5 +18,6 @@ namespace tobeh.Valmar.Server.Database
         [Column(TypeName = "text")] public string? BotName { get; set; }
         [Required] public bool? ShowInvite { get; set; }
         [Required] public bool? ProxyLinks { get; set; }
+        [Column(TypeName = "text")] public string? AnnouncementsWebhook { get; set; }
     }
 }

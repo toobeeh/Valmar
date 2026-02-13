@@ -12,8 +12,7 @@ public class GuildsDomainService(
 {
     public async Task<GuildDetailDdo> GetGuildByInvite(int invite)
     {
-        var guild = await db.LobbyBotOptions.FirstOrDefaultAsync(
-            guild => guild.Invite == invite);
+        var guild = await db.LobbyBotOptions.FirstOrDefaultAsync(guild => guild.Invite == invite);
         if (guild is null)
         {
             throw new EntityNotFoundException($"Guild with invite {invite} does not exist");
@@ -114,8 +113,7 @@ public class GuildsDomainService(
     {
         logger.LogTrace("GetGuildByDiscordId(discordId={discordId})", discordId);
 
-        var guild = await db.LobbyBotOptions.FirstOrDefaultAsync(
-            guild => guild.GuildId == discordId);
+        var guild = await db.LobbyBotOptions.FirstOrDefaultAsync(guild => guild.GuildId == discordId);
 
         if (guild is null)
         {
@@ -133,7 +131,7 @@ public class GuildsDomainService(
 
     public async Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix,
         bool showInvite, bool proxyLinks,
-        long? channelId = null, string? botName = null)
+        long? channelId = null, string? botName = null, string? announcementsWebhook = null)
     {
         logger.LogTrace("UpdateGuildOptions(guildId={guildId}, name={name})", guildId, name);
 
@@ -162,6 +160,7 @@ public class GuildsDomainService(
         options.BotName = botName;
         options.ShowInvite = showInvite;
         options.ProxyLinks = proxyLinks;
+        options.AnnouncementsWebhook = announcementsWebhook;
 
         db.LobbyBotOptions.Update(options);
         await db.SaveChangesAsync();

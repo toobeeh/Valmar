@@ -10,7 +10,7 @@ public interface IGuildsDomainService
 
     Task<LobbyBotOptionEntity> UpdateGuildOptions(long guildId, string name, string prefix, bool showInvite,
         bool proxyLinks,
-        long? channelId = null, string? botName = null);
+        long? channelId = null, string? botName = null, string? announcementsWebhook = null);
 
     Task<LobbyBotOptionEntity> GetGuildOptionsByGuildId(long guildId);
     Task<List<ServerWebhookEntity>> GetGuildWebhooks(long guildId);

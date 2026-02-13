@@ -103,4 +103,5 @@ message GuildOptionsMessage {
   google.protobuf.StringValue botName = 6;
   bool proxyLinks = 7;
   bool showInvite = 8;
+  google.protobuf.StringValue announcementsWebhook = 9;
 }

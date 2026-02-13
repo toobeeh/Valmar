@@ -57,7 +57,7 @@ public class GuildsGrpcService(
 
         await guildsService.UpdateGuildOptions(request.GuildId, request.Name, request.Prefix, request.ShowInvite,
             request.ProxyLinks, request.ChannelId,
-            request.BotName);
+            request.BotName, request.AnnouncementsWebhook);
         return new Empty();
     }
 
