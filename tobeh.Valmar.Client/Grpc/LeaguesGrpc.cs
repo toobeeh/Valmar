@@ -55,6 +55,8 @@ namespace tobeh.Valmar {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.EvaluateSeasonRequest> __Marshaller_leagues_EvaluateSeasonRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.EvaluateSeasonRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply> __Marshaller_leagues_LeagueSeasonSplitEvaluationReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.EvaluateMemberCurrentSeasonRequest> __Marshaller_leagues_EvaluateMemberCurrentSeasonRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.EvaluateMemberCurrentSeasonRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.LeagueSeasonMemberEvaluationReply> __Marshaller_leagues_LeagueSeasonMemberEvaluationReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.LeagueSeasonMemberEvaluationReply.Parser));
@@ -76,6 +78,14 @@ namespace tobeh.Valmar {
         "EvaluateLeagueSeason",
         __Marshaller_leagues_EvaluateSeasonRequest,
         __Marshaller_leagues_LeagueSeasonEvaluationReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.EvaluateSeasonRequest, global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply> __Method_EvaluateLeagueSeasonSplits = new grpc::Method<global::tobeh.Valmar.EvaluateSeasonRequest, global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "EvaluateLeagueSeasonSplits",
+        __Marshaller_leagues_EvaluateSeasonRequest,
+        __Marshaller_leagues_LeagueSeasonSplitEvaluationReply);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.EvaluateMemberCurrentSeasonRequest, global::tobeh.Valmar.LeagueSeasonMemberEvaluationReply> __Method_EvaluateMemberCurrentLeagueSeason = new grpc::Method<global::tobeh.Valmar.EvaluateMemberCurrentSeasonRequest, global::tobeh.Valmar.LeagueSeasonMemberEvaluationReply>(
@@ -221,6 +231,54 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.LeagueSeasonEvaluationReply> EvaluateLeagueSeasonAsync(global::tobeh.Valmar.EvaluateSeasonRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_EvaluateLeagueSeason, null, options, request);
+      }
+      /// <summary>
+      /// gets the league splits evaluation for a specific month
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply EvaluateLeagueSeasonSplits(global::tobeh.Valmar.EvaluateSeasonRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EvaluateLeagueSeasonSplits(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// gets the league splits evaluation for a specific month
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply EvaluateLeagueSeasonSplits(global::tobeh.Valmar.EvaluateSeasonRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_EvaluateLeagueSeasonSplits, null, options, request);
+      }
+      /// <summary>
+      /// gets the league splits evaluation for a specific month
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply> EvaluateLeagueSeasonSplitsAsync(global::tobeh.Valmar.EvaluateSeasonRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EvaluateLeagueSeasonSplitsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// gets the league splits evaluation for a specific month
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply> EvaluateLeagueSeasonSplitsAsync(global::tobeh.Valmar.EvaluateSeasonRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_EvaluateLeagueSeasonSplits, null, options, request);
       }
       /// <summary>
       /// Gets the current own league evaluation

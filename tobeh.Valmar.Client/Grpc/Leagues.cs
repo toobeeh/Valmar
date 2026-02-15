@@ -25,50 +25,62 @@ namespace tobeh.Valmar {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Cg1sZWFndWVzLnByb3RvEgdsZWFndWVzGhtnb29nbGUvcHJvdG9idWYvZW1w",
-            "dHkucHJvdG8aH2dvb2dsZS9wcm90b2J1Zi90aW1lc3RhbXAucHJvdG8iwgMK",
-            "G0xlYWd1ZVNlYXNvbkV2YWx1YXRpb25SZXBseRIMCgR5ZWFyGAEgASgFEg0K",
-            "BW1vbnRoGAIgASgFEjYKDHNjb3JlUmFua2luZxgDIAMoCzIgLmxlYWd1ZXMu",
-            "TGVhZ3VlU2NvcmVSYW5raW5nUmVwbHkSNgoMY291bnRSYW5raW5nGAQgAygL",
-            "MiAubGVhZ3Vlcy5MZWFndWVDb3VudFJhbmtpbmdSZXBseRI7Cgt0aW1lUmFu",
-            "a2luZxgFIAMoCzImLmxlYWd1ZXMuTGVhZ3VlQXZlcmFnZVRpbWVSYW5raW5n",
-            "UmVwbHkSPwoNd2VpZ2h0UmFua2luZxgGIAMoCzIoLmxlYWd1ZXMuTGVhZ3Vl",
-            "QXZlcmFnZVdlaWdodFJhbmtpbmdSZXBseRI4Cg1zdHJlYWtSYW5raW5nGAcg",
-            "AygLMiEubGVhZ3Vlcy5MZWFndWVTdHJlYWtSYW5raW5nUmVwbHkSLwoLc2Vh",
-            "c29uU3RhcnQYCCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi0K",
-            "CXNlYXNvbkVuZBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAi",
-            "lAIKIUxlYWd1ZVNlYXNvbk1lbWJlckV2YWx1YXRpb25SZXBseRIMCgR5ZWFy",
-            "GAEgASgFEg0KBW1vbnRoGAIgASgFEg0KBXNjb3JlGAMgASgBEg0KBWNvdW50",
-            "GAUgASgFEhEKCW1heFN0cmVhaxgGIAEoBRIVCg1jdXJyZW50U3RyZWFrGAcg",
-            "ASgFEhMKC2F2ZXJhZ2VUaW1lGAggASgBEhUKDWF2ZXJhZ2VXZWlnaHQYCSAB",
-            "KAESLwoLc2Vhc29uU3RhcnQYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGlt",
-            "ZXN0YW1wEi0KCXNlYXNvbkVuZBgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5U",
-            "aW1lc3RhbXAiRgoXTGVhZ3VlU2NvcmVSYW5raW5nUmVwbHkSDAoEbmFtZRgB",
-            "IAEoCRINCgVzY29yZRgCIAEoARIOCgZ1c2VySWQYAyABKAMiTAoXTGVhZ3Vl",
-            "Q291bnRSYW5raW5nUmVwbHkSDAoEbmFtZRgBIAEoCRITCgtjYXVnaHREcm9w",
-            "cxgCIAEoBRIOCgZ1c2VySWQYAyABKAMiUgodTGVhZ3VlQXZlcmFnZVRpbWVS",
-            "YW5raW5nUmVwbHkSDAoEbmFtZRgBIAEoCRITCgthdmVyYWdlVGltZRgCIAEo",
-            "ARIOCgZ1c2VySWQYAyABKAMiVgofTGVhZ3VlQXZlcmFnZVdlaWdodFJhbmtp",
-            "bmdSZXBseRIMCgRuYW1lGAEgASgJEhUKDWF2ZXJhZ2VXZWlnaHQYAiABKAES",
-            "DgoGdXNlcklkGAMgASgDImIKGExlYWd1ZVN0cmVha1JhbmtpbmdSZXBseRIM",
-            "CgRuYW1lGAEgASgJEhEKCW1heFN0cmVhaxgCIAEoBRIVCg1jdXJyZW50U3Ry",
-            "ZWFrGAMgASgFEg4KBnVzZXJJZBgEIAEoAyI0ChVFdmFsdWF0ZVNlYXNvblJl",
-            "cXVlc3QSDAoEeWVhchgBIAEoBRINCgVtb250aBgCIAEoBSJJChtFdmFsdWF0",
-            "ZU1lbWJlclNlYXNvblJlcXVlc3QSDAoEeWVhchgBIAEoBRINCgVtb250aBgC",
-            "IAEoBRINCgVsb2dpbhgDIAEoBSIzCiJFdmFsdWF0ZU1lbWJlckN1cnJlbnRT",
-            "ZWFzb25SZXF1ZXN0Eg0KBWxvZ2luGAIgASgFMrIDCgdMZWFndWVzElsKG0V2",
-            "YWx1YXRlQ3VycmVudExlYWd1ZVNlYXNvbhIWLmdvb2dsZS5wcm90b2J1Zi5F",
-            "bXB0eRokLmxlYWd1ZXMuTGVhZ3VlU2Vhc29uRXZhbHVhdGlvblJlcGx5ElwK",
-            "FEV2YWx1YXRlTGVhZ3VlU2Vhc29uEh4ubGVhZ3Vlcy5FdmFsdWF0ZVNlYXNv",
-            "blJlcXVlc3QaJC5sZWFndWVzLkxlYWd1ZVNlYXNvbkV2YWx1YXRpb25SZXBs",
-            "eRJ8CiFFdmFsdWF0ZU1lbWJlckN1cnJlbnRMZWFndWVTZWFzb24SKy5sZWFn",
-            "dWVzLkV2YWx1YXRlTWVtYmVyQ3VycmVudFNlYXNvblJlcXVlc3QaKi5sZWFn",
-            "dWVzLkxlYWd1ZVNlYXNvbk1lbWJlckV2YWx1YXRpb25SZXBseRJuChpFdmFs",
-            "dWF0ZU1lbWJlckxlYWd1ZVNlYXNvbhIkLmxlYWd1ZXMuRXZhbHVhdGVNZW1i",
-            "ZXJTZWFzb25SZXF1ZXN0GioubGVhZ3Vlcy5MZWFndWVTZWFzb25NZW1iZXJF",
-            "dmFsdWF0aW9uUmVwbHlCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
+            "dHkucHJvdG8aH2dvb2dsZS9wcm90b2J1Zi90aW1lc3RhbXAucHJvdG8i5AEK",
+            "IExlYWd1ZVNlYXNvblNwbGl0RXZhbHVhdGlvblJlcGx5EgwKBHllYXIYASAB",
+            "KAUSDQoFbW9udGgYAiABKAUSQwoKZXZhbHVhdGlvbhgDIAMoCzIvLmxlYWd1",
+            "ZXMuTGVhZ3VlU2Vhc29uTWVtYmVyU3BsaXRFdmFsdWF0aW9uUmVwbHkSLwoL",
+            "c2Vhc29uU3RhcnQYCCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1w",
+            "Ei0KCXNlYXNvbkVuZBgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3Rh",
+            "bXAiZwomTGVhZ3VlU2Vhc29uTWVtYmVyU3BsaXRFdmFsdWF0aW9uUmVwbHkS",
+            "DAoEbmFtZRgBIAEoCRIOCgZzcGxpdHMYAiABKAMSDgoGdXNlcklkGAMgASgD",
+            "Eg8KB2NvbW1lbnQYBCABKAkiwgMKG0xlYWd1ZVNlYXNvbkV2YWx1YXRpb25S",
+            "ZXBseRIMCgR5ZWFyGAEgASgFEg0KBW1vbnRoGAIgASgFEjYKDHNjb3JlUmFu",
+            "a2luZxgDIAMoCzIgLmxlYWd1ZXMuTGVhZ3VlU2NvcmVSYW5raW5nUmVwbHkS",
+            "NgoMY291bnRSYW5raW5nGAQgAygLMiAubGVhZ3Vlcy5MZWFndWVDb3VudFJh",
+            "bmtpbmdSZXBseRI7Cgt0aW1lUmFua2luZxgFIAMoCzImLmxlYWd1ZXMuTGVh",
+            "Z3VlQXZlcmFnZVRpbWVSYW5raW5nUmVwbHkSPwoNd2VpZ2h0UmFua2luZxgG",
+            "IAMoCzIoLmxlYWd1ZXMuTGVhZ3VlQXZlcmFnZVdlaWdodFJhbmtpbmdSZXBs",
+            "eRI4Cg1zdHJlYWtSYW5raW5nGAcgAygLMiEubGVhZ3Vlcy5MZWFndWVTdHJl",
+            "YWtSYW5raW5nUmVwbHkSLwoLc2Vhc29uU3RhcnQYCCABKAsyGi5nb29nbGUu",
+            "cHJvdG9idWYuVGltZXN0YW1wEi0KCXNlYXNvbkVuZBgJIAEoCzIaLmdvb2ds",
+            "ZS5wcm90b2J1Zi5UaW1lc3RhbXAilAIKIUxlYWd1ZVNlYXNvbk1lbWJlckV2",
+            "YWx1YXRpb25SZXBseRIMCgR5ZWFyGAEgASgFEg0KBW1vbnRoGAIgASgFEg0K",
+            "BXNjb3JlGAMgASgBEg0KBWNvdW50GAUgASgFEhEKCW1heFN0cmVhaxgGIAEo",
+            "BRIVCg1jdXJyZW50U3RyZWFrGAcgASgFEhMKC2F2ZXJhZ2VUaW1lGAggASgB",
+            "EhUKDWF2ZXJhZ2VXZWlnaHQYCSABKAESLwoLc2Vhc29uU3RhcnQYCiABKAsy",
+            "Gi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi0KCXNlYXNvbkVuZBgLIAEo",
+            "CzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiRgoXTGVhZ3VlU2NvcmVS",
+            "YW5raW5nUmVwbHkSDAoEbmFtZRgBIAEoCRINCgVzY29yZRgCIAEoARIOCgZ1",
+            "c2VySWQYAyABKAMiTAoXTGVhZ3VlQ291bnRSYW5raW5nUmVwbHkSDAoEbmFt",
+            "ZRgBIAEoCRITCgtjYXVnaHREcm9wcxgCIAEoBRIOCgZ1c2VySWQYAyABKAMi",
+            "UgodTGVhZ3VlQXZlcmFnZVRpbWVSYW5raW5nUmVwbHkSDAoEbmFtZRgBIAEo",
+            "CRITCgthdmVyYWdlVGltZRgCIAEoARIOCgZ1c2VySWQYAyABKAMiVgofTGVh",
+            "Z3VlQXZlcmFnZVdlaWdodFJhbmtpbmdSZXBseRIMCgRuYW1lGAEgASgJEhUK",
+            "DWF2ZXJhZ2VXZWlnaHQYAiABKAESDgoGdXNlcklkGAMgASgDImIKGExlYWd1",
+            "ZVN0cmVha1JhbmtpbmdSZXBseRIMCgRuYW1lGAEgASgJEhEKCW1heFN0cmVh",
+            "axgCIAEoBRIVCg1jdXJyZW50U3RyZWFrGAMgASgFEg4KBnVzZXJJZBgEIAEo",
+            "AyI0ChVFdmFsdWF0ZVNlYXNvblJlcXVlc3QSDAoEeWVhchgBIAEoBRINCgVt",
+            "b250aBgCIAEoBSJJChtFdmFsdWF0ZU1lbWJlclNlYXNvblJlcXVlc3QSDAoE",
+            "eWVhchgBIAEoBRINCgVtb250aBgCIAEoBRINCgVsb2dpbhgDIAEoBSIzCiJF",
+            "dmFsdWF0ZU1lbWJlckN1cnJlbnRTZWFzb25SZXF1ZXN0Eg0KBWxvZ2luGAIg",
+            "ASgFMpsECgdMZWFndWVzElsKG0V2YWx1YXRlQ3VycmVudExlYWd1ZVNlYXNv",
+            "bhIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRokLmxlYWd1ZXMuTGVhZ3VlU2Vh",
+            "c29uRXZhbHVhdGlvblJlcGx5ElwKFEV2YWx1YXRlTGVhZ3VlU2Vhc29uEh4u",
+            "bGVhZ3Vlcy5FdmFsdWF0ZVNlYXNvblJlcXVlc3QaJC5sZWFndWVzLkxlYWd1",
+            "ZVNlYXNvbkV2YWx1YXRpb25SZXBseRJnChpFdmFsdWF0ZUxlYWd1ZVNlYXNv",
+            "blNwbGl0cxIeLmxlYWd1ZXMuRXZhbHVhdGVTZWFzb25SZXF1ZXN0GikubGVh",
+            "Z3Vlcy5MZWFndWVTZWFzb25TcGxpdEV2YWx1YXRpb25SZXBseRJ8CiFFdmFs",
+            "dWF0ZU1lbWJlckN1cnJlbnRMZWFndWVTZWFzb24SKy5sZWFndWVzLkV2YWx1",
+            "YXRlTWVtYmVyQ3VycmVudFNlYXNvblJlcXVlc3QaKi5sZWFndWVzLkxlYWd1",
+            "ZVNlYXNvbk1lbWJlckV2YWx1YXRpb25SZXBseRJuChpFdmFsdWF0ZU1lbWJl",
+            "ckxlYWd1ZVNlYXNvbhIkLmxlYWd1ZXMuRXZhbHVhdGVNZW1iZXJTZWFzb25S",
+            "ZXF1ZXN0GioubGVhZ3Vlcy5MZWFndWVTZWFzb25NZW1iZXJFdmFsdWF0aW9u",
+            "UmVwbHlCD6oCDHRvYmVoLlZhbG1hcmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply), global::tobeh.Valmar.LeagueSeasonSplitEvaluationReply.Parser, new[]{ "Year", "Month", "Evaluation", "SeasonStart", "SeasonEnd" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeagueSeasonMemberSplitEvaluationReply), global::tobeh.Valmar.LeagueSeasonMemberSplitEvaluationReply.Parser, new[]{ "Name", "Splits", "UserId", "Comment" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeagueSeasonEvaluationReply), global::tobeh.Valmar.LeagueSeasonEvaluationReply.Parser, new[]{ "Year", "Month", "ScoreRanking", "CountRanking", "TimeRanking", "WeightRanking", "StreakRanking", "SeasonStart", "SeasonEnd" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeagueSeasonMemberEvaluationReply), global::tobeh.Valmar.LeagueSeasonMemberEvaluationReply.Parser, new[]{ "Year", "Month", "Score", "Count", "MaxStreak", "CurrentStreak", "AverageTime", "AverageWeight", "SeasonStart", "SeasonEnd" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.LeagueScoreRankingReply), global::tobeh.Valmar.LeagueScoreRankingReply.Parser, new[]{ "Name", "Score", "UserId" }, null, null, null, null),
@@ -86,6 +98,656 @@ namespace tobeh.Valmar {
   }
   #region Messages
   /// <summary>
+  /// Response containing league split rewards.
+  /// </summary>
+  public sealed partial class LeagueSeasonSplitEvaluationReply : pb::IMessage<LeagueSeasonSplitEvaluationReply>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<LeagueSeasonSplitEvaluationReply> _parser = new pb::MessageParser<LeagueSeasonSplitEvaluationReply>(() => new LeagueSeasonSplitEvaluationReply());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<LeagueSeasonSplitEvaluationReply> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LeagueSeasonSplitEvaluationReply() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LeagueSeasonSplitEvaluationReply(LeagueSeasonSplitEvaluationReply other) : this() {
+      year_ = other.year_;
+      month_ = other.month_;
+      evaluation_ = other.evaluation_.Clone();
+      seasonStart_ = other.seasonStart_ != null ? other.seasonStart_.Clone() : null;
+      seasonEnd_ = other.seasonEnd_ != null ? other.seasonEnd_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LeagueSeasonSplitEvaluationReply Clone() {
+      return new LeagueSeasonSplitEvaluationReply(this);
+    }
+
+    /// <summary>Field number for the "year" field.</summary>
+    public const int YearFieldNumber = 1;
+    private int year_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Year {
+      get { return year_; }
+      set {
+        year_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "month" field.</summary>
+    public const int MonthFieldNumber = 2;
+    private int month_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Month {
+      get { return month_; }
+      set {
+        month_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "evaluation" field.</summary>
+    public const int EvaluationFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::tobeh.Valmar.LeagueSeasonMemberSplitEvaluationReply> _repeated_evaluation_codec
+        = pb::FieldCodec.ForMessage(26, global::tobeh.Valmar.LeagueSeasonMemberSplitEvaluationReply.Parser);
+    private readonly pbc::RepeatedField<global::tobeh.Valmar.LeagueSeasonMemberSplitEvaluationReply> evaluation_ = new pbc::RepeatedField<global::tobeh.Valmar.LeagueSeasonMemberSplitEvaluationReply>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::tobeh.Valmar.LeagueSeasonMemberSplitEvaluationReply> Evaluation {
+      get { return evaluation_; }
+    }
+
+    /// <summary>Field number for the "seasonStart" field.</summary>
+    public const int SeasonStartFieldNumber = 8;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp seasonStart_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp SeasonStart {
+      get { return seasonStart_; }
+      set {
+        seasonStart_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "seasonEnd" field.</summary>
+    public const int SeasonEndFieldNumber = 9;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp seasonEnd_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp SeasonEnd {
+      get { return seasonEnd_; }
+      set {
+        seasonEnd_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as LeagueSeasonSplitEvaluationReply);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(LeagueSeasonSplitEvaluationReply other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Year != other.Year) return false;
+      if (Month != other.Month) return false;
+      if(!evaluation_.Equals(other.evaluation_)) return false;
+      if (!object.Equals(SeasonStart, other.SeasonStart)) return false;
+      if (!object.Equals(SeasonEnd, other.SeasonEnd)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Year != 0) hash ^= Year.GetHashCode();
+      if (Month != 0) hash ^= Month.GetHashCode();
+      hash ^= evaluation_.GetHashCode();
+      if (seasonStart_ != null) hash ^= SeasonStart.GetHashCode();
+      if (seasonEnd_ != null) hash ^= SeasonEnd.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Year != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Year);
+      }
+      if (Month != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Month);
+      }
+      evaluation_.WriteTo(output, _repeated_evaluation_codec);
+      if (seasonStart_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(SeasonStart);
+      }
+      if (seasonEnd_ != null) {
+        output.WriteRawTag(74);
+        output.WriteMessage(SeasonEnd);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Year != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Year);
+      }
+      if (Month != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Month);
+      }
+      evaluation_.WriteTo(ref output, _repeated_evaluation_codec);
+      if (seasonStart_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(SeasonStart);
+      }
+      if (seasonEnd_ != null) {
+        output.WriteRawTag(74);
+        output.WriteMessage(SeasonEnd);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Year != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Year);
+      }
+      if (Month != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Month);
+      }
+      size += evaluation_.CalculateSize(_repeated_evaluation_codec);
+      if (seasonStart_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SeasonStart);
+      }
+      if (seasonEnd_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SeasonEnd);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(LeagueSeasonSplitEvaluationReply other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Year != 0) {
+        Year = other.Year;
+      }
+      if (other.Month != 0) {
+        Month = other.Month;
+      }
+      evaluation_.Add(other.evaluation_);
+      if (other.seasonStart_ != null) {
+        if (seasonStart_ == null) {
+          SeasonStart = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        SeasonStart.MergeFrom(other.SeasonStart);
+      }
+      if (other.seasonEnd_ != null) {
+        if (seasonEnd_ == null) {
+          SeasonEnd = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        SeasonEnd.MergeFrom(other.SeasonEnd);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Year = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Month = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            evaluation_.AddEntriesFrom(input, _repeated_evaluation_codec);
+            break;
+          }
+          case 66: {
+            if (seasonStart_ == null) {
+              SeasonStart = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(SeasonStart);
+            break;
+          }
+          case 74: {
+            if (seasonEnd_ == null) {
+              SeasonEnd = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(SeasonEnd);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Year = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Month = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            evaluation_.AddEntriesFrom(ref input, _repeated_evaluation_codec);
+            break;
+          }
+          case 66: {
+            if (seasonStart_ == null) {
+              SeasonStart = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(SeasonStart);
+            break;
+          }
+          case 74: {
+            if (seasonEnd_ == null) {
+              SeasonEnd = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(SeasonEnd);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// Response containing own league splits evaluation.
+  /// </summary>
+  public sealed partial class LeagueSeasonMemberSplitEvaluationReply : pb::IMessage<LeagueSeasonMemberSplitEvaluationReply>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<LeagueSeasonMemberSplitEvaluationReply> _parser = new pb::MessageParser<LeagueSeasonMemberSplitEvaluationReply>(() => new LeagueSeasonMemberSplitEvaluationReply());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<LeagueSeasonMemberSplitEvaluationReply> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LeagueSeasonMemberSplitEvaluationReply() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LeagueSeasonMemberSplitEvaluationReply(LeagueSeasonMemberSplitEvaluationReply other) : this() {
+      name_ = other.name_;
+      splits_ = other.splits_;
+      userId_ = other.userId_;
+      comment_ = other.comment_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LeagueSeasonMemberSplitEvaluationReply Clone() {
+      return new LeagueSeasonMemberSplitEvaluationReply(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "splits" field.</summary>
+    public const int SplitsFieldNumber = 2;
+    private long splits_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Splits {
+      get { return splits_; }
+      set {
+        splits_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 3;
+    private long userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "comment" field.</summary>
+    public const int CommentFieldNumber = 4;
+    private string comment_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Comment {
+      get { return comment_; }
+      set {
+        comment_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as LeagueSeasonMemberSplitEvaluationReply);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(LeagueSeasonMemberSplitEvaluationReply other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (Splits != other.Splits) return false;
+      if (UserId != other.UserId) return false;
+      if (Comment != other.Comment) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Splits != 0L) hash ^= Splits.GetHashCode();
+      if (UserId != 0L) hash ^= UserId.GetHashCode();
+      if (Comment.Length != 0) hash ^= Comment.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (Splits != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Splits);
+      }
+      if (UserId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(UserId);
+      }
+      if (Comment.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Comment);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (Splits != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Splits);
+      }
+      if (UserId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(UserId);
+      }
+      if (Comment.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Comment);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Splits != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Splits);
+      }
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      }
+      if (Comment.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Comment);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(LeagueSeasonMemberSplitEvaluationReply other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Splits != 0L) {
+        Splits = other.Splits;
+      }
+      if (other.UserId != 0L) {
+        UserId = other.UserId;
+      }
+      if (other.Comment.Length != 0) {
+        Comment = other.Comment;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Splits = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            UserId = input.ReadInt64();
+            break;
+          }
+          case 34: {
+            Comment = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Splits = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            UserId = input.ReadInt64();
+            break;
+          }
+          case 34: {
+            Comment = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
   /// Response containing league evaluation.
   /// </summary>
   public sealed partial class LeagueSeasonEvaluationReply : pb::IMessage<LeagueSeasonEvaluationReply>
@@ -102,7 +764,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[0]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -553,7 +1215,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[1]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1093,7 +1755,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[2]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1356,7 +2018,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[3]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1619,7 +2281,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[4]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1882,7 +2544,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[5]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2145,7 +2807,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[6]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2448,7 +3110,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[7]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2677,7 +3339,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[8]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2943,7 +3605,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[9]; }
+      get { return global::tobeh.Valmar.LeaguesReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

@@ -14,12 +14,32 @@ service Leagues {
 
   // gets the league evaluation for a specific month
   rpc EvaluateLeagueSeason (EvaluateSeasonRequest) returns (LeagueSeasonEvaluationReply);
+
+  // gets the league splits evaluation for a specific month
+  rpc EvaluateLeagueSeasonSplits (EvaluateSeasonRequest) returns (LeagueSeasonSplitEvaluationReply);
   
   // Gets the current own league evaluation
   rpc EvaluateMemberCurrentLeagueSeason (EvaluateMemberCurrentSeasonRequest) returns (LeagueSeasonMemberEvaluationReply);
   
   // gets the own league evaluation for a specific month
   rpc EvaluateMemberLeagueSeason (EvaluateMemberSeasonRequest) returns (LeagueSeasonMemberEvaluationReply);
+}
+
+// Response containing league split rewards.
+message LeagueSeasonSplitEvaluationReply {
+  int32 year = 1;
+  int32 month = 2;
+  repeated LeagueSeasonMemberSplitEvaluationReply evaluation = 3;
+  google.protobuf.Timestamp seasonStart = 8;
+  google.protobuf.Timestamp seasonEnd = 9;
+}
+
+// Response containing own league splits evaluation.
+message LeagueSeasonMemberSplitEvaluationReply {
+  string name = 1;
+  int64 splits = 2;
+  int64 userId = 3;
+  string comment = 4;
 }
 
 // Response containing league evaluation.
