@@ -2,6 +2,7 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using tobeh.Valmar.Server.Domain;
+using tobeh.Valmar.Server.Grpc.Utils;
 
 namespace tobeh.Valmar.Server.Grpc;
 
@@ -28,14 +29,6 @@ public class GuildsGrpcService(
         return mapper.Map<GuildReply>(details);
     }
 
-    public override async Task<GuildReply> GetValidGuilds(Empty request, ServerCallContext context)
-    {
-        logger.LogTrace("GetValidGuilds()");
-
-        var details = await guildsService.GetValidGuilds();
-        return mapper.Map<GuildReply>(details);
-    }
-
     public override async Task GetGuildSupporters(GetGuildSupportersMessage request,
         IServerStreamWriter<MemberReply> responseStream,
         ServerCallContext context)
@@ -57,6 +50,15 @@ public class GuildsGrpcService(
 
         var options = await guildsService.GetGuildOptionsByGuildId(request.GuildId);
         return mapper.Map<GuildOptionsMessage>(options);
+    }
+
+    public override async Task GetValidGuilds(Empty request, IServerStreamWriter<GuildReply> responseStream,
+        ServerCallContext context)
+    {
+        logger.LogTrace("GetValidGuilds()");
+
+        var details = await guildsService.GetValidGuilds();
+        await responseStream.WriteAllMappedAsync(details, mapper.Map<GuildReply>);
     }
 
     public override async Task<Empty> SetGuildOptions(GuildOptionsMessage request, ServerCallContext context)

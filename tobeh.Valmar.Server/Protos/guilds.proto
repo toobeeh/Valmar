@@ -17,7 +17,7 @@ service Guilds {
   rpc GetGuildById (GetGuildByIdMessage) returns (GuildReply);
 
   // Gets all guilds with active support state
-  rpc GetValidGuilds (google.protobuf.Empty) returns (GuildReply);
+  rpc GetValidGuilds (google.protobuf.Empty) returns (stream GuildReply);
 
   rpc GetGuildOptionsById (GetGuildOptionsByIdMessage) returns (GuildOptionsMessage);
 
