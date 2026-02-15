@@ -1,6 +1,5 @@
 using AutoMapper;
 using tobeh.Valmar.Server.Domain.Classes;
-using tobeh.Valmar.Server.Database;
 
 namespace tobeh.Valmar.Server.Mappers;
 
@@ -14,7 +13,8 @@ public class LeagueMapperProfile : Profile
         CreateMap<LeagueAverageWeightRankingDdo, LeagueAverageWeightRankingReply>();
         CreateMap<LeagueAverageTimeRankingDdo, LeagueAverageTimeRankingReply>();
         CreateMap<LeagueStreakRankingDdo, LeagueStreakRankingReply>();
-        
+        CreateMap<LeagueSeasonSplitEvaluationDdo, LeagueSeasonSplitEvaluationReply>();
+        CreateMap<LeagueSeasonMemberSplitEvaluationDdo, LeagueSeasonMemberSplitEvaluationDdo>();
         CreateMap<LeagueSeasonMemberEvaluationDdo, LeagueSeasonMemberEvaluationReply>();
     }
 }
