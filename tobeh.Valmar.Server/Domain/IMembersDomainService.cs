@@ -17,7 +17,7 @@ public interface IMembersDomainService
     Task ConnectToServer(int login, int serverToken);
     Task DisconnectFromServer(int login, int serverToken);
     Task<int> GetMemberLoginFromDiscordId(long id);
-    Task<List<MemberJson>> GetMemberInfosFromDiscordIds(List<long> ids);
+    Task<List<MemberJson>> GetMemberInfosFromDiscordIds(List<long> ids, List<MemberFlagDdo> forbiddenFlags);
     Task<MemberDdo> GetPatronizedMemberOfPatronizer(long patronizerId);
     Task<List<MemberDdo>> GetAllMembers();
     Task<List<MemberDdo>> GetGuildMembers(long guildId);

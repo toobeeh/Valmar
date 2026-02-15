@@ -143,18 +143,19 @@ public class MembersDomainService(
         throw new EntityNotFoundException("User has no member patronized", false);
     }
 
-    public async Task<List<MemberJson>> GetMemberInfosFromDiscordIds(List<long> ids)
+    public async Task<List<MemberJson>> GetMemberInfosFromDiscordIds(List<long> ids, List<MemberFlagDdo> forbiddenFlags)
     {
         logger.LogTrace("GetMemberInfosFromDiscordIds(ids={ids})", ids);
         var idArray = ids.Select(id => id.ToString());
 
         // find likely candidates to avoid parsing a large amount of data
         var candidates = await db.Members
-            .Select(member => member.Member1)
+            .Select(member => new { Member = member.Member1, Flag = member.Flag })
             .ToListAsync();
         var matches = candidates
-            .Where(member => idArray.Any(id => member.Contains(id)))
-            .Select(candidate => ValmarJsonParser.TryParse<MemberJson>(candidate, logger))
+            .Where(member => idArray.Any(member.Member.Contains))
+            .Where(member => !forbiddenFlags.Any(flag => FlagHelper.HasFlag(member.Flag, flag)))
+            .Select(candidate => ValmarJsonParser.TryParse<MemberJson>(candidate.Member, logger))
             .ToList();
 
         return matches;

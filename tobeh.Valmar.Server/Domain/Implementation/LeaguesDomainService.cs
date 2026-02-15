@@ -179,13 +179,18 @@ public class LeaguesDomainService(
         var dateStart = new DateTimeOffset(new DateTime(year, month, 1, 0, 0, 1, DateTimeKind.Utc));
         var dateEnd = new DateTimeOffset(new DateTime(year, month, 1, 0, 0, 1, DateTimeKind.Utc).AddMonths(1));
 
-        var participants = await chunk.GetLeagueResults(dateStart, dateEnd);
+        var allParticipants = await chunk.GetLeagueResults(dateStart, dateEnd);
 
+        /* get details and filter participants by banned */
         var participantDetails =
-            await memberService.GetMemberInfosFromDiscordIds(participants.Keys.ToList()
-                .Select(id => Convert.ToInt64(id)).ToList());
+            await memberService.GetMemberInfosFromDiscordIds(allParticipants.Keys.ToList()
+                .Select(id => Convert.ToInt64(id)).ToList(), [MemberFlagDdo.DropBan, MemberFlagDdo.PermaBan]);
+        var participants = allParticipants
+            .Where(p => participantDetails.Any(detail => detail.UserId == p.Key))
+            .ToDictionary();
 
-        var memberInfoDict = participantDetails.ToDictionary(detail => detail.UserId);
+        var memberInfoDict = participantDetails
+            .ToDictionary(detail => detail.UserId);
 
         var scoreRanking = participants
             .Select(p =>
