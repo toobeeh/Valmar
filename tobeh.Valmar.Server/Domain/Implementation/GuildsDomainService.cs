@@ -27,6 +27,18 @@ public class GuildsDomainService(
         return await ConvertToDdo(guild, worker?.BotId);
     }
 
+    public async Task<List<GuildDetailDdo>> GetValidGuilds()
+    {
+        logger.LogTrace("GetValidGuilds()");
+
+        var activeGuilds = await db.LobbyBotClaims.Select(claim => claim.GuildId).ToListAsync();
+        var guildDetails = await db.LobbyBotOptions.Where(guild => activeGuilds.Contains(guild.GuildId)).ToListAsync();
+
+        return (await Task.WhenAll(guildDetails
+                .Select(detail => ConvertToDdo(detail, null)) // TODO add claim details
+        )).ToList();
+    }
+
     public async Task<List<int>> GetGuildSupporters(long guildId)
     {
         logger.LogTrace("GetGuildSupporters(guildId={guildId})", guildId);

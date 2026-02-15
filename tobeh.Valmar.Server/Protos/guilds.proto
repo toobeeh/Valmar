@@ -16,6 +16,9 @@ service Guilds {
   // Gets a guild by its discord ID
   rpc GetGuildById (GetGuildByIdMessage) returns (GuildReply);
 
+  // Gets all guilds with active support state
+  rpc GetValidGuilds (google.protobuf.Empty) returns (GuildReply);
+
   rpc GetGuildOptionsById (GetGuildOptionsByIdMessage) returns (GuildOptionsMessage);
 
   rpc SetGuildOptions (GuildOptionsMessage) returns (google.protobuf.Empty);

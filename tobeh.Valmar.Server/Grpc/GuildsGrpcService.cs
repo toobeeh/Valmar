@@ -28,6 +28,14 @@ public class GuildsGrpcService(
         return mapper.Map<GuildReply>(details);
     }
 
+    public override async Task<GuildReply> GetValidGuilds(Empty request, ServerCallContext context)
+    {
+        logger.LogTrace("GetValidGuilds()");
+
+        var details = await guildsService.GetValidGuilds();
+        return mapper.Map<GuildReply>(details);
+    }
+
     public override async Task GetGuildSupporters(GetGuildSupportersMessage request,
         IServerStreamWriter<MemberReply> responseStream,
         ServerCallContext context)

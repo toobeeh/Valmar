@@ -20,4 +20,5 @@ public interface IGuildsDomainService
     Task BanMemberFromGuild(int login, long guildId);
     Task UnbanMemberFromGuild(int login, long guildId);
     Task<List<int>> GetBannedMembers(long guildId);
+    Task<List<GuildDetailDdo>> GetValidGuilds();
 }
