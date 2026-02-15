@@ -50,7 +50,7 @@ public class LeaguesDomainService(
             /* overall #1 */
             rewards.AddToList(winner.UserId,
                 new LeagueSeasonMemberSplitEvaluationDdo(winner.Name, 6, winner.UserId,
-                    $"Overall Ranking Leader ({winner.Score}dw)"));
+                    $"Overall Ranking Leader ({winner.Score:F1}dw)"));
 
             /* overall #2 */
             var secondPlace = season.ScoreRanking.Skip(1).FirstOrDefault();
@@ -207,6 +207,8 @@ public class LeaguesDomainService(
             .ToList();
 
         var weightRanking = participants
+            /* only where at least 10 drops caught */
+            .Where(p => p.Value.Count >= 10)
             .Select(p =>
                 new LeagueAverageWeightRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageWeight,
                     Convert.ToInt64(p.Key)))
@@ -214,6 +216,8 @@ public class LeaguesDomainService(
             .ToList();
 
         var timeRanking = participants
+            /* only where at least 10 drops caught */
+            .Where(p => p.Value.Count >= 10)
             .Select(p =>
                 new LeagueAverageTimeRankingDdo(memberInfoDict[p.Key].UserName, p.Value.AverageTime,
                     Convert.ToInt64(p.Key)))
