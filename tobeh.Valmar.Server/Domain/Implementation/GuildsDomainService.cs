@@ -32,11 +32,16 @@ public class GuildsDomainService(
         logger.LogTrace("GetValidGuilds()");
 
         var activeGuilds = await db.LobbyBotClaims.Select(claim => claim.GuildId).ToListAsync();
-        var guildDetails = await db.LobbyBotOptions.Where(guild => activeGuilds.Contains(guild.GuildId)).ToListAsync();
 
-        return (await Task.WhenAll(guildDetails
-                .Select(detail => ConvertToDdo(detail, null)) // TODO add claim details
-        )).ToList();
+        var ddos = new List<GuildDetailDdo>();
+
+        foreach (var guild in activeGuilds)
+        {
+            var ddo = await GetGuildByDiscordId(guild);
+            ddos.Add(ddo);
+        }
+
+        return ddos;
     }
 
     public async Task<List<int>> GetGuildSupporters(long guildId)
