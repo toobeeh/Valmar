@@ -14,7 +14,7 @@ public class LeagueMapperProfile : Profile
         CreateMap<LeagueAverageTimeRankingDdo, LeagueAverageTimeRankingReply>();
         CreateMap<LeagueStreakRankingDdo, LeagueStreakRankingReply>();
         CreateMap<LeagueSeasonSplitEvaluationDdo, LeagueSeasonSplitEvaluationReply>();
-        CreateMap<LeagueSeasonMemberSplitEvaluationDdo, LeagueSeasonMemberSplitEvaluationDdo>();
+        CreateMap<LeagueSeasonMemberSplitEvaluationDdo, LeagueSeasonMemberSplitEvaluationReply>();
         CreateMap<LeagueSeasonMemberEvaluationDdo, LeagueSeasonMemberEvaluationReply>();
     }
 }
