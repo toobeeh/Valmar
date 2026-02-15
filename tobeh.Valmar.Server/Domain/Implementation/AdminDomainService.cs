@@ -143,7 +143,7 @@ public class AdminDomainService(
             userIds, flag, state, toggleOthers);
 
         var memberLogins =
-            (await membersService.GetMemberInfosFromDiscordIds(userIds.ToList())).Select(m => m.UserLogin);
+            (await membersService.GetMemberInfosFromDiscordIds(userIds.ToList(), [])).Select(m => m.UserLogin);
 
         var positives = await db.Members.Where(m => memberLogins.Contains(m.Login.ToString())).ToListAsync();
         var negatives = toggleOthers
