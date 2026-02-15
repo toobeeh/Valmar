@@ -31,14 +31,17 @@ public class GuildsDomainService(
     {
         logger.LogTrace("GetValidGuilds()");
 
-        var activeGuilds = await db.LobbyBotClaims.Select(claim => claim.GuildId).ToListAsync();
+        var activeGuilds = await db.LobbyBotClaims
+            .Select(claim => claim.GuildId)
+            .Distinct()
+            .ToListAsync();
 
         var ddos = new List<GuildDetailDdo>();
 
         foreach (var guild in activeGuilds)
         {
             var ddo = await GetGuildByDiscordId(guild);
-            ddos.Add(ddo);
+            if (ddo.Supporters.Count > 0) ddos.Add(ddo);
         }
 
         return ddos;
