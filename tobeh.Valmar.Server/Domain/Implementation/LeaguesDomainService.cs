@@ -56,18 +56,18 @@ public class LeaguesDomainService(
             var secondPlace = season.ScoreRanking.Skip(1).FirstOrDefault();
             if (secondPlace is not null)
             {
-                rewards.AddToList(winner.UserId,
+                rewards.AddToList(secondPlace.UserId,
                     new LeagueSeasonMemberSplitEvaluationDdo(winner.Name, 4, winner.UserId,
-                        $"Overall Ranking #2 ({secondPlace.Score}dw)"));
+                        $"Overall Ranking #2 ({secondPlace.Score:F1}dw)"));
             }
 
             /* overall #3 */
             var thirdPlace = season.ScoreRanking.Skip(2).FirstOrDefault();
             if (thirdPlace is not null)
             {
-                rewards.AddToList(winner.UserId,
+                rewards.AddToList(thirdPlace.UserId,
                     new LeagueSeasonMemberSplitEvaluationDdo(winner.Name, 3, winner.UserId,
-                        $"Overall Ranking #3 ({thirdPlace.Score}dw)"));
+                        $"Overall Ranking #3 ({thirdPlace.Score:F1}dw)"));
             }
 
             /* top 10 */
@@ -75,7 +75,7 @@ public class LeaguesDomainService(
             {
                 rewards.AddToList(place.UserId,
                     new LeagueSeasonMemberSplitEvaluationDdo(place.Name, 2, place.UserId,
-                        $"Overall Ranking Top 10 ({place.Score}dw)"));
+                        $"Overall Ranking Top 10 ({place.Score:F1}dw)"));
             }
 
             /* top 20 */
@@ -83,7 +83,7 @@ public class LeaguesDomainService(
             {
                 rewards.AddToList(place.UserId,
                     new LeagueSeasonMemberSplitEvaluationDdo(place.Name, 1, place.UserId,
-                        $"Overall Ranking Top 20 ({place.Score}dw)"));
+                        $"Overall Ranking Top 20 ({place.Score:F1}dw)"));
             }
 
             var streakWithoutWinner = season.StreakRanking.Where(s => s.UserId != winner.UserId).ToList();
@@ -155,11 +155,13 @@ public class LeaguesDomainService(
 
             /* aggregate user rewards */
             var userRewards = rewards.Select(kvp => new LeagueSeasonMemberSplitEvaluationDdo(
-                season.ScoreRanking.First(r => r.UserId == kvp.Key).Name,
-                kvp.Value.Sum(r => r.Splits),
-                kvp.Key,
-                string.Join(", ", kvp.Value.Select(r => r.Comment))
-            )).ToList();
+                    season.ScoreRanking.First(r => r.UserId == kvp.Key).Name,
+                    kvp.Value.Sum(r => r.Splits),
+                    kvp.Key,
+                    string.Join(", ", kvp.Value.Select(r => r.Comment))
+                ))
+                .OrderByDescending(item => item.Splits)
+                .ToList();
 
             return new LeagueSeasonSplitEvaluationDdo(year, month, userRewards, season.SeasonStart, season.SeasonEnd);
         }
