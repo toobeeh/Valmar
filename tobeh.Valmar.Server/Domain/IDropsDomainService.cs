@@ -12,4 +12,5 @@ public interface IDropsDomainService
     Task RewardDrop(int login, int? eventDropId, double value);
     Task LogDropClaim(long dropId, long discordId, long claimTimestamp, string lobbyKey, int catchMs, int? eventDropId);
     Task<CurrrentDropEntity> GetScheduledDrop();
+    Task<List<PastDropEntity>> GetDropHistory(long discordId, long historySince, long historyUntil);
 }

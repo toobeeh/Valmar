@@ -2,12 +2,14 @@ using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using tobeh.Valmar.Server.Domain;
+using tobeh.Valmar.Server.Grpc.Utils;
 
 namespace tobeh.Valmar.Server.Grpc;
 
 public class DropsGrpcService(
     ILogger<DropsGrpcService> logger,
     IDropsDomainService dropsService,
+    IMembersDomainService membersDomainService,
     IMapper mapper
 ) : Drops.DropsBase
 {
@@ -17,6 +19,28 @@ public class DropsGrpcService(
 
         await dropsService.ScheduleDrop(request.DelaySeconds, request.EventDropId);
         return new Empty();
+    }
+
+    public override async Task GetDropHistory(GetDropHistoryMessage request,
+        IServerStreamWriter<DropHistoryMessage> responseStream, ServerCallContext context)
+    {
+        logger.LogTrace("GetDropHistory(request={request})", request);
+
+        var members = await membersDomainService.GetMembersByLogin(request.Logins.ToList());
+
+        await responseStream.WriteAllMappedAsync(members, async member =>
+        {
+            var history = await dropsService.GetDropHistory(
+                member.DiscordId,
+                request.HistoryStart.ToDateTimeOffset().ToUnixTimeMilliseconds(),
+                request.HistoryEnd.ToDateTimeOffset().ToUnixTimeMilliseconds());
+
+            return new DropHistoryMessage
+            {
+                Login = member.Login,
+                History = { mapper.Map<List<DropHistoryEntryMessage>>(history) }
+            };
+        });
     }
 
     public override async Task<ScheduledDropMessage> GetScheduledDrop(Empty request, ServerCallContext context)

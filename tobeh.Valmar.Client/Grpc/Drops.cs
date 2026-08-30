@@ -26,43 +26,54 @@ namespace tobeh.Valmar {
           string.Concat(
             "Cgtkcm9wcy5wcm90bxIFYWRtaW4aG2dvb2dsZS9wcm90b2J1Zi9lbXB0eS5w",
             "cm90bxofZ29vZ2xlL3Byb3RvYnVmL3RpbWVzdGFtcC5wcm90bxoeZ29vZ2xl",
-            "L3Byb3RvYnVmL3dyYXBwZXJzLnByb3RvIoMBChRTY2hlZHVsZWREcm9wTWVz",
-            "c2FnZRIKCgJpZBgBIAEoAxItCgl0aW1lc3RhbXAYAiABKAsyGi5nb29nbGUu",
-            "cHJvdG9idWYuVGltZXN0YW1wEjAKC2V2ZW50RHJvcElkGAMgASgLMhsuZ29v",
-            "Z2xlLnByb3RvYnVmLkludDMyVmFsdWUiNgoQQ2xhaW1Ecm9wTWVzc2FnZRIO",
-            "CgZkcm9wSWQYASABKAMSEgoKbGVhZ3VlTW9kZRgCIAEoCCK+AQoWQ2xhaW1E",
-            "cm9wUmVzdWx0TWVzc2FnZRIOCgZkcm9wSWQYASABKAMSEgoKZmlyc3RDbGFp",
-            "bRgDIAEoCBITCgtjbGVhcmVkRHJvcBgEIAEoCBIPCgdjYXRjaE1zGAUgASgF",
-            "EhQKDGxlYWd1ZVdlaWdodBgGIAEoARIwCgtldmVudERyb3BJZBgHIAEoCzIb",
-            "Lmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlEhIKCmxlYWd1ZU1vZGUYCCAB",
-            "KAgiYwoRUmV3YXJkRHJvcE1lc3NhZ2USDQoFbG9naW4YASABKAUSMAoLZXZl",
-            "bnREcm9wSWQYAiABKAsyGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1ZRIN",
-            "CgV2YWx1ZRgDIAEoASKgAQoOTG9nRHJvcE1lc3NhZ2USDgoGZHJvcElkGAEg",
-            "ASgDEhEKCWRpc2NvcmRJZBgCIAEoAxIWCg5jbGFpbVRpbWVzdGFtcBgDIAEo",
-            "AxIQCghsb2JieUtleRgEIAEoCRIPCgdjYXRjaE1zGAUgASgFEjAKC2V2ZW50",
-            "RHJvcElkGAYgASgLMhsuZ29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUiXQoT",
-            "U2NoZWR1bGVEcm9wUmVxdWVzdBIUCgxkZWxheVNlY29uZHMYASABKAUSMAoL",
-            "ZXZlbnREcm9wSWQYAiABKAsyGy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1",
-            "ZSJHChVDYWxjdWxhdGVEZWxheVJlcXVlc3QSGQoRb25saW5lUGxheWVyQ291",
-            "bnQYASABKAUSEwoLYm9vc3RGYWN0b3IYAiABKAEiSAoURHJvcERlbGF5Qm91",
-            "bmRzUmVwbHkSFwoPbWluRGVsYXlTZWNvbmRzGAEgASgFEhcKD21heERlbGF5",
-            "U2Vjb25kcxgCIAEoBSIoChdDdXJyZW50Qm9vc3RGYWN0b3JSZXBseRINCgVi",
-            "b29zdBgBIAEoATKABAoFRHJvcHMSQgoMU2NoZWR1bGVEcm9wEhouYWRtaW4u",
-            "U2NoZWR1bGVEcm9wUmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJH",
-            "ChBHZXRTY2hlZHVsZWREcm9wEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Ghsu",
-            "YWRtaW4uU2NoZWR1bGVkRHJvcE1lc3NhZ2USTwoVR2V0Q3VycmVudEJvb3N0",
-            "RmFjdG9yEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Gh4uYWRtaW4uQ3VycmVu",
-            "dEJvb3N0RmFjdG9yUmVwbHkSVQoYQ2FsY3VsYXRlRHJvcERlbGF5Qm91bmRz",
-            "EhwuYWRtaW4uQ2FsY3VsYXRlRGVsYXlSZXF1ZXN0GhsuYWRtaW4uRHJvcERl",
-            "bGF5Qm91bmRzUmVwbHkSQwoJQ2xhaW1Ecm9wEhcuYWRtaW4uQ2xhaW1Ecm9w",
-            "TWVzc2FnZRodLmFkbWluLkNsYWltRHJvcFJlc3VsdE1lc3NhZ2USPQoMTG9n",
-            "RHJvcENsYWltEhUuYWRtaW4uTG9nRHJvcE1lc3NhZ2UaFi5nb29nbGUucHJv",
-            "dG9idWYuRW1wdHkSPgoKUmV3YXJkRHJvcBIYLmFkbWluLlJld2FyZERyb3BN",
-            "ZXNzYWdlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Qg+qAgx0b2JlaC5WYWxt",
-            "YXJiBnByb3RvMw=="));
+            "L3Byb3RvYnVmL3dyYXBwZXJzLnByb3RvIokBChVHZXREcm9wSGlzdG9yeU1l",
+            "c3NhZ2USDgoGbG9naW5zGAEgAygFEjAKDGhpc3RvcnlTdGFydBgCIAEoCzIa",
+            "Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKaGlzdG9yeUVuZBgDIAEo",
+            "CzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiWAoXRHJvcEhpc3RvcnlF",
+            "bnRyeU1lc3NhZ2USLAoIZHJvcERhdGUYASABKAsyGi5nb29nbGUucHJvdG9i",
+            "dWYuVGltZXN0YW1wEg8KB2NhdGNoTXMYBSABKAUiVAoSRHJvcEhpc3RvcnlN",
+            "ZXNzYWdlEg0KBWxvZ2luGAEgASgFEi8KB2hpc3RvcnkYAiADKAsyHi5hZG1p",
+            "bi5Ecm9wSGlzdG9yeUVudHJ5TWVzc2FnZSKDAQoUU2NoZWR1bGVkRHJvcE1l",
+            "c3NhZ2USCgoCaWQYASABKAMSLQoJdGltZXN0YW1wGAIgASgLMhouZ29vZ2xl",
+            "LnByb3RvYnVmLlRpbWVzdGFtcBIwCgtldmVudERyb3BJZBgDIAEoCzIbLmdv",
+            "b2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIjYKEENsYWltRHJvcE1lc3NhZ2US",
+            "DgoGZHJvcElkGAEgASgDEhIKCmxlYWd1ZU1vZGUYAiABKAgivgEKFkNsYWlt",
+            "RHJvcFJlc3VsdE1lc3NhZ2USDgoGZHJvcElkGAEgASgDEhIKCmZpcnN0Q2xh",
+            "aW0YAyABKAgSEwoLY2xlYXJlZERyb3AYBCABKAgSDwoHY2F0Y2hNcxgFIAEo",
+            "BRIUCgxsZWFndWVXZWlnaHQYBiABKAESMAoLZXZlbnREcm9wSWQYByABKAsy",
+            "Gy5nb29nbGUucHJvdG9idWYuSW50MzJWYWx1ZRISCgpsZWFndWVNb2RlGAgg",
+            "ASgIImMKEVJld2FyZERyb3BNZXNzYWdlEg0KBWxvZ2luGAEgASgFEjAKC2V2",
+            "ZW50RHJvcElkGAIgASgLMhsuZ29vZ2xlLnByb3RvYnVmLkludDMyVmFsdWUS",
+            "DQoFdmFsdWUYAyABKAEioAEKDkxvZ0Ryb3BNZXNzYWdlEg4KBmRyb3BJZBgB",
+            "IAEoAxIRCglkaXNjb3JkSWQYAiABKAMSFgoOY2xhaW1UaW1lc3RhbXAYAyAB",
+            "KAMSEAoIbG9iYnlLZXkYBCABKAkSDwoHY2F0Y2hNcxgFIAEoBRIwCgtldmVu",
+            "dERyb3BJZBgGIAEoCzIbLmdvb2dsZS5wcm90b2J1Zi5JbnQzMlZhbHVlIl0K",
+            "E1NjaGVkdWxlRHJvcFJlcXVlc3QSFAoMZGVsYXlTZWNvbmRzGAEgASgFEjAK",
+            "C2V2ZW50RHJvcElkGAIgASgLMhsuZ29vZ2xlLnByb3RvYnVmLkludDMyVmFs",
+            "dWUiRwoVQ2FsY3VsYXRlRGVsYXlSZXF1ZXN0EhkKEW9ubGluZVBsYXllckNv",
+            "dW50GAEgASgFEhMKC2Jvb3N0RmFjdG9yGAIgASgBIkgKFERyb3BEZWxheUJv",
+            "dW5kc1JlcGx5EhcKD21pbkRlbGF5U2Vjb25kcxgBIAEoBRIXCg9tYXhEZWxh",
+            "eVNlY29uZHMYAiABKAUiKAoXQ3VycmVudEJvb3N0RmFjdG9yUmVwbHkSDQoF",
+            "Ym9vc3QYASABKAEyzQQKBURyb3BzEkIKDFNjaGVkdWxlRHJvcBIaLmFkbWlu",
+            "LlNjaGVkdWxlRHJvcFJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkS",
+            "RwoQR2V0U2NoZWR1bGVkRHJvcBIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRob",
+            "LmFkbWluLlNjaGVkdWxlZERyb3BNZXNzYWdlEk8KFUdldEN1cnJlbnRCb29z",
+            "dEZhY3RvchIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoeLmFkbWluLkN1cnJl",
+            "bnRCb29zdEZhY3RvclJlcGx5ElUKGENhbGN1bGF0ZURyb3BEZWxheUJvdW5k",
+            "cxIcLmFkbWluLkNhbGN1bGF0ZURlbGF5UmVxdWVzdBobLmFkbWluLkRyb3BE",
+            "ZWxheUJvdW5kc1JlcGx5EkMKCUNsYWltRHJvcBIXLmFkbWluLkNsYWltRHJv",
+            "cE1lc3NhZ2UaHS5hZG1pbi5DbGFpbURyb3BSZXN1bHRNZXNzYWdlEj0KDExv",
+            "Z0Ryb3BDbGFpbRIVLmFkbWluLkxvZ0Ryb3BNZXNzYWdlGhYuZ29vZ2xlLnBy",
+            "b3RvYnVmLkVtcHR5Ej4KClJld2FyZERyb3ASGC5hZG1pbi5SZXdhcmREcm9w",
+            "TWVzc2FnZRoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRJLCg5HZXREcm9wSGlz",
+            "dG9yeRIcLmFkbWluLkdldERyb3BIaXN0b3J5TWVzc2FnZRoZLmFkbWluLkRy",
+            "b3BIaXN0b3J5TWVzc2FnZTABQg+qAgx0b2JlaC5WYWxtYXJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.GetDropHistoryMessage), global::tobeh.Valmar.GetDropHistoryMessage.Parser, new[]{ "Logins", "HistoryStart", "HistoryEnd" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.DropHistoryEntryMessage), global::tobeh.Valmar.DropHistoryEntryMessage.Parser, new[]{ "DropDate", "CatchMs" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.DropHistoryMessage), global::tobeh.Valmar.DropHistoryMessage.Parser, new[]{ "Login", "History" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ScheduledDropMessage), global::tobeh.Valmar.ScheduledDropMessage.Parser, new[]{ "Id", "Timestamp", "EventDropId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ClaimDropMessage), global::tobeh.Valmar.ClaimDropMessage.Parser, new[]{ "DropId", "LeagueMode" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::tobeh.Valmar.ClaimDropResultMessage), global::tobeh.Valmar.ClaimDropResultMessage.Parser, new[]{ "DropId", "FirstClaim", "ClearedDrop", "CatchMs", "LeagueWeight", "EventDropId", "LeagueMode" }, null, null, null, null),
@@ -78,6 +89,728 @@ namespace tobeh.Valmar {
 
   }
   #region Messages
+  public sealed partial class GetDropHistoryMessage : pb::IMessage<GetDropHistoryMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<GetDropHistoryMessage> _parser = new pb::MessageParser<GetDropHistoryMessage>(() => new GetDropHistoryMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<GetDropHistoryMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public GetDropHistoryMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public GetDropHistoryMessage(GetDropHistoryMessage other) : this() {
+      logins_ = other.logins_.Clone();
+      historyStart_ = other.historyStart_ != null ? other.historyStart_.Clone() : null;
+      historyEnd_ = other.historyEnd_ != null ? other.historyEnd_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public GetDropHistoryMessage Clone() {
+      return new GetDropHistoryMessage(this);
+    }
+
+    /// <summary>Field number for the "logins" field.</summary>
+    public const int LoginsFieldNumber = 1;
+    private static readonly pb::FieldCodec<int> _repeated_logins_codec
+        = pb::FieldCodec.ForInt32(10);
+    private readonly pbc::RepeatedField<int> logins_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<int> Logins {
+      get { return logins_; }
+    }
+
+    /// <summary>Field number for the "historyStart" field.</summary>
+    public const int HistoryStartFieldNumber = 2;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp historyStart_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp HistoryStart {
+      get { return historyStart_; }
+      set {
+        historyStart_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "historyEnd" field.</summary>
+    public const int HistoryEndFieldNumber = 3;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp historyEnd_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp HistoryEnd {
+      get { return historyEnd_; }
+      set {
+        historyEnd_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as GetDropHistoryMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(GetDropHistoryMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!logins_.Equals(other.logins_)) return false;
+      if (!object.Equals(HistoryStart, other.HistoryStart)) return false;
+      if (!object.Equals(HistoryEnd, other.HistoryEnd)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= logins_.GetHashCode();
+      if (historyStart_ != null) hash ^= HistoryStart.GetHashCode();
+      if (historyEnd_ != null) hash ^= HistoryEnd.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      logins_.WriteTo(output, _repeated_logins_codec);
+      if (historyStart_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(HistoryStart);
+      }
+      if (historyEnd_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(HistoryEnd);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      logins_.WriteTo(ref output, _repeated_logins_codec);
+      if (historyStart_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(HistoryStart);
+      }
+      if (historyEnd_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(HistoryEnd);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      size += logins_.CalculateSize(_repeated_logins_codec);
+      if (historyStart_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HistoryStart);
+      }
+      if (historyEnd_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HistoryEnd);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(GetDropHistoryMessage other) {
+      if (other == null) {
+        return;
+      }
+      logins_.Add(other.logins_);
+      if (other.historyStart_ != null) {
+        if (historyStart_ == null) {
+          HistoryStart = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        HistoryStart.MergeFrom(other.HistoryStart);
+      }
+      if (other.historyEnd_ != null) {
+        if (historyEnd_ == null) {
+          HistoryEnd = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        HistoryEnd.MergeFrom(other.HistoryEnd);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10:
+          case 8: {
+            logins_.AddEntriesFrom(input, _repeated_logins_codec);
+            break;
+          }
+          case 18: {
+            if (historyStart_ == null) {
+              HistoryStart = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(HistoryStart);
+            break;
+          }
+          case 26: {
+            if (historyEnd_ == null) {
+              HistoryEnd = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(HistoryEnd);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10:
+          case 8: {
+            logins_.AddEntriesFrom(ref input, _repeated_logins_codec);
+            break;
+          }
+          case 18: {
+            if (historyStart_ == null) {
+              HistoryStart = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(HistoryStart);
+            break;
+          }
+          case 26: {
+            if (historyEnd_ == null) {
+              HistoryEnd = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(HistoryEnd);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class DropHistoryEntryMessage : pb::IMessage<DropHistoryEntryMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<DropHistoryEntryMessage> _parser = new pb::MessageParser<DropHistoryEntryMessage>(() => new DropHistoryEntryMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<DropHistoryEntryMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public DropHistoryEntryMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public DropHistoryEntryMessage(DropHistoryEntryMessage other) : this() {
+      dropDate_ = other.dropDate_ != null ? other.dropDate_.Clone() : null;
+      catchMs_ = other.catchMs_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public DropHistoryEntryMessage Clone() {
+      return new DropHistoryEntryMessage(this);
+    }
+
+    /// <summary>Field number for the "dropDate" field.</summary>
+    public const int DropDateFieldNumber = 1;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp dropDate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp DropDate {
+      get { return dropDate_; }
+      set {
+        dropDate_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "catchMs" field.</summary>
+    public const int CatchMsFieldNumber = 5;
+    private int catchMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CatchMs {
+      get { return catchMs_; }
+      set {
+        catchMs_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as DropHistoryEntryMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(DropHistoryEntryMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(DropDate, other.DropDate)) return false;
+      if (CatchMs != other.CatchMs) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (dropDate_ != null) hash ^= DropDate.GetHashCode();
+      if (CatchMs != 0) hash ^= CatchMs.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (dropDate_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(DropDate);
+      }
+      if (CatchMs != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(CatchMs);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (dropDate_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(DropDate);
+      }
+      if (CatchMs != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(CatchMs);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (dropDate_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(DropDate);
+      }
+      if (CatchMs != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CatchMs);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(DropHistoryEntryMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.dropDate_ != null) {
+        if (dropDate_ == null) {
+          DropDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        DropDate.MergeFrom(other.DropDate);
+      }
+      if (other.CatchMs != 0) {
+        CatchMs = other.CatchMs;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (dropDate_ == null) {
+              DropDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(DropDate);
+            break;
+          }
+          case 40: {
+            CatchMs = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (dropDate_ == null) {
+              DropDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(DropDate);
+            break;
+          }
+          case 40: {
+            CatchMs = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class DropHistoryMessage : pb::IMessage<DropHistoryMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<DropHistoryMessage> _parser = new pb::MessageParser<DropHistoryMessage>(() => new DropHistoryMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<DropHistoryMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public DropHistoryMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public DropHistoryMessage(DropHistoryMessage other) : this() {
+      login_ = other.login_;
+      history_ = other.history_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public DropHistoryMessage Clone() {
+      return new DropHistoryMessage(this);
+    }
+
+    /// <summary>Field number for the "login" field.</summary>
+    public const int LoginFieldNumber = 1;
+    private int login_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Login {
+      get { return login_; }
+      set {
+        login_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "history" field.</summary>
+    public const int HistoryFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::tobeh.Valmar.DropHistoryEntryMessage> _repeated_history_codec
+        = pb::FieldCodec.ForMessage(18, global::tobeh.Valmar.DropHistoryEntryMessage.Parser);
+    private readonly pbc::RepeatedField<global::tobeh.Valmar.DropHistoryEntryMessage> history_ = new pbc::RepeatedField<global::tobeh.Valmar.DropHistoryEntryMessage>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::tobeh.Valmar.DropHistoryEntryMessage> History {
+      get { return history_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as DropHistoryMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(DropHistoryMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Login != other.Login) return false;
+      if(!history_.Equals(other.history_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Login != 0) hash ^= Login.GetHashCode();
+      hash ^= history_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Login != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Login);
+      }
+      history_.WriteTo(output, _repeated_history_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Login != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Login);
+      }
+      history_.WriteTo(ref output, _repeated_history_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Login != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Login);
+      }
+      size += history_.CalculateSize(_repeated_history_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(DropHistoryMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Login != 0) {
+        Login = other.Login;
+      }
+      history_.Add(other.history_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Login = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            history_.AddEntriesFrom(input, _repeated_history_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Login = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            history_.AddEntriesFrom(ref input, _repeated_history_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class ScheduledDropMessage : pb::IMessage<ScheduledDropMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -92,7 +825,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[0]; }
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -372,7 +1105,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[1]; }
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -598,7 +1331,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[2]; }
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1017,7 +1750,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[3]; }
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1288,7 +2021,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[4]; }
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1673,7 +2406,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[5]; }
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1910,7 +2643,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[6]; }
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2139,7 +2872,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[7]; }
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2368,7 +3101,7 @@ namespace tobeh.Valmar {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[8]; }
+      get { return global::tobeh.Valmar.DropsReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

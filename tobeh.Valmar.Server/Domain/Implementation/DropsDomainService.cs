@@ -194,4 +194,24 @@ public class DropsDomainService(
         db.PastDrops.Add(log);
         await db.SaveChangesAsync();
     }
+
+    public async Task<List<PastDropEntity>> GetDropHistory(long discordId, long historySince, long historyUntil)
+    {
+        logger.LogTrace(
+            "GetDropHistory(discordId={discordId}, historySince={historySince}, historyUntil={historyUntil})",
+            discordId, historySince, historyUntil);
+
+        var history = await db.PastDrops
+            .Where(drop => drop.CaughtLobbyPlayerId == discordId.ToString() &&
+                           drop.ValidFrom.CompareTo(
+                               DropHelper.FormatDropTimestamp(DateTimeOffset.FromUnixTimeMilliseconds(historySince))) >=
+                           0 &&
+                           drop.ValidFrom.CompareTo(
+                               DropHelper.FormatDropTimestamp(DateTimeOffset.FromUnixTimeMilliseconds(historyUntil))) <=
+                           0)
+            .OrderByDescending(drop => drop.ValidFrom)
+            .ToListAsync();
+
+        return history;
+    }
 }

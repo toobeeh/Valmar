@@ -68,6 +68,10 @@ namespace tobeh.Valmar {
     static readonly grpc::Marshaller<global::tobeh.Valmar.LogDropMessage> __Marshaller_admin_LogDropMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.LogDropMessage.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::tobeh.Valmar.RewardDropMessage> __Marshaller_admin_RewardDropMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.RewardDropMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.GetDropHistoryMessage> __Marshaller_admin_GetDropHistoryMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.GetDropHistoryMessage.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::tobeh.Valmar.DropHistoryMessage> __Marshaller_admin_DropHistoryMessage = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::tobeh.Valmar.DropHistoryMessage.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::tobeh.Valmar.ScheduleDropRequest, global::Google.Protobuf.WellKnownTypes.Empty> __Method_ScheduleDrop = new grpc::Method<global::tobeh.Valmar.ScheduleDropRequest, global::Google.Protobuf.WellKnownTypes.Empty>(
@@ -124,6 +128,14 @@ namespace tobeh.Valmar {
         "RewardDrop",
         __Marshaller_admin_RewardDropMessage,
         __Marshaller_google_protobuf_Empty);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::tobeh.Valmar.GetDropHistoryMessage, global::tobeh.Valmar.DropHistoryMessage> __Method_GetDropHistory = new grpc::Method<global::tobeh.Valmar.GetDropHistoryMessage, global::tobeh.Valmar.DropHistoryMessage>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "GetDropHistory",
+        __Marshaller_admin_GetDropHistoryMessage,
+        __Marshaller_admin_DropHistoryMessage);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -493,6 +505,30 @@ namespace tobeh.Valmar {
       public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> RewardDropAsync(global::tobeh.Valmar.RewardDropMessage request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_RewardDrop, null, options, request);
+      }
+      /// <summary>
+      /// fetch drop history for players
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.DropHistoryMessage> GetDropHistory(global::tobeh.Valmar.GetDropHistoryMessage request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetDropHistory(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// fetch drop history for players
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::tobeh.Valmar.DropHistoryMessage> GetDropHistory(global::tobeh.Valmar.GetDropHistoryMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetDropHistory, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

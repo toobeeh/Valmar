@@ -30,6 +30,25 @@ service Drops {
 
   // reward a drop
   rpc RewardDrop (RewardDropMessage) returns (google.protobuf.Empty);
+
+  // fetch drop history for players
+  rpc GetDropHistory (GetDropHistoryMessage) returns (stream DropHistoryMessage);
+}
+
+message GetDropHistoryMessage {
+  repeated int32 logins = 1;
+  google.protobuf.Timestamp historyStart = 2;
+  google.protobuf.Timestamp historyEnd = 3;
+}
+
+message DropHistoryEntryMessage {
+  google.protobuf.Timestamp dropDate = 1;
+  int32 catchMs = 5;
+}
+
+message DropHistoryMessage {
+  int32 login = 1;
+  repeated DropHistoryEntryMessage history = 2;
 }
 
 message ScheduledDropMessage {
