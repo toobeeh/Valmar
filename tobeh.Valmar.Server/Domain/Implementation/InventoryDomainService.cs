@@ -573,6 +573,16 @@ public class InventoryDomainService(
             "GiftEventCredit(fromMember={fromMember}, toMember={toMember}, amount={amount}, eventDropId={eventDropId}, lossRate={lossRate})",
             fromMember, toMember, amount, eventDrop, lossRate);
 
+        if (fromMember.MappedFlags.Any(flag => flag is MemberFlagDdo.DropBan or MemberFlagDdo.PermaBan))
+        {
+            throw new UserOperationException("The gifting user is banned and cannot gift event credit");
+        }
+
+        if (toMember.MappedFlags.Any(flag => flag is MemberFlagDdo.DropBan or MemberFlagDdo.PermaBan))
+        {
+            throw new UserOperationException("The receiving user is banned and cannot receive event credit");
+        }
+
         var eventDrops = (await eventsService.GetEventDrops(eventDrop.EventId)).Select(drop => drop.Id).ToArray();
         var eventCredit = await GetEventCredit(fromMember, eventDrops.ToList());
 
