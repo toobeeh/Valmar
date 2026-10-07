@@ -129,7 +129,7 @@ public static class InventoryHelper
 
     public static int GetSlotBaseCount(double drops)
     {
-        return drops switch
+        return (drops + 100) switch
         {
             > 30000 => 6 + Convert.ToInt32(Math.Floor((drops - 30000) / 20000)),
             > 15000 => 5,
@@ -142,7 +142,7 @@ public static class InventoryHelper
 
     public static int GetRequiredDropsForSlot(int slot)
     {
-        return slot switch
+        return (slot switch
         {
             1 => 0,
             2 => 1000,
@@ -151,6 +151,6 @@ public static class InventoryHelper
             5 => 15000,
             6 => 30000,
             _ => (slot - 6) * 20000 + 30000
-        };
+        }) - 100;
     }
 }
